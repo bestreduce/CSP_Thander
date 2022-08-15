@@ -2948,7 +2948,7 @@ void Ship_HullHitEvent()
 
 	if (bSeriousBoom == true)
 	{
-		if (rOurCharacter.id == pchar.id || rand(2) == 1)
+		if (rOurCharacter.id == pchar.id || rand(2) == 1 || iBallType == GOOD_BOMBS)
 		{
 			Ship_Serious_Boom(x, y, z);
 		}
