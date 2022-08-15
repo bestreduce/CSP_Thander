@@ -2766,6 +2766,7 @@ void Ship_HullHitEvent()
 	bool	bDead = LAi_IsDead(rOurCharacter) && CheckAttribute(rBallCharacter, "Ship.Cannons.Type");  // boal fix
 
 	bool	bSeriousBoom = false;
+	bool	bGoodsDestroy = false;
 	bool	bInflame = false;
     bool    isOurCompanion   = IsCompanion(rOurCharacter);
     float   fTmpCannonDamage = 0;
@@ -2775,7 +2776,7 @@ void Ship_HullHitEvent()
 	ref rCannon = GetCannonByType(sti(rBallCharacter.Ship.Cannons.Type));
 	float fCannonDamageMultiply = stf(rCannon.DamageMultiply);
 
-	float fDistanceDamageMultiply = Bring2Range(1.2, 0.25, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
+	float fDistanceDamageMultiply = Bring2Range(1.15, 0.3, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
 
     if (sti(rBallCharacter.TmpPerks.CriticalShoot) && rand(19)==10) { bSeriousBoom = true; }		// +5 процентов
 	if (sti(rBallCharacter.TmpPerks.CannonProfessional) && rand(9)==4) { bSeriousBoom = true; }		// +10 процентов
@@ -2798,8 +2799,21 @@ void Ship_HullHitEvent()
 			Play3DSound("ball2bort", x, y, z);
 		break;
 		case GOOD_BOMBS:
-			if (rand(50) == 10) { bSeriousBoom = true; }  // boal 20
-			if (rand(5) == 1) { bInflame = true; }
+			
+			if(prand(6) == 4)
+			{
+				//сработает ли защита от взрыва броней
+				if(rand(3) == 2)	{fDistanceDamageMultiply = 1;}
+				else		{fDistanceDamageMultiply = Bring2Range(1.0, 0.66, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));}
+				
+				bSeriousBoom = true; 
+				if(rand(14) == 7)//14.3%*6.6%=00.95% - симуляция взрыва бомбы в нужном месте
+					{bGoodsDestroy = true;}
+			}// boal 20
+			if (rand(5) == 3)
+			{ 
+				bInflame = true; 
+			}
 			Play3DSound("bomb2bort", x, y, z);
 		break;
 	}
@@ -2815,12 +2829,76 @@ void Ship_HullHitEvent()
 
 	if (bSeriousBoom)
 	{
-		fCrewDamage = fCrewDamage * 7.0;
+		fCrewDamage = fCrewDamage * 3.0;
 		// fHP = fDistanceDamageMultiply * fCannonDamageMultiply * stf(rBall.DamageHull) * (8.0 + frnd() * 4.0); // LEO: Забекапил
 		fHP = fDistanceDamageMultiply * fCannonDamageMultiply * stf(rBall.DamageHull) * 4; // 4.0
-		if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType != GOOD_GRAPES) fHP *= 1.25;
+		if (bGoodsDestroy)
+		{	
+			int iGoods[8];
+			iGoods[0] = GetCargoGoods(rOurCharacter, GOOD_POWDER);
+			iGoods[1] = GetCargoGoods(rOurCharacter, GOOD_WINE);
+			iGoods[2] = GetCargoGoods(rOurCharacter, GOOD_RUM);
+			iGoods[3] = GetCargoGoods(rOurCharacter, GOOD_BOMBS);
+			iGoods[4] = GOOD_POWDER;
+			iGoods[5] = GOOD_WINE;
+			iGoods[6] = GOOD_RUM;
+			iGoods[7] = GOOD_BOMBS;
+			float fExplodablesTotal = iGoods[0]/20+iGoods[1]*2+iGoods[2]/10+iGoods[3]/10;	
+			int iRandGood;
+			int iTempHP = fHP;
+			fHP *= 2;
+			if(iOurCharacterIndex == nMainCharacterIndex)
+			{
+				Log_Info("Произошел огромный взрыв! Часть товара сдетонировала...");
+			}
+			//begin chain reaction
+			if(fExplodablesTotal > iTempHP)
+			{
+				for(int i=0; i<5; i++)
+				{
+					Ship_Serious_Boom(x, y, z);
+					iRandGood = rand(3);
+					iTempHP = iTempHP * (frandSmall(1)+0.5); 
+					if(iGoods[iRandGood] > 0)
+					{
+						
+						if(iGoods[iRandGood] >= iTempHP)
+						{
+							AddCharacterGoodsSimple(rOurCharacter, iGoods[iRandGood+4], -iTempHP);
+							fHP = fHP+ makefloat(iTempHP*1.5);
+						}
+						else
+						{
+							fHP = fHP + makefloat(iGoods[iRandGood]*1.5);
+							AddCharacterGoodsSimple(rOurCharacter, iGoods[iRandGood+4], -iGoods[iRandGood]);
+						}
+					}
+					else
+					{
+						continue;
+					}
+				}
+			}
+			//end chain reaction
+			else
+			{
+				Ship_Serious_Boom(x, y, z);
+				iRandGood = rand(3);
+				if(iGoods[iRandGood]){
+					if(iGoods[iRandGood] >= iTempHP)
+					{
+						AddCharacterGoodsSimple(rOurCharacter, iGoods[iRandGood+4], -iTempHP);
+						fHP = fHP + iTempHP*2;
+					}
+					else
+					{
+						fHP = fHP + iGoods[iRandGood]*2;
+						SetCharacterGoods(rOurCharacter, iGoods[iRandGood+4], 0);
+					}
+				}
+			}
+		}
 		Ship_ApplyHullHitpointsWithCannon(rOurCharacter, fHP, KILL_BY_BALL, iBallCharacterIndex);
-
 		if (iBallCharacterIndex == nMainCharacterIndex)
 		{
 			Log_SetStringToLog(LanguageConvertString(iSeaSectionLang, "Ship_critical"));
@@ -2829,13 +2907,13 @@ void Ship_HullHitEvent()
 		// boal  check skill -->
 		if (!isOurCompanion && IsCompanion(rBallCharacter))
 		{
-            AddCharacterExpToSkill(rBallCharacter, "Accuracy", 15);
-            AddCharacterExpToSkill(rBallCharacter, SKILL_FORTUNE, 15);
-            AddCharacterExpToSkill(rBallCharacter, "Leadership", 2);
-            AddCharacterExpToSkill(rBallCharacter, "Sailing", 15);
-            AddCharacterExpToSkill(rBallCharacter, "Cannons", 15);
-            ChangeCrewExp(rBallCharacter, "Sailors", AIShip_isPerksUse(CheckCharacterPerk(rBallCharacter, "SeaWolf"), 0.05, 0.1));
-			ChangeCrewExp(rBallCharacter, "Cannoners", AIShip_isPerksUse(CheckCharacterPerk(rBallCharacter, "SeaWolf"), 0.5, 1.0));
+            AddCharacterExpToSkill(rBallCharacter, "Accuracy", 10);
+            AddCharacterExpToSkill(rBallCharacter, SKILL_FORTUNE, 10);
+            AddCharacterExpToSkill(rBallCharacter, "Leadership", 1);
+            AddCharacterExpToSkill(rBallCharacter, "Sailing", 10);
+            AddCharacterExpToSkill(rBallCharacter, "Cannons", 10);
+            ChangeCrewExp(rBallCharacter, "Sailors", AIShip_isPerksUse(CheckCharacterPerk(rBallCharacter, "SeaWolf"), 0.025, 0.05));
+			ChangeCrewExp(rBallCharacter, "Cannoners", AIShip_isPerksUse(CheckCharacterPerk(rBallCharacter, "SeaWolf"), 0.25, 0.5));
         }
         // boal <--
 	}
