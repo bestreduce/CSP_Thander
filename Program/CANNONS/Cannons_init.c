@@ -139,7 +139,7 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 28;
 	rCannon.hp = 55.0;
-	InitBaseCannons_CalcSpeedV0(&rCannon,850.0);
+	InitBaseCannons_CalcSpeedV0(&rCannon,800.0);
 
     makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS8]);
 	rCannon.type = CANNON_NAME_CANNON;
@@ -253,7 +253,7 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 32;
 	rCannon.hp = 60.0;
-	InitBaseCannons_CalcSpeedV0(&rCannon,700.0);
+	InitBaseCannons_CalcSpeedV0(&rCannon,650.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS36]);
 	rCannon.type = CANNON_NAME_CANNON;
@@ -272,7 +272,7 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 36;
 	rCannon.hp = 60.0;
-	InitBaseCannons_CalcSpeedV0(&rCannon,750.0);
+	InitBaseCannons_CalcSpeedV0(&rCannon,700.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS42]);
 	rCannon.type = CANNON_NAME_CANNON;
@@ -292,7 +292,7 @@ void InitCannons()
 	rCannon.DamageMultiply = 42;
 	rCannon.TradeOff = true;
 	rCannon.hp = 70.0;
-	InitBaseCannons_CalcSpeedV0(&rCannon,800.0);
+	InitBaseCannons_CalcSpeedV0(&rCannon,700.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS48]);
 	rCannon.type = CANNON_NAME_CANNON;
