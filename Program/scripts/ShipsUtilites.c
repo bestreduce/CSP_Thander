@@ -2898,12 +2898,12 @@ int GenerateShipTop(int iBaseType, bool isLock, ref chr)
 	switch (sti(rRealShip.Class))
 	{
 		case 7: rRealShip.HullArmor = 8; break;
-		case 6: rRealShip.HullArmor = 16; break;
-		case 5: rRealShip.HullArmor = 20; break;
-		case 4: rRealShip.HullArmor = 24; break;
-		case 3: rRealShip.HullArmor = 28; break;
-		case 2: rRealShip.HullArmor = 36; break;
-		case 1: rRealShip.HullArmor = 46; break;
+		case 6: rRealShip.HullArmor = 12; break;
+		case 5: rRealShip.HullArmor = 14; break;
+		case 4: rRealShip.HullArmor = 16; break;
+		case 3: rRealShip.HullArmor = 22; break;
+		case 2: rRealShip.HullArmor = 30; break;
+		case 1: rRealShip.HullArmor = 40; break;
 	}
 
 	// ugeen --> если кораблик генерится на верфи, разброс статов более узкий
