@@ -244,17 +244,17 @@ float Ship_GetBortFireDelta()
 	float z = GetEventData();
 	float fDistance = GetDistance2D(x, z, stf(aCharacter.Ship.Pos.x), stf(aCharacter.Ship.Pos.z));
 
-	float fAccuracy = 1.3 - stf(aCharacter.TmpSkill.Accuracy);
+	float fAccuracy = 0.86 - stf(aCharacter.TmpSkill.Accuracy)*0.66;
 
 	// to_do
-	if (iArcadeSails == 1)// && aCharacter.id == characters[nMainCharacterIndex].id)
+	/*if (iArcadeSails == 1)// && aCharacter.id == characters[nMainCharacterIndex].id)
 	{
 		fAccuracy  = fAccuracy - 0.2;
 		if (fAccuracy < 0.1)
 		{
 			fAccuracy = 0.1;
 		}
-	}
+	}*/
 
 	float fRadius = fAccuracy * Bring2Range(0.0, 120.0, 0.0, 1000.0, fDistance);
 	return fRadius;
