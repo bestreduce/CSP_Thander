@@ -11,7 +11,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 		break;
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
@@ -31,7 +31,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 		case "Step_F11_2":
             dialog.text = "Ну, поиронизируйте, сеньор"+ GetSexPhrase("","ита") +", по праву победителя вы можете себе это позволить. Но все меняется здесь, в Карибском море...";
-			link.l1 = "Приложу все усилия, чтобы эти перемены были на пользу Франции, сеньор. Ну все, дело сделано...";
+			link.l1 = "Приложу все усилия, чтобы эти перемены были на пользу Франции, сеньор. Ну всё, дело сделано...";
 			link.l1.go = "exit";
 			pchar.questTemp.State = "Fr11OccupySC_toWeWon";
             AddQuestRecord("Fra_Line_11_OccupySantaCatalina", "2");

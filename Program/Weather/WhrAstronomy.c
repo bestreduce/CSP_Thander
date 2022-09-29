@@ -107,7 +107,7 @@ void FillStars(ref aStars)
     Astronomy.Stars.Enable = Whr_GetLong(aStars, "Enable");
 	if (sti(Astronomy.Stars.Enable))
 	{
-		Astronomy.Stars.Catalog = "hic.dat";
+		Astronomy.Stars.Catalog = "resource\hic.dat";
 		Astronomy.Stars.Texture = Whr_GetString(aStars, "Texture");
 		Astronomy.Stars.Color = Whr_GetColor(aStars, "Color");
 		Astronomy.Stars.Radius = Whr_GetFloat(aStars, "Radius");

@@ -300,6 +300,7 @@ void ReloadStartFade()
     //#20191123-01 Fix
     DialogExit();
 	ApplayNewSkill(pchar, "", 0);
+	if (CheckAttribute(pchar,"activelocator")) Item_OnExitLocator(loadedLocation, pchar.activelocator);
 	// ResetSoundScheme();
 	ResetSound(); // new
 	PauseAllSounds();
@@ -386,6 +387,45 @@ void ReloadEndFade()
 	}
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	PostEvent("LoadSceneSound", 500);
+	if (startherotype == 9 || startherotype == 10)
+	{
+		if (CheckAttribute(pchar,"equip.blade") && HasSubStr(pchar.equip.blade, "Lilarcor"))
+		{
+			bool no2nd = false;
+			bool TalkMore = false;
+			int CanMore = 0;
+			if (CheckAttribute(pchar,"LilarcorKills"))
+			{
+				if (GetNpcQuestPastDayWOInit(pchar, "LilarcorTimer")>0) DeleteAttribute(pchar,"LilarcorTalksMore");
+				else
+				{
+					if (sti(pchar.LilarcorKills) > 299 && sti(pchar.LilarcorKills) < 800) CanMore = 1;
+					if (sti(pchar.LilarcorKills) > 800) CanMore = 2;
+					if (CanMore > 0 && rand(3)==0)
+					{
+						if (!CheckAttribute(pchar,"LilarcorTalksMore"))
+						{
+							pchar.LilarcorTalksMore = CanMore;
+						}
+						else pchar.LilarcorTalksMore = sti(pchar.LilarcorTalksMore)-1;
+						if (sti(pchar.LilarcorTalksMore)>-1) TalkMore = true;
+					}
+				}
+			}
+			if (GetNpcQuestPastDayWOInit(pchar, "LilarcorTimer")>0 || TalkMore)
+			{
+				PostEvent("Lilarcor_Talks",2000);
+				SaveCurrentNpcQuestDateParam(pchar, "LilarcorTimer");
+				no2nd = true;
+			}
+			if (GetNpcQuestPastDayWOInit(pchar, "LilarcorTimer2")>2 && !no2nd)
+			{
+				PostEvent("Lilarcor_Talks2",2000);
+				SaveCurrentNpcQuestDateParam(pchar, "LilarcorTimer2");
+			}
+		}
+	}
+	
 	ReloadProgressUpdate();
 	ReloadProgressEnd();
 	SetPerspectiveSettings();
@@ -608,6 +648,8 @@ int ReloadToSea(int island_index, aref reload_data)
 
 	ref rPlayer = GetMainCharacter();
 	rPlayer.lastFightMode = 0;
+	
+	if (HasSubStr(rPlayer.location,"town") || HasSubStr(rPlayer.location,"shore") || HasSubStr(rPlayer.location,"mayak")) rPlayer.Do180Turn = true;
 
 	ref rIsland = GetIslandByIndex(island_index);
 

@@ -86,7 +86,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddMoneyToCharacter(pchar, -15000);
 		break;
 		case "PL_Q3_6":
-			dialog.text = "Значит, вам придется ее раздобыть. Не волнуйтесь, я подожду...";
+			dialog.text = "Значит, вам придётся её раздобыть. Не волнуйтесь, я подожду...";
 			link.l1 = "Гм, ну ладно. Я раздобуду деньги!";
 			link.l1.go = "exit";
 			AddQuestRecord("Pir_Line_3_KillLoy", "8");

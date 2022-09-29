@@ -1,6 +1,6 @@
 //navy
 #include "DIALOGS\russian\Common_Duel.c"
-// boal 29.05.04 даем карту клада
+// boal 29.05.04 даём карту клада
 void ProcessDialogEvent()
 {
 	ref NPChar;

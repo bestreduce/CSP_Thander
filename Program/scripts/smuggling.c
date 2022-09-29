@@ -213,7 +213,7 @@ int FindNextContrabandGoods(ref _refCharacter)
 				{
 					int curGoodsNum = sti(_refCharacter.FindContrabandGoods.GoodsIdx) + 1;
 					aref islRef; makearef(islRef,Islands[curIslandIdx].Trade.Contraband);
-					for(i=curGoodsNum; i<GetAttributesNum(islRef); i++)      // это мне сомнительно, походу тут баг, но эта ветка не работает, тк магазин есть, тк разговор в таверне идет
+					for(i=curGoodsNum; i<GetAttributesNum(islRef); i++)      // это мне сомнительно, походу тут баг, но эта ветка не работает, тк магазин есть, тк разговор в таверне идёт
 					{
 						n = GetAttributeValue(GetAttributeN(islRef,i));
 						if( GetSquadronGoods(_refCharacter,n)>0 )

@@ -1420,178 +1420,186 @@ void SetBaseShipData(ref refCharacter)
 		if (CheckAttribute(refShip, "Cannons.Borts.cannonl.damages")) { DeleteAttribute(refShip, "Cannons.Borts.cannonl.damages"); }
 		if (CheckAttribute(refShip, "Cannons.Borts.cannonr.damages")) { DeleteAttribute(refShip, "Cannons.Borts.cannonr.damages"); } */
 
-		refShip.Cannons.Charge.Type = GOOD_BALLS;
+		if (!CheckAttribute(refCharacter,"DontRefresh"))
+		{
+			refShip.Cannons.Charge.Type = GOOD_BALLS;
 
-		if (!CheckAttribute(refShip,"Cannons.Type"))
-		{
-			refShip.Cannons.Type = GetCannonByTypeAndCaliber("cannon", sti(refBaseShip.MaxCaliber)); // MakeInt(refBaseShip.Cannon);
-		}
+			if (!CheckAttribute(refShip,"Cannons.Type"))
+			{
+				refShip.Cannons.Type = GetCannonByTypeAndCaliber("cannon", sti(refBaseShip.MaxCaliber)); // MakeInt(refBaseShip.Cannon);
+			}
 
-		if (!CheckAttribute(refShip,"Crew.Morale"))
-		{
-			refShip.Crew.Morale = 20 + rand(79);
-		}
-		if (!CheckAttribute(refShip,"Crew.Quantity"))
-		{
-			refShip.Crew.Quantity = refBaseShip.OptCrew; // оптимальная команда
-		}
+			if (!CheckAttribute(refShip,"Crew.Morale"))
+			{
+				refShip.Crew.Morale = 20 + rand(79);
+			}
+			if (!CheckAttribute(refShip,"Crew.Quantity"))
+			{
+				refShip.Crew.Quantity = refBaseShip.OptCrew; // оптимальная команда
+			}
 
-		SetGoodsInitNull(refCharacter); // boal пееренс в метод
-		// новый опыт
-        if(!CheckAttribute(refCharacter, "ship.crew.Exp"))
-		{
-			refCharacter.Ship.Crew.Exp.Sailors   = 1 + rand(80);
-			refCharacter.Ship.Crew.Exp.Cannoners = 1 + rand(80);
-			refCharacter.Ship.Crew.Exp.Soldiers  = 1 + rand(80);
-		}
-		int iGoodN = 0;
-		int iGoodR = 0;
+			SetGoodsInitNull(refCharacter); // boal пееренс в метод
+			// новый опыт
+			if(!CheckAttribute(refCharacter, "ship.crew.Exp"))
+			{
+				refCharacter.Ship.Crew.Exp.Sailors   = 1 + rand(80);
+				refCharacter.Ship.Crew.Exp.Cannoners = 1 + rand(80);
+				refCharacter.Ship.Crew.Exp.Soldiers  = 1 + rand(80);
+			}
+			int iGoodN = 0;
+			int iGoodR = 0;
 
-		// boal -->
-		i = GetCharacterFreeSpace(refCharacter,GOOD_POWDER) / 40;
-        if(i>0)
-        {
-			if(i>=500)
-            {
-				SetCharacterGoods(refCharacter,GOOD_POWDER, 500 - rand(50));
-			} else
-            {
-				SetCharacterGoods(refCharacter,GOOD_POWDER,i);
-			}
-		}
-		// boal <--
-		// bombs
-		i = GetCharacterFreeSpace(refCharacter,GOOD_BOMBS) / 42;
-		if(i>0)
-		{
-			if(i > 600)
+			// boal -->
+			i = GetCharacterFreeSpace(refCharacter,GOOD_POWDER) / 40;
+			if(i>0)
 			{
-				i = 600;
+				if(i>=500)
+				{
+					SetCharacterGoods(refCharacter,GOOD_POWDER, 500 - rand(50));
+				} else
+				{
+					SetCharacterGoods(refCharacter,GOOD_POWDER,i);
+				}
 			}
-			iGoodN = 20;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
+			// boal <--
+			// bombs
+			i = GetCharacterFreeSpace(refCharacter,GOOD_BOMBS) / 42;
+			if(i>0)
 			{
-				iGoodR = 0;
+				if(i > 600)
+				{
+					i = 600;
+				}
+				iGoodN = 20;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_BOMBS,iGoodN);
 			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_BOMBS,iGoodN);
-		}
 
-		// grapes
-		i = GetCharacterFreeSpace(refCharacter,GOOD_GRAPES) / 60;
-		if(i>0)
-		{
-			if(i > 200)
+			// grapes
+			i = GetCharacterFreeSpace(refCharacter,GOOD_GRAPES) / 60;
+			if(i>0)
 			{
-				i = 200;
+				if(i > 200)
+				{
+					i = 200;
+				}
+				iGoodN = 20;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_GRAPES,iGoodN);
 			}
-			iGoodN = 20;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
-			{
-				iGoodR = 0;
-			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_GRAPES,iGoodN);
-		}
 
-		// knippels
-		i = GetCharacterFreeSpace(refCharacter,GOOD_KNIPPELS) / 60;
-		if(i>0)
-		{
-			if(i > 200)
+			// knippels
+			i = GetCharacterFreeSpace(refCharacter,GOOD_KNIPPELS) / 60;
+			if(i>0)
 			{
-				i = 200;
+				if(i > 200)
+				{
+					i = 200;
+				}
+				iGoodN = 20;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_KNIPPELS,iGoodN);
 			}
-			iGoodN = 20;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
-			{
-				iGoodR = 0;
-			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_KNIPPELS,iGoodN);
-		}
 
-		// cannonballs
-		i = GetCharacterFreeSpace(refCharacter,GOOD_BALLS) / 42;
-		if(i>0)
-		{
-			if(i > 800)
+			// cannonballs
+			i = GetCharacterFreeSpace(refCharacter,GOOD_BALLS) / 42;
+			if(i>0)
 			{
-				i = 800;
+				if(i > 800)
+				{
+					i = 800;
+				}
+				iGoodN = 20;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_BALLS,iGoodN);
 			}
-			iGoodN = 20;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
-			{
-				iGoodR = 0;
-			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_BALLS,iGoodN);
-		}
 
-		//food
-		i = GetCharacterFreeSpace(refCharacter,GOOD_FOOD) / 20;
-		if(i>0)
-		{
-            if(i > 300)
+			//food
+			i = GetCharacterFreeSpace(refCharacter,GOOD_FOOD) / 20;
+			if(i>0)
 			{
-				i = 300;
+				if(i > 300)
+				{
+					i = 300;
+				}
+				iGoodN = 5;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_FOOD,iGoodN);
 			}
-			iGoodN = 5;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
+			//GOOD_WEAPON
+			i = GetCharacterFreeSpace(refCharacter,GOOD_WEAPON) / 60;
+			if(i>0)
 			{
-				iGoodR = 0;
+				if(i > 300)
+				{
+					i = 300;
+				}
+				iGoodN = 5;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_WEAPON,iGoodN);
 			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_FOOD,iGoodN);
-		}
-		//GOOD_WEAPON
-		i = GetCharacterFreeSpace(refCharacter,GOOD_WEAPON) / 60;
-		if(i>0)
-		{
-            if(i > 300)
+			//
+			i = GetCharacterFreeSpace(refCharacter,GOOD_MEDICAMENT) / 100;
+			if(i>0)
 			{
-				i = 300;
+				if(i > 300)
+				{
+					i = 300;
+				}
+				iGoodN = 5;
+				iGoodR = rand(i - iGoodN);
+				if(iGoodR < 0)
+				{
+					iGoodR = 0;
+				}
+				iGoodN = iGoodN + iGoodR;
+				SetCharacterGoods(refCharacter,GOOD_MEDICAMENT,iGoodN);
 			}
-			iGoodN = 5;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
-			{
-				iGoodR = 0;
-			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_WEAPON,iGoodN);
-		}
-		//
-		i = GetCharacterFreeSpace(refCharacter,GOOD_MEDICAMENT) / 100;
-		if(i>0)
-		{
-            if(i > 300)
-			{
-				i = 300;
-			}
-			iGoodN = 5;
-			iGoodR = rand(i - iGoodN);
-			if(iGoodR < 0)
-			{
-				iGoodR = 0;
-			}
-			iGoodN = iGoodN + iGoodR;
-			SetCharacterGoods(refCharacter,GOOD_MEDICAMENT,iGoodN);
 		}
 	}
-	refCharacter.ship.crew.disease = 0;
-	SetTuningShipStates(refCharacter);
-	//Mett: nation sails —->
-	if(sti(refCharacter.nation) == PIRATE)
+	
+	if (!CheckAttribute(refCharacter,"DontRefresh"))
 	{
-		refBaseShip.ship.upgrades.sails = 38 + rand(50); // LEO: пиратские паруса
-	}
+		refCharacter.ship.crew.disease = 0;
+		SetBermudeTuningShipStates(refCharacter);
+		//Mett: nation sails —->
+		if(sti(refCharacter.nation) == PIRATE)
+		{
+			refBaseShip.ship.upgrades.sails = 38 + rand(50); // LEO: пиратские паруса
+		}
 		else refBaseShip.ship.upgrades.sails = 1 + rand(22); // LEO: все остальные
+	}
+	if (CheckAttribute(refCharacter,"DontRefresh")) DeleteAttribute(refCharacter,"DontRefresh");
 	// <-—
 
 	//Debug —->
@@ -1723,6 +1731,28 @@ void GenerateAndAddItems(ref _chr, string _itemID, int _qty)
 bool CheckCharacterItem(ref _refCharacter,string itemName)
 {
 	return CheckAttribute(_refCharacter, "Items." + itemName) && (sti(_refCharacter.Items.(itemName)) > 0);
+}
+
+string CheckCharacterGeneratedItem(ref _refCharacter, string sItemBaseName)
+{
+	if (!CheckAttribute(_refCharacter, "Items")) { return ""; }
+
+	aref arInventory, arItem;
+	string sItem;
+	makearef(arInventory, _refCharacter.Items);
+
+	int n = GetAttributesNum(arInventory);
+	for (int i = 0; i < n; i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+		if (HasSubStr(sItem, sItemBaseName))
+		{
+			return sItem;
+		}
+	}
+
+	return "";
 }
 
 int GetCharacterItem(ref _refCharacter,string itemName)
@@ -2562,6 +2592,7 @@ void UnsetSpecialAttributes(ref chr)
 	chr.chr_ai.special.valueT = 0;
 	chr.chr_ai.special.valueB = 0;
 	chr.chr_ai.special.valueP = 0;
+	chr.chr_ai.special.valueV = 0;
 }
 
 void SetWeaponsSpecials(ref chr, ref arItm)
@@ -2598,6 +2629,10 @@ void SetWeaponsSpecials(ref chr, ref arItm)
 	if (CheckAttribute(arItm,"special.valueP"))
 	{
 		chr.chr_ai.special.valueP = sti(arItm.special.valueP);
+	}
+	if (CheckAttribute(arItm,"special.valueV"))
+	{
+		chr.chr_ai.special.valueV = sti(arItm.special.valueV);
 	}
 }
 
@@ -3684,6 +3719,7 @@ bool IsPCharHaveMushketerModel()
 
 	if(HasSubStr(sModel, "Blad") ||
 	HasSubStr(sModel, "Whisper") ||
+	HasSubStr(sModel, "PGG_Barhard") ||
 	HasSubStr(sModel, "PGG_Anamaria") ||
 	HasSubStr(sModel, "PGG_Victori") ||
 	HasSubStr(sModel, "PGG_Angellica") ||
@@ -3984,7 +4020,7 @@ void OfficersFree()
         {
             ref offchar = GetCharacter(idx);
             if(bAbordageStarted) SetCharacterTask_GotoPoint(offchar, "rld", LAi_FindFreeRandomLocator("rld"));
-            else LAi_tmpl_walk_go(offchar);
+            else LAi_tmpl_walk_InitTemplate(offchar);
         }
     }
 }
@@ -4035,4 +4071,25 @@ void SwapWeaponFight()
 void SwapWeaponFight2()
 {
 	pchar.mushket.timer = false;
+}
+
+#event_handler("Lilarcor_Talks", "Lilarcor_Talks");
+void Lilarcor_Talks()
+{
+	switch (pchar.equip.blade)
+	{
+		case "Lilarcor_Sword1": PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Bers_"+rand(7)+".mp3"); break;
+		case "Lilarcor_Sword2": PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Bers_"+rand(15)+".mp3"); break;
+		case "Lilarcor_Sword3": PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Bers_"+rand(22)+".mp3"); break;
+	}
+	pchar.perks.list.Rush.active = 3600;
+	pchar.perks.list.Rush.delay = 3600;
+	pchar.chr_ai.energy = pchar.chr_ai.energyMax;
+	log_info("Лиларкор вызвал в вас приступ неудержимой ярости!");
+}
+
+#event_handler("Lilarcor_Talks2", "Lilarcor_Talks2");
+void Lilarcor_Talks2()
+{
+	PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_rnd_"+rand(10)+".mp3");
 }

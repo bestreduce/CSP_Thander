@@ -760,7 +760,7 @@ void CreatTenochtitlan(aref loc)
 				if (CheckCharacterItem(pchar, sTemp))
 				{
 					itm = ItemsFromID(sTemp);
-					//если тотем еще не использован, то помечаем на укладку в button
+					//если тотем ещё не использован, то помечаем на укладку в button
 					if (!CheckAttribute(itm, "shown.used"))
 					{
 						itm.shown = 0;

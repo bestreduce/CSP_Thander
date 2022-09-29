@@ -98,7 +98,7 @@ void ProcessDialogEvent()
 				NPChar.quest.meeting = "1";
 				break;
 			}
-			if (!CheckAttribute(pchar, "questTemp.Headhunter"))
+			if (!CheckAttribute(pchar, "questTemp.Headhunter") && pchar.rank >= 10)
 			{
 				dialog.text = "Капитан, я бы хотел поговорить с вами об одном деле. Вы, как я вижу, человек на Архипелаге новый, и пока не известны в Береговом братстве... Возможно, вы именно т"+ GetSexPhrase("от","а") +", кто нуж"+ GetSexPhrase("ен","на") +".";
 				link.l1 = "Хм... Интересно. Излагайте, что у вас за дело.";
@@ -153,12 +153,12 @@ void ProcessDialogEvent()
 				}
 				if(FindFirstContrabandGoods(PChar) != -1)
 				{
-					Link.l1 = "Я привез"+ GetSexPhrase("","ла") +" немного товаров на продажу.";
+					Link.l1 = "Я прив"+ GetSexPhrase("ёз","езла") +" немного товаров на продажу.";
 					Link.l1.go = "Meeting_3";
 				}
 
 				if (CheckAttribute(pchar, "GenQuest.contraTravel.active") && sti(pchar.GenQuest.contraTravel.active) == true)
-					Link.l2 = "Насчет поездки...";
+					Link.l2 = "Насчёт поездки...";
 				else
 					Link.l2 = "Мне нужно добраться кое-куда.";
 				Link.l2.go = "Travel";
@@ -196,13 +196,13 @@ void ProcessDialogEvent()
 				{
 					if (pchar.contratrade.time != GetDataDay() && ChangeContrabandRelation(pchar, 0) > 5)
 					{
-						Link.l17 = "(Негромко) Я слышал"+ GetSexPhrase("","а") +", что у вас можно купить кое-то интересное.";
+						Link.l17 = "(негромко) Я слышал"+ GetSexPhrase("","а") +", что у вас можно купить кое-то интересное.";
 						Link.l17.go = "Trade";
 					}
 				}
 				if (!CheckAttribute(pchar,"contratrade.time") && ChangeContrabandRelation(pchar, 0) > 5)
 				{
-					Link.l17 = "(Негромко) Я слышал"+ GetSexPhrase("","а") +", что у вас можно купить кое-то интересное.";
+					Link.l17 = "(негромко) Я слышал"+ GetSexPhrase("","а") +", что у вас можно купить кое-то интересное.";
 					Link.l17.go = "Trade";
 				}
 				if (CheckAttribute(pchar,"RimalieGood") && ChangeContrabandRelation(pchar, 0) > 5)
@@ -239,7 +239,7 @@ void ProcessDialogEvent()
 		case "Rimalie_2":
 			if (ChangeContrabandRelation(pchar, 0) >= 70)
 			{
-				Dialog.Text = "Ты довольно уважаемый клиент для нашей организации и принёс"+ GetSexPhrase("","ла") +" немало прибыли. Ради тебя мы готовы пойти на уступки и прекратить его преследовать хоть прямо сейчас. Неужели он настолько тебе нужен? О Рималье ходят довольно нехорошие слухи о подстрекательстве к бунту. Не боишься?";
+				Dialog.Text = "Ты довольно уважаемый клиент для нашей организации и прин"+ GetSexPhrase("ёс","есла") +" немало прибыли. Ради тебя мы готовы пойти на уступки и прекратить его преследовать хоть прямо сейчас. Неужели он настолько тебе нужен? О Рималье ходят довольно нехорошие слухи о подстрекательстве к бунту. Не боишься?";
 				Link.l1 = "Ради хорошего офицера-мушкетёра не грех и рискнуть. Благодарю вас за помощь!";
 				Link.l1.go = "exit";
 				pchar.RimalieDone = true;
@@ -490,7 +490,7 @@ void ProcessDialogEvent()
 		}
 		break;
 		case "pirateStartQuest_Smuggler_1":
-			dialog.text = "Черт бы меня побрал, если я не знаю кто твой заказчик! Ну, этот пройдоха получит свою партию с солидной наценкой, если решил водить меня за нос.";
+			dialog.text = "Чёрт бы меня побрал, если я не знаю кто твой заказчик! Ну, этот пройдоха получит свою партию с солидной наценкой, если решил водить меня за нос.";
 			link.l1 = "Я не знаю, о ком ты говоришь. Мой покупатель сидит на другом острове, поэтому и тороплюсь, пока ветер попутный.";
 			link.l1.go = "pirateStartQuest_Smuggler_2";
 		break;
@@ -500,7 +500,7 @@ void ProcessDialogEvent()
 			link.l1.go = "pirateStartQuest_Smuggler_3";
 		break;
 		case "pirateStartQuest_Smuggler_3":
-			dialog.text = "Это обойдется тебе в 30 000 пиастров, по 300 за раба. Есть столько?";
+			dialog.text = "Это обойдётся тебе в 30 000 пиастров, по 300 за раба. Есть столько?";
 			link.l1 = "По рукам.";
 			link.l1.go = "pirateStartQuest_Smuggler_4";
 		break;
@@ -555,7 +555,7 @@ void ProcessDialogEvent()
 			break;
 
 		case "Contra_GenQuest_Church_2_3":
-			dialog.text = "А я здесь причем?";
+			dialog.text = "А я здесь причём?";
 				link.l1 = "В городе их нет, своего корабля у них тоже не было. Вот я и подумал"+ GetSexPhrase("","а") +", может быть, кто из твоих деловых партнёров оказал им некую услугу?..";
 				link.l1.go = "Contra_GenQuest_Church_2_4";
 			break;
@@ -585,7 +585,7 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_2.QuestGangShore = sGenLocation;
 			PChar.GenQuest.ChurchQuest_2.BanditsInShore = true;
 			dialog.text = "Хм, мы высадили их " + XI_ConvertString(sGenLocation + "Dat") + "... Знаешь, лучше бы они и вправду оказались тебе друзьями, иначе бы я не советовал их беспокоить.";
-			link.l1 = "Спасибо за заботу, но я вооружен"+ GetSexPhrase("","а") +" и очень обаятел"+ GetSexPhrase("ен","ьна") +".";
+			link.l1 = "Спасибо за заботу, но я вооружён"+ GetSexPhrase("","а") +" и очень обаятел"+ GetSexPhrase("ен","ьна") +".";
 			link.l1.go = "exit";
 			SetFunctionLocationCondition("Church_GenQuest2_GenerateBandits", sGenLocation, false);
 			sQuestTitle = PChar.GenQuest.ChurchQuest_2.QuestTown + "ChurchGenQuest2";
@@ -598,7 +598,7 @@ void ProcessDialogEvent()
 		// <-- Церковный генератор №2
 
 		case "Meeting_1":
-			Dialog.Text = "Хм... Причем здесь я? Наверное, вы не туда зашли, капитан. Идите в магазин - там с радостью купят то, что вы привезли.";
+			Dialog.Text = "Хм... Причём здесь я? Наверное, вы не туда зашли, капитан. Идите в магазин - там с радостью купят то, что вы привезли.";
 			Link.l1 = "Боюсь, что мне нужны именно вы.";
 			Link.l1.go = "Meeting_2";
 			Link.l2 = "Спасибо за совет. Всего хорошего.";
@@ -638,7 +638,7 @@ void ProcessDialogEvent()
                             }
                             else
                             {
-            				    Dialog.Text = "Хм... Возможно, покупатель и найдется. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
+            				    Dialog.Text = "Хм... Возможно, покупатель и найдётся. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
             				}
             				Link.l1 = "Хорошо. До встречи.";
             				Link.l1.go = "Smuggling_exit";
@@ -659,7 +659,7 @@ void ProcessDialogEvent()
     				}
     				else
     				{
-                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы еще не послали наемных убийц за твоей головой. Убирайся!";
+                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы ещё не послали наёмных убийц за твоей головой. Убирайся!";
         				Link.l1 = "Эх... значит не судьба мне стать контрабандистом.";
         				Link.l1.go = "Exit";
     				}
@@ -696,7 +696,7 @@ void ProcessDialogEvent()
 		//редкостная хрень, но по-другому не работает-класс корабля ГГ считается отдельно от компаньонов, и всё тут
 			int iClass, ipClass;
 			ipClass = 4-sti(RealShips[sti(pchar.ship.type)].Class);
-			iClass = 3;//т.к. не пройдет по числу кораблей в любом случае
+			iClass = 3;//т.к. не пройдёт по числу кораблей в любом случае
 		if (GetBaseHeroNation() == PIRATE)
 		{
 			ipClass = sti(ipClass)-1;
@@ -714,13 +714,13 @@ void ProcessDialogEvent()
 		}
 			if (sti(ipClass) > 0 || 3 - sti(iClass) > 0)
 			{
-				dialog.text = NPCStringReactionRepeat("Ты бы еще на королевском мановаре явил"+ GetSexPhrase("ся","ась") +". Да твою посудину за милю видать из форта. Мы не будем рисковать своими головами. Приходи на меньшем корабле, и только на одном.",
-					"Я что, непонятно выражаюсь? Найди себе суденышко поменьше, тогда и приходи.",
+				dialog.text = NPCStringReactionRepeat("Ты бы ещё на королевском мановаре явил"+ GetSexPhrase("ся","ась") +". Да твою посудину за милю видать из форта. Мы не будем рисковать своими головами. Приходи на меньшем корабле, и только на одном.",
+					"Я что, непонятно выражаюсь? Найди себе судёнышко поменьше, тогда и приходи.",
 					"Ты что, тупица или притворяешься? Говорю же тебе - найди себе шхуну, ну бриг на крайний случай, или сделка не состоится.",
 					"Ох, и как таких дур"+ GetSexPhrase("аков","") +" земля носит...", "block", 1, npchar, Dialog.CurrentNode);
 				link.l1 = HeroStringReactionRepeat("Хорошо, я тебя понял"+ GetSexPhrase("","а") +". Приду позже, как кораблик сменю.",
 					"Да все понятно, просто уточнить хотел"+ GetSexPhrase("","а") +".",
-					"Нет, не тупица, просто жадина. Подумал"+ GetSexPhrase("","а") +", может поменялось что. Я бы еще пару пинасов с собой прихватил"+ GetSexPhrase("","а") +"...",
+					"Нет, не тупица, просто жадина. Подумал"+ GetSexPhrase("","а") +", может поменялось что. Я бы ещё пару пинасов с собой прихватил"+ GetSexPhrase("","а") +"...",
 					"Ну ты же видишь - носит как-то...", npchar, Dialog.CurrentNode);
 				link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);
 				break;
@@ -779,7 +779,7 @@ void ProcessDialogEvent()
 									}
 									else
 									{
-										Dialog.Text = "Хм... Возможно, покупатель и найдется. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
+										Dialog.Text = "Хм... Возможно, покупатель и найдётся. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
 									}
 									Link.l1 = "Хорошо. До встречи.";
 									Link.l1.go = "Smuggling_exit";
@@ -800,7 +800,7 @@ void ProcessDialogEvent()
 							}
 							else
 							{
-								Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы еще не послали наемных убийц за твоей головой. Убирайся!";
+								Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы ещё не послали наёмных убийц за твоей головой. Убирайся!";
 								Link.l1 = "Эх... значит не судьба мне стать контрабандистом.";
 								Link.l1.go = "Exit";
 							}
@@ -847,7 +847,7 @@ void ProcessDialogEvent()
                             }
                             else
                             {
-            				    Dialog.Text = "Хм... Возможно, покупатель и найдется. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
+            				    Dialog.Text = "Хм... Возможно, покупатель и найдётся. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
             				}
             				Link.l1 = "Хорошо. До встречи.";
             				Link.l1.go = "Smuggling_exit";
@@ -868,7 +868,7 @@ void ProcessDialogEvent()
     				}
     				else
     				{
-                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы еще не послали наемных убийц за твоей головой. Убирайся!";
+                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы ещё не послали наёмных убийц за твоей головой. Убирайся!";
         				Link.l1 = "Эх... значит не судьба мне стать контрабандистом.";
         				Link.l1.go = "Exit";
     				}
@@ -905,7 +905,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-						Dialog.Text = "Хм... Возможно, покупатель и найдется. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
+						Dialog.Text = "Хм... Возможно, покупатель и найдётся. Мы будем ждать вас в месте, называющемся " + GetConvertStr(Pchar.quest.contraband.CurrentPlace, "LocLables.txt") + ".";
 					}
 					Link.l1 = "Хорошо. До встречи.";
 					Link.l1.go = "Smuggling_exit";
@@ -913,7 +913,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				Dialog.Text = "Постой, так у нас ничего не выйдет! Ты бы еще на королевском мановаре явил"+ GetSexPhrase("ся","ась") +". Приходи на небольшом корабле, и только одном, тогда и поговорим. А деньги твои я заберу, в качестве платы за совет.";
+				Dialog.Text = "Постой, так у нас ничего не выйдет! Ты бы ещё на королевском мановаре явил"+ GetSexPhrase("ся","ась") +". Приходи на небольшом корабле, и только одном, тогда и поговорим. А деньги твои я заберу, в качестве платы за совет.";
 				Link.l1 = RandSwear();
 				Link.l1.go = "exit";
 			}
@@ -1094,7 +1094,7 @@ void ProcessDialogEvent()
 					{
 						if(GetQuestPastDayParam("contraTravel") == sti(PChar.GenQuest.contraTravel.days))
 						{
-							Dialog.Text = "Принес"+ GetSexPhrase("","ла") +" деньги?";
+							Dialog.Text = "Прин"+ GetSexPhrase("ёс","есла") +" деньги?";
 							Link.l1 = "Да.";
 							Link.l1.go = "Travel_pay";
 							Link.l3 = "Я передумал"+ GetSexPhrase("","а") +"....";
@@ -1134,7 +1134,7 @@ void ProcessDialogEvent()
 						//за сколько доставят
 						pchar.GenQuest.contraTravel.price = (sti(PChar.rank)*250 + (100 - nRel)*10 + rand(30)*20) + sti(arTmp.destination.days)*100;
 
-						//если метро активно, и нет пассажиров у ГГ, и еще сегодня не виделись, есть доступная бухта, и ранд ...
+						//если метро активно, и нет пассажиров у ГГ, и ещё сегодня не виделись, есть доступная бухта, и ранд ...
 						bOk = !bPauseContrabandMetro && CheckNPCQuestDate(npchar, "Travel_Talk") &&
 							Pchar.GenQuest.contraTravel.CurrentPlace != "None" && rand(50) < nRel;
                         bOk2 = CheckAttribute(Pchar, "quest.Contraband.Active") && (sti(Pchar.quest.Contraband.Active) == true);
@@ -1145,7 +1145,7 @@ void ProcessDialogEvent()
 							SaveCurrentQuestDateParam("contraTravel");
 
 							Dialog.Text = "Что ж, можем доставить тебя до места " + GetConvertStr(locations[FindLocation(pchar.GenQuest.contraTravel.destination.loc)].id, "LocLables.txt") + " близ " +
-								XI_ConvertString("Colony" + pchar.GenQuest.contraTravel.destination + "Gen") + " за " + pchar.GenQuest.contraTravel.price + " золотых. Принесешь деньги через " +
+								XI_ConvertString("Colony" + pchar.GenQuest.contraTravel.destination + "Gen") + " за " + pchar.GenQuest.contraTravel.price + " золотых. Принесёшь деньги через " +
 								FindRussianDaysString(nDay) + ". Корабль будет ждать тебя в месте под названием " +
 								GetConvertStr(locations[FindLocation(Pchar.GenQuest.contraTravel.CurrentPlace)].id, "LocLables.txt") + " ровно сутки.";
 
@@ -1163,7 +1163,7 @@ void ProcessDialogEvent()
 					//нет, посылаем в сад
 					else
 					{
-                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы еще не послали наемных убийц за твоей головой. Убирайся!";
+                        Dialog.Text = "И после всего ты думаешь, что кто-то захочет работать с тобой? Радуйся, что мы ещё не послали наёмных убийц за твоей головой. Убирайся!";
         				Link.l2 = "Эх... значит не судьба.";
 					}
 
@@ -1174,7 +1174,7 @@ void ProcessDialogEvent()
 			{
 				if(GetPassengersQuantity(pchar) != 0)
 				{
-					Dialog.Text = "Нет, мы не повезем вас. Только одного.";
+					Dialog.Text = "Нет, мы не повезём вас. Только одного.";
 					Link.l2 = RandSwear() + " И не нужно!";
 				}
 				else
@@ -1209,6 +1209,7 @@ void ProcessDialogEvent()
 
 			//активируем квест
 			pchar.GenQuest.contraTravel.active = true;
+			pchar.GenQuest.contraTravel.GuardNation = npchar.nation;
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			break;
@@ -1222,7 +1223,7 @@ void ProcessDialogEvent()
 				AddMoneyToCharacter(pchar, -1*Sum);
 				//ставим флаг оплаты
 				pchar.GenQuest.contraTravel.payed = true;
-				Dialog.Text = "Приятно иметь с тобой дело. Корабль ждет, не опоздай.";
+				Dialog.Text = "Приятно иметь с тобой дело. Корабль ждёт, не опоздай.";
 				Link.l1 = "Постараюсь.";
 				AddQuestRecord("Gen_ContrabandTravel", "2");
 				AddQuestUserData("Gen_ContrabandTravel", "sSex", GetSexPhrase("","а"));

@@ -285,7 +285,7 @@ void LAi_tmpl_dialog_CharacterUpdate(aref chr, float dltTime)
 					// if(chr.sex == "woman") snd = "female-citizen";
 					if(chr.sex == "woman") snd = "Gr_Woman_Citizen";
 				}
-				if(bCharVoice) // LEO
+				if(sti(InterfaceStates.CharVoice)==1) // LEO
 				{
 					LAi_CharacterPlaySound(chr, snd);
 				}

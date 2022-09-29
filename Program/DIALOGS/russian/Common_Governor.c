@@ -18,9 +18,9 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
 
-	int Matheria1 = 4000;//шелк
+	int Matheria1 = 4000;//шёлк
 	int Matheria2 = 3000;//красное
-	int Matheria3 = 2000;//черное
+	int Matheria3 = 2000;//чёрное
 	int BuildPrice = 3000000;
 
     // вызов диалога по городам <--
@@ -133,7 +133,7 @@ void ProcessDialogEvent()
 			{
 				dialog.text = RandPhraseSimple("А, это опять вы? По какому вопросу вам понадобился генерал-губернатор " + NationNameGenitive(sti(NPChar.nation))+ " на этот раз?",
                               "Опять отрываете меня от важных государственных дел? Что вам угодно, " +GetAddress_Form(NPChar)+"?");
-				link.l1 = "Я хочу поговорить о работе на благо короны " + NationNameGenitive(sti(NPChar.nation));
+				link.l1 = "Я хочу поговорить о работе на благо короны " + NationNameGenitive(sti(NPChar.nation)) + ".";
 				link.l1.go = "work";
 				link.l2 = "Нужно поговорить с вами об одном деле.";
 				link.l2.go = "quests"; // файл нации
@@ -151,7 +151,7 @@ void ProcessDialogEvent()
 				/*
 				Можно в конце линейки сделать запрос: "Я, состою во флоте Франции, для усиления боевой мощи нашей державы, необходимо построить второй корабль - аналог СР".
 				В таком случае, один корабль будет охранять главную колонию, на втором корабле мы будем плавать и громить форты, захватывая колонии для Франции".
-				На постройку корабля - высчитать все ресурсы: доски, парусина, ЧД, КД, и еще некоторые ресурсы в больших количествах. Цена постройки 3 млн. Время строительства 1 месяц.
+				На постройку корабля - высчитать все ресурсы: доски, парусина, ЧД, КД, и ещё некоторые ресурсы в больших количествах. Цена постройки 3 млн. Время строительства 1 месяц.
 				Всё, всё по лору и все довольны без лишнего нытья.
 				*/
 			}
@@ -159,7 +159,7 @@ void ProcessDialogEvent()
 
 		case "build_ship":
 			dialog.Text = "Это отличная идея! Однако в казне нет ресурсов для её осуществления... Если хотите, вы можете привезти собственный материал и оплатить работу инженеров и рабочих. Я всё организую.";
-			Link.l1 = "Я " + GetSexPhrase("согласен","согласна")+ ". Что и в каком объеме нужно будет доставить?";
+			Link.l1 = "Я " + GetSexPhrase("согласен","согласна")+ ". Что и в каком объёме нужно будет доставить?";
 			Link.l1.go = "build_ship_1"
 			Link.l2 = "Простите, но на такое у меня нет ни времени, ни денег.";
 			Link.l2.go = "exit";
@@ -282,7 +282,7 @@ void ProcessDialogEvent()
     			link.l1.go = "exit";
 			}
 			else
-			{// даем задание
+			{// даём задание
                 // звание подрасло
                 if (isReadyToNextTitle(sti(NPChar.nation)))
                 {
@@ -296,7 +296,7 @@ void ProcessDialogEvent()
         			link.l1.go = "exit";
         			break
                 }
-                // даем задание
+                // даём задание
                 dialog.text = LinkRandPhrase("Вы имеете вопросы ко мне, "+GetAddress_FormTitle(sti(NPChar.nation), sti(Items[sti(pchar.EquipedPatentId)].TitulCur))+"?",
                                              "Я слушаю вас, " + GetAddress_Form(NPChar)+".",
                                              "Говорите, я весь внимание.");
@@ -341,7 +341,7 @@ void ProcessDialogEvent()
 				}
                 // Сдача города <--
                 link.l9 = RandPhraseSimple("Извините, я зайду позже.",
-                                           "Ничего серьезного, "+GetAddress_FormToNPC(NPChar)+". Просто визит вежливости.");
+                                           "Ничего серьёзного, "+GetAddress_FormToNPC(NPChar)+". Просто визит вежливости.");
     			link.l9.go = "exit";
 			}
 		break;
@@ -400,7 +400,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Gen_CityCapture", "sNation", XI_ConvertString(GetNationNameByType(sti(NPChar.nation)) + "Gen"));
 
             AddMoneyToCharacter(PChar, colony_money);
-            AddTitleNextRate(sti(NPChar.nation), 1);  // счетчик звания
+            AddTitleNextRate(sti(NPChar.nation), 1);  // счётчик звания
             ChangeCharacterNationReputation(Pchar, sti(NPChar.nation), 10);
             PChar.questTemp.DontNullDeposit = true;    // чтоб не нулили ростовщика
             SetCaptureTownByNation(colonies[i].id, sti(NPChar.nation));

@@ -322,7 +322,7 @@ void Sea_LandLoad()
 		if (sti(pchar.money) < sbormoney)
 		{
 			Log_Info("Недостаточно денег на оплату портового сбора. Вход невозможен.");
-			Log_Info("Вам необходимо еще "+ (sbormoney - sti(pchar.money)) +" пиастров.");
+			Log_Info("Вам необходимо ещё "+ (sbormoney - sti(pchar.money)) +" пиастров.");
 			return;
 		}
 	}
@@ -944,7 +944,7 @@ void SeaLogin(ref Login)
 			SetCaptanModelByEncType(rFantom, rFantom.EncType);
 			SetRandomNameToCharacter(rFantom);
 			SetSeaFantomParam(rFantom, rEncounter.Type);
-			int iRank = sti(pchar.rank) - rand(5) + rand(5);
+			int iRank = sti(pchar.rank) - 3;
 			if (iRank < 1) iRank = 1;
 			SetFantomParamFromRank(rFantom, iRank, false);
 			rFantom.SeaAI.Group.Name = sGName;
@@ -1010,7 +1010,7 @@ void SeaLogin(ref Login)
 			{
 				iFantomIndex = FANTOM_CHARACTERS + iNumFantoms - iNumFantomShips + j;
 				rFantom = &Characters[iFantomIndex];
-                DeleteAttribute(rFantom, "items"); // boal 28.07.04 фикс кучи сабель, когда идет в плен
+                DeleteAttribute(rFantom, "items"); // boal 28.07.04 фикс кучи сабель, когда идёт в плен
 				rFantom.id = "fenc_" + iFantomIndex;
                 // boal 26.02.2004 -->
 				rFantom.location = sIslandID;
@@ -1460,7 +1460,7 @@ void Sea_LoadIsland(string sIslandID)
 	{
 		// boal -->
 		float  fMaxViewDist;
-        Sea.MaxSeaHeight = SetMaxSeaHeight(iIslandIndex); // тут нужно для загрузки игры из сайва, для нормального перехода не работает, тк ГГ еще не в море, нет коорд
+        Sea.MaxSeaHeight = SetMaxSeaHeight(iIslandIndex); // тут нужно для загрузки игры из сайва, для нормального перехода не работает, тк ГГ ещё не в море, нет коорд
         Log_TestInfo("Sea_LoadIsland Sea.MaxSeaHeight " + Sea.MaxSeaHeight);
 		// boal <--
 		CreateEntity(&Island, "Island");
@@ -1630,7 +1630,7 @@ void Sea_Load()
 	for (i = 0; i < MAX_SHIPS_ON_SEA; i++) iTemp[i] = ShipModelrList[i];
 
 	//принципиальный момент !!!  двигаем  массив номеров моделек шипов вправо !! - иначе для флагмана ГГ приписывается неправильный номер модельки
-	// два дня понять не мог в чем дело - почему неправильно выставляются флаги при загрузке игры в режиме "море"
+	// два дня понять не мог в чём дело - почему неправильно выставляются флаги при загрузке игры в режиме "море"
 	for (i = 0; i < MAX_SHIPS_ON_SEA - 1; i++) { ShipModelrList[i + 1] = iTemp[i]; }
 	ShipModelrList[0] = ShipOnLoadModelrList;
 
@@ -1727,6 +1727,11 @@ ref CalculateGroupShipPos()
 
 	if (shipIndex == 0)
 	{
+		if (CheckAttribute(pchar,"Do180Turn") && pchar.Do180Turn == true)
+		{
+			result[1] = rotation-180.0;
+			pchar.Do180Turn = false;
+		}
 		return &result;
 	}
 

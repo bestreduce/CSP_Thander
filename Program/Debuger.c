@@ -6,7 +6,7 @@ void ActiveINSERTControl()
 {
 	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	// -->
-	string totalInfo = descF8;
+	string totalInfo = "телепорт по тавернам";
 	ref mc, ch;
 	int n, idx;
 	mc = GetMainCharacter();

@@ -215,6 +215,8 @@ void CreateLandActionsEnvironment()
 	ILogAndActions.ActiveActions.Action.Text		= XI_ConvertString("for_quick_action_Action");
 	ILogAndActions.ActiveActions.OpenBox.IconNum	= 16;
 	ILogAndActions.ActiveActions.OpenBox.Text		= XI_ConvertString("for_quick_action_OpenBox");
+	ILogAndActions.ActiveActions.DeadBox.IconNum	= 31;
+	ILogAndActions.ActiveActions.DeadBox.Text		= XI_ConvertString("for_quick_action_DeadBox");
 	ILogAndActions.ActiveActions.Reload.IconNum		= 13;
 	ILogAndActions.ActiveActions.Reload.Text		= XI_ConvertString("for_quick_action_Reload");
 	ILogAndActions.ActiveActions.Closed.IconNum		= 29;

@@ -160,7 +160,7 @@ void GenerateMaps(aref ch, int iProbability1, int iProbability2)
 	if(rand(iProbability2) == 1 && !CheckMainHeroMap("map_maine_1")) AddItems(ch, "map_maine_1", 1);
 	if(rand(iProbability2) == 1 && !CheckMainHeroMap("map_maine_2")) AddItems(ch, "map_maine_2", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_panama")) AddItems(ch, "map_panama", 1);
-	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_maracaibo")) AddItems(ch, "map_maracaibo", 1);
+	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_Bahames")) AddItems(ch, "map_Bahames", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_cumana")) AddItems(ch, "map_cumana", 1);
 }
 
@@ -1580,7 +1580,7 @@ int NPC_FindOrCreateCharacter(string _id)
 }
 // _ani нужно для двух рас пкм + к3
 // _LifeDay - сколько дней живет, если -1, то вечный, если 0, то трется при выходе из локации
-// _equip - экипировка саблями, перки все равно раздадутся
+// _equip - экипировка саблями, перки всё равно раздадутся
 int NPC_GenerateCharacter(string _id, string _model, string _sex, string _ani, int _rank, int _nation, int _LifeDay, bool _equip)
 {
     int iChar = NPC_FindOrCreateCharacter(_id);

@@ -168,6 +168,12 @@ int GetRelation(int iCharacterIndex1, int iCharacterIndex2)
 	ref rCharacter1 = GetCharacter(iCharacterIndex1);
 	ref rCharacter2 = GetCharacter(iCharacterIndex2);
 
+	// Дрейфующие суда - всегда нейтральные
+	if (HasSubStr(rCharacter1.id, "_DriftCap_") || HasSubStr(rCharacter2.id, "_DriftCap_"))
+	{
+		return RELATION_NEUTRAL;
+	}
+
 	// if sea active, check groups first, if both have same group - they are friends
 	if (bSeaActive)
 	{

@@ -140,7 +140,7 @@ void OfficersReactionResult()
 	ref sld;
 
 	if (LAi_IsCapturedLocation) return;
-	if (chrDisableReloadToLocation) return; // идет некий другой квест с запретом выхода
+	if (chrDisableReloadToLocation) return; // идёт некий другой квест с запретом выхода
 	if (CheckAttribute(Pchar,"questTemp.MunityOfficerIDX") && Pchar.questTemp.MunityOfficerIDX.begin == "1") return;
 
 	for (i = 0; i<GetPassengersQuantity(pchar); i++)
@@ -209,8 +209,10 @@ void OfficersReactionResult()
 						if (PlaceCharacter(sld, "goto", "random_must_be_near") != "")
 						{
 							sld.dialog.currentnode = "WantToGo";
-		                    sld.greeting           = "Gr_Officer_Salary";
-
+							if (sld.sex != "woman")
+							{
+								sld.greeting           = "Gr_Officer_Salary";
+							}
 							LAi_SetActorType(sld);
 							LAi_ActorDialog(sld, pchar, "", 2.0, 0);
 							//SetActorDialogAny2Pchar(sld.id, "pchar_back_to_player", 0.0, 0.0);
@@ -313,23 +315,6 @@ void CheckForReleaseOfficer(int iCharIndex)
 //////////////// OFFICER ////////////////
 void SetOfficerParam(ref Npchar, int _type)
 {
-	float upSkill = 0.7;
-
-	ClearCharacterExpRate(Npchar); // трем все пороги экспы на всяк сулчай
-
-    Npchar.quest.LeadershipModify  = 0;
-	Npchar.quest.FencingModify     = 0;
-	Npchar.quest.SailingModify     = 0;
-	Npchar.quest.AccuracyModify    = 0;
-	Npchar.quest.CannonsModify     = 0;
-	Npchar.quest.GrapplingModify   = 0;
-	Npchar.quest.RepairModify      = 0;
-	Npchar.quest.DefenseModify     = 0;
-	Npchar.quest.CommerceModify    = 0;
-	Npchar.quest.SneakModify       = 0;
-	Npchar.quest.PistolModify      = 0;
-
-	// SetRandSPECIAL(Npchar);   //  вот это нафиг
 	Npchar.quest.officertype_2 = ""; //mercen_";
     switch(_type)
 	{
@@ -337,127 +322,31 @@ void SetOfficerParam(ref Npchar, int _type)
 		    SetRandSPECIAL_K(Npchar);  // вот сюда методы  под каждого типа оффов
 			Npchar.quest.officertype = "boatswain";
 			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и доктором побыть, если припрёт. ", "Ещё умею матросов беречь, кости им вправлять, когда подранят. ");
-			Npchar.quest.LeadershipModify     = frandSmall(2.0);
-			Npchar.quest.FencingModify     = Rand(1);
-			Npchar.quest.GrapplingModify   = frandSmall(2.0) + 2;
-			Npchar.quest.DefenseModify     = frandSmall(2.0) + 2;
-			Npchar.quest.SneakModify       = Rand(1);
-
-			//Npchar.skill.Grappling_rate = makeint(MOD_EXP_RATE * upSkill);
-            //Npchar.skill.Defence_rate   = makeint(MOD_EXP_RATE * upSkill);
 		break;
 
 		case 1:
 		    SetRandSPECIAL_K(Npchar);
 			Npchar.quest.officertype = "cannoner";
-			Npchar.quest.AccuracyModify      = frandSmall(2.0) + 2;
-			Npchar.quest.CannonsModify       = frandSmall(2.0) + 2;
-			Npchar.quest.SneakModify         = Rand(1);
-
-			//Npchar.skill.Cannons_rate = makeint(MOD_EXP_RATE * upSkill);
-            //Npchar.skill.Accuracy_rate   = makeint(MOD_EXP_RATE * upSkill);
 		break;
 
 		case 2:
 		    SetRandSPECIAL_K(Npchar);
 			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и корабль починить помочь. ", "Ещё умею с пилой и рубанком обращаться. ");
 			Npchar.quest.officertype = "treasurer";
-			Npchar.quest.RepairModify        = frandSmall(2.0) + 3;
-			Npchar.quest.CommerceModify      = frandSmall(2.0) + 2;
-			Npchar.quest.SneakModify         = frandSmall(2.0) + 2;
-
-			//Npchar.skill.Repair_rate = makeint(MOD_EXP_RATE * upSkill);
-            //Npchar.skill.Commerce_rate   = makeint(MOD_EXP_RATE * upSkill);
 		break;
 
 		case 3:
 		    SetRandSPECIAL_K(Npchar);
-			Npchar.quest.officertype_2 = RandPhraseSimple("Еще поверхностно медицину знаю. ", "Врачём, конечно, не считаюсь, но подскажу и в этом. ");
+			Npchar.quest.officertype_2 = RandPhraseSimple("Ещё поверхностно медицину знаю. ", "Врачём, конечно, не считаюсь, но подскажу и в этом. ");
 			Npchar.quest.officertype = "navigator";
-			Npchar.quest.SailingModify        = frandSmall(2.0) + 2;
-			Npchar.quest.DefenseModify        = frandSmall(2.0) + 1.3;
-			Npchar.quest.SneakModify          = frandSmall(2.0);
-
-			//Npchar.skill.Sailing_rate = makeint(MOD_EXP_RATE * upSkill);
 		break;
 
         case 4:
 		    SetRandSPECIAL_F(Npchar);
 			Npchar.quest.officertype = "fighter";
-			Npchar.quest.FencingModify         = frandSmall(2.0) + 2;
-			Npchar.quest.PistolModify          = frandSmall(2.0) + 2;
-
-			//Npchar.skill.Fencing_rate = makeint(MOD_EXP_RATE * upSkill);
-            //Npchar.skill.Pistol_rate   = makeint(MOD_EXP_RATE * upSkill);
-		break;
-        // не при делах -->
-        case 5:
-		    SetRandSPECIAL(Npchar);
-			//Npchar.quest.officertype = OFFIC_TYPE_FIRSTMATE;
-			Npchar.quest.LeadershipModify     = frandSmall(3.0) + 2;
-			Npchar.quest.SailingModify        = frandSmall(1.0) + 1;
-			Npchar.quest.SneakModify          = Rand(3) + 1;
-
-			//Npchar.skill.Leadership_rate = makeint(MOD_EXP_RATE * upSkill);
-            //Npchar.skill.Sneak_rate   = makeint(MOD_EXP_RATE * upSkill);
-		break;
-
-		case 6:
-		    SetRandSPECIAL(Npchar);
-			//Npchar.quest.officertype = OFFIC_TYPE_DOCTOR;
-			Npchar.quest.DefenseModify       = Rand(3) + 3;
-			Npchar.quest.SneakModify         = Rand(3);
-		break;
-		// не при делах
-		case 7:
-		      SetRandSPECIAL(Npchar);
-			//Npchar.quest.officertype = OFFIC_TYPE_CARPENTER;
-			Npchar.quest.RepairModify         = Rand(3) + 3;
-			Npchar.quest.SneakModify          = Rand(3);
 		break;
 	}
-
-	// Npchar.rank = makeint(Pchar.rank) - 2 + Rand(4);
-	Npchar.experience = 0;// CalculateExperienceFromRank(sti(Npchar.rank));
-    // fix 16.12.2003 -->
-	//CalculateAppropriateSkills(NPchar);
-	float MiddleK = GetMiddleMainSkill();
-
-    Npchar.skill.Leadership    = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Fencing       = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Sailing       = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Accuracy      = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Cannons       = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Grappling     = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Repair        = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Defence       = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Commerce      = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-	Npchar.skill.Sneak         = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-    Npchar.skill.Pistol        = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-    Npchar.skill.FencingLight  = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-    Npchar.skill.FencingHeavy  = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-    Npchar.skill.Fortune       = MiddleK - frandSmall(10*MOD_SKILL_ENEMY_RATE / 1.5) + 7;
-
-    CorrectSkillParam(Npchar); // привести к 0-1
-    // boal fix 16.12.2003 <--
-
-	Npchar.skill.Leadership   = makeint(stf(Npchar.skill.Leadership)   + 10*stf(Npchar.quest.LeadershipModify));
-	Npchar.skill.Fencing      = makeint(stf(Npchar.skill.Fencing)      + 10*stf(Npchar.quest.FencingModify));
-	Npchar.skill.Sailing      = makeint(stf(Npchar.skill.Sailing)      + 10*stf(Npchar.quest.SailingModify));
-	Npchar.skill.Accuracy     = makeint(stf(Npchar.skill.Accuracy)     + 10*stf(Npchar.quest.AccuracyModify));
-	Npchar.skill.Cannons      = makeint(stf(Npchar.skill.Cannons)      + 10*stf(Npchar.quest.CannonsModify));
-	Npchar.skill.Grappling    = makeint(stf(Npchar.skill.Grappling)    + 10*stf(Npchar.quest.GrapplingModify));
-	Npchar.skill.Repair       = makeint(stf(Npchar.skill.Repair)       + 10*stf(Npchar.quest.RepairModify));
-	Npchar.skill.Defence      = makeint(stf(Npchar.skill.Defence)      + 10*stf(Npchar.quest.DefenseModify));
-	Npchar.skill.Commerce     = makeint(stf(Npchar.skill.Commerce)     + 10*stf(Npchar.quest.CommerceModify));
-	Npchar.skill.Sneak        = makeint(stf(Npchar.skill.Sneak)        + 10*stf(Npchar.quest.SneakModify));
-    Npchar.skill.Pistol       = makeint(stf(Npchar.skill.Pistol)       + 10*stf(Npchar.quest.PistolModify));
-    Npchar.skill.FencingLight = makeint(stf(Npchar.skill.FencingLight) + 10*stf(Npchar.quest.FencingModify));
-    Npchar.skill.FencingHeavy = makeint(stf(Npchar.skill.FencingHeavy) + 10*stf(Npchar.quest.FencingModify));
-    Npchar.skill.Fortune      = makeint(stf(Npchar.skill.Fortune)      + 10*stf(Npchar.quest.SneakModify));
-
-    CorrectSkillParam(Npchar); // привести к 0-10
-
+	CalculateTypeSkillsForRank(npchar, sti(pchar.rank) + rand(4), npchar.quest.officertype, 0.1);
     Npchar.reputation = rand(84) + 5;
     // пристрастие офицера -->
     Npchar.loyality = 5 + rand(10);
@@ -469,7 +358,6 @@ void SetOfficerParam(ref Npchar, int _type)
     {
         Npchar.alignment = "bad";
     }
-    SetRankFromSkill(Npchar);
 
 	Npchar.officerequip = true;
     LAi_NPC_Equip(Npchar, sti(Npchar.rank), true, true); // fix 101104 выдадим все заново!!!!

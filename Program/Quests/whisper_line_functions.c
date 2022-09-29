@@ -1438,7 +1438,7 @@ void WhisperWarDogSeaBattle()
 	sld.Ship.Type = GenerateShipExt(SHIP_WH_CORVETTE_QUEST, true, sld);
 	sld.Ship.name = "Пёс Войны";
 	//SetBaseShipData(sld);
-	sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
+	sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS24;
 
 	ChangeCharacterAddressGroup(sld, "My_Deck", "reload", "reload1");
 	EquipCharacterByItem(sld, "blade_15");
@@ -2119,36 +2119,26 @@ void DHmessages_2(string qName)
 
 void DHRaceAgainstTime(string qName)
 {
-	LocatorReloadEnterDisable("LaVega_town", "reload1", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload2", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload3", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload4", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload5", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload6", true);
-	//LocatorReloadEnterDisable("LaVega_town", "reload7", true);
-	LocatorReloadEnterDisable("LaVega_town", "reload8", true);
 	LocatorReloadEnterDisable("LaVega_town", "reload1_back", true);
+	LocatorReloadEnterDisable("LaVega_town", "reload2_back", true);
 	LocatorReloadEnterDisable("LaVega_town", "reload3_back", true);
+	LocatorReloadEnterDisable("LaVega_town", "reload4_back", true);
+	LocatorReloadEnterDisable("LaVega_town", "reload6_back", true);
 
 	AddQuestRecord("DHRaceAgainstTime", "4");
 
 	PChar.quest.DHRaceAgainstTime1.win_condition.l1 = "location";
-	PChar.quest.DHRaceAgainstTime1.win_condition.l1.location = "CommonRoom_MH2";
+	PChar.quest.DHRaceAgainstTime1.win_condition.l1.location = "CommonStoneHouse";
 	PChar.quest.DHRaceAgainstTime1.function = "DHRaceAgainstTime_findHouse";
 }
 
 void DHRaceAgainstTime_findHouse(string qName)
 {
-	LocatorReloadEnterDisable("LaVega_town", "reload1", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload2", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload3", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload4", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload5", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload6", false);
-	//LocatorReloadEnterDisable("LaVega_town", "reload7", false);
-	LocatorReloadEnterDisable("LaVega_town", "reload8", false);
 	LocatorReloadEnterDisable("LaVega_town", "reload1_back", false);
+	LocatorReloadEnterDisable("LaVega_town", "reload2_back", false);
 	LocatorReloadEnterDisable("LaVega_town", "reload3_back", false);
+	LocatorReloadEnterDisable("LaVega_town", "reload4_back", false);
+	LocatorReloadEnterDisable("LaVega_town", "reload6_back", false);
 
 	if(GetQuestPastDayParam("pchar.questTemp.DHRaceAgainstTime") < 59)
 	{
@@ -2157,7 +2147,7 @@ void DHRaceAgainstTime_findHouse(string qName)
 		sld = GetCharacter(NPC_GenerateCharacter("DHMerc", "OZG_" + (rand(6) + 1), "man", "man", 10+MOD_SKILL_ENEMY_RATE, PIRATE, -1, false));
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
-		ChangeCharacterAddressGroup(sld, "CommonRoom_MH2", "goto", "goto4");
+		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto3");
 		GiveItem2Character(sld, "blade202");
 		EquipCharacterByItem(sld, "blade202");
 		sld.SaveItemsForDead = true;
@@ -2168,7 +2158,7 @@ void DHRaceAgainstTime_findHouse(string qName)
 		pchar.quest.DHRaceAgainstTime_End.win_condition.c1.character ="DHMerc";
 
 		sld = GetCharacter(NPC_GenerateCharacter("DHIncq", "PGG_Vincento_0", "man", "man", 5+MOD_SKILL_ENEMY_RATE, SPAIN, -1, true));
-		ChangeCharacterAddressGroup(sld, "CommonRoom_MH2", "goto", "goto3");
+		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto1");
 		ChangeItemName("DeSouzaCross", "itmname_DeSouzaCross_DH");
 		GiveItem2Character(sld, "DeSouzaCross");
 		sld.SaveItemsForDead = true;
@@ -2326,7 +2316,7 @@ void CaptureCapitol_ShoreBattle(string q)
 	iNation = SPAIN;
 
 	perSailor = 50;
-	iRnd = GetCrewQuantity(pchar)/perSailor - GetOfficersQuantity(pchar);
+	iRnd = (GetCrewQuantity(pchar) + GetTroopersCrewQuantity(pchar))/perSailor - GetOfficersQuantity(pchar);
 
 	pchar.CaptureCapitolSailors = iRnd;
 	pchar.CaptureCapitolPerSailor = perSailor;
@@ -2385,7 +2375,7 @@ void CaptureCapitol_ShoreBattleRespite(string q)
 	DoQuestCheckDelay("hide_weapon", 2.0);
 	sld = GetCharacter(NPC_GenerateCharacter("CapitolLeader", "Dark_Incquisitor", "man", "man", 99, SPAIN, -1, true));
 
-	if (startherotype == 2)
+	if (pchar.name == "Виспер")
 	{
 		FantomMakeCoolFighter(sld, 100, 100, 100, "blade24", "pistol7shotgun", 80);
 		TakeNItems(sld, "12_gauge", 99);
@@ -2475,7 +2465,7 @@ void CaptureCapitol_OnLeaderDeath_1(string q)
 	LAi_LocationFightDisable(locLoad, true);
 	DoQuestCheckDelay("hide_weapon", 2.0);
 
-	if (startherotype == 2)	sld = CharacterFromID("Wh_Jim");
+	if (pchar.name == "Виспер")	sld = CharacterFromID("Wh_Jim");
 	else sld = GetCharacter(NPC_GenerateCharacter("Wh_Jim", "officer_"+(rand(63)+1), "man", "man", 5, PIRATE, -1, false));
 	ChangeCharacterAddressGroup(sld, pchar.location, "goto", "goto7");
 	LAi_SetActorTypeNoGroup(sld);
@@ -2544,8 +2534,9 @@ void QuestWhisper_Siege(string q)
 	LAi_SetStayTypeNoGroup(chr);
 	chr.talker = 10;
 
-	GiveItem2Character(chr, "blade_whisper");
-	EquipCharacterByItem(chr, "blade_whisper");
+	string sBlade = GetGeneratedItem("blade22");
+	GiveItem2Character(chr, sBlade);
+	EquipCharacterByItem(chr, sBlade);
 	GiveItem2Character(chr, "pistol_grapebok");
 	EquipCharacterByItem(chr, "pistol_grapebok");
 	GiveItem2Character(chr, "cirass5");
@@ -2666,11 +2657,6 @@ void QuestWhisper_Incq_4(string q)
 	LAi_ActorDialog(sld, pchar, "", -1, 0);
 
 	sld.HasNoFear = true;
-	GiveItem2Character(sld, "pistol7shotgun");
-	EquipCharacterByItem(sld, "pistol7shotgun");
-	sld.DontChangeGun = true;
-	TakeNItems(sld, "12_gauge", 50);
-    TakeNItems(sld, "grapeshot", 50);
 	DeleteAttribute(pchar, "PGGWhisperLetterSent");
 }
 

@@ -74,11 +74,18 @@ void SetSpyGlassData()
 	int tmpCharge;
 	ref chref = GetCharacter(chrIdx);
 
-	if( Items_FindItem( GetCharacterEquipByGroup(pchar,SPYGLASS_ITEM_TYPE), &arScopeItm)<0 )
-		{	makearef(arScopeItm,tmpobj);	}
+	if (Items_FindItem(GetCharacterEquipByGroup(pchar, SPYGLASS_ITEM_TYPE), &arScopeItm) < 0)
+	{
+		makearef(arScopeItm,tmpobj);
+	}
 
-	if( !CheckAttribute(arScopeItm,"scope.show.nation") || sti(arScopeItm.scope.show.nation)!=0 )
-		{	shipNation = TranslateNationCode(sti(chref.nation));	}
+	bool isDriftShip = HasSubStr(chref.id, "_DriftCap_");
+
+	// у брошенных кораблей нет нации
+	if (CheckAttribute(arScopeItm, "scope.show.nation") && (sti(arScopeItm.scope.show.nation) != 0) && !isDriftShip)
+	{
+		shipNation = TranslateNationCode(sti(chref.nation));
+	}
 
 	int nSailState = 1;
 	float fSailSt = Ship_GetSailState(chref);
@@ -87,19 +94,29 @@ void SetSpyGlassData()
 		if( fSailSt<0.6 ) {nSailState = 1;}
 		else {nSailState = 2;}
 	}
-	int nFace = sti(chref.faceID);
-	string sCaptainName = GetCharacterFullName(chref.id);
-	int nFencingSkill = GetCharacterSkill(chref,SKILL_DEFENCE);   // защита
-	int nCannonSkill = GetCharacterSkill(chref,SKILL_GRAPPLING);    // абордаж
-	int nAccuracySkill = GetCharacterSkill(chref,SKILL_CANNONS); // орудия
-	int nNavigationSkill = GetCharacterSkill(chref,SKILL_ACCURACY); // меткость
-	int nBoardingSkill = GetCharacterSkill(chref,SKILL_SAILING);  // навигация
-	if( !CheckAttribute(arScopeItm,"scope.show.captain_skills") || sti(arScopeItm.scope.show.captain_skills)==0 ) {
-		nFencingSkill = -1;
-		nCannonSkill = -1;
-		nAccuracySkill = -1;
-		nNavigationSkill = -1;
-		nBoardingSkill = -1;
+
+	int nFace = 65535;
+	string sCaptainName = "                ";
+	int nDefenceSkill = -1;
+	int nGrapplingSkill = -1;
+	int nCannonsSkill = -1;
+	int nAccuracySkill = -1;
+	int nSailingSkill = -1;
+
+	// для брошенных кораблей никого не показываем
+	if (!isDriftShip)
+	{
+		nFace = sti(chref.faceID);
+		sCaptainName = GetCharacterFullName(chref.id);
+	}
+
+	if (CheckAttribute(arScopeItm, "scope.show.captain_skills") && (sti(arScopeItm.scope.show.captain_skills) != 0) && !isDriftShip)
+	{
+		nDefenceSkill = GetCharacterSkill(chref,SKILL_DEFENCE);
+		nGrapplingSkill = GetCharacterSkill(chref,SKILL_GRAPPLING);
+		nCannonsSkill = GetCharacterSkill(chref,SKILL_CANNONS);
+		nAccuracySkill = GetCharacterSkill(chref,SKILL_ACCURACY);
+		nSailingSkill = GetCharacterSkill(chref,SKILL_SAILING);
 	}
 
 	// Warship 08.07.09 запрет спуска парусов
@@ -113,11 +130,11 @@ void SetSpyGlassData()
 	if((chref.ID == "MaryCelesteCapitan") || (CheckAttribute(pchar,"GenQuest.ShipSituation.Explosion")))
 	{
 		// Њоказываем нули в скилах
-		nFencingSkill = 0;
-		nCannonSkill = 0;
+		nDefenceSkill = 0;
+		nGrapplingSkill = 0;
+		nCannonsSkill = 0;
 		nAccuracySkill = 0;
-		nNavigationSkill = 0;
-		nBoardingSkill = 0;
+		nSailingSkill = 0;
 	}
 
 	// смотрим на форт
@@ -247,19 +264,18 @@ void SetSpyGlassData()
 			case CANNON_TYPE_CULVERINE_LBS36:CannonTypeName = " Кулеврины 36ф";break;
 		}
 	}
-		if (CheckAttribute(arScopeItm,"scope.show.mushketshot") && sti(arScopeItm.scope.show.mushketshot) != 0 && !isFort)
-		{
-			if (CheckCharacterPerk(chref, "MusketsShoot")) sCaptainName = "  "+XI_ConvertString("MushketShot")+"   " + sCaptainName;
-			if (CheckAttribute(RealShips[sti(chref.Ship.Type)],"Tuning.HighBort")) sCaptainName = "  "+XI_ConvertString("EXTRABIGSIDESON")+"  " + sCaptainName;
-		}
-		sCaptainName = CannonTypeName + "  " + sCaptainName;
-    //sCaptainName = XI_ConvertString("Distance") + ": " + FloatToString(Ship_GetDistance2D(GetMainCharacter(), chref), 1) + "       " + sCaptainName;
+	if (CheckAttribute(arScopeItm,"scope.show.mushketshot") && sti(arScopeItm.scope.show.mushketshot) != 0 && !isFort)
+	{
+		if (!LAi_IsDead(chref) && CheckCharacterPerk(chref, "MusketsShoot")) sCaptainName = "  "+XI_ConvertString("MushketShot")+"   " + sCaptainName;
+		if (CheckAttribute(RealShips[sti(chref.Ship.Type)],"Tuning.HighBort")) sCaptainName = "  "+XI_ConvertString("EXTRABIGSIDESON")+"  " + sCaptainName;
+	}
+	sCaptainName = CannonTypeName + "  " + sCaptainName;
     float fDistance = stf(FloatToString(Ship_GetDistance2D(GetMainCharacter(), chref), 1)); //boal
 	SendMessage(&objISpyGlass,"lsslllfflllllllllllssl",MSG_ISG_UPDATE, shipName,shipType,  //boal
 		shipHull,shipSail,shipCrew,	shipSpeed, fDistance,
 		shipCannons,shipMaxCannons,
 		shipCharge,shipNation, nSailState,nFace,
-		nFencingSkill,nCannonSkill,nAccuracySkill,nNavigationSkill,nBoardingSkill,
+		nDefenceSkill,nGrapplingSkill,nCannonsSkill,nAccuracySkill,nSailingSkill,
 		sCaptainName,"",shipClass);
 	SendMessage(&objISpyGlass,"lsffff",MSG_ISG_SET_SHIPICON, sTextureName, uvLeft,uvTop,uvRight,uvBottom);
 	SendMessage(&objISpyGlass,"ll",MSG_ISG_VISIBLE,true);
@@ -305,8 +321,79 @@ void SetSpyGlassData()
 		if (CheckAttribute(chref, "Ship.LastBallCharacter")) Log_Info("LastBallCharacter = " + chref.Ship.LastBallCharacter);
 		if (CheckAttribute(arScopeItm,"scope.show.mushketshot") && sti(arScopeItm.scope.show.mushketshot) != 0  && CheckOfficersPerk(chref, "MusketsShoot")) Log_Info("MushketShot enabled");
 		if (CheckAttribute(chref,"Situation")) Log_Info("Cap. Situation : " + chref.situation +" type :" + chref.situation.type);
+		ActiveF12Controll(sti(chref.index));
 	}
 	// boal <--
+}
+
+///  статы персонажа в близи
+void ActiveF12Controll(int chr)
+{
+
+    //Найти ближайшего видимого персонажа в заданном радиусе
+    int res = chr;
+    if (res != -1)
+    {
+        ref findCh = GetCharacter(res);
+        res = findCh.chr_ai.hp;
+        Log_SetStringToLog("" + GetFullName(findCh) +
+                           " "+XI_ConvertString("Rank")+" " + findCh.rank + " "+XI_ConvertString("Health")+" "+res + "/" + LAi_GetCharacterMaxHP(findCh));
+
+		if (bBettaTestMode)
+        {
+            Log_SetStringToLog("Id= " + findCh.id);
+            Log_SetStringToLog("Idx= " + findCh.index);
+            if(CheckAttribute(findCh, "LifeDay"))
+		Log_Info("LifeDay - " + findCh.LifeDay);
+
+	    if(CheckAttribute(findCh, "City"))
+	    	Log_Info("City - " + findCh.City);
+            if (CheckAttribute(findCh, "equip.blade"))
+            {
+                Log_SetStringToLog("Blade= " + findCh.equip.blade);
+            }
+            if (CheckAttribute(findCh, "equip.pistol"))
+            {
+                Log_SetStringToLog("Pistol= " + findCh.equip.pistol);
+            }
+            Log_SetStringToLog("model= " + findCh.model);
+            Log_SetStringToLog("face= " + findCh.faceId);
+            Log_SetStringToLog("chr_ai.type= " + findCh.chr_ai.type);
+            Log_SetStringToLog("Group= "+findCh.location.group + " locator= " + findCh.location.locator);
+            if (CheckAttribute(findCh, "cirassId"))
+            {
+                Log_SetStringToLog("cirassId= " + sti(findCh.cirassId));
+            }
+            else
+            {
+                Log_SetStringToLog("Нет брони");
+            }
+            if (CheckAttribute(findCh, "chr_ai.FencingType"))
+            {
+                Log_SetStringToLog("chr_ai.FencingType= " + findCh.chr_ai.FencingType));
+            }
+            else
+            {
+                Log_SetStringToLog("Нет FencingType - error");
+            }
+			Log_SetStringToLog("Нация: " + findCh.nation);
+			Log_SetStringToLog("Пол: " + findCh.sex);
+			Log_SetStringToLog("Группа: " + findCh.chr_ai.group);
+			Log_SetStringToLog("Темплейт: " + findCh.chr_ai.tmpl);
+			Log_SetStringToLog("Стейт: " + findCh.chr_ai.tmpl.state);
+			dumpattributes(findCh);
+
+            pchar.SystemInfo.OnlyShowCharacter = true;
+			LaunchCharacter(findCh);
+        }
+        else
+        {
+            if (MOD_BETTATESTMODE == "Test")
+	        {
+	            Log_SetStringToLog("Id= " + findCh.id);
+	        }
+        }
+    }
 }
 
 void ResetSpyGlassData()

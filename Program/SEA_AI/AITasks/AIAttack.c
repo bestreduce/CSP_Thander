@@ -92,7 +92,7 @@ void AIAttack_GroupAttack(string sGroupAttacker, string sGroupAttacked, bool bAt
 				{
 					Ship_SetTaskAttack(SECONDARY_TASK, iCharacterIndex, iCharacterVictim);
 				}
-				// boal это моя строка, нужно ее тестить SetCharacterRelationBoth(iCharacterVictim, iCharacterIndex, RELATION_ENEMY); //fix
+				// boal это моя строка, нужно её тестить SetCharacterRelationBoth(iCharacterVictim, iCharacterIndex, RELATION_ENEMY); //fix
 			}
 		}
 	}
@@ -132,7 +132,7 @@ void AIAttack_GroupAttack(string sGroupAttacker, string sGroupAttacked, bool bAt
 
 int AIAttack_SelectTask(string sGroupType, float fRatio)
 {
-	return AITASK_ATTACK; // boal все логика теперь по НПС, группа не тупит и всегде атакует, если ее проясят
+	return AITASK_ATTACK; // boal все логика теперь по НПС, группа не тупит и всегде атакует, если её проясят
 	/*
 	int iTask = AITASK_RUNAWAY;
 	switch (sGroupType)
@@ -175,6 +175,12 @@ void AIAttack_CheckTask(string sGroupID)
 	}
 	if (Group_isDead(rG2name))
 	{
+		if (findSubStr(sGroupID, "IslandGroup", 0) == 0)
+		{
+			Group_SetTaskDrift(sGroupID);
+			return;
+		}
+
 		switch (sGroupType1)
 		{
 			case "trade":

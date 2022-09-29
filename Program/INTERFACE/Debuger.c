@@ -1076,13 +1076,13 @@ void CalculateInfoDataF6()
 	// Квестовые
 	// mc.Ship.Type = GenerateShipExt(SHIP_LUGGERQUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_XEBEKVML, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGQEEN, true, mc);
+	mc.Ship.Type = GenerateShipExt(SHIP_BRIGQEEN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGSW, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CLIPPER, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CORVETTE_QUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_WH_CORVETTE_QUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ARABELLA, true, mc);
-	mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CATHERINE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FLYINGDUTCHMAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SANTISIMA, true, mc);
@@ -1095,9 +1095,18 @@ void CalculateInfoDataF6()
     VeryRealShip.ship.upgrades.sails = 3;
 
 	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS8;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS16;
+	mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS20;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS24;
 	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
-	mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS42;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS42;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS48;
 	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS8;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS12;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS16;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS20;
+	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS24;
 	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS32;
 	// mc.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS36;
 	SetCrewQuantityFull(mc);
@@ -1126,7 +1135,7 @@ void CalculateInfoDataF6()
 	RemoveItems(mc, sEquipItem, 1);
 
 	AddMoneyToCharacter(mc, 1000000);
-	AddItems(mc, "spyglass4", 1);
+	AddItems(mc, "spyglass5", 1);
 	AddItems(mc, "pistol7", 1);
 	AddItems(mc, "Map_Best", 1);
 
@@ -1141,7 +1150,7 @@ void CalculateInfoDataF6()
 
 	AddItems(mc, "cirass5", 1);
 
-	EquipCharacterbyItem(mc, "spyglass4");
+	EquipCharacterbyItem(mc, "spyglass5");
 	EquipCharacterbyItem(mc, "pistol7");
 	GiveGunAmmunition(mc,"pistol7");
  	EquipCharacterbyItem(mc, sEquipItem);
@@ -1647,7 +1656,7 @@ void CalculateInfoDataF22()
 					}
 					else
 					{
-						totalInfo = totalInfo + NewStr()+ "Слухи по флейтам торговцев еще не активированы.";
+						totalInfo = totalInfo + NewStr()+ "Слухи по флейтам торговцев ещё не активированы.";
 					}
     }
     // <--
@@ -1667,9 +1676,9 @@ void CalculateInfoDataF23()
 	totalInfo += "\n\nCamera.pos.x == " + Camera.pos.x +
 		"\nCamera.pos.y = " + Camera.pos.y +
 		"\nCamera.pos.z == " + Camera.pos.z +
-		"\n\nCamera.ang.z == " + Camera.ang.y +
-		"\nCamera.ang.y == " + Camera.ang.z +
-		"\nCamera.ang.x == " + Camera.ang.y + "\n\n";
+		"\n\nCamera.ang.x == " + Camera.ang.x +
+		"\nCamera.ang.y == " + Camera.ang.y +
+		"\nCamera.ang.z == " + Camera.ang.z + "\n\n";
     // <--
     totalInfo = totalInfo + NewStr() + NewStr() +
                 "Команда отработала успешно!";
@@ -2583,10 +2592,51 @@ void CalculateInfoDataF53()
 	Statistic_AddValue(PChar, "Cheats.F53", 1);
 }
 
-string descF54 = "Нет назначений";
+string descF54 = "Тест кораблей";
 void CalculateInfoDataF54()
 {
 	totalInfo = descF54;
+
+	sld = GetCharacter(NPC_GenerateCharacter("LoL", "ozg_green", "man", "man", 5, PIRATE, -1, true));
+	FantomMakeCoolFighter(sld, 5, 30, 30, "blade30", "pistol2", 5);
+	FantomMakeCoolSailor(sld, SHIP_POSEIDON, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_HMS_CENTURION, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_RESOLUTION, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_FR_SUPERIORWARSHIP1, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_LINK, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_SUPERBE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_BATTLESHIP, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_LINK2, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_BELLONA, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_LINEARSHIP, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_SHARK, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_ZEVENPROVINCIEN, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_FR_TRINITY, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_MANOWAR_FAST, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_BATTLEMANOWAR, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_MANOWAR_GUB, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_PRINCE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_MANOWAR, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_HMS_VICTORY, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_SP_SANFELIPE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+
+	sld.ship.Crew.Morale = 50;								//Мораль
+	ChangeCrewExp(sld, "Sailors", 50);						//Матросы
+	ChangeCrewExp(sld, "Cannoners", 60);					//Канониры
+	ChangeCrewExp(sld, "Soldiers", 70);						//Солдаты
+	sld.DontRansackCaptain = true; 							//Квестовые не сдаются
+	sld.AlwaysSandbankManeuver = true;
+	sld.AlwaysEnemy = true;
+	Group_FindOrCreateGroup("Test_Attack");
+	Group_SetType("Test_Attack", "war");
+	Group_AddCharacter("Test_Attack", "LoL");
+
+	Group_SetGroupCommander("Test_Attack", "LoL");
+	Group_SetTaskAttack("Test_Attack", PLAYER_GROUP);
+	Group_SetAddress("Test_Attack", "Reefs", "quest_ships", "Quest_ship_3");
+	Group_LockTask("Test_Attack");
+	QuestToSeaLogin_Launch();
+	QuestToSeaLogin_PrepareLoc("Reefs", "Quest_Ships", "Quest_ship_1", true);
 
 	totalInfo = totalInfo + NewStr() + NewStr() + "Команда отработала успешно!";
 
@@ -2596,12 +2646,24 @@ void CalculateInfoDataF54()
 	Statistic_AddValue(PChar, "Cheats.F54", 1);
 }
 
-string descF55 = "Нет назначений";
+string descF55 = "Получить все карты";
 void CalculateInfoDataF55()
 {
 	totalInfo = descF55;
 
+	TakeNItems(PChar, "jewelry11", 50);
+	TakeNItems(PChar, "chest", 12);
+
 	totalInfo = totalInfo + NewStr() + NewStr() + "Команда отработала успешно!";
+	
+	for (int z = 0; z < ITEMS_QUANTITY;z++)
+	{
+		if (CheckAttribute(Items[z],"id") && HasSubStr(Items[z].id,"map_"))
+		{
+			GiveItem2Character(pchar,Items[z].id);
+		}
+	}
+	RefreshEquippedMaps(GetMainCharacter());
 
 	SetFormatedText("INFO_TEXT", totalInfo);
 
@@ -2615,6 +2677,7 @@ void CalculateInfoDataF56()
 	totalInfo = descF56;
 
 	totalInfo = totalInfo + NewStr() + NewStr() + "Команда отработала успешно!";
+	pchar.LilarcorKills = 1799;
 
 	SetFormatedText("INFO_TEXT", totalInfo);
 
@@ -3335,7 +3398,7 @@ void GetRealCoordsObjects()
 	trace("---------");
 	trace("Hispaniola1 (areal) 					: " + Map_GetRealCoordX(198.977) + " " + Map_GetRealCoordZ(588.696));
 	trace("Санто-Доминго 						: " + Map_GetRealCoordX(198.683) + " " + Map_GetRealCoordZ(547.97));
-	trace("Ла-Вега 								: " + Map_GetRealCoordX(166.708) + " " + Map_GetRealCoordZ(662.952));
+	trace("Ла Вега 								: " + Map_GetRealCoordX(166.708) + " " + Map_GetRealCoordZ(662.952));
 	trace("Shore32 (мыс Исабела)				: " + Map_GetRealCoordX(130.591) + " " + Map_GetRealCoordZ(682.362));
 	trace("Shore33 (бухта Самана)				: " + Map_GetRealCoordX(229.081) + " " + Map_GetRealCoordZ(593.727));
 	trace("Mayak8 (маяк Санто-Доминго)			: " + Map_GetRealCoordX(168.314) + " " + Map_GetRealCoordZ(520.218));

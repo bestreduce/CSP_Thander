@@ -23,7 +23,20 @@ void ProcessDialogEvent()
 			link.l1.go = "Vstrecha_2";
 			link.l2 = "Честно говоря, на самом деле я "+ GetSexPhrase("кроткий и мягкий","кроткая и мягкая") +". Извините, но я бы "+ GetSexPhrase("предпочёл","предпочла") +" ненадолго обратиться в паническое бегство.";
 			link.l2.go = "exit";
-			LAi_CharacterPlaySound(NPChar, "GR_Jamescallow_FirstTime");
+			if (pchar.questTemp.AnjelikaTichPrologue == "ATP")
+			{
+				dialog.text = "Я пью пену - волна...";
+				link.l1 = "...";
+				link.l1.go = "Slushat_Pesnu_1";
+				DeleteAttribute(link, "l2");
+			}
+			if (pchar.questTemp.AnjelikaTichPrologue == "ATP" && pchar.questTemp.ATPNapelsy == "Napelsy")
+			{
+				dialog.text = "Это брюхо вспорол мне... Коралловый риф... Ла-ла-ла-ла-ла!";
+				link.l1 = "";
+				link.l1.go = "exit";
+				DeleteAttribute(link, "l2");
+			}
 		break;
 
 		case "Vstrecha_2":
@@ -36,7 +49,7 @@ void ProcessDialogEvent()
             dialog.text = "Ты веришь в привидений, "+ GetSexPhrase("приятель","подруга") +"? Веришь в злых духов, что приносят несчастье?";
 			link.l1 = "Я не верю в эту чепуху. Только дети и старики считают, что духи могут вмешиваться в человеческую жизнь.";
 			link.l1.go = "Ne_Veru_1";
-            link.l2 = "Мне приходилось слышать рассказы о духах и привидениях. (сесть за стол)";
+            link.l2 = "Мне приходилось слышать рассказы о духах и привидениях.";
 			link.l2.go = "Vstrecha_4";
 		break;
 
@@ -49,18 +62,23 @@ void ProcessDialogEvent()
 		break;
 
 		case "Vstrecha_4":
-			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
-			LAi_SetSitType(pchar);
-			LAi_SetSitType(npchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
+			DialogExit();
+			
+			sld = CharacterFromID("James_Callow")
+			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.currentnode = "Vstrecha_4_1";
+			LAi_Fade("PDM_Callow_sadis_na_stul", "");
+		break;
+		
+		case "Vstrecha_4_1":
             dialog.text = "Что ж, а я скажу тебе: все эти истории - чистая правда. Есть вещи, которые я никак иначе не могу объяснить. Я нашёл одну штуковину, и готов поклясться, что она проклята!";
             link.l1 = "Правда? И что заставляет тебя верить в это? Ты можешь пощупать этого духа? Или это проклятие является тебе по ночам и клянётся в собственной зловредности?";
 			link.l1.go = "Vstrecha_5";
+			LAi_CharacterPlaySound(NPChar, "GR_Jamescallow_FirstTime");
 		break;
 
 		case "Vstrecha_5":
-            dialog.text = "Это не повод для веселья, "+ pchar.name +". С тех пор, как я раздобыл этого проклятого идола, удача меня покинула. Сначала я попал в шторм неподалеку от Кубы. Потом я взял на абордаж испанский галеон. И знаешь, что я нашёл в трюме? Мешки. Пустые мешки. Ни золота, ни серебра, только эти проклятые мешки! Полные трюмы мешков!";
+            dialog.text = "Это не повод для веселья, "+ pchar.name +". С тех пор, как я раздобыл этого проклятого идола, удача меня покинула. Сначала я попал в шторм неподалёку от Кубы. Потом я взял на абордаж испанский галеон. И знаешь, что я нашёл в трюме? Мешки. Пустые мешки. Ни золота, ни серебра, только эти проклятые мешки! Полные трюмы мешков!";
             link.l1 = "Ха! Небогатый улов. А что потом?";
 			link.l1.go = "Vstrecha_6";
 		break;
@@ -105,6 +123,7 @@ void ProcessDialogEvent()
 			link.l1.go = "VstrechaNet_1";
 			link.l2 = "Да. Я помогу тебе.";
 			link.l2.go = "VstrechaDa_1";
+			LAi_SetSitType(npchar);
 		break;
 
 		case "VstrechaDa_1":
@@ -126,10 +145,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "CodDa_1":
-            ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "tables", "stay1");
-			LAi_SetPlayerType(pchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
+			LAi_Fade("PDM_Callow_vstaem", "");
+			
 			SetQuestHeader("PDM_Cursed_Idol");
 			AddQuestRecord("PDM_Cursed_Idol", "1");
 			AddQuestUserData("PDM_Cursed_Idol", "sSex", GetSexPhrase("","а"));
@@ -162,10 +179,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "CodNet_1":
-            ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "tables", "stay1");
-			LAi_SetPlayerType(pchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
+            LAi_Fade("PDM_Callow_vstaem", "");
+			
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
@@ -261,7 +276,7 @@ void ProcessDialogEvent()
 
 		case "RodjerPokapoka_1":
 			dialog.text = "Что тебе нужно?";
-			link.l1 = "Ничего, я ухожу";
+			link.l1 = "Ничего, я ухожу.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "RodjerPokapoka_1";
 		break;
@@ -306,7 +321,7 @@ void ProcessDialogEvent()
 
 		case "Pablo_Loco_Idol":
 			dialog.text = "Я чувствую в тебе злую магию...";
-			link.l1 = "Я здесь не при чём. Это всё вот эта статуэтка. (показать идол)";
+			link.l1 = "А я здесь при чём? Может... тебя заинтересует вот эта золотая статуэтка?";
 			link.l1.go = "Pablo_Loco_Idol_2";
 		break;
 
@@ -326,8 +341,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "FraOff_1":
-			dialog.text = "Мы любим забавляться с ходячим мясом. Особенно, когда это мясо брызгает багровым фонтаном.";
-			link.l1 = "Ты совершил ошибку, дружок.";
+			dialog.text = RandPhraseSimple("Мы любим забавляться с ходячим мясом. Особенно, когда это мясо брызгает багровым фонтаном.", "Я почти сшил себе прекрасный камзол из человеческой кожи, не хватает лишь пару лоскутов, твоя как раз подойдёт.");
+			link.l1 = RandPhraseSimple("Ты совершил ошибку, дружок.", "Ах ты нечисть проклятая, сгинь!");
 			link.l1.go = "FraOff_Bitva_1";
 		break;
 
@@ -395,15 +410,20 @@ void ProcessDialogEvent()
 		case "CollowNeRad_1":
 			dialog.text = "Ах! Наконец-то ты "+ GetSexPhrase("вернулся","вернулась") +". Как дела? Ты сделал"+ GetSexPhrase("","а") +" это?";
 			link.l1 = "У меня для тебя плохие новости. Роджерс отказался взять идола.";
-			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
-			LAi_SetSitType(pchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
-			LAi_CharacterPlaySound(NPChar, "GR_Jamescallow_FirstTime");
 			link.l1.go = "CollowNeRad_2";
+			LAi_CharacterPlaySound(NPChar, "GR_Jamescallow_FirstTime");
+		break;
+		
+		case "CollowNeRad_2":
+			DialogExit();
+			
+			sld = CharacterFromID("James_Callow")
+			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.currentnode = "CollowNeRad_2_1";
+			LAi_Fade("PDM_Callow_sadis_na_stul", "");
 		break;
 
-		case "CollowNeRad_2":
+		case "CollowNeRad_2_1":
 			dialog.text = "Дьявол! Дьявол его раздери! Почему он отказался взять его? Я знал, что не следует доверять это дело "+ GetSexPhrase("такому молокососу","такой дуре") +", как ты! Всё это из-за твоей глупости, "+ GetSexPhrase("парень","девица") +"!";
 			link.l1 = "Я не собираюсь сносить оскорбления, Джеймс. И я не отношусь к терпеливым людям.";
 			link.l1.go = "CollowNeRad_3";
@@ -413,6 +433,7 @@ void ProcessDialogEvent()
 			dialog.text = "Арргх! Ты прав"+ GetSexPhrase("","а") +". Что ты теперь собираешься делать? Я эту проклятую вещь назад не возьму. Что если мы отдадим идола кому-нибудь другому?";
 			link.l1 = "Хорошая идея... Но кого мы выберем в качестве жертвы?";
 			link.l1.go = "CollowNeRad_4";
+			LAi_SetSitType(npchar);
 		break;
 
 		case "CollowNeRad_4":
@@ -425,7 +446,7 @@ void ProcessDialogEvent()
 
 		case "CollowNeRad_5":
 			dialog.text = "Тебе придётся снова предложить её в дар... Надеюсь, он более жаден, чем Роджерс. Спорю, что он проглотит приманку.";
-			link.l1 = "Не волнуйся, на этот раз всё будет хорошо. Сначала я дам ему увидеть статую, и только потом заговорю с ним о деле. Блеск золота ослепит его. После этого он купит идола за любые деньги";
+			link.l1 = "Не волнуйся, на этот раз всё будет хорошо. Сначала я дам ему увидеть статую, и только потом заговорю с ним о деле. Блеск золота ослепит его. После этого он купит идола за любые деньги.";
 			link.l1.go = "CollowNeRad_6";
 		break;
 
@@ -452,10 +473,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "CollowNeRad_8":
-			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "tables", "stay1");
-			LAi_SetPlayerType(pchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
+			LAi_Fade("PDM_Callow_vstaem", "");
 
 			pchar.questTemp.PDM_PI_Rostov = "PDM_PI_Rostov";
 
@@ -526,8 +544,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Rostovshik_Fra_Off_1b":
-			dialog.text = "Я всё верну, на следующей недели будут деньги. Мамой клянусь!";
-            link.l1 = "ну, ваши дела меня не касаются.";
+			dialog.text = "Я всё верну, на следующей неделе будут деньги. Мамой клянусь!";
+            link.l1 = "Ну, ваши дела меня не касаются.";
 			link.l1.go = "Rostovshik_Fra_Off_1с";
 		break;
 
@@ -540,6 +558,7 @@ void ProcessDialogEvent()
 			dialog.text = "Стоять! Бабки на бочку. Если ты не собираешься ничего отдавать, то мы это заберём сами. Эй, БРАТВА, айда сюда.";
             link.l1 = "Это мы ещё посмотрим!";
 			link.l1.go = "Rostovshik_Mochilovo_1";
+			pchar.questTemp.PDM_CI_RostBlago = "PDM_CI_RostBlago";
 		break;
 
 		case "Rostovshik_Fra_Off_2":
@@ -590,7 +609,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "Tortuga_Town", "none", "");
 
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Skel_Rostov", "skel_2", "skeleton", "skeleton", 10, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade10", "pistol1", 0);
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade10", "pistol6", 70);
 			sld.name = "Ростовщик";
 			sld.lastname = "";
 			ChangeCharacterAddressGroup(sld, "Tortuga_Bank", "barmen", "stay");
@@ -676,37 +695,41 @@ void ProcessDialogEvent()
             link.l1 = "На этот раз всё прошло гладко. Ростовщик взял идола.";
 			link.l1.go = "Callow_POBEDA_2";
 			LAi_CharacterPlaySound(NPChar, "GR_Jamescallow_FirstTime");
-			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
-			LAi_SetSitType(pchar);
-			locCameraTarget(PChar)
-            locCameraFollow();
+		break;
+		
+		case "Callow_POBEDA_2":
+			DialogExit();
+			
+			sld = CharacterFromID("James_Callow")
+			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.currentnode = "Callow_POBEDA_2_1";
+			LAi_Fade("PDM_Callow_sadis_na_stul", "");
 		break;
 
-		case "Callow_POBEDA_2":
+		case "Callow_POBEDA_2_1":
 			dialog.text = "Агггх! Какое облегчение! Ты и представить себе не можешь, каким тяжким грузом это было для меня.";
             link.l1 = "Теперь ты свободен от его влияния. Но, я вспоминаю, что ты обещал стать моим офицером... как насчёт этого?";
 			link.l1.go = "Callow_POBEDA_3";
-			AddCharacterExpToSkill(pchar, "Leadership", 50);   	//добавить опыт к авторитету
-			AddCharacterExpToSkill(pchar, "FencingLight", 50);     //добавить опыт к лёгкому оружию
-			AddCharacterExpToSkill(pchar, "FencingHeavy", 50);     //добавить опыт к тяжёлому оружию
-			AddCharacterExpToSkill(pchar, "Fencing", 50);    	    //добавить опыт к среднему оружию
-			AddCharacterExpToSkill(pchar, "Pistol", 50);			//добавить опыт к пистолетам
-			AddCharacterExpToSkill(pchar, "Fortune", 50);			//добавить опыт к удаче
+			AddCharacterExpToSkill(pchar, "Leadership", 150);   	//добавить опыт к авторитету
+			AddCharacterExpToSkill(pchar, "FencingLight", 100);     //добавить опыт к лёгкому оружию
+			AddCharacterExpToSkill(pchar, "FencingHeavy", 100);     //добавить опыт к тяжёлому оружию
+			AddCharacterExpToSkill(pchar, "Fencing", 100);    	    //добавить опыт к среднему оружию
+			AddCharacterExpToSkill(pchar, "Pistol", 100);			//добавить опыт к пистолетам
+			AddCharacterExpToSkill(pchar, "Fortune", 100);			//добавить опыт к удаче
 			AddCharacterExpToSkill(pchar, "Sneak", 50);     	    //добавить опыт к скрытности
 			sld = CharacterFromID("Tortuga_usurer")   //возвращаем ростовщика, если на скелетах убили
 			ChangeCharacterAddressGroup(sld, "Tortuga_Bank", "barmen", "stay");
 		break;
 
 		case "Callow_POBEDA_3":
-			dialog.text = "Я выполняю то, что обещал. Теперь я буду плавать вместе с тобой, "+ GetSexPhrase("брат","сестра") +"";
+			dialog.text = "Я выполняю то, что обещал. Теперь я буду плавать вместе с тобой, "+ GetSexPhrase("брат","сестра") +".";
             link.l1 = "Увидимся в море, брат.";
 			link.l1.go = "Callow_POBEDA_4";
-			NextDiag.TempNode = "Callow_Officer_1";
 		break;
 
 		case "Callow_POBEDA_4":
-			dialog.text = "...";
-			link.l1 = "(Допивает ром)";
+			dialog.text = "";
+			link.l1 = "(допивает ром)";
 			link.l1.go = "FINAL";
 			sld = CharacterFromID("James_Callow")
 			AddPassenger(pchar, sld, false);
@@ -724,7 +747,6 @@ void ProcessDialogEvent()
 			SetCharacterPerk(sld, "Sliding");
 			SetCharacterPerk(sld, "Energaiser");
 			SetCharacterPerk(sld, "ByWorker");
-			GiveItem2Character(sld, BLADE_LONG);
 			LAi_SetHP(sld, 270.0, 270.0);
 			SetSPECIAL(sld, 9,8,10,4,6,7,9);		//(Сила, Воспр, Выносл, Лидер, Обуч, Реак, Удача)
 			SetSelfSkill(sld, 52, 60, 46, 38, 57);		//(ЛО, СО, ТО, пистолеты, фортуна)
@@ -746,23 +768,113 @@ void ProcessDialogEvent()
 		break;
 
 		case "FINAL":
+			LAi_Fade("PDM_Callow_vstaem", "");
+		
 			AddQuestRecord("PDM_Cursed_Idol", "10");
 			CloseQuestHeader("PDM_Cursed_Idol");
-			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "tables", "stay1");
-			LAi_SetPlayerType(pchar);
-			locCameraTarget(PChar)
-			locCameraFollow();
+			sld = CharacterFromID("James_Callow")
 			ChangeCharacterAddressGroup(sld, "LaVega_town", "none", "");
+			AddSimpleRumourToAllNations("На Тортуге ростовщика нашли мёртвым в подсобке, доктор гарнизонный сказал, что от страха умер. Невероятно! А стены все измалёваны изображениями идола языческого.", 30, 1);
+			DeleteAttribute(pchar, "questTemp.PDM_CI_RostBlago");
+			
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
-		case "Callow_Officer_1":
-			dialog.text = "Да, капитан?";
-            link.l1 = "За мной.";
-			link.l1.go = "exit";
-			NextDiag.TempNode = "Callow_Officer_1";
+		
+		case "Slushat_Pesnu_1":
+			dialog.text = "Не доходит до рта...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_2";
 		break;
-
+		
+		case "Slushat_Pesnu_2":
+			dialog.text = "И от палуб до дна...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_3";
+		break;
+		
+		case "Slushat_Pesnu_3":
+			dialog.text = "Обнажились борта...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_4";
+		break;
+		
+		case "Slushat_Pesnu_4":
+			dialog.text = "А бока мои грязны...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_5";
+		break;
+		
+		case "Slushat_Pesnu_5":
+			dialog.text = "Таи не таи...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_6";
+		break;
+		
+		case "Slushat_Pesnu_6":
+			dialog.text = "Так любуйтесь на язвы...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_7";
+		break;
+		
+		case "Slushat_Pesnu_7":
+			dialog.text = "И раны мои...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_8";
+			link.l2 = "Скучная песня.";
+			link.l2.go = "exit";
+		break;
+		
+		case "Slushat_Pesnu_8":
+			dialog.text = "Вот дыра у ребра...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_9";
+		break;
+		
+		case "Slushat_Pesnu_9":
+			dialog.text = "это след от ядра...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_10";
+		break;
+		
+		case "Slushat_Pesnu_10":
+			dialog.text = "Вот рубцы от тарана, и даже...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_11";
+		break;
+		
+		case "Slushat_Pesnu_11":
+			dialog.text = "Видно шрамы от крючьев - какой-то пират...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_12";
+		break;
+		
+		case "Slushat_Pesnu_12":
+			dialog.text = "Мне хребет перебил в абордаже...";
+            link.l1 = "...";
+			link.l1.go = "Slushat_Pesnu_13";
+		break;
+		
+		case "Slushat_Pesnu_13":
+			dialog.text = "Ик... Э-э, как там дальше?";
+            link.l1 = "А ты хорош!";
+			link.l1.go = "Slushat_Pesnu_14";
+			pchar.questTemp.ATPNapelsy = "Napelsy";
+		break;
+		
+		case "Slushat_Pesnu_14":
+			DialogExit();
+			
+			AddCharacterExpToSkill(pchar, "Leadership", 40);
+			AddCharacterExpToSkill(pchar, "Fortune", 60);
+			Log_SetStringToLog("Вы получили опыт");
+		break;
+		
+		case "Matros_preduprejdaet":
+			dialog.text = "Капитан! Мертвецы атакуют!!!";
+            link.l1 = "Дьявол!";
+			link.l1.go = "exit";
+			AddDialogExitQuest("PDM_PI_Skelety_on_Ship_3");
+		break;
 	}
 }

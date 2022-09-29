@@ -14,23 +14,23 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
 		break;
 
 		case "Slavetrader_HavanaAttack":
-			dialog.text = "Чертовы ладроны! Посметь напасть на Гавану - это неслыханная дерзость! Что вам нужно?!";
-			link.l1 = "Подумай хорошенько - поймешь.";
+			dialog.text = "Чёртовы ладроны! Посметь напасть на Гавану - это неслыханная дерзость! Что вам нужно?!";
+			link.l1 = "Подумай хорошенько - поймёшь.";
 			link.l1.go = "Slavetrader_HavanaAttack_1";
 			pchar.quest.Slavetrader_HavanaOver.over = "yes";
 			AfterTownBattle();
         break;
 
 		case "Slavetrader_HavanaAttack_1":
-			dialog.text = "Золото, конечно! Что вам, проклятым, кроме золота еще может быть нужно? Да только нет у нас его... Разве что те жалкие несколько мер, что лежат на складе магазина?";
-			link.l1 = "Хе-хе... Нет, мы не за золотом. Мы пришли за слоновой костью... черной слоновой костью. Ты понял, о чем я толкую?";
+			dialog.text = "Золото, конечно! Что вам, проклятым, кроме золота ещё может быть нужно? Да только нет у нас его... Разве что те жалкие несколько мер, что лежат на складе магазина?";
+			link.l1 = "Хе-хе... Нет, мы не за золотом. Мы пришли за слоновой костью... чёрной слоновой костью. Ты понял, о чем я толкую?";
 			link.l1.go = "Slavetrader_HavanaAttack_2";
         break;
 
@@ -50,7 +50,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 
 		case "Slavetrader_HavanaAttack_3":
-			dialog.text = "Ну что же, вы победили, и мы вынуждены подчиниться насилию. Но не думайте, что этот грабеж и потопление двух военных кораблей Испании сойдет вам с рук! Вы дорого заплатите за этот произвол!";
+			dialog.text = "Ну что же, вы победили, и мы вынуждены подчиниться насилию. Но не думайте, что этот грабёж и потопление двух военных кораблей Испании сойдёт вам с рук! Вы дорого заплатите за этот произвол!";
 			link.l1 = "Не пыжься так сильно, удар хватит. Сиди тихо и не дергайся...";
 			link.l1.go = "Slavetrader_HavanaAttack_4";
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(npchar.Nation)) + "hunter", 50);
@@ -64,7 +64,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			SetReturn_Gover_Dialog_Exit(NPChar);
             Statistic_AddValue(Pchar, NationShortName(sti(NPChar.nation)) + "_GrabbingTown", 1);
 			pchar.quest.Slavetrader_DieHardHavana.over = "yes";//теперь можно на карту
-            SetCharacterGoods(pchar, GOOD_SLAVES, 5000+rand(500));// c перегрузом пойдет
+            SetCharacterGoods(pchar, GOOD_SLAVES, 5000+rand(500));// c перегрузом пойдёт
             Log_SetStringToLog("Рабы погружены на корабль");
 			Log_SetStringToLog("У вас 30 дней на доставку рабов к работодателю");
 			chrDisableReloadToLocation = false;
@@ -83,7 +83,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             Statistic_AddValue(Pchar, NationShortName(sti(NPChar.nation)) + "_GrabbingTown", 1);
 			chrDisableReloadToLocation = false;
 			pchar.quest.Slavetrader_DieHardHavana.over = "yes";//можно на карту
-			pchar.quest.Slavetrader_HavanaAttack.over = "yes";//если из Сантьяго по суше пришел - уберем корабли
+			pchar.quest.Slavetrader_HavanaAttack.over = "yes";//если из Сантьяго по суше пришёл - уберём корабли
 			AddQuestRecord("Slavetrader", "27_1");
 			AddQuestUserData("Slavetrader", "sSex", GetSexPhrase("","а"));
 			CloseQuestHeader("Slavetrader");

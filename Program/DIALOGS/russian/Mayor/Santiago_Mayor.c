@@ -27,7 +27,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
@@ -41,13 +41,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AfterTownBattle();
         break;
         case "Step_E9_1":
-            dialog.text = "Обойдешься, английская свинья.";
+            dialog.text = "Обойдёшься, английская свинья.";
 			link.l1 = "Боюсь, что нет, сеньор. Дело в том, что мы уходим не одни. Вы составите нам компанию в путешествии к берегам Ямайки. Сэр Томас Мэдифорд жаждет встречи с вами.";
 			link.l1.go = "Step_E9_2";
         break;
         case "Step_E9_2":
             dialog.text = "Что?!!! По какому праву?!!!";
-			link.l1 = "По праву победителя, сеньор. А посему, так как нам, в силу обстоятельств, некоторое время придется общаться, я просил"+ GetSexPhrase("","а") +" бы вас называть меня именно так - 'капер', но не 'ладрон"+ GetSexPhrase("'","ка'") +".";
+			link.l1 = "По праву победителя, сеньор. А посему, так как нам, в силу обстоятельств, некоторое время придётся общаться, я просил"+ GetSexPhrase("","а") +" бы вас называть меня именно так - 'капер', но не 'ладрон"+ GetSexPhrase("'","ка'") +".";
 			link.l1.go = "Step_E9_3";
         break;
         case "Step_E9_3":
@@ -94,12 +94,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "Step_S5_3";
         break;
         case "Step_S5_3":
-            dialog.text = "Вы должны атаковать и уничтожить поселение буканьеров на Эспаньоле, называемое Ла Вега. Заправляет там всем некий Эдвард Мэнсфилд, старый ладрон. Данное поселение подлежит тотальному уничтожению, все, найденное там - ваша законная добыча. Эспаньола должна быть полностью испанской, и первое препятствие на пути к этому - Ла Вега. Я ожидаю новую партию колонистов, им нужно пространство для жизни.";
+            dialog.text = "Вы должны атаковать и уничтожить поселение буканьеров на Эспаньоле, называемое Ла Вега. Заправляет там всем некий Эдвард Мэнсфилд, старый ладрон. Данное поселение подлежит тотальному уничтожению, всё, найденное там - ваша законная добыча. Эспаньола должна быть полностью испанской, и первое препятствие на пути к этому - Ла Вега. Я ожидаю новую партию колонистов, им нужно пространство для жизни.";
 			link.l1 = "Понятно. Я могу приступать?";
 			link.l1.go = "Step_S5_4";
         break;
         case "Step_S5_4":
-            dialog.text = "Конечно, и чем раньше, тем лучше. Я еще раз хотел бы заострить ваше внимание на том, что поселение должно быть совершенно уничтожено, там не должно остаться ни одного живого человека. Эспаньола - наш остров, на нем нет места этому сброду.";
+            dialog.text = "Конечно, и чем раньше, тем лучше. Я ещё раз хотел бы заострить ваше внимание на том, что поселение должно быть совершенно уничтожено, там не должно остаться ни одного живого человека. Эспаньола - наш остров, на нём нет места этому сброду.";
 			link.l1 = "Я понимаю и немедленно приступаю к выполнению задачи.";
 			link.l1.go = "Step_S5_5";
         break;
@@ -110,24 +110,24 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             pchar.questTemp.State = "Sp5LaVegaAttack_AttackLaVega";
             AddQuestRecord("Spa_Line_5_LaVegaAttack", "2");
             Pchar.quest.Sp5LaVegaAttack_AttackGoOn.win_condition.l1 = "location";
-            Pchar.quest.Sp5LaVegaAttack_AttackGoOn.win_condition.l1.location = "LaVega_ExitTown";
+			Pchar.quest.Sp5LaVegaAttack_AttackGoOn.win_condition.l1.location = "LaVega_town";	// 22.08.2022 Sinistra Теперь сражение происходит сразу в городе из-за новой локации
             Pchar.quest.Sp5LaVegaAttack_AttackGoOn.win_condition = "Sp5LaVegaAttack_AttackGoOn";
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry3 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry4 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry5 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry7 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry8 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry10 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry14 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry17 = Rand(7)+1;
-            pchar.GenQuestBox.LaVega_townhall.box1.items.cirass3 = 1;
-			locations[FindLocation("LaVega_townhall")].models.day.charactersPatch = "SmallResidence_BoxPatch";
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry3 = Rand(19)+40;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry4 = Rand(19)+40;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry5 = Rand(19)+40;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry7 = Rand(19)+20;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry8 = Rand(19)+20;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry10 = Rand(19)+20;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry14 = Rand(19)+20;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.jewelry17 = Rand(19)+40;
+            pchar.GenQuestBox.LaVega_townhall.box1.items.cirass4 = 1;
 			sld = characterFromId("Edward Mansfield");
 			sld.Default.Crew.Quantity    = 1700;
 			sld.Default.Crew.MinQuantity = 1100;
 			sld.from_sea = ""; // для захвата с суши
 			sld.Default  = "LaVega_townhall";  // чтоб сухопутные города вернули население
-			sld.Default.BoardLocation = "LaVega_ExitTown";
+			sld.Default.BoardLocation = "LaVega_town";
+			SetLocationCapturedState("Lavega_town", true);
         break;
         case "Step_S5_6":
             dialog.text = "Прекрасно, сеньор"+ GetSexPhrase("","ита") +"! Просто великолепно! Дон Франсиско Орегон-и-Гаскон может по праву гордится тем, что у него на службе находятся такие офицеры.";
@@ -138,7 +138,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             dialog.text = "Ах да... Выполнение столь сложного задания оценивается городом Сантьяго в 100000 пиастров. Извольте получить.";
 			link.l1 = "Великолепно. Сеньор Хименес, мне было приятно иметь с вами дело. Прощайте.";
 			link.l1.go = "exit";
-			locations[FindLocation("LaVega_townhall")].models.day.charactersPatch = "SmallResidence_patch";
             AddMoneyToCharacter(pchar, 100000);
             pchar.questTemp.State = "Sp5LaVegaAttack_BackToHavana";
             AddQuestRecord("Spa_Line_5_LaVegaAttack", "4");

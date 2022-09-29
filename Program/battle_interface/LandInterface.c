@@ -11,6 +11,7 @@ bool bDisableFastReload = false;
 #event_handler("evntBattleCommandSound","procBattleCommandSound");
 
 bool bLandInterfaceStart = false;
+bool dead = false;
 
 void procBattleCommandSound()
 {
@@ -635,7 +636,7 @@ void BLI_SetObjectData()
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
 
-		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadtexturename	= "";
 		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
@@ -721,7 +722,7 @@ void BLI_SetObjectData()
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
 
-		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadtexturename	= "";
 		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
@@ -893,11 +894,11 @@ void BLI_SetObjectData()
 		objLandInterface.textinfo.AltInfo3.refreshable = true;
 	}
 
-	objLandInterface.textinfo.deadboxinfo.font = "interface_button";
+	/* objLandInterface.textinfo.deadboxinfo.font = "interface_button";
 	objLandInterface.textinfo.deadboxinfo.scale = 1.3 * fHtRatio;
 	objLandInterface.textinfo.deadboxinfo.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(130 * fHtRatio));
 	objLandInterface.textinfo.deadboxinfo.pos.y = RecalculateVIcon(makeint(140 * fHtRatio));
-	objLandInterface.textinfo.deadboxinfo.refreshable = true;
+	objLandInterface.textinfo.deadboxinfo.refreshable = true; */
 
 	objLandInterface.CommandList.CommandMaxIconQuantity = 15;
 	objLandInterface.CommandList.CommandIconSpace = 1;
@@ -990,9 +991,19 @@ void RefreshChargeTime()
 		i = Dead_FindCloseBody();
 		if (i != -1)
 		{
-			objLandInterface.textinfo.deadboxinfo.text = "Есть труп для обыска";
+			//objLandInterface.textinfo.deadboxinfo.text = "Есть труп для обыска";
+			Log_SetActiveAction("DeadBox");
+			dead = true;
 		}
-		else objLandInterface.textinfo.deadboxinfo.text = "";
+		else 
+		{
+			if (dead)
+			{
+				//objLandInterface.textinfo.deadboxinfo.text = "";
+				Log_SetActiveAction("Nothing");
+				dead = false;
+			}
+		}
 	}
 }
 
@@ -1083,7 +1094,7 @@ void BLI_SetPossibleCommands()
 		// boal запрет всех переходов
 		if (chrDisableReloadToLocation) bTmpBool = false;
 		if (!CheckAttribute(loadedLocation,"fastreload")) bTmpBool = false;  // в каюте некуда переходить
-		if (bTmpBool) // все еще можно переходить, провер§ем город враг
+		if (bTmpBool) // все ещё можно переходить, провер§ем город враг
 		{
 		    string sNation = Colonies[FindColony(loadedLocation.fastreload)].nation;
 			if (sNation != "none")

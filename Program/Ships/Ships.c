@@ -94,7 +94,7 @@ string GetShipLocationID(ref chref)
 		}
 		return "";
 	}
-	// в данный метод на вход всегда идет враг ГГ, метод только на абордаже
+	// в данный метод на вход всегда идёт враг ГГ, метод только на абордаже
 	// решаем, что за палуба
 	bool bBig1 = (ShipsTypes[iShipType].DeckType == "Big");
 	bool bBig2 = (RealShips[sti(pchar.ship.type)].DeckType == "Big");

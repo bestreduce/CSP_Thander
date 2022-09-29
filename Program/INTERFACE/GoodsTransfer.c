@@ -130,6 +130,24 @@ void SetCheckButtonsStates()
 		CheckButton_SetState("CHECK_RESTRICTSELL_I", 1, false);
 	}
 
+	if(CheckAttribute(Characters[iCurFighter], "TransferItems.SellGarbageRestriction"))
+	{
+		CheckButton_SetState("CHECK_RESTRICTSELL_G", 1, true);
+	}
+	else
+	{
+		CheckButton_SetState("CHECK_RESTRICTSELL_G", 1, false);
+	}
+
+	if(CheckAttribute(&InterfaceStates, "AutoSellLogs"))
+	{
+		CheckButton_SetState("CHECK_SELL_LOGS", 1, true);
+	}
+	else
+	{
+		CheckButton_SetState("CHECK_SELL_LOGS", 1, false);
+	}
+
 	if(CheckAttribute(Characters[iCurFighter], "TransferItems.AutoBuyAmmo"))
 	{
 		CheckButton_SetState("CHECK_BUYAMMO", 1, true);
@@ -390,6 +408,20 @@ void ProcessCheckBox()
 	{
 	if (iNewState) Characters[iCurFighter].TransferItems.SellRestriction = true;
 		else DeleteAttribute(&Characters[iCurFighter], "TransferItems.SellRestriction");
+	return;
+	}
+//========================================//
+	if (sControl == "CHECK_RESTRICTSELL_G")
+	{
+	if (iNewState) Characters[iCurFighter].TransferItems.SellGarbageRestriction = true;
+		else DeleteAttribute(&Characters[iCurFighter], "TransferItems.SellGarbageRestriction");
+	return;
+	}
+//========================================//
+	if (sControl == "CHECK_SELL_LOGS")
+	{
+	if (iNewState) InterfaceStates.AutoSellLogs = true;
+		else DeleteAttribute(&InterfaceStates, "AutoSellLogs");
 	return;
 	}
 //========================================//

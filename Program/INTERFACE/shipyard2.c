@@ -7,7 +7,7 @@ int iTunPoints = 8;
 int iTimeMake, iShipPoints, iQBorders, iPriceOrder;
 int iQMAX, iQMIN, iFreeSP, iFreeTP;
 bool Tune_Sheme[10] = {0,0,0,0,0,0,0,0,0,0};//элементы 0(заголовок таблицы) и 2(паруса) пропускаем. просто для удобства
-float Ship_Sheme[11] = {0.0,0.0,0.0,-1.0,0.0,0.0,0.0,0.0,0.0,0.0,-10.0};//тип флоат, чтоб не преобразовывать лишний раз при умножении на коэффициент, по факту - целые
+float Ship_Sheme[11] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-10.0};//тип флоат, чтоб не преобразовывать лишний раз при умножении на коэффициент, по факту - целые
 int CannonTypes[16] = {1000,7,0,8,1,9,2,10,3,11,4,12,5,13,6,14};// #define CANNON_TYPE_CULVERINE_LBS8	0, #define CANNON_TYPE_CANNON_LBS8		7
 
 string CurTable, CurRow, sNation;
@@ -18,12 +18,9 @@ string sMessageMode, index;
 
 int sundukSum;//на все апгрейды одинаковое колво сундуков	//chest
 int Tun_Mater1[10];//кол-во товар
-string Tun_Name1_Goods[10] = {"","Mahogany","","Planks","Silk","Linen","Cotton","Sandal","Leather","Ebony"};//0.HP.0.MAST.Speed.Turn.WAS.Capacity.Crew.Cannon
 int Tun_Mater2[10];//кол-во предмет
-string Tun_Name2_Items[10] = {"","jewelry17","","jewelry9","jewelry2","jewelry3","jewelry4","jewelry5","jewelry1","icollection"};
 int Tun_Mater3[10];//кол-во деньги	//gold
 string sAdd[10] = {"","\nкорпус: ","","\nмачты: ","\nскорость: ","\nманёвренность: ","\nбейдевинд: ","\nдэдвейт: ","\nкоманда: ","\nкалибр: "};
-//сменить крестики на жемчуг?? jewelry9
 
 void InitInterface_R(string iniName, ref _shipyarder)
 {
@@ -39,17 +36,15 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	if (!CheckCharacterItem(pchar, "Ship_Print_6")) DeleteAttribute(refNPCShipyard,"print6");
 
 	sNation = GetNationNameByType(sti(refNPCShipyard.nation));
-//TODO - надо ли брать нацию локации на случай захвата города(с одной стороны - чужие корабли будут делать, с другой - если вся карта захвачена - то везде одни и те же корабли)
-//TODO - можно снимать ограничение нации квестом каким-нибудь - украсть чертежи кораблей других наций...
 
-	if (refNPCShipyard.id != "Pirates_shipyarder") {iYarderSkill = (sti(refNPCShipyard.reputation) + 11)/2+50; iTunPoints = (iYarderSkill-8)/22;}
+	if (refNPCShipyard.id != "Pirates_shipyarder") {iYarderSkill = sti(refNPCShipyard.reputation)/2+50; iTunPoints = (iYarderSkill-41)/18;}
 	//берём за навык кораблестроения репутацию верфиста и приводим к отрезку (56:100)
 
 	iShipPoints = 999;//целые переменные делятся с округлением вниз
 	iQBorders = (iShipPoints+10)/3;
-	if (iQBorders > 9) iQBorders = 9;
-	iQMAX = iQBorders - 1;
-	iQMIN = -iQBorders - 1;
+	if (iQBorders > 10) iQBorders = 10;
+	iQMAX = iQBorders;
+	iQMIN = -iQBorders;
 	iFreeSP = iShipPoints;
 	iFreeTP = iTunPoints;
 
@@ -222,25 +217,25 @@ void FillShipParam()
 		ref rRealShip = &RealShips[iShip];
 		ref rBaseShip = GetShipByType(sti(rRealShip.BaseType));
 		DeleteAttribute(rRealShip, "Tuning");//просто затираем записи об апгрейдах
+		DeleteAttribute(rRealShip, "Untuned");
 
-		rRealShip.HP = stf(rBaseShip.HP) * (1 + Ship_Sheme[1]/32);
-		rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - (Ship_Sheme[3]+1)/30;//прочность мачт без коэфф 0,8
-		rRealShip.SpeedRate = stf(rBaseShip.SpeedRate) * (1 + Ship_Sheme[4]/32);
-		rRealShip.TurnRate = stf(rBaseShip.TurnRate) * (1 + Ship_Sheme[5]/32);
-		rRealShip.WindAgainstSpeed = stf(rBaseShip.WindAgainstSpeed) * (1 + Ship_Sheme[6]/32);
-		rRealShip.Capacity = makeint(stf(rBaseShip.Capacity) * (1 + Ship_Sheme[7]/32));
-		rRealShip.OptCrew = stf(rBaseShip.OptCrew) * (1 + Ship_Sheme[8]/32);
-		rRealShip.MaxCrew = stf(rBaseShip.MaxCrew) * (1 + Ship_Sheme[8]/32);
-		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/32);
+		rRealShip.HP = stf(rBaseShip.HP) * (1 + Ship_Sheme[1]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - (Ship_Sheme[3] * 0.03);
+		rRealShip.SpeedRate = stf(rBaseShip.SpeedRate) * (1 + Ship_Sheme[4]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.TurnRate = stf(rBaseShip.TurnRate) * (1 + Ship_Sheme[5]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.WindAgainstSpeed = stf(rBaseShip.WindAgainstSpeed) * (1 + Ship_Sheme[6]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.Capacity = makeint(stf(rBaseShip.Capacity) * (1 + Ship_Sheme[7]/10.0*SHIP_STAT_RANGE_DRAFT));
+		rRealShip.OptCrew = stf(rBaseShip.OptCrew) * (1 + Ship_Sheme[8]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.MaxCrew = stf(rBaseShip.MaxCrew) * (1 + Ship_Sheme[8]/10.0*SHIP_STAT_RANGE_DRAFT);
+		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/10.0*SHIP_STAT_RANGE_DRAFT);
 		rRealShip.MaxCaliber = rBaseShip.MaxCaliber;
 
 		refNPCShipyard.Ship.Cannons.Type = CANNON_TYPE_NONECANNON;
 		rRealShip.Price	= GetShipPriceByTTH(iShip, refNPCShipyard)*4;//цена без пушек
 		CalcTuningPrice();//стоимость апгрейда до применения апгрейдов считаем
 
-		SetTuningStates2Ship(refNPCShipyard, 0, Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3]);//калибр тюнингуем отдельно, иначе несколько раз до 36 можно поднимать
-		//void SetTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti)
-		SetShipWASTuning(refNPCShipyard, Tune_Sheme[6]);//бейдевинд
+		SetBermudeTuningStates2Ship(refNPCShipyard, false, Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3], Tune_Sheme[6]);//калибр тюнингуем отдельно, иначе несколько раз до 36 можно поднимать
+		//void SetBermudeTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti, bool WAS)
 
 		int BaseCaliber = sti(rBaseShip.MaxCaliber);
 		if (Tune_Sheme[9])//тюнинг калибра
@@ -405,20 +400,6 @@ void TableSelectChange()
 		FillOrderShip(iNewShip);
 	}
 	FillShipParam();
-}
-
-void SetShipWASTuning(ref chr, bool isSet)
-{
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.WindAgainst"))
-	{
-		if(isSet)
-			{
-				rShip.WindAgainstSpeed   = FloatToString(stf(rShip.WindAgainstSpeed) + stf(rShip.WindAgainstSpeed) / (2*stf(rShip.Class)) + 0.005, 2);
-				rShip.Tuning.WindAgainst = true;
-			}
-	}
 }
 
 void NullSelectTable(string sControl)
@@ -662,22 +643,22 @@ void DoBuyShip()
 		sTemp = "Кроме того, для особых усовершенствований корабля мне нужно будет доставить следующие материалы: ";
 		for (int i=1; i<10; i++)
 		{
-		if (i==2) continue;
-		if (Tune_Sheme[i])
+			if (i==2) continue;
+			if (Tune_Sheme[i])
 			{
-			sTemp2 = Tun_Name1_Goods[i];
-			refNPCShipyard.questTemp.(sTemp2) = Tun_Mater1[i];
-			sTemp += XI_ConvertString(sTemp2) + " - " + Tun_Mater1[i] + "шт., ";
-			sTemp2 = Tun_Name2_Items[i];
-			refNPCShipyard.questTemp.(sTemp2) = Tun_Mater2[i];
-			sTemp += LanguageConvertString(idLngFile, Items[FindItem(Tun_Name2_Items[i])].name) + " - " + Tun_Mater2[i] + "шт., ";
+				sTemp2 = g_ShipBermudeTuningGoods[i];
+				refNPCShipyard.questTemp.(sTemp2) = Tun_Mater1[i];
+				sTemp += XI_ConvertString(sTemp2) + " - " + Tun_Mater1[i] + "шт., ";
+				sTemp2 = g_ShipBermudeTuningItems[i];
+				refNPCShipyard.questTemp.(sTemp2) = Tun_Mater2[i];
+				sTemp += LanguageConvertString(idLngFile, Items[FindItem(g_ShipBermudeTuningItems[i])].name) + " - " + Tun_Mater2[i] + "шт., ";
 			}
-		else
+			else
 			{
-			sTemp2 = Tun_Name1_Goods[i];
-			refNPCShipyard.questTemp.(sTemp2) = 0;
-			sTemp2 = Tun_Name2_Items[i];
-			refNPCShipyard.questTemp.(sTemp2) = 0;
+				sTemp2 = g_ShipBermudeTuningGoods[i];
+				refNPCShipyard.questTemp.(sTemp2) = 0;
+				sTemp2 = g_ShipBermudeTuningItems[i];
+				refNPCShipyard.questTemp.(sTemp2) = 0;
 			}
 		}
 		refNPCShipyard.questTemp.chest = sundukSum*(iTunPoints-iFreeTP);
@@ -838,8 +819,8 @@ void FillPrice()
 				if(Tune_Sheme[k])
 				{
 				iTemp = Tun_Mater3[k];
-				iTemp += GetStoreGoodsPrice(refStore, FindGood(Tun_Name1_Goods[k]), PRICE_TYPE_BUY, pchar, Tun_Mater1[k]);
-				iTemp += Tun_Mater2[k] * GetTradeItemPrice(Tun_Name2_Items[k], PRICE_TYPE_BUY);
+				iTemp += GetStoreGoodsPrice(refStore, FindGood(g_ShipBermudeTuningGoods[k]), PRICE_TYPE_BUY, pchar, Tun_Mater1[k]);
+				iTemp += Tun_Mater2[k] * GetTradeItemPrice(g_ShipBermudeTuningItems[k], PRICE_TYPE_BUY);
 				stextPRICE += sAdd[k] + MakeMoneyShow(iTemp, MONEY_SIGN, MONEY_DELIVER);
 				iPriceOrder += iTemp;
 				}
@@ -856,52 +837,52 @@ void FillPrice()
 			i = 1;
 			for (k=1;k<10;k++)
 			{
-			if (Tune_Sheme[k])
+				if (Tune_Sheme[k])
 				{
-				row = "tr" + i;
-		 		sGood = Tun_Name1_Goods[k];
-				GameInterface.TABLE_TUN.(row).td1.icon.group = "GOODS";
-				GameInterface.TABLE_TUN.(row).td1.icon.image = sGood;
-				GameInterface.TABLE_TUN.(row).td1.icon.offset = "-3, -1";
-				GameInterface.TABLE_TUN.(row).td1.icon.width = 20;
-				GameInterface.TABLE_TUN.(row).td1.icon.height = 20;
-				GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
-				GameInterface.TABLE_TUN.(row).td1.str = XI_ConvertString(sGood);
-				GameInterface.TABLE_TUN.(row).td1.scale = 0.85;
-				GameInterface.TABLE_TUN.(row).td1.align = "left";
-				GameInterface.TABLE_TUN.(row).td2.str = Tun_Mater1[k];
-				GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
-				i++;
-				row = "tr" + i;
-				m = FindItem(Tun_Name2_Items[k]);
-				GameInterface.TABLE_TUN.(row).td1.icon.group = Items[m].picTexture;
-				GameInterface.TABLE_TUN.(row).td1.icon.image = "itm" + Items[m].picIndex;
-				GameInterface.TABLE_TUN.(row).td1.icon.offset = "-2,0";
-				GameInterface.TABLE_TUN.(row).td1.icon.width = 18;
-				GameInterface.TABLE_TUN.(row).td1.icon.height = 18;
-				GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
-				GameInterface.TABLE_TUN.(row).td1.scale = 0.70;
-				GameInterface.TABLE_TUN.(row).td1.align = "left";
-				GameInterface.TABLE_TUN.(row).td1.str = LanguageConvertString(idLngFile, Items[m].name);
-				GameInterface.TABLE_TUN.(row).td2.str = Tun_Mater2[k];
-				GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
-				i++;
-				Tun_Mater3_sum += Tun_Mater3[k];
+					row = "tr" + i;
+					sGood = g_ShipBermudeTuningGoods[k];
+					GameInterface.TABLE_TUN.(row).td1.icon.group = "GOODS";
+					GameInterface.TABLE_TUN.(row).td1.icon.image = sGood;
+					GameInterface.TABLE_TUN.(row).td1.icon.offset = "-3, -1";
+					GameInterface.TABLE_TUN.(row).td1.icon.width = 20;
+					GameInterface.TABLE_TUN.(row).td1.icon.height = 20;
+					GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
+					GameInterface.TABLE_TUN.(row).td1.str = XI_ConvertString(sGood);
+					GameInterface.TABLE_TUN.(row).td1.scale = 0.85;
+					GameInterface.TABLE_TUN.(row).td1.align = "left";
+					GameInterface.TABLE_TUN.(row).td2.str = Tun_Mater1[k];
+					GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
+					i++;
+					row = "tr" + i;
+					m = FindItem(g_ShipBermudeTuningItems[k]);
+					GameInterface.TABLE_TUN.(row).td1.icon.group = Items[m].picTexture;
+					GameInterface.TABLE_TUN.(row).td1.icon.image = "itm" + Items[m].picIndex;
+					GameInterface.TABLE_TUN.(row).td1.icon.offset = "-2,0";
+					GameInterface.TABLE_TUN.(row).td1.icon.width = 18;
+					GameInterface.TABLE_TUN.(row).td1.icon.height = 18;
+					GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
+					GameInterface.TABLE_TUN.(row).td1.scale = 0.65;
+					GameInterface.TABLE_TUN.(row).td1.align = "left";
+					GameInterface.TABLE_TUN.(row).td1.str = LanguageConvertString(idLngFile, Items[m].name);
+					GameInterface.TABLE_TUN.(row).td2.str = Tun_Mater2[k];
+					GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
+					i++;
+					Tun_Mater3_sum += Tun_Mater3[k];
 				}
 			}
-				row = "tr" + i;
-				m = FindItem("Chest");
-				GameInterface.TABLE_TUN.(row).td1.icon.group = Items[m].picTexture;
-				GameInterface.TABLE_TUN.(row).td1.icon.image = "itm" + Items[m].picIndex;
-				GameInterface.TABLE_TUN.(row).td1.icon.offset = "-2, 0";
-				GameInterface.TABLE_TUN.(row).td1.icon.width = 18;
-				GameInterface.TABLE_TUN.(row).td1.icon.height = 18;
-				GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
-				GameInterface.TABLE_TUN.(row).td1.scale = 0.85;
-				GameInterface.TABLE_TUN.(row).td1.align = "left";
-				GameInterface.TABLE_TUN.(row).td1.str = LanguageConvertString(idLngFile, Items[m].name);
-				GameInterface.TABLE_TUN.(row).td2.str = sundukSum*(iTunPoints - iFreeTP);
-				GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
+			row = "tr" + i;
+			m = FindItem("Chest");
+			GameInterface.TABLE_TUN.(row).td1.icon.group = Items[m].picTexture;
+			GameInterface.TABLE_TUN.(row).td1.icon.image = "itm" + Items[m].picIndex;
+			GameInterface.TABLE_TUN.(row).td1.icon.offset = "-2, 0";
+			GameInterface.TABLE_TUN.(row).td1.icon.width = 18;
+			GameInterface.TABLE_TUN.(row).td1.icon.height = 18;
+			GameInterface.TABLE_TUN.(row).td1.textoffset = "17,0";
+			GameInterface.TABLE_TUN.(row).td1.scale = 0.85;
+			GameInterface.TABLE_TUN.(row).td1.align = "left";
+			GameInterface.TABLE_TUN.(row).td1.str = LanguageConvertString(idLngFile, Items[m].name);
+			GameInterface.TABLE_TUN.(row).td2.str = sundukSum*(iTunPoints - iFreeTP);
+			GameInterface.TABLE_TUN.(row).td2.scale = 0.85;
 
 			Table_UpdateWindow("TABLE_TUN");
 			SetFormatedText("Money_TEXT4", "Аванс за апгрейды: " + MakeMoneyShow(Tun_Mater3_sum, MONEY_SIGN, MONEY_DELIVER));
@@ -943,7 +924,7 @@ void CalcTuningPrice()
 	Tun_Mater3[i] = makeint((shipHP * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 	i = i + 2;//MAST
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);
-	Tun_Mater2[i] = makeint(5 * (7-shipClass) * fQuestShip);
+	Tun_Mater2[i] = makeint(10 * (7-shipClass) * fQuestShip);
 	Tun_Mater3[i] = makeint((100 * MastMulti * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 	i++;//Speed
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);

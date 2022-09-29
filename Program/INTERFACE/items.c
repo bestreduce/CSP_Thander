@@ -831,7 +831,7 @@ void FillItemsSelected()
 				if(CheckAttribute(xi_refCharacter, "IsMushketer"))
 				{
 					iLastGunItem = GetItemIndex(xi_refCharacter.IsMushketer.LastGunID);
-					// Покажем картинку старого пистоля, если он еще есть
+					// Покажем картинку старого пистоля, если он ещё есть
 					if(iLastGunItem != -1 && GetCharacterItem(xi_refCharacter, xi_refCharacter.IsMushketer.LastGunID) > 0)
 					{
 						rLastGunItem = &Items[iLastGunItem];
@@ -1139,6 +1139,11 @@ bool ThisItemCanBeEquip(string sItemID)
 	ref rItem = ItemsFromID(sItemID);
 	if (CheckAttribute(xi_refCharacter,"nonremovable")) return false;
 	if (HasSubStr(loadedLocation.id,"FencingTown")) return false;
+	if (rItem.id == "suit_2" && pchar.questTemp.AnjelikaTichPrologue5 == "ATP5")	//Пролог Анжелика Тич, не даём снять юбку
+    {
+        SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Remove that"));
+        return false;
+    }
 	if (HasSubStr(sItemId,"Tube"))
 	{
 		return true;
@@ -1598,7 +1603,7 @@ void EquipPress()
 				{
 					pchar.chr_ai.bonushptube = 0;
 					pchar.PerkValue.HPBONUS = 50+rand(50)+sti(pchar.rank);
-					float nphpp = LAi_GetCharacterMaxHP(pchar) + GetCharacterAddHPValue(pchar)+sti(pchar.PerkValue.HPBONUS);
+					float nphpp = LAi_GetCharacterMaxHP(pchar) + sti(pchar.PerkValue.HPBONUS);
 					LAi_SetHP(pchar,nphpp,nphpp);
 					SetTimerFunction("ClearHPTubeEffect",0,0,1);
 				}
@@ -2414,7 +2419,7 @@ void SaveEquipSet()
 						if(CheckAttribute(xi_refCharacter, "IsMushketer"))
 						{
 							iLastGunItem = GetItemIndex(xi_refCharacter.IsMushketer.LastGunID);					//пистолет, который может быть под мушкетом
-							// Покажем картинку старого пистоля, если он еще есть
+							// Покажем картинку старого пистоля, если он ещё есть
 							if(iLastGunItem != -1 && GetCharacterItem(xi_refCharacter, xi_refCharacter.IsMushketer.LastGunID) > 0)
 							{
 								rLastGunItem = &Items[iLastGunItem];

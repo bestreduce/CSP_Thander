@@ -18,7 +18,7 @@ void ProcessDialogEvent()
     break;
     case "First Time":
         dialog.text = "Ты кто так" + GetSexPhrase("ой", "ая") + "? Иди отсюда, пока цел" + GetSexPhrase("", "а") + ", я не в настроении разговаривать.";
-        link.l1 = "Тише, тише, приятель, я принёс" + GetSexPhrase("", "ла") + " тебе письмо от Люка Актера.";
+        link.l1 = "Тише, тише, приятель, я прин" + GetSexPhrase("ёс", "есла") + " тебе письмо от Люка Актера.";
         link.l1.go = "GiveLetter1";
 		Map_CreateFastWarriorTreasure();
 		DeleteAttribute(Pchar,"Luke.SpawnMaks");

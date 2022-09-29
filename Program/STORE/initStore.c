@@ -102,7 +102,7 @@ void FillStoreGoods(ref pRef)
 				pRef.Goods.(goodName).Quantity = sti(sti(Goods[i].Norm)*0.1 + rand(sti(sti(Goods[i].Norm)*0.1)));
 				pRef.Goods.(goodName).RndPriceModify = frnd() * 0.2;
 			break;
-			case TRADE_TYPE_AMMUNITION:  //делаю все тоже, что и для нормального товара, а тип нужен, чтоб на корабле не скупали лишнее.
+			case TRADE_TYPE_AMMUNITION:  //делаю всё тоже, что и для нормального товара, а тип нужен, чтоб на корабле не скупали лишнее.
 			    pRef.Goods.(goodName).Quantity = sti(sti(Goods[i].Norm)*0.5 + rand(sti(sti(Goods[i].Norm)*0.2))); //200 + Rand(2500) + rand(500);
 				pRef.Goods.(goodName).RndPriceModify = frnd() * 0.15;//0.2
 			break;

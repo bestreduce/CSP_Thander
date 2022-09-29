@@ -66,26 +66,26 @@ void ProcessDialogEvent()
 		break;
 		case "DH_Villemstad_shipyarder_2":
 			dialog.Text = "Джонка, императрица. Такие иногда встречаются в наших водах. Удивительно, но именно мои соотечественники умудрились перегнать целую группу таких кораблей в карибское море с дальнего востока.";
-			Link.l1 = "Бывают в жизни чудеса, но в чем подвох?";
+			Link.l1 = "Бывают в жизни чудеса, но в чём подвох?";
 			Link.l1.go = "DH_Villemstad_shipyarder_3";
 		break;
 		case "DH_Villemstad_shipyarder_3":
 			dialog.Text = "Видите ли, это конфискат, бывшего владельца поймали на... как бы сказать, нечестных делишках. И он с перепугу решил, что палить по патрульному судну из пушек - это хорошая идея. Понятное дело воинственность ему быстро поубавили. Через совершенно непродолжительное время ему помог станцевать зажигательный танец пеньковый галстук, зрелище было интересное. Но не суть.";
-			Link.l1 = "Да, вернемся к делу.";
+			Link.l1 = "Да, вернёмся к делу.";
 			Link.l1.go = "DH_Villemstad_shipyarder_4";
 		break;
 		case "DH_Villemstad_shipyarder_4":
-			dialog.Text = "Так вот, воинственность ему поубавили пушками, что оставило определенные следы и на его джонке. К тому же меня в добровольно принудительном порядке и против всяких правил заставили ее выкупить. И висит она на мне сейчас как мертвый груз. ";
+			dialog.Text = "Так вот, воинственность ему поубавили пушками, что оставило определённые следы и на его джонке. К тому же меня в добровольно принудительном порядке и против всяких правил заставили её выкупить. И висит она на мне сейчас как мёртвый груз. ";
 			Link.l1 = "Состояние?";
 			Link.l1.go = "DH_Villemstad_shipyarder_5";
 		break;
 		case "DH_Villemstad_shipyarder_5":
-			dialog.Text = "Сразу скажу - не лучшее, но ниже ватерлинии я все дыры залатал. Так что не утонет - не бойтесь. ";
+			dialog.Text = "Сразу скажу - не лучшее, но ниже ватерлинии я всё дыры залатал. Так что не утонет - не бойтесь. ";
 			Link.l1 = "Цена вопроса?";
 			Link.l1.go = "DH_Villemstad_shipyarder_6";
 		break;
 		case "DH_Villemstad_shipyarder_6":
-			dialog.Text = "25 тысяч и она ваша. Честно скажу, желающих выкупить ее, у меня нет, так что несколько недель, я смогу и потерпеть.";
+			dialog.Text = "25 тысяч и она ваша. Честно скажу, желающих выкупить её, у меня нет, так что несколько недель, я смогу и потерпеть.";
 			NextDiag.TempNode = "DH_Villemstad_shipyarder_wait_money";
 			Link.l1 = "Что ж, возьму, как только появятся деньги.";
 			Link.l1.go = "exit";
@@ -126,7 +126,7 @@ void ProcessDialogEvent()
 			shTo.MastMultiplier = 1.45;
 			shTo.Capacity = 1300;
 			SetBaseShipData(pchar);
-			pchar.Ship.Name = RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple("Быстрый вепрь", "Боевой тигр"), "Транспортер"), "Антилопа"), "Экстра"), "Молния"), "Дельфин"), "Загадочный"), "Ужасный");
+			pchar.Ship.Name = RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple("Быстрый вепрь", "Боевой тигр"), "Транспортёр"), "Антилопа"), "Экстра"), "Молния"), "Дельфин"), "Загадочный"), "Ужасный");
 			SetCrewQuantityFull(pchar);
 			ChangeCrewExp(pchar, "Sailors", rand(30)+20);
 			ChangeCrewExp(pchar, "Cannoners", rand(30)+20);
@@ -228,7 +228,7 @@ void ProcessDialogEvent()
 		break;
 		case "DH_Villemstad_usurer_7":
 			dialog.Text = "Жаль с ним расставаться, но что не сделаешь для друга...";
-			Link.l1 = "Ладно, уговорил, возьму его в счет 30 процентов и месяца отсрочки на остальное.";
+			Link.l1 = "Ладно, уговорил, возьму его в счёт 30 процентов и месяца отсрочки на остальное.";
 			Link.l1.go = "DH_Villemstad_usurer_8";
 		break;
 		case "DH_Villemstad_usurer_8":
@@ -240,7 +240,7 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			TakeNItems(pchar, "sculMa"+(drand(2)+1), 1);
 			dialog.Text = "Замечательно, с вами приятно иметь дело.";
-			Link.l1 = "Я еще вернусь.";
+			Link.l1 = "Я ещё вернусь.";
 			Link.l1.go = "exit";
 			SaveCurrentQuestDateParam("questTemp.DH_Villemstad_money");
 			NextDiag.TempNode = "DH_Villemstad_usurer_get_money";
@@ -248,14 +248,14 @@ void ProcessDialogEvent()
 		break;
 		case "DH_Villemstad_usurer_get_money":
 			dialog.Text = "Простите, но у меня пока нет нужной суммы.";
-			Link.l1 = "Я еще вернусь.";
+			Link.l1 = "Я ещё вернусь.";
 			Link.l1.go = "exit";
 			NextDiag.TempNode = "DH_Villemstad_usurer_get_money";
 			if (GetQuestPastDayParam("questTemp.DH_Villemstad_money") >= 28)
 			{
 				AddMoneyToCharacter(pchar, 35000);
-				dialog.Text = "Я вас ждал. Теперь я готов вернуть ваш вклад. Вот, держите. Надеюсь, вы еще захотите воспользоваться моими услугами.";
-				Link.l1 = "Ну каконец-то. Насчет последнего, то я бы не надеялся.";
+				dialog.Text = "Я вас ждал. Теперь я готов вернуть ваш вклад. Вот, держите. Надеюсь, вы ещё захотите воспользоваться моими услугами.";
+				Link.l1 = "Ну каконец-то. Насчёт последнего, то я бы не надеялся.";
 				Link.l1.go = "exit";
 				NextDiag.TempNode = "First time";
 				npchar.Dialog.Filename = "Usurer_dialog.c";
@@ -265,16 +265,16 @@ void ProcessDialogEvent()
 
 		case "DH_mercenary_SK_vavern":
 			dialog.Text = "Здесь наши пути должны были разойтись.";
-			Link.l1 = "Да вы выполнили свои обязательства в полном объеме согласно букве и духу нашего договора. Вторую часть вашего гонорара вы сможете получить на Кюрасао.";
+			Link.l1 = "Да вы выполнили свои обязательства в полном объёме согласно букве и духу нашего договора. Вторую часть вашего гонорара вы сможете получить на Кюрасао.";
 			Link.l1.go = "DH_mercenary_SK_vavern_1";
 		break;
 		case "DH_mercenary_SK_vavern_1":
-			dialog.Text = "Да-да-да. Знаю, но с учетом обстоятельств я бы предпочел сопровождать вас до банка Кюрасао. ";
+			dialog.Text = "Да-да-да. Знаю, но с учётом обстоятельств я бы предпочёл сопровождать вас до банка Кюрасао. ";
 			Link.l1 = "А что до остальных?";
 			Link.l1.go = "DH_mercenary_SK_vavern_2";
 		break;
 		case "DH_mercenary_SK_vavern_2":
-			dialog.Text = "Остальные отправятся отдельно, слишком большая группа привлечет лишнее внимание. ";
+			dialog.Text = "Остальные отправятся отдельно, слишком большая группа привлечёт лишнее внимание. ";
 			Link.l1 = "Хорошо.";
 			Link.l1.go = "DH_mercenary_SK_vavern_exit";
 		break;
@@ -321,7 +321,7 @@ void ProcessDialogEvent()
 
 		case "DH_mercenary_SK_gate":
 			dialog.Text = "Добрались.";
-			Link.l1 = "Черт, целых тридцать дней! Не думал, что это займет столько времени!";
+			Link.l1 = "Чёрт, целых тридцать дней! Не думал, что это займёт столько времени!";
 			Link.l1.go = "DH_mercenary_SK_gate_1";
 			PChar.quest.DHLockSK.win_condition.l1 = "location";
 			PChar.quest.DHLockSK.win_condition.l1.location = "SantaCatalina_town";
@@ -357,7 +357,7 @@ void ProcessDialogEvent()
 		break;
 		case "DH_mercenary_Amatike_return_3_sailor":
 			dialog.Text = "Вы... вы вернулись, слава богу!";
-			Link.l1 = "Вот сейчас и узнаем что здесь творится! Куда делся корабль? Семь дней еще не вышли!";
+			Link.l1 = "Вот сейчас и узнаем что здесь творится! Куда делся корабль? Семь дней ещё не вышли!";
 			Link.l1.go = "DH_mercenary_Amatike_return_4_sailor";
 		break;
 		case "DH_mercenary_Amatike_return_4_sailor":
@@ -376,12 +376,12 @@ void ProcessDialogEvent()
 			Link.l1.go = "DH_mercenary_Amatike_return_7_sailor";
 		break;
 		case "DH_mercenary_Amatike_return_7_sailor":
-			dialog.Text = "Пусть наш корабль и не самый сильный, зато шустрый, к тому же у корвета был поврежден корпус, капитан смог уйти в море. ";
+			dialog.Text = "Пусть наш корабль и не самый сильный, зато шустрый, к тому же у корвета был повреждён корпус, капитан смог уйти в море. ";
 			Link.l1 = "Так, а ты?";
 			Link.l1.go = "DH_mercenary_Amatike_return_8_sailor";
 		break;
 		case "DH_mercenary_Amatike_return_8_sailor":
-			dialog.Text = "А что я? Меня не заметили, тем более что я спрятался у скалы. Я все видел своими глазами. Когда корвет отошел достаточно я добрался до берега и стал ждать вас, я знал, что вы должны вернуться.";
+			dialog.Text = "А что я? Меня не заметили, тем более что я спрятался у скалы. Я все видел своими глазами. Когда корвет отошёл достаточно я добрался до берега и стал ждать вас, я знал, что вы должны вернуться.";
 			Link.l1 = "Допустим.";
 			Link.l1.go = "DH_mercenary_Amatike_return_9";
 		break;
@@ -430,7 +430,7 @@ void ProcessDialogEvent()
 		case "DH_mercenary_Amatike_return_kill_1":
 			ChangeCharacterReputation(PChar, -30);
 			dialog.Text = "Пожалуйста, не трогайте меня!";
-			Link.l1 = "Не дергайся ты так, тогда ничего не почувствуешь.";
+			Link.l1 = "Не дёргайся ты так, тогда ничего не почувствуешь.";
 			Link.l1.go = "exit_fight_sailor";
 		break;
 		case "DH_mercenary_Amatike_return_12":
@@ -474,16 +474,16 @@ void ProcessDialogEvent()
 		break;
 		case "DH_mercenary_temple_afterstash_1":
 			dialog.Text = "Что? ";
-			Link.l1 = "Все готовы выдвигаться, нельзя терять времени. Корабль все еще ждет нас, а альтернативный путь ... займет слишком много времени. ";
+			Link.l1 = "Все готовы выдвигаться, нельзя терять времени. Корабль все ещё ждёт нас, а альтернативный путь ... займёт слишком много времени. ";
 			Link.l1.go = "DH_mercenary_temple_afterstash_2";
 		break;
 		case "DH_mercenary_temple_afterstash_2":
 			dialog.Text = "Да, но к чему ТАКАЯ спешка?";
-			Link.l1 = "Время не ждет, да и очередная группа индейцев может нагрянуть в любой момент.";
+			Link.l1 = "Время не ждёт, да и очередная группа индейцев может нагрянуть в любой момент.";
 			Link.l1.go = "DH_mercenary_temple_afterstash_3";
 		break;
 		case "DH_mercenary_temple_afterstash_3":
-			dialog.Text = "Действительно... Слышали парни, встаем и выдвигаемся!";
+			dialog.Text = "Действительно... Слышали парни, встаём и выдвигаемся!";
 			Link.l1 = "...";
 			Link.l1.go = "DH_mercenary_temple_afterstash_exit";
 		break;
@@ -530,12 +530,12 @@ void ProcessDialogEvent()
 
 		case "DH_Ambush":
 			dialog.Text = "Вот мы и встретились, дружок. Нам велели брать тебя живым, по возможности. Так что бросай оружие!";
-			Link.l1 = "Вот еще, лучше скажи мне, кто вас нанял?";
+			Link.l1 = "Вот ещё, лучше скажи мне, кто вас нанял?";
 			Link.l1.go = "DH_Ambush_1";
 		break;
 		case "DH_Ambush_1":
 			dialog.Text = "Я сказал, бросай оружие!";
-			Link.l1 = "Я вижу, диалог у нас не идет... Что же поступим по-другому.";
+			Link.l1 = "Я вижу, диалог у нас не идёт... Что же поступим по-другому.";
 			Link.l1.go = "DH_Ambush_fight";
 		break;
 		case "DH_Ambush_fight":
@@ -579,7 +579,7 @@ void ProcessDialogEvent()
 		break;
 		case "DH_mercenary_temple_3":
 			dialog.Text = "Именно.";
-			Link.l1 = "Вперед, в атаку!";
+			Link.l1 = "Вперёд, в атаку!";
 			Link.l1.go = "DH_mercenary_temple_exit";
 		break;
 		case "DH_mercenary_temple_exit":
@@ -627,7 +627,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "DH_mercenary_shore_3";
 		break;
 		case "DH_mercenary_shore_3":
-			dialog.Text = "Да, чертовы дикари. Впрочем огневой мощи у нас немало. (кивает на парней поблизости)";
+			dialog.Text = "Да, чёртовы дикари. Впрочем огневой мощи у нас немало. (кивает на парней поблизости)";
 			Link.l1 = "Тогда действительно не будем терять времени.";
 			Link.l1.go = "DH_mercenary_shore_exit";
 		break;

@@ -74,7 +74,7 @@ void ProcessDialogEvent()
 			mc = GetMainCharacter();
 
 			mc.Ship.Type = GenerateShipExt(SHIP_SOPHIE, true, mc);
-			mc.Ship.name="Черная Вдова";
+			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
 			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
 			SetCrewQuantityFull(mc);
@@ -138,13 +138,13 @@ void ProcessDialogEvent()
     			link.l1 = "...";
     			link.l1.go = "exit";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1 = "location";
-				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1.location = "LaVega_port";
+				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1.location = "LaVega_town";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition = "ToMansfield_OutFromFort";
     		}
             // ==> Исп. линейка, квест №4: в спальне донны Анны
             if (pchar.questTemp.State == "Sp4Detection_toMirderPlace")
     		{
-    		    dialog.text = "Хм, странное письмо. Она получила известие о прибытии человека... А кто мог ее известить? Тот, кто своим визитом не привлечет внимания слуг! Это может быть только местный житель. Мне нужно найти и допросить местного жителя, который известил донну Анну.";
+    		    dialog.text = "Хм, странное письмо. Она получила известие о прибытии человека... А кто мог её известить? Тот, кто своим визитом не привлечёт внимания слуг! Это может быть только местный житель. Мне нужно найти и допросить местного жителя, который известил донну Анну.";
     			link.l1 = "...";
     			link.l1.go = "exit";
                 pchar.questTemp.State = "Sp4Detection_FoundLetter";
@@ -160,7 +160,7 @@ void ProcessDialogEvent()
 				pchar.questTemp.Out = 1;
 				SaveCurrentQuestDateParam("questTemp");
     		}
-			// ==> Изабелла, нашли мертвую служанку
+			// ==> Изабелла, нашли мёртвую служанку
    	    	if (pchar.RomanticQuest == "SeekIsabella" && pchar.location == "Beliz_ExitTown")
     		{
     		    dialog.text = "Похоже, это и есть служанка Роситы... Дела Сальватора угадать легко - повсюду трупы невинных. Значит, я на верном пути.";
@@ -194,7 +194,7 @@ void ProcessDialogEvent()
 			//Квест нежити на перерождение
 			if (CheckAttribute(pchar, "questTemp.HellSpawn.Rebirth"))
 			{
-				dialog.Text = "(У одного из поверженных противников вы находите клочок бумаги с каким-то текстом, а также пузырек со странным содержимым)\nКажется, чтобы переродиться, я должен выпить зелье и прочесть вслух этот текст.";
+				dialog.Text = "(У одного из поверженных противников вы находите клочок бумаги с каким-то текстом, а также пузырёк со странным содержимым)\nКажется, чтобы переродиться, я должен выпить зелье и прочесть вслух этот текст.";
 				bMonstersGen = true;
 				DeleteAttribute(pchar, "questTemp.HellSpawn.Rebirth");
 				Link.l1 = "(Исполнить ритуал)";
@@ -214,7 +214,7 @@ void ProcessDialogEvent()
 			//Старт за Мэри и Шарля
 			if (CheckAttribute(pchar, "questTemp.SharleMary.Entered_Shore"))
 			{
-				dialog.Text = "Матерь Небесная, вот это шторм был... Кровь... У меня голова разбита... Черт возьми, всё как в тумане. "+GetSexPhrase("Мэри! Где Мэри?!","Шарль! Где Шарль?!")+" На песке ни досок, ни трупов. 'Фортуна' погибла или дрейфует где то в море. К дьяволу их всех!";
+				dialog.Text = "Матерь Небесная, вот это шторм был... Кровь... У меня голова разбита... Чёрт возьми, всё как в тумане. "+GetSexPhrase("Мэри! Где Мэри?!","Шарль! Где Шарль?!")+" На песке ни досок, ни трупов. 'Фортуна' погибла или дрейфует где-то в море. К дьяволу их всех!";
 				DeleteAttribute(pchar, "questTemp.SharleMary.Entered_Shore");
 				Link.l1 = "Мне нужно найти "+GetSexPhrase("Мэри.","Шарля.");
 				Link.l1.go = "Exit_Special";
@@ -230,7 +230,7 @@ void ProcessDialogEvent()
 			//Старт за нежить
 			if (CheckAttribute(pchar, "questTemp.Undead.Leave_Crypt"))
 			{
-				dialog.Text = "Микту... Мекетлу... М... Что со мной? Я чувствую, что "+GetSexPhrase("должен","должна")+" покинуть это место. Мне нужен корабль. Я слышу зов. Другие. Они ждут взаперти. Нет сил противиться. Я иду, бог мёртвых. Я иду.";
+				dialog.Text = "Микту... Мекетлу... М... Что со мной? Я чувствую, что "+GetSexPhrase("должен","должна")+" покинуть это место. Я слышу зов. Другие. Они ждут взаперти. Нет сил противиться. Я иду, бог мёртвых. Я иду.";
 				DeleteAttribute(pchar, "questTemp.Undead.Leave_Crypt");
 				Link.l1 = "Стоит переодеться в эту неприметную одежду, прежде чем посещать мир живых.";
 				Link.l1.go = "Exit_Special";
@@ -257,9 +257,9 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.Whisper.Inside_Incquisition"))
 			{
-				dialog.Text = "Проклятье, как же громко! Еще и это 'оружие' разлетелось на куски после выстрела. Эх, я бы сейчас всё отдала за свой верный шотган...";
+				dialog.Text = "Проклятье, как же громко! Ещё и это 'оружие' разлетелось на куски после выстрела. Эх, я бы сейчас всё отдала за свой верный шотган...";
 				DeleteAttribute(pchar, "questTemp.Whisper.Inside_Incquisition");
-				Link.l1 = "Нужно забрать с трупа саблю, пока остальные стражники не прибежали. Похоже, придется прорываться с боем.";
+				Link.l1 = "Нужно забрать с трупа саблю, пока остальные стражники не прибежали. Похоже, придётся прорываться с боем.";
 				Link.l1.go = "exit_WhisperIncq";
 			}
 			if (CheckAttribute(pchar, "questTemp.Whisper.Escaped_Incquisition"))
@@ -309,7 +309,7 @@ void ProcessDialogEvent()
 			if (CheckAttribute(pchar, "questTemp.Whisper.AfterTownBattle"))
 			{
 				DeleteAttribute(pchar, "questTemp.Whisper.AfterTownBattle");
-				dialog.Text = "Похоже, мы отбились. Жаль, что столько людей погибло\nДевятипалый говорил, что его тут недалеко ждет корабль. Стоит попытаться попасть на него, ведь испанцы наверняка могут вернуться сюда в любой момент с подкреплением.";
+				dialog.Text = "Похоже, мы отбились. Жаль, что столько людей погибло\nДевятипалый говорил, что его тут недалеко ждёт корабль. Стоит попытаться попасть на него, ведь испанцы наверняка могут вернуться сюда в любой момент с подкреплением.";
 				Link.l1 = "Нужно найти бухту.";
 				Link.l1.go = "exit_WhisperAddWidow";
 				PChar.quest.WhisperPirateTownBattle.win_condition.l1 = "location";
@@ -327,7 +327,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(pchar, "questTemp.Whisper.Portman_Deck");
 				dialog.Text = "Не думаю, что я смогу что-то выяснить блуждая по палубе, а в каюту меня не пустят.";
-				Link.l1 = "Остается только один выход - брать на абордаж.";
+				Link.l1 = "Остаётся только один выход - брать на абордаж.";
 				Link.l1.go = "exit";
 			}
 			if (CheckAttribute(pchar, "questTemp.Whisper.KilledPortman"))
@@ -490,7 +490,7 @@ void ProcessDialogEvent()
 			Link.l10 = "Установить приоритет использования еды.";
 	    	Link.l10.go = "food_priority";
 			if (pchar.location == Get_My_Cabin())
-				{
+			{
 				Link.l11 = "Использовать еду автоматически.";
 				Link.l11.go = "autofood";
 				if(CheckAttribute(pchar,"autofood"))
@@ -508,6 +508,19 @@ void ProcessDialogEvent()
 			{
 				link.lpotion = "Установить приоритет на использование лучших лечебных средств.";
 				Link.lpotion.go = "potion_priority";
+			}
+			if (pchar.location == Get_My_Cabin())
+			{
+				link.lcompanioncapture = "Проинструктировать компаньонов о распоряжении добычей при абордаже.";
+				if (CheckAttribute(PChar, "CompanionsLeaveCapturesDrift"))
+				{
+					link.lcompanioncapture = link.lcompanioncapture + " Приказать им действовать по-старому - поменять корабль если стоит, ограбить по-быстрому и утопить.";
+				}
+				else
+				{
+					link.lcompanioncapture = link.lcompanioncapture + " Приказать им оставлять призовой корабль дрейфовать.";
+				}
+				link.lcompanioncapture.go = "companion_capture";
 			}
 			if(startHeroType == 2)
 			{
@@ -557,7 +570,14 @@ void ProcessDialogEvent()
 				Link.lSmugglingFlag = "Отключить автоматическую смену флага во время контрабандных сделок.";
 				Link.lSmugglingFlag.go = "SmugglingFlag";
 			}
-
+			if (CheckAttribute(loadedLocation,"id"))
+			{
+				if (loadedLocation.id == "SanGabrielMechanic" && CheckAttribute(pchar,"VedekerDiscount"))
+				{
+					Link.lhenric = "Попросить Хенрика подготовить костюм к новому погружению.";
+					Link.lhenric.go = "RechargeCostume";
+				}
+			}
 			Link.l14 = RandPhraseSimple("Не сейчас. Нет времени.", "Некогда. Дела ждут.");
 			Link.l14.go = "exit";
 		break;
@@ -734,7 +754,7 @@ void ProcessDialogEvent()
 			Dialog.Text = "(Вы чувствуете себя немного другим).";
 			pchar.Ritual.ModelChanged = false;
 			if (HasSubStr(pchar.model,"Skeletcap"))
-			{//веселый роджер
+			{//весёлый роджер
 				pchar.sex = "man";
 				pchar.animation = "man";
 				pchar.model = "PGG_Tich_0";
@@ -833,15 +853,25 @@ void ProcessDialogEvent()
 
 		case "autofood_finished":
 			dialog.text = "Приоритет для еды установлен.";
-			DeleteAttribute(pchar, "autofood_betterfood");
+			DeleteAttribute(pchar, "betterfood");
 			link.l1 = "Славно!";
 			link.l1.go = "exit";
 		break;
 
 		case "autofood_finished_betterfood":
 			dialog.text = "Приоритет для еды установлен.";
-			PChar.autofood_betterfood = true;
+			PChar.betterfood = true;
 			link.l1 = "Славно!";
+			link.l1.go = "exit";
+		break;
+
+		case "companion_capture":
+			dialog.text = "Инструкции переданы.";			
+			if (CheckAttribute(PChar, "CompanionsLeaveCapturesDrift"))
+				DeleteAttribute(PChar, "CompanionsLeaveCapturesDrift");
+			else
+				PChar.CompanionsLeaveCapturesDrift = true;
+			link.l1 = "Отлично!";
 			link.l1.go = "exit";
 		break;
 
@@ -964,7 +994,7 @@ void ProcessDialogEvent()
 					}
 					if (pchar.location == "Panama_ExitTown")
 					{
-						Dialog.Text = "Не-е-ет, я не сумасшедш"+ GetSexPhrase("ий","ая")+". Это же Панама! Взять ее НЕВОЗМОЖНО!!! Надо валить отсюда, а то точно дождусь черной метки...";
+						Dialog.Text = "Не-е-ет, я не сумасшедш"+ GetSexPhrase("ий","ая")+". Это же Панама! Взять её НЕВОЗМОЖНО!!! Надо валить отсюда, а то точно дождусь чёрной метки...";
 	    				Link.l1 = "...";
 	    				Link.l1.go = "exit";
 					}
@@ -1097,7 +1127,7 @@ void ProcessDialogEvent()
 			setCharacterShipLocation(PChar, pchar.GenQuest.contraTravel.destination.loc);
 			setWDMPointXZ(pchar.GenQuest.contraTravel.destination.loc);
 
-			//трем аттрибуты
+			//трём аттрибуты
 			DeleteAttribute(PChar, "GenQuest.contraTravel");
 			break;
 //navy CONTRABAND METRO <--
@@ -1369,11 +1399,11 @@ void ProcessDialogEvent()
 			Link.l1.go = "Whisper_mission_1";
 		break;
 		case "Whisper_mission_1":
-			dialog.Text = "'Дорогая Виспер, тебя приветствует корпорация Omnitech! Мы слышали, что ты лучшая в своем деле, и хотим предложить тебе одну работу. Дело в том, что существует некий предмет - квантовый выпрямитель частиц. Это опасное устройство, в плохих руках оно может принести вред всему человечеству. В данный момент оно и находится в таких руках.'";
+			dialog.Text = "'Дорогая Виспер, тебя приветствует корпорация Omnitech! Мы слышали, что ты лучшая в своём деле, и хотим предложить тебе одну работу. Дело в том, что существует некий предмет - квантовый выпрямитель частиц. Это опасное устройство, в плохих руках оно может принести вред всему человечеству. В данный момент оно и находится в таких руках.'";
 			Link.l1.go = "Whisper_mission_2";
 		break;
 		case "Whisper_mission_2":
-			dialog.Text = "'Мы выслали тебе координаты лаборатории безумного ученого, что разработал данное устройство. Он окружил себя отрядом боевых ботов, но для тебя это не должно стать большой помехой. Оплата будет достойной, мы за ценой не постоим. У нас есть информация, что на твое имя записан ипотечный кредит. Считай, что он уже погашен, если возьмешься за это дело. И поторапливайся, устройство может активироваться в любой момент!'";
+			dialog.Text = "'Мы выслали тебе координаты лаборатории безумного учёного, что разработал данное устройство. Он окружил себя отрядом боевых ботов, но для тебя это не должно стать большой помехой. Оплата будет достойной, мы за ценой не постоим. У нас есть информация, что на твоё имя записан ипотечный кредит. Считай, что он уже погашен, если возьмёшься за это дело. И поторапливайся, устройство может активироваться в любой момент!'";
 			Link.l1 = "Что ж, приступим...";
 			DeleteAttribute(pchar, "questTemp.Whisper.Entered_Dungeon");
 			//AddDialogExitQuest("MainHeroFightModeOn");
@@ -1404,7 +1434,7 @@ void ProcessDialogEvent()
             mc = GetMainCharacter();
 
 			mc.Ship.Type = GenerateShipExt(SHIP_SOPHIE, true, mc);
-			mc.Ship.name="Черная Вдова";
+			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
 			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
 			SetCrewQuantityFull(mc);
@@ -1485,7 +1515,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "Exit";
 		break;
 		case "WhisperHatUnequip":
-			dialog.Text = "Оставлю ее в каюте, а то голова потеет.";
+			dialog.Text = "Оставлю её в каюте, а то голова потеет.";
 			ref hatRef = ItemsFromID("hatWhisper");
 			string itmGroup = hatRef.groupID;
 			RemoveCharacterEquip(pchar, itmGroup);
@@ -1520,6 +1550,44 @@ void ProcessDialogEvent()
 			Link.l1.go = "exit";
 			NextDiag.TempNode = "TalkSelf_Main";
 			chrDisableReloadToLocation = false;
+		break;
+		case "RechargeCostume":
+			if (!CheckAttribute(pchar,"questTemp.LSC.immersions"))
+			{
+				dialog.Text = "Хенрик сказал, что всё готово к погружению.";
+				Link.l1 = "Ну и отлично.";
+				Link.l1.go = "exit";
+				pchar.questTemp.LSC = "toUnderwater";
+				pchar.questTemp.LSC.immersions = 0;
+				pchar.questTemp.LSC.immersions.pay = true;
+				SaveCurrentQuestDateParam("questTemp.LSC.immersions");
+				WaitDate("", 0, 0, 0, 1, 0);
+				break;
+			}
+			if (CheckAttribute(pchar,"questTemp.LSC.immersions") && pchar.questTemp.LSC.immersions.pay == true)
+			{
+				dialog.Text = "Костюм уже готов, можно погружаться.";
+				Link.l1 = "Ну и отлично.";
+				Link.l1.go = "exit";
+				break;
+			}
+			if (GetQuestPastDayParam("questTemp.LSC.immersions") > 1)
+			{
+				dialog.Text = "Хенрик сказал, что всё готово к погружению.";
+				Link.l1 = "Ну и отлично.";
+				Link.l1.go = "exit";
+				pchar.questTemp.LSC = "toUnderwater";
+				pchar.questTemp.LSC.immersions = 0;
+				pchar.questTemp.LSC.immersions.pay = true;
+				SaveCurrentQuestDateParam("questTemp.LSC.immersions");
+				WaitDate("", 0, 0, 0, 1, 0);
+			}
+			else
+			{
+				dialog.Text = "Хенрик сказал, что костюм не готов к погружению и попросил проверить завтра.";
+				Link.l1 = "Что поделать...";
+				Link.l1.go = "exit";
+			}
 		break;
 
 	}

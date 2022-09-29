@@ -287,7 +287,7 @@ void AfterTownBattle()
 
     nulChr  = &NullCharacter;
 	if (CheckAttribute(Pchar, "GenQuestFort.StartAttack" )) DeleteAttribute(Pchar, "GenQuestFort.StartAttack");
-    if (!CheckAttribute(Pchar, "GenQuestFort.fortCharacterIdx")) return; // еще не было
+    if (!CheckAttribute(Pchar, "GenQuestFort.fortCharacterIdx")) return; // ещё не было
 
 	fortChr = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     bDisableFastReload = false;
@@ -500,7 +500,7 @@ void TWN_Capture_Forts()
                 Builder = Group_GetGroupCommander(sGroup);
                 LAi_LoginInCaptureTown(Builder, false); // убрать с того раза
             }
-            return;	 // по утверждению Хомо идет почему-то дальше код
+            return;	 // по утверждению Хомо идёт почему-то дальше код
 		}
 		else
 		{   // to_do
@@ -1290,7 +1290,7 @@ void Move_Govenour_Nation(int iNation)
 			{
 		        i = GetCharacterIndex(rChar.CityToStay + "_Mayor");  // старого мэра на место
 		        if (characters[i].location == rChar.location)
-		        {   //если он еще в резиденции, а не в тюрьме
+		        {   //если он ещё в резиденции, а не в тюрьме
 		            characters[i].location.group = "sit";
 					characters[i].location.locator = "sit1";
 					LAi_SetHuberTypeNoGroup(&characters[i]);
@@ -1315,7 +1315,7 @@ void SetGovenourToCity(int iNation, string sCity)
 	{
         i2 = GetCharacterIndex(rChar.CityToStay + "_Mayor");  // старого мэра на место
         if (characters[i2].location == rChar.location)
-        {   //если он еще в резиденции, а не в тюрьме
+        {   //если он ещё в резиденции, а не в тюрьме
             characters[i2].location.group = "sit";
 			characters[i2].location.locator = "sit1";
 			LAi_SetHuberTypeNoGroup(&characters[i2]);
@@ -1632,7 +1632,7 @@ void TWN_RealeseForMoney(string city, bool _agent)
 	Pchar.quest.(sTemp).over               = "yes";
     sTemp   = "Enemy_" + city;
     Pchar.quest.(sTemp).over = "yes";
-    // если корабли были, то они простоят еще до конца срока и растают
+    // если корабли были, то они простоят ещё до конца срока и растают
 
 	makeref(rColony, Colonies[FindColony(city)]);
 	rColony.isBought = true;

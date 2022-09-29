@@ -418,6 +418,10 @@ bool GetFortReloadFromTable(string tblName, ref refIslName, ref refLocName)
 		refIslName="Beliz";
 		refLocName="reload_fort1";
 		return true; break;
+	case "Nassau":
+		refIslName="Nassau";
+		refLocName="reload_fort1";
+		return true; break;
 	}
 	refIslName = "";
 	refLocName = "";

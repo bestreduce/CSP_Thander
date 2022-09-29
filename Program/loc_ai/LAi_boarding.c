@@ -761,7 +761,7 @@ void LAi_ReloadEndFade()
 				SetCrewQuantity(GetMainCharacter(),Makeint(crew + 0.3));
 			}
 			//Пересчитываем команду соперника
-			crew = 0;// какие еще люди? все трупы! boarding_enemy_base_crew*(0.1 + rand(20)*0.01);
+			crew = 0;// какие ещё люди? все трупы! boarding_enemy_base_crew*(0.1 + rand(20)*0.01);
 			if (boarding_echr_index >= 0)
 			{
 				SetCrewQuantity(&Characters[boarding_echr_index], MakeInt(crew + 0.3));
@@ -880,9 +880,9 @@ void LAi_EnableReload()
 					if(chr.chr_ai.group == LAI_GROUP_PLAYER)
 					{
 						boarding_player_crew = boarding_player_crew + 1;
-						//LAi_tmpl_stay_InitTemplate(chr);  // 05.02.08 требует локаторов ГОТО, что б не ходили за ГГ матросы толпой - нихрена это не работает, все равно ходят !
+						//LAi_tmpl_stay_InitTemplate(chr);  // 05.02.08 требует локаторов ГОТО, что б не ходили за ГГ матросы толпой - нихрена это не работает, всё равно ходят !
 						//LAi_SetStayType(chr); // а вот так не ходят !!  <-- ugeen
-						if (!IsOfficer(chr)) LAi_SetHuberStayType(chr); //нефиг им стоять, все-равно мешаются ! пущай расходятся по палубе
+						if (!IsOfficer(chr)) LAi_SetHuberStayTypeNoGroup(chr); //нефиг им стоять, все-равно мешаются ! пущай расходятся по палубе
 					}
 				}
 				/*
@@ -986,7 +986,7 @@ void LAi_SetBoardingActors(string locID)
 			model = LAi_GetBoardingModel(mchr, &ani);
 			// boal star with new loc always  -->
 			if (mchr.location.locator == (sLocType + i))
-			{ // искодим из того, что наша локация всегда < 4 офицеры пусть накладываются а матросик идет к противнику.
+			{ // искодим из того, что наша локация всегда < 4 офицеры пусть накладываются а матросик идёт к противнику.
 	           locMChar = rand(3);
 	           while (mchr.location.locator == (sLocType + locMChar))
 	           {
@@ -1127,7 +1127,7 @@ void LAi_SetBoardingActors(string locID)
 			ChangeAttributesFromCharacter(chr, boarding_enemy, true);
 			chr.CaptanId = boarding_enemy.id; // иначе у фантома свой ИД   // to_do поправить опечатку
 			boarding_enemy.CaptanId = boarding_enemy.id;
-			chr.SuperShooter = true; // супер стрелок (вероятность пальбы выше, от сложности, если еще и пистоль есть)
+			chr.SuperShooter = true; // супер стрелок (вероятность пальбы выше, от сложности, если ещё и пистоль есть)
 			if (boarding_enemy.sex == "man") chr.greeting = "CapSinkShip";
 			SetCharacterPerk(chr, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
 			if (CheckAttribute(chr,"Situation"))
@@ -1164,6 +1164,7 @@ void LAi_SetBoardingActors(string locID)
 		    }
 			//}
 			if(CheckAttribute(pchar, "CabinHelp") && pchar.CabinHelp == true)	BSHangover_FlintFight_3("");
+			if(CheckAttribute(pchar, "MaryCabinHelp") && pchar.MaryCabinHelp == true)	Mary_Pomogaet_v_Kautah("");
 		}
 		SetNewModelToChar(chr); //иначе сабли не те, что реально
 		string weaponID = GetCharacterEquipByGroup(chr, BLADE_ITEM_TYPE);

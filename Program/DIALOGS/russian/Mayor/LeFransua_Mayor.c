@@ -42,7 +42,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.mushket2x2");
 		break;
 		case "Mushket_1":
-			dialog.text = "А как же ты его найдешь? Он сам по себе, ни на кого не работает, никому долю не платит, в пиратские порты сам не заходит - чтоб делиться не заставили, а в порты колоний его не пускают. Нет, его там, конечно, ждут, чтоб с петлей сосватать, но рисковать не будет - не такой он человек.";
+			dialog.text = "А как же ты его найдёшь? Он сам по себе, ни на кого не работает, никому долю не платит, в пиратские порты сам не заходит - чтоб делиться не заставили, а в порты колоний его не пускают. Нет, его там, конечно, ждут, чтоб с петлёй сосватать, но рисковать не будет - не такой он человек.";
 			link.l1 = "Да уж... Может, посоветуешь что?";
 			link.l1.go = "Mushket_2";
 		break;
@@ -264,7 +264,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "CapComission6":
-			dialog.text = "Ты выкуп привез"+ GetSexPhrase("","ла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";
+			dialog.text = "Ты выкуп прив"+ GetSexPhrase("ёз","езла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";
 			link.l1 = "Слушай, "+ NPChar.name +", тут такое дело... В общем, у меня нет таких денег. Но я готов"+ GetSexPhrase("","а") +" отработать.";
 			link.l1.go = "CapComission2_2";
 			if(makeint(pchar.money) > 150000)
@@ -278,14 +278,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 }
 void SetMushketCapitainInWorld()
 {
-	//создаем кэпов
+	//создаём кэпов
 	int Rank = sti(pchar.rank) + 15;
 	if (Rank > 30) Rank = 30;
 	ref sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man", Rank, PIRATE, -1, true));
 	sld.name = "Альберт";
 	sld.lastname = "Зиверт";
  	SetCaptanModelByEncType(sld, "pirate");
-	FantomMakeCoolSailor(sld, SHIP_BRIGQEEN, "Стрела", CANNON_TYPE_CULVERINE_LBS24, 100, 100, 100);
+	FantomMakeCoolSailor(sld, SHIP_BRIGQEEN, "Стрела", CANNON_TYPE_CANNON_LBS20, 100, 100, 100);
 	FantomMakeCoolFighter(sld, 20, 50, 50, "blade34", "pistol2", 50);
 	sld.Ship.Mode = "pirate";
 	DeleteAttribute(sld, "SinkTenPercent");
@@ -328,7 +328,7 @@ void SetMushketCapitainInWorld()
 	sld.quest = "InMap"; //личный флаг искомого кэпа
 	sld.city = "PortRoyal"; //определим колонию, из бухты которой с мушкетом выйдет
 	sld.cityShore = GetIslandRandomShoreId(GetArealByCityName(sld.city));
-	sld.quest.targetCity = SelectAnyColony(sld.city); //определим колонию, в бухту которой он придет
+	sld.quest.targetCity = SelectAnyColony(sld.city); //определим колонию, в бухту которой он придёт
 	sld.quest.targetShore = GetIslandRandomShoreId(GetArealByCityName(sld.quest.targetCity));
 	pchar.questTemp.Mushket.Shore = GetIslandRandomShoreId(GetArealByCityName(sld.quest.targetCity));
 	Log_TestInfo("Кэп с мушкетом вышел из: " + sld.city + " и направился в: " + sld.quest.targetShore);
@@ -337,7 +337,7 @@ void SetMushketCapitainInWorld()
 	//выбор типа кораблика на карте
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Бриг 'Стрела'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даём с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//заносим Id кэпа в базу нпс-кэпов
 	sTemp = sld.id;

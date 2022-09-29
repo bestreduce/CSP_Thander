@@ -72,7 +72,7 @@ void ProcessDialogEvent()
 			if (sld.id == "none")
 			{
 				dialog.text = "Простите, но я совершенно не понимаю, о ком вы говорите. Чтобы вам помочь, мне нужны имя и фамилия.";
-				Link.l1 = "Хм. Давайте я попробую еще раз их назвать.";
+				Link.l1 = "Хм. Давайте я попробую ещё раз их назвать.";
 				Link.l1.go = "SeekCitizen_Choice_2";
 				Link.l2 = "Благодарю вас, но лучше я сам"+ GetSexPhrase("","а") +" поищу.";
 				Link.l2.go = "exit";
@@ -99,7 +99,7 @@ void ProcessDialogEvent()
 					dialog.text = GetFullName(sld) + ", вы о ней говорили?";
 					Link.l1 = "Точно, именно о ней.";
 					Link.l1.go = "SeekCitizen_agree";
-					Link.l2 = "Нет, не о ней. Может, я еще раз попробую назвать?";
+					Link.l2 = "Нет, не о ней. Может, я ещё раз попробую назвать?";
 					Link.l2.go = "SeekCitizen_Choice_2";
 				}
 				Link.l3 = "Вы знаете, я вам очень благодар"+ GetSexPhrase("ен","на") +", но я не хочу больше ни о ком спрашивать.";
@@ -108,7 +108,7 @@ void ProcessDialogEvent()
 			}
 		break;
         case "SeekCitizen_Choice_2":
-			dialog.text = "Тогда вам придется еще раз назвать имя и фамилию.";
+			dialog.text = "Тогда вам придётся ещё раз назвать имя и фамилию.";
 			Link.l1.edit = 3;
 			Link.l1 = "";
 			Link.l1.go = "SeekCitizen_Choice_1";
@@ -127,7 +127,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = LinkRandPhrase("Понятия не имею, где она.", "Ни малейшего представления не имею, где он сейчас.", "Я не видела ее уже прилично по времени. Так что не могу знать.");
+					dialog.text = LinkRandPhrase("Понятия не имею, где она.", "Ни малейшего представления не имею, где он сейчас.", "Я не видела её уже прилично по времени. Так что не могу знать.");
 					link.l1 = RandPhraseSimple("Понятно.", "Ясно... Что же, спасибо.");
 					link.l1.go = "exit";
 				}
@@ -142,7 +142,7 @@ void ProcessDialogEvent()
 						string Str2 = sld.location.locator;
 						if (npchar.location == sld.location && strcut(Str1, 0, 5) == strcut(Str2, 0, 5))
 						{
-							dialog.text = LinkRandPhrase("Он здесь, на этом корабле. Смотрите внимательней, пожалуйста.", "Хм, так ведь он сейчас на этом корабле...", "Он на этом корабле, странно, что вы еще встретились.");
+							dialog.text = LinkRandPhrase("Он здесь, на этом корабле. Смотрите внимательней, пожалуйста.", "Хм, так ведь он сейчас на этом корабле...", "Он на этом корабле, странно, что вы ещё встретились.");
 						}
 						else
 						{
@@ -171,22 +171,22 @@ void ProcessDialogEvent()
 						string Str4 = sld.location.locator;
 						if (npchar.location == sld.location && strcut(Str3, 0, 5) == strcut(Str4, 0, 5))
 						{
-							dialog.text = LinkRandPhrase("Она здесь, на этом корабле. Смотрите внимательней, пожалуйста.", "Хм, так ведь она сейчас на этом корабле...", "Она на этом корабле, странно, что вы еще встретились.");
+							dialog.text = LinkRandPhrase("Она здесь, на этом корабле. Смотрите внимательней, пожалуйста.", "Хм, так ведь она сейчас на этом корабле...", "Она на этом корабле, странно, что вы ещё встретились.");
 						}
 						else
 						{
-								dialog.text = LinkRandPhrase("Я видела ее совсем недавно " + npchar.quest.seekIdx.where + ".", "Вы знаете, я недавно встретила ее " + npchar.quest.seekIdx.where + ". Так что ищите ее там.", "Насколько мне известно, сейчас она находится " + npchar.quest.seekIdx.where + ".");
+								dialog.text = LinkRandPhrase("Я видела её совсем недавно " + npchar.quest.seekIdx.where + ".", "Вы знаете, я недавно встретила её " + npchar.quest.seekIdx.where + ". Так что ищите её там.", "Насколько мне известно, сейчас она находится " + npchar.quest.seekIdx.where + ".");
 						}
 					}
 					else
 					{
 						if (npchar.location == sld.location)
 						{
-							dialog.text = LinkRandPhrase("Простите, но она находится прямо здесь, " + npchar.quest.seekIdx.where + ". Вам нужно быть внимательн"+ GetSexPhrase("ым","ой") +".", "Хм, она ведь здесь, среди нас!", "Если бы вы посмотрели вокруг более внимательно, то наверняка уже увидели ее...");
+							dialog.text = LinkRandPhrase("Простите, но она находится прямо здесь, " + npchar.quest.seekIdx.where + ". Вам нужно быть внимательн"+ GetSexPhrase("ым","ой") +".", "Хм, она ведь здесь, среди нас!", "Если бы вы посмотрели вокруг более внимательно, то наверняка уже увидели её...");
 						}
 						else
 						{
-							dialog.text = LinkRandPhrase("Я видела ее совсем недавно " + npchar.quest.seekIdx.where + ".", "Недавно встретила ее " + npchar.quest.seekIdx.where + ". Так что вы сможете увидеть ее там.", "Насколько мне известно, сейчас она находится " + npchar.quest.seekIdx.where + ".");
+							dialog.text = LinkRandPhrase("Я видела её совсем недавно " + npchar.quest.seekIdx.where + ".", "Недавно встретила её " + npchar.quest.seekIdx.where + ". Так что вы сможете увидеть её там.", "Насколько мне известно, сейчас она находится " + npchar.quest.seekIdx.where + ".");
 						}
 					}
 					link.l1 = RandPhraseSimple("Ага, понятно. Спасибо вам!", "Спасибо вам огромное.");
@@ -206,7 +206,7 @@ void ProcessDialogEvent()
 			link.l10.go = "exit";
 		break;
 		case "ansewer_1":
-			dialog.text = "Как, вы еще не знаете? Это Город Потерянных Кораблей. А мы здесь все - потерянные люди... Ах, до чего же все это надоело!";
+			dialog.text = "Как, вы ещё не знаете? Это Город Потерянных Кораблей. А мы здесь все - потерянные люди... Ах, до чего же все это надоело!";
 			link.l1 = "Понимаю...";
 			link.l1.go = "exit";
 			NextDiag.(NodePrevName).l1 = true;

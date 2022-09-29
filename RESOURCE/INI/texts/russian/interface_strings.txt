@@ -2,7 +2,7 @@ Delete profile confirm		{Вы действительно хотите удали
 Delete savefile confirm		{Вы действительно хотите удалить эту запись?}
 Overwrite savefile confirm	{Вы действительно хотите перезаписать эту запись?}
 
-Low storage and unable save create	{Недостаточно места на диске что бы сохранить игру.}
+Low storage and unable save create	{Недостаточно места на диске чтобы сохранить игру.}
 Load game confirm					{Вы действительно хотите загрузить эту запись?}
 Unable to Load save game			{Невозможно загрузить эту запись.}
 
@@ -13,5 +13,5 @@ All info		{Итоговая сумма: }
 
 New game confirm{Вы действительно хотите начать новую игру?}
 
-Insert Disk Ok	{Пожалуйста вставьте первый диск игры "Pirates Of The Caribbean"}
+Insert Disk Ok	{Пожалуйста, вставьте первый диск игры "Pirates Of The Caribbean"}
 save game limit	{Вы превысили лимит максимального количества сохранённых игр. Удалите старые сохранения.}

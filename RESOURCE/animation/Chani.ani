@@ -1303,7 +1303,8 @@ end_time = 1678
 
 loop = false
 speed = 1.8
-
+event = "Recoil start", 1670, normal
+event = "Recoil end", 1676, normal
 data = "Blend time", "0.002"	; sec
 data = "Walk speed", "2.0"		; m/sec
 ;event = "SndAlliace_W_recoil", 1668, normal
@@ -1334,6 +1335,8 @@ loop = false
 speed = 1.8
 type = normal
 data = "Blend time", "0.1"	; sec
+event = "Recoil start", 1670, normal
+event = "Recoil end", 1676, normal
 event = "SndAlliace_recoil", 1610, normal
 event = "SndAlliace_W_recoil", 1609, normal
 ;event = "SndAlliace_W_attack_slash1", 1565, normal
@@ -1348,6 +1351,8 @@ loop = false
 speed = 1.8
 type = normal
 data = "Blend time", "0.1"	; sec
+event = "Recoil start", 1670, normal
+event = "Recoil end", 1676, normal
 event = "SndAlliace_recoil", 1627, normal
 event = "SndAlliace_W_recoil", 1626, normal
 ;event = "SndAlliace_W_attack_slash2", 1565, normal

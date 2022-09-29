@@ -722,7 +722,8 @@ data = "Blend time", "0.2"		; sec
 [Recoil]
 start_time = 1668
 end_time = 1678
-
+event = "Recoil start", 1670, normal
+event = "Recoil end", 1676, normal
 loop = false
 speed = 1.8
 

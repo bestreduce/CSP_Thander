@@ -22,14 +22,14 @@ void ProcessDialogEvent()
 		case "prepare_convoy_quest":
 			if (isBadReputation(pchar, 40))
 			{
-				dialog.text = RandPhraseSimple("О-о-о, черт!! Я знаю, кто ты "+ GetSexPhrase("такой","такая") +"! Только полный идиот может пойти к тебе на борт пассажиром. Прощай!", "А-а, я знаю, кто ты есть! К тебе на борт моя нога не ступит. Ищи дурака...");
-				link.l1 = RandPhraseSimple("Хех, боязливый какой...", "Пугливый какой народ пошел!");
+				dialog.text = RandPhraseSimple("О-о-о, чёрт!! Я знаю, кто ты "+ GetSexPhrase("такой","такая") +"! Только полный идиот может пойти к тебе на борт пассажиром. Прощай!", "А-а, я знаю, кто ты есть! К тебе на борт моя нога не ступит. Ищи дурака...");
+				link.l1 = RandPhraseSimple("Хех, боязливый какой...", "Пугливый какой народ пошёл!");
 				link.l1.go = "convoy_refused";
 			}
 			else
 			{
-				dialog.text = TimeGreeting() + ", "+GetAddress_Form(NPChar) + "! Я "+ GetFullName(NPChar) + ". Я слышал, что вы берете на борт пассажиров?";
-				link.l1 = "Возможно да, все зависит от моей выгоды.";
+				dialog.text = TimeGreeting() + ", "+GetAddress_Form(NPChar) + "! Я "+ GetFullName(NPChar) + ". Я слышал, что вы берёте на борт пассажиров?";
+				link.l1 = "Возможно да, всё зависит от моей выгоды.";
 				link.l1.go = "prepare_convoy_quest_3";
 			}
 		break;
@@ -69,7 +69,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sName", GetFullName(npchar));
 			AddQuestUserData(sTitle, "sDay", FindRussianDaysString(sti(npchar.GenQuest.GetPassenger_Time)));
             AddQuestUserData(sTitle, "sMoney", FindRussianMoneyString(sti(npchar.GenQuest.GetPassenger_Money)));
-            // по городу вернем его таверну
+            // по городу вернём его таверну
 			sTavern = npchar.GenQuest.GetPassenger_Destination + "_tavern";
 			sTemp = npchar.id + "_complited";
 			pchar.quest.(sTemp).win_condition.l1 = "location";
@@ -127,22 +127,22 @@ void ProcessDialogEvent()
 
 		case "convoy_DeskTalk":
 			dialog.text = NPCStringReactionRepeat(LinkRandPhrase(RandSwear() + "Капитан, время вышло. Когда же, в конце концов, я попаду в " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?",
-						  RandSwear() + "Капитан, сколько можно блуждать неизвестно где?! Когда мы доберемся до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?" ,
-						  RandSwear() + "Послушайте, капитан, мне необходимо было добраться до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + ", и я хочу получить четкий и ясный ответ, когда это произойдет!"),
-				RandPhraseSimple("Капитан, уже второй раз я поднимаю тему исполнения вами своих обязательств. Когда мы доберемся до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?", "Капитан, второй раз я вынужден поставить вопрос о моей доставке. Когда, наконец, мы увидим берега " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?"),
-				RandPhraseSimple(RandSwear() + "Капитан, третий раз я спрашиваю вас о том же - когда мы прибудем в " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?", "Капитан, мы потеряли черт знает сколько времени! Когда вы доставите меня в " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?"),
+						  RandSwear() + "Капитан, сколько можно блуждать неизвестно где?! Когда мы доберёмся до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?" ,
+						  RandSwear() + "Послушайте, капитан, мне необходимо было добраться до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + ", и я хочу получить чёткий и ясный ответ, когда это произойдёт!"),
+				RandPhraseSimple("Капитан, уже второй раз я поднимаю тему исполнения вами своих обязательств. Когда мы доберёмся до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?", "Капитан, второй раз я вынужден поставить вопрос о моей доставке. Когда, наконец, мы увидим берега " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?"),
+				RandPhraseSimple(RandSwear() + "Капитан, третий раз я спрашиваю вас о том же - когда мы прибудем в " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?", "Капитан, мы потеряли чёрт знает сколько времени! Когда вы доставите меня в " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?"),
                 "Послушайте, капитан, это уже ни в какие ворота не лезет...", "block", 0, npchar, Dialog.CurrentNode);
             if (sti(npchar.GenQuest.GetPassenger_Money) > 100)
             {
 				link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Прошу меня простить, дела... "+ GetSexPhrase("замотался","замоталась") +"... Через 7 дней вы точно будете на месте.", "Извините " + GetAddress_FormToNPC(NPChar) + ", совсем не было возможности выполнить обязательства по отношению к вам. Но можете не переживать, через неделю будем на месте."),
 					RandPhraseSimple("Я "+ GetSexPhrase("вынужден","вынуждена") +" во второй раз извиниться... Через неделю мы будем на месте.", "Я вторично приношу извинения. Через неделю мы будем на месте."),
 					RandPhraseSimple("И в третий раз я "+ GetSexPhrase("вынужден","вынуждена") +" просить прощения у вас... Мы будем на месте через неделю.", "Я приношу извинения в третий раз. Через неделю мы будем на месте, обещаю..."),
-					"Я понимаю, " + GetAddress_FormToNPC(NPChar) + ", но прошу еще немного потерпеть... Через семь дней я доставлю вас до места назначения!", npchar, Dialog.CurrentNode);
+					"Я понимаю, " + GetAddress_FormToNPC(NPChar) + ", но прошу ещё немного потерпеть... Через семь дней я доставлю вас до места назначения!", npchar, Dialog.CurrentNode);
     			link.l1.go = "convoy_DeskTalk_1";
 			}
 			link.l2 = HeroStringReactionRepeat(RandPhraseSimple("А-а... пассажир... я и "+ GetSexPhrase("забыл","забыла") +" про вас. Думаю, в трюме вам будет спокойнее, и доставать меня вы прекратите.", "Хех, ну надо же! У меня на корабле - посторонние!.. Полагаю, тебе нужно познакомиться с моим трюмом."),
 				"Второй раз? Ну, надо же... Пожалуй, я отправлю тебя в трюм на экскурсию.",
-				"Третий раз? Как это нехорошо, хе-хе... Вот что, приятель, тебе пора в трюм, нечего разгуливать на моем корабле.",
+				"Третий раз? Как это нехорошо, хе-хе... Вот что, приятель, тебе пора в трюм, нечего разгуливать на моём корабле.",
 				"Ворота? А-а, понимаю, это высшая степень раздражения! Ну, хватит, наверное, в бирюльки играть... Добро пожаловать в трюм, " + GetAddress_FormToNPC(NPChar) + ".", npchar, Dialog.CurrentNode);
 			link.l2.go = "convoy_Prison_1";
 			pchar.quest.Munity = "Deads"; //дверцы откроем
@@ -177,10 +177,10 @@ void ProcessDialogEvent()
 		break;
 
 		case "convoy_Prison_1":
-			dialog.text = RandSwear() + "Какой еще трюм? Я не понимаю вас!";
+			dialog.text = RandSwear() + "Какой ещё трюм? Я не понимаю вас!";
 			if (GetPrisonerQty() < PRISONER_MAX)
 			{
-    			Link.l1 = "Что тут неясного? Теперь ты мой пленник! Пошел в трюм!";
+    			Link.l1 = "Что тут неясного? Теперь ты мой пленник! Пошёл в трюм!";
     			link.l1.go = "convoy_Prison_2";
             }
 			Link.l2 = "Шучу я... Дней через семь будем точно в нужном городе.";
@@ -188,7 +188,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "convoy_Prison_2":
-			dialog.text = RandSwear() + "Ты еще заплатишь за это, "+ GetSexPhrase("мерзавец","мерзавка") +"!";
+			dialog.text = RandSwear() + "Ты ещё заплатишь за это, "+ GetSexPhrase("мерзавец","мерзавка") +"!";
 			Link.l1 = "Все так говорят, но выходит как раз наоборот - платят мне!";
 			link.l1.go = "convoy_Prison_3";
 		break;
@@ -196,7 +196,7 @@ void ProcessDialogEvent()
 		case "convoy_Prison_3":
 			AddSimpleRumour(LinkRandPhrase("Стало известно, что некий капитан " + GetFullName(pchar) + " взялся доставить пассажира по имени " + GetFullName(npchar) + ", но слова своего не "+ GetSexPhrase("сдержал","сдержала") +". К тому же "+ GetSexPhrase("пленил","пленила") +" беднягу. Вот так - доверять малознакомым людям...",
 				"Эх, куда катится мир?! Капитан " + GetFullName(pchar) + " "+ GetSexPhrase("захватил","захватила") +" беднягу по имени " + GetFullName(npchar) + ", хотя тот был пассажиром на его корабле...",
-				"Ходят слухи, капитан, что вы "+ GetSexPhrase("порядочный мерзавец","порядочная мерзавка") +". Погоривают, что бедняга " + GetFullName(npchar) + " был пленен на вашем корабле. А вы ведь обещали доставить его до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + ". Да уж, некрасиво..."), sti(npchar.nation), 40, 1);
+				"Ходят слухи, капитан, что вы "+ GetSexPhrase("порядочный мерзавец","порядочная мерзавка") +". Погоривают, что бедняга " + GetFullName(npchar) + " был пленён на вашем корабле. А вы ведь обещали доставить его до " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + ". Да уж, некрасиво..."), sti(npchar.nation), 40, 1);
             RemovePassenger(PChar, NPChar);
         	LAi_SetActorType(NPChar);
         	LAi_ActorRunToLocation(NPChar, "reload", "reload1", "none", "", "", "", 5.0);

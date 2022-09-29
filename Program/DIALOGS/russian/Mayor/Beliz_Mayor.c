@@ -12,7 +12,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
@@ -20,15 +20,15 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		//************************** Квестовые штрумы ************************
        //==> Третий квест англ.линейки: нападение на Белиз.
         case "EngLine3Quest_BelizAttack":
-			dialog.text = "Проклятье!!! Что тебе нужно"+ GetSexPhrase(", чертов ладрон","") +"?!!";
-			link.l1 = "Догадайся с трех раз.";
+			dialog.text = "Проклятье!!! Что тебе нужно"+ GetSexPhrase(", чёртов ладрон","") +"?!!";
+			link.l1 = "Догадайся с трёх раз.";
 			link.l1.go = "Step_E3_1";
 			AfterTownBattle();
         break;
 
         case "Step_E3_1":
             dialog.text = "Золото...";
-			link.l1 = "Вот видишь, ты сам все знаешь. Мы забираем золото и уходим, а ты остаешься в живых... при одном условии.";
+			link.l1 = "Вот видишь, ты сам все знаешь. Мы забираем золото и уходим, а ты остаёшься в живых... при одном условии.";
 			link.l1.go = "Step_E3_2";
         break;
 
@@ -40,13 +40,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
         case "Step_E3_3":
             dialog.text = "А если не скажу?";
-			link.l1 = "Хм, сначала тебе будет очень страшно, потом очень больно. А затем ты все расскажешь, только жить после всего этого не сможешь - очень уж серьезные будут повереждения на твоем теле...";
+			link.l1 = "Хм, сначала тебе будет очень страшно, потом очень больно. А затем ты все расскажешь, только жить после всего этого не сможешь - очень уж серьёзные будут повереждения на твоём теле...";
 			link.l1.go = "Step_E3_4";
         break;
 
         case "Step_E3_4":
             dialog.text = "Ни секунды не сомневаюсь, что все это будет реализовано. Наслышан...\n"+
-                          "Золото в форте. Поищите там как следует и найдете без труда.";
+                          "Золото в форте. Поищите там как следует и найдёте без труда.";
 			link.l1 = "Вы только что сохранили себе жизнь и здоровье. Поздравляю и желаю здравствовать также впредь, сеньор.";
 			link.l1.go = "Step_E3_5";
         break;
@@ -76,7 +76,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 characters[GetCharacterIndex("John Morris")].dialog.currentnode = "Gold_found_in_fort";
             }
             LAi_LocationFightDisable(&Locations[FindLocation("Beliz_fort")], true);
-            // ==> Дележ золота. Можно не брать Джекмена и Джона Морриса вообще в эскадру.
+            // ==> Делёж золота. Можно не брать Джекмена и Джона Морриса вообще в эскадру.
             // === Квест будет выполнен, а золото поделено соответственно.
             pchar.questTemp.BelizGoldQty = 3300 / sti(pchar.questTemp.CompanionQuantity);   // Нужно для контроля продаж золота Моргану, чтоб не продавать возможно уже существующее у ГГ золото.
 			// грузим ГГ и его эскадру (не квестовые)

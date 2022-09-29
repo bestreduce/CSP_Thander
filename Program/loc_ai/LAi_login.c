@@ -445,7 +445,7 @@ void CheckHighOnDrugs()
 void UniqueHeroEvents()
 {
 
-	if (startherotype == 7 && IsEquipCharactersByItem(pchar, "DHGlove") && rand (10) == 0)
+	if (pchar.name == "Тёмный Странник" && IsEquipCharactersByItem(pchar, "DHGlove") && rand (10) == 0)
 	{
 		Log_info("Обнаружено пять темпоральных червоточин.");
 		Log_info("Расчетное синхронизированное время:");

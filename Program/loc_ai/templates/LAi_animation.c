@@ -188,7 +188,7 @@ void LAi_tmpl_ani_ColThreshold(aref chr)
 void LAi_tmpl_ani_EndAction(aref chr)
 {
 	if(chr.chr_ai.tmpl.animation == "") return;
-	chr.chr_ai.tmpl.timeout = "-1"; //бага еще та!
+	chr.chr_ai.tmpl.timeout = "-1"; //бага ещё та!
 	LAi_tmpl_ani_EndAnimation(chr);
 }
 

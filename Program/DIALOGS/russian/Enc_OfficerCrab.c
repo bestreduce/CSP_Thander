@@ -43,7 +43,7 @@ void ProcessDialogEvent()
 		case "AsYouWish":
 			dialog.text = "(Краб жалобно стучит клешнями по земле.)";
 			if (isOfficer(Npchar)) // проверка для кампуса, где слотовые офы
-	            Link.l2 = "Прости, это мое окончательное решение. Для тебя слишком опасны все эти морские приключения.";
+	            Link.l2 = "Прости, это моё окончательное решение. Для тебя слишком опасны все эти морские приключения.";
 	            Link.l2.go = "exit_fire";
 			Link.l4 = "Прости, я передумал" + GetSexPhrase("","а")+ ". Не знаю, что на меня нашло...";
 			Link.l4.go = "exit";
@@ -72,7 +72,7 @@ void ProcessDialogEvent()
 
         // boal 05.09.03 offecer need to go to abordage -->
         case "stay_follow":
-            dialog.text = "(Краб издает щелкающий звук, чтобы показать, что он внимательно вас слушает.)";
+            dialog.text = "(Краб издаёт щёлкающий звук, чтобы показать, что он внимательно вас слушает.)";
             Link.l1 = "Стой здесь!";
             Link.l1.go = "Boal_Stay";
             Link.l2 = "Следуй за мной и не отставай!";
@@ -105,7 +105,7 @@ void ProcessDialogEvent()
 		      SetCharacterTask_FollowCharacter(Npchar, PChar); // it works here!!!
 			  Diag.TempNode = "Fired";
 		      dialog.text = "(Краб злобно клацает вам вслед.)";
-		      Link.l1 = "Со временем ты поймешь, почему я так поступил"+ GetSexPhrase("","а")+ ".";
+		      Link.l1 = "Со временем ты поймёшь, почему я так поступил"+ GetSexPhrase("","а")+ ".";
 		      Link.l1.go = "Exit";
 	      break;
         // boal 05.09.03 offecer need to go to abordage <--

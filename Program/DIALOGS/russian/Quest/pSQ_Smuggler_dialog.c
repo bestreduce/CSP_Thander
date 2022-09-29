@@ -33,7 +33,7 @@ void ProcessDialogEvent()
 		break;
 		case "pirateStartQuest_Smuggler3_1":
 			dialog.text = "Хех, хорошо сказано. Ну, а теперь выкладывай, сколько тебе заплатил " + pchar.questTemp.pirateStartQuest.Name + ", чтоб ты его рабов наш"+ GetSexPhrase("ел","ла") +".";
-			link.l1 = "Ну, я же предупреждал"+ GetSexPhrase("","а") +", что мне некогда играть в ваши игры. Или ты продаешь мне рабов, или я буду искать их в другом месте.";
+			link.l1 = "Ну, я же предупреждал"+ GetSexPhrase("","а") +", что мне некогда играть в ваши игры. Или ты продаёшь мне рабов, или я буду искать их в другом месте.";
 			link.l1.go = "pirateStartQuest_Smuggler3_2";
 		break;
 		case "pirateStartQuest_Smuggler3_2":
@@ -43,7 +43,7 @@ void ProcessDialogEvent()
 				link.l1 = "Устраивают. Вот половина суммы, остальную после погрузки получите.";
 				link.l1.go = "pirateStartQuest_Smuggler3_3";
 			}
-			link.l2 = "Не торопись приятель, сдается мне, что этот товар со шхуны 'Сентблу'. Живо говори, кто информатор.";
+			link.l2 = "Не торопись приятель, сдаётся мне, что этот товар со шхуны 'Сентблу'. Живо говори, кто информатор.";
 			link.l2.go = "pirateStartQuest_Smuggler3_5";
 			GiveItem2Character(npchar, "letter_open");
 			ChangeItemDescribe("letter_open", "itmdescr_letter_open_pirateStartQuest");
@@ -54,8 +54,8 @@ void ProcessDialogEvent()
 			AddQuestUserData("pSQ", "sCity2", XI_ConvertString("Colony" + pchar.questTemp.pirateStartQuest.City2 + "Gen"));
 		break;
 		case "pirateStartQuest_Smuggler3_3":
-			dialog.text = "Рабы загружены. Давай расчет, и разбежимся, пока нас патруль не накрыл.";
-			link.l1 = "Не торопись, приятель, сдается мне, что этот товар со шхуны 'Сентблу'. Хочешь получить вторую половину - говори, кто информатор.";
+			dialog.text = "Рабы загружены. Давай расчёт, и разбежимся, пока нас патруль не накрыл.";
+			link.l1 = "Не торопись, приятель, сдаётся мне, что этот товар со шхуны 'Сентблу'. Хочешь получить вторую половину - говори, кто информатор.";
 			link.l1.go = "pirateStartQuest_Smuggler3_5";
 			AddMoneyToCharacter(pchar, -15000);
 			AddMoneyToCharacter(npchar, 15000);
@@ -63,13 +63,13 @@ void ProcessDialogEvent()
 			AddQuestUserData("pSQ", "sText", "О рабах моему работодателю знать не обязательно, не напрасно же я выложил"+ GetSexPhrase("","а") +" за них 15 000 пиастров.");
 		break;
 		case "pirateStartQuest_Smuggler3_5":
-			dialog.text = "Вот черт! Теперь все понятно. Придется вытрясти из тебя деньги вместе с кишками и твоей поганой душонкой!";
-			link.l1 = "Видать, не такие уж вы серьезные. Но, надеюсь, хоть не глупые, поэтому предлагаю мирный вариант - ты говоришь имя информатора, который сдал тебе шхуну и покупателя, тогда сможете уйти отсюда живыми.";
+			dialog.text = "Вот чёрт! Теперь все понятно. Придётся вытрясти из тебя деньги вместе с кишками и твоей поганой душонкой!";
+			link.l1 = "Видать, не такие уж вы серьёзные. Но, надеюсь, хоть не глупые, поэтому предлагаю мирный вариант - ты говоришь имя информатора, который сдал тебе шхуну и покупателя, тогда сможете уйти отсюда живыми.";
 			link.l1.go = "pirateStartQuest_Smuggler3_6";
 		break;
 		case "pirateStartQuest_Smuggler3_6":
 			dialog.text = "Вот и хорошо, что все так вышло. Место здесь укромное, о лучшей могилке тебе и не мечталось, поди. А " + pchar.questTemp.pirateStartQuest.Name + " пусть подыскивает соглядатаев попроворнее.";
-			link.l1 = "Да, придется, видать, пощекотать тебе печенку...";
+			link.l1 = "Да, придётся, видать, пощекотать тебе печенку...";
 			link.l1.go = "pirateStartQuest_Smuggler3_7";
 		break;
 		case "pirateStartQuest_Smuggler3_7":

@@ -1,4 +1,5 @@
 #include "DIALOGS\russian\Rumours\Common_rumours.c"  //homo 25/06/06
+string sProf;
 
 void ProcessDialogEvent()
 {
@@ -147,7 +148,7 @@ void ProcessDialogEvent()
 			if (LAi_grp_playeralarm > 0)
 			{
 	  			dialog.text = NPCharRepPhrase(pchar,
-					LinkRandPhrase("В городе поднята тревога, тебя всюду ищут! На твоем месте я бы не стал здесь задерживаться.", "Вся городская стража рыщет по городу в поисках тебя. Я не идиот и разговаривать с тобой не буду!", "Беги, "+ GetSexPhrase("приятель","подруга") +", пока солдаты не сделали из тебя решето..."),
+					LinkRandPhrase("В городе поднята тревога, тебя всюду ищут! На твоём месте я бы не стал здесь задерживаться.", "Вся городская стража рыщет по городу в поисках тебя. Я не идиот и разговаривать с тобой не буду!", "Беги, "+ GetSexPhrase("приятель","подруга") +", пока солдаты не сделали из тебя решето..."),
 					LinkRandPhrase("Что тебе нужно, "+ GetSexPhrase("негодяй","мерзавка") +"?! Городская стража уже взяла твой след, далеко тебе не уйти"+ GetSexPhrase(", грязный пират","") +"!", "Грязн"+ GetSexPhrase("ый","ая") +" убийца, вон из моего дома! Стража!!", "Я не боюсь тебя, мерзав"+ GetSexPhrase("ец","ка") +"! Скоро тебя повесят в нашем форте, далеко тебе не уйти..."));
 				link.l1 = NPCharRepPhrase(pchar,
 					RandPhraseSimple("Хех, тревога для меня не проблема...", "Им меня ни за что не поймать."),
@@ -176,7 +177,7 @@ void ProcessDialogEvent()
 			else
 			{
 				dialog.text = LinkRandPhrase("Приветствую вас, " + GetAddress_Form(NPChar) + ". Вы ко мне по делу?",
-									"Здравствуйте, " + GetFullName(Pchar) + ". Я видел, как ваш корабль вошел в порт, и был уверен, что вы ко мне зайдете.",
+									"Здравствуйте, " + GetFullName(Pchar) + ". Я видел, как ваш корабль вошёл в порт, и был уверен, что вы ко мне зайдете.",
 									"А, капитан " + GetFullName(Pchar) + ". Что привело вас ко мне?");
 				Link.l1 = "Здравствуйте, " + GetFullName(NPChar) + ". Я хочу с вами поговорить.";
 			}
@@ -194,24 +195,24 @@ void ProcessDialogEvent()
 						dialog.text = "Так, что там с деньгами? Вы принесли мне хотя бы 1000 пиастров?";
 						if(sti(PChar.Money) >= 1000)
 						{
-							link.l1 = "Да, принес"+ GetSexPhrase("","ла") +". Вот ровно тысяча золотых. Теперь информация!";
+							link.l1 = "Да, прин"+ GetSexPhrase("ёс","есла") +". Вот ровно тысяча золотых. Теперь информация!";
 							link.l1.go = "Church_GenQuest1_Node_FillFullInfo_3";
 						}
 						else
 						{
-							link.l1 = LinkRandPhrase("Нет, еще не принес"+ GetSexPhrase("","ла") +"...", "Еще нет...", "Еще не принес"+ GetSexPhrase("","ла") +", но скоро принесу...");
+							link.l1 = LinkRandPhrase("Нет, ещё не прин"+ GetSexPhrase("ёс","есла") +"...", "Ещё нет...", "Ещё не прин"+ GetSexPhrase("ёс","есла") +", но скоро принесу...");
 							link.l1.go = "exit";
 						}
 					}
 					else
 					{
-						link.l1 = "Позвольте изложить вам суть вопроса. Я разминул"+ GetSexPhrase("ся","ась") +" со своим старым другом, капитаном " + PChar.GenQuest.ChurchQuest_1.CapFullName + ", всего на несколько часов, а у меня к нему срочное дело. Теперь придётся его догонять, но я, к сожалению, не осведомлен"+ GetSexPhrase("","а") +", в каком направлении он отбыл.";
+						link.l1 = "Позвольте изложить вам суть вопроса. Я разминул"+ GetSexPhrase("ся","ась") +" со своим старым другом, капитаном " + PChar.GenQuest.ChurchQuest_1.CapFullName + ", всего на несколько часов, а у меня к нему срочное дело. Теперь придётся его догонять, но я, к сожалению, не осведомлён"+ GetSexPhrase("","а") +", в каком направлении он отбыл.";
 						link.l1.go = "Church_GenQuest1_Node_FillFullInfo";
 					}
 				}
 				else	// Полная инфа уже есть
 				{
-					link.l1 = "Господин начальник порта, мне нужна информация о судне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "', капитана " + PChar.GenQuest.ChurchQuest_1.CapFullName + ".";
+					link.l1 = "Господин начальник порта, мне нужна информация о судне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "', капитана по имени " + PChar.GenQuest.ChurchQuest_1.CapFullName + ".";
 					if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.NextColonyIsLast")) // Он здесь, в этой колонии!
 						link.l1.go = "Church_GenQuest1_Node_CapOnThisColony_1";
 					else // Отправляет в рандомную колонию
@@ -262,7 +263,7 @@ void ProcessDialogEvent()
 			{
 				if (pchar.questTemp.Headhunter == "Houm" && npchar.nation == ENGLAND)
 				{
-					link.l12 = "Не подскажете, не останавливался ли у вас корабль 'Мертвая голова' с капитаном Ганнибалом Холмом?";
+					link.l12 = "Не подскажете, не останавливался ли у вас корабль 'Мёртвая голова' с капитаном Ганнибалом Холмом?";
 					link.l12.go = "Houm_portman_1";
 				}
 			}
@@ -517,7 +518,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.different.GiveShipLetters.speakPortman = true;
 			s1 = "Дайте-ка взглянуть! Да, в моих документах значатся и это судно, и его владелец. ";
 			s1 = s1 + "Ваша сознательность, капитан, делает Вам честь! Разумеется, Ваши труды должны быть вознаграждены. ";
-			dialog.text = s1 + "Скажем, " + sti(pchar.questTemp.different.GiveShipLetters.price1) + " золотых Вы сочтете достойной оплатой?";
+			dialog.text = s1 + "Скажем, " + sti(pchar.questTemp.different.GiveShipLetters.price1) + " золотых Вы сочтёте достойной оплатой?";
 			link.l1 = "Разумеется нет!";
 			link.l1.go = "exit";
 			link.l2 = "Что же, весьма скромная сумма, но и услуга не велика. Да, я принимаю Ваше предложение, "  + npchar.name +" .";
@@ -537,7 +538,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "ShipLetters_Portman2":
-			dialog.text = "Вы согласны принять мое предложение?";
+			dialog.text = "Вы согласны принять моё предложение?";
 			link.l1 = "Разумеется, нет!";
 			link.l1.go = "exit";
 			link.l2 = "Пожалуй. Хотя уверен"+ GetSexPhrase("","а") +", что эти бумаги стоят дороже.";
@@ -558,7 +559,7 @@ void ProcessDialogEvent()
 
 		case "EncGirl_1":
 			dialog.text = "Слушаю вас внимательно.";
-			link.l1 = "Я привел"+ GetSexPhrase("","а") +" вашу беглянку.";
+			link.l1 = "Я прив"+ GetSexPhrase("ёл","ела") +" вашу беглянку.";
 			link.l1.go = "EncGirl_2";
 		break;
 
@@ -695,9 +696,9 @@ void ProcessDialogEvent()
 			//--> дача миниквестов начальника порта.
 			if (rand(2) < 2 && pchar.questTemp.different == "free" && GetNpcQuestPastDayWOInit(npchar, "quest.meeting") > 7)
 			{
-				dialog.text = LinkRandPhrase("Да, черт возьми! У меня есть для вас работа!",
+				dialog.text = LinkRandPhrase("Да, чёрт возьми! У меня есть для вас работа!",
 					"Ха! Вы как нельзя вовремя! У меня есть одна проблема, требующая разрешения.",
-					"Еще бы! Конечно, у меня есть работа! Проблемы, знаете ли, просто задавили...");
+					"Ещё бы! Конечно, у меня есть работа! Проблемы, знаете ли, просто задавили...");
 				link.l1 = "Излагайте суть дела, " + GetAddress_FormToNPC(NPChar) + ".";
 				link.l1.go = "PortmanQuest";
 				SaveCurrentNpcQuestDateParam(npchar, "quest.meeting");
@@ -718,7 +719,7 @@ void ProcessDialogEvent()
 			//<-- дача миниквестов начальника порта.
 
 			dialog.text = "Губернатор радеет за благополучие города - у него всегда есть работа. Потом, в таверне могут быть заинтересованные купцы, ну и магазин иногда фрахтует капитанов.";
-			Link.l1 = "Еще один вопрос.";
+			Link.l1 = "Ещё один вопрос.";
 			Link.l1.go = "node_2";
 			Link.l2 = "Благодарю. До свидания.";
 			Link.l2.go = "exit";
@@ -766,7 +767,7 @@ void ProcessDialogEvent()
 		case "work_PU_1":
 			if (!CheckAttribute(npchar, "work_date_PU") || GetNpcQuestPastDayParam(npchar, "work_date_PU") >= 2 || bBettaTestMode)
 			{
-				if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 5 || makeint(7-sti(RealShips[sti(Pchar.Ship.Type)].Class)) < 1)//при низком авторитете и на 7 класс не даем
+				if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 5 || makeint(7-sti(RealShips[sti(Pchar.Ship.Type)].Class)) < 1)//при низком авторитете и на 7 класс не даём
 				{
 				dialog.text = "Извините, но желающих отправиться в путь вместе с вами у меня нет.";
 				link.l1 = "Понятно. Как скажете.";
@@ -793,7 +794,7 @@ void ProcessDialogEvent()
 						}
 						else
 						{
-									dialog.text = "Обычно у меня много торговцев, которым нужно сопровождение, но сейчас, как назло, никого нет. Может быть, в другой день вам повезет больше.";
+									dialog.text = "Обычно у меня много торговцев, которым нужно сопровождение, но сейчас, как назло, никого нет. Может быть, в другой день вам повезёт больше.";
 							link.l1 = RandPhraseSimple("Ладно, на нет и суда нет.", "Да, не свезло... Ну ладно, прощай.");
 							link.l1.go = "exit";
 						}
@@ -817,7 +818,7 @@ void ProcessDialogEvent()
 		case "work_PU_2":
 			if (!CheckAttribute(npchar, "work_date_PU") || GetNpcQuestPastDayParam(npchar, "work_date_PU") >= 2 || bBettaTestMode)
 			{
-				if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 5 || makeint(7-sti(RealShips[sti(Pchar.Ship.Type)].Class)) < 1)//при низком авторитете и на 7 класс не даем
+				if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 5 || makeint(7-sti(RealShips[sti(Pchar.Ship.Type)].Class)) < 1)//при низком авторитете и на 7 класс не даём
 				{
 				dialog.text = "Извините, но желающих отправиться в путь вместе с вами у меня нет.";
 				link.l1 = "Понятно. Как скажете.";
@@ -869,7 +870,7 @@ void ProcessDialogEvent()
 
 		case "PortmanQuest_NF":
 			dialog.text = "Хм, это плохо. В таком случае, ни о какой новой работе у меня не может быть и речи.";
-			link.l1 = "Понятно. Вот еще что хотел"+ GetSexPhrase("","а") +" сказать...";
+			link.l1 = "Понятно. Вот ещё что хотел"+ GetSexPhrase("","а") +" сказать...";
 			link.l1.go = "node_2";
 		break;
 
@@ -1032,9 +1033,9 @@ void ProcessDialogEvent()
 		// Не просрочено - проверяем корабль
 		case "BurntShip12":
 			dialog.text = "О чём вы хотели поговорить?";
-			link.l1 = "Я привел"+ GetSexPhrase("","а") +" вам судно с неординарной характеристикой. Жду обещанного вознаграждения.";
+			link.l1 = "Я прив"+ GetSexPhrase("ёл","ела") +" вам судно с неординарной характеристикой. Жду обещанного вознаграждения.";
 			link.l1.go = "BurntShip14";
-			link.l2 = "Знаете, " + GetFullName(NPChar) + ", никак мне не попадаются суда с заказанной вами характеристикой. Пожалуй я откажусь от этого поручения. Извините, если подвел"+ GetSexPhrase("","а") +"...";
+			link.l2 = "Знаете, " + GetFullName(NPChar) + ", никак мне не попадаются суда с заказанной вами характеристикой. Пожалуй я откажусь от этого поручения. Извините, если подвёл"+ GetSexPhrase("","а") +"...";
 			link.l2.go = "BurntShip13";
 		break;
 
@@ -1287,10 +1288,31 @@ void ProcessDialogEvent()
 			dialog.text = XI_ConvertString(npchar.quest.PortmansSeekShip.shipTapeName) + " с именем '" + npchar.quest.PortmansSeekShip.shipName + "'. Украден был ночью " + FindRussianDaysString(rand(5)+10) + " назад. Вахтенный убит.";
 			link.l1 = "Хм, они уже успели уйти, небось, прилично. В общем, о горячих следах говорить не приходится...";
 			link.l1.go = "SeekShip_3";
+			link.l2 = LinkRandPhrase("Извините, но я не могу выполнить это ответственное поручение...", "Нет, мне это не подходит...", "К сожалению, вынужден"+ GetSexPhrase("","а") +" отказаться от поисков...");
+			link.l2.go = "SeekShip_Icantfindship";
+		break;
+		case "SeekShip_Icantfindship":
+			dialog.text = "Очень жаль, " + GetAddress_Form(npchar) + "... Я на вас очень рассчитывал...";
+			link.l1 = "Ещё раз прошу меня простить... Прощайте.";
+			link.l1.go = "exit";
+			sTemp = "SeekShip_checkAbordage" + npchar.index;
+			pchar.quest.(sTemp).over = "yes"; //снимаем прерывание на абордаж
+			cn = GetCharacterIndex("SeekCap_" + npchar.index);
+			//если кэп-вор ещё жив - убираем его
+			if (cn > 0)
+			{
+				characters[cn].LifeDay = 0;
+				Map_ReleaseQuestEncounter(characters[cn].id);
+				group_DeleteGroup("SeekCapShip_" + characters[cn].index);
+			}
+			DeleteAttribute(npchar, "quest.PortmansSeekShip");
+			npchar.quest = ""; //освобождаем личный флаг квеста для портмана
+
+			ChangeCharacterReputation(pchar, -2);
 		break;
 		case "SeekShip_3":
 			dialog.text = "Да, верно. Но и смысла мне сразу панику поднимать не было. Военные если и догонят, то разнесут корабль в щепки, а это не совсем то, что мне нужно.";
-			link.l1 = "Понятно. Ну что же, приступаю к поискам. Надеюсь, мне повезет.";
+			link.l1 = "Понятно. Ну что же, приступаю к поискам. Надеюсь, мне повезёт.";
 			link.l1.go = "exit";
 			sTitle = npchar.id + "Portmans_SeekShip";
 			ReOpenQuestHeader(sTitle);
@@ -1312,7 +1334,7 @@ void ProcessDialogEvent()
 			sTemp = "SeekShip_checkAbordage" + npchar.index;
 			pchar.quest.(sTemp).over = "yes"; //снимаем прерывание на абордаж
 			cn = GetCharacterIndex("SeekCap_" + npchar.index);
-			//если кэп-вор еще жив - убираем его
+			//если кэп-вор ещё жив - убираем его
 			if (cn > 0)
 			{
 				characters[cn].LifeDay = 0;
@@ -1329,7 +1351,7 @@ void ProcessDialogEvent()
 		case "SeekShip_good":
 			if (npchar.quest == "SeekShip_sink")
 			{
-				dialog.text = "Отлично! Однако, полагаю, что это не совсем тот корабль, что был украден... Хотя, собственно, все равно! Я беру его у вас.";
+				dialog.text = "Отлично! Однако, полагаю, что это не совсем тот корабль, что был украден... Хотя, собственно, всё равно! Я беру его у вас.";
 				link.l1 = "Да, действительно...";
 				//npchar.quest.money = makeint(sti(npchar.quest.money) / 4); //снижаем оплату
 				ChangeCharacterReputation(pchar, 5);
@@ -1375,7 +1397,7 @@ void ProcessDialogEvent()
 		//в список портмана заносим тайтл, заголовок и номер строки из quest_text.txt
 		//ПРИМЕР: в конце метода  void SetCapitainFromCityToSea(string qName)
 		case "BuyLicense":
-				dialog.text = "Есть у меня один документ, срок которого вот-вот истечет. Не знаю, зачем он кому-либо может понадобиться, но я только рад избавиться от этой бумажки. За определенную сумму, конечно. " + license_price + ". Берете?";
+				dialog.text = "Есть у меня один документ, срок которого вот-вот истечёт. Не знаю, зачем он кому-либо может понадобиться, но я только рад избавиться от этой бумажки. За определённую сумму, конечно. " + license_price + ". Берете?";
 				if(makeint(Pchar.money) >= license_price)
 				{
 					link.l1 = "Беру.";
@@ -1420,8 +1442,8 @@ void ProcessDialogEvent()
 			arCapLocal = GetAttributeN(arCapBase,  0);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
-			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашел! ", "Значит, так. ") +
-				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушел из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
+			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашёл! ", "Значит, так. ") +
+				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушёл из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
 			link.l1 = "Спасибо. Хотелось бы посмотреть список дальше...";
 			link.l1.go = "CapitainList";
 			link.l2 = "Все, капитаны меня более не интересуют.";
@@ -1446,8 +1468,8 @@ void ProcessDialogEvent()
 			arCapLocal = GetAttributeN(arCapBase,  1);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
-			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашел! ", "Значит, так. ") +
-				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушел из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
+			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашёл! ", "Значит, так. ") +
+				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушёл из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
 			link.l1 = "Спасибо. Хотелось бы посмотреть список дальше...";
 			link.l1.go = "CapitainList";
 			link.l2 = "Все, капитаны меня более не интересуют.";
@@ -1472,8 +1494,8 @@ void ProcessDialogEvent()
 			arCapLocal = GetAttributeN(arCapBase,  2);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
-			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашел! ", "Значит, так. ") +
-				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушел из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
+			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашёл! ", "Значит, так. ") +
+				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушёл из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
 			link.l1 = "Спасибо. Хотелось бы посмотреть список дальше...";
 			link.l1.go = "CapitainList";
 			link.l2 = "Все, капитаны меня более не интересуют.";
@@ -1498,8 +1520,8 @@ void ProcessDialogEvent()
 			arCapLocal = GetAttributeN(arCapBase,  3);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
-			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашел! ", "Значит, так. ") +
-				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушел из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
+			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашёл! ", "Значит, так. ") +
+				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушёл из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
 			link.l1 = "Спасибо. Хотелось бы посмотреть список дальше...";
 			link.l1.go = "CapitainList";
 			link.l2 = "Все, капитаны меня более не интересуют.";
@@ -1524,8 +1546,8 @@ void ProcessDialogEvent()
 			arCapLocal = GetAttributeN(arCapBase,  4);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
-			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашел! ", "Значит, так. ") +
-				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушел из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
+			dialog.text = LinkRandPhrase("Та-а-ак, давайте посмотрим... Ага, есть! ", "Так-так... Ага, нашёл! ", "Значит, так. ") +
+				"Капитан " + GetFullName(sld) + " " + arCapLocal.date + " года ушёл из нашего порта в " + XI_ConvertString("Colony" + arCapLocal + "Acc") + ".";
 			link.l1 = "Спасибо. Хотелось бы посмотреть список дальше...";
 			link.l1.go = "CapitainList";
 			link.l2 = "Все, капитаны меня более не интересуют.";
@@ -1631,7 +1653,7 @@ void ProcessDialogEvent()
 			// Warship 22.03.09 fix Не перенеслось с КВЛ 1.2.3
 			chref.ShipInStockMan.MoneyForShip = NPChar.MoneyForShip;
 			chref.ShipInStockMan.AltDate = GetQuestBookDataDigit(); // для печати
-			SaveCurrentNpcQuestDateParam(chref, "ShipInStockMan.Date"); // для расчета
+			SaveCurrentNpcQuestDateParam(chref, "ShipInStockMan.Date"); // для расчёта
 			//chref.Ship.Crew.Quantity  = 0;
 			RemoveCharacterCompanion(pchar, chref);
 			}
@@ -1648,7 +1670,7 @@ void ProcessDialogEvent()
 			chref.ShipInStockMan = NPChar.id;
 			chref.ShipInStockMan.MoneyForShip = NPChar.MoneyForShip;
 			chref.ShipInStockMan.AltDate = GetQuestBookDataDigit(); // для печати
-			SaveCurrentNpcQuestDateParam(chref, "ShipInStockMan.Date"); // для расчета
+			SaveCurrentNpcQuestDateParam(chref, "ShipInStockMan.Date"); // для расчёта
 
 			compref = GetCharacter(sti(NPChar.ShipToStoreIdx));//компаньон, у которого надо забрать корабль
 
@@ -1668,7 +1690,7 @@ void ProcessDialogEvent()
 			NPChar.Portman	= sti(NPChar.Portman) + 1;
 			pchar.ShipInStock = sti(pchar.ShipInStock) + 1;//разобраться - что это. не могу найти, где оно используется.
 
-			dialog.text = "Хорошо. Заберете, когда будет нужно.";
+			dialog.text = "Хорошо. Заберёте, когда будет нужно.";
 			Link.l1 = "Спасибо.";
 			Link.l1.go = "exit";
 		break;
@@ -1679,7 +1701,7 @@ void ProcessDialogEvent()
 			{
 				if (GetCompanionQuantity(pchar) < COMPANION_MAX)
 				{
-					dialog.text = "Какой именно корабль вы заберете?";
+					dialog.text = "Какой именно корабль вы заберёте?";
 					cn = 1;
 					for(i=1; i<MAX_CHARACTERS; i++)
 					{
@@ -1709,7 +1731,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = "Нет ли у вас места для еще одного корабля?";
+					dialog.text = "Нет ли у вас места для ещё одного корабля?";
 					Link.l1 = "Да, точно. Спасибо.";
 					Link.l1.go = "exit";
 				}
@@ -1729,7 +1751,7 @@ void ProcessDialogEvent()
 
 			if (sti(NPChar.MoneyForShip) > 0)
 			{
-				dialog.Text = "Забираете? С вас за хранение еще " + FindRussianMoneyString(sti(NPChar.MoneyForShip)) + ".";
+				dialog.Text = "Забираете? С вас за хранение ещё " + FindRussianMoneyString(sti(NPChar.MoneyForShip)) + ".";
 			}
 			else
 			{
@@ -1777,7 +1799,15 @@ void ProcessDialogEvent()
 							if (!ok && GetRemovable(&characters[_curCharIdx]))
 							{
 								attrL = "l"+i;
-								Link.(attrL)	= GetFullName(&characters[_curCharIdx]);
+								sProf = "";
+								if (IsOfficer(sld)) sProf += " (абордажник)";
+								if (sti(pchar.Fellows.Passengers.navigator) == sti(sld.index)) sProf += " (штурман)";
+								if (sti(pchar.Fellows.Passengers.boatswain) == sti(sld.index)) sProf += " (боцман)";
+								if (sti(pchar.Fellows.Passengers.cannoner) == sti(sld.index)) sProf += " (канонир)";
+								if (sti(pchar.Fellows.Passengers.doctor) == sti(sld.index)) sProf += " (врач)";
+								if (sti(pchar.Fellows.Passengers.carpenter) == sti(sld.index)) sProf += " (плотник)";
+							    if (sti(pchar.Fellows.Passengers.treasurer) == sti(sld.index)) sProf += " (казначей)";
+								Link.(attrL)	= GetFullName(&characters[_curCharIdx]) + sProf;
 								Link.(attrL).go = "ShipStockManBack2_" + i;
 								q++;
 							}
@@ -3950,7 +3980,7 @@ void SetJornalCapParam(ref npchar)
 	npchar.quest.PortmansJornal.capName = GetFullName(sld); //имя кэпа
 	npchar.quest.PortmansJornal.shipName = sld.Ship.name; //имя корабля
 	npchar.quest.PortmansJornal.shipTapeName = RealShips[sti(sld.Ship.Type)].BaseName; //название корабля
-	npchar.quest.PortmansJornal.city = SelectNotEnemyColony(npchar); //определим колонию, куда ушел кэп
+	npchar.quest.PortmansJornal.city = SelectNotEnemyColony(npchar); //определим колонию, куда ушёл кэп
 	sld.quest = "InMap"; //личный флаг рассеянного кэпа
 	sld.quest.targetCity = npchar.quest.PortmansJornal.city; //продублируем колонию-цель в структуру кэпа
 	sld.quest.firstCity = npchar.city; //капитану знать откуда вышел в самом начале
@@ -3964,7 +3994,7 @@ void SetJornalCapParam(ref npchar)
 	sld.mapEnc.type = "trade";
 	sld.mapEnc.worldMapShip = "ranger";
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.PortmansJornal.shipTapeName) + " '" + npchar.quest.PortmansJornal.shipName + "'";
-	int daysQty = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity))+5; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity))+5; //дней доехать даём с запасом
 	Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, daysQty);
 	//заносим Id кэпа в базу нпс-кэпов
 	sTemp = sld.id;
@@ -3991,7 +4021,7 @@ int CheckCapitainsList(ref npchar)
 	{
 		arCapLocal = GetAttributeN(arCapBase, i);
 		sCapitainId = GetAttributeName(arCapLocal);
-		if (GetCharacterIndex(sCapitainId) > 0) //если еще жив
+		if (GetCharacterIndex(sCapitainId) > 0) //если ещё жив
 		{
 			bResult++;
 		}
@@ -4008,7 +4038,7 @@ int CheckCapitainsList(ref npchar)
 
 void SetSeekShipCapParam(ref npchar)
 {
-	//создаем кэпа-вора
+	//создаём кэпа-вора
 	int Rank = sti(pchar.rank) + 5;
 	if (Rank > 30) Rank = 30;
 	ref sld = GetCharacter(NPC_GenerateCharacter("SeekCap_" + npchar.index, "", "man", "man", Rank, PIRATE, -1, true));
@@ -4063,14 +4093,14 @@ void SetSeekShipCapParam(ref npchar)
 	npchar.quest.chest = 7-sti(RealShips[sti(sld.Ship.Type)].Class); //в сундуках
 	sld.quest = "InMap"; //личный флаг кэпа-вора
 	sld.city = SelectAnyColony(npchar.city); //определим колонию, откуда кэп-вор выйдет
-	sld.quest.targetCity = SelectAnyColony2(npchar.city, sld.city); //определим колонию, куда он придет
+	sld.quest.targetCity = SelectAnyColony2(npchar.city, sld.city); //определим колонию, куда он придёт
 	Log_TestInfo("Кэп-вор " + sld.id + " вышел из: " + sld.city + " и направился в: " + sld.quest.targetCity);
-	sld.quest.cribCity = npchar.city; //город, откуда кэп-вор спер корабль
+	sld.quest.cribCity = npchar.city; //город, откуда кэп-вор спёр корабль
 	//на карту
 	sld.mapEnc.type = "trade";
 	sld.mapEnc.worldMapShip = "Galleon_red";
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.PortmansSeekShip.shipTapeName) + " '" + npchar.quest.PortmansSeekShip.shipName + "'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даём с запасом
 	Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, daysQty);
 	//прерывание на абордаж
 	string sTemp = "SeekShip_checkAbordage" + npchar.index;

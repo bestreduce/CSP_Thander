@@ -150,7 +150,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddQuestRecord("BSPrologue", "2");
 			pchar.BSPrologue.GatriGold = 600;
-			SetTimerCondition("Gatri_Hunters", 0, 0, 30, true);//Отсчет времени до НЗГ
+			SetTimerCondition("Gatri_Hunters", 0, 0, 30, true);//Отсчёт времени до НЗГ
 			NextDiag.TempNode = "BS_NPVK_10";
 		break;
 

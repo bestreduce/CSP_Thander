@@ -178,7 +178,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	n = n + 1;
 
-    makeref(ch,Characters[n]);
+    makeref(ch,Characters[n]);			//Контрабандист
 	ch.name 	= "Контрабандист";
 	ch.lastname = "";
 	ch.id		= "SantoDomingo_Smuggler";
@@ -193,6 +193,23 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_SetSitType(ch);
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "Gr_Smuggler Agent";
+	n = n + 1;
+	
+	makeref(ch,Characters[n]);			//Адмиралтейство
+	ch.id		= "SantoDomingo_Admiralty";
+	ch.model	= "trader_10";
+	ch.sex = "man";
+	ch.City = "SantoDomingo";
+	ch.location	= "SantoDomingo_Admiralty";
+	ch.location.group = "sit";
+	ch.location.locator = "sit2";
+	ch.Dialog.Filename = "Admiralty.c";
+	ch.nation = SPAIN;
+	ch.greeting = "portmans";
+	LAi_SetHuberType(ch);
+	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
+	LAi_SetImmortal(ch, true);
+	ch.item_date = "";
 	n = n + 1;
 
 	return n;

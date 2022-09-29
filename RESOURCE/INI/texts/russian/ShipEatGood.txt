@@ -9,7 +9,7 @@ seg_Sailcloth	{парусины}
 seg_Planks		{досок}
 seg_Slaves		{рабов}
 seg_Wheat		{пшеницы}
-seg_Ebony		{черного дерева}
+seg_Ebony		{чёрного дерева}
 seg_Chocolate	{какао}
 seg_Sugar		{сахара}
 seg_Wine		{вина}
@@ -23,7 +23,7 @@ seg_Copra		{копры}
 seg_Paprika		{паприки}
 seg_Fruits		{фруктов}
 seg_Ale			{эля}
-seg_Silk		{шелка}
+seg_Silk		{шёлка}
 seg_Clothes		{одежды}
 seg_Cotton		{хлопка}
 seg_Sandal		{сандала}

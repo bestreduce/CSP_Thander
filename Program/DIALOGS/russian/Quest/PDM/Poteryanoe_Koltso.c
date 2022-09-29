@@ -92,22 +92,8 @@ void ProcessDialogEvent()
 
 		case "Uhodi":
 			dialog.text = "Кольцо моё хочешь? Нет у меня никаких колец! Уходи прочь, прочь!";
-			link.l1 = "Хорошо, я ухожу.";
+			link.l1 = "Ладно, пойду к твоей хозяйке.";
 			link.l1.go = "exit";
-			link.l2 = "Я мог"+ GetSexPhrase("","ла") +" бы купить у тебя кольцо.";
-			link.l2.go = "Kupit_Posle";
-		break;
-
-		case "Kupit_Posle":
-			dialog.text = "Двадцать тысяч миллионов! И ни монеткой меньше!";
-			link.l1 = "Вот - (дать ей двадцать).";
-			link.l1.go = "Kupit_20";
-			link.l2 = "Вот - (дать ей двадцать тысяч).";
-			link.l2.go = "Kupit_20000";
-			link.l3 = "Вот - (дать ей двадцать миллионов).";
-			link.l3.go = "Kupit_20000000";
-			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже..";
-			link.l4.go = "exit";
 		break;
 
 		case "Istoria":
@@ -123,25 +109,22 @@ void ProcessDialogEvent()
 		break;
 
 		case "Istoria_3":
-			dialog.text = "Ой! Посмотри, у меня тоже есть кольцо. Может, оно волшебное? Мне его дал добрый, хороший мужчина. Вот. Скажи, это волшебное кольцо?";
-			link.l1 = "О, боже! Невероятно! Это то самое кольцо, которое потеряла женщина! Кольцо, которое сняли с пальца её погибшего сына! Если ты вернёшь мне кольцо, я отнесу его женщине.";
+			dialog.text = "Ой! Посмотри, у меня тоже есть кольцо. Может, оно ВОЛШЕБНОЕ? Мне его дал добрый, хороший мужчина. Вот. Скажи, это ВОЛШЕБНОЕ кольцо?";
+			link.l1 = "О, боже! Невероятно! Это то самое ВОЛШЕБНОЕ кольцо, которое потеряла женщина! Если ты вернёшь мне это кольцо, я отнесу его женщине.";
 			link.l1.go = "Volshebnoe";
-			link.l2 = "Что ты, нет, конечно нет, Франческа. Каждому ясно, что это самое обыкновенное кольцо. Но смотри, Франческа, я мог"+ GetSexPhrase("","ла") +" бы купить у тебя это кольцо. Сколько?";
+			link.l2 = "Что ты, нет, конечно нет, Франческа. Каждому ясно, что это самое ОБЫКНОВЕННОЕ кольцо. Если ты вернёшь мне это кольцо, я отнесу его женщине.";
 			link.l2.go = "Obichnoe";
 		break;
 
 		case "Obichnoe":
-			dialog.text = "Я не хочу кольцо мёртвого человека. Вот, возьми его.";
+			dialog.text = "Я не хочу кольцо мёртвого человека, тем более оно не ВОЛШЕБНОЕ. Вот, возьми его.";
 			link.l1 = "Спасибо. Ты очень хорошая девушка, Франческа! Я обещаю тебе, что в один прекрасный день я вернусь и расскажу тебе длинную историю о моих приключениях. А теперь мне надо идти.";
 			link.l1.go = "Pomenyt";
-			Log_SetStringToLog("Авторитет + 2");
-			Log_SetStringToLog("Скрытность + 2");
-			AddCharacterSkillDontClearExp(pchar, "Leadership", 2);
-			AddCharacterSkillDontClearExp(pchar, "Sneak", 2);
-			ChangeCharacterReputation(pchar, 2);
-			sld = CharacterFromID("PDM_PK_Francheska")
-			LAi_CharacterDisableDialog(sld);
-			sld.lifeday = 0;
+			AddCharacterExpToSkill(pchar, "Leadership", 250);
+			AddCharacterExpToSkill(pchar, "Sneak", 250);
+			ChangeCharacterReputation(pchar, 5);
+			LAi_CharacterDisableDialog(npchar);
+			npchar.lifeday = 0;
 
 			DeleteAttribute(pchar, "questTemp.PDM_PK_UvestiNaVerh");
 			GiveItem2Character(PChar, "PDM_PK_Koltso");
@@ -150,20 +133,20 @@ void ProcessDialogEvent()
 		break;
 
 		case "Volshebnoe":
-			dialog.text = "Это кольцо? Но это волшебное кольцо! Как я могу его тебе отдать?";
-			link.l1 = "Это кольцо принадлежит очень бедной старой женщине, которая потеряла своего единственного сына, старой женщине, которая сошла с ума и которая напоминает тебе твою маму. И это кольцо забрали с мёртвого тела ее сына. Я только хочу вернуть его настоящей владелице. Сама подумай, разве такое волшебное кольцо принесёт тебе счастье?";
+			dialog.text = "Это кольцо? Но это ВОЛШЕБНОЕ кольцо! Как я могу его тебе отдать?";
+			link.l1 = "Я только хочу вернуть его настоящей владелице. Сама подумай, разве такое ВОЛШЕБНОЕ кольцо принесёт тебе счастье?";
 			link.l1.go = "Kupit";
 		break;
 
 		case "Kupit":
-			dialog.text = "Двадцать тысяч миллионов! И не меньше, за волшебное-то кольцо! Кольцо волшебное! Мне сказал"+ GetSexPhrase("","а") +" это дорог"+ GetSexPhrase("ой","ая") +" "+GetFullName(pchar)+", я припоминаю!";
-			link.l1 = "Вот - (дать ей двадцать).";
+			dialog.text = "Двадцать тысяч миллионов! И не меньше, за ВОЛШЕБНОЕ-то кольцо! Кольцо ВОЛШЕБНОЕ! Ты сам так сказал, а значит оно должно стоить очень-очень много! Очень!";
+			link.l1 = "Вот. (дать ей двадцать)";
 			link.l1.go = "Kupit_20";
-			link.l2 = "Вот - (дать ей двадцать тысяч).";
+			link.l2 = "Вот. (дать ей двадцать тысяч)";
 			link.l2.go = "Kupit_20000";
-			link.l3 = "Вот - (дать ей двадцать миллионов).";
+			link.l3 = "Вот. (дать ей двадцать миллионов)";
 			link.l3.go = "Kupit_20000000";
-			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже..";
+			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
 			link.l4.go = "exit";
 			NextDiag.TempNode = "Popitka_Vtoraya";
 		break;
@@ -173,7 +156,6 @@ void ProcessDialogEvent()
 			link.l1 = "Спасибо. Я уверен"+ GetSexPhrase("","а") +", что теперь ты сможешь купить дворец губернатора. До свидания.";
 			link.l1.go = "Pomenyt";
 			AddMoneyToCharacter(pchar, -20);
-			ChangeCharacterReputation(pchar, 2);
 			NextDiag.TempNode = "UNasKoltso";
 
 			DeleteAttribute(pchar, "questTemp.PDM_PK_UvestiNaVerh");
@@ -193,7 +175,7 @@ void ProcessDialogEvent()
 			else
 			{
 				dialog.text = "";
-				link.l1 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже..";
+				link.l1 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
 				link.l1.go = "exit";
 			}
 		break;
@@ -209,26 +191,26 @@ void ProcessDialogEvent()
 			else
 			{
 				dialog.text = "";
-				link.l1 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже..";
+				link.l1 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
 				link.l1.go = "exit";
 			}
 		break;
 
 		case "Popitka_Vtoraya":
 			dialog.text = "Ой, это ты. Расскажешь мне историю?";
-			link.l1 = "Нет. Я хочу купить твоё кольцо.";
+			link.l1 = "Нет. Я приш"+ GetSexPhrase("ёл","ла") +" за кольцом.";
 			link.l1.go = "Popitka_Vtoraya_2";
 		break;
 
 		case "Popitka_Vtoraya_2":
-			dialog.text = "Ты принес"+ GetSexPhrase("","ла") +" мне двадцать тысяч миллионов за волшебное кольцо?";
+			dialog.text = "Ты прин"+ GetSexPhrase("ёс","есла") +" мне двадцать тысяч миллионов за ВОЛШЕБНОЕ кольцо?";
 			link.l1 = "Вот - (дать ей двадцать).";
 			link.l1.go = "Kupit_20";
 			link.l2 = "Вот - (дать ей двадцать тысяч).";
 			link.l2.go = "Kupit_20000";
 			link.l3 = "Вот - (дать ей двадцать миллионов).";
 			link.l3.go = "Kupit_20000000";
-			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже..";
+			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
 			link.l4.go = "exit";
 		break;
 
@@ -242,20 +224,18 @@ void ProcessDialogEvent()
 
 		case "UNasKoltso_2":
 			dialog.text = "Да, это был"+ GetSexPhrase("","а") +" ты! Теперь я куплю дворец губернатора! И я приглашаю тебя в гости!";
-			link.l1 = "Спасибо, Франческа, но не сейчас.";
+			link.l1 = "Спасибо, Франческа, очень рад"+ GetSexPhrase("","а") +" за тебя.";
 			link.l1.go = "exit";
-			sld = CharacterFromID("PDM_PK_Francheska")
-			LAi_CharacterDisableDialog(sld);
-			sld.lifeday = 0;
+			LAi_CharacterDisableDialog(npchar);
+			npchar.lifeday = 0;
 		break;
 
 		case "UNasKoltso_3":
 			dialog.text = "Тогда уходи! Я тебе не расскажу, что я сделала со своими двадцатью тысячами миллионов!";
 			link.l1 = "До встречи, Франческа.";
 			link.l1.go = "exit";
-			sld = CharacterFromID("PDM_PK_Francheska")
-			LAi_CharacterDisableDialog(sld);
-			sld.lifeday = 0;
+			LAi_CharacterDisableDialog(npchar);
+			npchar.lifeday = 0;
 		break;
 
 		case "Pomenyt":
@@ -284,10 +264,9 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("PDM_PK_Francheska")
 			sld.dialog.currentnode   = "PosleTraha";
 
-			Log_SetStringToLog("Скрытность + 3");
-			Log_SetStringToLog("Везение + 1");
-			AddCharacterSkillDontClearExp(pchar, "Sneak", 3);
-			AddCharacterSkillDontClearExp(pchar, "Fortune", 1);
+			AddCharacterExpToSkill(pchar, "Sneak", 300);
+			AddCharacterExpToSkill(pchar, "Leadership", 100);
+			AddCharacterExpToSkill(pchar, "Fortune", 100);
 			AddCharacterHealth(pchar, 10);
 
 			AddQuestRecord("PDM_Poteryanoe_Koltso", "5");
@@ -300,7 +279,7 @@ void ProcessDialogEvent()
 			link.l1 = "Прощай, Франческа.";
 			link.l1.go = "exit";
 			PlayVoice("Kopcapkz\Voices\PDM\Francesca.wav");
-			LAi_CharacterDisableDialog(sld);
+			LAi_CharacterDisableDialog(npchar);
 		break;
 
 		case "UbitEE":
@@ -314,6 +293,8 @@ void ProcessDialogEvent()
 			sld.SaveItemsForDead = true
 			RemoveAllCharacterItems(sld, true);
 			GiveItem2Character(sld, "PDM_PK_Koltso");
+			LAi_SetActorType(sld); 
+			LAi_ActorAnimation(sld, "afraid", "", 4.5);
 
 			PChar.quest.PDM_PK_Ubita.win_condition.l1 = "item";
 			PChar.quest.PDM_PK_Ubita.win_condition.l1.item = "PDM_PK_Koltso";
@@ -324,7 +305,7 @@ void ProcessDialogEvent()
 
 		case "Konets":
 			dialog.text = "Вы не видели моё кольцо, "+ GetSexPhrase("месье","мадемуазель") +"? Я потеряла кольцо. Оно должно быть где-то здесь. Мне так неловко, я с трудом могу вспомнить... Иногда мне кажется, что я потеряла что-то ещё... Что-то, что я забыла...";
-			link.l1 = "Да, я знаю, что вы потеряли. Я принёс"+ GetSexPhrase("","ла") +" вам ваше кольцо, мадам. Его сняли с тела вашего сына - который погиб во время сражения у стен Санто-Доминго. Вот, возьмите ваше кольцо.";
+			link.l1 = "Да, я знаю, что вы потеряли. Я прин"+ GetSexPhrase("ёс","есла") +" вам ваше кольцо, мадам. Его сняли с тела вашего сына - который погиб во время сражения у стен Санто-Доминго. Вот, возьмите ваше кольцо.";
 			link.l1.go = "Konets_2";
 
 			PlayVoice("Kopcapkz\Voices\PDM\Josephine Lodet.wav");
@@ -339,20 +320,14 @@ void ProcessDialogEvent()
 		break;
 
 		case "Nagrada":
-			Log_SetStringToLog("Авторитет + 1");
-			Log_SetStringToLog("Скрытность + 1");
-			Log_SetStringToLog("Навигация + 1");
-			AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
-			AddCharacterSkillDontClearExp(pchar, "Sneak", 1);
-			AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
+			AddCharacterExpToSkill(pchar, "Sailing", 100);
+			AddCharacterExpToSkill(pchar, "Leadership", 100);
 			ChangeCharacterReputation(pchar, 2);
 			sld = CharacterFromID("Josephine_Lodet")
 			sld.dialog.filename   = "Common_citizen.c";
-			sld.dialog.currentnode   = "First time";
+			sld.dialog.currentnode = "First Time";
 
 			DialogExit();
 		break;
-
-
 	}
 }

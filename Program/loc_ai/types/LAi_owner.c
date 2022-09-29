@@ -58,7 +58,7 @@ void LAi_type_owner_CharacterUpdate(aref chr, float dltTime)
 	if (chr.chr_ai.tmpl == LAI_TMPL_ANI)
 	{
 		if (chr.chr_ai.tmpl.animation == "")
-		{	//если враг рядом - еще боимся
+		{	//если враг рядом - ещё боимся
 			num = FindNearCharacters(chr, 20.0, -1.0, 180.0, 0.01, true, true);
 			iNumEnemy = LAi_type_owner_FindEnemy(chr, num);
 			if (iNumEnemy < 0) LAi_type_owner_SetGoto(chr);
@@ -109,7 +109,7 @@ void LAi_type_owner_CharacterUpdate(aref chr, float dltTime)
 								if (chr.sex == "man") chr.greeting = "VOICE\Russian\soldier_arest_1.wav";
 								else chr.greeting = "VOICE\Russian\Gr_Woman_Citizen_11.wav";
 								chr.dialog.currentnode = chr.sex  + "_FackYou";
-								LAi_SetActorTypeNoGroup(chr); //временно актер, чтобы темплейт диалога не слетал. кодить это еще и в этом типе - геморой.
+								LAi_SetActorTypeNoGroup(chr); //временно актер, чтобы темплейт диалога не слетал. кодить это ещё и в этом типе - геморой.
 								LAi_ActorDialog(chr, pchar, "", 0.0, 0);
 							}
 

@@ -20,7 +20,7 @@ void ProcessDialogEvent()
 				npchar.quest.meeting = "1";
 				if (CheckAttribute(loadedLocation, "storm"))
 				{
-					dialog.text = "Чертов шторм! Хотя уже пошел на убыль... Я так понимаю, что ты - "+ GetSexPhrase("новый гражданин","новая гражданка") +" Города.";
+					dialog.text = "Чёртов шторм! Хотя уже пошёл на убыль... Я так понимаю, что ты - "+ GetSexPhrase("новый гражданин","новая гражданка") +" Города.";
 					link.l1 = "Капитан " + GetFullName(pchar) + " собственной персоной. А шторм - не беда!";
 					link.l1.go = "FS_1";
 				}
@@ -39,7 +39,7 @@ void ProcessDialogEvent()
 				//квест получения карты -->
 				if (!CheckAttribute(npchar, "quest.takeMap"))
 				{
-					link.l2 = "Дружище, я слышал"+ GetSexPhrase("","а") +", что у тебя есть карта Города. Ты знаешь, в данный момент мне бы она очень пригодилась. А то бегаю здесь, как слепой котенок, не освоил"+ GetSexPhrase("ся","ась") +" еще...";
+					link.l2 = "Дружище, я слышал"+ GetSexPhrase("","а") +", что у тебя есть карта Города. Ты знаешь, в данный момент мне бы она очень пригодилась. А то бегаю здесь, как слепой котёнок, не освоил"+ GetSexPhrase("ся","ась") +" ещё...";
 					link.l2.go = "tekeMap_begin";
 				}
 				if (CheckAttribute(npchar, "quest.takeMap") && npchar.quest.takeMap == "mapIsToken" && !CheckCharacterItem(pchar, "map_LSC"))
@@ -49,7 +49,7 @@ void ProcessDialogEvent()
 				}
 				if (CheckAttribute(npchar, "quest.takeMap") && npchar.quest.takeMap == "discount")
 				{
-					link.l2 = "Послушай, дружище, " + npchar.quest.takeMap.name + " просила меня переговорить с тобой еще раз по поводу карты Города.";
+					link.l2 = "Послушай, дружище, " + npchar.quest.takeMap.name + " просила меня переговорить с тобой ещё раз по поводу карты Города.";
 					link.l2.go = "tekeMap_on";
 				}
 				//<-- квест получения карты
@@ -69,7 +69,7 @@ void ProcessDialogEvent()
 				//поиски команды на корвет
 				if (pchar.questTemp.LSC == "toSeekPeopleInCrew")
 				{
-					link.l8 = "Слушай, есть серьезный разговор. Я набираю команду.";
+					link.l8 = "Слушай, есть серьёзный разговор. Я набираю команду.";
 					link.l8.go = "SeekCrew";
 				}
 				NextDiag.TempNode = "First time";
@@ -117,8 +117,8 @@ void ProcessDialogEvent()
 			DialogExit();
 		break;
 		case "Man_FackYou":
-			dialog.text = LinkRandPhrase("Какого черта ты лезешь ко мне в сундук! Закона Города не знаешь? Ну ладно, теперь узнаешь...", "Эй, граждан"+ GetSexPhrase("ин","ка") +", ты что это вытворяешь? Закон запрещает тебе так поступать! Я тебя накажу...", "Постой, ты куда это полез"+ GetSexPhrase("","ла") +"? У нас в Городе завелся вор!! Ну, теперь держись...");
-			link.l1 = LinkRandPhrase("Дьявол!!", "Каррамба!!", "А-ать, черт!");
+			dialog.text = LinkRandPhrase("Какого черта ты лезешь ко мне в сундук! Закона Города не знаешь? Ну ладно, теперь узнаешь...", "Эй, граждан"+ GetSexPhrase("ин","ка") +", ты что это вытворяешь? Закон запрещает тебе так поступать! Я тебя накажу...", "Постой, ты куда это полез"+ GetSexPhrase("","ла") +"? У нас в Городе завёлся вор!! Ну, теперь держись...");
+			link.l1 = LinkRandPhrase("Дьявол!!", "Каррамба!!", "А-ать, чёрт!");
 			link.l1.go = "fight";
 		break;
 		case "Woman_FackYou":
@@ -127,9 +127,9 @@ void ProcessDialogEvent()
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
 		break;
-		//замечение по обнаженному оружию
+		//замечение по обнажённому оружию
 		case "LSCNotBlade":
-			dialog.text = LinkRandPhrase("Слушай, ты бы убрал"+ GetSexPhrase("","а") +" оружие. А то нервируешь немного...", "Знаешь, у нас тут не принято сабелькой размахивать. Убери оружие.", "Слушай, что ты, как д'Артаньян, бегаешь тут, шпагой машешь? Убери оружие, не к лицу это "+ GetSexPhrase("серьезному мужчине","девушке") +"...");
+			dialog.text = LinkRandPhrase("Слушай, ты бы убрал"+ GetSexPhrase("","а") +" оружие. А то нервируешь немного...", "Знаешь, у нас тут не принято сабелькой размахивать. Убери оружие.", "Слушай, что ты, как д'Артаньян, бегаешь тут, шпагой машешь? Убери оружие, не к лицу это "+ GetSexPhrase("серьёзному мужчине","девушке") +"...");
 			link.l1 = LinkRandPhrase("Хорошо.", "Ладно.", "Как скажешь...");
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First Time";
@@ -137,7 +137,7 @@ void ProcessDialogEvent()
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")
 			{
-				dialog.text = NPCharSexPhrase(NPChar, "Послушайте, я, как гражданин этого города, прошу вас не ходить у нас с обнаженным клинком.", "Знаете, я, как гражданка этого города, прошу вас не ходить у нас с обнаженным клинком.");
+				dialog.text = NPCharSexPhrase(NPChar, "Послушайте, я, как гражданин этого города, прошу вас не ходить у нас с обнажённым клинком.", "Знаете, я, как гражданка этого города, прошу вас не ходить у нас с обнажённым клинком.");
 				link.l1 = LinkRandPhrase("Хорошо.", "Ладно.", "Как скажете...");
 			}
 			else
@@ -152,7 +152,7 @@ void ProcessDialogEvent()
 		//поиск товаров на корвет
 		case "SeekGoods":
 			dialog.text = "Всегда к твоим услугам, "+ GetSexPhrase("приятель","" + pchar.name + "") +". Заказывай!";
-			link.l1 = "Слушай, таких товаров в твоем ассортименте я еще не встречал"+ GetSexPhrase("","а") +". Это бомбы, книпеля, порох, провиант, парусина, доски, лекарства...";
+			link.l1 = "Слушай, таких товаров в твоём ассортименте я ещё не встречал"+ GetSexPhrase("","а") +". Это бомбы, книпеля, порох, провиант, парусина, доски, лекарства...";
 			link.l1.go = "SeekGoods_1";
 		break;
 		case "SeekGoods_1":
@@ -216,7 +216,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				link.l1 = "Нет еще...";
+				link.l1 = "Нет ещё...";
 				link.l1.go = "SeekGoods_notMoney";
 			}
 		break;
@@ -276,7 +276,7 @@ void ProcessDialogEvent()
 		break;
 		case "tekeMap_off_2":
 			dialog.text = ""+ GetSexPhrase("Приятель","Подруга") +", благотворительностью занимаются в церкви, а у меня бизнес. Так что даже не проси - бесполезно.";
-			link.l1 = "А-ать, черт!..";
+			link.l1 = "А-ать, чёрт!..";
 			link.l1.go = "exit";
 			npchar.quest.takeMap = "notTrade"; //поговорили о том, что не торгуется
 		break;
@@ -284,13 +284,13 @@ void ProcessDialogEvent()
             if (CheckNPCQuestDate(npchar, "Item_date"))
 			{
 				dialog.text = "Ладно, снижу цену, так и быть...";
-				link.l1 = "Спасибо тебе! И сколько ты попросишь за нее сейчас?";
+				link.l1 = "Спасибо тебе! И сколько ты попросишь за неё сейчас?";
 				link.l1.go = "tekeMap_on_1";
 			}
 			else
 			{
-				dialog.text = "Я не в курсе. " + npchar.quest.takeMap.name + " мне еще ничего не говорила.";
-				link.l1 = "Наверное, еще не успела. Зайду позже, там и поговорим на эту тему.";
+				dialog.text = "Я не в курсе. " + npchar.quest.takeMap.name + " мне ещё ничего не говорила.";
+				link.l1 = "Наверное, ещё не успела. Зайду позже, там и поговорим на эту тему.";
 				link.l1.go = "exit";
 			}
 		break;

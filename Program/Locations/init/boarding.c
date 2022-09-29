@@ -1,4 +1,4 @@
-
+﻿
 int LocationInitBoarding(int n)
 {
 	//// форт для абордажей, клон локаций городов
@@ -260,6 +260,90 @@ int LocationInitBoarding(int n)
     //Reload map
 	Locations[n].reload.l1.name = "reload1";
 	Locations[n].reload.l1.go = "Bridgetown_fort";
+	Locations[n].reload.l1.emerge = "reload2";
+	Locations[n].reload.l1.autoreload = "0";
+	n = n + 1;
+	
+	////////////////////////////////////////////////////////////
+	/// Nassau Fort (Bahames)
+	////////////////////////////////////////////////////////////
+	//ID
+	Locations[n].id = "Nassau_fort";
+	locations[n].id.label = "Nassau Fort";
+	//Info
+	Locations[n].image = "loading\fort_spa_" + rand(1) + ".tga";
+	locations[n].townsack = "Nassau";
+	//Sound
+	locations[n].type = "fort";
+	locations[n].parent_colony = "Nassau";
+	locations[n].islandId = "Bahames";
+	locations[n].soldiers = true;
+	LAi_LocationFantomsGen(&locations[n], true);
+	//Models
+	//Always
+	Locations[n].filespath.models = "locations\Fort_inside\FortV";
+	Locations[n].models.always.fortV = "fortV";	
+	locations[n].models.always.fortV.level = 65538;
+	Locations[n].models.always.fortVrock = "fortV_rock";
+	Locations[n].models.always.fortVseabed = "fortV_sb";
+	Locations[n].models.always.locators = "fortV_locators";
+	Locations[n].models.always.grassPatch = "fortV_grass";
+	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
+	Locations[n].models.always.l1 = "plan1";
+	Locations[n].models.always.l1.tech = "LocationModelBlend";	
+	locations[n].models.always.l1.level = 9;
+	//Day
+	locations[n].models.day.charactersPatch = "fortV_patch";
+	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
+	//Night
+	locations[n].models.night.charactersPatch = "fortV_patch";
+	Locations[n].models.night.fortVBigNight= "fortV_fn";		
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "true";
+    //Reload map
+    locations[n].reload.l1.name = "reload1_back";
+    locations[n].reload.l1.go = "Bahames_jungle_05";
+    locations[n].reload.l1.emerge = "reload2";
+    locations[n].reload.l1.autoreload = "1";
+    locations[n].locators_radius.reload.reload1_back = 2.0;
+
+	locations[n].reload.l2.name = "reload2";
+	locations[n].reload.l2.go = "Nassau_prison";
+	locations[n].reload.l2.emerge = "reload1";
+	locations[n].reload.l2.autoreload = "0";
+	n = n + 1;
+
+	////////////////////// prison ////////////////////////////
+	Locations[n].id = "Nassau_prison";
+	locations[n].id.label = "Prison";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
+	locations[n].townsack = "Nassau";
+	locations[n].parent_colony = "Nassau";
+	locations[n].fastreload = "Nassau";
+	locations[n].islandId = "Bahames";
+	//Sound
+	locations[n].type = "jail";
+	//Models
+	//Always
+	locations[n].filespath.models = "locations\inside\prison1";
+	locations[n].models.always.prison1 = "prison1";
+	locations[n].models.always.lamps = "prison1_lamps";
+	locations[n].models.always.locators = "prison1_locators";
+	//Day
+	locations[n].models.day.charactersPatch = "prison1_patch";
+	//Night
+	locations[n].models.night.charactersPatch = "prison1_patch";
+	//Environment
+	locations[n].environment.weather = "true";
+	Locations[n].lockWeather = "Inside";
+	Locations[n].QuestlockWeather = "23 Hour";
+	locations[n].environment.sea = "false";
+	locations[n].environment.weather.rain = false;
+    //Reload map
+	Locations[n].reload.l1.name = "reload1";
+	Locations[n].reload.l1.go = "Nassau_fort";
 	Locations[n].reload.l1.emerge = "reload2";
 	Locations[n].reload.l1.autoreload = "0";
 	n = n + 1;
@@ -985,7 +1069,7 @@ int LocationInitBoarding(int n)
 	locations[n].environment.sea = "true";
     //Reload map
 	locations[n].reload.l1.name = "reload1_back";
-	locations[n].reload.l1.go = "SantoDomingo_ExitTown";
+	locations[n].reload.l1.go = "SantoDomingo_ExitJungle";
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].locators_radius.reload.reload1_back = 2.0;

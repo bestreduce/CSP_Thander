@@ -143,7 +143,7 @@ int GetStoreGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref, int
 				tradeModify = 0.75 + stf(refGoods.RndPriceModify);	//0.6		+r0.35	//1.8 + r0.2
 			break;
 		case TRADE_TYPE_AMMUNITION:
-			//return basePrice; делаю все тоже, что и длz нормального товара, а тип нужен, чтоб на корабле не скупали лишнее.
+			//return basePrice; делаю всё тоже, что и длz нормального товара, а тип нужен, чтоб на корабле не скупали лишнее.
 			tradeModify = 0.85 + stf(refGoods.RndPriceModify);
 			break;
 		case TRADE_TYPE_CANNONS:

@@ -1717,11 +1717,14 @@ void BuyConsume(ref chr)
 
 	LanguageCloseFile(idLngFile);
 
-	if (bAdded) 		{Log_Info(GetFullName(chr)+" пополнил" + sTemp + " комплект расходников.");	return;}
-	if (bNotOverWeight)	{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников. Кончились деньги."); return;}
-	if (bNotEnough) 	{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников из-за перегруза."); return;}
-	if (bNotEnoughTrader) 	{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников. Не было в наличии у торговца."); return;}
-						 Log_Info(GetFullName(chr)+" уже имел" + sTemp + " полный комплект расходников.");
+	if (CheckAttribute(&InterfaceStates, "AutoSellLogs"))
+	{
+		if (bAdded) 			{Log_Info(GetFullName(chr)+" пополнил" + sTemp + " комплект расходников.");	return;}
+		if (bNotOverWeight)		{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников. Кончились деньги."); return;}
+		if (bNotEnough) 		{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников из-за перегруза."); return;}
+		if (bNotEnoughTrader) 	{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников. Не было в наличии у торговца."); return;}
+							 	 Log_Info(GetFullName(chr)+" уже имел" + sTemp + " полный комплект расходников.");
+	}
 	//TO DO - сделать подробный и красивый вывод результата
 	//TO DO - содержимое таблицы товаров не обновляется после отъёма товаров у торговца - исправить, Да и остаток золота в кармане тоже обновлять надо
 }
@@ -1898,7 +1901,7 @@ void Fastsale_trash()
 	{
 		if (z == 0) iOfficer = GetMainCharacterIndex();
 		else iOfficer = GetOfficersIndex(pchar, z);
-		if (iOfficer != -1)
+		if (iOfficer != -1 && CheckAttribute(&characters[iOfficer],"TransferItems.SellGarbageRestriction"))
 		{
 			if (CheckAttribute(&characters[iOfficer],"fighter") || z == 0)
 			{
@@ -1907,15 +1910,22 @@ void Fastsale_trash()
 		}
 	}
 
-	Log_Info("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
-		", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
-	AddmoneyToCharacter(PChar, sti(rSaleProps.money));
-	ref rTreasurer = GetPCharTreasurerRef();//Казначей. Ему даем экспу
-	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
+	if (rSaleProps.money != 0) { // если хоть что-то продали
+		if (CheckAttribute(&InterfaceStates, "AutoSellLogs"))
+		{
+			Log_TestInfo("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
+				", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
+		}
+		AddmoneyToCharacter(PChar, sti(rSaleProps.money));
+		ref rTreasurer = GetPCharTreasurerRef(); //Казначей. Ему даем экспу
+		AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
+	}
 }
 
 void Fastsale_trash_single(ref character)
 {
+	if (!CheckAttribute(character,"TransferItems.SellGarbageRestriction")) return; //нет разрешения продавать мусор
+
 	object sellProps;
 	ref rSaleProps;
 	makeref(rSaleProps, sellProps);
@@ -1928,9 +1938,14 @@ void Fastsale_trash_single(ref character)
 
 	FastSaleCharacter(character, rSaleProps);
 
-	Log_Info("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
-		", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
-	AddmoneyToCharacter(PChar, sti(rSaleProps.money));
-	ref rTreasurer = GetPCharTreasurerRef();//Казначей. Ему даем экспу
-	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
+	if (rSaleProps.money != 0) { // если хоть что-то продали
+		if(CheckAttribute(&InterfaceStates, "AutoSellLogs"))
+		{
+			Log_TestInfo("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
+				", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
+		}
+		AddmoneyToCharacter(PChar, sti(rSaleProps.money));
+		ref rTreasurer = GetPCharTreasurerRef(); //Казначей. Ему даем экспу
+		AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
+	}
 }

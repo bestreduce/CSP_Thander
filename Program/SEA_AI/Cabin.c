@@ -247,7 +247,7 @@ void Cabin_ReloadEndFadeAfter()
 	mchr.location.group = boarding_adr[0].group;
 	mchr.location.locator = boarding_adr[0].locator;
 	// если бой, то ломаем корпус -->
-	if (bDisableMapEnter) //идет бой
+	if (bDisableMapEnter) //идёт бой
 	{
 	    mchr.Ship.HP = makefloat(stf(mchr.Ship.HP) - GetCharacterShipHP(mchr) * 0.01);
 	    if (stf(mchr.Ship.HP) < 0) mchr.Ship.HP = 0;
@@ -910,7 +910,7 @@ void SetOfficersInCampus()
 
 
 	//navy --> компаньоны
- 	if (!bDisableMapEnter) //не идет бой
+ 	if (!bDisableMapEnter) //не идёт бой
 	{
 		for (i = 1; i < GetCompanionQuantity(PChar); i++)
 		{

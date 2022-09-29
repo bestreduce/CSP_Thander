@@ -133,7 +133,7 @@ void procQuestSceneCommand()
 		arTask.action = s1;
 		return;
 	break;
-	// Поместить в руку саблю (задаем флаг перереключения сабли: true - есть сабля, false - нет ее)
+	// Поместить в руку саблю (задаем флаг перереключения сабли: true - есть сабля, false - нет её)
 	case "BladeToHand": // "ssal"
 		b1 = GetEventData();
 		arTask = PushSceneTask(arCharacter,"BladeToHand");

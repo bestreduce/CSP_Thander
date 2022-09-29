@@ -189,6 +189,18 @@ bool ProcessCondition(aref condition)
         case "Goods":
     		return TestIntValue(GetCargoGoods(refCharacter,sti(condition.goods)),sti(condition.quantity),condition.operation);
     	break;
+		
+		case "Rank":
+			return TestIntValue(sti(refCharacter.rank),sti(condition.value),condition.operation);
+		break;
+		
+		case "Alarm":
+			return TestIntValue(LAi_grp_playeralarm, sti(condition.value), condition.operation);
+    	break;
+		
+		case "Money":
+			return TestIntValue(sti(pchar.money), sti(condition.value), condition.operation);
+    	break;
 
     	case "item":  // to_do  пока в квесте воровства  есть, но не используется
 			// Warship Для новой системы предметов это неприемлемо

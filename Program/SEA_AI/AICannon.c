@@ -78,11 +78,11 @@ void Cannon_RecalculateParameters(int iCharacterIndex)
 	ref	rBall = GetGoodByType(sti(rCharacter.Ship.Cannons.Charge.Type));
 	if (CheckAttribute(rCharacter, "TmpPerks.LongRangeShoot"))
 	{
-		rCharacter.Ship.Cannons.SpeedV0 = stf(rCannon.SpeedV0) * stf(rBall.SpeedV0) * AIShip_isPerksUse(rCharacter.TmpPerks.LongRangeShoot, 1.0, 1.15)*(1.0+GetCharacterSPECIALSimple(rCharacter, SPECIAL_P)*0.02); //slib
+		rCharacter.Ship.Cannons.SpeedV0 = stf(rCannon.SpeedV0) * stf(rBall.SpeedV0) * sqrt(AIShip_isPerksUse(rCharacter.TmpPerks.LongRangeShoot, 1.0, 1.15) + GetCharacterSPECIALSimple(rCharacter, SPECIAL_P) * 0.02); //slib
 	}
 	else
 	{
-	    rCharacter.Ship.Cannons.SpeedV0 = stf(rCannon.SpeedV0) * stf(rBall.SpeedV0)*(1.0+GetCharacterSPECIALSimple(rCharacter, SPECIAL_P)*0.02);
+	    rCharacter.Ship.Cannons.SpeedV0 = stf(rCannon.SpeedV0) * stf(rBall.SpeedV0) * sqrt(1.0 +GetCharacterSPECIALSimple(rCharacter, SPECIAL_P) * 0.02);
 	}
 	rCharacter.Ship.Cannons.FireAngMax = rCannon.FireAngMax;
 	rCharacter.Ship.Cannons.FireAngMin = rCannon.FireAngMin;
@@ -101,7 +101,13 @@ float Cannon_GetFireHeight()
 	float Y,DY;
 	Y = stf(rEnemyShip.Height.(sBallName).Y);
 	DY = stf(rEnemyShip.Height.(sBallName).DY);
-	return (Y + (frnd()-0.5) * DY);
+	Y = (Y + (frnd()-0.5) * DY);
+	//временно - нужно перебрать все высоты в шипс.инит
+	if(sBallName != "Knippels")
+	{
+		Y = Y * 0.66;
+	}
+	return Y;
 }
 
 // calculate recharge time for cannon
@@ -166,7 +172,7 @@ float Cannon_GetFireTime()
 	if (refBaseShip.Name == ShipsTypes[SHIP_FORT].Name) { return frnd() * 20.0; }   // иначе пулеметный залп
 
 	float fCannonSkill = stf(aCharacter.TmpSkill.Cannons);
-	float fFireTime = 1.3 - fCannonSkill;
+	float fFireTime = 1 - fCannonSkill*0.5;
 	//fFireTime = fFireTime * Bring2RangeNoCheck(3.0, 1.0, 0.0, 1.0, stf(aCharacter.Ship.Crew.MinRatio));
 	fFireTime = frnd() * fFireTime * 6.0;
 	if (iArcadeSails) { fFireTime = fFireTime * 0.5; }

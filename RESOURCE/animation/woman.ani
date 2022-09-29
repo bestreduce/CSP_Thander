@@ -880,7 +880,8 @@ end_time = 3113
 
 loop = false
 speed = 1.8
-
+event = "Recoil start", 3105, normal
+event = "Recoil end", 3111, normal
 data = "Blend time", "0.02"	; sec
 data = "Walk speed", "2.2"		; m/sec
 event = "SndAlliace_w_recoil", 3103, normal
@@ -891,6 +892,8 @@ end_time = 3391
 data = "Blend time", "0.1"		; sec
 event = "LStep", 3386, normal
 event = "RStep", 3388, normal
+event = "Recoil start", 3382, normal
+event = "Recoil end", 3389, normal
 speed = 1.2
 loop = false
 type = normal
@@ -902,6 +905,8 @@ end_time = 3372
 data = "Blend time", "0.1"		; sec
 event = "LStep", 3368, normal
 event = "RStep", 3365, normal
+event = "Recoil start", 3362, normal
+event = "Recoil end", 3370, normal
 speed = 1.2
 loop = false
 type = normal	

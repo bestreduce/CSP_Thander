@@ -16,7 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1 = "Послушай, а что за человек местный ростовщик?";
                 link.l1.go = "Step_E6_1";
 			}
-            // ==> Восьмой квест фр.линейки, отговорить трех корсаров
+            // ==> Восьмой квест фр.линейки, отговорить трёх корсаров
             if (pchar.questTemp.State == "Fr8ThreeCorsairs_toSeek")
 			{
                 link.l1 = "Где я могу найти капитана Гея? У меня к нему важное дело.";
@@ -47,7 +47,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		//********************** Французская линейка **********************
         case "Step_F8_1":
-			dialog.text = NPCStringReactionRepeat("Капитана Гея? Нет ничего проще. Он снимает у меня комнату, и сегодня еще не выходил, так что вы его там обязательно увидите.",
+			dialog.text = NPCStringReactionRepeat("Капитана Гея? Нет ничего проще. Он снимает у меня комнату, и сегодня ещё не выходил, так что вы его там обязательно увидите.",
 				          "Я уже все сказал...", "Не о чем говорить...", ""+ GetSexPhrase("Сэр","Мисс") +", дайте мне возможность заниматься своими делами!", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Спасибо, дружище...", ""+ GetSexPhrase("Понял","Поняла") +", извини...", "Хм, ну да...", "Да, да, извини, приятель...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";

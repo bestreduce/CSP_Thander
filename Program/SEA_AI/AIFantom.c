@@ -413,37 +413,48 @@ void Fantom_SetSails(ref rFantom, string sFantomType)
 
 void Fantom_SetBalls(ref rFantom, string sFantomType)
 {
-	float fKBalls = 7 - GetCharacterShipClass(rFantom);
-
-	if (fKBalls <= 0) fKBalls = 0.7; // баркас
+	int iKClass = 7 - GetCharacterShipClass(rFantom);
+	float fK = 1;	
+	
+	int nShipType = sti(rFantom.ship.type);
+	ref refBaseShip = GetRealShip(nShipType);
+	int iCannons = sti(refBaseShip.CannonsQuantity);
+	int iCrew, iPlanks;
+	
+	if (iKClass <= 0) fK = 0.7; // баркас
 	switch (sFantomType)
 	{
 		case "war":
-			fKBalls = fKBalls * 1.5;
+			iCrew = GetMaxCrewQuantity(rFantom);
+			iPlanks = 130;
+			fK = fK * 1.5;
 		break;
 		case "trade":
-			fKBalls = fKBalls * 0.7;
+			iCrew = GetOptCrewQuantity(rFantom);
+			fK = fK * 0.7;
+			iPlanks = 20;
 		break;
 		case "pirate":
-			fKBalls = fKBalls * 1.0;
+			iCrew = GetMaxCrewQuantity(rFantom);
+			fK = fK * 1.0;
+			iPlanks = 70;
 		break;
 	}
-	if (GetCharacterShipClass(rFantom) == 1) fKBalls = fKBalls * 1.6;	//много пушек, большой расход
-
+	iKClass = iKClass * fK;
     // boal 20.01.2004 -->
-	Fantom_SetCharacterGoods(rFantom, GOOD_BALLS,    MakeInt(195 * fKBalls + rand(MakeInt(10 * fKBalls))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(180 * fKBalls + rand(MakeInt(20 * fKBalls))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_KNIPPELS, MakeInt(90 * fKBalls + rand(MakeInt(10 * fKBalls))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_GRAPES,   MakeInt(70 * fKBalls + rand(MakeInt(10 * fKBalls))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_POWDER,   MakeInt(350 * fKBalls + rand(MakeInt(30 * fKBalls))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_BALLS,    MakeInt(19 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(18 * iCannons * fK + rand(MakeInt(20 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_KNIPPELS, MakeInt(9 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_GRAPES,   MakeInt(7 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_POWDER,   MakeInt(35 * iCannons * fK + rand(MakeInt(30 * iKClass))), 0);
 
-	Fantom_SetCharacterGoods(rFantom, GOOD_SAILCLOTH, 	MakeInt(4 * fKBalls + rand(MakeInt(10 * fKBalls))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_PLANKS, 		MakeInt(3 * fKBalls + rand(MakeInt(20 * fKBalls))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_SAILCLOTH, 	MakeInt(50 * iKClass + rand(MakeInt(10 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_PLANKS, 		MakeInt(iPlanks * iKClass + rand(MakeInt(20 * iKClass))), 0);
 
-    Fantom_SetCharacterGoods(rFantom, GOOD_FOOD, 		MakeInt(60 + 20 * fKBalls  + rand(MakeInt(8 * fKBalls))), 0);  //WW
-    Fantom_SetCharacterGoods(rFantom, GOOD_WEAPON, 		MakeInt(20 + 12 * fKBalls + rand(MakeInt(8 * fKBalls))), 0);   //WW
-    Fantom_SetCharacterGoods(rFantom, GOOD_RUM, 		MakeInt(60 + 12 * fKBalls  + rand(MakeInt(8 * fKBalls))), 0);  //WW
-    Fantom_SetCharacterGoods(rFantom, GOOD_MEDICAMENT, 	MakeInt(20 + 8 * fKBalls + rand(MakeInt(10 * fKBalls))), 0);   //WW
+    Fantom_SetCharacterGoods(rFantom, GOOD_FOOD, 		MakeInt(60 + 20 * iKClass + rand(MakeInt(8 * iKClass))), 0);  //WW
+    Fantom_SetCharacterGoods(rFantom, GOOD_WEAPON, 		MakeInt(iCrew + rand(MakeInt(8 * iKClass))), 0);   //WW
+    Fantom_SetCharacterGoods(rFantom, GOOD_RUM, 		MakeInt(60 + 12 * iKClass + rand(MakeInt(8 * iKClass))), 0);  //WW
+    Fantom_SetCharacterGoods(rFantom, GOOD_MEDICAMENT, 	MakeInt(iCrew + rand(MakeInt(10 * iKClass))), 0);   //WW
     // boal 20.01.2004 <--
 }
 
@@ -585,7 +596,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 		break;
 	}
     // boal 20.01.2004 <--
-    // есть еще осталось место, то дать запасных орудий в трюм -->
+    // есть ещё осталось место, то дать запасных орудий в трюм -->
     iMultiply = GetCannonGoodsIdxByType(sti(rFantom.Ship.Cannons.Type));
     if (iMultiply != -1)
     {
@@ -595,7 +606,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
     		Fantom_SetCharacterGoods(rFantom, iMultiply, iRandMultiply, 0);
     	}
     }
-    // есть еще осталось место, то дать запасных орудий в трюм <--
+    // есть ещё осталось место, то дать запасных орудий в трюм <--
 	RecalculateCargoLoad(rFantom);
 }
 
@@ -666,7 +677,7 @@ void Fantom_SetGoodsOld(ref rFantom, string sFantomType)
 		break;
 	}
     // boal 20.01.2004 <--
-    // есть еще осталось место, то дать запасных орудий в трюм -->
+    // есть ещё осталось место, то дать запасных орудий в трюм -->
     iMultiply = GetCannonGoodsIdxByType(sti(rFantom.Ship.Cannons.Type));
     if (iMultiply != -1)
     {
@@ -676,7 +687,7 @@ void Fantom_SetGoodsOld(ref rFantom, string sFantomType)
     		Fantom_SetCharacterGoods(rFantom, iMultiply, iRandMultiply, 0);
     	}
     }
-    // есть еще осталось место, то дать запасных орудий в трюм <--
+    // есть ещё осталось место, то дать запасных орудий в трюм <--
 	RecalculateCargoLoad(rFantom);
 }
 // доработал метод, теперь возвращает сколько взял
@@ -809,243 +820,80 @@ void GenerateShipUpgradeParameters(ref rFantom)
 
 	if(i < 30)
 	{
-		UpgradeShipParameter(rFantom, "SpeedRate");
+		SetShipBermudeTuningSpeedRate(rFantom);
 		return;
 	}
 	if((i >= 30) && (i < 45))
 	{
-		UpgradeShipParameter(rFantom, "SpeedRate");
+		SetShipBermudeTuningSpeedRate(rFantom);
 		if(rand(1) == 0)
 		{
-			UpgradeShipParameter(rFantom, "TurnRate");
+			SetShipBermudeTuningTurnRate(rFantom);
 		}
 		else
 		{
-			UpgradeShipParameter(rFantom, "WindAgainstSpeed");
+			SetShipBermudeTuningWindAgainstSpeed(rFantom);
 		}
 		return;
 	}
 	if((i >= 45) && (i < 60))
 	{
-		UpgradeShipParameter(rFantom, "SpeedRate");
-		UpgradeShipParameter(rFantom, "TurnRate");
-		UpgradeShipParameter(rFantom, "WindAgainstSpeed");
+		SetShipBermudeTuningSpeedRate(rFantom);
+		SetShipBermudeTuningTurnRate(rFantom);
+		SetShipBermudeTuningWindAgainstSpeed(rFantom);
 		if(rand(1) == 0)
 		{
-			UpgradeShipParameter(rFantom, "Capacity");
+			SetShipBermudeTuningCapacity(rFantom);
 		}
 		else
 		{
-			UpgradeShipParameter(rFantom, "MaxCrew");
+			SetShipBermudeTuningMaxCrew(rFantom);
 		}
 		return;
 	}
 	if((i >= 60) && (i < 75))
 	{
-		UpgradeShipParameter(rFantom, "SpeedRate");
-		UpgradeShipParameter(rFantom, "TurnRate");
-		UpgradeShipParameter(rFantom, "WindAgainstSpeed");
-		UpgradeShipParameter(rFantom, "Capacity");
-		UpgradeShipParameter(rFantom, "MaxCrew");
+		SetShipBermudeTuningSpeedRate(rFantom);
+		SetShipBermudeTuningTurnRate(rFantom);
+		SetShipBermudeTuningWindAgainstSpeed(rFantom);
+		SetShipBermudeTuningCapacity(rFantom);
+		SetShipBermudeTuningMaxCrew(rFantom);
 		if(rand(1) == 0)
 		{
-			UpgradeShipParameter(rFantom, "Cannons");
+			SetShipBermudeTuningMaxCaliber(rFantom);
 		}
 		else
 		{
-			UpgradeShipParameter(rFantom, "HP");
+			SetShipBermudeTuningHP(rFantom);
+			SetShipBermudeTuningMastMultiplier(rFantom);
 		}
 		return;
 	}
 	if((i >= 75) && (i < 80))
 	{
-		UpgradeShipParameter(rFantom, "SpeedRate");
-		UpgradeShipParameter(rFantom, "TurnRate");
-		UpgradeShipParameter(rFantom, "WindAgainstSpeed");
-		UpgradeShipParameter(rFantom, "Capacity");
-		UpgradeShipParameter(rFantom, "MaxCrew");
-		UpgradeShipParameter(rFantom, "Cannons");
-		UpgradeShipParameter(rFantom, "HP");
+		SetShipBermudeTuningSpeedRate(rFantom);
+		SetShipBermudeTuningTurnRate(rFantom);
+		SetShipBermudeTuningWindAgainstSpeed(rFantom);
+		SetShipBermudeTuningCapacity(rFantom);
+		SetShipBermudeTuningMaxCrew(rFantom);
+		SetShipBermudeTuningMaxCaliber(rFantom);
+		SetShipBermudeTuningHP(rFantom);
+		SetShipBermudeTuningMastMultiplier(rFantom);
 		return;
 	}
 	if(i >=80)
 	{
-		int irand = rand(7);
-		if(irand == 0) UpgradeShipParameter(rFantom, "SpeedRate");
-		if(irand == 1) UpgradeShipParameter(rFantom, "TurnRate");
-		if(irand == 2) UpgradeShipParameter(rFantom, "WindAgainstSpeed");
-		if(irand == 3) UpgradeShipParameter(rFantom, "Capacity");
-		if(irand == 4) UpgradeShipParameter(rFantom, "MaxCrew");
-		if(irand == 5) UpgradeShipParameter(rFantom, "Cannons");
-		if(irand == 6) UpgradeShipParameter(rFantom, "HP");
+		int irand = rand(8);
+		if(irand == 0) SetShipBermudeTuningSpeedRate(rFantom);
+		if(irand == 1) SetShipBermudeTuningTurnRate(rFantom);
+		if(irand == 2) SetShipBermudeTuningWindAgainstSpeed(rFantom);
+		if(irand == 3) SetShipBermudeTuningCapacity(rFantom);
+		if(irand == 4) SetShipBermudeTuningMaxCrew(rFantom);
+		if(irand == 5) SetShipBermudeTuningMaxCaliber(rFantom);
+		if(irand == 6) SetShipBermudeTuningHP(rFantom);
+		if(irand == 7) SetShipBermudeTuningMastMultiplier(rFantom);
 	}
 }
-
-void UpgradeShipParameter(ref _chr, string _param)
-{
-	ref 	shTo;
-	int 	iCaliber;
-
-	shTo = &RealShips[sti(_chr.Ship.Type)];
-
-	switch(_param)
-	{
-		case "SpeedRate":
-
-			if(!CheckAttribute(shTo, "Tuning.SpeedRate"))
-			{
-				if(!CheckAttribute(shTo, "Bonus_SpeedRate"))
-				{
-					shTo.SpeedRate        = (stf(shTo.SpeedRate) + stf(shTo.SpeedRate)/5.0);
-				}
-				//else
-				//{
-				//	shTo.SpeedRate        = (stf(shTo.SpeedRate) - stf(shTo.Bonus_SpeedRate)) * 1.2 + stf(shTo.Bonus_SpeedRate);
-				//}
-				shTo.Tuning.SpeedRate = true;
-			}
-
-		break;
-
-		case "TurnRate":
-
-			if(!CheckAttribute(shTo, "Tuning.TurnRate"))
-			{
-				if(!CheckAttribute(shTo, "Bonus_TurnRate"))
-				{
-					shTo.TurnRate        = (stf(shTo.TurnRate) + stf(shTo.TurnRate)/5.0);
-				}
-				//else
-				//{
-				//	shTo.TurnRate        = (stf(shTo.TurnRate) - stf(shTo.Bonus_TurnRate)) * 1.2 + stf(shTo.Bonus_TurnRate);
-				//}
-				shTo.Tuning.TurnRate = true;
-			}
-
-		break;
-
-		case "HP":
-
-			if(!CheckAttribute(shTo, "Tuning.HP"))
-			{
-				if(!CheckAttribute(shTo, "Bonus_HP"))
-				{
-					shTo.HP        = sti(shTo.HP) + makeint(sti(shTo.HP)/5);
-				}
-				//else
-				//{
-				//	shTo.HP        = makeint((sti(shTo.HP) - sti(shTo.Bonus_HP)) * 1.2 + sti(shTo.Bonus_HP));
-				//}
-				shTo.Tuning.HP = true;
-			}
-
-		break;
-
-		case "WindAgainstSpeed":
-
-			if(!CheckAttribute(shTo, "Tuning.WindAgainst"))
-			{
-				shTo.WindAgainstSpeed   = FloatToString(stf(shTo.WindAgainstSpeed) + 0.5* stf(shTo.WindAgainstSpeed) / stf(shTo.Class) + 0.005, 2);
-				shTo.Tuning.WindAgainst = true;
-			}
-
-		break;
-
-		case "Capacity":
-
-			if(!CheckAttribute(shTo, "Tuning.Capacity"))
-			{
-				if(!CheckAttribute(shTo, "Bonus_Capacity"))
-				{
-					shTo.Capacity        = sti(shTo.Capacity) + makeint(sti(shTo.Capacity)/5);
-				}
-				//else
-				//{
-				//	shTo.Capacity        = makeint((sti(shTo.Capacity) - sti(shTo.Bonus_Capacity)) * 1.2 + sti(shTo.Bonus_Capacity));
-				//}
-				shTo.Tuning.Capacity = true;
-			}
-
-		break;
-
-		case "MaxCrew":
-
-			if(!CheckAttribute(shTo, "Tuning.MaxCrew"))
-			{
-				shTo.MaxCrew        = sti(shTo.MaxCrew) + makeint(sti(shTo.MaxCrew)/5);
-				shTo.Tuning.MaxCrew = true;
-				SetCrewQuantityFull(_chr);
-			}
-
-		break;
-
-		case "Cannons":
-
-			if(!CheckAttribute(shTo, "Tuning.Cannon"))
-			{
-				iCaliber = sti(shTo.MaxCaliber);
-				switch(iCaliber)
-				{
-					case 8:
-						iCaliber = 0;
-					break;
-					case 12:
-						iCaliber = 1;
-					break;
-					case 16:
-						iCaliber = 2;
-					break;
-					case 20:
-						iCaliber = 3;
-					break;
-					case 24:
-						iCaliber = 4;
-					break;
-					case 32:
-						iCaliber = 5;
-					break;
-					case 36:
-						iCaliber = 6;
-					break;
-				}
-				iCaliber = iCaliber + 1;
-				if (iCaliber > 6) iCaliber = 6;
-				switch(iCaliber)
-				{
-					case 0:
-						iCaliber = 8;
-					break;
-					case 1:
-						iCaliber = 12;
-					break;
-					case 2:
-						iCaliber = 16;
-					break;
-					case 3:
-						iCaliber = 20;
-					break;
-					case 4:
-						iCaliber = 24;
-					break;
-					case 5:
-						iCaliber = 32;
-					break;
-					case 6:
-						iCaliber = 36;
-					break;
-				}
-				if (iCaliber > sti(shTo.MaxCaliber))
-				{
-					iCaliber=sti(shTo.MaxCaliber);
-				}
-				shTo.MaxCaliber = iCaliber;
-				shTo.Tuning.Cannon = true;
-			}
-
-		break;
-	}
-}
-// ugeen
 
 // eddy. подбор типа корабля для фантома от ранга и нац. принадлежности
 void SetShipToFantom(ref _chr, string _type, bool _setgoods)

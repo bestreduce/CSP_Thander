@@ -18,7 +18,7 @@ void ProcessDialogEvent()
 			dialog.text = "Ошибка открытия файла диалога.";
 			if(CheckAttribute(CharacterRef, "Dialog.Filename"))
 			{
-				dialog.text = "Не удается открыть файл диалога " + CharacterRef.Dialog.Filename + ", назначенный этому персонажу.";
+				dialog.text = "Не удаётся открыть файл диалога " + CharacterRef.Dialog.Filename + ", назначенный этому персонажу.";
 			}
 			link.l1 = "ok";
 			link.l1.go = "Exit";

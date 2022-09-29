@@ -16,6 +16,11 @@ void StoreInit()
 	Stores[Bridgetown_STORE].Colony	= "Bridgetown";
 	Stores[Bridgetown_STORE].group	= "Bridgetown";
 	Stores[Bridgetown_STORE].StoreSize = "large";
+	
+	// Bahames (Nassau)
+	Stores[Nassau_STORE].Colony	= "Nassau";
+	Stores[Nassau_STORE].group	= "Nassau";
+	Stores[Nassau_STORE].StoreSize = "small";
 
 	// PortRoyal (Jamaica)
 	Stores[PortRoyal_STORE].Colony	= "PortRoyal";

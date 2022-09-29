@@ -34,6 +34,7 @@ void ProcessDialogEvent()
 			link.l1.go = "Fickler_1";
 			PlayVoice("Kopcapkz\Voices\PDM\Andreas Fickler.wav");
 			DeleteAttribute(npchar, "talker");
+			UnmarkCharacter(npchar);
 		break;
 
 		case "Fickler_1":
@@ -78,6 +79,7 @@ void ProcessDialogEvent()
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_NK_Viktor", "officer_52", "man", "man", 10, PIRATE, -1, false));
 			sld.name = "Виктор";
 			sld.lastname = "Бретье";
+			FreeSitLocator("Villemstad_tavern", "sit12");
 			sld.city = "Villemstad";
 			sld.location	= "Villemstad_tavern";
 			sld.location.group = "sit";
@@ -137,10 +139,18 @@ void ProcessDialogEvent()
 			dialog.text = "Невинного? Из-за этого идиота я потерял свой фрахт! " + Plata1 + " золотых! Если не больше! Я узнаю, куда он спрятался!";
 			link.l1 = "Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
 			link.l1.go = "Viktor_Bitva";
-			link.l2 = "" + Plata1 + " золотых? И из-за этого ты поднял шум? Вот. Я покрываю твой ущерб, теперь оставь Андреаса в покое.";
-			link.l2.go = "Zaplati_ED";
-			link.l3 = "" + Plata1 + "? Я принесу тебе эти деньги. Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
-			link.l3.go = "Zaplati_ND";
+			if (sti(pchar.Money) >= Plata2)
+			{
+				link.l2 = "" + Plata1 + " золотых? И из-за этого ты поднял шум? Вот. Я покрываю твой ущерб, теперь оставь Андреаса в покое.";
+				link.l2.go = "Zaplati_ED";
+			}
+			else
+			{
+				link.l2 = "" + Plata1 + " золотых? Нехилый такой фрахт.";
+				link.l2.go = "Zaplati_ED";
+			}
+			link.l3 = "Ничего себе! А знаешь что, ищи своего Андреаса где хочешь, я не буду тебе мешать.";
+			link.l3.go = "Konec";
 			NextDiag.TempNode = "Viktor_VernulsyDengi";
 		break;
 
@@ -148,53 +158,61 @@ void ProcessDialogEvent()
 			dialog.text = "Я сказал " + Plata1 + "? Нет, я ошибся! По крайней мере, " + Plata2 + "!";
 			link.l1 = "Да ты обнаглел, Виктор! Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
 			link.l1.go = "Viktor_Bitva";
-			link.l2 = "Вот, держи свои деньги. Приятного времяпрепровождения, Виктор.";
-			link.l2.go = "Zaplati_2";
-			link.l3 = "Я принесу тебе эти " + Plata2 + ". Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
-			link.l3.go = "exit";
+			if (sti(pchar.Money) >= Plata2)
+			{
+				link.l2 = "Вот, держи свои деньги. Приятного времяпрепровождения, Виктор.";
+				link.l2.go = "Zaplati_2";
+			}
+			else
+			{
+				link.l2 = "Я принесу тебе " + Plata2 + " золотых. Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
+				link.l2.go = "exit";
+			}
 			NextDiag.TempNode = "Viktor_VernulsyDengi";
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "2");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sMoney", FindRussianMoneyString(sti(pchar.PDM_NK_Plata2.Money)));
 		break;
 		
+		case "Konec":
+			DialogExit();
+			
+			sld = CharacterFromID("PDM_NK_Viktor")
+			sld.lifeday = 0;
+			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.currentnode   = "Viktor_Poka";
+			
+			sld = CharacterFromID("Andreas_Fickler")
+			sld.lifeday = 0;
+			
+			AddQuestRecord("PDM_Neputyovy_kaznachey", "7");
+			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("","а"));
+			CloseQuestHeader("PDM_Neputyovy_kaznachey");
+		break;
+		
 		case "Zaplati_ND":
-			dialog.text = "Я сказал " + Plata1 + "? Нет, я ошибся! По крайней мере, " + Plata2 + "!";
+			dialog.text = "";
 			link.l1 = "Да ты обнаглел, Виктор! Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
 			link.l1.go = "Viktor_Bitva";
 			link.l2 = "Хорошо, как только будут у меня деньги, я к тебе загляну.";
 			link.l2.go = "exit";
-			NextDiag.TempNode = "Viktor_VernulsyDengi";
-			AddQuestRecord("PDM_Neputyovy_kaznachey", "2");
-			AddQuestUserData("PDM_Neputyovy_kaznachey", "sMoney", FindRussianMoneyString(sti(pchar.PDM_NK_Plata2.Money)));
+			NextDiag.TempNode = "Zaplati_ND";
 		break;
 
 		case "Zaplati_2":
-			if (sti(pchar.Money) >= Plata2)
-			{
-				AddMoneyToCharacter(pchar, -sti(Plata2));
-				Log_SetStringToLog("Авторитет + 1");
-				Log_SetStringToLog("Торговля + 2");
-				Log_SetStringToLog("Скрытность + 1");
-				AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
-				AddCharacterSkillDontClearExp(pchar, "Commerce", 2);
-				AddCharacterSkillDontClearExp(pchar, "Sneak", 1);
-				sld = CharacterFromID("PDM_NK_Viktor")
-				sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
-				sld.dialog.currentnode   = "Viktor_Poka";
-				sld.lifeday = 0;
-				sld = CharacterFromID("Andreas_Fickler")
-				sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
-				sld.dialog.currentnode   = "Fickler_11";
-				AddQuestRecord("PDM_Neputyovy_kaznachey", "3");
-				AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("","а"));
-				DialogExit();
-			}
-			else
-			{
-				dialog.text = "";
-				link.l1 = "Сейчас у меня нет таких денег, Виктор, но я зайду позже и заплачу за Андреаса.";
-				link.l1.go = "exit";
-			}
+			AddMoneyToCharacter(pchar, -sti(Plata2));
+			AddCharacterExpToSkill(pchar, "Leadership", 150);
+			AddCharacterExpToSkill(pchar, "Commerce", 220);
+			AddCharacterExpToSkill(pchar, "Sneak", 150);
+			sld = CharacterFromID("PDM_NK_Viktor")
+			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.currentnode   = "Viktor_Poka";
+			sld.lifeday = 0;
+			sld = CharacterFromID("Andreas_Fickler")
+			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.currentnode   = "Fickler_11";
+			AddQuestRecord("PDM_Neputyovy_kaznachey", "3");
+			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("","а"));
+			DialogExit();
 		break;
 
 		case "Viktor_Poka":
@@ -214,10 +232,18 @@ void ProcessDialogEvent()
 
 		case "Viktor_VernulsyDengi_2":
 			dialog.text = "Ты прин"+ GetSexPhrase("ёс","есла") +" деньги?";
-			link.l1 = "" + Plata2 + " золотых. Вот, держи.";
-			link.l1.go = "Zaplati_2";
-			link.l2 = "Ещё нет, но я скоро принесу их тебе.";
-			link.l2.go = "exit";
+			if (sti(pchar.Money) >= Plata2)
+			{
+				link.l1 = "" + Plata2 + " золотых. Вот, держи.";
+				link.l1.go = "Zaplati_2";
+			}
+			else
+			{
+				link.l1 = "Сейчас у меня нет таких денег, Виктор, но я зайду позже и заплачу за Андреаса.";
+				link.l1.go = "exit";
+			}
+			link.l2 = "Мне надоело таскаться по всему архипелагу из-за твоего дурацкого фрахта. Мог бы уже 100 раз поднять свою задницу, и добыть себе деньги сам, старый ты пень!";
+			link.l2.go = "Konec";
 			NextDiag.TempNode = "Viktor_VernulsyDengi";
 		break;
 
@@ -226,15 +252,25 @@ void ProcessDialogEvent()
 			link.l1 = "Меньше слов - к делу!";
 			link.l1.go = "fight_right_now";
 			sld = CharacterFromID("PDM_NK_Viktor")
-
-			if (MOD_SKILL_ENEMY_RATE >= 1 && MOD_SKILL_ENEMY_RATE <= 6) sld.equip.blade = "blade18";
-			if (MOD_SKILL_ENEMY_RATE >= 7 && MOD_SKILL_ENEMY_RATE <= 10) sld.equip.blade = "blade39";
-			if (MOD_SKILL_ENEMY_RATE <= 6) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol1", DopHP);
-			if (MOD_SKILL_ENEMY_RATE >= 7) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol2", DopHP);
-
+			if (MOD_SKILL_ENEMY_RATE <= 6)
+			{
+				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "Pistol1", DopHP);
+			}
+			else
+			{
+				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "Pistol2", DopHP);
+			}
 			sld.SaveItemsForDead = true;
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
 			AddMoneyToCharacter(sld, 15000);
 			GiveItem2Character(sld, "Litsenzia");
+			GiveItem2Character(sld, "mineral9");
+			AddItems(sld, "jewelry1", rand(7)+2);
+			AddItems(sld, "jewelry3", rand(7)+2);
+			AddItems(sld, "jewelry6", 1);
+			TakeItemFromCharacter(sld, "spyglass3");
+			TakeNItems(sld, "food1", -10);
 
 			PChar.quest.PDM_NK_Viktor.win_condition.l1 = "NPC_Death";
 			PChar.quest.PDM_NK_Viktor.win_condition.l1.character = "PDM_NK_Viktor";
@@ -292,6 +328,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "6");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("ся","ась"));
 			CloseQuestHeader("PDM_Neputyovy_kaznachey");
+			sld = CharacterFromID("Andreas_Fickler")
 			sld.lifeday = 0;
 			LAi_CharacterDisableDialog(sld);
 			DialogExit();
@@ -301,7 +338,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("Andreas_Fickler")
 			SetCharacterRemovable(sld, false);
 			LAi_SetActorType(sld);
-			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_NK_NaKorabl", 5);
+			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_NK_NaKorabl", 0.5);
 			bDisableFastReload = true;
 			chrDisableReloadToLocation = true;
 			NextDiag.CurrentNode = NextDiag.TempNode;

@@ -116,7 +116,7 @@ string RandSwear()
 		break;
 
 		case 3:
-			return "Черт! ";
+			return "Чёрт! ";
 		break;
 
 		case 4:
@@ -477,7 +477,7 @@ string GetPortByCityName(string city) // имена портов по город
             return "BasTer_town";
 		break;
 		case "LaVega":
-            return "LaVega_port";
+            return "LaVega_town";
 		break;
 		case "Bridgetown":
             return "Bridgetown_town";

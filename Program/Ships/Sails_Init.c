@@ -1,6 +1,6 @@
 void InitSailsColors()
 {
-	// в КВЛ 1.2.3 переделано использование  icon и texture не используются, принцип радуга + белый и черный
+	// в КВЛ 1.2.3 переделано использование  icon и texture не используются, принцип радуга + белый и чёрный
 	// нужно только name и color
 	SailsColors[0].icon = "interfaces\sails\blue.tga";
 	SailsColors[0].texture = "parus_blue";
@@ -19,12 +19,12 @@ void InitSailsColors()
 
 	SailsColors[3].icon = "interfaces\sails\yellow.tga";
 	SailsColors[3].texture = "parus_yellow";
-	SailsColors[3].name  = "Желтый";
+	SailsColors[3].name  = "Жёлтый";
 	SailsColors[3].color = argb(255, 255, 255, 60);
 
 	SailsColors[4].icon = "interfaces\sails\lilo.tga";
 	SailsColors[4].texture = "parus_lilo";
-	SailsColors[4].name  = "Зеленый";
+	SailsColors[4].name  = "Зелёный";
 	SailsColors[4].color = argb(255, 60, 255, 60);
 
 	SailsColors[5].icon = "interfaces\sails\gray.tga";
@@ -44,7 +44,7 @@ void InitSailsColors()
 
 	SailsColors[8].icon = "interfaces\sails\black.tga";
 	SailsColors[8].texture = "parus_black";
-	SailsColors[8].name  = "Черный";
+	SailsColors[8].name  = "Чёрный";
 	SailsColors[8].color = argb(255, 60, 60, 60);
 }
 

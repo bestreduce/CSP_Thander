@@ -67,7 +67,7 @@ void LAi_type_barman_CharacterUpdate(aref chr, float dltTime)
 							if (chr.sex == "man") chr.greeting = "VOICE\Russian\soldier_arest_1.wav";
 							else chr.greeting = "VOICE\Russian\Gr_Woman_Citizen_11.wav";
 							chr.dialog.currentnode = chr.sex  + "_FackYou";
-							LAi_SetActorTypeNoGroup(chr); //временно актер, чтобы темплейт диалога не слетал. кодить это еще и в этом типе - геморой.
+							LAi_SetActorTypeNoGroup(chr); //временно актер, чтобы темплейт диалога не слетал. кодить это ещё и в этом типе - геморой.
 							LAi_ActorDialog(chr, pchar, "", 0.0, 0);
 							return;
 						}
@@ -284,7 +284,7 @@ void LAi_type_barman_Ask(aref chr)
 	}
 	LAi_tmpl_ani_PlayAnimation(chr, animation, 4.0 + frand(3.0));
 	//Выбираем проигрываемый звук
-	if(bCharVoice) // LEO
+	if(sti(InterfaceStates.CharVoice)==1) // LEO
 	{
 		LAi_CharacterPlaySound(chr, "Gr_Barmen");
 	}

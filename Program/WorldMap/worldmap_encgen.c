@@ -16,7 +16,7 @@
 #define WDM_SPECIAL_RATE  		0.002
 
 //MAX, это поменял Я!!!!!!! Шуршунчик.
-// Boal - учите мат. часть, г-н Шуршунчик. не работает это до начала новой игры, всегда по уполчанию идет. Дефайн правильно, тем более  iEncountersRate далее работает
+// Boal - учите мат. часть, г-н Шуршунчик. не работает это до начала новой игры, всегда по уполчанию идёт. Дефайн правильно, тем более  iEncountersRate далее работает
 //float WDM_FOLLOW_RATE = 0.025 * iEncountersRate;
 //float WDM_STORM_RATE = 0.0001 * iEncountersRate;
 
@@ -260,7 +260,7 @@ void Map_TraderSucces_quest(string sChar)
 	{
 		Map_ReleaseQuestEncounter("MaryCelesteCapitan");
 
-		// Для палубы, при Map_ReleaseQuestEncounter() рассылалось событие, а ставить еще раз не нужно
+		// Для палубы, при Map_ReleaseQuestEncounter() рассылалось событие, а ставить ещё раз не нужно
 		if(PChar.QuestTemp.MaryCeleste != "OnDeck")
 		{
 			character.fromCity = character.toCity; // Колония, из бухты которой выйдет
@@ -296,7 +296,7 @@ void Map_TraderSucces_quest(string sChar)
 	// ugeen --> генератор "Повод для спешки"
 	if(sChar == "PirateCapt")
 	{
-		Log_TestInfo("Пиратский корабль дошел до места назначения.");
+		Log_TestInfo("Пиратский корабль дошёл до места назначения.");
 		Map_ReleaseQuestEncounter(sChar);
 		AddQuestRecord("ReasonToFast","26");
 		CloseQuestHeader("ReasonToFast");
@@ -307,13 +307,13 @@ void Map_TraderSucces_quest(string sChar)
 	if (findsubstr(sChar, "PortmansCap_" , 0) != -1 && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
 		SetCapitainFromSeaToCity(sChar);
-		Log_TestInfo("Энканутер рассеянного кэпа " + sChar + " дошел до места назначения.");
+		Log_TestInfo("Энканутер рассеянного кэпа " + sChar + " дошёл до места назначения.");
 	}
 	//поиски кэпа-вора
 	if (findsubstr(sChar, "SeekCap_" , 0) != -1 && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
 		SetRobberFromMapToSea(sChar);
-		Log_TestInfo("Энканутер кэпа-вора " + sChar + " дошел до места назначения.");
+		Log_TestInfo("Энканутер кэпа-вора " + sChar + " дошёл до места назначения.");
 	}
 	//поиски кэпа, квест дают горожане
 	if (findsubstr(sChar, "SeekCitizCap_" , 0) != -1)
@@ -322,7 +322,7 @@ void Map_TraderSucces_quest(string sChar)
 		if (characters[iChar].quest == "InMap")
 		{
 			CitizCapFromMapToCity(sChar);
-			Log_TestInfo("Энканутер кэпа " + sChar + " дошел до места назначения.");
+			Log_TestInfo("Энканутер кэпа " + sChar + " дошёл до места назначения.");
 		}
 		if (characters[iChar].quest == "outMap")
 		{
@@ -335,18 +335,18 @@ void Map_TraderSucces_quest(string sChar)
 	if (sChar == "MushketCap" && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
 		SetMushketFromMapToSea();
-		Log_TestInfo("Энканутер кэпа с мушкетом дошел до места назначения.");
+		Log_TestInfo("Энканутер кэпа с мушкетом дошёл до места назначения.");
 	}
 	//поиски брига Королева
 	if (sChar == "Danielle" && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
 		SetDanielleFromMapToSea();
-		Log_TestInfo("Энканутер кэпа брига Queen дошел до места назначения.");
+		Log_TestInfo("Энканутер кэпа брига Queen дошёл до места назначения.");
 	}
 	//поиски Чёрной Бороды
 	if (sChar == "BlackBeardNPC" && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
 		SetBlackBeardFromMapToSea();
-		Log_TestInfo("Энканутер кэпа Чёрная Борода дошел до места назначения.");
+		Log_TestInfo("Энканутер кэпа Чёрная Борода дошёл до места назначения.");
 	}
 }

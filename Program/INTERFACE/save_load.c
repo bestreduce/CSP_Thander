@@ -292,7 +292,7 @@ void SaveLoadCurrentIntoSlot()
 		if( g_nCurrentSaveIndex<0 || g_nCurrentSaveIndex>=g_nSaveQuantity ) { // нет такой ¤чейки с записью
 			return;
 		}
-		if( bIsGameProcessNow ) { // в данный момент уже идет игра?
+		if( bIsGameProcessNow ) { // в данный момент уже идёт игра?
 			DoConfirm(CONFIRMMODE_LOAD_GAME);
 		} else {
 			ProcessLoad();

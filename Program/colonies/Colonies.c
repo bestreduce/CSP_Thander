@@ -41,7 +41,7 @@ int GetDistanceToColony2D(string _sColony) // Дистанция до колон
 	string sColonyTown = _sColony + "_town";
 
 	if(_sColony == "FortOrange") sColonyTown = "Shore36";
-	if(_sColony == "LaVega") sColonyTown = "LaVega_Port";
+	if(_sColony == "LaVega") sColonyTown = "LaVega_town";
 	if(_sColony == "Dominica") sColonyTown = "Shore27";
 	if(_sColony == "Terks") sColonyTown = "Shore56";
 

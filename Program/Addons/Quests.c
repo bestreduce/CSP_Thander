@@ -99,6 +99,14 @@ void DozorSetRiddleQuestion(int iType)
 
 void DozorPrepare()
 {
+	pchar.quest.DozorPrepare.win_condition.l1 = "Rank";
+	pchar.quest.DozorPrepare.win_condition.l1.value = 3;
+	pchar.quest.DozorPrepare.win_condition.l1.operation = ">=";
+	PChar.quest.DozorPrepare.function = "DozorPrepare_2";
+}
+
+void DozorPrepare_2()
+{
 	for(int d=1; d<=8; d++)
 	{
 		DozorSetRiddleQuestion(d);

@@ -18,7 +18,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			if(CheckAttribute(pchar, "Whisper.FindDesouzaHol") && !CheckAttribute(npchar, "Whisper.FindDesouzaHol"))
 			{
 				npchar.Whisper.FindDesouzaHol = true;
-				link.l1 = "Послушай, к тебе тут случаем не подходили ребята подозрительной наружности? У них еще должно быть клеймо в форме распятия на руке.";
+				link.l1 = "Послушай, к тебе тут случаем не подходили ребята подозрительной наружности? У них ещё должно быть клеймо в форме распятия на руке.";
 				link.l1.go = "FindDesouzaHol";
 				break;
 			}
@@ -39,7 +39,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 
         case "DefenceOrange": //Голландская линейка, квест №4, защита форта Оранж.
-            dialog.text = "Да, скажу я вам, такой лихой бойни я не видел на своем веку...";
+            dialog.text = "Да, скажу я вам, такой лихой бойни я не видел на своём веку...";
             link.l2 = "Ловко почикали английских псов, а?";
             link.l2.go = "Step_H4_1";
         break;
@@ -58,14 +58,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Jamaica_ratF_2":
-			dialog.text = "Ушел в море на своем корабле. А куда - не знаю. Он мне не докладывал.";
+			dialog.text = "Ушёл в море на своём корабле. А куда - не знаю. Он мне не докладывал.";
 			link.l1 = "Эх, жаль! Где ж я теперь его искать буду?";
 			link.l1.go = "Jamaica_ratF_3";
 		break;
 
 		case "Jamaica_ratF_3":
 			dialog.text = "Не знаю, "+ GetSexPhrase("дружище","мэм") +". Знал - подсказал бы.";
-			link.l1 = "Ладно, все понятно. Пойду, у кого еще поспрашиваю...";
+			link.l1 = "Ладно, все понятно. Пойду, у кого ещё поспрашиваю...";
 			link.l1.go = "exit";
 			AddQuestRecord("Slavetrader", "21_4");
 			pchar.questTemp.Slavetrader = "FindRatJamaica_H";

@@ -71,7 +71,7 @@ void ProcessDialogEvent()
 		break;
 		case "Shore53_9":
 			dialog.text = "Сеньор"+ GetSexPhrase("","ита") +", не ходите туда. Это место проклято!";
-			link.l1 = "Я все-таки рискну.";
+			link.l1 = "Я всё-таки рискну.";
 			link.l1.go = "Shore53_10";
 		break;
 		case "Shore53_10":

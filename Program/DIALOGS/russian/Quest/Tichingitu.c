@@ -162,7 +162,7 @@ void ProcessDialogEvent()
             dialog.Text = "Какие быть приказания?";
 			if (CheckAttribute(npchar, "IsMushketer"))
 			{
-				Link.l3 = "Я хочу, чтобы ты держался на определенном расстоянии от цели.";
+				Link.l3 = "Я хочу, чтобы ты держался на определённом расстоянии от цели.";
 				Link.l3.go = "TargetDistance";
 			}
             Link.l1 = "Стой здесь!";

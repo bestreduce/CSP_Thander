@@ -1,10 +1,14 @@
+AT_Mechty_Sbivautsya {Мечты сбываются}
+
+KSM_Spasenie_na_rifah {Чудесное спасение на рифах}
+
 WhisperTitanic {Титаник}
 
 PGGWhisper {Посягнуть на святое}
 
 TheLastMass {Последняя месса}
 
-BSHangover {Тяжелое похмелье}
+BSHangover {Тяжёлое похмелье}
 
 BSUrka {Неуловимая 'Урка'}
 
@@ -12,13 +16,13 @@ PDM_Aptekar {Аптекарь}
 
 PDM_Proklyataya_Jara {Проклятая жара}
 
-BSChaseBegun {Погоня началась!}
+BSChaseBegun {Погоня началась}
 
 BSCourtlyPassions {Куртуазные страсти}
 
-BSOnTheHorizon {Чёрные паруса на горизонте!}
+BSOnTheHorizon {Чёрные паруса на горизонте}
 
-BSPrologue {Не плюй в колодец...}
+BSPrologue {Не плюй в колодец}
 
 PDM_Clan_Lambrini {Клан Ламбрини}
 
@@ -44,7 +48,7 @@ Findship {Поиск корабля}
 
 PDM_Cursed_Idol {Проклятый идол}
 
-WhisperContraband {Незавершенное дело Билла}
+WhisperContraband {Незавершённое дело Билла}
 
 WhisperChardQuest {Карты, деньги, два клинка}
 
@@ -102,15 +106,15 @@ CompanionTravel {Компаньон в свободном плавании}
 
 Xebeca_BlueBird {Уничтожить шебеку 'Синяя Птица'}
 
-SharpPearl {Найти промысел ловцов жемчуга.}
+SharpPearl {Найти промысел ловцов жемчуга}
 
-SharpPearl_SeekSpy {Найти человека среди ловцов жемчуга, который дает информацию Шарпу}
+SharpPearl_SeekSpy {Найти человека среди ловцов жемчуга, который даёт информацию Шарпу}
 
 Pir_Line_0_Waiting {Капитан Гудли в Пуэрто-Принсипе}
 
 Pir_Line_1_JohnBolton {Услуга Моргану}
 
-Pir_Line_2_BlackLabel {Черная Метка}
+Pir_Line_2_BlackLabel {Чёрная Метка}
 
 Pir_Line_3_KillLoy {Разыскать и убить Эдварда Лоу}
 
@@ -130,15 +134,15 @@ SeekMayorsRing {Поиски обручального кольца в борде
 
 SeekUsurersJewel {Найти драгоценный камень ростовщика}
 
-Church_DestroyGhost {Задание церкви. Чистка от нечисти.}
+Church_DestroyGhost {Задание церкви по очистке от нечисти}
 
 Church_NightGuard {Ночное дежурство в церкви}
 
-PortmansBook_Delivery {Задание начальника порта. Догнать капитана.}
+PortmansBook_Delivery {Задание начальника порта догнать капитана}
 
-Portmans_SeekShip {Задание начальника порта. Вернуть украденный корабль.}
+Portmans_SeekShip {Задание начальника порта вернуть украденный корабль}
 
-SCQ_manSlave {Месть бывшего раба. Просьба горожанина.}
+SCQ_manSlave {Месть бывшего раба}
 
 SCQ_womanHasband {Найти мужа горожанки}
 
@@ -158,7 +162,7 @@ ISS_takeCandles {Свечи для прихода}
 
 ISS_takeStoreMoney {Пробраться в жилые помещения магазина на 'Эсмеральде'}
 
-ISS_ElisHusband {Непутевый муж Элис Тейло.}
+ISS_ElisHusband {Непутёвый муж Элис Тейлор}
 
 LSC_findDekster {Пропавший пират Лейтон Декстер}
 
@@ -190,7 +194,7 @@ Tenochtitlan {Тенотчитлан}
 
 MagicCity {Зачарованный город}
 
-Slavetrader {Работорговец.}
+Slavetrader {Работорговец}
 
 PrisonGun {Орудия для форта}
 
@@ -212,13 +216,13 @@ Gen_PGGQuest1woman {Предложение пирата}
 
 Rumour_GoldFleet {Испанский золотой флот}
 
-MerchantOnMap {Легкая добыча}
+MerchantOnMap {Лёгкая добыча}
 
 ShipTuning {Улучшение корабля}
 
-Gen_LoanFindCitizen {Помощь ростовщикам. Найти должника.}
+Gen_LoanFindCitizen {Помощь ростовщику найти должника}
 
-Gen_LoanTakeChest {Помощь ростовщикам. Доставить золото.}
+Gen_LoanTakeChest {Помощь ростовщику доставить золото}
 
 convoy_quest {Сопровождение торговцев}
 
@@ -290,7 +294,7 @@ Spa_Line_6_TakeMessangeer {Перехват вестового генерал-г
 
 Spa_Line_7_SavePardal {Оказать помощь Маноэлю Риверо Пардалю}
 
-Spa_Line_8_SaveCumana {Защита Куманы от нападения объединенной франко-английской эскадры пиратов}
+Spa_Line_8_SaveCumana {Защита Куманы от нападения объединённой франко-английской эскадры пиратов}
 
 Spa_Line_9_FourGolgGaleons {Задание губернатора Порто Белло на сопровождение кораблей}
 
@@ -326,7 +330,7 @@ Fra_Line_12_EndOfWar {Встреча с маркизом Бонрепо}
 
 Ascold {Поиски порошка мумии}
 
-ContractWithHell {Текст контракта с Департаментом Ада по учету людей}
+ContractWithHell {Текст контракта с Департаментом Ада по учёту людей}
 
 Azzy_HellSign {Текущая рассылка сообщений абонентам канцелярии Ада}
 

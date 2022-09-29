@@ -13,16 +13,6 @@ void ProcessDialogEvent()
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
-			if (npchar.id == "SharleMary")
-			{
-				chrDisableReloadToLocation = false;
-				LAi_SetPlayerType(PChar);
-				LAi_SetImmortal(NPChar, true);
-				dialog.text = GetSexPhrase("Мой капитан! Ты весь в крови!","Любовь моя! Ты вся в крови!");
-				link.l1 = "Пустяки. "+GetSexPhrase("приложился","приложилась")+" об камни на берегу. Тебя не задели? Эти дьяволы отравляют своё оружие.";
-				link.l1.go = "2";
-			}
-
 			NextDiag.TempNode = "First time";
 		break;
 
@@ -30,6 +20,39 @@ void ProcessDialogEvent()
 			dialog.text = GetSexPhrase("Он","Она")+" шевелится!!! Пресвятая дева, помилуй!";
 			link.l1 = "МОЗГИИИ!!!";
 			link.l1.go = "exit_fight";
+			
+			//Продолжение
+			PChar.quest.UP_KrovPismo1.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo1.win_condition.l1.location = "My_Cabin_Small";
+			PChar.quest.UP_KrovPismo1.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo2.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo2.win_condition.l1.location = "My_Cabin_Medium";
+			PChar.quest.UP_KrovPismo2.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo3.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo3.win_condition.l1.location = "My_Cabin_Medium2";
+			PChar.quest.UP_KrovPismo3.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo4.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo4.win_condition.l1.location = "My_New_Cabin1";
+			PChar.quest.UP_KrovPismo4.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo5.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo5.win_condition.l1.location = "My_New_Cabin2";
+			PChar.quest.UP_KrovPismo5.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo6.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo6.win_condition.l1.location = "My_Cabin_Huge";
+			PChar.quest.UP_KrovPismo6.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_KrovPismo7.win_condition.l1 = "location";
+			PChar.quest.UP_KrovPismo7.win_condition.l1.location = "My_Cabin_Quest";
+			PChar.quest.UP_KrovPismo7.win_condition = "UP_KrovPismo";
+			
+			PChar.quest.UP_DrugPridet.win_condition.l1 = "item";
+			PChar.quest.UP_DrugPridet.win_condition.l1.item = "UP_PismoZagadka";
+			PChar.quest.UP_DrugPridet.win_condition = "UP_DrugPridet";
 		break;
 
 		case "DeadmansGod":
@@ -71,12 +94,83 @@ void ProcessDialogEvent()
 
 		case "exit_fight":
 			AddDialogExitQuest("MainHeroFightModeOn");
-			//LAi_group_Attack(NPChar, Pchar);
 			LAi_SetWarriorType(NPChar);
 			LAi_group_MoveCharacter(NPChar, LAI_GROUP_MONSTERS);
 			LAi_SetImmortal(npchar, false);
 			LAi_group_SetRelation(LAI_GROUP_MONSTERS, LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			DialogExit();
+		break;
+		
+		case "PGG_Undead_1":
+			dialog.text = "Хватит здесь дрыхнуть!";
+			link.l1 = "Что, ты как сюда попал?";
+			link.l1.go = "PGG_Undead_2";
+		break;
+		
+		case "PGG_Undead_2":
+			dialog.text = "Бог мёртвых не доволен твоим бездействием.";
+			link.l1 = "Я уже давно перестал слышать голос бога мёртвых, теперь я занимаюсь своими делами.";
+			link.l1.go = "PGG_Undead_3";
+		break;
+		
+		case "PGG_Undead_3":
+			dialog.text = "Не спеши, у Миктлантекутли на тебя большие планы. Но тебе нужно ещё подрасти. Для армии мёртвых нужен сильный лидер, и тёмный повелитель ждёт, когда ты будешь готов.\nОставляю тебя переваривать эту информацию. Мы ещё увидимся, прощай.";
+			link.l1 = "Эй, постой...";
+			link.l1.go = "PGG_Undead_4";
+		break;
+		
+		case "PGG_Undead_4":
+			DialogExit();
+			sld = CharacterFromID("PGG_Undead")
+			LAi_ActorGoToLocation(sld, "reload", "reload1", "none", "", "", "UD_DrugUshel", -1);
+			pchar.questTemp.UndeadPrologue3 = "UP3";
+		break;
+		
+		case "PGG_Undead_5":
+			dialog.text = "Вот я тебя и нашёл.";
+			link.l1 = "Снова ты?";
+			link.l1.go = "PGG_Undead_6";
+		break;
+		
+		case "PGG_Undead_6":
+			dialog.text = "Время пришло. Миктлантекутли требует, чтобы ты взял ЕГО громадный зачарованный меч, и возглавил армию мёртвых, чтобы нести смерть всему живому! Муа-ха-ха.\n(неуверенно) ...ха-ха... Да... Есть одна малю-ю-ю-ю-ю-юсенькая проблемочка. Э-э...";
+			link.l1 = "Мне даже интересно стало.";
+			link.l1.go = "PGG_Undead_7";
+		break;
+		
+		case "PGG_Undead_7":
+			dialog.text = "Мне было поручено вручить тебе этот меч, но я его потерял. Хы.\nТеперь он в руках живых, что не есть хорошо, ведь через него они могут общаться с САМИМ богом мёртвых, что УМУ НЕПОСТИЖИМО! Это КОШМАР, КАТАСТРОФА!!!";
+			link.l1 = "Да успокойся ты.";
+			link.l1.go = "PGG_Undead_7_1";
+		break;
+		
+		case "PGG_Undead_7_1":
+			dialog.text = "Только не говори пожалуйста Миктлантекутли, а то он из меня котлету сделает, правду говорю!";
+			link.l1 = "Вижу, дела у тебя совсем хреновые.";
+			link.l1.go = "PGG_Undead_8";
+		break;
+		
+		case "PGG_Undead_8":
+			dialog.text = "Это ещё полбеды! Вот если воришки догадаются, как работает меч, и позвонят самому Миктлантекутли... Сам понимаешь, что будет...";
+			link.l1 = "Я понял, но от меня-то ты что хочешь?";
+			link.l1.go = "PGG_Undead_9";
+		break;
+		
+		case "PGG_Undead_9":
+			dialog.text = "Ты с дуба рухнул?! Найди меч, он ведь необычный, а - 'Говорящий меч'. Ты ведь нежить, а значит должен чувствовать энергетику меча. Он должен звать тебя, притягивать своим магнетизмом. Просто выйди в море, и ты сразу поймёшь, куда держать курс.";
+			link.l1 = "Безумие какое-то. Ну ладно, пойдём искать твой меч.";
+			link.l1.go = "PGG_Undead_10";
+		break;
+		
+		case "PGG_Undead_10":
+			DialogExit();
+			sld = CharacterFromID("PGG_Undead")
+			LAi_SetActorType(sld);
+			LAi_ActorGoToLocation(sld, "reload", "reload1", "none", "", "", "UD_DrugUshel_2", -1);
+			
+			PChar.quest.UP_PGGUndead_Off.win_condition.l1 = "ExitFromLocation";
+			PChar.quest.UP_PGGUndead_Off.win_condition.l1.location = PChar.location;
+			PChar.quest.UP_PGGUndead_Off.win_condition = "UP_PGGUndead_Off";
 		break;
 	}
 }

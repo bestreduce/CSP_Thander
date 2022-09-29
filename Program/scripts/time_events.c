@@ -64,6 +64,7 @@ void WorldSituationsUpdate()
 	float dayRandom;
 	float dayRandom1;
 	float dayRandom2;
+	float dayRandom3;
 
 	// boal -->
 	/*if (bQuestCheckProcessFreeze)   // если в квесте, то откладываем
@@ -94,6 +95,10 @@ void WorldSituationsUpdate()
 			dayRandom2 = Random();
 			PChar.DayRandom2 = dayRandom2;
 			Log_TestInfo("dayRandom2 == " + dayRandom2);
+			
+			dayRandom3 = Random();
+			PChar.DayRandom3 = dayRandom3;
+			Log_TestInfo("dayRandom3 == " + dayRandom3);
 
 			ChangeImport();
 			UpdateSmugglers();
@@ -231,6 +236,7 @@ void Tut_StartGame(string sQuest)
 void Tut_locCamera_1(string _tmp)
 {
     locCameraToPos(-5, 2.5, 5.6, false);
+	ChangeShowIntarface();
     DoQuestFunctionDelay("Tut_locCamera_2", 10.0);
 }
 

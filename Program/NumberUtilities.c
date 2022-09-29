@@ -39,7 +39,7 @@ int prand(int _max)
 }
 
 // Коммент - не нравится мне cRand() - он возвращает не псевдослучайное число,
-// а зависящее от конкретного дня месяца, да еще и подряд может быть несколько
+// а зависящее от конкретного дня месяца, да ещё и подряд может быть несколько
 // одинаковых числе, например, cRand(5) будет давать 5 дней подряд одно и тоже.
 // Функция ниже вернет псевдослучайное число, потом запоминает его в PChar и пока не наступит
 // новый день будет возвращать его-же. PChar.dayRandom устанавливается в первом шаге обновления дня
@@ -95,6 +95,24 @@ int dRand2(int _max2)
 	PChar.dayRandom2 = dayRandom2;
 
 	return MakeInt(dayRandom2 * (_max2+1));
+}
+
+int dRand3(int _max3)
+{
+	float dayRandom3;
+
+	if(CheckAttribute(PChar, "dayRandom3"))
+	{
+		dayRandom3 = stf(PChar.dayRandom3);
+		// Log_Info(""+dayRandom3);
+		// Log_Info(""+MakeInt(dayRandom3 * (_max3+1)));
+		return MakeInt(dayRandom3 * (_max3+1)); // 1.0 / (_max + 1) - для округления, иначе _max не выпадет никогда
+	}
+
+	dayRandom3 = Random();
+	PChar.dayRandom3 = dayRandom3;
+
+	return MakeInt(dayRandom3 * (_max3+1));
 }
 // <-- Warship 30.07.09
 

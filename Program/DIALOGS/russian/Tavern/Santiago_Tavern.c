@@ -26,7 +26,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 //**************************** Голл. линейка, квест №6. Узнать для Моргана инфу о губере Сантьяго ************************
  	 	case "Step_H6_1":
 			dialog.text = "Хвала Всемогущему Господу - у нас все хорошо. Город процветает.";
-			link.l1 = "В окружении врагов довольно сложно процветать. Как вам это удается?";
+			link.l1 = "В окружении врагов довольно сложно процветать. Как вам это удаётся?";
 			link.l1.go = "Step_H6_2";
         break;
  	 	case "Step_H6_2":
@@ -35,12 +35,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "Step_H6_3";
         break;
  	 	case "Step_H6_3":
-			dialog.text = "Да нет, по мне, так с ними было удобней. Я всегда имел хорошее свежее мясо для своей кухни. И дешевое, к тому же. А сейчас с этим стало сложней, все дорожает.";
+			dialog.text = "Да нет, по мне, так с ними было удобней. Я всегда имел хорошее свежее мясо для своей кухни. И дешёвое, к тому же. А сейчас с этим стало сложней, все дорожает.";
 			link.l1 = "Хм, зачем же тогда ваш губернатор так поступил?";
 			link.l1.go = "Step_H6_4";
         break;
  	 	case "Step_H6_4":
-			dialog.text = "А черт его знает. Наверное потому, что все они были сплошь - грязные французы. Эспаньола должна быть испанской!";
+			dialog.text = "А чёрт его знает. Наверное потому, что все они были сплошь - грязные французы. Эспаньола должна быть испанской!";
 			link.l1 = "Ну что же, пусть будет... Послушай, я хочу наняться к вашему губернатору на службу. Что порекомендуешь? Он вообще в городе?";
 			link.l1.go = "Step_H6_5";
         break;
@@ -76,7 +76,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             LAi_group_MoveCharacter(npchar, "SPAIN_CITIZENS");
             LAi_group_MoveCharacter(characterFromID("Santiago_waitress"), "SPAIN_CITIZENS");
             LAi_group_Delete("QuestGroup");
-            SetNationRelation2MainCharacter(SPAIN, RELATION_ENEMY); //если флаг сменен.
+            SetNationRelation2MainCharacter(SPAIN, RELATION_ENEMY); //если флаг сменён.
             ref sld;
             for (int i=1; i<=2; i++)
             {

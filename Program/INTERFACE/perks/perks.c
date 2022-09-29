@@ -167,10 +167,6 @@ bool IsCharacterPerkOn(ref chref, string perkName)
 
 void CharacterPerkOff(ref chref, string perkName)
 {
-	if (perkName == "Turn180")
-	{
-		chref.Tmp.SpeedRecall = 0; // чтоб маневр применить
-	}
 	DeleteAttribute(chref,"perks.list."+perkName+".active");
 	Event("eSwitchPerks","l",sti(chref.index));
 	// fix boal всегда для ГГ

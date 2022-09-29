@@ -1,4 +1,5 @@
 Antigua			{Антигуа}
+Bahames			{Багамы}
 Barbados		{Барбадос}
 Bermudes		{Бермуды}
 Beliz			{Юкатан}
@@ -31,10 +32,12 @@ Trinidad		{Тринидад и Тобаго}
 Reefs			{Риф скелета}
 KhaelRoa		{Кхаэль Роа}
 Mein			{Мэйн}
+StLucia         {Санта-Люсия}
 
 Tenotchitlan	{оз. Тескоко}
 
 SentJons_town		{Сент-Джонс}
+Nassau_town			{Нассау}
 Pirates_town		{Пиратское поселение}
 Bridge_town			{Бриджтаун}
 Beliz_town			{Белиз}
@@ -135,6 +138,10 @@ Shore62		{Истапалапу}
 Shore63		{залив Сан Мигель}
 Shore64		{пляж Кхаэль Роа}
 Shore64_1	{ }
+Shore65	    {залив Буканьеров}
+Shore66	    {мыс Пеликана}
+Shore68	    {бухта Приватира}
+Shore69	    {пляж Корсара}
 Shore_ship1	{бухта Разбитого корыта}
 Shore_ship2	{залив Гибели}
 Shore_ship3	{мыс Несбывшихся надежд}
@@ -234,6 +241,10 @@ Marigo				{Мариго}
 Marigo Town			{Мариго}
 Marigo Fort			{форт Мариго}
 Marigo Port			{порт Мариго}
+Nassau				{Нассау}
+Nassau Town			{Нассау}
+Nassau Fort			{форт Нассау}
+Nassau Port			{порт Нассау}
 Panama Town			{Панама}
 Panama Fort			{форт Панамы}
 Panama Port			{порт Панамы}
@@ -391,3 +402,4 @@ TempleUnderwater	{Лабиринт}
 DeckWithReefs		{Бухта проклятых}
 Reefs_Chapter		{Капитул}
 MountainPath		{Ущелье дьявола}
+WreckedShip			{Разбитый корабль}

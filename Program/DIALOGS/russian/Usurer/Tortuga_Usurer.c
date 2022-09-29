@@ -27,7 +27,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "PDM_PI_Rostov_2":
-			dialog.text = "О-о-о-о! О, Бог мой! "+ GetSexPhrase("месье","мадемуазель") +" "+pchar.name+"! Как прекрасно! Великолепно! Да этот идол может искупить все десять смертных грехов!";
+			dialog.text = "О-о-о-о! О, Бог мой! "+ GetSexPhrase("Месье","Мадемуазель") +" "+pchar.name+"! Как прекрасно! Великолепно! Да этот идол может искупить все десять смертных грехов!";
 			link.l1 = "Похоже, он вам нравится. Он ваш.";
 			link.l1.go = "PDM_PI_Rostov_3";
         break;
@@ -65,6 +65,15 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_1";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
+				sld.SaveItemsForDead = true;
+				sld.DontChangeBlade = true;
+				TakeItemFromCharacter(sld, "spyglass3");
+				TakeNItems(sld, "food1", -10);
+				AddMoneyToCharacter(sld, 7000);
+				AddItems(sld, "jewelry1", 25);
+				AddItems(sld, "jewelry7", 10);
+				AddItems(sld, "compcraft_copper", 20);
+				AddItems(sld, "compcraft_grindstone", 20);
 			break;
 			}
             if (Phrase == 1)
@@ -76,23 +85,41 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_2";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
+				sld.SaveItemsForDead = true;
+				sld.DontChangeBlade = true;
+				TakeItemFromCharacter(sld, "spyglass3");
+				TakeNItems(sld, "food1", -10);
+				AddMoneyToCharacter(sld, 7000);
+				AddItems(sld, "jewelry1", 25);
+				AddItems(sld, "jewelry7", 10);
+				AddItems(sld, "compcraft_copper", 20);
+				AddItems(sld, "compcraft_grindstone", 20);
 			break;
 			}
 			if (Phrase == 2)
             {
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandit_1", "skel1", "skeleton", "skeleton", Rank, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 20 + MOD_SKILL_ENEMY_RATE * 5, 20 + MOD_SKILL_ENEMY_RATE * 5, "blade19", "", 30 + MOD_SKILL_ENEMY_RATE * 4);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 20 + MOD_SKILL_ENEMY_RATE * 5, 20 + MOD_SKILL_ENEMY_RATE * 5, "blade36", "", 80 + MOD_SKILL_ENEMY_RATE * 5);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
 				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_3";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
+				sld.SaveItemsForDead = true;
+				sld.DontChangeBlade = true;
+				TakeItemFromCharacter(sld, "spyglass3");
+				TakeNItems(sld, "food1", -10);
+				AddMoneyToCharacter(sld, 7000);
+				AddItems(sld, "jewelry1", 25);
+				AddItems(sld, "jewelry7", 10);
+				AddItems(sld, "compcraft_copper", 20);
+				AddItems(sld, "compcraft_grindstone", 20);
 			break;
 			}
 		break;
 
  	 	case "Step_H3_1":
-			dialog.text = NPCStringReactionRepeat("Сразу хочу сказать, что деньги в рост не беру. Занять - это пожалуйста.", "Опять та же финансовая операция?...", "Снова деньги будем предлагать?", "Давайте делом займемся, а не о делах разговоры вести.", "block", 0, npchar, Dialog.CurrentNode);
+			dialog.text = NPCStringReactionRepeat("Сразу хочу сказать, что деньги в рост не беру. Занять - это пожалуйста.", "Опять та же финансовая операция?...", "Снова деньги будем предлагать?", "Давайте делом займёмся, а не о делах разговоры вести.", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Это почему?", "Да, опять та же...", "Опять...", "Давайте...", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("Step_H3_2", "none", "none", "none", npchar, Dialog.CurrentNode);
         break;

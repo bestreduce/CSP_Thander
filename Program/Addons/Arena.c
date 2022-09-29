@@ -1342,6 +1342,14 @@ void ArenaTournamentGoStart(int iStage, int iStageTemp)
 
 	ArenaTournamentSetDetailsForChar(attack, iStage);
 	ArenaTournamentSetDetailsForChar(enemy, iStage);
+	
+	if (attack.id != pchar.id && enemy.id != pchar.id) 
+	{
+		pchar.SkipBattle = true;
+		pchar.ArenaAttack = attack.id;
+		pchar.ArenaEnemy = enemy.id;
+	}
+	else pchar.SkipBattle = false;
 
 	Log_Info(attack.name + " " + attack.lastname + " VS " + enemy.name + " " + enemy.lastname);
 }
@@ -1522,6 +1530,11 @@ void ArenaTournamentCheckNewRound(string qName)
 		{
 			ArenaTournamentStartNewBattle();
 		}
+	}
+	
+	if (Characters[iAttack].id != pchar.id && Characters[iEnemy].id != pchar.id) 
+	{
+		pchar.SkipBattle = true;
 	}
 }
 

@@ -6,7 +6,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Какие вопросы, "+ GetSexPhrase("молодой человек","юная леди") +"?", "Чего ты хочешь, "+ GetSexPhrase("красавчик","красотка") +"? Ну хоть задай его."), "Опять вопросы?", "Хи-хи, третий раз на дню одно и то же - вопросы...",
-                          ""+ GetSexPhrase("Хм, может ты выберешь какую-нибудь красотку себе? А то у меня уже складывается в отношении тебя вполне определенное мнение...","Хм, может ты выберешь какую-нибудь красотку себе? Мальчиков не держим, хи-хи...") +"", "block", 1, npchar, Dialog.CurrentNode);
+                          ""+ GetSexPhrase("Хм, может ты выберешь какую-нибудь красотку себе? А то у меня уже складывается в отношении тебя вполне определённое мнение...","Хм, может ты выберешь какую-нибудь красотку себе? Мальчиков не держим, хи-хи...") +"", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я передумал...", "Хм, да ничего..."), "Не могу... Нет вопросов...",
                       "Да уж, действительно в третий раз... Извини.", "Не сейчас... В другой раз...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
@@ -17,7 +17,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				SaveCurrentNpcQuestDateParam(npchar, "quest.SharpTime");
 			}
 		break;
-		// капитан Шарп, грабеж жемчужных промыслов
+		// капитан Шарп, грабёж жемчужных промыслов
 		case "SharpPearl_1":
 			if (drand(1) || bBettaTestMode)
 			{
@@ -49,8 +49,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					sld.mapEnc.type = "trade";
 					sld.mapEnc.worldMapShip = "quest_ship";
 					sld.mapEnc.Name = "бриг 'Шарпоносец'";
-					string sColony= SelectAnyColony(npchar.city); //колония, откуда плывет Шарп
-					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даем с запасом
+					string sColony= SelectAnyColony(npchar.city); //колония, откуда плывёт Шарп
+					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даём с запасом
 					Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 					Log_TestInfo("Шарпоносец установлен из " + sColony + "  в " + pchar.questTemp.Sharp.City);
 				}
@@ -70,12 +70,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "SharpPearl_2":
 			dialog.text = "Барталомью-ю-ша! Зайди ко мне, дорогой, тебя тут спрашивают!";
-			link.l1 = "Хех, а Шарп у вас в почете, как я погляжу...";
+			link.l1 = "Хех, а Шарп у вас в почёте, как я погляжу...";
 			link.l1.go = "SharpPearl_3";
 		break;
 		case "SharpPearl_3":
 			chrDisableReloadToLocation = true;
-			pchar.questTemp.Sharp.count = 0; //счетчик нулим для след. раза
+			pchar.questTemp.Sharp.count = 0; //счётчик нулим для след. раза
 			pchar.questTemp.Sharp.price = 5000+rand(20)*1000; //цена за наводку
 			pchar.questTemp.Sharp.price.evil = rand(1); //добрый или злой, для скидки
 			sld = &characters[GetCharacterIndex("Sharp")];

@@ -264,7 +264,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Justin_Butt_3":
-			dialog.text = "Какое ещё к черту задание? Ты что, не понимаешь, что здесь происходит?";
+			dialog.text = "Какое ещё к чёрту задание? Ты что, не понимаешь, что здесь происходит?";
 			link.l1 = "Да, объясни, ты, наконец, толком!";
 			link.l1.go = "Justin_Butt_4";
 		break;

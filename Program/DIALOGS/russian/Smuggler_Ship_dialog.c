@@ -31,7 +31,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "start1":
-			dialog.text = "Надеюсь, тебе повезет больше чем с 'Меркурием'. Прощай.";
+			dialog.text = "Надеюсь, тебе повезёт больше чем с 'Меркурием'. Прощай.";
 			link.l1 = "Не сомневаюсь. Прощай, капитан!";
 			link.l1.go = "game_begin";
 		break;
@@ -136,7 +136,7 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("AnyReloadToLocation");
             chrDisableReloadToLocation = false;
 			CloseQuestHeader("Gen_ContrabandTravel");
-			//трем аттрибуты
+			//трём аттрибуты
 			DeleteAttribute(PChar, "GenQuest.contraTravel");
 		break;
 	}

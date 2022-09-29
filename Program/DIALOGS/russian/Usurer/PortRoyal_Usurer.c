@@ -16,7 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             }
 			if (pchar.questTemp.State == "MorrisWillams_AfterFightGoRedmond")
             {
-                link.l1 = "Ваших партнеров вы больше не увидите.";
+                link.l1 = "Ваших партнёров вы больше не увидите.";
                 link.l1.go = "Step_E6_5";
             }
 		break;
@@ -38,7 +38,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "Step_E6_4":
 			dialog.text = "Меня беспокоит только собственное здоровье, а на остальное мне наплевать, "+ GetSexPhrase("сэр","мисс") +". Я больше не желаю говорить об этом.";
-			link.l1 = "Я это дело так не оставлю. Мы встретимся еще...";
+			link.l1 = "Я это дело так не оставлю. Мы встретимся ещё...";
 			link.l1.go = "exit";
             pchar.questTemp.State = "MorrisWillams_ArrestedSeekInfo";
             AddQuestRecord("Eng_Line_6_MorrisWillams", "18");
@@ -55,7 +55,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "Step_E6_7":
 			dialog.text = "И это говорит пират?!! Ну хорошо, Уильямс немедленно будет освобожден.";
-			link.l1 = "Это еще не все. За мое молчание о ваших делишках с контрабандой вы будете выплачивать мне... 10000 ежемесячно.";
+			link.l1 = "Это ещё не все. За моё молчание о ваших делишках с контрабандой вы будете выплачивать мне... 10000 ежемесячно.";
 			link.l1.go = "Step_E6_8";
 		break;
 		case "Step_E6_8":

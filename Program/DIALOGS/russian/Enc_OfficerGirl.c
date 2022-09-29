@@ -78,7 +78,7 @@ void ProcessDialogEvent()
     			link.l1.go = "exit";
     			break;
             }
-			dialog.text = "Неужели вы передумали, капитан? Решили, что новый телохранитель, да еще девушка, вам не помешает?";
+			dialog.text = "Неужели вы передумали, капитан? Решили, что новый телохранитель, да ещё девушка, вам не помешает?";
 			link.l1 = "Пожалуй, так. Сколько ты хочешь?";
 			link.l1.go = "price";
             link.l2 = "Ошибаешься. Счастливо оставаться.";
@@ -93,7 +93,7 @@ void ProcessDialogEvent()
     			link.l1.go = "exit";
     			break;
             }
-			dialog.text = "Думаю, мы с вами сойдемся на 50000 пиастров.";
+			dialog.text = "Думаю, мы с вами сойдёмся на 50000 пиастров.";
 			link.l1 = "Я "+ GetSexPhrase("согласен","согласна") +", красотка. Считай себя зачисленной в команду.";//"+ GetSexPhrase("","а") +"
 			link.l1.go = "hire";
             link.l2 = "Ты не стоишь этих денег. Прощай.";
@@ -104,7 +104,7 @@ void ProcessDialogEvent()
 			if(makeint(Pchar.money) >= 50000)
 			{
 				AddMoneyToCharacter(Pchar, -50000);
-                dialog.text = "Не стану благодарить вас, капитан. Вы сами прекрасно знаете, что удачно вложили свое золото.";
+                dialog.text = "Не стану благодарить вас, капитан. Вы сами прекрасно знаете, что удачно вложили своё золото.";
 			    link.l1 = "Хочется в это верить.";
 			    link.l1.go = "Exit_hire";
 			}
@@ -112,7 +112,7 @@ void ProcessDialogEvent()
 			{
 				NextDiag.TempNode = "OnceAgain";
                 dialog.text = "Эй, похоже, у вас проблемы с наличностью! Извините, капитан, но я не работаю в кредит.";
-				link.l1 = "Ах ты, черт!";
+				link.l1 = "Ах ты, чёрт!";
 				link.l1.go = "Exit";
 			}
 		break;
@@ -136,13 +136,21 @@ void ProcessDialogEvent()
 				}
 			}
 
+			//Расторжение контракта
+			
+			if (CheckAttribute(npchar, "ImmortalOfficer"))
+			{
+				Link.l6 = "Я хочу расторгнуть заключённый между нами контракт.";
+				Link.l6.go = "cancelcontract1";
+			}
+
 			// приколы -->
             if (PChar.location == Get_My_Cabin())
             {
     			if (PChar.sex != "woman")
     			{
 					Link.l3 = RandPhraseSimple("Раз уж мы в каюте давай может...а? Посмотри тут и кровать есть... такая мягенькая...",
-	                                           "Посмотри какая в моей каюте большая кровать. Не хочешь разделить ее со мной?");
+	                                           "Посмотри какая в моей каюте большая кровать. Не хочешь разделить её со мной?");
 	                if (sti(pchar.GenQuest.BrothelCount) > 4+rand(3))
 	                {
 	                    Link.l3.go = "Love_Sex_Yes";
@@ -163,14 +171,14 @@ void ProcessDialogEvent()
                 if (PChar.sex != "woman")
                 {
 					Link.l3 = RandPhraseSimple("Девушка-телохранитель - это, конечно, хорошо, но может мы попытаемся сталь ближе?",
-	                                           "Как насчет неуставных услуг?");
+	                                           "Как насчёт неуставных услуг?");
 	                Link.l3.go = "Love_Sex";
                 }
             }
             Link.l5 = "Слушай мой приказ!";
             Link.l5.go = "stay_follow";
 
-			// по тек локации определим можно ли тут приказать  -->
+			// по тёк локации определим можно ли тут приказать  -->
 			if (IsEntity(loadedLocation))
             {
                 if (CheckAttribute(loadedLocation, "fastreload"))
@@ -287,8 +295,50 @@ void ProcessDialogEvent()
 				//pchar.quest.(immortal_officer).win_condition.l1.character = npchar.id;
 				//pchar.quest.(immortal_officer).function = "Remove_Contract_Officer";
 			}
-			// DeleteAttribute(NPChar, "contractMoney");//Mett: это можно заблокировать по желанию, мб потом понадобиться для перерасчета суммы контракта
+			// DeleteAttribute(NPChar, "contractMoney");//Mett: это можно заблокировать по желанию, мб потом понадобиться для перерасчёта суммы контракта
 			Link.l1 = "Вот и отлично! Договорились";
+			Link.l1.go = "Exit";
+		break;
+
+		case "cancelcontract1":
+			dialog.text = "Довольно неожиданно, капитан. И в чем же я " + NPCharSexPhrase(NPChar,"провинился?","провинилась?");
+			Link.l1 = "Забудь, я ошиб" + GetSexPhrase("ся.","лась.");
+			Link.l1.go = "Exit";
+			Link.l2 = "Меня не устраивают твои навыки.";
+			Link.l2.go = "cancelcontract2";
+		break;
+			
+		case "cancelcontract2":
+			NPChar.contractMoney = makeint(sti(NPChar.rank)*MOD_SKILL_ENEMY_RATE*1000);
+			dialog.text = "Вот как, ну что ж если вы оплатите неустойку по контракту, то у меня не будет претензий.";
+			if (sti(Pchar.money) >= sti(NPChar.contractMoney))
+			{
+				Link.l1 = "Как скажешь, " + sti(NPChar.contractMoney) + " золотых прямо сейчас на руки тебя устроит?";
+				Link.l1.go = "cancelcontract3";
+			}
+			Link.l2 = "У меня сейчас проблемы с наличностью, вернемся к этому разговору позже.";
+			Link.l2.go = "Exit";
+		break;
+			
+		case "cancelcontract3":
+			dialog.text = "Вполне, капитан. Я соглас" + NPCharSexPhrase(NPChar,"ен.","на.");
+			AddMoneyToCharacter(Pchar, -sti(NPChar.contractMoney));
+			pchar.Option_ImmortalOfficers = sti(sti(pchar.Option_ImmortalOfficers) - 1);
+			NPChar.OfficerWantToGo.DontGo = false;
+			NPChar.HalfImmortal = false;
+			NPchar.loyalty = MAX_LOYALITY / 2;
+			DeleteAttribute(npchar,"ImmortalOfficer");
+			if (rand(sti(pchar.reputation)) >= 50)
+			{
+				NPchar.alignment  = "good";
+				NPchar.reputation = 51 + rand(48);
+			}
+			else
+			{
+				NPchar.alignment = "bad";
+				NPchar.reputation = 49 - rand(48);
+			}
+			Link.l1 = "Вот и хорошо.";
 			Link.l1.go = "Exit";
 		break;
 
@@ -314,7 +364,7 @@ void ProcessDialogEvent()
         case "After_sex":
             NextDiag.TempNode = "Hired";
 		    dialog.text = RandPhraseSimple("Хм.. странно, я думала ты способен на большее...",
-                                           "Капитан, теперь вы снова можете соображать головой, а не... ? Вернемся к нашим делам.");
+                                           "Капитан, теперь вы снова можете соображать головой, а не... ? Вернёмся к нашим делам.");
             link.l1 = RandPhraseSimple("Но-но! Как ты разговариваешь со старшим по званию!", "Я могу многое, если соберусь с мыслями.");
 			link.l1.go = "exit";
         break;
@@ -322,7 +372,7 @@ void ProcessDialogEvent()
         case "Love_Sex":
             NextDiag.TempNode = "Hired";
 		    dialog.text = RandPhraseSimple("Что!!!?? Капитан, ты давно не сходил на берег и не был в борделе?", "Не понимаю, о чем это ты?");
-            link.l1 = RandPhraseSimple("Ну сама подумай.. ты такая красавица, да еще и в моем подчинении", "Ну не идти же мне в бордель, когда под боком есть ты!");
+            link.l1 = RandPhraseSimple("Ну сама подумай.. ты такая красавица, да ещё и в моем подчинении", "Ну не идти же мне в бордель, когда под боком есть ты!");
 			link.l1.go = "Love_Sex_2";
 			link.l2 = RandPhraseSimple("Извини меня, крошка, очень трудно было удержаться, чтоб не предложить..", "Эх.. ладно, проехали...");
 			link.l2.go = "exit";
@@ -330,7 +380,7 @@ void ProcessDialogEvent()
 
         case "Love_Sex_2":
             NextDiag.TempNode = "Hired";
-		    dialog.text = RandPhraseSimple("Капитан! Держите себя в руках, если не можете в своих, позовите матросов", "То, что я офицер и номинально подчиняюсь Вам, капитан, еще ничего не значит!");
+		    dialog.text = RandPhraseSimple("Капитан! Держите себя в руках, если не можете в своих, позовите матросов", "То, что я офицер и номинально подчиняюсь Вам, капитан, ещё ничего не значит!");
             link.l1 = RandPhraseSimple("Детка, не протився. Я уже не могу себя сдерживать. Пойдем..", "Я - твой капитан! И я приказываю тебе!");
 			link.l1.go = "Love_Sex_3";
 			link.l2 = RandPhraseSimple("Извини меня, крошка, очень трудно было удержаться, чтоб не предложить..", "Эх.. ладно, проехали...");
@@ -339,7 +389,7 @@ void ProcessDialogEvent()
 
         case "Love_Sex_3":
             NextDiag.TempNode = "Hired";
-		    dialog.text = RandPhraseSimple("Ну все! Ты ответишь за это! И прямо сейчас!", "Покувыркаться с тобой? Чтож сейчас поглядим, кто на что способен..");
+		    dialog.text = RandPhraseSimple("Ну всё! Ты ответишь за это! И прямо сейчас!", "Покувыркаться с тобой? Чтож сейчас поглядим, кто на что способен..");
             link.l1 = "Э.. ты о чем?";
 			link.l1.go = "Love_Sex_4";
         break;
@@ -367,7 +417,7 @@ void ProcessDialogEvent()
 
         case "AsYouWish":
 			dialog.text = "Как скажете, капитан, решать вам.";
-			link.l1 = "Пожалуй, я передумал"+ GetSexPhrase("","а") +". Ты мне еще нужна.";
+			link.l1 = "Пожалуй, я передумал"+ GetSexPhrase("","а") +". Ты мне ещё нужна.";
 			link.l1.go = "exit";
 			link.l2 = "Отлично. Можешь проваливать, куда подальше.";
 			link.l2.go = "Exit_Fire";
@@ -573,7 +623,7 @@ void ProcessDialogEvent()
 
 		case "Companion_TaskBoarding":
 			dialog.Text = "Что же вы желаете?";
-			Link.l1 = "Я хочу чтобы ты не брал"+ GetSexPhrase("","а") +" корабли на абордаж. Побереги себя и свою команду.";
+			Link.l1 = "Я хочу чтобы ты не брал корабли на абордаж. Побереги себя и свою команду.";
 			Link.l1.go = "Companion_TaskBoardingNo";
 			Link.l2 = "Мне нужно чтобы ты брал вражеские корабли на абордаж.";
 			Link.l2.go = "Companion_TaskBoardingYes";
@@ -685,13 +735,14 @@ void ProcessDialogEvent()
 		break;
 		//Элен
 		case "Helen_meet":
-			if (startherotype == 5 || startherotype == 6)
+			if (pchar.name == "Шарль" || pchar.name == "Мэри")
 			{
 				if(npchar.id == "Beatrice")
 				{
 					dialog.text = "У тебя хватает наглости заявляться сюда, после того, что было? Прочь с глаз моих, пока я тебя не зарубила!";
 					link.l1 = "Прости, Элен...";
 					link.l1.go = "exit";
+					NextDiag.TempNode = "Helen_meet";
 					break;
 				}
 			}

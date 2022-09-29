@@ -37,7 +37,7 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "ResWoman";
 			if (isBadReputation(pchar, 40))
 			{
-				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Шел","Шла") +" бы ты отсюда, " + GetAddress_Form(NPChar) + ". Нечего шляться "+ GetSexPhrase("такому типу","такой оторве") +" в доме у губернатора...", "Уходи, "+ GetSexPhrase("разбойник","разбойница") +"! Как вообще ты сюда попал"+ GetSexPhrase("","а") +"?..", "Ну и времена настали. Всякая мерзость шастает по дому губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + "!");
+				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Шёл","Шла") +" бы ты отсюда, " + GetAddress_Form(NPChar) + ". Нечего шляться "+ GetSexPhrase("такому типу","такой оторве") +" в доме у губернатора...", "Уходи, "+ GetSexPhrase("разбойник","разбойница") +"! Как вообще ты сюда попал"+ GetSexPhrase("","а") +"?..", "Ну и времена настали. Всякая мерзость шастает по дому губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + "!");
 				link.l1 = RandPhraseSimple("Полегче, дура...", "Аккуратней в выражениях...");
 				link.l1.go = "exit";
 			}
@@ -60,7 +60,7 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "ResMan";
 			if (isBadReputation(pchar, 40))
 			{
-				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Пошел вон отсюда, мерзавец","Пошла вон отсюда, мерзавка") +"!", "Немедленно убирайся из дома губернатора, "+ GetSexPhrase("негодяй","негодяйка") +"!", "Мне нет дела до того, что тебе нужно в доме губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + ". Но дам тебе совет - убирайся отсюда!");
+				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Пошёл вон отсюда, мерзавец","Пошла вон отсюда, мерзавка") +"!", "Немедленно убирайся из дома губернатора, "+ GetSexPhrase("негодяй","негодяйка") +"!", "Мне нет дела до того, что тебе нужно в доме губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + ". Но дам тебе совет - убирайся отсюда!");
 				link.l1 = RandPhraseSimple("Полегче, родной...", "Смотри, не подавись своими словами!");
 				link.l1.go = "exit";
 			}
@@ -83,8 +83,8 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "ResGuard";
 			if (isBadReputation(pchar, 40))
 			{
-				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Шел бы отсюда, приятель","Шла бы отсюда, подруга") +"...", "Проваливай отсюда!", "Ты, часом, дверью не "+ GetSexPhrase("ошибся","ошиблась") +"? Это дом губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + ". Тебе лучше уйти!");
-				link.l1 = RandPhraseSimple("Уйду, когда захочу!", "Не лезь не в свое дело...");
+				dialog.text = LinkRandPhrase(""+ GetSexPhrase("Шёл бы отсюда, приятель","Шла бы отсюда, подруга") +"...", "Проваливай отсюда!", "Ты, часом, дверью не "+ GetSexPhrase("ошибся","ошиблась") +"? Это дом губернатора " + XI_ConvertString("Colony" + npchar.city + "Gen") + ". Тебе лучше уйти!");
+				link.l1 = RandPhraseSimple("Уйду, когда захочу!", "Не лезь не в своё дело...");
 				link.l1.go = "exit";
 			}
 			else

@@ -194,7 +194,7 @@ int SelectColonyForSiege(int ination)  // выбираем колонию для
 /*
     if (i == 15)
     {
-        // поругать и все-таки сгенерить колонию, если конечно это возможно
+        // поругать и всё-таки сгенерить колонию, если конечно это возможно
         if (tempcolony != ination && !bWorldAlivePause)
         {
             SetNationRelationBoth(tempcolony, ination, RELATION_ENEMY)
@@ -269,7 +269,7 @@ void EndSiegeMap()
     pchar.quest.(sQuest).win_condition = "ClearSiege";
     pchar.quest.(sQuest).function= "SiegeClear";
     //--> слухи
-    SiegeRumourEx("Говорят, что "+NationNameSK(sti(aData.nation))+"ая эскадра, разорившая наш город, все еще в водах нашей колонии. Эх, если бы нашелся храбрый капитан, который рискнул бы напасть на них...", aData.Colony, sti(aData.conation), -1, 5, 3, "citizen,habitue,trader,tavern");
+    SiegeRumourEx("Говорят, что "+NationNameSK(sti(aData.nation))+"ая эскадра, разорившая наш город, все ещё в водах нашей колонии. Эх, если бы нашёлся храбрый капитан, который рискнул бы напасть на них...", aData.Colony, sti(aData.conation), -1, 5, 3, "citizen,habitue,trader,tavern");
     //<-- слухи
 
 }

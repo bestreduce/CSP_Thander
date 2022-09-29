@@ -69,16 +69,11 @@ void InitInterface(string iniName)
 	SetFormatedText("TEXT_NATIONS_PIC_SETTINGS", "Иконки наций");
 	SetFormatedText("TEXT_VISUAL_CIRASS_PIC_SETTINGS", "Визуал кирас");
 	SetFormatedText("TEXT_FONT_QUESTBOOK_PIC_SETTINGS", "Шрифт журнала");
+	SetFormatedText("TEXT_PARTICLES_PIC_SETTINGS", "Партиклы бомб");
+	SetFormatedText("TEXT_ALT_GUN_SOUNDS_SETTINGS", "Звуки выстрелов");
 
 	aref ar; makearef(ar,objControlsState.key_codes);
 	SendMessage(&GameInterface,"lsla",MSG_INTERFACE_MSG_TO_NODE,"KEY_CHOOSER", 0,ar);
-
-	if( sti(Render.full_screen)==0 )
-	{
-		SetSelectable("GAMMA_SLIDE",false);
-		SetSelectable("BRIGHT_SLIDE",false);
-		SetSelectable("CONTRAST_SLIDE",false);
-	}
 
 	float ftmp1 = -1.0;
 	float ftmp2 = -1.0;
@@ -213,6 +208,7 @@ void IReadVariableAfterInit()
 	GetFlagAllOptionsData();
 	GetVisualCirassOptionsData();
 	GetAltFontOptionsData();
+	GetBombsParticlesOptionsData();
 
 	int nShowBattleMode = 0;
 	if( CheckAttribute(&InterfaceStates,"ShowBattleMode") ) {
@@ -238,7 +234,7 @@ void IReadVariableAfterInit()
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FXMARK_CHECKBOX", 2, 1, nEnabledFXMarks );
 
-	int nEnabledCMControls = 1;
+	int nEnabledCMControls = 0;
 	if( CheckAttribute(&InterfaceStates,"EnabledCMControls") ) {
 		nEnabledCMControls = sti(InterfaceStates.EnabledCMControls);
 	}
@@ -249,6 +245,12 @@ void IReadVariableAfterInit()
 		nEnabledOldStore = sti(InterfaceStates.EnabledOldStore);
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"GOOD_OLD_STORE_CHECKBOX", 2, 1, nEnabledOldStore );
+
+	int nEnabledAltSoundsGun = 0;
+	if( CheckAttribute(&InterfaceStates,"EnabledAltSoundsGun") ) {
+		nEnabledAltSoundsGun = sti(InterfaceStates.EnabledAltSoundsGun);
+	}
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"ALT_GUN_SOUNDS_CHECKBOX", 2, 1, nEnabledAltSoundsGun );
 
 	int nEnabledShipMarks = 1;
 	if( CheckAttribute(&InterfaceStates,"EnabledShipMarks") ) {
@@ -296,6 +298,12 @@ void IReadVariableAfterInit()
 		nShowBoardMode = sti(InterfaceStates.ShowBoardMode);
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"BOARD_MODE_CHECKBOX", 2, 1, nShowBoardMode );
+	
+	int nCharVoice = 0;
+	if( CheckAttribute(&InterfaceStates,"CharVoice") ) {
+		nCharVoice = sti(InterfaceStates.CharVoice);
+	}
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CHAR_VOICE_CHECKBOX", 2, 1, nCharVoice );
 
 	int nDeadBoxText = 0;
 	if( CheckAttribute(&InterfaceStates,"DeadBoxText") ) {
@@ -328,7 +336,7 @@ void IReadVariableAfterInit()
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"ALT_INT_ICONS_CHECKBOX", 2, 1, nAltIntIcons );
 
 
-	if(bBoardMode)
+	/*if(bBoardMode)
 	{
 		CheckButton_SetState("BOARD_MODE_CHECKBOX", 1, true);
 	}
@@ -342,7 +350,7 @@ void IReadVariableAfterInit()
 	{
 		nCharVoice = bCharVoice;
 	}
-	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CHAR_VOICE_CHECKBOX", 2, 1, nCharVoice );
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CHAR_VOICE_CHECKBOX", 2, 1, nCharVoice );*/
 
 }
 
@@ -503,6 +511,13 @@ void procCheckBoxChange()
 		}
 	}
 
+	if( sNodName == "ALT_GUN_SOUNDS_CHECKBOX" )
+	{
+		{ // Show battle mode border
+			InterfaceStates.EnabledAltSoundsGun = bBtnState;
+		}
+	}
+
 	if( sNodName == "SHIPMARK_CHECKBOX" )
 	{
 		{ // Show battle mode border
@@ -580,19 +595,26 @@ void procCheckBoxChange()
 		}
 	}
 
- 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "BOARD_MODE_CHECKBOX", 3, 1))
+ 	/*if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "BOARD_MODE_CHECKBOX", 3, 1))
 	{
 		bBoardMode = true;
 	}
 	else
 	{
 		bBoardMode = false;
+	}*/
+	
+	if( sNodName == "BOARD_MODE_CHECKBOX")
+	{
+		{ // Show battle mode border
+			InterfaceStates.ShowBoardMode = bBtnState;
+		}
 	}
 
 	if( sNodName == "CHAR_VOICE_CHECKBOX")
 	{
 		{
-			bCharVoice = bBtnState;
+			InterfaceStates.CharVoice = bBtnState;
 		}
 	}
 
@@ -662,6 +684,32 @@ void procCheckBoxChange()
 					InterfaceStates.AltFont=2;
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"ALTFONT_CHECKBOX", 2, 1, false );
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"ALTFONT_CHECKBOX", 2, 2, false );
+				break;
+			}
+		}
+		return;
+	}
+	
+	if( sNodName == "PARTICLES_CHECKBOX" )
+	{
+		if( bBtnState == true )
+		{
+			switch( nBtnIndex )
+			{
+				case 1:
+					InterfaceStates.BombsParticles=0;
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 2, false );
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 3, false );
+				break;
+				case 2:
+					InterfaceStates.BombsParticles=1;
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 1, false );
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 3, false );
+				break;
+				case 3:
+					InterfaceStates.BombsParticles=2;
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 1, false );
+					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, 2, false );
 				break;
 			}
 		}
@@ -990,11 +1038,9 @@ float ConvertGamma(float fGamma, bool Real2Slider)
 { // гамма от 0.5 до 2.0
 	if(Real2Slider)
 	{
-		if(fGamma<=1.0) {return fGamma-0.5;}
-		return fGamma*0.5;
+		return fGamma*2.0/3.0-1.0/3.0;
 	}
-	if(fGamma<=0.5) {return fGamma+0.5;}
-	return fGamma*2.0;
+	return fGamma*1.5+0.5;
 }
 
 float ConvertBright(float fBright, bool Real2Slider)
@@ -1002,7 +1048,7 @@ float ConvertBright(float fBright, bool Real2Slider)
 	if(Real2Slider) {
 		return (fBright+50.0)/100.0;
 	}
-	return fBright*100-50;
+	return fBright*100.0-50.0;
 }
 
 float ConvertSeaDetails(float fDetails, bool Real2Slider)
@@ -1089,6 +1135,17 @@ void GetAltFontOptionsData()
 	case 2: nSelBtn=3; break;
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"ALTFONT_CHECKBOX", 2, nSelBtn, true );
+}
+
+void GetBombsParticlesOptionsData()
+{
+	int nSelBtn = 0;
+	switch( sti(InterfaceStates.BombsParticles) ) {
+	case 0: nSelBtn=1; break;
+	case 1: nSelBtn=2; break;
+	case 2: nSelBtn=3; break;
+	}
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"PARTICLES_CHECKBOX", 2, nSelBtn, true );
 }
 
 void GetControlsStatesData()
@@ -1286,17 +1343,14 @@ void ShowInfo()
 		case "GAMMA_SLIDE":
 			sHeader = XI_ConvertString("gamma");
 			sText1 = XI_ConvertString("gamma_descr");
-			sText3 = XI_ConvertString("FullScreenOnly");
 		break;
 		case "BRIGHT_SLIDE":
 			sHeader = XI_ConvertString("Brightness");
 			sText1 = XI_ConvertString("brightness_descr");
-			sText3 = XI_ConvertString("FullScreenOnly");
 		break;
 		case "CONTRAST_SLIDE":
 			sHeader = XI_ConvertString("Contrast");
 			sText1 = XI_ConvertString("Contrast_descr");
-			sText3 = XI_ConvertString("FullScreenOnly");
 		break;
 		case "SEA_DETAILS_SLIDE":
 			sHeader = XI_ConvertString("Sea Detail");
@@ -1398,6 +1452,11 @@ void ShowInfo()
 			yy = 258;
 		break;
 
+		case "ALT_GUN_SOUNDS_CHECKBOX":
+			sHeader = XI_ConvertString("AltSoundsGun");
+			sText1 = XI_ConvertString("AltSoundsGun_descr");
+		break;
+
 		case "FLAGALLWDM_CHECKBOX":
 			sHeader = XI_ConvertString("FlagAllWDM");
 			sText1 = XI_ConvertString("FlagAllWDM_descr");
@@ -1465,6 +1524,11 @@ void ShowInfo()
             sPicture = "INTERFACES\FaqPictures\ALTFONT_CHECKBOX.png";
 			xx = 570;
 			yy = 494;
+		break;
+
+		case "PARTICLES_CHECKBOX":
+			sHeader = XI_ConvertString("Particles_title");
+			sText1 = XI_ConvertString("Particles_descr");
 		break;
 
 		case "NOINT_CHECKBOX":

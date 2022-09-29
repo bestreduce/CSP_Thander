@@ -21,7 +21,7 @@ void CreateCitizens(aref loc)
 	int iColony = -1;
 	int iNation = -1;
 
-	if (isLocationHasCitizens(loc.id)) return; // boal  если есть еще с того раза, но не нужно
+	if (isLocationHasCitizens(loc.id)) return; // boal  если есть ещё с того раза, но не нужно
 
 	if(CheckAttribute(loc, "fastreload"))
 	{
@@ -482,7 +482,7 @@ void CreateCitizens(aref loc)
 	}
 	// грузчики <--
 	//--> возможная генерация квестодателя на розыск капитанов
-	if (CheckAttribute(loc, "questSeekCap") && GetCharacterIndex("QuestCitiz_" + loc.fastreload) == -1)
+	/*if (CheckAttribute(loc, "questSeekCap") && GetCharacterIndex("QuestCitiz_" + loc.fastreload) == -1)
 	{
 		string sModel, sSex, sAnimation, sGr;
 		if (rand(1))
@@ -514,7 +514,7 @@ void CreateCitizens(aref loc)
         chr.chr_ai.type.checkFight = 999999.0;
 		LAi_group_MoveCharacter(chr, slai_group);
 		PlaceCharacter(chr, "goto", "random_free");
-	}
+	}*/
 }
 
 // плодим завсегдатеев в таверну, тоже фантомы-многоджневки (24ч) переработка boal 13.05.06
@@ -528,7 +528,7 @@ void CreateHabitues(aref loc)
 
 	OfficersReactionResult(); // уход офов в местах, где есть пьянь и др офы - пока это таверна
 
-	if (!isLocationHasCitizens(loc.id))  // boal  если есть еще с того раза, но не нужно
+	if (!isLocationHasCitizens(loc.id))  // boal  если есть ещё с того раза, но не нужно
 	{
 		if (CheckAttribute(loc, "fastreload"))
 		{
@@ -606,7 +606,7 @@ void CreateHabitues(aref loc)
 		            chr.City = Colonies[iColony].id;  // это можно прописать в статике, но мне лениво по 20 городам лазить.
 		            chr.nation = iNation; // нация его нужна, тк она будет нацией патруля на берегу, он не пират
 					CreateModel(iChar, "pirate", MAN);
-					sTemp = PlaceCharacter(chr, "sit", "random_free");
+					sTemp = LAi_FindFreeRandomLocator("sit");
 					FreeSitLocator(loc.id, sTemp);
 					ChangeCharacterAddressGroup(chr, loc.id, "sit", sTemp);
 					LAi_group_MoveCharacter(chr, slai_group);
@@ -1168,7 +1168,7 @@ void CreatePearlVillage(aref loc)
 		pchar.GenQuestBox.(sTemp) = true;
         pchar.GenQuestBox.(sTemp).box1.items.jewelry11 = rand(150) + rand(150);
         pchar.GenQuestBox.(sTemp).box2.items.jewelry12 = rand(250) + rand(250);
-		// ==> защитники, повоевать таки придется
+		// ==> защитники, повоевать таки придётся
 		model[0] = "pirate_1";
 		model[1] = "pirate_2";
 		model[2] = "pirate_3";

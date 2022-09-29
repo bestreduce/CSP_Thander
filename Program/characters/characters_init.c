@@ -99,6 +99,10 @@ void CreateCharacters()
 	n = CreateBarbadosCharacters(n);
 	ReloadProgressUpdate();
 	Trace("Barbados: " + n);
+	
+	n = CreateBahamesCharacters(n);
+	ReloadProgressUpdate();
+	Trace("Bahames: " + n);
 
 	n = CreateJamaicaCharacters(n);
 	ReloadProgressUpdate();
@@ -424,6 +428,12 @@ void CreateCharacters()
 	NullCharacter.GenQuestFort.Bridgetown.next0  = "Bridgetown_town";
     NullCharacter.GenQuestFort.Bridgetown.next1  = "Bridgetown_townhall";
     NullCharacter.GenQuestFort.Bridgetown.next2  = "Bridgetown_ExitTown";
+	
+	NullCharacter.GenQuestFort.Nassau.how        = 3;
+    NullCharacter.GenQuestFort.Nassau.howSolder  = 3;
+	NullCharacter.GenQuestFort.Nassau.next0  = "Nassau_town";
+    NullCharacter.GenQuestFort.Nassau.next1  = "Nassau_townhall";
+    NullCharacter.GenQuestFort.Nassau.next2  = "Nassau_ExitTown";
 
     NullCharacter.GenQuestFort.SanJuan.how        = 3;
     NullCharacter.GenQuestFort.SanJuan.howSolder  = 3;

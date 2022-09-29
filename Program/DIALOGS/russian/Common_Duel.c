@@ -79,7 +79,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		if (sti(pchar.Ship.Type) != SHIP_NOTUSED && sti(NPChar.Ship.Type) != SHIP_NOTUSED)
 		{
 			Dialog.Text = RandPhraseSimple(Dialog.Text + " Или мы можем выйти в море и посмотреть, кто на что способен!",
-				"Дуэль?!! Ха, да я раздавлю тебя как блоху! Выбирай, как ты умрешь!");
+				"Дуэль?!! Ха, да я раздавлю тебя как блоху! Выбирай, как ты умрёшь!");
 			link.l2 = RandPhraseSimple("В море мне нет равных.", "Мой корабль пустит ко дну твоё старое корыто!");
 			link.l2.go = "sea_duel";
 		}
@@ -132,7 +132,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		}
 		break;
 
-	//предложение "пойдем выйдем" рассматривается
+	//предложение "пойдём выйдем" рассматривается
 	case "fight_off_town":
 		Dialog.Text = RandPhraseSimple("Слишком много чести! Защищайся!", "Мне некогда! Здесь и сейчас!");
 		link.l1 = RandPhraseSimple("Ну, если ты так торопишься умереть...", "Проклятье! Я помогу тебе отправиться в ад!!!");
@@ -145,7 +145,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		}
 		break;
 
-	//что ж, пойдем выйдем
+	//что ж, пойдём выйдем
 	case "fight_off_town_prep":
 		SaveCurrentQuestDateParam("questTemp.Duel.StartTime");
 		PChar.questTemp.duel.Start = true;
@@ -162,7 +162,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.duel_move_opponent2place.win_condition.l1 = "Location";
 			pchar.quest.duel_move_opponent2place.win_condition.l1.location = pchar.questTemp.duel.place;
 			pchar.quest.duel_move_opponent2place.function = "Duel_Move_Opponent2Place";
-			//на случай, если не дождется, часа вполне достаточно
+			//на случай, если не дождётся, часа вполне достаточно
 			SetTimerConditionParam("duel_move_opponentBack", "Duel_Move_OpponentBack", 0, 0, 0, sti(GetTime() + 0.5) + sti(pchar.questTemp.Duel.WaitTime) + 1, false);
 			pchar.quest.duel_move_opponentBack.function = "Duel_Move_OpponentBack";
 			if (CheckAttribute(NPChar, "CityType"))
@@ -289,7 +289,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 
 	case "TreasureHunterPGG":
 		NextDiag.CurrentNode = "Second time";
-		//dialog.text = "Постой-ка, "+ GetSexPhrase("приятель","подруга") +"... Сдается, у тебя есть кое-что интересное. Нужно делиться с близкими найдеными сокровищами.";
+		//dialog.text = "Постой-ка, "+ GetSexPhrase("приятель","подруга") +"... Сдаётся, у тебя есть кое-что интересное. Нужно делиться с близкими найдеными сокровищами.";
 		dialog.text = RandPhraseSimple("Я так и подозревал" + npcharSexPhrase(npchar,"","а") + ", что этот жулик продал больше одной карты. Не зря я его убил" + npcharSexPhrase(npchar,"","а")+".","Постой-ка, "+ GetSexPhrase("приятель","подруга") +". Эта карта - моя. Не знаю, как именно она у тебя оказалась, но у меня её стащил по пьяни один жулик. Так что эти сокровища тебе не принадлежат. ");
 	    //if (PGG_ChangeRelation2MainCharacter(npchar, 0) < 41)
 		if (sti(npchar.reputation) < 41)
@@ -373,7 +373,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		else
 		{
 			dialog.text = LinkRandPhrase ("Может и хочу, но не с тобой", "Отвали, не до тебя сейчас!", "Знаешь что? " + LinkRandPhrase("Я уже всё проиграл"+ NPCharSexPhrase(NPChar,"","а") +".", "Ты уже всех обчистил"+GetSexPhrase("","а")+".", "Я сейчас не в том настроении, отвали."));
-			link.l10 = "Как знаешь, дело твое.";
+			link.l10 = "Как знаешь, дело твоё.";
 			link.l10.go = "exit";
 		}
 	break;
@@ -397,7 +397,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 
 	case "Cards_Rule":
 		dialog.text = CARDS_RULE;
-		link.l1 = "Что ж, начнем!";
+		link.l1 = "Что ж, начнём!";
 		link.l1.go = "Cards_begin";
 		link.l3 = "Нет, это не для меня...";
 		link.l3.go = "exit";
@@ -486,7 +486,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 
 	case "Dice_Rule":
 		dialog.text = DICE_RULE;
-		link.l1 = "Что ж, начнем!";
+		link.l1 = "Что ж, начнём!";
 		link.l1.go = "Dice_begin";
 		link.l3 = "Нет, это не для меня...";
 		link.l3.go = "exit";
@@ -583,14 +583,16 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 // Квест ПГГ Виспер
 	case "Quest_Whisper":
 		npchar.QuestWhisper = true;
-		chrDisableReloadToLocation = true;
 
 		Dialog.Text = "Дело серьёзное, я не стану обсуждать его при всех. Продолжим у меня в комнате?";
 		link.l1 = "Ну пойдём.";
 		link.l1.go = "Quest_Whisper_Room";
+		link.l2 = "Я наслышан"+GetSexPhrase("","а")+", что ты приносишь неудачу в любом деле, лучше буду держаться от тебя подальше.";
+		link.l2.go = "exit";
 	break;
 
 	case "Quest_Whisper_Room":
+		chrDisableReloadToLocation = true;
 		DoReloadCharacterToLocation(npchar.PGGAi.location.town + "_tavern_upstairs","goto","goto1");
 		ChangeCharacterAddressGroup(npchar, npchar.PGGAi.location.town + "_tavern_upstairs", "goto", "goto1");
 		pchar.InstantDialog = npchar.id;

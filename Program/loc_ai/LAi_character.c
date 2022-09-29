@@ -1033,9 +1033,19 @@ void LAi_AllCharactersUpdate(float dltTime)
 						LAi_SetFightMode(chr, true);
 					}
 					else
-					{
-						LAi_SetWarriorTypeNoGroup(chr);
-						LAi_SetFightMode(chr, true);
+					{	
+						if(chr.chr_ai.backuptype == officer)
+						{
+							DeleteAttribute(chr, "ai_type.backuptype");
+							LAi_type_officer_Init(chr);
+							LAi_SetFightMode(chr, true);
+						}
+						else
+						{
+							DeleteAttribute(chr, "ai_type.backuptype");
+							LAi_SetWarriorTypeNoGroup(chr);
+							LAi_SetFightMode(chr, true);
+						}
 					}
 				}
 			}
@@ -1331,7 +1341,7 @@ void EatSomeFood()
 		aref  arItm;
 		int   itmIdx;
 		String itemID;
-		if (!CheckAttribute(pchar, "autofood_betterfood"))
+		if (!CheckAttribute(pchar, "betterfood"))
 		{
 			itmIdx = FindFoodFromChr(pchar, &arItm, 0);
 		}
@@ -1351,7 +1361,7 @@ void EatSomeFood()
 				PlaySound("interface\_Hrust_"+rand(3)+".wav");
 				break;
 			}
-			if (!CheckAttribute(pchar, "autofood_betterfood"))
+			if (!CheckAttribute(pchar, "betterfood"))
 			{
 				itmIdx = FindFoodFromChr(pchar, &arItm, itmIdx+1);
 			}
@@ -1367,20 +1377,4 @@ void EatSomeFood()
 	{
 		DeleteAttribute(pchar, "pressedFoodButton");
 	}
-}
-
-int FindBetterFoodFromChr(ref chref, ref arFind)
-{
-	int i;
-	aref arItm;
-	for(i=ITEMS_QUANTITY; i>-1; i--)
-	{
-		makearef(arItm,Items[i]);
-		if( CheckAttribute(arItm,"Food") && GetCharacterItem(chref,Items[i].id)>0 )
-		{
-			arFind = arItm;
-			return i;
-		}
-	}
-	return -1;
 }

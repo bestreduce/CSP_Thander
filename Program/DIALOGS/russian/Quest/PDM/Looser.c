@@ -12,7 +12,7 @@ void ProcessDialogEvent()
 	switch(Dialog.CurrentNode)
 	{
 		case "first time":
-			dialog.text = "Слушаю тебя.";
+			dialog.text = "Слушаю тебя, приятель.";
 			link.l1 = "Мне не удалось сделать, как ты просил.";
 			link.l1.go = "1";
 		break;
@@ -34,7 +34,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "quest":
-			dialog.text = "Слушаю тебя.";
+			dialog.text = "Слушаю тебя, приятель.";
 			link.l1 = "Я забрал"+ GetSexPhrase("","а") +" все кошельки, как ты просил. Так что там с наградой?";
 			link.l1.go = "2";
 		break;
@@ -59,7 +59,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "3":
-			dialog.text = LinkRandPhrase("А, это ты...","Я скоро ухожу, до встречи.","Может когда-нибудь еще пересечёмся...");
+			dialog.text = LinkRandPhrase("А, это ты...","Я скоро ухожу, до встречи.","Может когда-нибудь ещё пересечёмся...");
 			link.l1 = "...";
 			link.l1.go = "exit";
 
@@ -67,7 +67,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Jdet_1":
-			dialog.text = "Слушаю тебя.";
+			dialog.text = "Слушаю тебя, приятель.";
 			link.l1 = "Я скоро достану твои деньги, не переживай.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Jdet_1";

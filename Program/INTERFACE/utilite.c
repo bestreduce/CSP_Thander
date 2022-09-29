@@ -726,13 +726,13 @@ bool XI_FindFoldersWithoutNetsave(string sFindTemplate,aref arFoldersList)
 // boal -->
 void ReadSavedOptionsEx(ref gopt)
 {
-	string sFileName = "options";
+	string sFileName = "options_start";
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_LOADOPTIONS, sFileName, gopt);
 }
 
 void SaveSavedOptionsEx(ref gopt)
 {
-	string sFileName = "options";
+	string sFileName = "options_start";
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_SAVEOPTIONS, sFileName, gopt);
 }
 
@@ -746,7 +746,9 @@ void SaveStartGameParam()
 
     optref.StartGameParam.PlayerProfile    = GameInterface.PROFILE_NAME.str;//PlayerProfile.name;
     optref.StartGameParam.MOD_SKILL_ENEMY_RATE   = MOD_SKILL_ENEMY_RATE;
+	optref.StartGameParam.MOD_EXP_RATE   = MOD_EXP_RATE;
 	optref.StartGameParam.MOD_DEAD_CLEAR_TIME   = MOD_DEAD_CLEAR_TIME;
+	optref.StartGameParam.MOD_DEFENDERS_RATE   = MOD_DEFENDERS_RATE;
 	optref.StartGameParam.MainChAnim   = MainChAnim;
     optref.StartGameParam.bHardcoreGame          = bHardcoreGame;
 	optref.StartGameParam.bPartitionSet          = bPartitionSet;
@@ -756,6 +758,7 @@ void SaveStartGameParam()
 	optref.StartGameParam.bHardBoss  		 	 = bHardBoss;
 	optref.StartGameParam.bHigherShipRate  		 = bHigherShipRate;
 	optref.StartGameParam.bHigherSelfRate  		 = bHigherSelfRate;
+	optref.StartGameParam.bRankRequirement  	 = bRankRequirement;
 	optref.StartGameParam.bHalfImmortalPGG  	 = bHalfImmortalPGG;
 	optref.StartGameParam.bPortPermission  		 = bPortPermission;
 	optref.StartGameParam.bBribeSoldiers  		 = bBribeSoldiers;
@@ -765,13 +768,30 @@ void SaveStartGameParam()
 	optref.StartGameParam.iEncountersCountRate   = iEncountersCountRate;
 	optref.StartGameParam.iArcadeSails           = iArcadeSails;
 	optref.StartGameParam.bAltBalance          	 = bAltBalance;
+	optref.StartGameParam.bAltBalanceTimeSlow    = bAltBalanceTimeSlow;
+	optref.StartGameParam.bAltBalanceOffTopPerk  = bAltBalanceOffTopPerk;
+	optref.StartGameParam.bAltBalanceProHits     = bAltBalanceProHits;
 	optref.StartGameParam.bFillEncyShips         = bFillEncyShips;
 	optref.StartGameParam.bDifficultyWeight      = bDifficultyWeight;
+	optref.StartGameParam.bModDamage      		 = bModDamage;
+	optref.StartGameParam.iStealthSystem         = iStealthSystem;
     // иначе сброс галки может быть optref.StartGameParam.bWorldAlivePause       = bWorldAlivePause;
 
     optref.StartGameParam.HeroType         = NullCharacter.HeroParam.HeroType;
     optref.StartGameParam.Nation           = NullCharacter.HeroParam.Nation;
     optref.StartGameParam.CurHeroNum       = startHeroType;
+	
+	int  heroQty   = sti(GetNewMainCharacterParam("ps_hero_qty"));
+	for (int n=1; n<=heroQty; n++)
+	{
+		string sBlockPGG = "PGG"+n;
+		if (CheckAttribute(pchar,"RemovePGG." + sBlockPGG) && sti(pchar.RemovePGG.(sBlockPGG)) == 1)
+		{
+			optref.StartGameParam.DisabledPGGs.(sBlockPGG) = 1;
+		}
+		else optref.StartGameParam.DisabledPGGs.(sBlockPGG) = 0;
+	}
+	
 
 	SaveSavedOptionsEx(&gopt);
 }
@@ -792,9 +812,17 @@ void LoadStartGameParam()
 	{
     	MOD_SKILL_ENEMY_RATE = sti(optref.StartGameParam.MOD_SKILL_ENEMY_RATE);
     }
+	if (CheckAttribute(optref, "StartGameParam.MOD_EXP_RATE"))
+	{
+    	MOD_EXP_RATE = sti(optref.StartGameParam.MOD_EXP_RATE);
+    }
 	if (CheckAttribute(optref, "StartGameParam.MOD_DEAD_CLEAR_TIME"))
 	{
     	MOD_DEAD_CLEAR_TIME = sti(optref.StartGameParam.MOD_DEAD_CLEAR_TIME);
+    }
+	if (CheckAttribute(optref, "StartGameParam.MOD_DEFENDERS_RATE"))
+	{
+    	MOD_DEFENDERS_RATE = sti(optref.StartGameParam.MOD_DEFENDERS_RATE);
     }
 	if (CheckAttribute(optref, "StartGameParam.MainChAnim"))
 	{
@@ -831,6 +859,10 @@ void LoadStartGameParam()
 	if (CheckAttribute(optref, "StartGameParam.bHigherSelfRate"))
 	{
     	bHigherSelfRate = sti(optref.StartGameParam.bHigherSelfRate);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bRankRequirement"))
+	{
+    	bRankRequirement = sti(optref.StartGameParam.bRankRequirement);
     }
 	if (CheckAttribute(optref, "StartGameParam.bHalfImmortalPGG"))
 	{
@@ -881,14 +913,49 @@ void LoadStartGameParam()
 	{
 		startHeroType = sti(optref.StartGameParam.CurHeroNum);
 	}
+	
 	if (CheckAttribute(optref, "StartGameParam.bAltBalance"))
 	{
     	bAltBalance = sti(optref.StartGameParam.bAltBalance);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bAltBalanceTimeSlow"))
+	{
+    	bAltBalanceTimeSlow = sti(optref.StartGameParam.bAltBalanceTimeSlow);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bAltBalanceOffTopPerk"))
+	{
+    	bAltBalanceOffTopPerk = sti(optref.StartGameParam.bAltBalanceOffTopPerk);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bAltBalanceProHits"))
+	{
+    	bAltBalanceProHits = sti(optref.StartGameParam.bAltBalanceProHits);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bFillEncyShips"))
+	{
+    	bFillEncyShips = sti(optref.StartGameParam.bFillEncyShips);
     }
 	if (CheckAttribute(optref, "StartGameParam.bDifficultyWeight"))
 	{
     	bDifficultyWeight = sti(optref.StartGameParam.bDifficultyWeight);
     }
+	if (CheckAttribute(optref, "StartGameParam.bModDamage"))
+	{
+    	bModDamage = stf(optref.StartGameParam.bModDamage);
+    }
+	if (CheckAttribute(optref, "StartGameParam.iStealthSystem"))
+	{
+    	iStealthSystem = sti(optref.StartGameParam.iStealthSystem);
+    }
+	int  heroQty   = sti(GetNewMainCharacterParam("ps_hero_qty"));
+	for (int n=1; n<=heroQty; n++)
+	{
+		string sBlockPGG = "PGG"+n;
+		if (CheckAttribute(optref,"StartGameParam.DisabledPGGs." + sBlockPGG) && sti(optref.StartGameParam.DisabledPGGs.(sBlockPGG)) == 1)
+		{
+			pchar.RemovePGG.(sBlockPGG) = 1;
+		}
+		else pchar.RemovePGG.(sBlockPGG) = 0;
+	}
 }
 void LoadPlayerProfileDefault()
 {

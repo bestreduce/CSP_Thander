@@ -39,7 +39,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "DestroyGang_1";
 		break;
 		case "DestroyGang_1":
-			dialog.text = LinkRandPhrase("Да, я известен в этих краях, хе-хе... Стоп, а ты не "+ GetSexPhrase("очередной ли пес","очередная ли шавка") +" губернатора, "+ GetSexPhrase("которого","которую") +" он пытается натравить на меня?",
+			dialog.text = LinkRandPhrase("Да, я известен в этих краях, хе-хе... Стоп, а ты не "+ GetSexPhrase("очередной ли пёс","очередная ли шавка") +" губернатора, "+ GetSexPhrase("которого","которую") +" он пытается натравить на меня?",
 				"Губернатор - мой большой друг, чего скрывать? Ха, а не "+ GetSexPhrase("очередной ли ты герой, отправленный","не очередная ли ты героиня, отправленная") +", им за моей головой?",
 				"'Дружеское' расположение губернатора ко мне - факт, хе-хе. А ты откуда об этом знаешь? Может, он послал тебя по мою душу?");
 			Link.l1 = LinkRandPhrase("Точно так, мерзавец. Готовься к смерти!", "Надо же, какой ты догадливый. Ну что же, пора приступать к твоей ликвидации. Поговорили, хватит уже...", "Да, это я и есть. Доставай оружие, приятель! Посмотрим, какого цвета у тебя кровь.");
@@ -56,7 +56,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "DestroyGang_ExitAfraid":
-			pchar.GenQuest.DestroyGang = "Found"; //флаг нашел, но струсил
+			pchar.GenQuest.DestroyGang = "Found"; //флаг нашёл, но струсил
 			npchar.money = AddMoneyToCharacter(npchar, sti(pchar.money));
 			pchar.money = 0;
 			LAi_SetWarriorType(npchar);
@@ -101,12 +101,12 @@ void ProcessDialogEvent()
 			Link.l1.go = "SeekSpy_2";
 		break;
 		case "SeekSpy_2":
-			dialog.text = "Ну а я здесь при чем?";
-			Link.l1 = "Может, и ни при чем, но давай-ка, для начала, пройдем в комендатуру. Там разберемся...";
+			dialog.text = "Ну а я здесь при чём?";
+			Link.l1 = "Может, и ни при чём, но давай-ка, для начала, пройдём в комендатуру. Там разберемся...";
 			Link.l1.go = "SeekSpy_3";
 		break;
 		case "SeekSpy_3":
-			dialog.text = "Нет, в комендатуру я не пойду. Считай, что "+ GetSexPhrase("нашел","нашла") +" лазутчика. Ну а теперь попробуй выйти отсюда "+ GetSexPhrase("живым","живой") +".";
+			dialog.text = "Нет, в комендатуру я не пойду. Считай, что "+ GetSexPhrase("нашёл","нашла") +" лазутчика. Ну а теперь попробуй выйти отсюда "+ GetSexPhrase("живым","живой") +".";
 			Link.l1 = "Хех, да уж выйду как-нибудь...";
 			Link.l1.go = "SeekSpy_fight";
 		break;
@@ -132,7 +132,7 @@ void ProcessDialogEvent()
                     +", "+ GetSexPhrase("старый пройдоха","отчаянная деваха") +"", ""+ GetSexPhrase("Рад тебя видеть, старина","Рад тебя видеть, красавица") +""
                     + Pchar.name, "О, да это же сам"+ GetSexPhrase("","а") +" капитан "
                         +GetFullName(Pchar))
-                                    +LinkRandPhrase(". Думал, тебя уже нет на этом свете!", ". И, наверное, как всегда, "+ GetSexPhrase("пьян","выпивши") +".", ". И, как вижу, еще на свободе!")
+                                    +LinkRandPhrase(". Думал, тебя уже нет на этом свете!", ". И, наверное, как всегда, "+ GetSexPhrase("пьян","выпивши") +".", ". И, как вижу, ещё на свободе!")
                                     +LinkRandPhrase(" Ну, говори, чего тебе нужно?", " Чего тебе на этот раз?", " Опять тревожишь меня по пустякам?"),
                                     LinkRandPhrase(TimeGreeting() + ", капитан ", "Здравствуйте "+GetAddress_Form(NPChar)+" ", "Приветствую вас, капитан ")+GetFullName(Pchar)
                                     +LinkRandPhrase(". Что может быть нужно "+ GetSexPhrase("такому почтенному человеку","бравой девушке") +", как вы, от меня?", ". Зачем вы пришли?", ". Что на этот раз вы хотите узнать?")
@@ -141,14 +141,14 @@ void ProcessDialogEvent()
                     PCharRepPhrase(LinkRandPhrase("Здравствуйте капитан ", "Приветствую, ах, это вы "+GetAddress_Form(NPChar)+" ", "А, капитан ")
                                     +GetFullName(Pchar)
                                     +LinkRandPhrase(" я думал"+NPCharSexPhrase(NPChar, " ", "а ")+"мы больше с вами не встретимся,",
-                                                        " не скажу, что рад"+NPCharSexPhrase(NPChar, " ", "а ")+"вас видеть, но", " вижу, вы еще живы, как это ни прискорбно. А")
+                                                        " не скажу, что рад"+NPCharSexPhrase(NPChar, " ", "а ")+"вас видеть, но", " вижу, вы ещё живы, как это ни прискорбно. А")
                                     +LinkRandPhrase(" что вам нужно?", " зачем вы пришли?", " чем могу быть "+NPCharSexPhrase(NPChar, "полезен?", "полезна?")),
                                     LinkRandPhrase(TimeGreeting() + ", капитан " + GetFullName(Pchar) + ". Чем могу помочь?",
                                     "О, да это же сам капитан " + GetFullName(Pchar) + "! Что вы хотите узнать на этот раз?",
                                     "Здравствуйте, " + GetAddress_Form(NPChar) + " " + Pchar.lastname + ". Вы что-то хотели?"))
                                     );
 
-	   		link.l1 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто "+ GetSexPhrase("шел","шла") +" в таверну."),
+	   		link.l1 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто "+ GetSexPhrase("шёл","шла") +" в таверну."),
                                     RandPhraseSimple("Ладно, ничего. Удачи!", "Просто осматриваю город. До свидания."));
 			link.l1.go = "exit";
 			link.l2 = RandPhraseSimple("У меня есть вопрос к тебе.", "Мне нужна информация.");
@@ -172,7 +172,7 @@ void ProcessDialogEvent()
 		case "new question":
             dialog.text = NPCharRepPhrase(npchar,
 		                PCharRepPhrase(LinkRandPhrase("О, да, я рад"+NPCharSexPhrase(NPChar, " ", "а ")+" тебе как выпивке, спрашивай, чего хочешь.", "Любишь поболтать, капитан? Что ж, я тоже... Особенно за кружечкой рома.", "Да, " + PChar.name + "?"),
-                                        LinkRandPhrase("Ну, чего тебе еще?", "Вижу, капитан "+PChar.name+", ты "+ GetSexPhrase("охотник","охотница") +" поболтать? ", "Замучил"+ GetSexPhrase("","а") +" вопросами, капитан, лучше бы угостил ромом.")),
+                                        LinkRandPhrase("Ну, чего тебе ещё?", "Вижу, капитан "+PChar.name+", ты "+ GetSexPhrase("охотник","охотница") +" поболтать? ", "Замучил"+ GetSexPhrase("","а") +" вопросами, капитан, лучше бы угостил ромом.")),
 		                PCharRepPhrase(LinkRandPhrase("Что вы хотели узнать "+ GetAddress_Form(NPChar) + "?", "Я вас слушаю капитан.", "Мне нужно идти, поэтому спрашивайте скорее, капитан."),
                                         LinkRandPhrase("Всегда рад"+NPCharSexPhrase(NPChar, " ", "а ")+" приятному собеседнику, " + GetAddress_Form(NPChar) + " " + PChar.lastname + ". Говорите.",
                                                         "Да, " + GetAddress_Form(NPChar) + "?",
@@ -182,7 +182,7 @@ void ProcessDialogEvent()
             // homo 25/06/06
 			link.l1 = LinkRandPhrase ("Какие байки в ходу в здешней таверне?",
                                     "Что новенького в этих краях?",
-                                    "Как течет жизнь на суше?");
+                                    "Как течёт жизнь на суше?");
 			link.l1.go = "rumours_citizen";
 			link.l2 = LinkRandPhrase("Не объясните мне дороги?", "Что-то я никак не найду дороги кое-куда...", "Подскажите дорогу...");
 			link.l2.go = "exit";  //(перессылка в файл города)
@@ -190,7 +190,7 @@ void ProcessDialogEvent()
 			link.l3.go = "colony";
             link.l4 = RandPhraseSimple("Есть важное дело!", "У меня к вам дело.");
 			link.l4.go = "exit";  //(перессылка в файл города)
-			link.l5 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто "+ GetSexPhrase("шел","шла") +" в таверну."),
+			link.l5 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто "+ GetSexPhrase("шёл","шла") +" в таверну."),
                                         RandPhraseSimple("Ладно, ничего. Удачи!", "Просто осматриваю город. До свидания."));
 			link.l5.go = "exit";
 		break;
@@ -210,7 +210,7 @@ void ProcessDialogEvent()
 					link.l1.go = "fort";
 				break;
             }
-			link.l2 = "Поговорим о чем-нибудь другом.";
+			link.l2 = "Поговорим о чём-нибудь другом.";
 			link.l2.go = "new question";
 		break;
 	  // to_do
@@ -227,7 +227,7 @@ void ProcessDialogEvent()
 		break;
 		//==> поймал засланца
 		case "SitySpy":
-			dialog.text = "Ну, а я здесь при чем? Я местный житель!";
+			dialog.text = "Ну, а я здесь при чём? Я местный житель!";
 			link.l1 = "Кто может подтвердить твои слова?";
 		    link.l1.go = "SitySpy_1";
 		break;
@@ -238,12 +238,12 @@ void ProcessDialogEvent()
 		break;
 		case "SitySpy_3":
             dialog.text = "Эээ... Сейчас... Ммм..";
-			link.l1 = "Все ясно, приятель, тебя-то я и ищу! Следуй за мной, иначе я прикончу тебя на месте. Тебе все понятно?!";
+			link.l1 = "Всё ясно, приятель, тебя-то я и ищу! Следуй за мной, иначе я прикончу тебя на месте. Тебе всё понятно?!";
 		    link.l1.go = "SitySpy_4";
 		break;
 		case "SitySpy_4":
-            dialog.text = "Черт! Надо же было так глупо вляпаться!.. Все ясно, буду следовать за тобой - мне моя жизнь еще дорога...";
-			link.l1 = "Ну, вот и славно. Мы идем губернатору, он хотел тебя видеть...";
+            dialog.text = "Чёрт! Надо же было так глупо вляпаться!.. Всё ясно, буду следовать за тобой - мне моя жизнь ещё дорога...";
+			link.l1 = "Ну, вот и славно. Мы идём губернатору, он хотел тебя видеть...";
 		    link.l1.go = "SitySpy_5";
 		break;
 		case "SitySpy_5":
@@ -252,10 +252,10 @@ void ProcessDialogEvent()
 			AddQuestUserData("MayorsQuestsList", "ColonyName", XI_ConvertString("Colony"+characters[GetCharacterIndex(pchar.GenQuest.SeekSpy.MayorId)].city+"Gen"));
 			AddQuestUserData("MayorsQuestsList", "MayorName", sTemp);
 			// слухи
-			AddSimpleRumour(RandPhraseSimple("Вы знаете, губернатор " + sTemp + " поручил "+ GetSexPhrase("некоему капитану","некой девушке-капитану") +" " + GetMainCharacterNameGen() + " найти в городе вражеского лазутчика. И вы знаете, "+ GetSexPhrase("он его нашел","она его нашла") +" прямо на улицах!",
-				"Наш губернатор зал задание капитану " + GetMainCharacterNameGen() + " разыскать в городе вражеского агента. И "+ GetSexPhrase("этот капитан нашел","эта девушка нашла") +" лазутчика среди горожан!"), sti(characters[sti(pchar.GenQuest.SeekSpy.MayorId)].nation), 5, 1);
+			AddSimpleRumour(RandPhraseSimple("Вы знаете, губернатор " + sTemp + " поручил "+ GetSexPhrase("некоему капитану","некой девушке-капитану") +" " + GetMainCharacterNameGen() + " найти в городе вражеского лазутчика. И вы знаете, "+ GetSexPhrase("он его нашёл","она его нашла") +" прямо на улицах!",
+				"Наш губернатор зал задание капитану " + GetMainCharacterNameGen() + " разыскать в городе вражеского агента. И "+ GetSexPhrase("этот капитан нашёл","эта девушка нашла") +" лазутчика среди горожан!"), sti(characters[sti(pchar.GenQuest.SeekSpy.MayorId)].nation), 5, 1);
 			pchar.quest.AllMayorsQuests_Late.over = "yes"; //снимаем общий таймер
-			pchar.GenQuest.SeekSpy = "FoundSpy"; //флаг нашел шпиона
+			pchar.GenQuest.SeekSpy = "FoundSpy"; //флаг нашёл шпиона
 			DeleteAttribute(pchar, "GenQuest.SeekSpy.City"); //не опрашивать более в городе
 			LocatorReloadEnterDisable(pchar.location, "gate_back", true);
 			LocatorReloadEnterDisable(pchar.location, "reload1_back", true);
@@ -268,14 +268,14 @@ void ProcessDialogEvent()
 		case "DestroyPirate_Abordage": //абордаж
 			if (CheckAttribute(pchar, "GenQuest.DestroyPirate.wasTalkInDeck"))
 			{
-				dialog.text = "Ты все-таки решил"+ GetSexPhrase("","а") +" вернуться...";
+				dialog.text = "Ты всё-таки решил"+ GetSexPhrase("","а") +" вернуться...";
 				Link.l1 = "Да, забыл"+ GetSexPhrase("","а") +" кое-что...";
 				Link.l1.go = "DP_Abordage_1";
 			}
 			else
 			{
-				dialog.text = "Кто ты так"+ GetSexPhrase("ой","ая") +", черт тебя дери?!";
-				Link.l1 = "Я "+ GetSexPhrase("пришел","пришла") +" за твоей головой, приятель. Губернатор " + XI_ConvertString("Colony"+pchar.GenQuest.DestroyPirate.MayorId+"Gen") + " хочет видеть ее прибитой к городским воротам.";
+				dialog.text = "Кто ты так"+ GetSexPhrase("ой","ая") +", чёрт тебя дери?!";
+				Link.l1 = "Я "+ GetSexPhrase("пришёл","пришла") +" за твоей головой, приятель. Губернатор " + XI_ConvertString("Colony"+pchar.GenQuest.DestroyPirate.MayorId+"Gen") + " хочет видеть её прибитой к городским воротам.";
 				Link.l1.go = "DP_Abordage_2";
 			}
 		break;
@@ -298,7 +298,7 @@ void ProcessDialogEvent()
 		//разговор на палубе
 		case "DestroyPirate_Deck":
 			pchar.GenQuest.DestroyPirate.wasTalkInDeck = true; //флаг на палубный базар
-			dialog.text = "Рад видеть тебя на моем корабле, "+ GetSexPhrase("приятель","подруга") +". Зачем пожаловал"+ GetSexPhrase("","а") +"?";
+			dialog.text = "Рад видеть тебя на моём корабле, "+ GetSexPhrase("приятель","подруга") +". Зачем пожаловал"+ GetSexPhrase("","а") +"?";
 			Link.l1 = "Я действую по поручению губернатора " + XI_ConvertString("Colony"+pchar.GenQuest.DestroyPirate.MayorId+"Gen") + ", разыскиваю пирата, орудующего в здешних водах в последнее время.";
 			Link.l1.go = "DestroyPirate_1";
 		break;
@@ -313,7 +313,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "DestroyPirate_3";
 		break;
 		case "DestroyPirate_3":
-			dialog.text = "Именно так, губернаторская шестерка.\nДа уж, положеньице у тебя незавидное - "+ GetSexPhrase("один","одна") +", на моем корабле...";
+			dialog.text = "Именно так, губернаторская шестёрка.\nДа уж, положеньице у тебя незавидное - "+ GetSexPhrase("один","одна") +", на моём корабле...";
 			Link.l1 = "Ну, и что ты собираешься делать дальше?";
 			Link.l1.go = "DestroyPirate_4";
 		break;
@@ -325,7 +325,7 @@ void ProcessDialogEvent()
 				sld = characterFromId(pchar.GenQuest.DestroyPirate.MayorId);
 				lngFileID = LanguageOpenFile("LocLables.txt");
 				sTemp = LanguageConvertString(lngFileID, pchar.GenQuest.DestroyPirate.outShoreId);
-				dialog.text = "Хм, дальше... Я слишком близко подошел к форту, поэтому не буду рисковать и придержу тебя на время здесь. Своим ты скажешь, что пойдешь на моем корабле до места, под названием " + sTemp + ", а они пусть ждут тебя в " + XI_ConvertString("Colony"+sld.city+"Dat") +
+				dialog.text = "Хм, дальше... Я слишком близко подошёл к форту, поэтому не буду рисковать и придержу тебя на время здесь. Своим ты скажешь, что пойдёшь на моём корабле до места, под названием " + sTemp + ", а они пусть ждут тебя в " + XI_ConvertString("Colony"+sld.city+"Dat") +
 					". В этом случае я оставлю тебе жизнь. Иначе тебе вспорят брюхо прямо здесь, на палубе.\nКак перспективы на будущее?";
 				Link.l1 = "Не скажу, что заманчивые. Откуда мне знать, что ты сдержишь слово, когда форт тебя не достанет?";
 				Link.l1.go = "DestroyPirate_5";
@@ -333,7 +333,7 @@ void ProcessDialogEvent()
 			}
 			if (GetCompanionQuantity(pchar) == 1 && makeint(pchar.GenQuest.DestroyPirate.shipState) > 1)
 			{
-				dialog.text = "Пожалуй, я отпущу тебя, "+ GetSexPhrase("губернаторский пес","губернаторская шавка") +". Заплатишь за мое великодушие своей наличностью.\nВ общем, проваливай, пока я добрый...";
+				dialog.text = "Пожалуй, я отпущу тебя, "+ GetSexPhrase("губернаторский пёс","губернаторская шавка") +". Заплатишь за моё великодушие своей наличностью.\nВ общем, проваливай, пока я добрый...";
 				Link.l1 = "Спасибо и на этом. Прощай...";
 				Link.l1.go = "DP_WithoutFight";
 				Link.l2 = "Знаешь что, я, пожалуй, перережу тебе глотку, пока вся твоя команда не сбежалась...";
@@ -345,14 +345,14 @@ void ProcessDialogEvent()
 				sld = characterFromId(pchar.GenQuest.DestroyPirate.MayorId);
 				lngFileID = LanguageOpenFile("LocLables.txt");
 				sTemp = LanguageConvertString(lngFileID, pchar.GenQuest.DestroyPirate.outShoreId);
-				dialog.text = "А дальше ты скажешь своим, что пойдешь на моем корабле до места, под названием " + sTemp + ", а они пусть ждут тебя в " + XI_ConvertString("Colony"+sld.city+"Dat") +
+				dialog.text = "А дальше ты скажешь своим, что пойдёшь на моём корабле до места, под названием " + sTemp + ", а они пусть ждут тебя в " + XI_ConvertString("Colony"+sld.city+"Dat") +
 					". В этом случае я оставлю тебе жизнь. Иначе тебе вспорят брюхо прямо здесь, на палубе.\nКак перспективы на будущее?";
 				Link.l1 = "Не скажу, что заманчивые. Откуда мне знать, что ты сдержишь слово, когда я буду совсем "+ GetSexPhrase("один","одна") +"?";
 				Link.l1.go = "DestroyPirate_5";
 			}
 		break;
 		case "DestroyPirate_5":
-			dialog.text = "Хех, знать ты не можешь, но у тебя будет мое слово. А так тебя ждет смерть прямо сейчас. Мне кажется, выбор очевиден...";
+			dialog.text = "Хех, знать ты не можешь, но у тебя будет моё слово. А так тебя ждёт смерть прямо сейчас. Мне кажется, выбор очевиден...";
 			Link.l1 = "Хм, ну что же, я "+ GetSexPhrase("согласен","согласна") +". Надеюсь, ты сдержись слово...";
 			Link.l1.go = "DP_toShore";
 			Link.l2 = "По мне, так оно и есть. И выбор этот - дать бой, здесь и прямо сейчас. К оружию, мерзавцы!";
@@ -367,14 +367,14 @@ void ProcessDialogEvent()
 		break;
 
 		case "DP_WithoutFight":
-			dialog.text = "Еще раз увижу тебя - будешь болтаться на рее, имей в виду...";
+			dialog.text = "Ещё раз увижу тебя - будешь болтаться на рее, имей в виду...";
 			Link.l1 = "Понятно...";
 			Link.l1.go = "exit";
 			Diag.TempNode = "DP_WithoutFight_again";
 			AddDialogExitQuest("DestroyPirate_WithoutFight");
 		break;
 		case "DP_WithoutFight_again":
-			dialog.text = "Ты еще здесь? Я бы на твоем месте не стал здесь задерживаться...";
+			dialog.text = "Ты ещё здесь? Я бы на твоём месте не стал здесь задерживаться...";
 			Link.l1 = "Ухожу.";
 			Link.l1.go = "exit";
 			Diag.TempNode = "DP_WithoutFight_again";

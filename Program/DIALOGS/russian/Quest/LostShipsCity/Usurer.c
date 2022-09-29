@@ -32,7 +32,7 @@ void ProcessDialogEvent()
 				//поиски команды на корвет
 				if (pchar.questTemp.LSC == "toSeekPeopleInCrew")
 				{
-					link.l8 = "Слушай, есть серьезный разговор. Я набираю команду.";
+					link.l8 = "Слушай, есть серьёзный разговор. Я набираю команду.";
 					link.l8.go = "SeekCrew";
 				}
 			}
@@ -80,7 +80,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
 		break;
-		//замечение по обнаженному оружию
+		//замечение по обнажённому оружию
 		case "LSCNotBlade":
 			dialog.text = "Хм, смешно... Убери оружие.";
 			link.l1 = LinkRandPhrase("Хорошо.", "Ладно.", "Как скажешь...");
@@ -90,7 +90,7 @@ void ProcessDialogEvent()
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")
 			{
-				dialog.text = NPCharSexPhrase(NPChar, "Послушайте, я, как гражданин этого города, прошу вас не ходить у нас с обнаженным клинком.", "Знаете, я, как гражданка этого города, прошу вас не ходить у нас с обнаженным клинком.");
+				dialog.text = NPCharSexPhrase(NPChar, "Послушайте, я, как гражданин этого города, прошу вас не ходить у нас с обнажённым клинком.", "Знаете, я, как гражданка этого города, прошу вас не ходить у нас с обнажённым клинком.");
 				link.l1 = LinkRandPhrase("Хорошо.", "Ладно.", "Как скажете...");
 			}
 			else
@@ -125,7 +125,7 @@ void ProcessDialogEvent()
 			link.l1.go = "SeekCrew_3";
 		break;
 		case "SeekCrew_3":
-			dialog.text = "Я знаю, но все равно останусь. Мне ничего не угрожает.";
+			dialog.text = "Я знаю, но всё равно останусь. Мне ничего не угрожает.";
 			link.l1 = "Странный ты... Ну как знаешь.";
 			link.l1.go = "exit";
 		break;
@@ -213,7 +213,7 @@ void ProcessDialogEvent()
 			}
 		break;
 		case "GiveMoney_3":
-			dialog.text = "Очень рад. Надеюсь, что ты будешь помнить об условиях рассчета за предоставленный займ. Когда придется время, ты долж"+ GetSexPhrase("ен","на") +" будешь вернуть сумму, в пять раз превышающую размер долга. И на данный момент, это " + FindRussianMoneyString(sti(npchar.quest.loan.qtyMoney) * 5) + ".";
+			dialog.text = "Очень рад. Надеюсь, что ты будешь помнить об условиях рассчета за предоставленный займ. Когда придётся время, ты долж"+ GetSexPhrase("ен","на") +" будешь вернуть сумму, в пять раз превышающую размер долга. И на данный момент, это " + FindRussianMoneyString(sti(npchar.quest.loan.qtyMoney) * 5) + ".";
 			link.l1 = "Да, я помню. А что будет, если я не смогу их сразу вернуть?";
 			link.l1.go = "GiveMoney_4";
 		break;
@@ -223,7 +223,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 		break;
 		case "GiveMoney_disAgree":
-			dialog.text = "Ну, как знаешь. Поразмысли как следует, может, и надумаешь еще.";
+			dialog.text = "Ну, как знаешь. Поразмысли как следует, может, и надумаешь ещё.";
 			link.l1 = "Да, конечно...";
 			link.l1.go = "exit";
 		break;

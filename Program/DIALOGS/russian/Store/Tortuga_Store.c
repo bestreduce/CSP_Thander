@@ -22,13 +22,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
              // <== Проверяем поле состояния квестов.
 		break;
  	 	case "Step_H3_1":
-			dialog.text = NPCStringReactionRepeat("Был часа два назад, прикупил очередную порцию дорогих безделушек и пошел дальше жизнь прожигать.", "Сеньор, давайте торговлей займемся, что за одни и те же вопросы?", "Спрашивали вы меня уже о Пьере...", "Послушайте, может вы поспрашиваете о Пьере в другом месте, а?", "block", 0, npchar, Dialog.CurrentNode);
+			dialog.text = NPCStringReactionRepeat("Был часа два назад, прикупил очередную порцию дорогих безделушек и пошёл дальше жизнь прожигать.", "Сеньор, давайте торговлей займёмся, что за одни и те же вопросы?", "Спрашивали вы меня уже о Пьере...", "Послушайте, может вы поспрашиваете о Пьере в другом месте, а?", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Да уж, Пьер сейчас как сыр в масле катается... Часто он к тебе захаживает по такого рода делам?", "Говорили? Ну да, наверное...", "Можно и поторговать...", "Да, пожалуй, поспрашиваю в другом месте.", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("Step_H3_2", "none", "none", "none", npchar, Dialog.CurrentNode);
         break;
  	 	case "Step_H3_2":
 			dialog.text = "Почитай, каждый день бывает, за редким исключением.";
-			link.l1 = "Эх, и везет же людям! Ну ладно, пойду дальше его искать. Спасибо тебе.";
+			link.l1 = "Эх, и везёт же людям! Ну ладно, пойду дальше его искать. Спасибо тебе.";
 			link.l1.go = "exit";
             pchar.questTemp.Talks.Store = true;
             AddQuestRecord("Hol_Line_3_WormEnglishPlans", "8");

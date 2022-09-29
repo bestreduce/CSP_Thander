@@ -869,7 +869,8 @@ type = normal
 	type = normal
 	start_time = 757
 	end_time = 780
-	
+	event = "Recoil start", 762, normal
+	event = "Recoil end", 775, normal
 	loop = false
 	speed = 2.
 	
@@ -1418,6 +1419,8 @@ end_time = 2550
 	data = "Blend time", "0.1"		; sec
 	event = "LStep", 2541, normal
 	event = "RStep", 2547, normal
+	event = "Recoil start", 2536, normal
+	event = "Recoil end", 2547, normal
         speed = 1.05
 	loop = false
 	type = normal
@@ -1428,6 +1431,8 @@ end_time = 2569
 	data = "Blend time", "0.1"		; sec
 	event = "LStep", 2559, normal
 	event = "RStep", 2563, normal
+	event = "Recoil start", 2554, normal
+	event = "Recoil end", 2566, normal
 	speed = 1.05
 	loop = false
 	type = normal

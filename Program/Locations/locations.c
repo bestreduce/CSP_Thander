@@ -135,8 +135,8 @@ void LocationMakeClone(string _locId)
 //navy <--
 
 // Warship -->
-// Подключить к локации еще одну модельку
-// Ввел доп. проверки в иф, чтобы можно было этим методом "прилеплять" к локации модели еще при инициализации
+// Подключить к локации ещё одну модельку
+// Ввел доп. проверки в иф, чтобы можно было этим методом "прилеплять" к локации модели ещё при инициализации
 bool Location_AddNewModel(String _LocID, String _GroupName, String _LocatorName, String _Model, String _Type, String _Tech, int _Level, bool _Now)
 {
 	int iLoc =  FindLocation(_LocID);

@@ -278,5 +278,4 @@ void SetMineFree(ref xi_refCharacter, int type)
     AISeaGoods_AddGood(xi_refCharacter, "powder" + type, "barrel", 600.0, 1);
     PlaySound("Ships\jakor_002.wav");
     RemoveCharacterGoods(xi_refCharacter, GOOD_POWDER, type * MINE_POWDER);
-    xi_refCharacter.Tmp.SpeedRecall = 0;  // чтоб пересчитались скорость и маневр
 }

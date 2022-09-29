@@ -22,7 +22,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			Link.l1.go = "RomanticQuest_2";
 		break;
 		case "RomanticQuest_2":
-			dialog.Text = "Мне показалось, он ушел в таверну совсем недавно";
+			dialog.Text = "Мне показалось, он ушёл в таверну совсем недавно";
 			link.l1 = "Спасибо.";
 			Link.l1.go = "exit";
 			DeleteAttribute(pchar, "RomanticQuest.ShipToCumana");

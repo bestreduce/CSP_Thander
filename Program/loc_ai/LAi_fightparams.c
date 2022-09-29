@@ -73,7 +73,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 
 	// TO_DO оптимизация на ветку параметров
 	//if (sti(attack.index) == GetMainCharacterIndex()) Log_Info(attackType);
-	if (bAltBalance)
+	if (bAltBalanceProHits)
 	{
 		switch(attackType)
 		{
@@ -303,19 +303,19 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 			}
 		}
 		// упрощение игры новичкам
-		if (MOD_SKILL_ENEMY_RATE == 1 && CheckAttribute(enemy, "chr_ai.group"))
+		/*if (MOD_SKILL_ENEMY_RATE == 1 && CheckAttribute(enemy, "chr_ai.group"))
 		{
 			if (enemy.chr_ai.group == LAI_GROUP_PLAYER)
 			{
 				dmg = dmg / MOD_Complexity_1_DMG;
 			}
-		}
-
+		}*/
+		
 		//Boyer mod #20170318-33 difficulty level rebalancing
 		//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
-		if (MOD_SKILL_ENEMY_RATE < 11 && sti(enemy.index) == GetMainCharacterIndex())
+		if (sti(enemy.index) == GetMainCharacterIndex())
 		{
-			dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
+			dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0) * bModDamage;
 		}
 		return dmg;
 	}
@@ -347,8 +347,7 @@ float LAi_CalcExperienceForBlade(aref attack, aref enemy, string attackType, boo
 	ra = re/ra;
 	if (ra > 3.0)
 		ra = 3.0;//обрезание слишком большого множителя. кривые множители тоже решает
-	float exp = frandSmall(dmg * ra);//Lipsar передeлка опыта
-	// frandSmall на замену эффекта Lipsar-а
+	float exp = dmg * (0.8 + Random() * 0.2);
 
 	if(attackType == "feintc")
 		exp = exp * 1.5;
@@ -468,7 +467,8 @@ float LAi_GunCalcProbability(aref attack, float kDist)
 	pmin = pmin + 0.3*aSkill;
 
 	//Вероятность попадания в текущей позиции
-	float p = pmin + (1.0 - pmin)*(kDist/0.9)+(GetCharacterSPECIALSimple(attack, SPECIAL_P)*0.01);
+	//float p = pmin + (1.0 - pmin)*(kDist/0.9)+(GetCharacterSPECIALSimple(attack, SPECIAL_P)*0.01);
+	float p = pmin + (1.0 - pmin)*(kDist/0.9)+(GetCharacterSPECIALSimple(attack, SPECIAL_P)*0.01)-0.25; //добавил базовый штраф в 25%, убирается перками
  	//Учесть абилити
 	if(IsCharacterPerkOn(attack, "GunProfessional"))
 	{
@@ -537,18 +537,18 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 		dmg = dmg * (1.0 + 0.7 * (aSkill - eSkill));
 	}
 	// упрощение игры новичкам
-	if (MOD_SKILL_ENEMY_RATE == 1 && CheckAttribute(enemy, "chr_ai.group"))
+	/*if (MOD_SKILL_ENEMY_RATE == 1 && CheckAttribute(enemy, "chr_ai.group"))
 	{
 		if (enemy.chr_ai.group == LAI_GROUP_PLAYER)
 		{
-			dmg = dmg * MOD_Complexity_1_DMG;
+			dmg = dmg / MOD_Complexity_1_DMG;
 		}
-	}
+	}*/
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
-	if (MOD_SKILL_ENEMY_RATE < 11 && sti(enemy.index) == GetMainCharacterIndex())
+	if (sti(enemy.index) == GetMainCharacterIndex())
 	{
-		dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
+		dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0) * bModDamage;
 	}
 	if(CheckCharacterPerk(attack, "Buccaneer"))
 	{
@@ -575,12 +575,9 @@ float LAi_GunCalcExperience(aref attack, aref enemy, float dmg)
 	ra = re/ra;
 	if (ra > 3.0)
 		ra = 3.0;//обрезание слишком большого множителя. кривые множители тоже решает
-	dmg = frandSmall(dmg * ra);//Lipsar передeлка опыта
-	// frandSmall на замену эффекта Lipsar-а
-	if(bRechargePistolOnLine || findsubstr(attack.model.animation, "mushketer" , 0) != -1)
-		{}
-	else
-		dmg *= 2;
+	dmg = dmg * (0.8 + Random() * 0.2);
+	if (findsubstr(attack.model.animation, "mushketer" , 0) != -1) dmg *= 0.8;
+	if (!bRechargePistolOnLine) dmg *= 2;
 	return dmg;
 }
 
@@ -926,8 +923,8 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	//проверим на отравление
 	MakePoisonAttackCheckSex(enemy, attack);
 	//Есть ли оружие у цели
-	bool isSetBalde = (CheckAttribute(enemy, "equip.blade"));//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "IsSetBalde") != 0);
-	if (CheckAttribute(attack,"vampire"))
+	bool isSetBlade = (CheckAttribute(enemy, "equip.blade"));//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "isSetBlade") != 0);
+	if (CheckAttribute(attack,"vampire") || sti(attack.chr_ai.special.valueV) > 0)
 	{
 		float hp = attack.chr_ai.hp;
 		float maxhp = attack.chr_ai.hp_max;
@@ -948,14 +945,14 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 			}
 		}
 	} */
-	if(LAi_IsDead(enemy) && isSetBalde)
+	if(LAi_IsDead(enemy) && isSetBlade)
 	{
 		//Начислим за убийство
 		//exp = exp + LAi_CalcDeadExp(attack, enemy);
 		//exp = LAi_GetCharacterMaxHP(enemy) * 10;
 		//noExp = false;
 		//DoCharacterKilledStatistics(sti(attack.index), sti(enemy.index));
-		/*if(!isSetBalde)
+		/*if(!isSetBlade)
 		{
 			//LAi_ChangeReputation(attack, -3);
 		}*/
@@ -980,9 +977,9 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
         // boal statistic info 17.12.2003 -->
         Statistic_KillChar(attack, enemy, "_s");
         // boal statistic info 17.12.2003 <--
-        LAi_SetResultOfDeath(attack, enemy, isSetBalde);
+        LAi_SetResultOfDeath(attack, enemy, isSetBlade);
 	}
-	if(!isSetBalde)
+	if(!isSetBlade)
 	{
 		exp = 0.0;
 	}
@@ -990,7 +987,7 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	if (!noExp)
     {
         //AddCharacterExp(attack, MakeInt(exp*0.5 + 0.5));
-        AddCharacterExpToSkill(attack, fencing_type, Makefloat(exp*0.2));
+        AddCharacterExpToSkill(attack, fencing_type, Makefloat(exp*0.12));
     }
 
 }
@@ -1364,13 +1361,13 @@ bool CheckForCirassBreak(ref attack, ref enemy, bool type)
 }
 
 //boal 19.09.05 -->
-void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBalde)
+void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBlade)
 {
     if (sti(attack.index) == GetMainCharacterIndex())
     {
 		if (GetRelation2BaseNation(sti(enemy.nation)) == RELATION_ENEMY)
 		{
-			if (!isSetBalde)
+			if (!isSetBlade)
 			{
 				LAi_ChangeReputation(attack, -1);   // to_do
 				if (rand(1) && CheckAttribute(enemy, "City"))
@@ -1394,6 +1391,36 @@ void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBalde)
 			{
 			    SetNationRelation2MainCharacter(sti(enemy.nation), RELATION_ENEMY);
 		    }
+		}
+		if (startherotype == 9 || startherotype == 10)
+		{
+			if (CheckAttribute(pchar,"equip.blade") && HasSubStr(pchar.equip.blade, "Lilarcor"))
+			{
+				if (!CheckAttribute(pchar,"LilarcorKills")) pchar.LilarcorKills = 0;
+				pchar.LilarcorKills = sti(pchar.LilarcorKills)+1;
+				if (sti(pchar.LilarcorKills) == 300)
+				{
+					PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Up1.mp3");
+					DeleteAttribute(pchar,"items.Lilarcor_Sword1");
+					AddItems(pchar, "Lilarcor_Sword2", 1);
+					EquipCharacterbyItem(pchar, "Lilarcor_Sword2");
+				}
+				if (sti(pchar.LilarcorKills) == 800)
+				{
+					PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Up2.mp3");
+					DeleteAttribute(pchar,"items.Lilarcor_Sword2");
+					AddItems(pchar, "Lilarcor_Sword3", 1);
+					EquipCharacterbyItem(pchar, "Lilarcor_Sword3");
+				}
+				if (sti(pchar.LilarcorKills) == 1800)
+				{
+					PlayVoice("Kopcapkz\Voices\Lilarcor\Lilarcor_Victory.mp3");
+					string sEquipItem = GetGeneratedItem("blade201");
+					AddItems(pchar, sEquipItem, 1);
+					EquipCharacterbyItem(pchar, sEquipItem);
+					RemoveItems(pchar, "Lilarcor_Sword3", 1);
+				}
+			}
 		}
 	}
 }
@@ -1519,20 +1546,32 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 	}
 	if(damage > 0.0)
 	{
+		//Влияние точности на урон
+		damage *= p;
 		//Начисляем опыт
 		float exp = LAi_GunCalcExperience(attack, enemy, damage);
+		float critd = 1.0;
+		int critchance = 0;
+		int pured = 0;
+		if (CheckCharacterPerk(attack,"Buccaneer")) 
+		{
+			critd = 1.3;
+			critchance = 10;
+		}
 		if(IsEquipCharacterByArtefact(attack, "talisman1"))
 		{
-			if (rand(4)==0)	{LAi_ApplyCharacterDamage(enemy, MakeInt(damage + 0.5)*2); Log_Info("Критический выстрел");}
-			else LAi_ApplyCharacterDamage(enemy, MakeInt(damage + 0.5)+25);
+			critd = 2.0;
+			critchance += 20;
+			pured = 25;
 		}
-		else LAi_ApplyCharacterDamage(enemy, MakeInt(damage + 0.5));
+		if (critchance > 0 && rand(99)<critchance)	{LAi_ApplyCharacterDamage(enemy, MakeInt(damage + 0.5)*critd); Log_Info("Критический выстрел");}
+		else LAi_ApplyCharacterDamage(enemy, MakeInt(damage + 0.5)+pured);
 
 		//Проверим на смерть
 		LAi_CheckKillCharacter(enemy);
 	}
 	//Есть ли оружие у цели
-	bool isSetBalde = (CheckAttribute(enemy, "equip.blade"));//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "IsSetBalde") != 0);
+	bool isSetBlade = (CheckAttribute(enemy, "equip.blade"));//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "isSetBlade") != 0);
 	/*if(LAi_grp_alarmactive == false)
 	{
 		if(CheckAttribute(pchar, "sneak.success"))
@@ -1543,13 +1582,13 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 			}
 		}
 	}  */
-	if(LAi_IsDead(enemy) && isSetBalde)
+	if(LAi_IsDead(enemy) && isSetBlade)
 	{
 		//Начислим за убийство
 		//exp = exp + LAi_CalcDeadExp(attack, enemy);
 		//exp = LAi_GetCharacterMaxHP(enemy) * 10;
 		//noExp = false;
-		//if(!isSetBalde)
+		//if(!isSetBlade)
 		//{
 			//LAi_ChangeReputation(attack, -3);
 		//	exp = 0.0;
@@ -1580,11 +1619,11 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
         //Начислим за убийство
 		/*exp = exp + */
         //LAi_CalcDeadExp(attack, enemy); // начисляем только за удар и смерть
-  		LAi_SetResultOfDeath(attack, enemy, isSetBalde);
+  		LAi_SetResultOfDeath(attack, enemy, isSetBlade);
 	}
 	if(sBullet == "grapeshot")
 		exp *= 2;
-	if(!isSetBalde)
+	if(!isSetBlade)
 	{
 		//LAi_ChangeReputation(attack, -1);
 		exp = 0.0;
@@ -1592,7 +1631,7 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 
 	if(!noExp)
     {
-        AddCharacterExpToSkill(attack, SKILL_PISTOL, MakeFloat(exp*0.25));
+        AddCharacterExpToSkill(attack, SKILL_PISTOL, MakeFloat(exp*0.65));
     }
 }
 
@@ -1952,3 +1991,76 @@ float LAi_NPC_EvtGetEny()
 	npc_return_tmp = LAi_GetCharacterRelEnergy(chr);
 	return npc_return_tmp;
 }
+
+// EvgAnat - требование энергии для отскока -->
+bool bIsRecoilEnableWithoutEnergy = false; // можно ли выполнять отскоки при недостатке энергии (это не влияет на расход энергии)
+
+#event_handler("ChrCheckEnergy", "LAi_Chr_CheckEnergy");
+bool LAi_Chr_CheckEnergy()
+{
+	aref chr = GetEventData();
+	string action = GetEventData(); // "recoil" - отскок назад, "strafe_l" и "strafe_r" - отскоки влево и вправо
+	bool res = false;
+	float needEnergy = 0.0;
+	switch(action)
+	{
+		case "recoil":		needEnergy = 3.0;	break;
+		case "strafe_l":	needEnergy = 4.0;	break;
+		case "strafe_r":	needEnergy = 4.0;	break;
+	}
+	if (stf(chr.chr_ai.energy) >= needEnergy)
+	{	
+		res = true;
+		Lai_CharacterChangeEnergy(chr, -needEnergy);
+	}
+	if (bIsRecoilEnableWithoutEnergy)
+		return true;
+	return res;
+}
+// EvgAnat - требование энергии для отскока <--
+
+// EvgAnat - уклонение от выстрела -->
+#event_handler("Check_ChrHitFire", "LAi_Chr_CheckHitFire")
+int LAi_Chr_CheckHitFire() // 1 - не попал, 2 - попал
+{
+	aref shooter = GetEventData(); // стрелок
+	aref target = GetEventData(); // цель
+	bool isRecoil = GetEventData(); // находится ли цель в окне уклонения 
+	float kDist = GetEventData(); // коэффициент дальности, равный 1-d/25; k(0)=1; k(10)=0.6; k(25)=0
+	int res = 2;
+	if(isRecoil)
+	{
+		res = 1;
+		if (shooter.index == GetMainCharacterIndex())
+			Log_SetStringToLog("Мазила!");
+	}
+	return res;
+}
+// EvgAnat - уклонение от выстрела <--
+
+// EvgAnat - уклонение от атаки -->
+#event_handler("Check_ChrHitAttack", "LAi_Chr_CheckHitAttack");
+bool LAi_Chr_CheckHitAttack() // попала ли атака
+{
+	aref attack = GetEventData();
+	aref enemy = GetEventData();
+	bool isRecoil = GetEventData(); // находится ли цель в окне уклонения
+	bool res = true;
+	if (isRecoil)
+		res = false;	
+	return res;
+}
+// EvgAnat - уклонение от атаки <--
+
+// EvgAnat - вероятность желания уклониться от выстрела у нпс -->
+#event_handler("NPC_IsDodge", "LAi_NPC_IsDodge");
+bool LAi_NPC_IsDodge() // true - уклоняется, false - не уклоняется
+{
+	aref chr = GetEventData();
+	float r = Random();
+	bool res = false;
+	if (r <= 1.0)
+		res = true;
+	return true;
+}
+// EvgAnat - вероятность желания уклониться от выстрела у нпс <--

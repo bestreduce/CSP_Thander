@@ -15,7 +15,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "Romantic_1":
             dialog.Text = "(Изабелле):  Так вы будете платить или мне позвать солдат?";
-			Link.l1 = "Да как ты смеешь, мерзавец!  Немедленно извинись перед сеньорой, или я проткну твое толстое брюхо!";
+			Link.l1 = "Да как ты смеешь, мерзавец!  Немедленно извинись перед сеньорой, или я проткну твоё толстое брюхо!";
 		    Link.l1.go = "exit";
 		    NextDiag.TempNode = "Second time";
 		    AddDialogExitQuest("Romantic_TalkInShop_2");

@@ -550,7 +550,7 @@ void initStartState2Character(ref ch)
 	ch.CameraShipNPC = 0;// номер компаньона для камеры 0 - ГГ
 	ch.GenQuestFort.FarLocator = true; // для методов пихания фантомов в город
 
-	// Черная жемчужина
+	// Чёрная жемчужина
 	ch.GenQuest.GhostShip.DeadByMe       = 0;
 	ch.GenQuest.GhostShip.KillMe         = 0;
 	ch.GenQuest.GhostShip.AskAbout       = 0; // в таверне три раза спросить до появления
@@ -566,7 +566,7 @@ void initStartState2Character(ref ch)
 	ch.questTemp.Waiting_time = "2";
 	// ==> номер текущего квеста, присваиваем сразу второй, т.к. первый берется на момент первого обращения к губеру.
 	ch.questTemp.CurQuestNumber = "2";
-	//параметры островов и бухт для корсарского метро, ПГГ, и много еще чего :)
+	//параметры островов и бухт для корсарского метро, ПГГ, и много ещё чего :)
 	InitTravelMap();
 	// ==> проверка не посещение борделей после свадьбы
 	pchar.RomanticQuest.HorseCheck = -1;
@@ -590,6 +590,10 @@ void initStartState2Character(ref ch)
 	SilencePriceInit();
 	// ==> Квесты Проклятие Дальних Морей Sinistra
 	PDMQuestsInit();
+	// ==> Квесты Корсары: Сундук Мертвеца
+	KSMQuestsInit();
+	// ==> Все остальные НПС
+	VSEnpcInit()
 	// ==>  флаги и иниты бергларов
 	BerglarsInit();
 	// ==>  нищие
@@ -662,7 +666,7 @@ void QuestActions()
 			TakeNationLicence(i);
 		}
 	}
-	//Если идет линейка ГПК, то шмаляем открытые сундуки. Все, кроме Диффиндура.
+	//Если идёт линейка ГПК, то шмаляем открытые сундуки. Все, кроме Диффиндура.
 	if (sti(pchar.questTemp.LSC.checkBoxes))
 	{
 		LSC_checkBoxes();
@@ -785,7 +789,7 @@ void QuestActions()
 	//************** линейка ГПК, завал первого каспера с помощь Армо *******************
 	if (CheckAttribute (pchar, "questTemp.LSC.Armo"))
 	{
-		//первый каспер пошел
+		//первый каспер пошёл
 		if (sti(pchar.questTemp.LSC.Armo) == 1 || sti(pchar.questTemp.LSC.Armo) == 3 || sti(pchar.questTemp.LSC.Armo) == 5)
 		{
 			if (pchar.location == "LostShipsCity_town" && GetHour() < 2)
@@ -821,14 +825,14 @@ void QuestActions()
 	//************** генератор "Продажный патруль" *********************************
 	if(CheckAttribute(pchar, "questTemp.ReasonToFast"))
 	{
-		if(pchar.questTemp.ReasonToFast == "SpeakHorse") // не пришел в бухту
+		if(pchar.questTemp.ReasonToFast == "SpeakHorse") // не пришёл в бухту
 		{
 			AddQuestRecord("ReasonToFast", "2");
 			AddQuestUserData("ReasonToFast", "sSex", GetSexPhrase("","а"));
 			CloseQuestHeader("ReasonToFast");
 			pchar.questTemp.ReasonToFast.end = true;
 		}
-		if(pchar.questTemp.ReasonToFast == "MeetPatrolFail") // в бухту пришел не один или удачи не хватило
+		if(pchar.questTemp.ReasonToFast == "MeetPatrolFail") // в бухту пришёл не один или удачи не хватило
 		{
 			AddQuestRecord("ReasonToFast", "3");
 			AddQuestUserData("ReasonToFast", "sSex", GetSexPhrase("ся","ась"));
@@ -870,7 +874,7 @@ void QuestActions()
     			//---------- мертв ------------
     			if (capIndex == -1)
     			{
-					//страховка. если квест еще открыт - закрываем его
+					//страховка. если квест ещё открыт - закрываем его
 					/*if (CheckActiveQuest(arCapBase.Tilte1))
 					{
 						CitizCapIsDead_CloseQuest(arCapBase, sName);
@@ -1784,11 +1788,11 @@ string Sharp_choiceAction()
 {
 	string sBack;
 	ref sld;
-	//удалим Шарпа с карты, если он плывет еще где-то
+	//удалим Шарпа с карты, если он плывет ещё где-то
 	Map_ReleaseQuestEncounter("Sharp");
 	group_DeleteGroup("Sharp_Group");
 	if (rand(3) != 2 && sti(pchar.questTemp.Sharp.count) < 5)
-	{	//еще динамим, отправляем ГГ в другой город
+	{	//ещё динамим, отправляем ГГ в другой город
 		string sCity = pchar.questTemp.Sharp.City; //предыдущая цель, запомним для СЖ
 		pchar.questTemp.Sharp.City.rumour = true; //флаг дать слух в городе
 		pchar.questTemp.Sharp.City = GetSharpCity(); //новый город
@@ -1891,9 +1895,9 @@ string GetSharpRumour_default()
 	string sRumour;
 	switch (rand(2))
     {
-        case 0: sRumour = "Капитан Шарп был здесь, я его видел. Но сейчас его в городе нет, а куда ушел - не знаю."; break;
+        case 0: sRumour = "Капитан Шарп был здесь, я его видел. Но сейчас его в городе нет, а куда ушёл - не знаю."; break;
         case 1: sRumour = "Капитан Шарп заходил в наш город. Где он сейчас я не знаю, у нас его точно нет."; break;
-        case 2:	sRumour = "Капитан Барталомью Шарп ушел из города буквально на днях..."; break;
+        case 2:	sRumour = "Капитан Барталомью Шарп ушёл из города буквально на днях..."; break;
     }
 	return sRumour;
 }
@@ -1903,9 +1907,9 @@ string GetSharpRumour_toCityTarget()
 	string sRumour;
 	switch (rand(2))
     {
-        case 0: sRumour = "Капитан Бартоломью Шарп был у нас в городе и, как всегда, умудрился 'отметиться'... Но сейчас его здесь нет. По слухам он ушел в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
-        case 1: sRumour = "Знаете, капитан Шарп был в городе недавно. Веселый пират, этот Барталомью... Хорошо, однако, что он покинул наш город. Кажется он ушел в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
-        case 2:	sRumour = "Вы знаете, недавно нас почтил своим присутствием капитан Шарп. Но, к нашему большому разочарованию, нового карибского анекдота 'от Шарпа' не случилось. Жаль... А сейчас его нет у нас в городе. Говорят, он ушел в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + ". Может им повезет..."; break;
+        case 0: sRumour = "Капитан Бартоломью Шарп был у нас в городе и, как всегда, умудрился 'отметиться'... Но сейчас его здесь нет. По слухам он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
+        case 1: sRumour = "Знаете, капитан Шарп был в городе недавно. Веселый пират, этот Барталомью... Хорошо, однако, что он покинул наш город. Кажется он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
+        case 2:	sRumour = "Вы знаете, недавно нас почтил своим присутствием капитан Шарп. Но, к нашему большому разочарованию, нового карибского анекдота 'от Шарпа' не случилось. Жаль... А сейчас его нет у нас в городе. Говорят, он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + ". Может им повезет..."; break;
     }
 	return sRumour;
 }
@@ -1916,7 +1920,7 @@ string GetSharpRumour_inIsland()
 	switch (rand(2))
     {
         case 0: sRumour = "Вы знаете, капитан Шарп только что вышел из города на своем бриге. Если бы вы прибыли с пол часа назад, то увидели бы его прямо в порту."; break;
-        case 1: sRumour = "Капитан Шарп... Да уже, тот еще капитан. Знаете, он только что покинул наш город. Если вы поторопитесь, то сможете его застать в окрестных водах."; break;
+        case 1: sRumour = "Капитан Шарп... Да уже, тот ещё капитан. Знаете, он только что покинул наш город. Если вы поторопитесь, то сможете его застать в окрестных водах."; break;
         case 2:	sRumour = "Бартоломью Шарп буквально с час назад вышел из нашего порта в море."; break;
     }
 	return sRumour;
@@ -1962,7 +1966,7 @@ string GetBlueBirdRumour_Ship()
     {
         case 0: sRumour = "Вы знаете, местный торговец, " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + ", опять отправляет собственный флейт '" + pchar.questTemp.BlueBird.Ship.Name + "' в Старый Свет за товаром. Недавно флейт вышел из порта."; break;
 		case 1: sRumour = "Хм, а дела у нашего негоцианта доморощенного идут неплохо! " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " вновь отправил собственный флейт '" + pchar.questTemp.BlueBird.Ship.Name + "' за товаром, тот только что вышел из нашего порта."; break;
-        case 2:	sRumour = "М-да, а " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " все богатеет и богатеет. Только вчера его парусник стоял под разгрузкой в порту, а сегодня порт уже попрощался с ним. Флейт '" + pchar.questTemp.BlueBird.Ship.Name + "' ушел опять за товаром, так то!"; break;
+        case 2:	sRumour = "М-да, а " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " все богатеет и богатеет. Только вчера его парусник стоял под разгрузкой в порту, а сегодня порт уже попрощался с ним. Флейт '" + pchar.questTemp.BlueBird.Ship.Name + "' ушёл опять за товаром, так то!"; break;
     }
 	return sRumour;
 }
@@ -2311,7 +2315,7 @@ void PortmansSeekShip_writeQuestBook(ref rid)
 		AddQuestUserData(sTitle, "sShipName", sld.Ship.name);
 		AddQuestUserData(sTitle, "sCity", XI_ConvertString("Colony" + rid.city + "Gen"));
 		iTemp = RealShips[sti(sld.Ship.Type)].basetype;
-		AddQuestUserData(sTitle, "sSexWord", GetShipSexWord(ShipsTypes[iTemp].name, "ушел", "ушла"));
+		AddQuestUserData(sTitle, "sSexWord", GetShipSexWord(ShipsTypes[iTemp].name, "ушёл", "ушла"));
 		AddQuestUserData(sTitle, "sTargetCity", XI_ConvertString("Colony" + sld.quest.targetCity + "Acc"));
 		if (GetIslandByCityName(sld.quest.targetCity) != sld.quest.targetCity)
 		{
@@ -2595,7 +2599,7 @@ void LSC_CasperIsHelp()
 	Log_SetStringToLog("Звуки борьбы были услышаны на барке 'Сан Габриэль'.");
 	chrDisableReloadToLocation = true;
 	pchar.questTemp.LSC = "toSeekMechanikCasperOff";
-	//если пошел навал, то чистим квест Армо
+	//если пошёл навал, то чистим квест Армо
 	pchar.questTemp.LSC.Armo = 15; //завязываем с дачей квестов от Армо
 	pchar.quest.LSC_KillOneCasper.over = "yes";
 	pchar.quest.LSC_checkCasperDead.over = "yes";
@@ -2862,6 +2866,7 @@ void LoginDeadmansGod()
 	if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
 	ChangeCharacterAddressGroup(sld, "Temple_great", "goto", "goto1");
 	LAi_SetActorType(sld);
+	LAi_group_MoveCharacter(sld, "EnemyFight");
 	LAi_ActorDialog(sld, pchar, "", 0.0, 0);
 	LAi_CharacterPlaySound(sld, "DeadmansGod");
 }

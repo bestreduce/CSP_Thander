@@ -21,9 +21,9 @@ ChrTurnV	{Движение персонажа}
 ChrTurnHL	{Поворот персонажа влево}
 ChrTurnHR	{Поворот персонажа вправо}
 
-ChrForward	{Идти вперед}
-ChrForward1	{Идти вперед}
-ChrForward2	{Идти вперед (альтернативная)}
+ChrForward	{Идти вперёд}
+ChrForward1	{Идти вперёд}
+ChrForward2	{Идти вперёд (альтернативная)}
 ChrBackward	{Идти назад}
 ChrBackward1{Идти назад}
 ChrRun		{Перейти на бег}
@@ -52,7 +52,7 @@ SoloFient			{Финт (контратака)}
 
 ChrFire				{Выстрелить}
 MushketHotkey		{Переключить (мушкет)/(сабля+пистолет)}
-BOAL_UsePotion		{Выпить хилку}
+BOAL_UsePotion		{Выпить зелье лечения}
 
 BOAL_ActivateRush	{Активировать 'Берсерка'}
 PusherHotkey		{Активировать "Громилу"}
@@ -76,25 +76,25 @@ OfficersFree	{Команда офицерам "Вольно"}
 
 ChrJump			{Прыжок}
 BOAL_DeadSearch	{Обыск трупа}
-hk_Cure			{Выпить хилку}
+hk_Cure			{Выпить зелье лечения}
 UseAntidote		{Выпить противоядие}
 UseFood			{Использовать еду}
 hk_Rush			{Активировать 'Ярость'}
 ChrAction		{Выполнить действие}
 
-ShipCamera_Turn_V	{Вертикальное перемещение камеры за кораблем}
-ShipCamera_Turn_H	{Горизонтальное перемещение камеры за кораблем}
+ShipCamera_Turn_V	{Вертикальное перемещение камеры за кораблём}
+ShipCamera_Turn_H	{Горизонтальное перемещение камеры за кораблём}
 ShipCamera_Forward	{Приближение камеры к кораблю}
 ShipCamera_Backward	{Удаление камеры от корабля}
 
-Sea_CameraSwitch	{Переключение камеры "за кораблем"/"на палубе"}
+Sea_CameraSwitch	{Переключение камеры "за кораблём"/"на палубе"}
 Telescope			{Включить/выключить подзорную трубу}
 TelescopeIn			{Включить/приблизить подзорную трубу}
 TelescopeOut		{Выключить/удалить подзорную трубу}
 
 DeckCamera_Turn_V	{Вертикальный поворот камеры (вид с палубы)}
 DeckCamera_Turn_H	{Горизонтальный поворот камеры (вид с палубы)}
-DeckCamera_Forward	{Вперед (вид с палубы)}
+DeckCamera_Forward	{Вперёд (вид с палубы)}
 DeckCamera_Backward	{Назад (вид с палубы)}
 DeckCamera_Left		{Левый стрейф (вид с палубы)}
 DeckCamera_Right	{Правый стрейф (вид с палубы)}
@@ -141,7 +141,7 @@ WMapForward		{Приближение камеры}
 WMapBackward	{Удаление камеры}
 WMapCameraSwitch{Переключение режима обзора}
 
-WMapShipSailUp		{Плыть вперед}
+WMapShipSailUp		{Плыть вперёд}
 WMapShipSailDown	{Плыть назад}
 WMapShipTurnLeft	{Поворот влево}
 WMapShipTurnRight	{Поворот вправо}

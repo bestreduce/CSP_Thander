@@ -2,7 +2,7 @@
 // здесь и далее ник boal - это разработческий ник ALexusB
 
 #define VERSION_NUMBER1       "ГПК v.1.3.2 ATR  "
-#define VERSION_NUMBER2       "CSP v2.3.0a (24.05.2022)"
+#define VERSION_NUMBER2       "CSP v2.3.0a (03.10.2022)"
 #define VERSION_NUMBER3       ""
 #define PROVIDER_TXT            "LEOPARD's team"
 #define VERSION_NUM      99910  // текущий номер
@@ -83,14 +83,18 @@ bool 	bHigherShipRate				= true;
 bool 	bQuestMark 					= false;
 // -10 личного порога
 bool 	bHigherSelfRate 			= true;
+// Требование ранга для навигации
+bool 	bRankRequirement 			= false;
 // влияние сложности на переносимый вес
-bool 	bDifficultyWeight 			= true;
+bool 	bDifficultyWeight 			= false;
+// Упрощённое фехтование
+float 	bModDamage 					= 1.0;
 // Найм полубессмертного ПГГ
 bool 	bHalfImmortalPGG 			= false;
 // Сбор денег за швартовку
 bool 	bPortPermission 			= false;
 //Абордаж стенка на стенку
-bool   bBoardMode                   = false;
+//bool   bBoardMode                   = false;
 //Срез скиллов от офицеров
 bool   bNoBonusSkillOff             = false;
 //Взятки стражникам
@@ -101,8 +105,11 @@ int 	iStealthSystem = 1;
 bool 	bFillEncyShips              = false;
 //альтернативный баланс
 bool 	bAltBalance                 = false;
+bool 	bAltBalanceTimeSlow         = false;
+bool 	bAltBalanceOffTopPerk       = false;
+bool 	bAltBalanceProHits          = false;
 //Разговор местных жителей
-bool 	bCharVoice                 = false;
+//bool 	bCharVoice                 = false;
 
 // платный сайв-лоад
 //bool    bPayForSaveLoad           = true;

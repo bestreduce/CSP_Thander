@@ -4,7 +4,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     switch (Dialog.CurrentNode)
 	{
 		case "quests":
-			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Вопросы, " + GetAddress_Form(NPChar) + "?", "Что вам угодно, " + GetAddress_Form(NPChar) + "?"), ""+ GetSexPhrase("Хм, уж не пристаете ли вы ко мне, " + GetAddress_Form(NPChar) + "? ","Опять со странными вопросами? Девушка, выпили бы вы рому, что ли...") +"", "В течение этого дня вы уже третий раз говорите о каком-то вопросе..."+ GetSexPhrase(" Это знаки внимания?","") +"",
+			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Вопросы, " + GetAddress_Form(NPChar) + "?", "Что вам угодно, " + GetAddress_Form(NPChar) + "?"), ""+ GetSexPhrase("Хм, уж не пристаёте ли вы ко мне, " + GetAddress_Form(NPChar) + "? ","Опять со странными вопросами? Девушка, выпили бы вы рому, что ли...") +"", "В течение этого дня вы уже третий раз говорите о каком-то вопросе..."+ GetSexPhrase(" Это знаки внимания?","") +"",
                           "Опять вопросы будете задавать, " + GetAddress_Form(NPChar) + "?", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Сейчас мне не о чем говорить"), "Да нет, что ты, красавица...",
                       "Никак нет, дорогуша, склероз...", "Да нет, какие вопросы...", npchar, Dialog.CurrentNode);
@@ -13,14 +13,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             if (CheckAttribute(pchar, "questTemp.State.Usurer"))
             {
                 dialog.text = "Вы что-то хотите мне сказать?";
-    			link.l1 = ""+ GetSexPhrase("Да. Я хочу сказать, что ты замечательно выглядишь, красавица. Даже несмотря на слезки в глазах.","Что ты такая расстроенная, малышка? Никак плачешь?") +"";
+    			link.l1 = ""+ GetSexPhrase("Да. Я хочу сказать, что ты замечательно выглядишь, красавица. Даже несмотря на слёзки в глазах.","Что ты такая расстроенная, малышка? Никак плачешь?") +"";
     			link.l1.go = "Step_S2_1";
             }
             //<== проверяем поле состояния квестов
 		break;
 //*************************** Квест №2 испанки, задание Инквизиции ***************************
  		case "Step_S2_1":
-    		dialog.text = NPCStringReactionRepeat("Ох...", "Ох, поговорили мы уже об этом...", "Послушайте, мы поговорили - и все...", "Что это вы пристаете к бедной девушке. "+ GetSexPhrase("Думаете, что горе у меня - и вы тут как тут, утешить?","") +"", "block", 0, npchar, Dialog.CurrentNode);
+    		dialog.text = NPCStringReactionRepeat("Ох...", "Ох, поговорили мы уже об этом...", "Послушайте, мы поговорили - и все...", "Что это вы пристаёте к бедной девушке. "+ GetSexPhrase("Думаете, что горе у меня - и вы тут как тут, утешить?","") +"", "block", 0, npchar, Dialog.CurrentNode);
     		link.l1 = HeroStringReactionRepeat("Так кто же он, твой обидчик? Может, я смогу помочь?", "Да, верно.", "Хорошо, хорошо...", ""+ GetSexPhrase("Да ничего я не думаю, красавица. Все нормально...","Ладно...") +"", npchar, Dialog.CurrentNode);
     		link.l1.go = DialogGoNodeRepeat("Step_S2_2", "none", "none", "none", npchar, Dialog.CurrentNode);
  		break;
@@ -35,7 +35,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     		link.l1.go = "Step_S2_4";
  		break;
  		case "Step_S2_4":
-    		dialog.text = "А вдруг он от этого умрет? Лучше передайте ему, что бы он не появлялся в таверне. Иначе я ему глаза выцарапаю!";
+    		dialog.text = "А вдруг он от этого умрёт? Лучше передайте ему, что бы он не появлялся в таверне. Иначе я ему глаза выцарапаю!";
     		link.l1 = "Ну хорошо, передам.";
     		link.l1.go = "exit";
             AddQuestRecord("Spa_Line_2_Inquisition", "6");

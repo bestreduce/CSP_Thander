@@ -28,14 +28,14 @@ void ProcessDialogEvent()
 		break;
 
         case "Meeting_1":
-			dialog.text = "Моя ошибся? Ты белый человек, я белый, мое имя даже 'Белый Мальчик'. Одежда - память о предках, я носить ее, как смочь одеть, давно.";
+			dialog.text = "Моя ошибся? Ты белый человек, я белый, моё имя даже 'Белый Мальчик'. Одежда - память о предках, я носить её, как смочь одеть, давно.";
 			link.l1 = "Ну да, не девочка точно, только лет тебе явно уже за мальчика перевалило, а ума так и нет. Зачем всю жизнь ходить в лохмотьях?";
 			link.l1.go = "Meeting_2";
 		break;
 
 		case "Meeting_2":
 			dialog.text = "Твоя не понимай. Я сын дочери главный шаман и белый капитан большой корабль. Я носить так, чтоб духи не видеть меня и не забрать к себе.";
-			link.l1 = "В общем, очередной юродивый, ясно все. Ты продаешь жемчуг?";
+			link.l1 = "В общем, очередной юродивый, ясно все. Ты продаёшь жемчуг?";
 			link.l1.go = "Meeting_3";
 		break;
 
@@ -67,7 +67,7 @@ void ProcessDialogEvent()
 			}
 			if (GetCharacterItem(Pchar, "Coins") >= 666 && CheckAttribute(pchar , "GenQuest.GhostShip.NeedCoins"))
 			{
-                Link.l4 = "Я принес"+ GetSexPhrase("","ла") +" твои жемчужины.";
+                Link.l4 = "Я прин"+ GetSexPhrase("ёс","есла") +" твои жемчужины.";
     			Link.l4.go = "quest_coin_2";
 			}
 		break;
@@ -75,13 +75,13 @@ void ProcessDialogEvent()
 		// корабль
 		case "GhostCapt":
 			NextDiag.TempNode = "AfterMeet";
-			dialog.Text = "Большой корабль? Плавать долго-долго вокруг, раньше быть простым, потом стать призрак с черным парусом.";
+			dialog.Text = "Большой корабль? Плавать долго-долго вокруг, раньше быть простым, потом стать призрак с чёрным парусом.";
 			Link.l1 = "Когда и как он появился?";
 			Link.l1.go = "GhostCapt_1";
 		break;
 
 		case "GhostCapt_1":
-			dialog.Text = "Ошибка, а может, злой дух капитана посетил. Они были тут 40 зим назад, жили и торговали в мире. Капитан сильно обидеть племя, взять мою мать силой, разграбить нас, похитить священный черный жемчуг.";
+			dialog.Text = "Ошибка, а может, злой дух капитана посетил. Они были тут 40 зим назад, жили и торговали в мире. Капитан сильно обидеть племя, взять мою мать силой, разграбить нас, похитить священный чёрный жемчуг.";
 			Link.l1 = "Хм... Нормальное дело, ну, а корабль-призрак как возник?";
 			Link.l1.go = "GhostCapt_2";
 		break;
@@ -93,13 +93,13 @@ void ProcessDialogEvent()
 		break;
 
 		case "GhostCapt_3":
-			dialog.Text = "Они и страдать, сильно страдать. Получаться все не так, могущество священных жемчужин защищать их, они будут мучаться, пока не вернется все обратно. Я стоять здесь с рождения и собирать обратно наш жемчуг, менять на белый, они продавать, я искать.";
+			dialog.Text = "Они и страдать, сильно страдать. Получаться все не так, могущество священных жемчужин защищать их, они будут мучаться, пока не вернётся все обратно. Я стоять здесь с рождения и собирать обратно наш жемчуг, менять на белый, они продавать, я искать.";
 			Link.l1 = "По-моему, страдают от этого проклятия больше другие люди. Порезали бы им глотки ночью - и всех дел. Как снять с них бессмертие?";
 			Link.l1.go = "GhostCapt_4";
 		break;
 
 		case "GhostCapt_4":
-			dialog.Text = "Осталось мало, они уже почти все потратить, я собрать все, что было, осталось совсем мало, нужно 666 черных жемчужин с их корабля. Тогда проклятие обернется правильной стороной.";
+			dialog.Text = "Осталось мало, они уже почти все потратить, я собрать все, что было, осталось совсем мало, нужно 666 чёрных жемчужин с их корабля. Тогда проклятие обернётся правильной стороной.";
 			Link.l1 = "Хорошо, жди меня и я вернусь!";
 			Link.l1.go = "Exit";
 			AddQuestRecord("GhostShipQuest", "5");
@@ -107,7 +107,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "quest_coin_2":
-            dialog.Text = "Замечательно. Ты спасти всех нас! Скорее давай их. Тебе остается только еще раз встретить корабль и сломать его или взять боем. На этом их пути конец. Теперь они стать просто пираты, без черного паруса.";
+            dialog.Text = "Замечательно. Ты спасти всех нас! Скорее давай их. Тебе остаётся только ещё раз встретить корабль и сломать его или взять боем. На этом их пути конец. Теперь они стать просто пираты, без чёрного паруса.";
 			Link.l1 = "Хорошо. Забирай их.";
 			Link.l1.go = "Exit";
 			TakeNItems(pchar, "Coins", -666);
@@ -181,7 +181,7 @@ void ProcessDialogEvent()
 			link.l1.go = "GhostCapt_Prize5";
 			shTo = &RealShips[sti(pchar.Ship.Type)];
 			shTo.Tuning.GhostShip = true;
-			GetBaseShipParam_ToUpgrade(shTo, "SpeedRate");
+			SetShipTuningF(pchar, "SpeedRate", SHIP_STAT_UPGRADE_FLYING_DUTCHMAN);
 		break;
 
 		case "GhostCapt_upgrade2":
@@ -190,7 +190,7 @@ void ProcessDialogEvent()
 			link.l1.go = "GhostCapt_Prize5";
 			shTo = &RealShips[sti(pchar.Ship.Type)];
 			shTo.Tuning.GhostShip = true;
-			GetBaseShipParam_ToUpgrade(shTo, "TurnRate");
+			SetShipTuningF(pchar, "TurnRate", SHIP_STAT_UPGRADE_FLYING_DUTCHMAN);
 		break;
 
 		case "GhostCapt_upgrade3":
@@ -199,7 +199,7 @@ void ProcessDialogEvent()
 			link.l1.go = "GhostCapt_Prize5";
 			shTo = &RealShips[sti(pchar.Ship.Type)];
 			shTo.Tuning.GhostShip = true;
-			GetBaseShipParam_ToUpgrade(shTo, "WindAgainstSpeed");
+			SetShipTuningF(pchar, "WindAgainstSpeed", SHIP_STAT_UPGRADE_FLYING_DUTCHMAN);
 		break;
 
 		case "GhostCapt_noupgrade":
@@ -227,7 +227,7 @@ void ProcessDialogEvent()
 
 		case "GhostCapt_LastDialog":
 			dialog.text = "А-а, " + GetSexPhrase("старый знакомец","старая знакомая") + "! А ведь я тебя ждал - знал, что найдёшь разгадку...";
-			link.l1 = " Я " + GetSexPhrase("пришел","пришла") + " освободить тебя и твоих людей от проклятия. Твоё время вышло - пора на покой, гроза морей и капитан призрака Дейви Джонс.";
+			link.l1 = " Я " + GetSexPhrase("пришёл","пришла") + " освободить тебя и твоих людей от проклятия. Твоё время вышло - пора на покой, гроза морей и капитан призрака Дейви Джонс.";
 			link.l1.go = "GhostCapt_LastDialog1";
 		break;
 
@@ -251,24 +251,5 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-	}
-}
-
-void GetBaseShipParam_ToUpgrade(ref shTo, string param)
-{
-	string sAttr = "Bonus_"+param;
-	int iRealShipType = sti(shTo.basetype);
-	string sParam =	GetBaseShipParamFromType(iRealShipType, param);
-	float paramValue = stf(sParam)/10*3;
-	if(CheckAttribute(shTo, sAttr))
-	{
-		shTo.(param) = stf(shTo.(param)) - stf(shTo.(sAttr));
-		shTo.(sAttr) = stf(shTo.(sAttr)) + paramValue;
-		shTo.(param) = stf(shTo.(param)) + stf(shTo.(sAttr));
-	}
-	else
-	{
-		shTo.(sAttr) = paramValue;
-		shTo.(param) = stf(shTo.(param)) + stf(shTo.(sAttr));
 	}
 }

@@ -62,7 +62,7 @@ void ContraDeliverQuest_ReloadConterToRoom(string sQuest) // генерим кл
 void ContraDeliverQuest_ContraIsDead(string sQuest)
 {
 	ref rChar = &characters[GetCharacterIndex(sGenLocation + "_Smuggler")];
-	rChar.model    = "pirate_" + (rand(9)+1); // Меняем модель (типо, туда уже другой пришел)
+	rChar.model    = "pirate_" + (rand(9)+1); // Меняем модель (типо, туда уже другой пришёл)
 	FaceMaker(rChar);
 	chrDisableReloadToLocation = false;
 	bDisableFastReload         = false;
@@ -390,7 +390,7 @@ void CitizenFindItemMiniQuest_CheckItem()
 		DeleteGameModeCondition("CitizenFindItemMiniQuest_CheckItem");
 		PChar.GenQuest.CitizenFindItem.GiveItem = true; // Флаг - взяли предмет
 		string sCity = XI_ConvertString("Colony" + PChar.GenQuest.CitizenFindItem.City + "Gen");
-		Log_Info("Вот я и нашел обручальное кольцо девушки из " + sCity + ". Нужно отнести его ей.");
+		Log_Info("Вот я и нашёл обручальное кольцо девушки из " + sCity + ". Нужно отнести его ей.");
 	}
 }
 
@@ -1826,7 +1826,7 @@ void SetFreeQuestAboardShipSituation(string qName)
 	SetFunctionTimerCondition("CanGenerateQuestAboardShipSituation", 0, 1, rand(15) + 15, false);
 }
 
-// можем генерировать ситуацию еще раз до упора, пока на нее не напорется геймер
+// можем генерировать ситуацию ещё раз до упора, пока на нее не напорется геймер
 void CanGenerateQuestAboardShipSituation(string qName)
 {
 	bSeaCanGenerateShipSituation = true;
@@ -2021,7 +2021,7 @@ void SetCaptainFreeQuestAboardSituation(ref chr)
 	if (bSeaActive)
 	{
 		PostEvent("evntQuestsCheck", 400);
-		ShipTakenFree(sti(chr.index), KILL_BY_ABORDAGE, sti(pchar.index)); // тут умер реальный кэп, апдайтим еще
+		ShipTakenFree(sti(chr.index), KILL_BY_ABORDAGE, sti(pchar.index)); // тут умер реальный кэп, апдайтим ещё
 		SetCharacterRelationBoth(sti(sld.index), GetMainCharacterIndex(), RELATION_FRIEND);
 		UpdateRelations();
 		RefreshBattleInterface();
@@ -3237,7 +3237,7 @@ void CaptainComission_GuardsAfter(string qName)
 
 }
 
-void CaptainComission_SlaveDeathJungles(string qName) // если не пришел на маяк в течение 2-х суток - раб заблудился в джунглях и помер
+void CaptainComission_SlaveDeathJungles(string qName) // если не пришёл на маяк в течение 2-х суток - раб заблудился в джунглях и помер
 {
 	pchar.GenQuest.CaptainComission.GetSlave = "SlaveDied";
 	pchar.quest.CaptainComission_SlaveOnMayak.over = "yes";
@@ -4793,7 +4793,7 @@ void Convict_LocExit(string qName)
 		if(pchar.GenQuest.Convict == "FightInShore")
 		{
 			AddQuestRecord("Convict", "6");
-			AddQuestUserData("Convict", "sSex", GetSexPhrase("слово джентльмена","'держать свое слово'"));
+			AddQuestUserData("Convict", "sSex", GetSexPhrase("слово джентльмена","'держать своё слово'"));
 			AddQuestUserData("Convict", "sSex1", GetSexPhrase("","а"));
 			AddQuestUserData("Convict", "sShoreName", XI_ConvertString("Shore" + pchar.GenQuest.Convict.ShoreLocation + "Acc"));
 		}
@@ -4805,7 +4805,7 @@ void Convict_LocExit(string qName)
 		if(pchar.GenQuest.Convict == "MayakFight")
 		{
 			AddQuestRecord("Convict", "13");
-			AddQuestUserData("Convict", "sSex", GetSexPhrase("слово джентльмена","'держать свое слово'"));
+			AddQuestUserData("Convict", "sSex", GetSexPhrase("слово джентльмена","'держать своё слово'"));
 			AddQuestUserData("Convict", "sSex1", GetSexPhrase("","а"));
 			AddQuestUserData("Convict", "sMayak", XI_ConvertString(pchar.GenQuest.Convict.Mayak + "Abl"));
 		}
@@ -4831,7 +4831,7 @@ void Convict_MeetInShore(string qName)
 
 	DeleteAttribute(&Locations[FindLocation(pchar.GenQuest.Convict.ShoreLocation)], "DisableEncounters");
 
-	if(pchar.Location == pchar.location.from_sea) // пришел с моря
+	if(pchar.Location == pchar.location.from_sea) // пришёл с моря
 	{
 		chrDisableReloadToLocation = true;
 		bDisableFastReload = true;
@@ -4859,7 +4859,7 @@ void Convict_MeetInShore(string qName)
 			}
 		}
 	}
-	else // пришел с суши --> закрываем квест
+	else // пришёл с суши --> закрываем квест
 	{
 		AddQuestRecord("Convict", "3");
 		AddQuestUserData("Convict", "sSex", GetSexPhrase("","а"));
@@ -4948,7 +4948,7 @@ int Convict_GetShipPrice(int iShipType)
 void Convict_OnMayak(string qName)
 {
 	ref sld;
-	if(pchar.location == pchar.location.from_sea) // пришел с моря
+	if(pchar.location == pchar.location.from_sea) // пришёл с моря
 	{
 		pchar.quest.Convict_OnMayak.over = "yes"; // затираем прерывание
 		DeleteAttribute(&Locations[FindLocation(pchar.GenQuest.Convict.Mayak)], "DisableEncounters");

@@ -1123,7 +1123,6 @@ void DropGoodsToSeaFromInterface(int iGoodIndex, int iQuantity)
 			}
 
 			RecalculateCargoLoad(xi_refCharacter);
-	        xi_refCharacter.Tmp.SpeedRecall = 0; // чтоб пересчитались скорость и маневр
 
 			if (CheckAttribute(&Goods[iGoodIndex], "Swim"))
 			{
@@ -1259,7 +1258,7 @@ void ShowCannonsMenu()
     bool bOk  = !bSeaActive && LAi_grp_alarmactive;
     bool bOk2 = bAbordageStarted && !bCabinStarted; // в абордаже не жать пушки
 	if (bDisableMapEnter || bOk || bOk2)
-    { // идет бой, запрет смены орудий
+    { // идёт бой, запрет смены орудий
     	SetSelectable("CANNONS_OK", false);
 	}
 	else
@@ -1356,8 +1355,8 @@ void SetCannonsToBort(ref chr, string sBort, int iQty)
 	for (i = 0; i < maxQty; i++)
 	{
 		attr = "c" + i;
-		chr.Ship.Cannons.borts.(sBort).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет ее
-		chr.Ship.Cannons.borts.(sBort_real).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет ее
+		chr.Ship.Cannons.borts.(sBort).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет её
+		chr.Ship.Cannons.borts.(sBort_real).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет её
 	}
 	// распределяем
 	if (iQty > 0)

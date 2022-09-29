@@ -70,7 +70,7 @@ void ProcessDialogEvent()
 
 		case "ThisTimeFree":
 			dialog.snd = "Voice\COGU\COGU002";
-			dialog.text = "Не морочьте нам голову, капитан " + Pchar.name + "! И кто мог подумать, что такой положительный и уважаемый всеми человек, как вы, займется контрабандой!";
+			dialog.text = "Не морочьте нам голову, капитан " + Pchar.name + "! И кто мог подумать, что такой положительный и уважаемый всеми человек, как вы, займётся контрабандой!";
 			Link.l1 = "Увы, все совершают ошибки. Но я уже раскаиваюсь!";
 			Link.l1.go = "ThisTimeFree_1";
 			Link.l2 = "Сейчас я отрежу тебе голову!";
@@ -137,7 +137,7 @@ void ProcessDialogEvent()
 
 		case "GiveMeSomeMoneyToo":
 			dialog.snd = "Voice\COGU\COGU005";
-			dialog.text = "Вот как? Нет, конечно, это занятие совершенно правомочно... Если нам, конечно, тоже достанется. А по сколько вы раздаете?";
+			dialog.text = "Вот как? Нет, конечно, это занятие совершенно правомочно... Если нам, конечно, тоже достанется. А по сколько вы раздаёте?";
 			Link.l1 = "Думаю, что " + makeint(sti(Pchar.contratradedmoney)*(0.1+(0.01*MOD_SKILL_ENEMY_RATE))) + " пиастров будет достаточно.";
 			//if(makeint(Pchar.rank)*1000 <= makeint(sti(Pchar.money)/10))
 			if (sti(pchar.money)>=makeint(sti(Pchar.contratradedmoney)*(0.1+(0.01*MOD_SKILL_ENEMY_RATE))))
@@ -149,7 +149,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "TryingToGiveBribe";
 			}
 
-			/*Link.l2 = "Как насчет " + makeint(sti(Pchar.money)/5) + " пиастров?";
+			/*Link.l2 = "Как насчёт " + makeint(sti(Pchar.money)/5) + " пиастров?";
 			if(makeint(Pchar.rank)*1000 <= makeint(sti(Pchar.money)/5))
 			{
 				Link.l2.go = "MoneyAccepted5";
@@ -173,7 +173,7 @@ void ProcessDialogEvent()
 		case "TryingToGiveBribe":
 			dialog.snd = "Voice\COGU\COGU006";
 			dialog.text = "Ага, предлагаете взятку? Нет уж, мне честь мундира дороже! Извольте следовать за нами!";
-			Link.l1 = "Проклятье! Жаль вас разочаровывать, но вряд ли вы куда-либо сейчас пойдете!";
+			Link.l1 = "Проклятье! Жаль вас разочаровывать, но вряд ли вы куда-либо сейчас пойдёте!";
 			Link.l1.go = "ThisTimeFree_fight";
 		break;
 
@@ -204,7 +204,7 @@ void ProcessDialogEvent()
 		case "GettingLostFromHere":
 			dialog.snd = "Voice\COGU\COGU008";
 			dialog.text = "Но... Дьявол... Я же должен вас арестовать!";
-			Link.l1 = "Арргх! Ты еще здесь? Жить надоело?";
+			Link.l1 = "Арргх! Ты ещё здесь? Жить надоело?";
 			Link.l1.go = "GettingLostFromHere_1";
 		break;
 

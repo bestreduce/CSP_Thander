@@ -5,7 +5,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Какие вопросы, "+ GetSexPhrase("сын мой","дочь моя") +"?", "Спрашивай, я слушаю тебя..."), "Я слушаю тебя, говори, "+ GetSexPhrase("сын мой","дочь моя") +"...", "И в третий раз говорю тебе, "+ GetSexPhrase("сын мой","дочь моя") +" мой: задавай свой вопрос.",
-                          "Столько обязанностей у церковнослужителя, а тут еще и ты донимаешь, "+ GetSexPhrase("сын мой","дочь моя") +" мой...", "block", 1, npchar, Dialog.CurrentNode);
+                          "Столько обязанностей у церковнослужителя, а тут ещё и ты донимаешь, "+ GetSexPhrase("сын мой","дочь моя") +" мой...", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Не сейчас, падре..."), "Да, пока особо и нечего сказать...",
                       "Задам, задам... Только позже...", "Простите, святой отец...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
@@ -44,7 +44,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         case "Step_F7_1":
 			dialog.text = NPCStringReactionRepeat("Прямо под церковью, "+ GetSexPhrase("сын мой","дочь моя") +".", "Прямо под нашей церковью, "+ GetSexPhrase("сын мой","дочь моя") +". Вход находится под лестницей.", "Ты совсем "+ GetSexPhrase("тугой на слух, сын мой","туга на слух, дочь моя") +". Ох, лечиться тебе надобно...",
                           "Смирение...", "block", 1, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("Спасибо, падре.", "Спасибо еще раз, падре.",
+			link.l1 = HeroStringReactionRepeat("Спасибо, падре.", "Спасибо ещё раз, падре.",
                       "Обязательно!", "Ась?", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 		break;

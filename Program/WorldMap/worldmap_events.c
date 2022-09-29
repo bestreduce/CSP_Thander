@@ -268,7 +268,7 @@ ref wdmEncounterDelete()
 	string chrID = "";
 	if(CheckAttribute(enc, "quest.chrID"))
 	{
-    //homo 14/04/07 не ясно если энкоутер еще не доплыл до пункта назанчения значит его нельзя тереть?
+    //homo 14/04/07 не ясно если энкоутер ещё не доплыл до пункта назанчения значит его нельзя тереть?
     //Даже если его трет программист?
     	if(CheckAttribute(&enc, "Gotox") && CheckAttribute(&enc, "Gotoz"))
 		{

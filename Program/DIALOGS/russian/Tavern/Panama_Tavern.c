@@ -31,13 +31,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		//-->работорговец
 		case "Panama_rat_1":
-			dialog.text = NPCStringReactionRepeat("Да, был у нас в городе этот тип. Все по темным углам прятался... Потом к нему приехали какие-то дружки - на вид - форменные головорезы, и он с ушел из города.", "Ты уже "+ GetSexPhrase("спрашивал","спрашивала") +" об этом, я тебе ответил.", "Я же говорю тебе, ты уже "+ GetSexPhrase("спрашивал","спрашивала") +" об этом Гонтьере.", "Послушай, отойди и не мешай! Совсем что ли крыша поехала?", "block", 0, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("А куда ушел, не знаешь?", "Хм, ну да...", "Да, точно, "+ GetSexPhrase("спрашивал","спрашивала") +"...", "Извини, " + npchar.name + "...", npchar, Dialog.CurrentNode);
+			dialog.text = NPCStringReactionRepeat("Да, был у нас в городе этот тип. Все по темным углам прятался... Потом к нему приехали какие-то дружки - на вид - форменные головорезы, и он с ушёл из города.", "Ты уже "+ GetSexPhrase("спрашивал","спрашивала") +" об этом, я тебе ответил.", "Я же говорю тебе, ты уже "+ GetSexPhrase("спрашивал","спрашивала") +" об этом Гонтьере.", "Послушай, отойди и не мешай! Совсем что ли крыша поехала?", "block", 0, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("А куда ушёл, не знаешь?", "Хм, ну да...", "Да, точно, "+ GetSexPhrase("спрашивал","спрашивала") +"...", "Извини, " + npchar.name + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "Panama_rat_2";
 		break;
 
 		case "Panama_rat_2":
-			dialog.text = "Ну, пешком отсюда только одна дорога - в Порто Белло. А он пешком и пошел. Так что ищи его там.";
+			dialog.text = "Ну, пешком отсюда только одна дорога - в Порто Белло. А он пешком и пошёл. Так что ищи его там.";
 			link.l1 = "Спасибо, ты мне здорово помог!";
 			link.l1.go = "exit";
 			pchar.questTemp.Slavetrader = "FindRatPortobello";

@@ -29,28 +29,30 @@ void ProcessDialogEvent()
             link.l1 = "Я не против.";
 			link.l1.go = "Slushau_1";
 			link.l2 = "Ну, нет, вообще-то. Я лучше ещё где-нибудь часок проведу.";
-			link.l2.go = "exit";
+			link.l2.go = "Ya_Ustal_Ya_Uhoju";
 			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
 		break;
 
 		case "Slushau_1":
             dialog.text = "Ты ведь корсар"+ GetSexPhrase("","ка") +", не так ли?";
+			link.l1 = "Ты что, хочешь меня оскорбить? Я "+ GetSexPhrase("свободный пират","свободная пиратка") +"!";
+			link.l1.go = "Nelzya_Pomoch";
+			if (sti(pchar.nation) != PIRATE)
+			{
+				link.l1 = "Нет, корсары служат государству, а я вольный капитан своего корабля.";
+				link.l1.go = "Nelzya_Pomoch";
+			}
             if (CheckCharacterItem(Pchar, "patent_spa") || CheckCharacterItem(Pchar, "patent_fra") || CheckCharacterItem(Pchar, "patent_hol") || CheckCharacterItem(Pchar, "patent_eng"))
 			{
 				link.l1 = "Да, я корсар"+ GetSexPhrase("","ка") +".";
 				link.l1.go = "Korsar_1";
-			}
-			else
-			{
-				link.l1 = "Ты что, хочешь меня оскорбить? Я "+ GetSexPhrase("свободный пират","свободная пиратка") +"!";
-				link.l1.go = "Nelzya_Pomoch";
 			}
 		break;
 
 		case "Nelzya_Pomoch":
             dialog.text = "А, тогда ты мне ничем не поможешь. Желаю тебе удачи, прощай.";
 			link.l1 = "М-да, плодотворная беседа, нечего сказать. До встречи.";
-			link.l1.go = "exit";
+			link.l1.go = "Ya_Ustal_Ya_Uhoju";
             link.l2 = "Ну, ты можешь, по крайней мере, поведать мне свою историю.";
 			link.l2.go = "Istoria_1";
 			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
@@ -61,41 +63,73 @@ void ProcessDialogEvent()
 							"Я думаю купить себе каперское свидетельство, заработать золотишка и подкупить пару чиновников, да проклятые форты открывают пальбу, как только я подхожу к какому-либо порту, и я не могу добраться до губернатора, чтобы сделать ему предложение. Англичане или французы повесят меня, едва я окажусь у них в руках: у них приказ убить меня, как только я высуну нос. Я думаю, что я мог бы поступить на службу к испанцам, но я не могу зайти в их чёртовы порты, они тут же откроют по мне огонь!";
 			link.l1 = "Мне очень жаль, Хьюго, но я ничем не могу помочь тебе. Я желаю тебе удачи. Счастливо.";
 			link.l1.go = "exit";
-			link.l2 = "Но чем я могу тебе помочь?";
-			link.l2.go = "Davai_Pomogu_NET";
-			link.l3 = "А как насчет Братства?";
-			link.l3.go = "Davai_Pomogu_Bratstvo";
+			if (!CheckAttribute(pchar, "questTemp.PDM_NR_Pomoch"))
+			{
+				link.l2 = "Но чем я могу тебе помочь?";
+				link.l2.go = "Davai_Pomogu_NET";
+			}
+			if (!CheckAttribute(pchar, "questTemp.PDM_NR_Bratstvo"))
+			{
+				link.l3 = "А как насчёт Братства?";
+				link.l3.go = "Davai_Pomogu_Bratstvo";
+			}
 			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
 		break;
 
 		case "Davai_Pomogu_NET":
             dialog.text = "Ты не сможешь мне помочь, "+ GetSexPhrase("парень","девочка") +". Ты ведь пират"+ GetSexPhrase("","ка") +", не так ли? Тебе вышибут мозги, как только ты приблизишься к испанскому городу на расстояние мили.";
-            link.l1 = "Верное замечание. Тогда до встречи. И желаю тебе удачи.";
+			if (sti(pchar.nation) != PIRATE)
+			{
+				dialog.text = "Ты не сможешь мне помочь, "+ GetSexPhrase("парень","девочка") +". Ты ведь не служишь испанскому генерал-губернатору, ведь так? А значит нужных связей у тебя тоже нет.";
+			}
+			link.l1 = "Верное замечание. Тогда до встречи. И желаю тебе удачи.";
 			link.l1.go = "exit";
+			if (!CheckAttribute(pchar, "questTemp.PDM_NR_Bratstvo"))
+			{
+				link.l3 = "А как насчёт Братства?";
+				link.l3.go = "Davai_Pomogu_Bratstvo";
+			}
 			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
+			pchar.questTemp.PDM_NR_Pomoch = "PDM_NR_Pomoch";
+			pchar.questTemp.PDM_NR_Bratstvo = "PDM_NR_Bratstvo";
 		break;
 
 		case "Davai_Pomogu_Bratstvo":
             dialog.text = "Братство! Я не вхожу в него, и никогда не войду! Они устанавливают правила пиратства - правила, слыхал"+ GetSexPhrase("","а") +"? Правила для пиратов! Я никогда не слышал подобной чуши. Я тебе честно скажу, "+ GetSexPhrase("парень","девочка") +", Братство - это всего лишь банда безмозглых кретинов, собравшихся вместе, чтобы путаться у нас, свободных моряков, под ногами.";
             link.l1 = "Хмм. В конце концов, это твоё мнение. Ну ладно, тогда я боюсь, что ничего больше не смогу тебе предложить. До встречи.";
 			link.l1.go = "exit";
+			if (!CheckAttribute(pchar, "questTemp.PDM_NR_Pomoch"))
+			{
+				link.l2 = "Но чем я могу тебе помочь?";
+				link.l2.go = "Davai_Pomogu_NET";
+			}
 			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
+			pchar.questTemp.PDM_NR_Pomoch = "PDM_NR_Pomoch";
+			pchar.questTemp.PDM_NR_Bratstvo = "PDM_NR_Bratstvo";
 		break;
 
 		case "Podhodim_SNOVA_Reactia":
 			PlayVoice("Kopcapkz\Voices\PDM\Hugo Lumbermill.wav");
 			if (CheckCharacterItem(Pchar, "patent_spa"))
 			{
-				dialog.text = "(Пьёт ром)";
+				dialog.text = "(пьёт ром)";
 				link.l1 = "Привет, Хьюго. Я теперь "+ GetSexPhrase("испанский корсар","испанская корсарка") +", могу я тебе чем-то помочь?";
 				link.l1.go = "Ya_Ispania_1";
 			}
 			else
 			{
-				dialog.text = "Если ты не испанский капер, то нам не о чем с тобой разговаривать.";
+				dialog.text = "Если ты не испанский корсар, то нам не о чем с тобой разговаривать.";
 				link.l1 = "Тогда счастливо.";
 				link.l1.go = "exit";
+				link.l2 = "Испанцы мои враги - запомни это!";
+				link.l2.go = "Ya_Ustal_Ya_Uhoju";
 			}
+		break;
+		
+		case "Ya_Ustal_Ya_Uhoju":
+			DialogExit();
+            npchar.lifeday = 0;
+			LAi_CharacterDisableDialog(npchar);
 		break;
 
 		case "Korsar_1":
@@ -128,27 +162,25 @@ void ProcessDialogEvent()
 		case "Nelzya_Pomoch_Korsar_2":
             dialog.text = "А, тогда ты мне ничем не поможешь. Желаю тебе удачи, прощай.";
 			link.l1 = "М-да, плодотворная беседа, нечего сказать. До встречи.";
-			link.l1.go = "exit";
+			link.l1.go = "Ya_Ustal_Ya_Uhoju";
             link.l2 = "Ну, ты можешь, по крайней мере, поведать мне свою историю.";
 			link.l2.go = "Istoria_Korsar_2";
-			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
+			
 		break;
 
 		case "Istoria_Korsar_2":
             dialog.text = "Ну хорошо. Вот, слушай: я стал слишком стар, чтобы вести жизнь пирата. Грабёж и драки - игры для молодёжи, понимаешь? А я не хочу больше рисковать своей шкурой, и хочу плавать спокойно, не вздрагивая при виде других кораблей. Но проблема в том, что мне некуда идти. Все хотят повесить меня, понимаешь? Но я придумал одну штуку, "+ GetSexPhrase("парень","девочка") +".\n"+
 							"Я думаю купить себе каперское свидетельство, заработать золотишка и подкупить пару чиновников, да проклятые форты открывают пальбу, как только я подхожу к какому-либо порту, и я не могу добраться до губернатора, чтобы сделать ему предложение. Англичане или французы повесят меня, едва я окажусь у них в руках: у них приказ убить меня, как только я высуну нос. Я думаю, что я мог бы поступить на службу к испанцам, но я не могу зайти в их чёртовы порты, они тут же откроют по мне огонь!";
 			link.l1 = "Мне очень жаль, Хьюго, но я ничем не могу помочь тебе. Я желаю тебе удачи. Счастливо.";
-			link.l1.go = "exit";
+			link.l1.go = "Ya_Ustal_Ya_Uhoju";
 			link.l2 = "Но чем я могу тебе помочь?";
 			link.l2.go = "Davai_Pomogu_KORSAR_NET_2";
-			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
 		break;
 
 		case "Davai_Pomogu_KORSAR_NET_2":
             dialog.text = "Ты не сможешь мне помочь, "+ GetSexPhrase("парень","девочка") +". Ты ведь служишь врагам Испании, не так ли? Тебе вышибут мозги, как только ты приблизишься к испанскому городу на расстояние мили.";
             link.l1 = "Верное замечание. Тогда до встречи. И желаю тебе удачи.";
-			link.l1.go = "exit";
-			NextDiag.TempNode = "Podhodim_SNOVA_Reactia";
+			link.l1.go = "Ya_Ustal_Ya_Uhoju";
 		break;
 
 		case "Ya_Ispania_1":
@@ -177,11 +209,12 @@ void ProcessDialogEvent()
             link.l1 = "До встречи.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Obida";
+			npchar.lifeday = 0;
 		break;
 
 		case "Obida":
             dialog.text = "Ха, "+ GetSexPhrase("приятель","девочка") +", я так не играю. Ты один раз "+ GetSexPhrase("отказался","отказалась") +" мне помочь, и второго шанса я тебе не предоставлю.";
-            link.l1 = "Это твои проблемы, капитан. Тогда счастливо.";
+            link.l1 = "Это твои проблемы, дед. Тогда счастливо.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Obida";
 		break;

@@ -66,7 +66,7 @@ ship_kills_2_descr{Потопите 35 кораблей в бою}
 ship_kills_3{Гроза морей}
 ship_kills_3_descr{Потопите 70 кораблей в бою}
 
-skel_kills_1{Очистка от темных сил}
+skel_kills_1{Очистка от тёмных сил}
 skel_kills_1_descr{Убить 30 нежити}
 skel_kills_icon{AchSkeletDead}
 skel_kills_2{Священный воитель}
@@ -117,7 +117,7 @@ AchStanS_3_descr{Нанести 300 резких ударов}
 AchStanH_1{Мощный удар}
 AchStanH_1_descr{Нанести 50 оглушающих ударов}
 AchStanH_icon{AchStanH}
-AchStanH_2{Тяжелые руки}
+AchStanH_2{Тяжёлые руки}
 AchStanH_2_descr{Нанести 150 оглушающих ударов}
 AchStanH_3{Викинг}
 AchStanH_3_descr{Нанести 300 оглушающих ударов}

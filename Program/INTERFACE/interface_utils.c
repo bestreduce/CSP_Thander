@@ -869,7 +869,7 @@ void SetShipOTHERTable(string _tabName, ref _chr)
     GameInterface.(_tabName).tr6.td1.icon.image = "AgainstWind";
 	GameInterface.(_tabName).tr6.td2.str = XI_ConvertString("AgainstWind");
 	GameInterface.(_tabName).tr6.td3.str = FloatToString(stf(refBaseShip.WindAgainstSpeed),2);
-	if (!CheckAttribute(&RealShips[iShip], "Tuning.WindAgainst"))
+	if (!CheckAttribute(&RealShips[iShip], "Tuning.WindAgainstSpeed"))
 	{
 		GameInterface.(_tabName).tr6.td3.color = argb(255,255,255,255);
 	}
@@ -960,59 +960,35 @@ void SetShipQualityTable(ref _chr, string _bar1, string _bar7, string _bar2, str
 
 	if (sti(refShip.BaseType) <= SHIP_SP_SANFELIPE)//рассчитываем качество только для НЕквестовых кораблей
 	{
-	ref rBaseShip = GetShipByType(sti(refShip.BaseType));
+		ref rBaseShip = GetShipByType(sti(refShip.BaseType));
+		float fTemp;
 
-	int iDiffClass = 5 - makeint(sti(refShip.Class)/2);
-	int MaxiCannonDiff;
-	if (rBaseShip.CannonsQuantity > 7) MaxiCannonDiff = 1;
-	if (rBaseShip.CannonsQuantity > 13) MaxiCannonDiff = 2;
-	if (rBaseShip.CannonsQuantity > 29) MaxiCannonDiff = 3;
-	if (rBaseShip.CannonsQuantity > 49) MaxiCannonDiff = 4;
-	if (rBaseShip.CannonsQuantity > 79) MaxiCannonDiff = 5;
-	float MaxSpeedBONUS = (stf(rBaseShip.SpeedRate) * MaxiCannonDiff) / (15*iDiffClass);//рассчитываем бонусы от неполного числа пушек при генерации корабля
-	float MaxTurnBONUS = (stf(rBaseShip.TurnRate) * MaxiCannonDiff) / (15*iDiffClass);
-	float MaxHPBONUS = (stf(rBaseShip.HP) * MaxiCannonDiff) / (15*iDiffClass);
-	float MaxCapacityBONUS = (stf(rBaseShip.Capacity) * MaxiCannonDiff) / (15*iDiffClass);
+		fTemp = stf(refShip.Capacity);
+		if (CheckAttribute(refShip, "Untuned.Capacity")) fTemp = refShip.Untuned.Capacity;
+		fCapacity = 50 * (fTemp - stf(rBaseShip.Capacity)) / (stf(rBaseShip.Capacity) * SHIP_STAT_RANGE_MAX) + 50;
 
-	float Bonus_Capacity, Bonus_HP, Bonus_SpeedRate, Bonus_TurnRate;
-	if (CheckAttribute(refShip, "Bonus_Capacity")) Bonus_Capacity = refShip.Bonus_Capacity; else Bonus_Capacity = 0;
-	if (CheckAttribute(refShip, "Bonus_HP")) Bonus_HP = refShip.Bonus_HP; else Bonus_HP = 0;
-	if (CheckAttribute(refShip, "Bonus_SpeedRate")) Bonus_SpeedRate = refShip.Bonus_SpeedRate; else Bonus_SpeedRate = 0;
-	if (CheckAttribute(refShip, "Bonus_TurnRate")) Bonus_TurnRate = refShip.Bonus_TurnRate; else Bonus_TurnRate = 0;
+		fTemp = stf(refShip.HP);
+		if (CheckAttribute(refShip, "Untuned.HP")) fTemp = refShip.Untuned.HP;
+		fHP = 50 * (fTemp - stf(rBaseShip.HP)) / (stf(rBaseShip.HP) * SHIP_STAT_RANGE_MAX) + 50;
 
-	float fTemp; //приводим 0,9 - 1,1 к формату 0-100
-//=======================================//четыре параметра с бонусами от числа пушек
-	fTemp = stf(refShip.Capacity) - Bonus_Capacity;
-	if (CheckAttribute(refShip, "Tuning.BotPack")) fTemp = fTemp/1.5;
-	if (CheckAttribute(refShip, "Tuning.Capacity")) fTemp = fTemp/1.2;
-	fCapacity = 100*(fTemp + Bonus_Capacity - 0.87499*stf(rBaseShip.Capacity)) / (MaxCapacityBONUS + 0.25*stf(rBaseShip.Capacity));
+		fTemp = stf(refShip.SpeedRate);
+		if (CheckAttribute(refShip, "Untuned.SpeedRate")) fTemp = refShip.Untuned.SpeedRate;
+		fSpeedRate = 50 * (fTemp - stf(rBaseShip.SpeedRate)) / (stf(rBaseShip.SpeedRate) * SHIP_STAT_RANGE_MAX) + 50;
 
-	fTemp = stf(refShip.HP) - Bonus_HP;
-	if (CheckAttribute(refShip, "Tuning.BotPack")) fTemp = fTemp*2;
-	if (CheckAttribute(refShip, "Tuning.HP")) fTemp = fTemp/1.2;
-	fHP = 100*(fTemp + Bonus_HP - 0.899*stf(rBaseShip.HP)) / (MaxHPBONUS + 0.2*stf(rBaseShip.HP));
+		fTemp = stf(refShip.TurnRate);
+		if (CheckAttribute(refShip, "Untuned.TurnRate")) fTemp = refShip.Untuned.TurnRate;
+		fTurnRate = 50 * (fTemp - stf(rBaseShip.TurnRate)) / (stf(rBaseShip.TurnRate) * SHIP_STAT_RANGE_MAX) + 50;
 
-	fTemp = stf(refShip.SpeedRate) - Bonus_SpeedRate;
-	if (CheckAttribute(refShip, "Tuning.SpeedRate")) fTemp = fTemp/1.2;
-	fSpeedRate = 100*(fTemp + Bonus_SpeedRate - 0.899*stf(rBaseShip.SpeedRate)) / (MaxSpeedBONUS + 0.2*stf(rBaseShip.SpeedRate));
+		fTemp = stf(refShip.MastMultiplier);
+		if (CheckAttribute(refShip, "Untuned.MastMultiplier")) fTemp = refShip.Untuned.MastMultiplier;
+		fMast = 50 * (stf(rBaseShip.MastMultiplier) - fTemp) / 0.3 + 50;
 
-	fTemp = stf(refShip.TurnRate) - Bonus_TurnRate;
-	if (CheckAttribute(refShip, "Tuning.TurnRate")) fTemp = fTemp/1.2;
-	fTurnRate = 100*(fTemp + Bonus_TurnRate - 0.899*stf(rBaseShip.TurnRate)) / (MaxTurnBONUS + 0.2*stf(rBaseShip.TurnRate));
-//=======================================//
-	fTemp = stf(refShip.MastMultiplier);
-	if (CheckAttribute(refShip, "Tuning.MastMultiplier")) fTemp = fTemp + 0.3;
-	fMast = 100*(stf(rBaseShip.MastMultiplier)+0.3-fTemp)/0.6;
+		fTemp = stf(refShip.WindAgainstSpeed);
+		if (CheckAttribute(refShip, "Untuned.WindAgainstSpeed")) fTemp = refShip.Untuned.WindAgainstSpeed;
+		fWAS = 50 * (fTemp - stf(rBaseShip.WindAgainstSpeed)) / (stf(rBaseShip.WindAgainstSpeed) * SHIP_STAT_RANGE_MAX) + 50;
 
-	fTemp = stf(refShip.WindAgainstSpeed);
-	if (CheckAttribute(refShip, "Tuning.WindAgainst")) fTemp = stf(FloatToString((fTemp-0.005)*stf(refShip.Class)*2/(stf(refShip.Class)*2+1),2));// :(
-	fWAS = 500*(fTemp/stf(rBaseShip.WindAgainstSpeed)-0.9);
-
-	fTemp = stf(refShip.OptCrew); 	//тюнинг не влияет на оптимальную
-	fCrew = 300*(fTemp/stf(rBaseShip.OptCrew)-0.8333);
-
-	if (fCapacity < 0) fCapacity = 0;
-	if (fWAS < 0) fWAS = 0;
+		fTemp = stf(refShip.OptCrew); 	//тюнинг не влияет на оптимальную
+		fCrew = 50 * (fTemp - stf(rBaseShip.OptCrew)) / (stf(rBaseShip.OptCrew) * SHIP_STAT_RANGE_MAX) + 50;
 	}
 
 	GameInterface.StatusLine.(_bar1).Max   = 100;
@@ -1022,7 +998,7 @@ void SetShipQualityTable(ref _chr, string _bar1, string _bar7, string _bar2, str
 
 	GameInterface.StatusLine.(_bar2).Max   = 100;
 	GameInterface.StatusLine.(_bar2).Min   = 0;
-	GameInterface.StatusLine.(_bar2).Value = fspeedRate;
+	GameInterface.StatusLine.(_bar2).Value = fSpeedRate;
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, _bar2,0);
 
 	GameInterface.StatusLine.(_bar3).Max   = 100;

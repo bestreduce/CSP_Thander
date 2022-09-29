@@ -309,13 +309,13 @@ void ProcessDialogEvent()
 					if(sti(pchar.questTemp.tournamentcount) >= 3) UnlockAchievement("AchTurnir", 2);
 					if(sti(pchar.questTemp.tournamentcount) >= 7) UnlockAchievement("AchTurnir", 3);
 
-					if (rand(3) == 0 && !CheckAttribute(pchar,"ScamFanActive"))
+					/*if (rand(3) == 0 && !CheckAttribute(pchar,"ScamFanActive"))
 					{
 						pchar.quest.SpawnScamFan.win_condition.l1 = "Location";
 						pchar.quest.SpawnScamFan.win_condition.l1.location = "FencingTown_ExitTown";
 						pchar.quest.SpawnScamFan.win_condition = "SpawnScamFan";
 						pchar.ScamFanActive = true;
-					}
+					}*/
 
 					bool nopirate = false;
 					if (!CheckAttribute(pchar,"questTemp.UniquePirate.Barbarigo") || !CheckAttribute(pchar,"questTemp.UniquePirate.BlackBeard") || !CheckAttribute(pchar,"questTemp.UniquePirate.Levasser")) nopirate = true;
@@ -480,9 +480,9 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "HouseMan";
 			if (LAi_grp_playeralarm > 0)
 			{
-       			dialog.text = PCharRepPhrase(LinkRandPhrase("В городе поднята тревога. Похоже, и мне пора браться за оружие...", "Уж не за тобой ли носится вся городская стража?.. Ко мне, солдаты!!!", "У меня приюта ты не найдешь. Зато найдешь несколько дюймов холодной стали под ребро!"),
+       			dialog.text = PCharRepPhrase(LinkRandPhrase("В городе поднята тревога. Похоже, и мне пора браться за оружие...", "Уж не за тобой ли носится вся городская стража?.. Ко мне, солдаты!!!", "У меня приюта ты не найдёшь. Зато найдёшь несколько дюймов холодной стали под ребро!"),
 					LinkRandPhrase("Что тебе нужно, негодяй?! Городская стража уже взяла твой след, далеко тебе не уйти, грязный пират!", "Грязный убийца! Стража!!!", "Я не боюсь тебя, мерзавец! Скоро тебя повесят в нашем форте, далеко тебе не уйти..."));
-				link.l1 = PCharRepPhrase(RandPhraseSimple("Похоже, тебе жить надоело...", "Хех, и не живется же спокойно мирным гражданам " + XI_ConvertString("Colony" + npchar.city + "Gen") + "!"),
+				link.l1 = PCharRepPhrase(RandPhraseSimple("Похоже, тебе жить надоело...", "Хех, и не живётся же спокойно мирным гражданам " + XI_ConvertString("Colony" + npchar.city + "Gen") + "!"),
 					RandPhraseSimple("Отправляйся в ад!", "Хех, жить тебе осталось несколько секунд..."));
 				link.l1.go = PCharRepPhrase("exit_setOwner", "fight");
 				break;
@@ -498,7 +498,7 @@ void ProcessDialogEvent()
 				else
 				{
 					dialog.text = "Что тебе надо в моем доме, негодяй?! Даю тебе десять секунд, чтобы ты убрался отсюда!";
-					link.l1 = LinkRandPhrase("Хех, и здесь меня знают!", "Слава моя идет впереди меня...", "Хм, понятно.");
+					link.l1 = LinkRandPhrase("Хех, и здесь меня знают!", "Слава моя идёт впереди меня...", "Хм, понятно.");
 					link.l1.go = "exit_GoOut";
 				}
 			}
@@ -521,7 +521,7 @@ void ProcessDialogEvent()
 					dialog.text = NPCStringReactionRepeat("Простите, вы не вовремя появились у меня дома - ночь на дворе. Я прошу вас покинуть мой дом!",
 						"Я уже говорил, что время позднее. Прошу вас уйти.",
 						"Не хочу показаться грубым, но я настаиваю, чтобы вы немедленно покинули мой дом!",
-						"Черт возьми, что это такое?! Стража, воры!!!", "block", 1, npchar, Dialog.CurrentNode);
+						"Чёрт возьми, что это такое?! Стража, воры!!!", "block", 1, npchar, Dialog.CurrentNode);
 					link.l1 = HeroStringReactionRepeat("Хорошо, я понимаю...",
 						"Да, сейчас...",
 						"Ладно, не кипятись.",

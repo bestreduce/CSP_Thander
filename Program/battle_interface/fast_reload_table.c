@@ -770,6 +770,48 @@ void initFastReloadTable()
 	curTable.l10.pic = FRP_PRISON;
 	curTable.l10.tex = FRT_PRISON;
 	curTable.l10.location = "PortSpein_prison";
+	
+	makearef(curTable,objFastReloadTable.table.Nassau);
+	// store
+	curTable.l1.pic = FRP_STORE;
+	curTable.l1.tex = FRT_STORE;
+	curTable.l1.location = "Nassau_store";
+	// shipyard
+	curTable.l2.pic = FRP_SHIPYARD;
+	curTable.l2.tex = FRT_SHIPYARD;
+	curTable.l2.location = "Nassau_shipyard";
+	// tavern
+	curTable.l3.pic = FRP_TAVERN;
+	curTable.l3.tex = FRT_TAVERN;
+	curTable.l3.location = "Nassau_tavern";
+	// residence
+	curTable.l4.pic = FRP_RESIDENCE;
+	curTable.l4.tex = FRT_RESIDENCE;
+	curTable.l4.location = "Nassau_townhall";
+	// usurer
+	curTable.l5.pic = FRP_USURER;
+	curTable.l5.tex = FRT_USURER;
+	curTable.l5.location = "Nassau_bank";
+	// church
+	curTable.l6.pic = FRP_CHURCH;
+	curTable.l6.tex = FRT_CHURCH;
+	curTable.l6.location = "Nassau_church";
+
+	curTable.l7.pic = FRP_PORT_OFFICE;
+	curTable.l7.tex = FRT_PORT_OFFICE;
+	curTable.l7.location = "Nassau_PortOffice";
+
+	curTable.l8.pic = FRP_TOWN_EXIT;
+	curTable.l8.tex = FRT_TOWN_EXIT;
+	curTable.l8.location = "Nassau_ExitTown";
+
+	curTable.l9.pic = FRP_FORT;
+	curTable.l9.tex = FRT_FORT;
+	curTable.l9.location = "Nassau_fort";
+
+	curTable.l10.pic = FRP_PRISON;
+	curTable.l10.tex = FRT_PRISON;
+	curTable.l10.location = "Nassau_prison";
 
 	makearef(curTable,objFastReloadTable.table.Marigo);
 	// store
@@ -1510,4 +1552,12 @@ void InitTownTable()
 	objTownStateTable.towns.t29.crew.data.year = 1;
 	objTownStateTable.towns.t29.crew.data.month = 1;
 	objTownStateTable.towns.t29.crew.data.day = 1;
+	
+	objTownStateTable.towns.t30.name = "Nassau";
+	objTownStateTable.towns.t30.captured = false;
+	objTownStateTable.towns.t30.crew.quantity = 200 + Rand(300);
+	objTownStateTable.towns.t30.crew.morale = MORALE_NORMAL - 20 + Rand(40);
+	objTownStateTable.towns.t30.crew.data.year = 1;
+	objTownStateTable.towns.t30.crew.data.month = 1;
+	objTownStateTable.towns.t30.crew.data.day = 1;
 }

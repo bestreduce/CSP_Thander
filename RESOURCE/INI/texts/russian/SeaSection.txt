@@ -29,7 +29,7 @@ seg_Copra		{Копры}
 seg_Paprika		{Перца}
 seg_Fruits		{Фруктов}
 seg_Ale			{Эля}
-seg_Silk		{Шелка}
+seg_Silk		{Шёлка}
 seg_Clothes		{Одежды}
 seg_Cotton		{Хлопка}
 seg_Sandal		{Сандала}

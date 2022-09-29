@@ -682,6 +682,8 @@ data = "Turn speed", "5.5"
 	end_time = 6859
 	loop = false
 	speed = 0.7
+	event = "Recoil start", 6851, normal
+	event = "Recoil end", 6857, normal
 	data = "Blend time", "0.02"	; sec
 	data = "Walk speed", "-0.5"		; m/sec
 	
@@ -692,6 +694,8 @@ data = "Turn speed", "5.5"
 	end_time = 6859
 	loop = false
 	speed = 0.9
+	event = "Recoil start", 6851, normal
+	event = "Recoil end", 6857, normal
 	data = "Blend time", "0.02"	; sec
 	data = "Walk speed", "0.9"		; m/sec
 	
@@ -702,6 +706,8 @@ data = "Turn speed", "5.5"
 	end_time = 6859
 	loop = false
 	speed = 0.9
+	event = "Recoil start", 6851, normal
+	event = "Recoil end", 6857, normal
 	data = "Blend time", "0.02"	; sec
 	data = "Walk speed", "0.9"		; m/sec
 	

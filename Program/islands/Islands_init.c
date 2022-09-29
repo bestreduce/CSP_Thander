@@ -1239,8 +1239,8 @@ void InitIslands()
 
 		Islands[n].reload.l6.label = "LaVega Port";
 		Islands[n].reload.l6.name = "reload_4";
-		Islands[n].reload.l6.go = "LaVega_port";
-		Islands[n].reload.l6.emerge = "sea";
+		Islands[n].reload.l6.go = "LaVega_town";
+		Islands[n].reload.l6.emerge = "reload1";
 		Islands[n].reload.l6.radius = 600.0;
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";
@@ -1532,6 +1532,14 @@ void InitIslands()
         Islands[n].reload.l2.radius = 600.0;
         Islands[n].reload.l2.pic = 0;
         Islands[n].reload.l2.tex = "t1";
+		
+		Islands[n].reload.l3.label = "WreckedShip";
+        Islands[n].reload.l3.name = "reload_3";
+        Islands[n].reload.l3.go = "WreckedShip";
+        Islands[n].reload.l3.emerge = "reload1";
+        Islands[n].reload.l3.radius = 400.0;
+        Islands[n].reload.l3.pic = 0;
+        Islands[n].reload.l3.tex = "t1";
 
         SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
 
@@ -2214,6 +2222,126 @@ void InitIslands()
 		Islands[n].InterfaceTextures.t1.v = 1;
 
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
+		
+	/////////////////////////////////////////////////////////////////////////
+	/// Bahames (Nassau)
+	/////////////////////////////////////////////////////////////////////////
+		n = n + 1;
+		Islands[n].id = "Bahames";
+		Islands[n].model = "Bahames";
+		Islands[n].filespath.models = "islands\Bahames";
+		Islands[n].refl_model = "Bahames_refl";
+		Islands[n].locators = "Bahames_locators";
+		Islands[n].visible = true;
+		Islands[n].reload_enable = true;
+		Islands[n].hidden = true;
+		Islands[n].colonyquantity = 1;
+		Islands[n].LoadGroup.g1 = "IslandShips1";
+		// Islands[n].jungle.patch = "Bahames_jungle";
+		// Islands[n].jungle.texture = "junglesprites";
+		// Islands[n].jungle.scale = 12.5;
+		Islands[n].TexturePath = "Bahames";
+
+		Islands[n].reload.l1.label = "Nassau Port";
+		Islands[n].reload.l1.name = "reload_1";
+		Islands[n].reload.l1.go = "Nassau_town";
+		Islands[n].reload.l1.emerge = "reload1";
+		Islands[n].reload.l1.radius = 600.0;
+		Islands[n].reload.l1.pic = 0;
+		Islands[n].reload.l1.tex = "t1";
+		Islands[n].reload.l1.istown = true;
+
+		Islands[n].reload.l2.label = "Nassau Fort";
+		Islands[n].reload.l2.name = "reload_fort1";
+		Islands[n].reload.l2.go = "Nassau_fort";
+		Islands[n].reload.l2.GoAfterBoard.location = "reload_1";
+		Islands[n].reload.l2.emerge = "see";
+		Islands[n].reload.l2.radius = 600.0;
+		Islands[n].reload.l2.fortname = "fort_Nassau";
+		Islands[n].reload.l2.colonyname = "Nassau";
+		Islands[n].reload.l2.fort.model = "Bahames_fort1";
+		Islands[n].reload.l2.fort.locators = "Bahames_fort1_locators";
+		Islands[n].reload.l2.pic = 1;
+		Islands[n].reload.l2.tex = "t1";
+				
+		Islands[n].reload.l3.label = "Shore68";
+		Islands[n].reload.l3.name = "reload_2";
+		Islands[n].reload.l3.go = "Shore68";
+		Islands[n].reload.l3.emerge = "sea";
+		Islands[n].reload.l3.radius = 600.0;
+		Islands[n].reload.l3.pic = 0;
+		Islands[n].reload.l3.tex = "t1";
+
+		Islands[n].reload.l4.label = "Shore69";
+		Islands[n].reload.l4.name = "reload_3";
+		Islands[n].reload.l4.go = "Shore69";
+		Islands[n].reload.l4.emerge = "sea";
+		Islands[n].reload.l4.radius = 600.0;
+		Islands[n].reload.l4.pic = 0;
+		Islands[n].reload.l4.tex = "t1";
+		
+		Islands[n].Trade.Export.id1 = GOOD_BRICK;
+		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
+		Islands[n].Trade.Export.id3 = GOOD_COTTON;
+		Islands[n].Trade.Export.id4 = GOOD_LEATHER;
+		Islands[n].Trade.Export.id5 = GOOD_ALE;
+		
+		Islands[n].Trade.Import.id1 = GOOD_POWDER;
+		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
+		Islands[n].Trade.Import.id3 = GOOD_WINE;
+		Islands[n].Trade.Import.id4 = GOOD_RUM;
+		
+		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
+		Islands[n].Trade.Contraband.id2 = GOOD_SANDAL;
+		Islands[n].Trade.Contraband.id3 = GOOD_OIL;
+		Islands[n].Trade.Contraband.id4 = GOOD_WEAPON;
+	
+		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
+		Islands[n].InterfaceTextures.t1.h = 4;
+		Islands[n].InterfaceTextures.t1.v = 1;
+
+		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
+		
+	/////////////////////////////////////////////////////////////////////////
+	/// StLucia
+	/////////////////////////////////////////////////////////////////////////	
+	
+		n = n + 1;
+		Islands[n].id = "StLucia";
+		Islands[n].model = "StLucia";
+		Islands[n].filespath.models = "islands\StLucia";
+		Islands[n].refl_model = "StLucia_refl";
+		Islands[n].locators = "StLucia_locators";
+		Islands[n].visible = true;
+		Islands[n].reload_enable = true;
+		Islands[n].hidden = true;
+		Islands[n].colonyquantity = 0;
+		Islands[n].jungle.patch = "StLucia_jungles";
+		Islands[n].jungle.texture = "junglesprites";
+		Islands[n].jungle.scale = 12.5;
+		Islands[n].TexturePath = "StLucia";
+
+		Islands[n].reload.l1.label = "Shore65";
+		Islands[n].reload.l1.name = "reload_1";
+		Islands[n].reload.l1.go = "Shore65";
+		Islands[n].reload.l1.emerge = "sea";
+		Islands[n].reload.l1.radius = 600.0;
+		Islands[n].reload.l1.pic = 0;
+		Islands[n].reload.l1.tex = "t1";
+
+		Islands[n].reload.l2.label = "Shore66";
+		Islands[n].reload.l2.name = "reload_2";
+		Islands[n].reload.l2.go = "Shore66";
+		Islands[n].reload.l2.emerge = "sea";
+		Islands[n].reload.l2.radius = 600.0;
+		Islands[n].reload.l2.pic = 0;
+		Islands[n].reload.l2.tex = "t1";
+						        
+		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
+		Islands[n].InterfaceTextures.t1.h = 4;
+		Islands[n].InterfaceTextures.t1.v = 1;
+
+		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);	
 
 	/////////////////////////////////////////////////////////////////////////
 	/// Кхаэль Роа

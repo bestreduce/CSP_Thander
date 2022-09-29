@@ -114,10 +114,8 @@ void ProcessDialogEvent()
 			dialog.text = "Ах, вы должно быть, капитан "+pchar.name+"! Я должен поблагодарить вас за моё исцеление. "+sld.name+" рассказал мне обо всём, что вы для меня сделали.";
 			link.l1 = "Я рад"+ GetSexPhrase("","а") +", что ты поправился, и теперь ты расскажешь, что же с тобой случилось. "+sld.name+" сказал, что Ропфлейк захватил твой корабль.";
 			link.l1.go = "Markus_Vizdorovel_2";
-			AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
-			AddCharacterSkillDontClearExp(pchar, "Defence", 1);
-			Log_SetStringToLog("Авторитет + 1");
-			Log_SetStringToLog("Защита + 1");
+			AddCharacterExpToSkill(pchar, "Leadership", 150);
+			AddCharacterExpToSkill(pchar, "Defence", 150);
 			DeleteAttribute(pchar, "questTemp.PDM_Apt_Vizdorovel");
 		break;
 
@@ -237,7 +235,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Pablo_Loco_ER_2":
-			dialog.text = "Жадность делает твоё сердце тяжелым, как само золото. Ты долж"+ GetSexPhrase("ен","на") +" выбросить её в море, чтобы очиститься.";
+			dialog.text = "Жадность делает твоё сердце тяжёлым, как само золото. Ты долж"+ GetSexPhrase("ен","на") +" выбросить её в море, чтобы очиститься.";
 			link.l1 = "Расскажи мне свою историю.";
 			link.l1.go = "Pablo_Loco_2";
 		break;
@@ -264,7 +262,7 @@ void ProcessDialogEvent()
 
 		case "Pablo_Loco_4":
 			dialog.text = "";
-			link.l1 = "Расскажи мне ещё о своем народе.";
+			link.l1 = "Расскажи мне ещё о своём народе.";
 			link.l1.go = "Pablo_Loco_Plemya_Ushlo";
 			link.l2 = "Это ты Пабло, травник?";
 			link.l2.go = "Pablo_Loco_Trava";
@@ -380,10 +378,8 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(npchar);
 			npchar.lifeday = 0;
 
-			AddCharacterSkillDontClearExp(pchar, "Sailing", 1);
-			AddCharacterSkillDontClearExp(pchar, "Repair", 1);
-			Log_SetStringToLog("Навигация + 1");
-			Log_SetStringToLog("Ремонт + 1");
+			AddCharacterExpToSkill(pchar, "Sailing", 150);
+			AddCharacterExpToSkill(pchar, "Repair", 150);
 
 			GiveItem2Character(PChar, "PDM_Trava_Tzes_Umrat");
 			AddQuestRecord("PDM_Aptekar", "11");

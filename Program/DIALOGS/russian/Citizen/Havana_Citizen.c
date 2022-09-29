@@ -47,43 +47,43 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "PDM_ONV_MAN":
-				int Phrase;
-                Phrase = rand(4);
-                if (Phrase == 0)
-                {
-					dialog.text = "Извините, но я спешу.";
-					link.l1 = "Извините.";
-					link.l1.go = "exit";
-				break;
-				}
-                if (Phrase == 1)
-                {
-					dialog.text = "Отстаньте от меня, сеньор"+ GetSexPhrase("","ита") +".";
-					link.l1 = "Извините.";
-					link.l1.go = "exit";
-				break;
-				}
-				if (Phrase == 2)
-                {
-					dialog.text = "Иди своей дорогой, амиг"+ GetSexPhrase("о","а") +".";
-					link.l1 = "Извините.";
-					link.l1.go = "exit";
-				break;
-				}
-				if (Phrase == 3)
-                {
-					dialog.text = "Не видишь, я занят?";
-					link.l1 = "Извините.";
-					link.l1.go = "exit";
-				break;
-				}
-				if (Phrase == 4)
-                {
-					dialog.text = "Говорю вам, сеньор"+ GetSexPhrase("","ита") +" - эта ведьма Карла околдовала всех в этом городе! Все добропорядочные люди должны пойти прямиком к губернатору и заявить ему, что она злая ведьма, и её следует сжечь на медленном огне!";
-					link.l1 = "Карла? Что вы о ней знаете?";
-					link.l1.go = "PDM_ONV_MAN_2";
-				break;
-				}
+			int Phrase;
+            Phrase = rand(4);
+            if (Phrase == 0)
+            {
+				dialog.text = "Извините, но я спешу.";
+				link.l1 = "Извините.";
+				link.l1.go = "exit";
+			break;
+			}
+            if (Phrase == 1)
+            {
+				dialog.text = "Отстаньте от меня, сеньор"+ GetSexPhrase("","ита") +".";
+				link.l1 = "Извините.";
+				link.l1.go = "exit";
+			break;
+			}
+			if (Phrase == 2)
+            {
+				dialog.text = "Иди своей дорогой, амиг"+ GetSexPhrase("о","а") +".";
+				link.l1 = "Извините.";
+				link.l1.go = "exit";
+			break;
+			}
+			if (Phrase == 3)
+            {
+				dialog.text = "Не видишь, я занят?";
+				link.l1 = "Извините.";
+				link.l1.go = "exit";
+			break;
+			}
+			if (Phrase == 4)
+            {
+				dialog.text = "Говорю вам, сеньор"+ GetSexPhrase("","ита") +" - эта ведьма Карла околдовала всех в этом городе! Все добропорядочные люди должны пойти прямиком к губернатору и заявить ему, что она злая ведьма, и её следует сжечь на медленном огне!";
+				link.l1 = "Карла? Что вы о ней знаете?";
+				link.l1.go = "PDM_ONV_MAN_2";
+			break;
+			}
 		break;
 
 		case "PDM_ONV_MAN_2":

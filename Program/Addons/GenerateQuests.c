@@ -17,7 +17,7 @@ void QuestDuelCheckPossibility(ref loc)
 	if(LAi_IsCapturedLocation) { return; }
 	if(PChar.GenerateQuestDuel.Block == true) { return; }
 	if(!isDay()) { return; }
-	if(drand1(100) > 20) { return; }
+	if(drand3(100) > 20) { return; }
 
 	GenerateQuestDuel();
 }
@@ -511,7 +511,7 @@ void QuestDuelBattleWithMercenaryWinner(string qName)
 	LAi_ActorWaitDialog(PChar, chr);
 	LAi_ActorDialog(chr, PChar, "", 20.0, 1.0);
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвался на дуэль за другого человека и выиграл её.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвал"+ GetSexPhrase("ся","ась") +" на дуэль за другого человека и выиграл"+ GetSexPhrase("","а") +" её.", 5, 1);
 }
 
 void QuestDuelBattleWithMercenaryEnd()
@@ -562,7 +562,7 @@ void QuestDuelBattleWithMercenaryHappyEnd()
 	if(sti(pchar.questTemp.duelcount) >= 10) UnlockAchievement("AchDuelyant", 2);
 	if(sti(pchar.questTemp.duelcount) >= 20) UnlockAchievement("AchDuelyant", 3);
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвался на дуэль за другого человека и выиграл её.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвал"+ GetSexPhrase("ся","ась") +" на дуэль за другого человека и выиграл"+ GetSexPhrase("","а") +" её.", 5, 1);
 
 	PChar.quest.ClearGenerateQuestDuel.win_condition.l1 = "ExitFromLocation";
 	PChar.quest.ClearGenerateQuestDuel.win_condition.l1.location = PChar.location;
@@ -688,7 +688,7 @@ void QuestDuelBattleWithDuelistHappyEnd()
 		PChar.quest.ClearGenerateQuestDuel.function = "ClearGenerateQuestDuel";
 	}
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвался на дуэль за другого человека и выиграл её.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " вызвал"+ GetSexPhrase("ся","ась") +" на дуэль за другого человека и выиграл"+ GetSexPhrase("","а") +" её.", 5, 1);
 }
 
 void QuestDuelBattleWithRelativeRevengePrepare()
@@ -1106,7 +1106,7 @@ void ShipWreckLoginToWorldMap(string qName)
 
 	chr.mapEnc.type = "warrior";
 	chr.mapEnc.worldMapShip = "ranger";
-	chr.mapEnc.Name = "сильно потрепавшийся неизвестный корабль прямо по курсу";
+	chr.mapEnc.Name = "сильно потрёпанный неизвестный корабль прямо по курсу";
 
 	//Map_CreateWarrior("", sGroup, 30);
 	Map_CreateSlowMerch("",sGroup, 30);
@@ -1138,7 +1138,7 @@ void ShipWreckInSeaFailedSink(string qName)
 	Log_TestInfo("Убили крушённый корабль.");
 
 	ChangeCharacterReputation(PChar, -15);
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + " встретил в море потерпевший крушение корабль. Но вместо того, чтобы оказать помощь, он его утопил!", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + " встретил"+ GetSexPhrase("","а") +" в море потерпевший крушение корабль. Но вместо того, чтобы оказать помощь, он"+ GetSexPhrase("","а") +" его утопил"+ GetSexPhrase("","а") +"!", 5, 1);
 
 	PChar.quest.ShipWreckInTown.over = "yes";
 	PChar.GenerateShipWreck.Block = true;
@@ -1300,7 +1300,7 @@ void ShipWreckBattleWithSailorWinner(string qName)
 
 	SetQuestFunction("ShipWreckBattleWithSailorOut", "ShipWreckBattleWithSailorOut", "efl", PChar.location);
 
-	PChar.quest.ShipWreckCapture.win_condition.l1 = "Character_Capture";
+	PChar.quest.ShipWreckCapture.win_condition.l1 = "NPC_Death";
 	PChar.quest.ShipWreckCapture.win_condition.l1.character = chr.id;
 	PChar.quest.ShipWreckCapture.function = "ShipWreckCapture";
 
@@ -1311,8 +1311,6 @@ void ShipWreckBattleWithSailorWinner(string qName)
 void ShipWreckNoCapture(string qName)
 {
 	PChar.GenerateShipWreck.State = "none";
-	if(CheckAttribute(PChar, "quest.ShipWreckCapture")) { DeleteAttribute(PChar, "quest.ShipWreckCapture"); }
-	if(CheckAttribute(PChar, "quest.ShipWreckNoCapture")) { DeleteAttribute(PChar, "quest.ShipWreckNoCapture"); }
 	CloseQuestHeader("ShipWreck");
 }
 
@@ -1414,7 +1412,7 @@ void ShipWreckBandInit()
 	SetCharacterGoods(chr, GOOD_COFFEE, 0);
 	SetCharacterGoods(chr, GOOD_TOBACCO, 0);
 
-	int iRank = GetRank(PChar, 0) + MOD_SKILL_ENEMY_RATE;
+	int iRank = sti(pchar.rank);
 	chr = GetCharacter(NPC_GenerateCharacter("ShipWreckValodya_" + rand(30000), "citiz_" + (rand(11)+1), "man", "man", iRank, PIRATE, -1, true));
 	chr.greeting = "Gr_AllowToDump";
 	chr.Dialog.Filename = "DamnedDestiny\ShipWreck_dialog.c";
@@ -1630,6 +1628,8 @@ void ShipWreckBanditsStartBattle()
 	chrDisableReloadToLocation = true;
 
 	LAi_LocationFightDisable(&Locations[FindLocation(PChar.location)], false);
+	
+	AddDialogExitQuest("MainHeroFightModeOn");
 
 	int iQty = sti(PChar.GenerateShipWreck.ShipCrewQty) + 2;
 	ref chr;
@@ -1726,7 +1726,7 @@ void ShipWreckBanditsBattleWinner(string qName)
 	LAi_Fade("", "");
 
 	string sModel = PChar.GenerateShipWreck.CapModel;
-	int iRank = GetRank(PChar, 3) + rand(3);
+	int iRank = sti(pchar.rank) + rand(3);
 	int iNation = sti(PChar.GenerateShipWreck.CapNation);
 
 	chr = GetCharacter(NPC_GenerateCharacter("ShipWreckBadCaptain_" + rand(30000), sModel, "man", "man", iRank, iNation, -1, true));
@@ -1921,5 +1921,7 @@ void ClearShipWreckQuest()
 	PChar.GenerateShipWreck.ValodyaToMoney = false;
 	DeleteAttribute(PChar,"VolodyaDebil.Convoy");
 	DeleteAttribute(PChar,"IdVolodiDebila");
+	if(CheckAttribute(PChar, "quest.ShipWreckCapture")) { DeleteAttribute(PChar, "quest.ShipWreckCapture"); }
+	if(CheckAttribute(PChar, "quest.ShipWreckNoCapture")) { DeleteAttribute(PChar, "quest.ShipWreckNoCapture"); }
 }
 

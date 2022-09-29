@@ -250,7 +250,7 @@ void ProcessCommandExecute()
     		if(comName=="activate" || comName=="click")
     		{
                 if (openExit == true)
-                {   // еще одна игра
+                {   // ещё одна игра
                     if (bStartGame != 100)
                     {
                         dir_i = -dir_i_start;
@@ -268,7 +268,7 @@ void ProcessCommandExecute()
                 }
                 else
                 {   // ГГ берет карты
-                    if (bStartGame <2) break; // еще сдают
+                    if (bStartGame <2) break; // ещё сдают
                     if (bStartGame == 100) break; // открываемся
 
                     if (dir_i == 1 && (iMoneyP - iRate) < 0)
@@ -660,7 +660,7 @@ bool CheckGame()
 		{
 			if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
 			{
-				sTemp += NewStr() + RandPhraseSimple("Повторим?","Еще разок?");
+				sTemp += NewStr() + RandPhraseSimple("Повторим?","Ещё разок?");
 			}
 			else
 			{
@@ -786,7 +786,7 @@ void OpenCards();
 	{
 		if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
 		{
-			sTemp += NewStr() + RandPhraseSimple("Повторим?","Еще разок?");
+			sTemp += NewStr() + RandPhraseSimple("Повторим?","Ещё разок?");
 			bStartGame = 2;
 		}
 		else

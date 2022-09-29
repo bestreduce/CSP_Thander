@@ -18,7 +18,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
         case "Step_H3_1":
             dialog.text = "Это невозможно.";
-			link.l1 = "Все возможно, только для этого придется всех вас убить. К бою!";
+			link.l1 = "Все возможно, только для этого придётся всех вас убить. К бою!";
 			link.l1.go = "fight";
 		break;
 	}

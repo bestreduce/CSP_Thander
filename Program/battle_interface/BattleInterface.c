@@ -300,6 +300,7 @@ void StartBattleInterface()
 	CreateEntity(&objShipPointer,"shippointer");
 	LayerAddObject(SEA_EXECUTE,&objShipPointer,222222);
 	LayerAddObject(SEA_REALIZE,&objShipPointer,-1);
+	DoQuestFunctionDelay("ActiveShowAfterReload", 0.2);
 }
 
 void RefreshBattleInterface()
@@ -317,13 +318,13 @@ ref BI_GetCmdListOrderPriority()
   if(curItem >= 0 && curItem < 14) {
     int i = 0;
     int cmdList[14];
+    cmdList[i] = BI_COMMODE_FRIEND_FORT_SELECT; i++;
+    cmdList[i] = BI_COMMODE_NEUTRAL_FORT_SELECT; i++;
+    cmdList[i] = BI_COMMODE_ENEMY_FORT_SELECT; i++;
     cmdList[i] = BI_COMMODE_NOTDISEASED_TOWN; i++;
     cmdList[i] = BI_COMMODE_DISEASED_TOWN; i++;
     cmdList[i] = BI_COMMODE_ENEMY_TOWN; i++;
     cmdList[i] = BI_COMMODE_LAND_SELECT; i++;
-    cmdList[i] = BI_COMMODE_FRIEND_FORT_SELECT; i++;
-    cmdList[i] = BI_COMMODE_NEUTRAL_FORT_SELECT; i++;
-    cmdList[i] = BI_COMMODE_ENEMY_FORT_SELECT; i++;
     cmdList[i] = BI_COMMODE_MY_SHIP_SELECT; i++;
     cmdList[i] = BI_COMMODE_NEUTRAL_SHIP_SELECT; i++;
     cmdList[i] = BI_COMMODE_FRIEND_SHIP_SELECT; i++;
@@ -591,7 +592,7 @@ void BI_LaunchCommand()
         Sea_CabinStartNow();
 		break;
 	case "BI_Boat":
-		if (!CheckAttribute(Characters[targetNum], "LockBoat"))
+		if (!CheckAttribute(Characters[targetNum], "LockBoat") && !HasSubStr(Characters[targetNum].id, "_DriftCap_"))
 		{
 			// Warship 09.07.09 Мэри Селест
 			// Второй раз на нее выслать шлюпку низя
@@ -875,7 +876,6 @@ void BI_LaunchCommand()
 		break;
 	case "BI_Turn180":
 		ActivateCharacterPerk(GetCharacter(charIdx),"Turn180");
-		Ship_Turn180(GetCharacter(charIdx));
 		PlayVoice("INTERFACE\SignalCompanion.wav");
 		break;
 	case "BI_SandbankManeuver":
@@ -925,7 +925,7 @@ void BI_UpdateShip()
 void BI_CreateShip()
 {
 	int charIndex = GetEventData();
-	if(charIndex>=0) ClearActiveChrPerks(GetCharacter(charIndex));
+	//if(charIndex>=0) ClearActiveChrPerks(GetCharacter(charIndex)); //ломало таймеры для морских активных перков
 	if( IsEntity(&BattleInterface) ) {
 		AddShipToInterface(charIndex);
 	}
@@ -979,6 +979,7 @@ void AddShipToInterface(int charIndex)
 		}
 	}
 	int myShip = false;
+	int transferableShip = false;
 	int shipRelation = BI_RELATION_NEUTRAL;
 	switch( SeaAI_GetRelation(charIndex,nMainCharacterIndex) )
 	{
@@ -997,7 +998,8 @@ void AddShipToInterface(int charIndex)
 			myShip = true;
 		}
 	}
-
+	transferableShip = myShip;
+	if (HasSubStr(chRef.id, "_DriftCap_") && !LAi_IsDead(chRef)) transferableShip = true;
 
 	if( CharacterIsDead(chRef) )
 	{
@@ -1005,18 +1007,7 @@ void AddShipToInterface(int charIndex)
 			return;
 	}
 
-	if (myShip != true)
-	{
-		bCanSpeak = true;
-	}
-	//заглушка, убирающая интерфейс разговоров в море.
-	//кому из аддонщиков будет интересно привести систему разговоров в норм - раскоментарьте
-	//а у нас поставили сроки жесткие, програмеры в отпуске, и я банально не успеваю все оттестить
-	//и поправить, ибо некоторые баги програмерские
-	//для изьятия заглушки удалите нах следующую строчку
-	//bCanSpeak = false;
-
-	SendMessage(&BattleInterface,"llaall",BI_IN_CREATE_SHIP,charIndex,chRef,shipRef,myShip,shipRelation);
+	SendMessage(&BattleInterface,"llaallll",BI_IN_CREATE_SHIP,charIndex,chRef,shipRef,myShip,shipRelation,0,transferableShip);
 }
 
 void BI_DeleteShip()
@@ -1468,6 +1459,10 @@ ref GetCurrentCharge()
 	BattleInterface.textinfo.CannonsNumR.text = GetBortIntactCannonsNum(pchar, "rcannon", sti(refBaseShip.rcannon)) + "/" + GetBortCannonsMaxQty(pchar, "rcannon");
 	BattleInterface.textinfo.CannonsNumB.text = GetBortIntactCannonsNum(pchar, "bcannon", sti(refBaseShip.bcannon)) + "/" + GetBortCannonsMaxQty(pchar, "bcannon");
 	BattleInterface.textinfo.CannonsNumF.text = GetBortIntactCannonsNum(pchar, "fcannon", sti(refBaseShip.fcannon)) + "/" + GetBortCannonsMaxQty(pchar, "fcannon");
+	/*if (CheckAttribute(pchar,"perks.list.Turn180.delay")) BattleInterface.textinfo.Turn180CD.text = "Откат Манёвр. разворота: "+sti(pchar.perks.list.Turn180.delay)+" c.";
+	else BattleInterface.textinfo.Turn180CD.text = "";
+	if (CheckAttribute(pchar,"perks.list.ImmediateReload.delay")) BattleInterface.textinfo.ImmediateReloadCD.text = "Откат Предв. перезарядки: "+sti(pchar.perks.list.ImmediateReload.delay)+" c.";
+	else BattleInterface.textinfo.ImmediateReloadCD.text = "";*/ //инфа по перезарядке перков
 	//<---
 	return &BI_intNRetValue;
 }
@@ -2021,6 +2016,20 @@ void SetParameterData()
 	BattleInterface.textinfo.Planks.pos.y = RecalculateVIcon(makeint(388* fHtRatio));//RecalculateVIcon(402);
 	BattleInterface.textinfo.Planks.text = XI_convertString("Planks");
 	BattleInterface.textinfo.Planks.refreshable = true;
+	
+	/*BattleInterface.textinfo.Turn180CD.font = "interface_button";
+	BattleInterface.textinfo.Turn180CD.scale = 1.0 * fHtRatio;
+	BattleInterface.textinfo.Turn180CD.color = argb(255,255,255,255);
+	BattleInterface.textinfo.Turn180CD.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(144* fHtRatio));//sti(showWindow.right) - RecalculateHIcon(104);
+	BattleInterface.textinfo.Turn180CD.pos.y = RecalculateVIcon(makeint(598* fHtRatio));//RecalculateVIcon(402);
+	BattleInterface.textinfo.Turn180CD.refreshable = true;
+	
+	BattleInterface.textinfo.ImmediateReloadCD.font = "interface_button";
+	BattleInterface.textinfo.ImmediateReloadCD.scale = 1.0 * fHtRatio;
+	BattleInterface.textinfo.ImmediateReloadCD.color = argb(255,255,255,255);
+	BattleInterface.textinfo.ImmediateReloadCD.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(144* fHtRatio));//sti(showWindow.right) - RecalculateHIcon(104);
+	BattleInterface.textinfo.ImmediateReloadCD.pos.y = RecalculateVIcon(makeint(628* fHtRatio));//RecalculateVIcon(402);
+	BattleInterface.textinfo.ImmediateReloadCD.refreshable = true;*/ //инфа по перкам
 
 	// Парусина
 	BattleInterface.textinfo.Sailcloth.font = "bold_numbers";
@@ -2371,7 +2380,7 @@ ref ProcessSailDamage()
 	
 	if (LAi_IsImmortal(chref))
 	{
-		arSail.hd = DeleteOneSailHole(sti(chref.index), groupName, reyName, holeData, 1);
+		arSail.hd = DeleteOneSailHole(sti(chref.index), groupName, reyName, holeData, 1);//имитирует защиту залатыванием дырки в месте попадания
 		BI_g_fRetVal = 0;
 		return &BI_g_fRetVal;
 	}
@@ -2451,7 +2460,6 @@ ref ProcessSailDamage()
 		arSail.hc = holeCount;
 		arSail.oldhd = holeData;
 	}
-	//Log_Info("NewHitCount "+arSail.NewHitCount+", HoleCount "+holeCount+", sailDmg "+sailDmg+", defendedCount "+arSail.defended);
 	
 	arSail.mhc = maxHoleCount;
 	arSail.sp = sailPower;
@@ -3274,6 +3282,8 @@ ref procGetSRollSpeed()
 // скорость подъема паруса
 float GetRSRollSpeed(ref chref)
 {
+	if (HasSubStr(chref.id, "_DriftCap_")) return 3.0;
+
 	int iShip = sti(chref.ship.type);
 	if( iShip<0 || iShip>=REAL_SHIPS_QUANTITY ) {return 0.0;}
 

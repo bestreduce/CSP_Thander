@@ -77,6 +77,8 @@ void CharactersInit()
 	LoadSegment(sPath + "init\Beliz.c");				ReloadProgressUpdate();
 
 	LoadSegment(sPath + "init\SantaCatalina.c");				ReloadProgressUpdate();
+	
+	LoadSegment(sPath + "init\Bahames.c");				ReloadProgressUpdate();
 
 	LoadSegment(sPath + "init\StoryCharacters.c");		ReloadProgressUpdate();
 
@@ -118,6 +120,7 @@ void CharactersInit()
 	UnloadSegment(sPath + "init\Cumana.c");
 	UnloadSegment(sPath + "init\Beliz.c");
 	UnloadSegment(sPath + "init\SantaCatalina.c");
+	UnloadSegment(sPath + "init\Bahames.c");
 	UnloadSegment(sPath + "init\StoryCharacters.c");
 	UnloadSegment(sPath + "init\Caiman.c");
 	UnloadSegment(sPath + "init\Other.c");

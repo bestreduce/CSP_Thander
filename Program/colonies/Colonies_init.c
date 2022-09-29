@@ -364,7 +364,7 @@ void InitColonies()
 		colonies[n].map.x = 535;
 		colonies[n].map.y = 265;
 		colonies[n].StoreNum   = LaVega_STORE;
-		colonies[n].from_sea   = "LaVega_port";
+		colonies[n].from_sea   = "LaVega_town";
 		colonies[n].HasNoFort = true;
         //colonies[n].Default.BoardLocation = "LaVega_ExitTown";
 
@@ -567,6 +567,24 @@ void InitColonies()
 		colonies[n].from_sea   = "Beliz_town";
 		colonies[n].Default.BoardLocation = "Beliz_ExitTown";
 		colonies[n].FortValue = 85; // homo
+		
+	/////////////////////////////////////////////////////////////////////
+	/// Nassau
+	/////////////////////////////////////////////////////////////////////
+		n = n + 1;
+		Colonies[n].id = "Nassau";
+		Colonies[n].visible = true;
+		Colonies[n].smuggling_nation = ENGLAND;
+		Colonies[n].nation = ENGLAND;
+		Colonies[n].island = "Bahames";
+		Colonies[n].islandLable = "Bahames";
+		Colonies[n].num = 1;
+		colonies[n].map.x = 1605;
+		colonies[n].map.y = 1852;
+		colonies[n].StoreNum   = Nassau_STORE;
+		colonies[n].from_sea   = "Nassau_town";
+		colonies[n].Default.BoardLocation = "Nassau_ExitTown";
+		colonies[n].FortValue = 80; 		
 
 	/////////////////////////////////////////////////////////////////////
 	/// Pearl (Mein)

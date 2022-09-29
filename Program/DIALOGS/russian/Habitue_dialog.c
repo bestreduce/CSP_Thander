@@ -68,7 +68,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Beta_test_card":
-            dialog.text = "Игрок в карты (30%% что пошлет с первого раза)";
+            dialog.text = "Игрок в карты (30%% что пошлёт с первого раза)";
 			link.l1 = "Продолжить";
 			link.l1.go = "First time";
 			npchar.quest.last_theme = 1;
@@ -76,7 +76,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Beta_test_dice":
-            dialog.text = "Игрок в кости (30%% что пошлет с первого раза)";
+            dialog.text = "Игрок в кости (30%% что пошлёт с первого раза)";
 			link.l1 = "Продолжить";
 			link.l1.go = "First time";
 			npchar.quest.last_theme = 1;
@@ -86,7 +86,7 @@ void ProcessDialogEvent()
 		case "First time":
 			if (LAi_grp_playeralarm > 0)
 			{
-       			dialog.text = LinkRandPhrase("Я, может, и пьян, но в своем уме. Сейчас вот выпью с тобой, а солдаты и меня загребут! Не-е-ет...", "Я не враг городу, в котором живу. Не буду с тобой пить!" , ""+ GetSexPhrase("Приятель","Подруга") +", тебе лучше бы убраться отсюда подобру-поздорову...");
+       			dialog.text = LinkRandPhrase("Я, может, и пьян, но в своём уме. Сейчас вот выпью с тобой, а солдаты и меня загребут! Не-е-ет...", "Я не враг городу, в котором живу. Не буду с тобой пить!" , ""+ GetSexPhrase("Приятель","Подруга") +", тебе лучше бы убраться отсюда подобру-поздорову...");
 				link.l1 = RandPhraseSimple("Ну, как знаешь...", "Хех, больно надо глаза заливать! Не то время.");
 				link.l1.go = "exit";
 				break;
@@ -95,7 +95,7 @@ void ProcessDialogEvent()
 			if(CheckAttribute(pchar,"questTemp.HabitueSpeakDisable") && rand(1) == 0) // если дуэлянт то каждый второй посылает нафик
 			{
 				dialog.text = "Ха, судар"+ GetSexPhrase("ь","ыня") +", слыхал я о вас, как же, как же, хе-хе. В тавернах говорят, что вы записн"+ GetSexPhrase("ой","ая") +" задира и дуэлянт"+ GetSexPhrase("","ка") +", и по пьяному делу уже чуть ли не дюжину душ представили пред очи Господни. Смотрите, народ у нас, конечно, не из пугливых, да только кому охота за кружку рому живота лишиться. Мне вот лично даже за одним столом с вами сидеть боязно, так что, пойду я пожалуй.";
-				link.l1 = LinkRandPhrase("Ну и скатертью дорога!","Катись, пока я добр"+ GetSexPhrase("ый","ая") +"...","Давай-давай! Улепетывай, рыбья снедь!");
+				link.l1 = LinkRandPhrase("Ну и скатертью дорога!","Катись, пока я добр"+ GetSexPhrase("ый","ая") +"...","Давай-давай! Улепётывай, рыбья снедь!");
 				link.l1.go = "exit";
 				link.l2 = "Постойте, я хотел"+ GetSexPhrase("","а") +" спросить кое-что....";
 				link.l2.go = "talk_habitue_duel";
@@ -121,7 +121,7 @@ void ProcessDialogEvent()
 						}
 						else
 						{
-	                        link.l2 = "Это еще почему?";
+	                        link.l2 = "Это ещё почему?";
 							link.l2.go = "talk_with_alchogol_song";
 						}
 					break;
@@ -217,6 +217,13 @@ void ProcessDialogEvent()
 	        			    link.l1.go = "exit";
 	        			    link.l2 = RandPhraseSimple("Как ты со мной разговариваешь, скотина! Сейчас я научу тебя хорошим манерам.", "Вот я тресну тебя сейчас по башке, вмиг протрезвеешь.");
 	        	            link.l2.go = "tavern_keeper";
+							if (SharleMaryIsHere() && PChar.sex != "woman")
+							{
+								link.l1 = "";
+								link.l1.go = "Mary_Zastupaetsya_1";
+								DeleteAttribute(link, "l2");
+								pchar.Mary.hamila.npcharID = npchar.id;
+							}
 	        			}
 					break;
 				}
@@ -224,8 +231,29 @@ void ProcessDialogEvent()
 			Diag.TempNode = "First time";
 	    break;
 
+		case "Mary_Zastupaetsya_1":
+			StartInstantDialogNoType(pchar.SharleMaryId, "Mary_Zastupaetsya_2", "Habitue_dialog.c");
+		break;
+
+		case "Mary_Zastupaetsya_2":
+			dialog.text = RandPhraseSimple("(к пьянице) Я тебе сейчас глотку порву!", "(к пьянице) Ты сейчас будешь иметь дело со мной, грязная морда!");
+	        link.l1 = "Тише, тише, Мэри, он уже всё понял.";
+	        link.l1.go = "Mary_Zastupaetsya_3";
+			LAi_SetActorTypeNoGroup(npchar);
+			LAi_ActorTurnToCharacter(npchar, CharacterFromID(pchar.Mary.hamila.npcharID));
+		break;
+
+		case "Mary_Zastupaetsya_3":
+			DialogExit();
+
+			sld = characterFromID("SharleMary");
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Mary_dialog.c";
+			sld.dialog.currentnode = "hired";
+			LAi_SetOfficerType(sld);
+		break;
+
 		case "talk_habitue_duel":
-			dialog.text = "Ничего, судар"+ GetSexPhrase("ь","ыня") +", я вам не скажу! И вряд ли кто еще согласится, ведь разговоры с вами плохо кончаются... Но память людская коротка - глядишь через месяцок-другой все ваши похождениях и подзабудутся. Если вы, конечно, память-то людям не освежите, хе-хе... Прощавайте, судар"+ GetSexPhrase("ь","ыня") +". ";
+			dialog.text = "Ничего, судар"+ GetSexPhrase("ь","ыня") +", я вам не скажу! И вряд ли кто ещё согласится, ведь разговоры с вами плохо кончаются... Но память людская коротка - глядишь через месяцок-другой все ваши похождениях и подзабудутся. Если вы, конечно, память-то людям не освежите, хе-хе... Прощавайте, судар"+ GetSexPhrase("ь","ыня") +". ";
 			link.l1 = "Ну и ладно ....";
 			link.l1.go = "exit";
 		break;
@@ -233,7 +261,7 @@ void ProcessDialogEvent()
 	    // карты -->
 	    case "Cards_Rule":
    			dialog.text = CARDS_RULE;
-			link.l1 = "Что ж, давай начнем!";
+			link.l1 = "Что ж, давай начнём!";
 			link.l1.go = "Cards_begin";
 			link.l3 = "Нет, это не для меня...";
 			link.l3.go = "exit";
@@ -264,7 +292,7 @@ void ProcessDialogEvent()
 			iLa_Puesta = GetStrSmallRegister(dialogEditStrings[1]);
             if (!CheckCardsGameSmallRate())
 		    {
-                dialog.text = "О тебе ходит слава непревзойденного шулера. Я не буду с тобой играть в карты вообще.";
+                dialog.text = "О тебе ходит слава непревзойдённого шулера. Я не буду с тобой играть в карты вообще.";
                 link.l1 = "Все врут! Ну и не нужно.";
 			    link.l1.go = "exit_sit";
 			    break;
@@ -289,7 +317,7 @@ void ProcessDialogEvent()
 		{
 			if(sti(iLa_Puesta) < 50)
 			{
-				dialog.text = "Хех, ты смеешься?! Играть на " + iLa_Puesta + " золотых?! Давай ставку поменяем, иначе я с тобой играть не буду!";
+				dialog.text = "Хех, ты смеёшься?! Играть на " + iLa_Puesta + " золотых?! Давай ставку поменяем, иначе я с тобой играть не буду!";
 				link.l1 = "Да, пожалуй. Ставку надо бы повысить.";
 				link.l1.go = "Cards_begin_2";
 				link.l2 = "Что-то я играть раздумал"+ GetSexPhrase("","а") +".";
@@ -334,7 +362,7 @@ void ProcessDialogEvent()
 	/*	case "Cards_Node_500":
             if (!CheckCardsGameSmallRate())
 		    {
-                dialog.text = "О тебе ходит слава непревзойденного шулера. Я не буду с тобой играть в карты вообще.";
+                dialog.text = "О тебе ходит слава непревзойдённого шулера. Я не буду с тобой играть в карты вообще.";
                 link.l1 = "Все врут! Ну и не нужно.";
 			    link.l1.go = "exit_sit";
 			    break;
@@ -380,7 +408,7 @@ void ProcessDialogEvent()
 	    // КОСТИ -->
 	    case "Dice_Rule":
    			dialog.text = DICE_RULE;
-			link.l1 = "Что ж, давай начнем!";
+			link.l1 = "Что ж, давай начнём!";
 			link.l1.go = "Dice_begin";
 			link.l3 = "Нет, это не для меня...";
 			link.l3.go = "exit";
@@ -411,7 +439,7 @@ void ProcessDialogEvent()
 			iLa_Puesta = GetStrSmallRegister(dialogEditStrings[1]);
             if (!CheckDiceGameSmallRate())
 		    {
-				dialog.text = "О тебе ходит слава непревзойденного шулера. Я не буду с тобой играть в кубики вообще.";
+				dialog.text = "О тебе ходит слава непревзойдённого шулера. Я не буду с тобой играть в кубики вообще.";
                 link.l1 = "Все врут! Ну и не нужно.";
 			    link.l1.go = "exit_sit";
 			    break;
@@ -436,7 +464,7 @@ void ProcessDialogEvent()
 		{
 			if(sti(iLa_Puesta) < 50)
 			{
-				dialog.text = "Хех, ты смеешься?! Играть по " + iLa_Puesta + " золотых за кубик?! Давай ставку поменяем, иначе я с тобой играть не буду!";
+				dialog.text = "Хех, ты смеёшься?! Играть по " + iLa_Puesta + " золотых за кубик?! Давай ставку поменяем, иначе я с тобой играть не буду!";
 				link.l1 = "Да, пожалуй. Ставку надо бы повысить.";
 				link.l1.go = "Dice_begin_2";
 				link.l2 = "Что-то я играть раздумал"+ GetSexPhrase("","а") +".";
@@ -474,7 +502,7 @@ void ProcessDialogEvent()
 	/*	case "Dice_Node_500":
             if (!CheckDiceGameSmallRate())
 		    {
-                dialog.text = "О тебе ходит слава непревзойденного шулера. Я не буду с тобой играть в кости вообще.";
+                dialog.text = "О тебе ходит слава непревзойдённого шулера. Я не буду с тобой играть в кости вообще.";
                 link.l1 = "Все врут! Ну и не нужно.";
 			    link.l1.go = "exit_sit";
 			    break;
@@ -520,7 +548,7 @@ void ProcessDialogEvent()
 		break;
 	    // КОСТИ <--
 	    // homo 01/08/06 to_del
-        // наводка на товар - перенес в слухи
+        // наводка на товар - перенёс в слухи
 	    //case "Find_Merchant_1":
             //if (pchar.GenQuest.Find_Merchant.lastspeak_date == LastSpeakDate())
             //{
@@ -534,7 +562,7 @@ void ProcessDialogEvent()
                 MerchantOnMap();
                 sld = characterFromID("Quest_Merchant");
        			dialog.text = "Слыхал я, один " + RandPhraseSimple("торгаш", "купец") + " на корабле '" + sld.Ship.Name +
-                              "' под флагом " + NationNameGenitive(sti(sld.nation)) + " везет полный трюм " + GetGoodsNameAlt(sti(sld.QuestGoodsIdx)) + ".";
+                              "' под флагом " + NationNameGenitive(sti(sld.nation)) + " везёт полный трюм " + GetGoodsNameAlt(sti(sld.QuestGoodsIdx)) + ".";
     			link.l1 = "Спасибо, браток! Пора мне в море, засидел"+ GetSexPhrase("ся","ась") +" я тут.";
     			link.l1.go = "exit_sit";
 			} */
@@ -544,14 +572,14 @@ void ProcessDialogEvent()
 			if(Pchar.chr_ai.type != LAI_TYPE_SIT) LAi_SetSitType(pchar);
             npchar.GhostShip_Speak_Yet = true;
             pchar.GenQuest.GhostShip.lastspeak_date = LastSpeakDate();
-   			dialog.text = "Ну... И-ик! Видел я страшное - корабль-призрак, а на нем сплошные мертвецы... Говорят, он тут со времен Колумба плавает...";
-			link.l1 = "Да врешь, небось!";
+   			dialog.text = "Ну... И-ик! Видел я страшное - корабль-призрак, а на нем сплошные мертвецы... Говорят, он тут со времён Колумба плавает...";
+			link.l1 = "Да врёшь, небось!";
 			link.l1.go = "GhostShip_Speak_1_2";
 		break;
 
 		case "GhostShip_Speak_1_2":
 			if(Pchar.chr_ai.type != LAI_TYPE_SIT) LAi_SetSitType(pchar);
-			dialog.text = "Я вру? И-ик! Да я вторую неделю пью, чтоб забыть, что видел... как он на черных рваных парусах входил в бухту...";
+			dialog.text = "Я вру? И-ик! Да я вторую неделю пью, чтоб забыть, что видел... как он на чёрных рваных парусах входил в бухту...";
 			link.l1 = "И как же ты уцелел?";
 			link.l1.go = "GhostShip_Speak_1_3";
 		break;
@@ -570,7 +598,7 @@ void ProcessDialogEvent()
             npchar.GhostShip_Speak_Yet = true;
             pchar.GenQuest.GhostShip.lastspeak_date = LastSpeakDate();
             dialog.text = "Деется? Да че тут деется?.. А вот говорят, Летучий голландец опять золотой караван пустил на дно.";
-			link.l1 = "Какой еще голландец?";
+			link.l1 = "Какой ещё голландец?";
 			link.l1.go = "GhostShip_Speak_2_2";
 		break;
 
@@ -652,7 +680,7 @@ void ProcessDialogEvent()
 		break;
 		/////////////////////////////////////////////
         case "talk_with_alchogol_song":
-			dialog.text = "Ну... И-ик! Бывает все на свете хорошо... И-ик! В чем дело сразу не поймешь... И-ик! А просто славно ром пошел... И-ик! ямайский черный ром... И-ик!\n Подставляй, наливай!";
+			dialog.text = "Ну... И-ик! Бывает всё на свете хорошо... И-ик! В чем дело сразу не поймёшь... И-ик! А просто славно ром пошёл... И-ик! ямайский чёрный ром... И-ик!\n Подставляй, наливай!";
 			link.l1 = "А дальше?";
 			link.l1.go = "talk_with_alchogol_song_2";
 			link.l2 = "Да ну тебя!";
@@ -668,7 +696,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "talk_with_alchogol_song_3":
-			dialog.text = "Когда на сердце тяжесть и холодно в груди, ты пару кружек рома на грудь себе прими! И без забот и фальши все станет вдруг вокруг. Поймешь ты, что я лучший тебе я самый друг!";
+			dialog.text = "Когда на сердце тяжесть и холодно в груди, ты пару кружек рома на грудь себе прими! И без забот и фальши всё станет вдруг вокруг. Поймёшь ты, что я лучший тебе я самый друг!";
 			link.l1 = "Да ну тебя!";
 			link.l1.go = "exit";
 		break;
@@ -685,8 +713,8 @@ void ProcessDialogEvent()
 			Diag.TempNode = "first time";
 			dialog.snd = "Voice\HADI\HADI028";
 			dialog.text = LinkRandPhrase("Ик! Вот это я понимаю! Вот это по-нашему! Ну, так чего? Поставишь мне кружечку рома?",
-						"Присаживайтесь, " + GetAddress_Form(npchar) + ", опрокинем по кружечке доброго ямайского рому. Это здоровью никогда не повредит. А для человека, интересующегося делами, лучше места, чем таверна не найти, это я вам точно говорю... Немного денег, пара кружек хорошей выпивки - и вы узнаете все, что хотите... и даже больше. Уж поверьте старому завсегдатаю...",
-						"Эхе-хе, присаживайтесь, "+ GetSexPhrase("сударь мой","сударыня") +", выпьем... отчего ж не выпить в хорошей-то кампании? В нашей портовой таверне иногда очень интересные вещи можно услышать, если иметь терпение и пить маленькими глотками, чтобы аверкиль не свалиться... То кэп какой-нибудь загрузит лишку на борт и начнет своими похождениями хвалиться, то кто-то знающий чего сболтнет в нужной кондиции... Тут разный люд обретается, и многим есть что порассказать, поверьте, "+ GetSexPhrase("сударь мой","сударыня") +".");
+						"Присаживайтесь, " + GetAddress_Form(npchar) + ", опрокинем по кружечке доброго ямайского рому. Это здоровью никогда не повредит. А для человека, интересующегося делами, лучше места, чем таверна не найти, это я вам точно говорю... Немного денег, пара кружек хорошей выпивки - и вы узнаете всё, что хотите... и даже больше. Уж поверьте старому завсегдатаю...",
+						"Эхе-хе, присаживайтесь, "+ GetSexPhrase("сударь мой","сударыня") +", выпьем... отчего ж не выпить в хорошей-то кампании? В нашей портовой таверне иногда очень интересные вещи можно услышать, если иметь терпение и пить маленькими глотками, чтобы аверкиль не свалиться... То кэп какой-нибудь загрузит лишку на борт и начнёт своими похождениями хвалиться, то кто-то знающий чего сболтнёт в нужной кондиции... Тут разный люд обретается, и многим есть что порассказать, поверьте, "+ GetSexPhrase("сударь мой","сударыня") +".");
 			link.l1 = "Да запросто! Трактирщик, рома!";
 			link.l1.go = "sit_2";
 		break;
@@ -750,31 +778,31 @@ void ProcessDialogEvent()
 
 			case "EscapeSlave_Villemstad_H1":
 				dialog.text = "Да-а-а, чего только не увидишь в море... Вот и в последнем рейсе тако-ое случилось...";
-				link.l1 = "Ну, рассказывай, только не ври сильно. А я пока еще рому налью.";
+				link.l1 = "Ну, рассказывай, только не ври сильно. А я пока ещё рому налью.";
 				link.l1.go = "EscapeSlave_Villemstad_H2";
 			break;
 
 			case "EscapeSlave_Villemstad_H2":
-				dialog.text = "Вот вам крест, благородн"+ GetSexPhrase("ый господин","ая госпожа") +" - своими глазами видел... Идет корабль, а вместо экипажа на нем - образины-гаврилы... э-э... обезьяны-гориллы... ну, или макаки, черт их разберет...";
+				dialog.text = "Вот вам крест, благородн"+ GetSexPhrase("ый господин","ая госпожа") +" - своими глазами видел... Идёт корабль, а вместо экипажа на нем - образины-гаврилы... э-э... обезьяны-гориллы... ну, или макаки, чёрт их разберет...";
 				link.l1 = "Чего-о?! А скажи, любезный, ты и на вахте к бутылке прикладываешься?";
 				link.l1.go = "EscapeSlave_Villemstad_H3";
 			break;
 
 			case "EscapeSlave_Villemstad_H3":
 				dialog.text = "Да не сойти мне с этого места, ежели я вру! Ты разве никогда не слыхал"+ GetSexPhrase("","а") +" про корабль обезьян? Так вот, это был он... забодай меня креветка!";
-				link.l1 = "Какой еще корабль обезьян? Нет, не слыхал"+ GetSexPhrase("","а") +".";
+				link.l1 = "Какой ещё корабль обезьян? Нет, не слыхал"+ GetSexPhrase("","а") +".";
 				link.l1.go = "EscapeSlave_Villemstad_H4";
 			break;
 
 			case "EscapeSlave_Villemstad_H4":
-				dialog.text = "О-о... а я говорю, что видел его собственными глазами. В шторм это было, " + pchar.questTemp.SlavetraderAreal.add + ". Темень - хоть глаз выколи, и тут появляется из ниоткуда он - корабль с рваными парусами... У него были сломаны фок, и грот, и нок, и бак, и-и-и... короче - все было у него сломано! А он себе идет прямо против ветра и хоть бы что!\nА на палубе - столько обезьян в лохмотьях, как тюленей на лежбище! И за штурвалом стоит натуральная горилла! роста девяти футов, в красной рубахе, а на груди вместо нательного креста у него акульи зубы... Глаза горят, зубы сверкают, увидел он нас и ка-а-ак заорет нечеловеческим голосом...";
-				link.l1 = "Ну, совсем ты, братец, заврался. Чего только с пьяных глаз не привидится. Ты еще скажи, что на корме у него надпись была 'Летучий Голландец'.";
+				dialog.text = "О-о... а я говорю, что видел его собственными глазами. В шторм это было, " + pchar.questTemp.SlavetraderAreal.add + ". Темень - хоть глаз выколи, и тут появляется из ниоткуда он - корабль с рваными парусами... У него были сломаны фок, и грот, и нок, и бак, и-и-и... короче - все было у него сломано! А он себе идёт прямо против ветра и хоть бы что!\nА на палубе - столько обезьян в лохмотьях, как тюленей на лежбище! И за штурвалом стоит натуральная горилла! роста девяти футов, в красной рубахе, а на груди вместо нательного креста у него акульи зубы... Глаза горят, зубы сверкают, увидел он нас и ка-а-ак заорёт нечеловеческим голосом...";
+				link.l1 = "Ну, совсем ты, братец, заврался. Чего только с пьяных глаз не привидится. Ты ещё скажи, что на корме у него надпись была 'Летучий Голландец'.";
 				link.l1.go = "EscapeSlave_Villemstad_H5";
 			break;
 
 			case "EscapeSlave_Villemstad_H5":
 				dialog.text = "Э, нет, это был не 'Голландец'. Говорю же - не вру я! Это был барк, а на корме было написано " + pchar.questTemp.Slavetrader.ShipName + ".";
-				link.l1 = "Кха-ркх!! Черт возьми! Кажется, я знаю, что это были за обезьяны... Действительно, ром развязывает языки, надо только слушать.";
+				link.l1 = "Кха-ркх!! Чёрт возьми! Кажется, я знаю, что это были за обезьяны... Действительно, ром развязывает языки, надо только слушать.";
 				link.l1.go = "EscapeSlave_Villemstad_H6";
 			break;
 
@@ -798,7 +826,7 @@ void ProcessDialogEvent()
 			break;
 
 			case "Rat_Tavern_2":
-			dialog.text = "А кто ж его разберет, капитан? Слыхал только, как матросы те бахвалились, что французских шлюх в борделе щупать будут, когда пропивать золото станут, что им хозяин за рейс заплатит. Может и в Старый Свет подались, а может еще куда. А больше-то и ничего не говорили – только песни горланили да ром заказывали.";
+			dialog.text = "А кто ж его разберёт, капитан? Слыхал только, как матросы те бахвалились, что французских шлюх в борделе щупать будут, когда пропивать золото станут, что им хозяин за рейс заплатит. Может и в Старый Свет подались, а может ещё куда. А больше-то и ничего не говорили – только песни горланили да ром заказывали.";
 			link.l1 = "Говоришь, француженок щупать... Ладно, мне пора. Спасибо за информацию!";
 			link.l1.go = "exit_sit";
 			CreateRatOfficer();
@@ -823,23 +851,23 @@ void ProcessDialogEvent()
 			WaitDate("",0,0,0, 0, 30);
 			dialog.text = LinkRandPhrase("Ты настоящ"+ GetSexPhrase("ий друг","ая морячка") +"! Давай за знакомство!",
 			                             "Ик! Какой ром! Ну... вздрогнем!",
-										 "За твое здоровье и за твою щедрость!");
+										 "За твоё здоровье и за твою щедрость!");
 			link.l1 = "Эх, забористый ром. Ладно, мне уже пора, удачно посидеть.";
 			link.l1.go = "exit_sit";
 			if (makeint(pchar.money) >=2)
 			{
-				link.l2 = "Давай еще по одной кружечке.";
+				link.l2 = "Давай ещё по одной кружечке.";
 				link.l2.go = "sit_3";
 			}
 			// homo 01/08/06 to_del
-            // наводка на товар - перенес в слухи
+            // наводка на товар - перенёс в слухи
 			//if (sti(pchar.reputation) < 41)
             //{
             //    link.l3 = "Что интересного можешь сказать про 'честных' купцов в этих водах?";
 			//	link.l3.go = "Find_Merchant_1";
             //}
             //homo 15/06/06 слухи
-            link.l4 = LinkRandPhrase("Кажется, что провел"+ GetSexPhrase("","а") +" в море целую вечность. Что новенького в ваших краях?",
+            link.l4 = LinkRandPhrase("Кажется, что пров"+ GetSexPhrase("ёл","ела") +" в море целую вечность. Что новенького в ваших краях?",
                                     "Расскажи-ка мне, о чем теперь болтают? Не зря же я пою тебя ромом...",
                                     "Скажи мне, братец, какие байки ходят по тавернам?");
 		    link.l4.go = "rumours_habitue";
@@ -868,7 +896,7 @@ void ProcessDialogEvent()
 						link.l1.go = "exit_sit";
 						link.l2 = "Что-то не нравится мне твой тон, приятель. Попридержал бы ты язык.";
 						link.l2.go = "sit_case_2_enemy";
-						link.l3 = "Ты кого бандитом назвал, сухопутная крыса?! Поглядим, как ты запоешь, с дырой в брюхе!";
+						link.l3 = "Ты кого бандитом назвал, сухопутная крыса?! Поглядим, как ты запоёшь, с дырой в брюхе!";
 						link.l3.go = "sit_case_2_enemy2";
 					}
 					else
@@ -898,22 +926,7 @@ void ProcessDialogEvent()
 
 				case 3:
 					if(Pchar.chr_ai.type != LAI_TYPE_SIT) LAi_SetSitType(pchar);
-					if (!IsCharacterPerkOn(pchar, "Adventurer"))
-					{
-						if (GetSummonSkillFromName(pchar, SKILL_SNEAK) > rand(110))
-						{
-						dialog.text = "...И тогда я схв-схватил его шпагу за л-лезвие и...";
-							link.l1 = "... а она мне и говорит...";
-							link.l1.go = "sit_2";
-						}
-						else
-						{
-							dialog.text = "...И тогда я схв-схватил его шпагу за л-лезвие и...";
-							link.l1 = "... и-ик! А она мне и г-говорит...";
-						link.l1.go = "sit_case_4_exit";
-						}
-					}
-					else
+					if (IsCharacterPerkOn(pchar, "Adventurer") || IsCharacterPerkOn(pchar, "Agent"))
 					{
 						if (GetSummonSkillFromName(pchar, SKILL_SNEAK) > rand(110))
 						{
@@ -928,6 +941,21 @@ void ProcessDialogEvent()
 						link.l1.go = "sit_2";
 						}
 					}
+					else
+					{
+						if (GetSummonSkillFromName(pchar, SKILL_SNEAK) > rand(110))
+						{
+						dialog.text = "...И тогда я схв-схватил его шпагу за л-лезвие и...";
+							link.l1 = "... а она мне и говорит...";
+							link.l1.go = "sit_2";
+						}
+						else
+						{
+							dialog.text = "...И тогда я схв-схватил его шпагу за л-лезвие и...";
+							link.l1 = "... и-ик! А она мне и г-говорит...";
+						link.l1.go = "sit_case_4_exit";
+						}
+					}
 				break;
 
 				case 4:
@@ -939,9 +967,9 @@ void ProcessDialogEvent()
 
                 case 5:
 					if(Pchar.chr_ai.type != LAI_TYPE_SIT) LAi_SetSitType(pchar);
-                    if (!CheckAttribute(pchar , "GenQuest.GhostShip.LastBattleEnd") && !checkAttribute(npchar, "GhostShip_Speak_Yet") && pchar.GenQuest.GhostShip.lastspeak_date != LastSpeakDate())
+                    if (!CheckAttribute(pchar , "GenQuest.GhostShip.LastBattleEnd") && !checkAttribute(npchar, "GhostShip_Speak_Yet") && pchar.GenQuest.GhostShip.lastspeak_date != LastSpeakDate() && pchar.rank >= 10)
 					{
-                        dialog.text = "Давай еще по одной кружечке.";
+                        dialog.text = "Давай ещё по одной кружечке.";
                         link.l1 = "Эх, забористый ром. Ладно, мне уже пора, удачно посидеть.";
 						link.l1.go = "exit_sit";
 						switch (sti(pchar.GenQuest.GhostShip.AskAbout))
@@ -964,7 +992,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-	         			dialog.text = "Пить так пить! Еще давай?";
+	         			dialog.text = "Пить так пить! Ещё давай?";
 						link.l1 = "Наливай!";
 						link.l1.go = "sit_2";
 					}
@@ -1031,7 +1059,7 @@ void ProcessDialogEvent()
 		case "sit_case_2_friend_2":
 			if(Pchar.chr_ai.type != LAI_TYPE_SIT) LAi_SetSitType(pchar);
 			dialog.snd = "Voice\HADI\HADI039";
-			dialog.text = "А-а-а! Уберите "+ GetSexPhrase("его","ее") +" от меня!!";
+			dialog.text = "А-а-а! Уберите "+ GetSexPhrase("его","её") +" от меня!!";
 			link.l1 = "Да ты успокойся... ик... больно не будет!";
 			link.l1.go = "tavern_keeper";
 		break;
@@ -1039,7 +1067,7 @@ void ProcessDialogEvent()
 		case "sit_case_2_enemy":
 			dialog.snd = "Voice\HADI\HADI040";
 			dialog.text = RandSwear() + "Я тебя разделаю, как свинью!";
-			link.l1 = "Это мы еще посмотрим!";
+			link.l1 = "Это мы ещё посмотрим!";
 //			link.l1.go = "tavern_keeper";
 			link.l1.go = "fight_right_now"; //navy -- битва в таверне без базаров! :)
 		break;

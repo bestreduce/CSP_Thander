@@ -2,6 +2,7 @@
 // метод для совместимости с .ИНИ файлом (секция SKILLCHANGER)
 #include "scripts\Pusher.c"
 #include "scripts\Utils2.c"
+string checkskillfortrauma = "LeadershipFencingLightFencingHeavyPistolFortuneSneak"
 
 // порог ранга
 int GetCharacterRankRate(ref _refCharacter)
@@ -36,6 +37,76 @@ int GetCharacterBaseHPValue(ref _refCharacter)
   		ret = ret + sti(_refCharacter.PerkValue.HPPlus);
 	} */
 	return ret;
+}
+
+int GetCharacterNormalHp(ref _refCharacter)
+{
+	int ret = GetCharacterBaseHpValue(_refCharacter) + GetCharacterAddHpValue(_refCharacter) * (sti(_refCharacter.rank) - 1);
+	if (CheckCharacterPerk(_refCharacter, "HPPlus"))
+	{
+		ret += 80;
+	}
+	if (CheckCharacterPerk(_refCharacter, "HPPlusFixed"))
+	{
+		ret += 60;
+	}
+	return ret;
+}
+
+float GetCharacterEffectiveHp(ref _refCharacter)
+{
+	float EffHp;
+	if (CheckAttribute(_refCharacter, "Cirassid")) 
+	{
+		if(IsCharacterPerkOn(_refCharacter, "SwordplayProfessional"))
+			EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.7 / (1 - stf(Items[sti(_refCharacter.cirassId)].CirassLevel.break));
+		else
+		{
+			if(IsCharacterPerkOn(_refCharacter, "AdvancedDefense"))
+				EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.8 / (1 - stf(Items[sti(_refCharacter.cirassId)].CirassLevel.break));
+			else
+			{
+				if(IsCharacterPerkOn(_refCharacter, "BasicDefense"))
+					EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.9 / (1 - stf(Items[sti(_refCharacter.cirassId)].CirassLevel.break));
+				else
+					EffHp = sti(_refCharacter.chr_ai.hp_max) / (1 - stf(Items[sti(_refCharacter.cirassId)].CirassLevel.break));
+			}
+		}
+	}
+	else
+	{
+		if(IsCharacterPerkOn(_refCharacter, "SwordplayProfessional"))
+			EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.7 ;
+		else
+		{
+			if(IsCharacterPerkOn(_refCharacter, "AdvancedDefense"))
+				EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.8;
+			else
+			{
+				if(IsCharacterPerkOn(_refCharacter, "BasicDefense"))
+					EffHp = sti(_refCharacter.chr_ai.hp_max) / 0.9;
+				else
+					EffHp = sti(_refCharacter.chr_ai.hp_max);
+			}
+		}
+	}
+	return EffHp;
+}
+
+void SetHealthToCharacter(ref _refCharacter)
+{
+	_refCharacter.chr_ai.hp_max = GetCharacterNormalHp(_refCharacter);
+	if (!CheckAttribute(_refcharacter, "chr_ai.hp"))
+	{
+		_refcharacter.chr_ai.hp = GetCharacterNormalHp(_refCharacter);
+	}
+	else
+	{
+		if (sti(_refcharacter.chr_ai.hp) > sti(_refcharacter.chr_ai.hp_max))
+		{
+			_refcharacter.chr_ai.hp = _refcharacter.chr_ai.hp_max;
+		}
+	}		
 }
 
 float GetCharacterMaxEnergyValue(ref _refCharacter)
@@ -237,9 +308,25 @@ void SetRandSPECIAL_K(ref _refCharacter)  // для штурманов-казн�
                (2 + rand(8)));
 }
 
+int ChecKSufficientRankForClass(int shipClass)
+{
+	switch (shipClass)
+    {
+		case 1 : return 30; break;
+		case 2 : return 25; break;
+		case 3 : return 18; break;
+		case 4 : return 10; break;
+		case 5 : return 5; break;
+		case 6 : return 1; break;
+		case 7 : return 1; break;
+		else return 0;
+    }
+}
+
 /// влияет только на СПЕЦИАЛ
 int ApplayNavyPenalty(ref _refCharacter, string skillName, int sumSkill)
 {
+	if (CheckAttribute(_refCharacter,"bchangepirates")) {return sumSkill;} // фикс неправильного расчета начальных значений скиллов при старте игры от наличия минусов от навигации
     if (IsCompanion(_refCharacter) && GetRemovable(_refCharacter))//пусть будет для компаньонов тоже sti(_refCharacter.index) == GetMainCharacterIndex()) // только для главного, чтоб не тормозить всю игру
     {
         int sailSkill;
@@ -260,6 +347,7 @@ int ApplayNavyPenalty(ref _refCharacter, string skillName, int sumSkill)
 // пенальти в скилы
 int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
 {
+	if (CheckAttribute(_refCharacter,"bchangepirates")) {return sumSkill;}
     if (IsCompanion(_refCharacter) && GetRemovable(_refCharacter))//пусть будет для компаньонов тоже sti(_refCharacter.index) == GetMainCharacterIndex()) // только для главного, чтоб не тормозить всю игру
     {
         int sailSkill;
@@ -275,6 +363,12 @@ int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
 
         int shipClass = GetCharacterShipClass(_refCharacter);
         int needSkill = GetShipClassNavySkill(shipClass);
+		if (bRankRequirement)
+		{
+			int needRank = (ChecKSufficientRankForClass(shipClass) - sti(_refCharacter.rank))*2;
+			if (needRank < 0) needRank = 0;
+			needSkill += needRank;
+		}
 
         if (sailSkill < needSkill)
         {
@@ -282,8 +376,8 @@ int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
 			sumSkill = sumSkill - sailSkill;
 	        if (sumSkill < 1) sumSkill = 1;
         }
-		if (CheckAttribute(_refCharacter,"chr_ai.Trauma")) sumSkill = sumSkill - 20; //штраф от травмы - Gregg
-		if (CheckAttribute(_refCharacter,"chr_ai.HeavyTrauma")) sumSkill = sumSkill - 30; //штраф от тяжелой травмы - Gregg
+		if (CheckAttribute(_refCharacter,"chr_ai.Trauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - 20; //штраф от травмы - Gregg
+		if (CheckAttribute(_refCharacter,"chr_ai.HeavyTrauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - 30; //штраф от тяжелой травмы - Gregg
     }
 	else
 	{
@@ -425,14 +519,14 @@ string GetSkillNameByIdx(int idx)
         case 4:    ret = SKILL_PISTOL;    break;
         case 5:    ret = SKILL_FORTUNE;   break;
         case 6:    ret = SKILL_LEADERSHIP; break;
-        case 7:    ret = SKILL_COMMERCE;   break;
+        case 7:    ret = SKILL_SNEAK;      break;
         case 8:    ret = SKILL_ACCURACY;   break;
         case 9:    ret = SKILL_CANNONS;    break;
         case 10:   ret = SKILL_SAILING;    break;
         case 11:   ret = SKILL_REPAIR;     break;
         case 12:   ret = SKILL_GRAPPLING;  break;
         case 13:   ret = SKILL_DEFENCE;    break;
-        case 14:   ret = SKILL_SNEAK;      break;
+        case 14:   ret = SKILL_COMMERCE;   break;
         case 15:   ret = SPECIAL_S;   break;
         case 16:   ret = SPECIAL_P;   break;
         case 17:   ret = SPECIAL_A;   break;
@@ -749,25 +843,19 @@ void ApplayNewSkill(ref _chref, string _skill, int _addValue)
             }
             else
             {
-                Log_Info("Новый уровень у "+ _chref.name + " "+_chref.lastname);
+                Log_Info(""+ _chref.name + " "+_chref.lastname + " получает новый уровень!");
             }
         }
-		if (sti(_chref.index) == GetMainCharacterIndex())
-		{
-			if(sti(_chref.rank) == 10)
-			{
-				UnexpectedInheritance();
-			}
-		}
     }
 }
 
 void ClearHPTubeEffect(string qName)
 {
-	float nphp = LAi_GetCharacterMaxHP(pchar) + GetCharacterAddHPValue(pchar);
+	float nphp = LAi_GetCharacterMaxHP(pchar);
 	LAi_SetHP(pchar,nphp-sti(pchar.PerkValue.HPBONUS),nphp-sti(pchar.PerkValue.HPBONUS));
 	DeleteAttribute(pchar,"chr_ai.bonushptube");
 	DeleteAttribute(pchar,"PerkValue.HPBONUS");
+	RestoreModelsBeforeDrugs();
 }
 
 void ClearENTubeEffect(string qName)
@@ -815,7 +903,7 @@ void InitStartParam(ref _chref)
     for (i=1; i<15; i++)
     {
         skillName = GetSkillNameByIdx(i);
-        _chref.skill.(skillName) = makeint(MOD_EXP_RATE / GetCharacterExpRate(_chref, skillName) + 0.5);
+        _chref.skill.(skillName) = makeint(MOD_EXP_RATE / GetCharacterExpRate(_chref, skillName));
     }
     LAi_SetHP(_chref, GetCharacterBaseHPValue(_chref), GetCharacterBaseHPValue(_chref));
 	MAX_NUM_FIGHTERS=MOD_OFFICERS_RATE;
@@ -874,7 +962,7 @@ float GetCharacterExpRate(ref _chref, string _skill)
                 divBy = GetCharacterSPECIAL(_chref, SPECIAL_P)*0.5 + GetCharacterSPECIAL(_chref, SPECIAL_L)*0.5;
             break;
         }
-        _chref.skill.(skill_rate) = makefloat(MOD_EXP_RATE / divBy);
+        _chref.skill.(skill_rate) = makefloat(MOD_EXP_RATE / (divBy * 2.8696 * pow(divBy,-0.457)));
     }
     return  stf(_chref.skill.(skill_rate));
 }
@@ -1157,7 +1245,7 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "jewelry4", 10);			// {Изумруд}							(+10 авторитет)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "jewelry8", 10);				// {Бронзовое кольцо} 					(+10 к везению)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "indian5", 10);				// {Двойная маска}						(+10 скрытность)
-    	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_HEAVY, "indian12", 10);				// {Кубок-тотем Тепейоллотля}			(+10 тяжелое оружие)
+    	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_HEAVY, "indian12", 10);				// {Кубок-тотем Тепейоллотля}			(+10 тяжёлое оружие)
 		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "Dozor_HorseShoe", 15);		// {Счастливая подкова}					(+15 к везению)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "jewelry15", 10);				// {Изумрудные подвески} 				(+10 к скрытности)
 
@@ -1208,13 +1296,12 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "Totem_6", 5);			// {Тотем Чалчиуитликуэ}				(+5 авторитет)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FENCING, "Totem_7", 5);				// {Тотем Уицилопочтли}					(+5 среднее оружие)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_LIGHT, "Totem_8", 5);				// {Тотем Тлалока}						(+5 легкое оружие)
-    	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_HEAVY, "Totem_9", 5); 				// {Тотем Майяуэль}						(+5 тяжелое оружие)
+    	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_HEAVY, "Totem_9", 5); 				// {Тотем Майяуэль}						(+5 тяжёлое оружие)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "Dozor_Mirror", 15);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SAILING, "hatWhisper", 5);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "hatWhisper", 5);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_GRAPPLING, "hatWhisper", 5);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "hatWhisper", -5);				// {Карманное зеркало}					(+15 к скрытности)
-		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "Joker", 10);				// {Джокер}							(+10 к везению)
 
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_DEFENCE, "Totem_3", 5);				// {Тотем Кецалькоатля} 				(+5 защита)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_ACCURACY, "Totem_4", 5);				// {Тотем Мишкоатля}					(+5 меткость)
@@ -2124,7 +2211,7 @@ void setWDMPointXZ(string _location)
 	}
 	// координаты на гловал карте <--
 }
-// нужно не перекрывать еще и признаки фантома
+// нужно не перекрывать ещё и признаки фантома
 void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCopy)
 {
     aref arToChar;
@@ -2148,7 +2235,17 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
     CopyChref.rank             = PastChref.rank;
     CopyChref.reputation       = makeint(PastChref.reputation);
 	CopyChref.baseCapIdx       = PastChref.index; //Id оригинального в структуру клона
-
+	
+	if(CheckAttribute(PastChref, "ImmortalOfficer"))
+	{
+		CopyChref.ImmortalOfficer = PastChref.ImmortalOfficer;
+		CopyChref.OfficerWantToGo.DontGo = PastChref.OfficerWantToGo.DontGo;
+		CopyChref.HalfImmortal = PastChref.HalfImmortal;
+	}
+	else 
+	{
+		DeleteAttribute(CopyChref, "ImmortalOfficer");
+	}
     if (CheckAttribute(PastChref, "loyality"))
     {
     	CopyChref.loyality         = PastChref.loyality;
@@ -2648,7 +2745,7 @@ void initNewMainCharacter()
 	}
 	else
 	{
-		ch.HeroParam.ToCityId = FindAlliedColonyForNationExceptColony("Pirates"); //Бермуды не берем, туда еще добираться надо
+		ch.HeroParam.ToCityId = FindAlliedColonyForNationExceptColony("Pirates"); //Бермуды не берем, туда ещё добираться надо
 	}
 	//ch.HeroParam.ToCityId = "Santiago";
 	// откуда плывем
@@ -2666,6 +2763,12 @@ void initNewMainCharacter()
 		ch.HeroParam.Location = ch.HeroParam.ToCityId + "_port";
 		ch.HeroParam.Group    = "reload";
 		ch.HeroParam.Locator  = "sea";
+		if (ch.HeroParam.ToCityId == "LaVega")	//Ла Вега town
+		{
+			ch.HeroParam.Location = ch.HeroParam.ToCityId + "_town";
+			ch.HeroParam.Group    = "reload";
+			ch.HeroParam.Locator  = "reload1";
+		}
 		if(startherotype == 2)
 		{
 			ch.HeroParam.Location = "PuertoPrincipe_port";
@@ -2847,7 +2950,7 @@ void initNewMainCharacter()
 
 	// Warship Для разных квестов
 	// Важно: функция MaryCelesteInit() должна быть тут, а не в initStartState2Character()
-	// т.к. в ней идет выборка колоний, которые в функции initStartState2Character() еще не инитились
+	// т.к. в ней идёт выборка колоний, которые в функции initStartState2Character() ещё не инитились
 	OtherQuestCharactersInit(); // Инициализация прочих квестов
 
 	MaryCelesteInit(); // Warship 07.07.09 Пасхалка "Мэри Селест"
@@ -3083,6 +3186,11 @@ void initMainCharacterItem()
 			TakenItems(Pchar, "Totem_2", 1);
 			TakenItems(Pchar, "indian5", 1);
 			TakenItems(Pchar, "indian17", 1);
+			TakenItems(Pchar, "suit_1", 1);
+			SetCharacterPerk(pchar, "FlagEng");
+			SetCharacterPerk(pchar, "FlagFra");
+			SetCharacterPerk(pchar, "FlagSpa");
+			SetCharacterPerk(pchar, "FlagHol");
 			switch (sti(ch.nation))
 			{
 				case ENGLAND:
@@ -3095,10 +3203,7 @@ void initMainCharacterItem()
 					GiveItem2Character(Pchar, "patent_hol");
 				break;
 				case PIRATE:
-					SetCharacterPerk(pchar, "FlagEng");
-					SetCharacterPerk(pchar, "FlagFra");
-					SetCharacterPerk(pchar, "FlagSpa");
-					SetCharacterPerk(pchar, "FlagHol");
+
 				break;
 				case SPAIN:
 					GiveItem2Character(Pchar, "patent_spa");

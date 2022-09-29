@@ -100,7 +100,7 @@ int _GetDistanceToColony2D(string _sColony)
 	string sColonyTown = _sColony + "_town";
 
 	if(_sColony == "FortOrange") sColonyTown = "Shore36";
-	if(_sColony == "LaVega") sColonyTown = "LaVega_Port";
+	if(_sColony == "LaVega") sColonyTown = "LaVega_town";
 
 	float X1, Z1;
 	GetCorrectShipCoords(&X1, &Z1)
@@ -141,6 +141,7 @@ void InitInterface(string iniName)
 		if(sColony == "SantaQuiteria") continue;
 		if(sColony == "IslaDeVieques") continue;
 		if(sColony == "SanAndres") continue;
+		if(sColony == "Nassau") continue;
 		if(sColony == "Is") continue;
 		if(sColony == "IslaMona" && !CheckAttribute(CharacterFromID("Islamona_carpenter"), "Storage.Activate")) continue;
 
@@ -1102,6 +1103,8 @@ int GetMaxFortCannons(string _FortCommander)
 		case "Tortuga Fort Commander": _iCannons = 28; break;
 
 		case "Havana Fort Commander": _iCannons = 80; break;
+		
+		case "Nassau Fort Commander": _iCannons = 80; break;
 	}
 
 	return _iCannons;
@@ -1184,7 +1187,7 @@ float _GetDirToColony(string _sColony)
 	string sColonyTown = _sColony + "_town";
 
 	if(_sColony == "FortOrange") sColonyTown = "Shore36";
-	if(_sColony == "LaVega") sColonyTown = "LaVega_Port";
+	if(_sColony == "LaVega") sColonyTown = "LaVega_town";
 
 	float X1, Z1;
 	GetCorrectShipCoords(&X1, &Z1)

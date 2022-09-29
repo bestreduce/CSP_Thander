@@ -364,7 +364,7 @@ void locCameraUpdate()
 	float charX, charY, charZ, charAY;
 	float offsetX, offsetZ;
 	float rotateRadius, rotateAngle;
-	float time; // Здесь время дробное, т.к. учитывается еще ускорение времени
+	float time; // Здесь время дробное, т.к. учитывается ещё ускорение времени
 
 	float timeScale = 1 + TimeScaleCounter * 0.25; // Текущее ускорение времени
 

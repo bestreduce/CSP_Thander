@@ -18,6 +18,9 @@ void Ship_Walk_Delete()
 	DeleteClass(&Sailors);
 }
 
+string sDefaultPathes[5] = { "Lowcharacters/Lo_SoldEng/Lo_SoldEng_",
+    "Lowcharacters/Lo_SoldFra/Lo_SoldFra_", "Lowcharacters/Lo_SoldSpa/Lo_SoldSpa_",
+    "Lowcharacters/Lo_SoldHol/Lo_SoldHol_", "Lowcharacters/Lo_Sbrod/Lo_Man_" };
 
 void Ship_Walk_Create()
 {
@@ -41,7 +44,23 @@ void Ship_Walk_Create()
 	int Index= sti(ch.ship.type);
 	int ri= sti(RealShips[Index].basetype);
 
-	SendMessage(&Sailors, "lis", AI_MESSAGE_ADD_SHIP, ship, /*ShipsTypes[ri].name*/RealShips[Index].name);
+	if (!CheckAttribute(ch,"nation")) SendMessage(&Sailors, "lis", AI_MESSAGE_ADD_SHIP, ship, /*ShipsTypes[ri].name*/RealShips[Index].name); //если вдруг без нации, то ваниль
+	else
+	{
+		string sDefaultPath = sDefaultPathes[4];
+        if (sti(ch.index) == nMainCharacterIndex)
+        {
+            if (isMainCharacterPatented()) sDefaultPath = sDefaultPathes[sti(ch.nation)];
+        }
+        else
+        {
+            if (RealShips[Index].Type.War == true) sDefaultPath = sDefaultPathes[sti(ch.nation)];
+        }
+		//sDefaultPath = sDefaultPathes[sti(ch.nation)]; //нация капитана отражает путь из глобального массива
+		string sPathes[6];
+		for (int i = 0; i < 6; i++) sPathes[i] = sDefaultPath + (i+1); //пропись всех 6 моделек
+		SendMessage(&Sailors, "lise", AI_MESSAGE_ADD_SHIP, ship, RealShips[Index].name,&sPathes); //собственно изменение команды относительно нации капитана
+	}
 }
 
 void Ship_Walk_Hull_Damage()

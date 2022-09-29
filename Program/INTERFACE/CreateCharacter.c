@@ -21,8 +21,6 @@ void InitInterface(string iniName)
 {
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
 
-	startHeroType = 1;
-
 	StartAboveForm(false);
 
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
@@ -32,6 +30,14 @@ void InitInterface(string iniName)
 	SetEventHandler("CheckButtonChange", "ProcessFilter", 0);
 
 	LAi_SetActorTypeNoGroup(PChar);
+	
+	LoadStartGameParam();
+	startHeroType = 1;
+	if (CheckAttribute(pchar,"RemovePGG.PGG1") && pchar.RemovePGG.PGG1 == 1)
+	{
+		CheckButton_SetState("REMOVE_PGG_CHECKBOX", 1, 1);
+	}
+	
 	SelectOperation();
 }
 

@@ -121,6 +121,7 @@ void LAi_type_officer_CharacterUpdate(aref chr, float dltTime)
 	else chr.chr_ai.type.bottle = fCheck;
 	//Log_Info("LAi_type_officer_CharacterUpdate "+chr.chr_ai.tmpl);
 	if (chr.chr_ai.tmpl == LAI_TMPL_STAY) return; // приказ ему стоять. Врага не ищем 18.06.05
+	if (chr.chr_ai.tmpl == LAI_TMPL_WALK) return; // приказ вольно.
 
 	if (CheckAttribute(loadedLocation, "noFight")) return;
 

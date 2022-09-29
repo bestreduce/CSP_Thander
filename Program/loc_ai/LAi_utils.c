@@ -458,7 +458,7 @@ void LAi_CheckKillCharacter(aref chr)
 		}
 		if(IsCharacterPerkOn(chr, "Adventurer"))
 		{
-			if (!CheckAttribute(chr, "ScriptedDeath") && !CheckAttribute(chr, "Adventurers_Luck") && rand(10) <= GetCharacterSPECIALSimple(chr, SPECIAL_L))
+			if (!CheckAttribute(chr, "ScriptedDeath") && !CheckAttribute(chr, "Adventurers_Luck") && rand(15) <= GetCharacterSPECIALSimple(chr, SPECIAL_L))
 			{
 				chr.Adventurers_Luck = true;
 				int hitpoints = LAi_GetCharacterMaxHP(chr) / 2;
@@ -469,7 +469,7 @@ void LAi_CheckKillCharacter(aref chr)
 				if (sti(chr.index) == GetMainCharacterIndex())
 				{
 					chr.chr_ai.hp =  hitpoints;
-					Log_Info("Судьба дает вам второй шанс!");
+					Log_Info("Судьба даёт вам второй шанс!");
 					PlaySound("interface\heartbeat.wav");
 					//Сюда можно поставить юз звука
 					return;
@@ -510,7 +510,7 @@ void LAi_CheckKillCharacter(aref chr)
 
 		chr.chr_ai.hp = 0.0;
 		// boal dead can be searched 14.12.2003 -->
-		Dead_AddLoginedCharacter(chr); // записали еще живого в список трупов
+		Dead_AddLoginedCharacter(chr); // записали ещё живого в список трупов
 		// boal dead can be searched 14.12.2003 <--
 		SetCharacterTask_Dead(chr);
 		Postevent(EVENT_CHARACTER_DEAD, 1, "a", chr);
@@ -1100,7 +1100,7 @@ void Dead_AddLoginedCharacter(aref chr)
                 //TakeNItems(chref, "Coins", Rand(9) + 3);
                 // обыск скелетов давал вылет, даем сразу в ГГ
                 TakeNItems(pchar, "Coins", Rand(9) + 3);
-                Log_Info("Собраны черные жемчужины");
+                Log_Info("Собраны чёрные жемчужины");
 		    }
 		    else
 		    // матрос с ЧЖ <--
@@ -1548,6 +1548,7 @@ void MakeSwiftAttack(aref enemy, aref attacked, float coeff) // Резкий у�
 void MushketStun(aref enemy) // Мушкетный стан - Gregg
 {
 	LAi_LockFightMode(enemy, true);
+	enemy.chr_ai.backuptype = enemy.chr_ai.type;
 	LAi_SetActorTypeNoGroup(enemy);
 	float understun = 0.0;
 	if(CheckAttribute(enemy, "chr_ai.understun"))

@@ -138,7 +138,7 @@ void DailyRatsEatGoodsUpdate(ref chref)
 }
 
 // boal food for crew 20.01.2004 -->
-void DailyEatCrewUpdate()   // сюда пихаю все что в 1 день
+void DailyEatCrewUpdate()   // сюда пихаю всё что в 1 день
 {
     ref mainCh = GetMainCharacter();
     int i, cn, crew, morale;

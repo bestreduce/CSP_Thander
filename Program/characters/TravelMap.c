@@ -45,6 +45,8 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Dominica.Shore.t1		= "shore27";
 	NullCharacter.TravelMap.Islands.Terks.Shore.t0			= "shore56";
 	NullCharacter.TravelMap.Islands.Terks.Shore.t1			= "shore57";
+	NullCharacter.TravelMap.Islands.Bahames.Shore.t0		= "shore68";
+	NullCharacter.TravelMap.Islands.Bahames.Shore.t1		= "shore69";
 
 
 ///////////////// клады //////////////////////////////////////////
@@ -53,6 +55,7 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Antigua.Treasure.SentJons_TownCave.t1="box2";
 	NullCharacter.TravelMap.Islands.Antigua.Treasure.SentJons_TownCave.t2="box3";
 	NullCharacter.TravelMap.Islands.Barbados.Treasure.Barbados_Cave.t0="box1";
+	NullCharacter.TravelMap.Islands.Bahames.Treasure.Bahames_Cave.t0="box1";
 	NullCharacter.TravelMap.Islands.Beliz.Treasure.Beliz_Cave.t0="box1";
 	NullCharacter.TravelMap.Islands.Beliz.Treasure.Beliz_Cave.t1="box2";
 	NullCharacter.TravelMap.Islands.Beliz.Treasure.Beliz_Cave.t2="box3";
@@ -4022,6 +4025,153 @@ void InitTravelMap()
 	NullCharacter.TravelMap.PuertoPrincipe.t26.town = "";
 	NullCharacter.TravelMap.PuertoPrincipe.t26.town.days.min = 7;
 	NullCharacter.TravelMap.PuertoPrincipe.t26.town.days.max = 10;
+	
+	//////////////////////////////////////////////////////////////////////////////
+/////////////////////// NASSAU //////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+	NullCharacter.TravelMap.Nassau.t0 = "Cumana";
+	NullCharacter.TravelMap.Nassau.t0.town = "Cumana";
+	NullCharacter.TravelMap.Nassau.t0.town.days.min = 13;
+	NullCharacter.TravelMap.Nassau.t0.town.days.max = 19;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t1 = "Caracas";
+	NullCharacter.TravelMap.Nassau.t1.town = "Caracas";
+	NullCharacter.TravelMap.Nassau.t1.town.days.min = 11;
+	NullCharacter.TravelMap.Nassau.t1.town.days.max = 17;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t2 = "Maracaibo";
+	NullCharacter.TravelMap.Nassau.t2.town = "Maracaibo";
+	NullCharacter.TravelMap.Nassau.t2.town.days.min = 10;
+	NullCharacter.TravelMap.Nassau.t2.town.days.max = 19;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t3 = "Cartahena";
+	NullCharacter.TravelMap.Nassau.t3.town = "Cartahena";
+	NullCharacter.TravelMap.Nassau.t3.town.days.min = 11;
+	NullCharacter.TravelMap.Nassau.t3.town.days.max = 17;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t4 = "PortoBello";
+	NullCharacter.TravelMap.Nassau.t4.town = "PortoBello";
+	NullCharacter.TravelMap.Nassau.t4.town.days.min = 11;
+	NullCharacter.TravelMap.Nassau.t4.town.days.max = 17;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t5 = "SantaCatalina";
+	NullCharacter.TravelMap.Nassau.t5.town = "SantaCatalina";
+	NullCharacter.TravelMap.Nassau.t5.town.days.min = 8;
+	NullCharacter.TravelMap.Nassau.t5.town.days.max = 13;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t6 = "Jamaica";
+	NullCharacter.TravelMap.Nassau.t6.town = "PortRoyal";
+	NullCharacter.TravelMap.Nassau.t6.town.days.min = 6;
+	NullCharacter.TravelMap.Nassau.t6.town.days.max = 8;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t7 = "Trinidad";
+	NullCharacter.TravelMap.Nassau.t7.town = "PortSpein";
+	NullCharacter.TravelMap.Nassau.t7.town.days.min = 13;
+	NullCharacter.TravelMap.Nassau.t7.town.days.max = 20;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t8 = "Cuba2";
+	NullCharacter.TravelMap.Nassau.t8.town = "Havana";
+	NullCharacter.TravelMap.Nassau.t8.town.days.min = 1;
+	NullCharacter.TravelMap.Nassau.t8.town.days.max = 1;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t9 = "Beliz";
+	NullCharacter.TravelMap.Nassau.t9.town = "Beliz";
+	NullCharacter.TravelMap.Nassau.t9.town.days.min = 7;
+	NullCharacter.TravelMap.Nassau.t9.town.days.max = 12;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t10 = "Bermudes";
+	NullCharacter.TravelMap.Nassau.t10.town = "Pirates";
+	NullCharacter.TravelMap.Nassau.t10.town.days.min = 7;
+	NullCharacter.TravelMap.Nassau.t10.town.days.max = 12;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t11 = "SentMartin";
+	NullCharacter.TravelMap.Nassau.t11.town = "Marigo";
+	NullCharacter.TravelMap.Nassau.t11.town.days.min = 7;
+	NullCharacter.TravelMap.Nassau.t11.town.days.max = 12;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t12 = "Nevis";
+	NullCharacter.TravelMap.Nassau.t12.town = "Charles";
+	NullCharacter.TravelMap.Nassau.t12.town.days.min = 7;
+	NullCharacter.TravelMap.Nassau.t12.town.days.max = 12;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t13 = "Antigua";
+	NullCharacter.TravelMap.Nassau.t13.town = "SentJons";
+	NullCharacter.TravelMap.Nassau.t13.town.days.min = 8;
+	NullCharacter.TravelMap.Nassau.t13.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t14 = "Barbados";
+	NullCharacter.TravelMap.Nassau.t14.town = "Bridgetown";
+	NullCharacter.TravelMap.Nassau.t14.town.days.min = 11;
+	NullCharacter.TravelMap.Nassau.t14.town.days.max = 18;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t15 = "Curacao";
+	NullCharacter.TravelMap.Nassau.t15.town = "Villemstad";
+	NullCharacter.TravelMap.Nassau.t15.town.days.min = 10;
+	NullCharacter.TravelMap.Nassau.t15.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t16 = "Martinique";
+	NullCharacter.TravelMap.Nassau.t16.town = "FortFrance";
+	NullCharacter.TravelMap.Nassau.t16.town.days.min = 9;
+	NullCharacter.TravelMap.Nassau.t16.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t17 = "Guadeloupe";
+	NullCharacter.TravelMap.Nassau.t17.town = "BasTer";
+	NullCharacter.TravelMap.Nassau.t17.town.days.min = 8;
+	NullCharacter.TravelMap.Nassau.t17.town.days.max = 13;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t18 = "PuertoRico";
+	NullCharacter.TravelMap.Nassau.t18.town = "SanJuan";
+	NullCharacter.TravelMap.Nassau.t18.town.days.min = 6;
+	NullCharacter.TravelMap.Nassau.t18.town.days.max = 11;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t19 = "Hispaniola1";
+	NullCharacter.TravelMap.Nassau.t19.town = "SantoDomingo";
+	NullCharacter.TravelMap.Nassau.t19.town.days.min = 4;
+	NullCharacter.TravelMap.Nassau.t19.town.days.max = 8;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t20 = "Hispaniola2";
+	NullCharacter.TravelMap.Nassau.t20.town = "PortPax";
+	NullCharacter.TravelMap.Nassau.t20.town.days.min = 3;
+	NullCharacter.TravelMap.Nassau.t20.town.days.max = 5;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t21 = "Tortuga";
+	NullCharacter.TravelMap.Nassau.t21.town = "Tortuga";
+	NullCharacter.TravelMap.Nassau.t21.town.days.min = 4;
+	NullCharacter.TravelMap.Nassau.t21.town.days.max = 5;
+	//------------------------------------------------------------
+	// Сухопутные, пиратские
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t22 = "Hispaniola1";
+	NullCharacter.TravelMap.Nassau.t22.town = "LaVega";
+	NullCharacter.TravelMap.Nassau.t22.town.days.min = 4;
+	NullCharacter.TravelMap.Nassau.t22.town.days.max = 8;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t23 = "Martinique";
+	NullCharacter.TravelMap.Nassau.t23.town = "LeFransua";
+	NullCharacter.TravelMap.Nassau.t23.town.days.min = 9;
+	NullCharacter.TravelMap.Nassau.t23.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t27 = "Jamaica";
+	NullCharacter.TravelMap.Nassau.t27.town = "FortOrange";
+	NullCharacter.TravelMap.Nassau.t27.town.days.min = 6;
+	NullCharacter.TravelMap.Nassau.t27.town.days.max = 8;
+	//------------------------------------------------------------
+	// Необитаемые
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t24 = "Dominica";
+	NullCharacter.TravelMap.Nassau.t24.town = "";
+	NullCharacter.TravelMap.Nassau.t24.town.days.min = 9;
+	NullCharacter.TravelMap.Nassau.t24.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t25 = "Dominica";
+	NullCharacter.TravelMap.Nassau.t25.town = "";
+	NullCharacter.TravelMap.Nassau.t25.town.days.min = 9;
+	NullCharacter.TravelMap.Nassau.t25.town.days.max = 14;
+	//------------------------------------------------------------
+	NullCharacter.TravelMap.Nassau.t26 = "Terks";
+	NullCharacter.TravelMap.Nassau.t26.town = "";
+	NullCharacter.TravelMap.Nassau.t26.town.days.min = 7;
+	NullCharacter.TravelMap.Nassau.t26.town.days.max = 10;
 
 //////////////////////////////////////////////////////////////////////////////
 /////////////////////// JAMAYAKA FORTORANGE //////////////////////////////////
@@ -4418,7 +4568,7 @@ void SetSmugglersTravelDestination(aref arDest)
 	iNum = GetAttributesNum(arTown);
 	sTmp = "t" + rand(iNum-1);
 	//необитаемые острова, там нет городов, туда не плаваем.
-	//PS: мы плывем на остров, хотя выбор идет по городам (по сухопутным тоже),
+	//PS: мы плывем на остров, хотя выбор идёт по городам (по сухопутным тоже),
 	//но т.к. высаживаем в бухте, то пофиг.
 	while (arTown.(sTmp).town == "")
 	{
@@ -4512,6 +4662,9 @@ string GetRandomUninhabitatIsland()
 		break;
 		case 3:
 			sTemp = "Bermudes";
+		break;
+		case 4:
+			sTemp = "StLucia";
 		break;
 	}
 	return sTemp;

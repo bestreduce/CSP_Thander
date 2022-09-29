@@ -1,5 +1,45 @@
 /////////  новый файл под нужды ВМЛ, код К3 не совместим - весь потерт  ///////////
 // boal абордаж офицеров 27.01.2004 -->
+void CompaniontDefaultCapturedDecision(ref rCompanion, ref rEnemy)
+{
+	if (CheckAttribute(PChar, "CompanionsLeaveCapturesDrift"))
+	{
+		ref sld = GetCharacter(NPC_GenerateCharacter("_DriftCap_" + rEnemy.id, "off_hol_2", "man", "man", 1, sti(rEnemy.nation), 0, true));
+		DeleteAttribute(sld, "ship");
+		sld.ship = "";
+
+		aref arTo, arFrom;
+		makearef(arTo, sld.ship);
+		makearef(arFrom, rEnemy.Ship);
+		CopyAttributes(arTo, arFrom);
+
+		sld.AlwaysFriend = true;
+		sld.Abordage.Enable = false;
+		sld.Dialog.Filename = "Capitans_dialog.c";
+		sld.greeting = "Gr_Commander";
+		sld.DeckDialogNode = "Go_away";
+
+		SeaAI_SetCaptainFree(sld, rEnemy);
+		rEnemy.location = "none";
+
+		ShipTakenFree(sti(rEnemy.index), KILL_BY_ABORDAGE, sti(rCompanion.index));
+		PostEvent("evntQuestsCheck", 400);
+		UpdateRelations();
+		RefreshBattleInterface();
+		CheckQuestAboardCabinSituation(sld);
+		DoQuestCheckDelay("NationUpdate", 1.5);
+	}
+	else
+	{
+		if (CheckChanceOfBetterShip(rCompanion, rEnemy))
+		{
+			SeaExchangeCharactersShips(rCompanion, rEnemy, true, true);
+		}
+		DoTakeAbordageGoods(rCompanion, rEnemy);
+		ShipDead(sti(rEnemy.index), KILL_BY_ABORDAGE, sti(rCompanion.index));
+	}
+}
+
 bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 {
     bool bSuccess = false;
@@ -82,11 +122,19 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", sti(rEnemyCharacter.Ship.Crew.Quantity));
 			    SetCrewQuantity(rCharacter, makeint(sti(rCharacter.Ship.Crew.Quantity) - deadCrew));
 				SetCrewQuantity(rEnemyCharacter, 0);
+				LAi_SetCurHP(rEnemyCharacter, 0.0);
 			    if (bIsCharCompanion)
 			    {
-			        RemoveCharacterGoodsSelf(rCharacter, GOOD_WEAPON, deadCrew);
-					LAi_SetCurHP(rEnemyCharacter, 0.0);
-					LaunchRansackMain(rCharacter, rEnemyCharacter, "companion_captured");
+					RemoveCharacterGoodsSelf(rCharacter, GOOD_WEAPON, deadCrew);
+
+					if (GetRemovable(rCharacter) && GetShipRemovable(rCharacter))
+					{
+						LaunchRansackMain(rCharacter, rEnemyCharacter, "companion_captured");
+					}
+					else
+					{
+						CompaniontDefaultCapturedDecision(rCharacter, rEnemyCharacter);
+					}
 				}
 				else
 				{
@@ -114,11 +162,19 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
 			    SetCrewQuantity(rEnemyCharacter, makeint(sti(rEnemyCharacter.Ship.Crew.Quantity) - deadCrew));
 				SetCrewQuantity(rCharacter, 0);
+				LAi_SetCurHP(rCharacter, 0.0);
 			    if (bIsEnemyCompanion)
 			    {
-			        RemoveCharacterGoodsSelf(rEnemyCharacter, GOOD_WEAPON, deadCrew);
-					LAi_SetCurHP(rCharacter, 0.0);
-					LaunchRansackMain(rEnemyCharacter, rCharacter, "companion_captured");
+					RemoveCharacterGoodsSelf(rEnemyCharacter, GOOD_WEAPON, deadCrew);
+
+					if (GetRemovable(rEnemyCharacter) && GetShipRemovable(rEnemyCharacter))
+					{
+						LaunchRansackMain(rEnemyCharacter, rCharacter, "companion_captured");
+					}
+					else
+					{
+						CompaniontDefaultCapturedDecision(rEnemyCharacter, rCharacter);
+					}
 				}
 				else
 				{

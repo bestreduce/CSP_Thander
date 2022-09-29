@@ -21,7 +21,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			if (CheckAttribute(pchar, "questTemp.PDM_Apt_Rasskazat_Tavern"))	//Квест "Аптекарь"
 			{
-    			link.l1 = "Возьмите этот мешок, мистер "+npchar.name+". В нём вы найдете кое-что, что пригодится Маркусу для того, чтобы поправиться. Насыпьте в воду и давайте ему пить это три раза в день. Он поправится, так сказал доктор.";
+    			link.l1 = "Возьмите этот мешок, мистер "+npchar.name+". В нём вы найдёте кое-что, что пригодится Маркусу для того, чтобы поправиться. Насыпьте в воду и давайте ему пить это три раза в день. Он поправится, так сказал доктор.";
 				link.l1.go = "PDM_Apt_Rasskazat_Tavern_1";
 			}
 			if (CheckAttribute(pchar, "questTemp.PDM_Apt_Vizdorovel"))	//Квест "Аптекарь"

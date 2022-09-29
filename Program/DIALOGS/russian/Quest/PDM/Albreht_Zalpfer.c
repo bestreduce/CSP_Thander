@@ -25,6 +25,7 @@ void ProcessDialogEvent()
 			link.l2.go = "Next_1";
 			LAi_CharacterPlaySound(NPChar, "GR_Kakovi_Merzavczi");
 			DeleteAttribute(npchar, "talker");
+			UnmarkCharacter(npchar);
 		break;
 
 		case "Next_1":
@@ -77,7 +78,7 @@ void ProcessDialogEvent()
 		case "Next_7":
 			sld = CharacterFromID("Charles_shipyarder")
             dialog.text = "Никогда! Вы просто "+ GetSexPhrase("обманщик","обманщица") +", "+ GetSexPhrase("жулик","воровка") +", как и ваш хозяин "+sld.name+", йа! Когда меня выпустили из тюрьмы, я пришёл к этому негодяю, и потребовал вернуть мои чертежи. Но он лишь посмеялся надо мной, и сказал, что он сжёг их. Ха! Но я знаю, знаю, что он забрал их себе, йа, и теперь он хочет выведать саму суть этого изобретения - ну уж нет! Пусть поломает голову! Я не стану с вами разговаривать больше!";
-            link.l1 = "Простите, господин изобретатель, но вам следует подумать над конструкцией вашей головы. В ней определенно чего-то не хватает. Всего доброго.";
+            link.l1 = "Простите, господин изобретатель, но вам следует подумать над конструкцией вашей головы. В ней определённо чего-то не хватает. Всего доброго.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Next_9";
 		break;
@@ -115,7 +116,7 @@ void ProcessDialogEvent()
         	Pchar.quest.PDM_Albreht_Vhod.win_condition.l1.location  = "PortRoyal_town";
         	Pchar.quest.PDM_Albreht_Vhod.win_condition              = "PDM_Albreht_Vhod";
 			LAi_SetActorType(sld);
-			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_Albreht_Saditsya_na_korabl", 5);
+			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_Albreht_Saditsya_na_korabl", 0.5);
 			AddPassenger(pchar, sld, false);
 			SetCharacterRemovable(sld, false);
 			bDisableFastReload = true;
@@ -140,6 +141,9 @@ void ProcessDialogEvent()
 			AddQuestRecord("ColonyBuilding", "0.2");
 			RemovePassenger(pchar, NPChar);
 			RemoveCharacterCompanion(pchar, NPChar);
+			npchar.lifeday = 0;
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
 			NextDiag.TempNode = "Ja_2";
 		break;
 
@@ -154,13 +158,9 @@ void ProcessDialogEvent()
 			Log_info("Получены чертежи от Альбрехта Цальпфера.");
 			PlaySound("Interface\important_item.wav");
 			GiveItem2Character(PChar, "Ship_Print_6");
-			AddCharacterSkillDontClearExp(pchar, "Repair", 1);
-			Log_SetStringToLog("Починка + 1");
+			AddCharacterExpToSkill(pchar, "Sailing", 130);
 			ChangeCharacterReputation(pchar, 3);
 			LAi_SetCitizenType(npchar);
-			Pchar.quest.PDM_Albreht_Vihod.win_condition.l1           = "ExitFromLocation";
-        	Pchar.quest.PDM_Albreht_Vihod.win_condition.l1.location  = "PortRoyal_town";
-        	Pchar.quest.PDM_Albreht_Vihod.win_condition              = "PDM_Albreht_Vihod";
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;

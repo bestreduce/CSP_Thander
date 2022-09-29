@@ -119,7 +119,7 @@ void LAi_type_actor_CharacterUpdate(aref chr, float dltTime)
 				if (LAi_CheckFightMode(by))
 				{
 					LAi_group_FightGroups(chr.chr_ai.group, by.chr_ai.group, true);
-					//линейка ГПК, каспер-любовничек идет на свиданку. вызывать ли подкрепление
+					//линейка ГПК, каспер-любовничек идёт на свиданку. вызывать ли подкрепление
 					if (pchar.questTemp.LSC == "toSeekMechanik")
 					{
 						LSC_CheckCasperDistance(chr);
@@ -279,7 +279,7 @@ void LAi_type_actor_Attacked(aref chr, aref by)
 	if (CheckAttribute(chr, "BreakTmplAndFight"))
 	{
 		LAi_SetWarriorTypeNoGroup(chr);
-		//линейка ГПК, каспер-любовничек идет на свиданку. вызывать ли подкрепление
+		//линейка ГПК, каспер-любовничек идёт на свиданку. вызывать ли подкрепление
 		if (pchar.questTemp.LSC == "toSeekMechanik")
 		{
 			LSC_CheckCasperDistance(chr);

@@ -117,6 +117,7 @@ void ProcessDialogEvent()
 			{
 				iOfficer = GetPassenger(pchar, i);
 				sld = GetCharacter(iOfficer);
+				if (CheckAttribute(sld, "prisoned") && (sld.prisoned == true)) continue;
 				if (!GetRemovable(sld)) continue;
 				attrL = "l"+i;
 				Link.(attrL)	= "Офицер " + GetFullName(sld) + ".";
@@ -143,7 +144,7 @@ void ProcessDialogEvent()
 			chref.OfficerInStockMan = NPChar.id;
 			// Warship 22.03.09 fix Не перенеслось с КВЛ 1.2.3
 			chref.OfficerInStockMan.AltDate = GetQuestBookDataDigit(); // для печати
-			SaveCurrentNpcQuestDateParam(chref, "OfficerInStockMan.Date"); // для расчета
+			SaveCurrentNpcQuestDateParam(chref, "OfficerInStockMan.Date"); // для расчёта
 			RemovePassenger(pchar, chref);
 
 			chref.location = "";
@@ -152,7 +153,7 @@ void ProcessDialogEvent()
 			NPChar.Portman	= sti(NPChar.Portman) + 1;
 			pchar.OfficerInStock = sti(pchar.OfficerInStock) + 1;//разобраться - что это. не могу найти, где оно используется.
 
-			dialog.text = "Хорошо. Заберете, когда будет нужно.";
+			dialog.text = "Хорошо. Заберёте, когда будет нужно.";
 			Link.l1 = "Спасибо.";
 			Link.l1.go = "again";
 		break;

@@ -9,6 +9,7 @@
 	itm.special.valueT = 100; 	// Травмы
 	itm.special.valueB = 100; 	// Кровоток
 	itm.special.valueP = 100; 	// Отравление
+	itm.special.valueV = 1; 	// Вампиризм
 
 	itm.points_shop = 1; // Атрибут для магазина ачивок
 */
@@ -1415,7 +1416,7 @@ int InitItems()
 	itm.Generation.Weight.max = 4.8;
 	n++;
 
-	// ГПК Чиавона
+	// ККС, Офицерский клеванг
 	makeref(itm,Items[n]);
 	itm.id = "blade24";
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1423,8 +1424,8 @@ int InitItems()
 	itm.describe = "itmdescr_blade24";
 	itm.folder = "items";
 	itm.model = "blade24";
-	itm.picIndex = 5;
-	itm.picTexture = "ITEMS_8";
+	itm.picIndex = 10;
+	itm.picTexture = "ITEMS_16";
 	// boal 19.01.2004 -->
 	itm.piercing = 58.0;
 	itm.special.valueSS = 12; //Резкий удар
@@ -1701,7 +1702,7 @@ int InitItems()
 	itm.quality = "excellent";
 	n++;
 
-	// ККС, Офицерский Клеванг
+	// ГПК Кракемарт
     makeref(itm,Items[n]);
 	itm.id = "blade46";
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1709,8 +1710,8 @@ int InitItems()
 	itm.describe = "itmdescr_blade46";
 	itm.folder = "items";
 	itm.model = "blade46";
-	itm.picIndex = 10;
-	itm.picTexture = "ITEMS_16";
+	itm.picIndex = 6;
+	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
 	itm.piercing = 88.0;
 	itm.special.valueStS = 4; //Стан
@@ -1796,6 +1797,96 @@ int InitItems()
 	itm.Generation.dmg_max.max = 55.0;
 	itm.Generation.Weight.min = 4.5;
 	itm.Generation.Weight.max = 6.0;
+	n++;
+
+	// CSP Лиларкор1
+	makeref(itm,Items[n]);
+	itm.id = "Lilarcor_Sword1";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_Lilarcor_Sword1";
+	itm.describe = "itmdescr_Lilarcor_Sword1";
+	itm.folder = "items";
+	itm.model = "Lilarcor_Sword";
+	itm.picIndex = 8;
+	itm.picTexture = "ITEMS_20";
+	itm.minlevel = 1;
+	itm.rare = 0.01;
+	itm.block = 12;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "Fencing";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	itm.price = 5000;
+	itm.Weight = 4.2;
+	itm.dmg_min = 22.0;
+	itm.dmg_max = 70.0;
+	itm.piercing = 90.0;
+	itm.special.valueCrB = 12; // Буст крита
+	itm.special.valueSS = 7; // Резкий удар
+	itm.special.valueStS = 5; // Стан
+	itm.special.valueV = 1; // Вампиризм
+	n++;
+
+	// CSP Лиларкор2
+	makeref(itm,Items[n]);
+	itm.id = "Lilarcor_Sword2";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_Lilarcor_Sword2";
+	itm.describe = "itmdescr_Lilarcor_Sword2";
+	itm.folder = "items";
+	itm.model = "Lilarcor_Sword";
+	itm.picIndex = 9;
+	itm.picTexture = "ITEMS_20";
+	itm.minlevel = 1;
+	itm.rare = 0.01;
+	itm.block = 12;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "Fencing";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	itm.price = 25000;
+	itm.Weight = 4.6;
+	itm.dmg_min = 28.0;
+	itm.dmg_max = 80.0;
+	itm.piercing = 90.0;
+	itm.special.valueCrB = 10; // Буст крита
+	itm.special.valueT = 10; // Травмы
+	itm.special.valueB = 4; // Кровоток
+	itm.special.valueV = 1; // Вампиризм
+	n++;
+
+	// CSP Лиларкор3
+	makeref(itm,Items[n]);
+	itm.id = "Lilarcor_Sword3";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_Lilarcor_Sword3";
+	itm.describe = "itmdescr_Lilarcor_Sword3";
+	itm.folder = "items";
+	itm.model = "Lilarcor_Sword";
+	itm.picIndex = 10;
+	itm.picTexture = "ITEMS_20";
+	itm.minlevel = 1;
+	itm.rare = 0.01;
+	itm.block = 12;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "Fencing";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	itm.price = 100000;
+	itm.Weight = 5.0;
+	itm.dmg_min = 33.0;
+	itm.dmg_max = 95.0;
+	itm.piercing = 90.0;
+	itm.special.valueCB = 20; // Пролом кирасы
+	itm.special.valueStS = 10; // Стан
+	itm.special.valueB = 4; // Кровоток
+	itm.special.valueV = 1; // Вампиризм
 	n++;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1930,7 +2021,7 @@ int InitItems()
 	itm.Generation.Weight.max = 10.0;
 	n++;
 
-	// ГПК Кракемарт
+	// ККС, Скьявона
 	makeref(itm,Items[n]);
 	itm.id = "blade13";
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1938,8 +2029,8 @@ int InitItems()
 	itm.describe = "itmdescr_blade13";
 	itm.folder = "items";
 	itm.model = "blade13";
-	itm.picIndex = 6;
-	itm.picTexture = "ITEMS_3";
+	itm.picIndex = 5;
+	itm.picTexture = "ITEMS_8";
 	// boal 19.01.2004 -->
 	itm.piercing = 65;
 	itm.special.valueT = 10; //Травмы
@@ -4849,6 +4940,22 @@ int InitItems()
 	itm.price = (rand(8)+7)*1200;
 	itm.Weight = 0.2;
 	itm.imageTga = "panama";
+	itm.imageType = "";
+	itm.MapIsland = "";
+	itm.ItemType = "MAP";
+	n++;
+
+	makeref(itm,Items[n]);
+	itm.id = "map_Bahames";
+	itm.groupID = MAPS_ITEM_TYPE;
+	itm.name = "itmname_map_Bahames";
+	itm.describe = "itmdescr_map_Bahames";
+	itm.model = "";
+	itm.picIndex = 12;
+	itm.picTexture = "ITEMS_20";
+	itm.price = (rand(8)+9)*1250;
+	itm.Weight = 0.2;
+	itm.imageTga = "Bahames";
 	itm.imageType = "";
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
@@ -9074,13 +9181,13 @@ int InitItems()
 	//Джокер "Проигравшийся игрок"
 	makeref(itm,Items[n]);
 	itm.id = "Joker";
-	itm.groupID = IDOLS_LEFT_ITEM_TYPE;
+	itm.groupID = TALISMAN_ITEM_TYPE;
 	itm.name = "itmname_Joker";
 	itm.describe = "itmdescr_Joker";
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_20";
-	itm.price = 5000;
-	itm.weight = 0.1;
+	itm.price = 20000;
+	itm.weight = 0.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
 
@@ -9113,6 +9220,28 @@ int InitItems()
 	itm.describe = "itmdescr_PDM_Trava_Tzes_Umrat";
 	itm.picIndex = 8;
 	itm.picTexture = "ITEMS_18";
+	itm.price = 0;
+	itm.weight = 0.1;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	makeref(itm,Items[n]);	//Пролог "Анжелика Тич"
+	itm.id = "ATpr_pismo";	//Письмо
+	itm.name = "itmname_ATpr_pismo";
+	itm.describe = "itmdescr_ATpr_pismo";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_12";
+	itm.price = 0;
+	itm.weight = 0.1;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	makeref(itm,Items[n]);	//Нежить "Говорящий клинок"
+	itm.id = "UP_PismoZagadka";	//Загадочная записка
+	itm.name = "itmname_UP_PismoZagadka";
+	itm.describe = "itmdescr_UP_PismoZagadka";
+	itm.picIndex = 10;
+	itm.picTexture = "ITEMS_12";
 	itm.price = 0;
 	itm.weight = 0.1;
 	itm.ItemType = "QUESTITEMS";

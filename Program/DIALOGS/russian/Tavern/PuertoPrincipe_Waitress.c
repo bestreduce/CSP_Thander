@@ -4,7 +4,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     switch (Dialog.CurrentNode)
 	{
 		case "quests":
-			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Вопросы, " + GetAddress_Form(NPChar) + "?", "Что вам угодно, " + GetAddress_Form(NPChar) + "?"), "Хм, уж не пристаете ли вы ко мне, " + GetAddress_Form(NPChar) + "? Опять со странными вопросами...", "В течение этого дня вы уже третий раз говорите о каком-то вопросе... Это знаки внимания?",
+			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Вопросы, " + GetAddress_Form(NPChar) + "?", "Что вам угодно, " + GetAddress_Form(NPChar) + "?"), "Хм, уж не пристаёте ли вы ко мне, " + GetAddress_Form(NPChar) + "? Опять со странными вопросами...", "В течение этого дня вы уже третий раз говорите о каком-то вопросе... Это знаки внимания?",
                           "Опять вопросы будете задавать, " + GetAddress_Form(NPChar) + "?", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я передумал...", "Сейчас мне не о чем говорить"), "Да нет, что ты, красавица...",
                       "Никак нет, дорогуша, склероз...", "Да нет, какие вопросы...", npchar, Dialog.CurrentNode);
@@ -16,7 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			if (pchar.questTemp.piratesLine == "Soukins_seekRings" && CheckCharacterItem(pchar, "jewelry18") && CheckCharacterItem(pchar, "jewelry7"))
 			{
-				link.l1 = "Я "+ GetSexPhrase("принес","принесла") +" то, что ты хотела. Вот твои кольца.";
+				link.l1 = "Я "+ GetSexPhrase("принёс","принесла") +" то, что ты хотела. Вот твои кольца.";
 				link.l1.go = "PL_Q7_3";
 			}
 		break;
@@ -32,7 +32,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 		break;
 		case "PL_Q7_2":
-			dialog.text = "Очень жаль, но это мое категорическое условие.";
+			dialog.text = "Очень жаль, но это моё категорическое условие.";
 			link.l1 = "Понятно...";
 			link.l1.go = "exit";
 		break;
@@ -50,17 +50,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "PL_Q7_5":
 			dialog.text = "Я же говорю, что знаю, как узнать. Значит, слушай внимательно. Ричард - человек педантичный, он все записывает в свой судовой журнал. Тебе нужно получить его, вот и все.";
-			link.l1 = "Ха! Может ты еще подскажешь, как это сделать?";
+			link.l1 = "Ха! Может ты ещё подскажешь, как это сделать?";
 			link.l1.go = "PL_Q7_6";
 		break;
 		case "PL_Q7_6":
-			dialog.text = "Подскажу. Забери журнал из его резиденции. Днем он все время там торчит, так что живым ты оттуда не уйдешь, если посмеешь забрать журнал. Но вот ночью...";
+			dialog.text = "Подскажу. Забери журнал из его резиденции. Днём он все время там торчит, так что живым ты оттуда не уйдёшь, если посмеешь забрать журнал. Но вот ночью...";
 			link.l1 = "Так ночью все закрыто!";
 			link.l1.go = "PL_Q7_7";
 		break;
 		case "PL_Q7_7":
 			dialog.text = "Влезь через окно с задней стороны дома. Только тебе лестница нужна будет, чтобы забраться наверх.";
-			link.l1 = "И где ее взять?";
+			link.l1 = "И где её взять?";
 			link.l1.go = "PL_Q7_8";
 		break;
 		case "PL_Q7_8":

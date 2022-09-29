@@ -59,7 +59,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "BlueBird_2":
 			dialog.text = "Многие пытались, да обломались, ха-ха!!";
-			link.l1 = "А что-нибудь путное тебе известно? Где ее видят часто, к примеру.";
+			link.l1 = "А что-нибудь путное тебе известно? Где её видят часто, к примеру.";
 			link.l1.go = "BlueBird_3";
 		break;
 		case "BlueBird_3":
@@ -78,7 +78,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "BlueBird_6";
 		break;
 		case "BlueBird_6":
-			dialog.text = "Его зовут Джон Нортон. На Бермудах ты его уже не найдешь. Слышал я, что он перебрался в Пуэрто-Принсипе, торгует там себе потихоньку и никуда не высовывается.";
+			dialog.text = "Его зовут Джон Нортон. На Бермудах ты его уже не найдёшь. Слышал я, что он перебрался в Пуэрто-Принсипе, торгует там себе потихоньку и никуда не высовывается.";
 			link.l1 = "Большое тебе спасибо, приятель. Ты - хороший трактирщик.";
 			link.l1.go = "BlueBird_7";
 		break;
@@ -93,7 +93,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		//голл. линейка, квест №8
  		case "Step_H8_1":
     		dialog.text = "Нет, не слышал.";
-    		link.l1 = "Вроде история известная, мне на Кюрасао ее рассказали.";
+    		link.l1 = "Вроде история известная, мне на Кюрасао её рассказали.";
     		link.l1.go = "Step_H8_2";
  		break;
  		case "Step_H8_2":
@@ -129,12 +129,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		//Пиратка, квест №5, ОЗГ
 		case "StepPL5Berm_1":
-			dialog.text = "Да вот, только что и забегал. Спросил, где живет Орри Брюс, и ушел. ";
+			dialog.text = "Да вот, только что и забегал. Спросил, где живёт Орри Брюс, и ушёл. ";
 			link.l1 = "И где же этот Орри Брюс обитает?";
 			link.l1.go = "StepPL5Berm_2";
 		break;
 		case "StepPL5Berm_2":
-			dialog.text = "Так, в двухэтажном доме с каменной кладкой он живет. Как выйдешь из таверны, налево первый дом. Там и обитает...";
+			dialog.text = "Так, в двухэтажном доме с каменной кладкой он живёт. Как выйдешь из таверны, налево первый дом. Там и обитает...";
 			link.l1 = "Спасибо, ты мне здорово помог!";
 			link.l1.go = "exit";
 			AddQuestRecord("Pir_Line_5_Hunter", "10");

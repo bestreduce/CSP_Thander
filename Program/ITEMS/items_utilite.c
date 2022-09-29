@@ -2,7 +2,7 @@ int FindFoodFromChr(ref chref, ref arFind, int startIdx)
 {
 	int i;
 	aref arItm;
-	for(i=startIdx; i<ITEMS_QUANTITY; i++)
+	for(i=startIdx; i<10; i++)
 	{
 		if (i!= -1)
 		{
@@ -12,6 +12,22 @@ int FindFoodFromChr(ref chref, ref arFind, int startIdx)
 				arFind = arItm;
 				return i;
 			}
+		}
+	}
+	return -1;
+}
+
+int FindBetterFoodFromChr(ref chref, ref arFind)
+{
+	int i;
+	aref arItm;
+	for(i=10; i>-1; i--)
+	{
+		makearef(arItm,Items[i]);
+		if( CheckAttribute(arItm,"Food") && GetCharacterItem(chref,Items[i].id)>0 )
+		{
+			arFind = arItm;
+			return i;
 		}
 	}
 	return -1;
@@ -851,7 +867,41 @@ void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<провер
 		//проверяем флаг запрещения генерации
 		if(LAi_LocationIsMonstersGen(_location) && LAi_grp_playeralarm == 0 && GenQuest_CheckMonstersGen() && _location.id != "Treasure_alcove")
 		{
-			SetSkeletonsToLocation(_location);
+			if (pchar.sex == "Skeleton" && GetCharacterEquipSuitID(pchar)!= "suit_1")
+			{
+				sTemp = "skel_"+(rand(3)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("Skelet_Drug", sTemp, "skeleton", "skeleton", 3, PIRATE, -1, true));
+				LAi_SetActorType(sld);
+				PlaceCharacter(sld, "monsters", PChar.location);
+				LAi_ActorDialog(sld, pchar, "", -1, 0);
+				sld.lifeday = 0;
+				sld.dialog.filename = "Sailor.c";
+				sld.dialog.currentnode = "First time";
+				LAi_SetImmortal(sld, true);
+				LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+				if (rand(20) <= 10+GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_LEADERSHIP)) // WW нанимаются в команду в % от авторитета (У нежити выше шанс)
+				{
+					sld.quest.crew = "true";
+					sld.quest.crew.qty = 10+rand(14)+(GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_LEADERSHIP) * 8); // WW 10-24 + 6-60 = 16-84 от авторитета
+					sld.quest.crew.type = rand(2);
+					sld.quest.crew.money = (30+rand(2)*10+rand(50))*(1+(sti(Pchar.rank)/4))+rand(100);	//Для нежити дешевле
+				}
+				bMonstersGen = true; //флаг генерации скелетов
+				for (i=1; i<=15; i++)
+				{
+				sTemp = "skel_"+(rand(3)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("Skelet_Drug_"+i, sTemp, "skeleton", "skeleton", 3, PIRATE, -1, true));
+				PlaceCharacter(sld, "monsters", "random_free");
+				LAi_SetWarriorType(sld);
+				sld.lifeday = 0;
+				LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+				LAi_CharacterDisableDialog(sld);
+				}
+			}
+			else
+			{
+				SetSkeletonsToLocation(_location);
+			}
 		}
 	}
 	if (_locator == "spawndeadsmangod")
@@ -940,7 +990,7 @@ void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<провер
 
 void QuestCheckExitLocItem(aref _location, string _locator) /// <<<проверка выхода ГГ из локаторов группы Item.<<<
 {
-	//=======> Испанская линейка, квест №4. В спальне нашел возле комода нашел недописанное письмо
+	//=======> Испанская линейка, квест №4. В спальне нашёл возле комода нашёл недописанное письмо
 	if (_location.id == "Havana_houseS1Bedroom" && pchar.questTemp.State == "Sp4Detection_toMirderPlace" && CheckCharacterItem(pchar, "letter_notes"))
     {
         DoQuestCheckDelay("TalkSelf_Quest", 0.1); //диалог сам-на-сам
@@ -955,7 +1005,7 @@ void QuestCheckExitLocItem(aref _location, string _locator) /// <<<провер�
     		DoQuestCheckDelay("TalkSelf_Quest", 0.1); //диалог сам-на-сам
         }
     }
-	//=======> Квест Аскольда, ГГ добрался до мумии, но бутылки еще не имеет. Вместо прерывания на локатор.
+	//=======> Квест Аскольда, ГГ добрался до мумии, но бутылки ещё не имеет. Вместо прерывания на локатор.
     if (_location.id == "Guadeloupe_Cave" && _locator == "button02")
     {
 		if (pchar.questTemp.Ascold == "Ascold_SeekRockLetter" || pchar.questTemp.Ascold == "Ascold_EnterGrave")

@@ -14,7 +14,7 @@ int LocationInitLostShipsCity(int n)
  	locations[n].islandId = "LostShipsCity";
 
 	locations[n].filespath.models = "locations\LostShipsCity\";
-	locations[n].image = "loading\jonny_load\quest\LostShipsCity_"+rand(2)+".tga";
+	locations[n].image = "loading\jonny_load\quest\LostShipsCity_"+(1+rand(1))+".tga";
 	//Sound
 	locations[n].type = "LostShipsCity";
 	//locations[n].houseEnc = true; //для энкаунтеров в домах
@@ -57,7 +57,7 @@ int LocationInitLostShipsCity(int n)
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].alwaysStorm.WaveHeigh = true; //поднять уровень воды до 2.5 для низкого волнения
 	locations[n].storm = true;
 	locations[n].tornado = true;
@@ -761,7 +761,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -861,7 +861,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -946,7 +946,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1066,7 +1066,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1182,7 +1182,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1255,7 +1255,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1329,7 +1329,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	LAi_LocationFightDisable(&locations[n], true);
 	//Reload map
@@ -1385,7 +1385,6 @@ int LocationInitLostShipsCity(int n)
 	locations[n].private1.items.rabble = 1;
 	locations[n].private1.items.topor3 = 1;
 	locations[n].private1.items.mineral9 = 26;
-	locations[n].private1.items.topor10 = 1;
 	locations[n].private1.items.mineral3 = 2;
 
 	locations[n].private2.key = "key2";
@@ -1461,7 +1460,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1571,7 +1570,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload4";
@@ -1664,7 +1663,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1770,7 +1769,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -1842,7 +1841,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -2009,7 +2008,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -2121,7 +2120,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -2242,7 +2241,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -2332,7 +2331,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//locations[n].environment.weather.rain = false;
-	locations[n].alwaysStorm = true; //живем в штормах
+	locations[n].alwaysStorm = true; //живём в штормах
 	locations[n].storm = true;
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
@@ -2363,11 +2362,11 @@ int LocationInitLostShipsCity(int n)
 
 	//ключи для сундуков и предметы внутри
 	locations[n].private1.key = "key1";
-	locations[n].private1.items.mineral = 1;
-	locations[n].private1.items.mineral = 1;
-	locations[n].private1.items.mineral = 10;
-	locations[n].private1.items.mineral = 3;
-	locations[n].private1.items.mineral = 1;
+	locations[n].private1.items.mineral2 = 1;
+	locations[n].private1.items.mineral3 = 1; 
+	locations[n].private1.items.mineral9 = 10;
+	locations[n].private1.items.mineral7 = 3;
+	locations[n].private1.items.mineral10 = 1;
 	locations[n].private1.items.potion5 = 21;
 
 	locations[n].private2.key = "key2";
@@ -2390,8 +2389,8 @@ int LocationInitLostShipsCity(int n)
 	locations[n].private3.items.jewelry14 = 9;
 	locations[n].private3.items.jewelry15 = 15;
 	locations[n].private3.items.jewelry5 = 35;
-	locations[n].private2.items.map_hisp = 1;
-	locations[n].private1.items.CompCraft_Lead = 22;
+	locations[n].private3.items.map_hisp = 1;
+	locations[n].private3.items.CompCraft_Lead = 22;
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
@@ -2517,7 +2516,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].private1.items.food1 = 10;
 	locations[n].private1.items.food2 = 30;
 
-	locations[n].private2.items.Mineral11 = 1;
+	locations[n].private2.items.Mineral10 = 1;
 
 	locations[n].private4.items.potionrum = 40; // 40 бутылок рома
 
@@ -2529,7 +2528,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].private9.items.blade21 = 1;
 
 	locations[n].private10.items.jewelry15 = 30;
-	locations[n].private10.items.jewelry19 = 10;
+	locations[n].private10.items.jewelry18 = 10;
 
 	locations[n].private11.items.jewelry1 = 20;
 

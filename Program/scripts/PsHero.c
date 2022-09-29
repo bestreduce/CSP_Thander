@@ -126,7 +126,7 @@ void InitPsHeros()
 
 void DeleteCloneHeros(ref sld)
 {
-	if (startHeroType > 1 && startHeroType < 7)
+	if (startHeroType > 1 && startHeroType < 8)
 	{
 		if (startHeroType == 2)
 		{
@@ -149,6 +149,15 @@ void DeleteCloneHeros(ref sld)
 		if (startHeroType == 5 || startHeroType == 6)
 		{
 			if(sld.FaceId == 508 || sld.FaceId == 517)
+			{//Его мы позже наймем оффом, так что убираем из ПГГ
+				sld.willDie = true;
+				sld.DontCountDeath = true;
+				LAi_KillCharacter(sld);
+			}
+		}
+		if (startHeroType == 9 || startHeroType == 10)	//Нежить
+		{
+			if(sld.FaceId == 511 || sld.FaceId == 537)
 			{//Его мы позже наймем оффом, так что убираем из ПГГ
 				sld.willDie = true;
 				sld.DontCountDeath = true;
@@ -251,7 +260,7 @@ void PGG_DailyUpdateEx(int i)
 		//раз в месяц проверка.
 		if (GetNpcQuestPastDayParam(chr, "Companion.CheckRelation") > 30)
 		{
-			//тут вожможно стоит дописать еще и общую лояльность и мораль матросов.
+			//тут вожможно стоит дописать ещё и общую лояльность и мораль матросов.
 			if (PGG_ChangeRelation2MainCharacter(chr, 0) < 5 && sti(chr.Ship.Type) != SHIP_NOTUSED)
 			{
 				pchar.Quest.PGG_Companion_Leave.win_condition.l1 = "Location_Type";
@@ -1484,7 +1493,7 @@ void PGG_TavernCheckIsPGGHere()
 
 		if (findsubstr(pchar.location, chr.PGGAi.location.town, 0) != -1 && !LAi_IsDead(chr) && chr.PGGAi.location != "Dead" && !CheckAttribute(chr, "PGGAi.Task.SetSail")) //закрыл дополнительно.
 		{
-			//квест от ПГГ. Только от одного. И ГГ еще не занят в квесте.
+			//квест от ПГГ. Только от одного. И ГГ ещё не занят в квесте.
 			if (!CheckAttribute(pchar, "GenQuest.PGG_Quest") && PGG_CheckForQuestOffer(chr)) continue;
 			//в таверне или нет.
 			if (rand(1) == 1 && chr.sex != "skeleton")
@@ -1512,7 +1521,7 @@ void PGG_GraveyardCheckIsPGGHere(ref location)
 			chr = CharacterFromID("PsHero_" + i);
 			if (findsubstr(pchar.location, chr.PGGAi.location.town, 0) != -1 && !LAi_IsDead(chr) && chr.PGGAi.location != "Dead") //закрыл дополнительно.
 			{
-				//квест от ПГГ. Только от одного. И ГГ еще не занят в квесте.
+				//квест от ПГГ. Только от одного. И ГГ ещё не занят в квесте.
 				//if (!CheckAttribute(pchar, "GenQuest.PGG_Quest") && PGG_CheckForQuestOffer(chr)) continue;
 				//в таверне или нет.
 				if (rand(1) == 1 && !CheckAttribute(chr, "PGGAi.Task.SetSail") && chr.sex == "skeleton")

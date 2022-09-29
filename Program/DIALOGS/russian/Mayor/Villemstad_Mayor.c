@@ -12,7 +12,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
@@ -20,7 +20,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
         //==> Одиннадцатый квест исп.линейки: разорение Виллемстада и Мариго.
         case "SpaLine11Quest_DestrHol":
-			dialog.text = "Черт возьми, проклятые испанцы!! Вы разорили город!";
+			dialog.text = "Чёрт возьми, проклятые испанцы!! Вы разорили город!";
 			link.l1 = "Это наказание.";
 			link.l1.go = "Step_S11_1";
 			AfterTownBattle();

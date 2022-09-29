@@ -18,7 +18,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Cupture_after":
-            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам еще нужно?", "Неужели осталось еще что-то, что вы не прихватили?");
+            dialog.text = RandPhraseSimple("Вы уже все забрали. Что вам ещё нужно?", "Неужели осталось ещё что-то, что вы не прихватили?");
             link.l1 = RandPhraseSimple("Осматриваюсь напоследок...", "Проверяю, может забыл"+ GetSexPhrase("","а") +" что забрать...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
@@ -26,7 +26,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
         //==> Двенадцатый квест исп.линейки: захват Порт-о-Принса.
         case "SpaLine12Quest_PortPax":
-			dialog.text = "Мы сдаемся, "+ GetSexPhrase("чертов кастилец","чертова испанка") +"...";
+			dialog.text = "Мы сдаёмся, "+ GetSexPhrase("чёртов кастилец","чёртова испанка") +"...";
 			link.l1 = "Это хорошо - вы сохранили свои жизни.";
 			link.l1.go = "Step_S12_1";
 			AfterTownBattle();

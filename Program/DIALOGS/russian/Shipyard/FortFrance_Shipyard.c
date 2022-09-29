@@ -5,7 +5,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Какие вопросы?", "Что вам угодно?"), "Совсем недавно вы пытались задать мне вопрос...", "У себя на верфи, а и вообще в городе, я таких однообразно любознательных не видал.",
-                          "Ну что за вопросы? Мое дело - корабли строить, давайте этим и займемся.", "block", 1, npchar, Dialog.CurrentNode);
+                          "Ну что за вопросы? Моё дело - корабли строить, давайте этим и займемся.", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить"), "Хм, что-то с памятью моей стало...",
                       "Хм, однако...", "Давайте...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
@@ -17,7 +17,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		//пиратка, квест №3, поиски Лоу
 		case "PL_Q3_1":
-			dialog.text = NPCStringReactionRepeat("Приходил, правда, не приобрел ничего.",
+			dialog.text = NPCStringReactionRepeat("Приходил, правда, не приобрёл ничего.",
 				"Я уже все сказал по этому поводу...",
 				"Обращался, обращался. Только к сказанному ранее мне добавить нечего.",
                 "Послушай, "+ GetSexPhrase("утомил","утомила") +"!", "block", 0, npchar, Dialog.CurrentNode);
@@ -29,16 +29,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "PL_Q3_2":
 			dialog.text = "Он же бриг хотел, а денег, я извиняюсь, у него только-только на  люггер было.";
-			link.l1 = "Ясно... Не заметили, куда он пошел?";
+			link.l1 = "Ясно... Не заметили, куда он пошёл?";
 			link.l1.go = "PL_Q3_3";
 		break;
 		case "PL_Q3_3":
-			dialog.text = "Хе-хе, известно куда. К ростовщику пошел, денег занять, только тот ему денег не дал, хе-хе-хе...";
+			dialog.text = "Хе-хе, известно куда. К ростовщику пошёл, денег занять, только тот ему денег не дал, хе-хе-хе...";
 			link.l1 = "С чего это вы так решили?";
 			link.l1.go = "PL_Q3_4";
 		break;
 		case "PL_Q3_4":
-			dialog.text = "Так он обратно не вернулся, стало быть, денег не нашел, хе-хе...";
+			dialog.text = "Так он обратно не вернулся, стало быть, денег не нашёл, хе-хе...";
 			link.l1 = "Верно!";
 			link.l1.go = "exit";
 			AddQuestRecord("Pir_Line_3_KillLoy", "4");

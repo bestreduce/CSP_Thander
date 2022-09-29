@@ -30,7 +30,7 @@ void ProcessDialogEvent()
 
 		case "Term_1":
 			dialog.text = "Я - киборг марки Т-102, производства 'Скайнет продакшн', анклава Детройт, выпуск 2022 года. Я настиг тебя, человек со странного корабля.";
-			link.l1 = "Кто? Чего? Какой еще Ки Борг? Какого года? На дворе семнадцатый век от рождества Христова! Ты - нечисть! Только почему-то металлическая, что странно.";
+			link.l1 = "Кто? Чего? Какой ещё Ки Борг? Какого года? На дворе семнадцатый век от рождества Христова! Ты - нечисть! Только почему-то металлическая, что странно.";
 			link.l1.go = "Term_2";
 			LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_1");
 			if(startherotype == 2)
@@ -53,7 +53,7 @@ void ProcessDialogEvent()
 			              ". Я - машина с биологическим покрытием, киборг. Покрытие имело меньший срок службы, чем основная база из сплава металлических полимеров. За 170 лет биопокров был утерян. Мой ресурс на пределе. Ядерный источник питания сел, работаю на резерве.";
 			link.l1 = "Полтора века? Тогда я не понял"+ GetSexPhrase("","а") +", когда тебя породили - в 15-м веке или же в 21-м?";
 			link.l1.go = "Term_3";
-			if (startherotype > 0 && startherotype < 12) LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_3_"+startherotype);
+			if (startherotype > 0 && startherotype < 11) LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_3_"+startherotype);
 			else LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_3_unknown");
 		break;
 
@@ -94,8 +94,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Term_7":
-			dialog.text = "При отправке не были учтены искажения, наводимые оружием и обмундированием. Произошел сбой времяопределения. Доставка в конец 15-го века. Основная задача - выполнение миссии. Поиск не дал результатов.";
-			link.l1 = "Допустим, а я тут причем?";
+			dialog.text = "При отправке не были учтены искажения, наводимые оружием и обмундированием. Произошёл сбой времяопределения. Доставка в конец 15-го века. Основная задача - выполнение миссии. Поиск не дал результатов.";
+			link.l1 = "Допустим, а я тут причём?";
 			link.l1.go = "Term_8";
 			LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_8");
 		break;
@@ -126,14 +126,14 @@ void ProcessDialogEvent()
 		break;
 
 		case "Term_9_2":
-			dialog.text = "Да, индивид '" +GetFullName(pchar) +"', ты прав"+ GetSexPhrase("","а") +". Мое время истекает с разрядом резервной батареи. Миссия не может быть выполнена, объект не обнаружен, генетический анализ показал отсутствие ближайших предков цели в этом ареале.";
+			dialog.text = "Да, индивид '" +GetFullName(pchar) +"', ты прав"+ GetSexPhrase("","а") +". Моё время истекает с разрядом резервной батареи. Миссия не может быть выполнена, объект не обнаружен, генетический анализ показал отсутствие ближайших предков цели в этом ареале.";
 			link.l1 = "Да, не повезло тебе. Пора, видимо, на покой. Где взять хорошее оружие, я уже понял"+ GetSexPhrase("","а") +". Если встречу Сару о'Конер, обязательно убью, в качестве платы за такой подарок от потомков.";
 			if(startherotype == 2)
 			{
 				link.l1 = "Да, не повезло тебе. Ну ладно, если у тебя нет при себе функционирующей машины времени, то говорить нам больше не о чем. Я пойду, пожалуй.";
 			}
 			link.l1.go = "Term_11";
-			if (startherotype > 0 && startherotype < 12) LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_11_"+startherotype);
+			if (startherotype > 0 && startherotype < 11) LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_11_"+startherotype);
 			else
 			{
 				if (pchar.sex != "woman") LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_11_man");
@@ -174,7 +174,7 @@ void ProcessDialogEvent()
 
 		case "Term_11_Whisper":
 			dialog.text = "Цель проявляет агрессию. Боевой режим активирован.";
-			link.l1 = "Зря ты это затеял. В своем времени я успела уничтожить немало вашего брата, при чем это были более новые и смертоносные модели.";
+			link.l1 = "Зря ты это затеял. В своём времени я успела уничтожить немало вашего брата, при чем это были более новые и смертоносные модели.";
 			link.l1.go = "Term_11_exit";
 			LAi_CharacterPlaySoundAtOnce(NPChar, "Terminator_14");
 		break;

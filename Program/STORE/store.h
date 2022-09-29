@@ -1,5 +1,5 @@
 
-#define STORE_QUANTITY	31
+#define STORE_QUANTITY	32
 
 #define Bridgetown_STORE		0
 #define SanJuan_STORE			1
@@ -31,8 +31,9 @@
 #define Beliz_STORE          	27
 #define Caiman_STORE		28
 #define STORE_HOUSE			29
+#define Nassau_STORE          	30
 
-#define SHIP_STORE 				30
+#define SHIP_STORE 				31
 
 #define TRADE_TYPE_NORMAL		0
 #define TRADE_TYPE_EXPORT		1

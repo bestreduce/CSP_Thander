@@ -1,220 +1,197 @@
+//0.HP.0.MAST.Speed.Turn.WAS.Capacity.Crew.Cannon
+string g_ShipBermudeTuningGoods[10] = {"","Mahogany","","Planks","Silk","Linen","Cotton","Sandal","Leather","Ebony"};
+string g_ShipBermudeTuningItems[10] = {"","jewelry17","","jewelry11","jewelry2","jewelry3","jewelry4","jewelry5","jewelry1","icollection"};
 
-//генератор "отбермуженных" статов для кораблей
-void SetTuningShipStates(ref chr)
-{
-	int iType = GetCharacterShipType(chr);
-	if(iType == SHIP_NOTUSED)
-	{
-		return; //нет корабля - отсекаем
-	}
-	ref rShip = GetRealShip(iType);
-
-	if(rShip.class == 7) return;	//мелкие корабли отсекаем
-	//if(rShip.stolen == 0) return;	//генератор будет только на захваченных в море
-
-	int iRand = 30;
-	if(rand(iRand) == 0) SetShipMaxCaliberTuning(chr, true);	//увеличение калибра
-	if(rand(iRand) == 0) SetShipCapacityTuning(chr, true);		//увеличение трюма
-	if(rand(iRand) == 0) SetShipSpeedRateTuning(chr, true);		//увеличение скорости
-	if(rand(iRand) == 0) SetShipMastMultiplierTuning(chr, true);//увеличение прочности мачт
-	if(rand(iRand) == 0) SetShipMaxCrewTuning(chr, true);		//увеличение команды
-	if(rand(iRand) == 0) SetShipTurnRateTuning(chr, true);		//увеличение маневренности
-	if(rand(iRand) == 0) SetShipHPTuning(chr, true);			//увеличение ХП
-}
-
-//генератор "отбермуженных" статов для кораблей с ручным рандомом
-void SetTuningShipStatesRandom(ref chr, int iRand)
-{
-	int iType = GetCharacterShipType(chr);
-	if(iType == SHIP_NOTUSED)
-	{
-		return; //нет корабля - отсекаем
-	}
-	ref rShip = GetRealShip(iType);
-
-	if(rShip.class == 7) return;	//мелкие корабли отсекаем
-	//if(rShip.stolen == 0) return;	//генератор будет только на захваченных в море
-
-	if(rand(iRand) == 0) SetShipMaxCaliberTuning(chr, true);	//увеличение калибра
-	if(rand(iRand) == 0) SetShipCapacityTuning(chr, true);		//увеличение трюма
-	if(rand(iRand) == 0) SetShipSpeedRateTuning(chr, true);		//увеличение скорости
-	if(rand(iRand) == 0) SetShipMastMultiplierTuning(chr, true);//увеличение прочности мачт
-	if(rand(iRand) == 0) SetShipMaxCrewTuning(chr, true);		//увеличение команды
-	if(rand(iRand) == 0) SetShipTurnRateTuning(chr, true);		//увеличение маневренности
-	if(rand(iRand) == 0) SetShipHPTuning(chr, true);			//увеличение ХП
-}
-
-//установка назначенных "отбермуженных" статов для корабля
-void SetTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti)
-{
-	int iType = GetCharacterShipType(chr);
-	if(iType == SHIP_NOTUSED)
-	{
-		return; //нет корабля - отсекаем
-	}
-
-	if(MaxCaliber)	SetShipMaxCaliberTuning(chr, MaxCaliber);		//увеличение калибра
-	if(Capacity)	SetShipCapacityTuning(chr, Capacity);			//увеличение трюма
-	if(SpeedRate)	SetShipSpeedRateTuning(chr, SpeedRate);			//увеличение скорости
-	if(MastMulti)	SetShipMastMultiplierTuning(chr, MastMulti);	//увеличение прочности мачт
-	if(MaxCrew)		SetShipMaxCrewTuning(chr, MaxCrew);				//увеличение команды
-	if(TurnRate)	SetShipTurnRateTuning(chr, TurnRate);			//увеличение маневренности
-	if(HP)			SetShipHPTuning(chr, HP);						//увеличение ХП
-}
-
-//увеличение калибра
-void SetShipMaxCaliberTuning(ref chr, bool isSet)
+void SetShipTuningF(ref chr, string sStat, float fBonus)
 {
 	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.MaxCaliber") && sti(rShip.MaxCaliber) < 36)
+	float value = stf(rShip.(sStat));
+	if (CheckAttribute(rShip, "Untuned." + sStat))
 	{
-		if(isSet)
-		{
-			int iCaliber = sti(rShip.MaxCaliber);
-			switch(iCaliber)
-			{
-				case 8:
-					iCaliber = 0;
-				break;
-				case 12:
-					iCaliber = 1;
-				break;
-				case 16:
-					iCaliber = 2;
-				break;
-				case 20:
-					iCaliber = 3;
-				break;
-				case 24:
-					iCaliber = 4;
-				break;
-				case 32:
-					iCaliber = 5;
-				break;
-				case 36:
-					iCaliber = 6;
-				break;
-			}
-			iCaliber = iCaliber + 1;
-			if(iCaliber > 6) iCaliber = 6;
-			switch(iCaliber)
-			{
-				case 0:
-					iCaliber = 8;
-				break;
-				case 1:
-					iCaliber = 12;
-				break;
-				case 2:
-					iCaliber = 16;
-				break;
-				case 3:
-					iCaliber = 20;
-				break;
-				case 4:
-					iCaliber = 24;
-				break;
-				case 5:
-					iCaliber = 32;
-				break;
-				case 6:
-					iCaliber = 36;
-				break;
-			}
-			rShip.MaxCaliber = iCaliber;
-			rShip.Tuning.Cannon = true;
-		}
+		value = stf(rShip.Untuned.(sStat));
 	}
+	else
+	{
+		rShip.Untuned.(sStat) = value;
+	}
+	value = value + value * fBonus;
+	rShip.(sStat) = value;
+	chr.ship.(sStat) = value;
+}
+
+void SetShipTuningI(ref chr, string sStat, float fBonus)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	int value = sti(rShip.(sStat));
+	if (CheckAttribute(rShip, "Untuned." + sStat))
+	{
+		value = sti(rShip.Untuned.(sStat));
+	}
+	else
+	{
+		rShip.Untuned.(sStat) = value;
+	}
+	value = value + makeint(value * fBonus);
+	rShip.(sStat) = value;
+	chr.ship.(sStat) = value;
+}
+
+void SetShipTuningMastMultiplier(ref chr, float fValue)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	float value = stf(rShip.MastMultiplier);
+	if (CheckAttribute(rShip, "Untuned.MastMultiplier"))
+	{
+		value = stf(rShip.Untuned.MastMultiplier);
+	}
+	else
+	{
+		rShip.Untuned.MastMultiplier = value;
+	}
+	value = value - fValue;
+	rShip.MastMultiplier = value;
+	chr.ship.MastMultiplier = value;
+}
+
+void SetShipBermudeTuningF(ref chr, string sStat)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	if (CheckAttribute(rShip, "Tuning." + sStat)) { return; }
+	rShip.Tuning.(sStat) = true;
+	SetShipTuningF(chr, sStat, SHIP_STAT_UPGRADE_BERMUDE);
+}
+
+void SetShipBermudeTuningI(ref chr, string sStat)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	if (CheckAttribute(rShip, "Tuning." + sStat)) { return; }
+	rShip.Tuning.(sStat) = true;
+	SetShipTuningI(chr, sStat, SHIP_STAT_UPGRADE_BERMUDE);
+}
+
+//увеличение прочности мачт
+void SetShipBermudeTuningMastMultiplier(ref chr)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	if (CheckAttribute(rShip, "Tuning.MastMultiplier")) { return; }
+	rShip.Tuning.MastMultiplier = true;
+	SetShipTuningMastMultiplier(chr, 0.3);
+}
+
+//увеличение калибра и количества пушек
+void SetShipBermudeTuningMaxCaliber(ref chr)
+{
+	ref rShip = &RealShips[sti(chr.ship.type)];
+	if (CheckAttribute(rShip, "Tuning.MaxCaliber") || (sti(rShip.MaxCaliber) >= 36)) { return; }
+
+	int iCaliber = sti(rShip.MaxCaliber);
+	switch(iCaliber)
+	{
+		case 8:
+			iCaliber = 12;
+		break;
+		case 12:
+			iCaliber = 16;
+		break;
+		case 16:
+			iCaliber = 20;
+		break;
+		case 20:
+			iCaliber = 24;
+		break;
+		case 24:
+			iCaliber = 32;
+		break;
+		case 32:
+			iCaliber = 36;
+		break;
+	}
+	rShip.MaxCaliber = iCaliber;
+	rShip.Tuning.Cannon = true;
 }
 
 //увеличение трюма
-void SetShipCapacityTuning(ref chr, bool isSet)
+void SetShipBermudeTuningCapacity(ref chr)
 {
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.Capacity"))
-	{
-		if(isSet)
-		{
-			rShip.Capacity = sti(rShip.Capacity) + makeint(sti(rShip.Capacity)/5);
-			rShip.Tuning.Capacity = true;
-		}
-	}
+	SetShipBermudeTuningI(chr, "Capacity");
 }
 
 //увеличение скорости
-void SetShipSpeedRateTuning(ref chr, bool isSet)
+void SetShipBermudeTuningSpeedRate(ref chr)
 {
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.SpeedRate"))
-	{
-		if(isSet)
-		{
-			rShip.SpeedRate = (stf(rShip.SpeedRate) + stf(rShip.SpeedRate)/5.0);
-			rShip.Tuning.SpeedRate = true;
-		}
-	}
-}
-
-//прочность мачт
-void SetShipMastMultiplierTuning(ref chr, bool isSet)
-{
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.MastMultiplier"))
-	{
-		if(isSet)
-		{
-			rShip.MastMultiplier        = stf(rShip.MastMultiplier) - 0.3;
-			rShip.Tuning.MastMultiplier = true;
-		}
-	}
+	SetShipBermudeTuningF(chr, "SpeedRate");
 }
 
 //увеличение команды
-void SetShipMaxCrewTuning(ref chr, bool isSet)
+void SetShipBermudeTuningMaxCrew(ref chr)
 {
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.MaxCrew"))
-	{
-		if(isSet)
-		{
-			rShip.MaxCrew = sti(rShip.MaxCrew) + makeint(sti(rShip.MaxCrew)/5);
-			rShip.Tuning.MaxCrew = true;
-		}
-	}
+	SetShipBermudeTuningI(chr, "MaxCrew");
 }
 
 //увеличение маневренности
-void SetShipTurnRateTuning(ref chr, bool isSet)
+void SetShipBermudeTuningTurnRate(ref chr)
 {
-	ref rShip = &RealShips[sti(chr.ship.type)];
-
-	if(!CheckAttribute(rShip, "Tuning.TurnRate"))
-	{
-		if(isSet)
-		{
-			rShip.TurnRate = (stf(rShip.TurnRate) + stf(rShip.TurnRate)/5.0);
-			rShip.Tuning.TurnRate = true;
-		}
-	}
+	SetShipBermudeTuningF(chr, "TurnRate");
 }
 
 //увеличение ХП
-void SetShipHPTuning(ref chr, bool isSet)
+void SetShipBermudeTuningHP(ref chr)
+{
+	SetShipBermudeTuningI(chr, "HP");
+}
+
+//увеличение бейдевинда
+void SetShipBermudeTuningWindAgainstSpeed(ref chr)
 {
 	ref rShip = &RealShips[sti(chr.ship.type)];
+	if (CheckAttribute(rShip, "Tuning.WindAgainstSpeed")) { return; }
+	rShip.Tuning.WindAgainstSpeed = true;
+	SetShipTuningF(chr, "WindAgainstSpeed", 0.5 / stf(rShip.Class)); // странно, но пока оставим
+}
 
-	if(!CheckAttribute(rShip, "Tuning.HP"))
+//генератор "отбермуженных" статов для кораблей с ручным рандомом
+void SetBermudeTuningShipStatesRandom(ref chr, int iRand)
+{
+	int iType = GetCharacterShipType(chr);
+	if(iType == SHIP_NOTUSED)
 	{
-		if(isSet)
-		{
-			rShip.HP = sti(rShip.HP) + makeint(sti(rShip.HP)/5);
-			rShip.Tuning.HP = true;
-			chr.ship.HP = sti(rShip.HP);		//чтобы были полные ХП после тюнинга
-		}
+		return; //нет корабля - отсекаем
 	}
+	ref rShip = GetRealShip(iType);
+
+	if(rShip.class == 7) return;	//мелкие корабли отсекаем
+
+	if(rand(iRand) == 0) SetShipBermudeTuningMaxCaliber(chr);		//увеличение калибра
+	if(rand(iRand) == 0) SetShipBermudeTuningCapacity(chr);			//увеличение трюма
+	if(rand(iRand) == 0) SetShipBermudeTuningSpeedRate(chr);		//увеличение скорости
+	if(rand(iRand) == 0) SetShipBermudeTuningMastMultiplier(chr);	//увеличение прочности мачт
+	if(rand(iRand) == 0) SetShipBermudeTuningMaxCrew(chr);			//увеличение команды
+	if(rand(iRand) == 0) SetShipBermudeTuningTurnRate(chr);			//увеличение маневренности
+	if(rand(iRand) == 0) SetShipBermudeTuningHP(chr);				//увеличение ХП
+	if(rand(iRand) == 0) SetShipBermudeTuningWindAgainstSpeed(chr);	//увеличение бейдевинда
+}
+
+// генератор "отбермуженных" статов для кораблей
+void SetBermudeTuningShipStates(ref chr)
+{
+	SetBermudeTuningShipStatesRandom(chr, 30);
+}
+
+//установка назначенных "отбермуженных" статов для корабля
+void SetBermudeTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti, bool WAS)
+{
+	int iType = GetCharacterShipType(chr);
+	if(iType == SHIP_NOTUSED)
+	{
+		return; //нет корабля - отсекаем
+	}
+
+	if (MaxCaliber)	SetShipBermudeTuningMaxCaliber(chr);		//увеличение калибра
+	if (Capacity)	SetShipBermudeTuningCapacity(chr);			//увеличение трюма
+	if (SpeedRate)	SetShipBermudeTuningSpeedRate(chr);		//увеличение скорости
+	if (MastMulti)	SetShipBermudeTuningMastMultiplier(chr);	//увеличение прочности мачт
+	if (MaxCrew)	SetShipBermudeTuningMaxCrew(chr);			//увеличение команды
+	if (TurnRate)	SetShipBermudeTuningTurnRate(chr);			//увеличение маневренности
+	if (HP)			SetShipBermudeTuningHP(chr);				//увеличение ХП
+	if (WAS)		SetShipBermudeTuningWindAgainstSpeed(chr);	//увеличение бейдевинда
 }

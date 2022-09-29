@@ -256,7 +256,7 @@ void InitInterfaceTables()
 	Interfaces[INTERFACE_PS_HERO].IniFile = "RESOURCE\INI\INTERFACES\PsHero.ini";
 
 	Interfaces[INTERFACE_LEAVE_BATTLE].SectionName = "interface\LeaveBattle.c";
-	Interfaces[INTERFACE_LEAVE_BATTLE].IniFile = "RESOURCE\INI\NTERFACES\LeaveBattle.ini";
+	Interfaces[INTERFACE_LEAVE_BATTLE].IniFile = "RESOURCE\INI\INTERFACES\LeaveBattle.ini";
 
 	Interfaces[INTERFACE_SPEAK].SectionName = "interface\Speak.c";  // Philippe
 	Interfaces[INTERFACE_SPEAK].IniFile = "RESOURCE\INI\INTERFACES\Speak.ini";
