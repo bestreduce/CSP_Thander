@@ -118,11 +118,11 @@ int LocationInitDominica(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// мыс Скотс Хед
+	// мыс Касл Брус
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore26";
 	locations[n].id.label = "Shore26";
-	locations[n].image = "loading\jonny_load\jungle\Jungle8.tga";
+	locations[n].image = "loading\jonny_load\shores\Shore08.tga";
 	locations[n].worldmap = "Dominica";
 	//Sound
 	locations[n].type = "seashore";

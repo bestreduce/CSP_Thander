@@ -42,6 +42,8 @@ void Cabin_ReloadEndFade()
 
 	DelEventHandler("FaderEvent_EndFade", "Cabin_ReloadEndFade");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
+	SetPerspectiveSettings();
+	SetPerspective2Settings();
 }
 
 void Sea_CabinStartNow()
@@ -411,6 +413,8 @@ void DeckBoat_ReloadEndFade()
 
 	DelEventHandler("FaderEvent_EndFade", "DeckBoat_ReloadEndFade");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
+	SetPerspectiveSettings();
+	SetPerspective2Settings();
 }
 void DeckBoat_Start()
 {

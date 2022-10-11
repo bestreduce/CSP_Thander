@@ -2411,7 +2411,7 @@ void QuestComplete(string sQuestName, string qname)
 			        sld.SaveItemsForDead  = true;
 					AddBonusEnergyToCharacter(sld, 30);
 					FantomMakeCoolFighterWRankDepend(sld,Rank,20+rand(70),20+rand(70),70+(MOD_SKILL_ENEMY_RATE*3));//реф,уровень,скилы фехта(дополнительно скейлятся в методе от сложности),навык стрельбы и везения(аналогично),доп хп(аналогично)
-					DeleteAttribute(sld, "perks.list");
+					DeleteAllPerksExceptChar(sld);
 					DeleteAttribute(sld, "items.spyglass3")
 					SetCharacterPerk(sld, "BasicDefense");
 					SetCharacterPerk(sld, "CriticalHit");
@@ -8702,6 +8702,10 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_group_MoveCharacter(&Characters[GetCharacterIndex("Builder")], LAI_GROUP_PLAYER);
 			chrDisableReloadToLocation = false;
 		break;
+		
+		case "BuilderToTownhall":
+			ChangeCharacterAddressGroup(CharacterFromID("Builder"), "Caiman_townhall", "goto", LAi_FindFreeRandomLocator("goto"));
+		break;
 
 		case "ColonyModification_5":
 			Characters[GetCharacterIndex("Builder")].Dialog.CurrentNode = "First time";
@@ -11230,7 +11234,7 @@ void QuestComplete(string sQuestName, string qname)
 			SetCharacterPerk(sld, "EmergentSurgeon");
 			
 			//Синий скелет
-			sld = GetCharacter(NPC_GenerateCharacter("Undead_Blue", "skelt", "skeleton", "skeleton", 10, PIRATE, -1, false));
+			sld = GetCharacter(NPC_GenerateCharacter("Undead_Blue", "skelt_0", "skeleton", "skeleton", 10, PIRATE, -1, false));
 			sld.name = "Ледяной";
 			sld.lastname = "демон";
 			sld.FaceId = 354;
@@ -11247,6 +11251,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.location = "None";
 			sld.Dialog.CurrentNode = "hired";
 			sld.Payment = true;
+			sld.HeroModel = "skelt_0,skelt_1,skelt_2,skelt_3,skelt_4,skelt_5";
 			LAi_SetHP(sld, 300.0, 300.0);
 			SetCharacterPerk(sld, "BasicDefense");
 			SetCharacterPerk(sld, "AdvancedDefense");

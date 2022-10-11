@@ -244,6 +244,9 @@ void ProcessDialogEvent()
 			UnlockAchievement("AchBuildColony", 2);
 			NextDiag.TempNode = "First time";
 			AddDialogExitQuest("ColonyModification_4");
+			PChar.quest.BuilderToTownhall.win_condition.l1 = "ExitFromLocation";
+			PChar.quest.BuilderToTownhall.win_condition.l1.location = PChar.location;
+			PChar.quest.BuilderToTownhall.win_condition = "BuilderToTownhall";
 		break;
 
 		case "ColonyModification_5":

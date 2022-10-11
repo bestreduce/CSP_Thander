@@ -421,6 +421,7 @@ void SetCoastalGuardPursuit()
 			Smuggler = GetCharacter(NPC_GenerateCharacter("Coastal_Captain0" + i, Model, "man", "man", 5, iNation, 3, true)); // 3 дня, потом сами пропадут
 			SetFantomParam(Smuggler);
 			SelectCoastalGuardShip(Smuggler);
+			DeleteAttribute(Smuggler,"OZG");
 			// 1.2.3 хардкор! Smuggler.Coastal_Captain = true; // если по нему палить, НЗГ не будет
 			Smuggler.AlwaysEnemy = true;
 			Smuggler.DontRansackCaptain = true;

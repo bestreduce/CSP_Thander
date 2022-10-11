@@ -569,6 +569,16 @@ void HideInfoWindow()
 	CloseTooltip();
 }
 
+int GetSummonSkillForSkillTable(ref _refCharacter, string skillName)//метод-дубль без бэк скилов, у оригинала почему-то иногда сносит крышу
+{
+    int sumSkill;
+
+    sumSkill = GetSummonSkillFromNameSimple(_refCharacter, skillName);
+    sumSkill = ApplayNavyPenaltyToSkill(_refCharacter, skillName, sumSkill);
+
+    return sumSkill;
+}
+
 void FillSkillTables()
 {
 	int     i;
@@ -668,7 +678,7 @@ void FillSkillTables()
 		skillVal = GetSkillValue(xi_refCharacter, SKILL_TYPE, skillName);
 		GameInterface.TABLE_SKILL_1.(row).td5.str = skillVal;
 		// рассчет драйна
-		diff = GetSummonSkillFromName(xi_refCharacter, skillName) - skillVal;
+		diff = GetSummonSkillForSkillTable(xi_refCharacter, skillName) - skillVal;
 
 		if (skillVal < SKILL_MAX)
 		{
@@ -728,7 +738,7 @@ void FillSkillTables()
 		skillVal = GetSkillValue(xi_refCharacter, SKILL_TYPE, skillName);
 		GameInterface.TABLE_SKILL_2.(row).td5.str = skillVal;
 		// рассчет драйна
-		diff = GetSummonSkillFromName(xi_refCharacter, skillName) - skillVal;
+		diff = GetSummonSkillForSkillTable(xi_refCharacter, skillName) - skillVal;
 		if (skillVal < SKILL_MAX)
 		{
 			GameInterface.TABLE_SKILL_2.(row).td3.str = makeint(GetSkillValueExp(xi_refCharacter, skillName) * 100.0 / makefloat(skillVal * GetCharacterExpRate(xi_refCharacter, skillName))) + "%";

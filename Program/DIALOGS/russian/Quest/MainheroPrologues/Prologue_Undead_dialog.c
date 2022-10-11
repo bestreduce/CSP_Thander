@@ -174,9 +174,13 @@ void ProcessDialogEvent()
 			sld.name = "Ужасный";
 			sld.lastname = "";
 			sld.FaceId = 537;
+			SetSPECIAL(sld, 8, 10, 8, 3, 8, 10, 8);
 			GiveItem2Character(sld, "mushket");
+			SetCharacterPerk(sld, "BasicDefense");
+			SetCharacterPerk(sld, "AdvancedDefense");
 			SetCharacterPerk(sld, "Gunman");
 			SetCharacterPerk(sld, "GunProfessional");
+			SetCharacterPerk(sld, "Energaiser");
 			AddItems(sld, "bullet", 20);
 			AddItems(sld, "GunPowder", 20);
 			LAi_SetHP(sld, 180.0, 180.0);

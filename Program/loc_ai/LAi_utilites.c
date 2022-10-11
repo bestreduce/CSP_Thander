@@ -1097,6 +1097,7 @@ void CreateBrothels(aref loc)
 						case "Panama":		 sld.quest.price = 900*(rand(4)+5); break;
 						case "Marigo":	     sld.quest.price = 700*(rand(4)+5); break;
 						case "Bridgetown":	 sld.quest.price = 400*(rand(4)+5); break;
+						case "Nassau":	 	 sld.quest.price = 450*(rand(4)+5); break;
 						case "FortFrance":	 sld.quest.price = 500*(rand(4)+5); break;
 						case "Charles":		 sld.quest.price = 300*(rand(4)+5); break;
 						case "SantoDomingo": sld.quest.price = 200*(rand(4)+5); break;

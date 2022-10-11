@@ -269,7 +269,7 @@ int InitItems()
 
 	makeref(itm,Items[n]);
 	itm.id = "Dozor_Storm";
-	itm.groupID = IDOLS_RIGHT_ITEM_TYPE;
+	itm.groupID = IDOLS_LEFT_ITEM_TYPE;
 	itm.name = "itmname_Dozor_Storm";
 	itm.describe = "itmdescr_Dozor_Storm";
 	itm.model = "";
@@ -7372,8 +7372,6 @@ int InitItems()
 	itm.model = "sapphire";
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_9";
-//	itm.shown = false;
-	// boal 19.01.2004 -->
 	itm.price = 50;
 	itm.Weight = 2;
 
@@ -7396,7 +7394,6 @@ int InitItems()
     itm.Solder.rare = 0.01
     itm.Solder.min = 1;
     itm.Solder.max = 1;
-    // boal 19.01.2004 <--
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
@@ -7409,15 +7406,11 @@ int InitItems()
 	itm.model = "pursel";
 	itm.picIndex = 11;
 	itm.picTexture = "ITEMS_7";
-//	itm.shown = false;
-	// boal 19.01.2004 -->
 	itm.price = 75;
 	itm.Weight = 2;
-
     itm.Monster.rare = 0.005;
     itm.Monster.min = 1;
     itm.Monster.max = 1;
-    // boal 19.01.2004 <--
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;

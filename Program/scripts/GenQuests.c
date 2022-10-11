@@ -2849,8 +2849,6 @@ void Set_TreasureBarrel()
 		if(irand == 19) trBarrel.items.coins = rand(10) + 7;
 
 		irand = drand(25);
-		if(irand == 3) trBarrel.items.indian18 = 1;
-		irand = drand(25);
 		if(irand == 6) trBarrel.items.indian20 = 1;
 		irand = drand(25);
 		if(irand == 9) trBarrel.items.indian21 = 1;
