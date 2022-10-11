@@ -228,9 +228,14 @@ bool WdmAddEncountersData()
 			float encZ = MakeFloat(worldMap.encounter.z); 
 			float dx = encX - mpsX;
 			float dz = encZ - mpsZ;
-			float kdist = 900/WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;
-			if (abs(dx) > kdist) {dx = kdist;}
-			if (abs(dz) > kdist) {dz = kdist;}
+			float kdist = 500/WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;
+			kdist = sqrt(sqr(dx)+sqr(dz)) / kdist;
+			if (kdist < 1) 
+			{
+				kdist = 1/kdist;
+				dx = dx * kdist;
+				dz = dz * kdist;
+			}
 			wdmLoginToSea.encounters.(grp).x = wpsX + dx*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
 			wdmLoginToSea.encounters.(grp).z = wpsZ + dz*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
 			wdmLoginToSea.encounters.(grp).ay = worldMap.encounter.ay;
