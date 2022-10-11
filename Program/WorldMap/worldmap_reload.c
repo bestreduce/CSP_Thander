@@ -225,9 +225,14 @@ bool WdmAddEncountersData()
 			//Описываем его параметры
 			string grp; grp = "group" + i;
 			float encX = MakeFloat(worldMap.encounter.x);
-			float encZ = MakeFloat(worldMap.encounter.z);
-			wdmLoginToSea.encounters.(grp).x = wpsX + (encX - mpsX)*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
-			wdmLoginToSea.encounters.(grp).z = wpsZ + (encZ - mpsZ)*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
+			float encZ = MakeFloat(worldMap.encounter.z); 
+			float dx = encX - mpsX;
+			float dz = encZ - mpsZ;
+			float kdist = 900/WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;
+			if (abs(dx) > kdist) {dx = kdist;}
+			if (abs(dz) > kdist) {dz = kdist;}
+			wdmLoginToSea.encounters.(grp).x = wpsX + dx*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
+			wdmLoginToSea.encounters.(grp).z = wpsZ + dz*WDM_MAP_ENCOUNTERS_TO_SEA_SCALE;//WDM_MAP_TO_SEA_SCALE;
 			wdmLoginToSea.encounters.(grp).ay = worldMap.encounter.ay;
 			wdmLoginToSea.encounters.(grp).type = mapEncSlot;
 			wdmLoginToSea.encounters.(grp).id = worldMap.encounter.id;
