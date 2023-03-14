@@ -11,7 +11,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			if (CheckAttribute(pchar, "questTemp.PKM_SvtvA_FortFranceChurch_1"))	//Квест "Странные вещи творятся на архипелаге"
             {
-                link.l1 = "Святой отец, я слышал, что вы тоже разыскиваете загадочный чёрный фрегат, который похитил детей на Сан Мартине.";
+                link.l1 = "Святой отец, я слышал"+GetSexPhrase("","а")+", что вы тоже разыскиваете загадочный чёрный фрегат, который похитил детей на Сан Мартине.";
                 link.l1.go = "PKM_SvtvA_Ch1_1";
             }
 			if (CheckAttribute(pchar, "questTemp.PKM_SvtvA_PismoKlermon"))	//Квест "Странные вещи творятся на архипелаге"
@@ -56,7 +56,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "PKM_SvtvA_Ch1_5.1":
 			dialog.text = "Также я вам выдам документ, который позволит вам находиться в Пуэрто-Рико на законных основаниях.\nИ умоляю вас - не заходите в порт. Высадитесь где-нибудь в укромной бухте, чтобы вас никто не видел. Это письмо имеет большую важность.";
-			link.l1 = "Хорошо. не думаю, что это займёт у меня слишком много времени.";
+			link.l1 = "Хорошо. Не думаю, что это займёт у меня слишком много времени.";
 			link.l1.go = "PKM_SvtvA_Ch1_6";
 			GiveNationLicence(SPAIN, 8);
 		break;
