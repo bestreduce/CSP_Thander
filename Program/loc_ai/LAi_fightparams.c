@@ -1770,10 +1770,10 @@ float LAi_NPC_GetAttackDefence()
 			sAction = "break";
 		break;
 	}
-	npc_return_tmp = 5.0 * level + MOD_SKILL_ENEMY_RATE * 0.5;
+	npc_return_tmp = 5 + 10.0 * level + MOD_SKILL_ENEMY_RATE;
 	if(Lai_CharacterGetEnergy(chr) < LAi_CalcUseEnergyForBlade(chr,sAction)) 
 	{
-		npc_return_tmp = 2;
+		npc_return_tmp *= 2;
 	}
 
 	return npc_return_tmp;
