@@ -91,6 +91,7 @@ void InitLocations()
 		// видимость новых (и старых) локаторов
 		loc.locators_radius.Actor = 1.0;
 		loc.locators_radius.ships_other = 1.0;
+		loc.locators_radius.ports = 1.0;
 		loc.locators_radius.ships = 1.0;
 		loc.locators_radius.Genres = 1.0;
 

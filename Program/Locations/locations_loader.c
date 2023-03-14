@@ -675,7 +675,7 @@ bool LoadLocation(ref loc)
             SendMessage(loc, "lsl", MSG_LOCATION_EX_MSG, "AddRats", 3 + rand(5));
         }
         // boal <--
-if(loc.type == "seashore" || loc.type == "port")
+		if(loc.type == "seashore" || loc.type == "port")
 		{		
 			SendMessage(loc, "lsl", MSG_LOCATION_EX_MSG, "AddCrabs", 5 + rand(5) - 1);
 		}
@@ -1347,6 +1347,176 @@ void LocLoadShips(ref Location)
 			locNumShips++;
 		}
 	}
+	if(Location.id == "Shore51")
+	{
+    	for (i = 1; i<=7; i++)
+		{
+    		CreateEntity(&locShips[locNumShips], "ship");
+
+        	rCharacter = GetCharacter(NPC_GenerateCharacter("Shore51_tartane_"+i, "pirate_"+(rand(9)+1), "man", "man", 25, GetCityNation("Beliz"), 0, true));
+			rCharacter.ship.type = GenerateShip(rand(2), false);
+			SetBaseShipData( rCharacter );
+			rShip = GetRealShip(sti(rCharacter.Ship.Type));
+			Ship_SetLightsAndFlares(rCharacter);
+			Ship_PrepareShipForLocation(rCharacter);
+			Ship_SetFantomData( rCharacter );
+			Ship_ClearImpulseStrength( rCharacter );
+			
+			sLocShip = i;
+
+			makearef(ShipLoc, Location.locators.ports.(sLocShip));
+
+			rCharacter.Ship.Pos.x = stf(ShipLoc.x);
+			rCharacter.Ship.Pos.z = stf(ShipLoc.z);
+			rCharacter.Ship.Ang.y = GetAngleY(stf(ShipLoc.vZ.x),stf(ShipLoc.vZ.z));
+			rCharacter.TmpPerks.StormProfessional = 0;
+			if(i == 1 || i == 4 || i == 7)
+			{
+				rCharacter.Ship.LastBallCharacter = -1;
+				rCharacter.Ship.WindDotShip = 1.0;
+				rShip.SpeedRate = 2.0; // чтоб не летал
+				rCharacter.Ship.Speed.z = 1.0;
+				rCharacter.Ship.Pos.Mode = SHIP_SAIL;
+			}
+			else
+			{
+				rCharacter.Ship.stopped = true;
+				rCharacter.Ship.Speed.z = 0.0;
+			}
+			rShip.ship.upgrades.hull = 1+rand(2);
+			rShip.ship.upgrades.sails = 1+rand(3);
+			SendMessage(&locShips[locNumShips],"laa",MSG_SHIP_CREATE,&rCharacter,&rShip);
+			locNumShips++;
+		}
+	}
+	if(Location.id == "FortFrance_town")
+	{
+    	for (i = 1; i<=7; i++)
+		{
+    		CreateEntity(&locShips[locNumShips], "ship");
+
+        	rCharacter = GetCharacter(NPC_GenerateCharacter("FortFrance_town_tartane_"+i, "pirate_"+(rand(9)+1), "man", "man", 25, GetCityNation("FortFrance"), 0, true));
+			rCharacter.ship.type = GenerateShip(rand(2), false);
+			SetBaseShipData( rCharacter );
+			rShip = GetRealShip(sti(rCharacter.Ship.Type));
+			Ship_SetLightsAndFlares(rCharacter);
+			Ship_PrepareShipForLocation(rCharacter);
+			Ship_SetFantomData( rCharacter );
+			Ship_ClearImpulseStrength( rCharacter );
+			
+			sLocShip = i;
+
+			makearef(ShipLoc, Location.locators.ports.(sLocShip));
+
+			rCharacter.Ship.Pos.x = stf(ShipLoc.x);
+			rCharacter.Ship.Pos.z = stf(ShipLoc.z);
+			rCharacter.Ship.Ang.y = GetAngleY(stf(ShipLoc.vZ.x),stf(ShipLoc.vZ.z));
+			rCharacter.TmpPerks.StormProfessional = 0;
+			if(i == 1 || i == 4 || i == 7)
+			{
+				rCharacter.Ship.LastBallCharacter = -1;
+				rCharacter.Ship.WindDotShip = 1.0;
+				rShip.SpeedRate = 2.0; // чтоб не летал
+				rCharacter.Ship.Speed.z = 1.0;
+				rCharacter.Ship.Pos.Mode = SHIP_SAIL;
+			}
+			else
+			{
+				rCharacter.Ship.stopped = true;
+				rCharacter.Ship.Speed.z = 0.0;
+			}
+			rShip.ship.upgrades.hull = 1+rand(2);
+			rShip.ship.upgrades.sails = 1+rand(3);
+			SendMessage(&locShips[locNumShips],"laa",MSG_SHIP_CREATE,&rCharacter,&rShip);
+			locNumShips++;
+		}
+	}
+
+	if(Location.id == "SantoDomingo_town")
+	{
+    	for (i = 1; i<=3; i++)
+		{
+    		CreateEntity(&locShips[locNumShips], "ship");
+
+        	rCharacter = GetCharacter(NPC_GenerateCharacter("SantoDomingo_town_tartane_"+i, "pirate_"+(rand(9)+1), "man", "man", 25, GetCityNation("SantoDomingo"), 0, true));
+			rCharacter.ship.type = GenerateShip(3+drand1(52), false);
+			SetBaseShipData( rCharacter );
+			rShip = GetRealShip(sti(rCharacter.Ship.Type));
+			Ship_SetLightsAndFlares(rCharacter);
+			Ship_PrepareShipForLocation(rCharacter);
+			Ship_SetFantomData( rCharacter );
+			Ship_ClearImpulseStrength( rCharacter );
+			
+			sLocShip = i;
+
+			makearef(ShipLoc, Location.locators.ports.(sLocShip));
+
+			rCharacter.Ship.Pos.x = stf(ShipLoc.x);
+			rCharacter.Ship.Pos.z = stf(ShipLoc.z);
+			rCharacter.Ship.Ang.y = GetAngleY(stf(ShipLoc.vZ.x),stf(ShipLoc.vZ.z));
+			rCharacter.TmpPerks.StormProfessional = 0;
+			if(i == 1 || i == 2)
+			{
+				rCharacter.Ship.LastBallCharacter = -1;
+				rCharacter.Ship.WindDotShip = 1.0;
+				rShip.SpeedRate = 2.0; // чтоб не летал
+				rCharacter.Ship.Speed.z = 1.0;
+				rCharacter.Ship.Pos.Mode = SHIP_SAIL;
+			}
+			else
+			{
+				rCharacter.Ship.stopped = true;
+				rCharacter.Ship.Speed.z = 0.0;
+			}
+			rShip.ship.upgrades.hull = 1+rand(2);
+			rShip.ship.upgrades.sails = 1;
+			SendMessage(&locShips[locNumShips],"laa",MSG_SHIP_CREATE,&rCharacter,&rShip);
+			locNumShips++;
+		}
+	}
+
+	if(Location.id == "Bridgetown_town")
+	{
+    	for (i = 1; i<=3; i++)
+		{
+    		CreateEntity(&locShips[locNumShips], "ship");
+
+        	rCharacter = GetCharacter(NPC_GenerateCharacter("Bridgetown_town_tartane_"+i, "pirate_"+(rand(9)+1), "man", "man", 25, GetCityNation("Bridgetown"), 0, true));
+			rCharacter.ship.type = GenerateShip(4+drand1(32), false);
+			SetBaseShipData( rCharacter );
+			rShip = GetRealShip(sti(rCharacter.Ship.Type));
+			Ship_SetLightsAndFlares(rCharacter);
+			Ship_PrepareShipForLocation(rCharacter);
+			Ship_SetFantomData( rCharacter );
+			Ship_ClearImpulseStrength( rCharacter );
+			
+			sLocShip = i;
+
+			makearef(ShipLoc, Location.locators.ports.(sLocShip));
+
+			rCharacter.Ship.Pos.x = stf(ShipLoc.x);
+			rCharacter.Ship.Pos.z = stf(ShipLoc.z);
+			rCharacter.Ship.Ang.y = GetAngleY(stf(ShipLoc.vZ.x),stf(ShipLoc.vZ.z));
+			rCharacter.TmpPerks.StormProfessional = 0;
+			if(i == 1 || i == 2)
+			{
+				rCharacter.Ship.LastBallCharacter = -1;
+				rCharacter.Ship.WindDotShip = 1.0;
+				rShip.SpeedRate = 2.; // чтоб не летал
+				rCharacter.Ship.Speed.z = 1.0;
+				rCharacter.Ship.Pos.Mode = SHIP_SAIL;
+			}
+			else
+			{
+				rCharacter.Ship.stopped = true;
+				rCharacter.Ship.Speed.z = 0.0;
+			}
+			rShip.ship.upgrades.hull = 1+rand(2);
+			rShip.ship.upgrades.sails = 1;
+			SendMessage(&locShips[locNumShips],"laa",MSG_SHIP_CREATE,&rCharacter,&rShip);
+			locNumShips++;
+		}
+	}
 	// load boat 2 location
 	if (CheckAttribute(Location, "locators.reload.boat"))
 	{
@@ -1496,6 +1666,7 @@ void ShowAllLocators()
     VisibleLocatorsGroup("tables", 1.0, 15.0, 255, 255, 0, 0);
 	// видимость новых (и старых) локаторов
 	VisibleLocatorsGroup("ships_other", 1.0, 15.0, 255, 255, 200, 200);
+	VisibleLocatorsGroup("ports", 1.0, 15.0, 255, 255, 200, 200);
 	VisibleLocatorsGroup("ships", 1.0, 15.0, 255, 255, 200, 200);
 	VisibleLocatorsGroup("Actor", 1.0, 15.0, 155, 255, 0, 0);
 	VisibleLocatorsGroup("Genres", 1.0, 15.0, 255, 0, 255, 0);
