@@ -173,7 +173,7 @@ void ProcessVersionCheck() // boal 271004
 	{}//{log_info("РЕИНИТ не требуется");}
 	else
 	{
-		if (!CheckAttribute(pchar, "fixsaveNG0") && HasSubStr(pchar.versionnumber, "21.02.2023"))//для версии от 21 февраля
+		if (!CheckAttribute(pchar, "fixsaveNG0") && HasSubStr(pchar.versionnumber, ".02.2023"))//для версии от февраля
 		{
 			if (sti(pchar.rank)>2) DozorPrepare_2();//фикс дозора без НИ
 
