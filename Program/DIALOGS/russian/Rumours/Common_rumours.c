@@ -25,8 +25,8 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		}
 
 		//квест шебеки Синяя Птица
-		if(CheckAttribute(NPChar, "city") && pchar.questTemp.BlueBird.City == npchar.city && pchar.questTemp.BlueBird == "returnMoney")
-		{
+		if(CheckAttribute(NPChar, "city") && pchar.questTemp.BlueBird.City == npchar.city && pchar.questTemp.BlueBird == "returnMoney" && sti(pchar.questTemp.BlueBird.count)<7)
+		{//после 7 флейтов перестаём пускать новые
 			Dialog.Text = BlueBurd_setTradeShip();
 			link.l1 = "Ага, понятно... Что ещё нового в городе?";
 			link.l1.go = "new question";
@@ -397,8 +397,8 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 							sld.mapEnc.Name = "щебека 'Драккар'";
 							sld.mapEnc.type = "war";
 							FantomMakeCoolFighter(sld, 80, 100, 100, "topor_viking", "pistol3", 600);
-							//FantomMakeCoolSailor(sld, SHIP_XEBEKVT, "Драккар", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
-							FantomMakeCoolestSailor(sld, SHIP_XEBEKVT, "Драккар", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+							//FantomMakeCoolSailor(sld, SHIP_REQUIN, "Драккар", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+							FantomMakeCoolestSailor(sld, SHIP_REQUIN, "Драккар", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 
 							sld.name 	= "Рагнар";
 							sld.lastname = "Лотброк";
@@ -542,10 +542,9 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		break;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		case "rumours_tavern":  // homo 03/08/06
-
-                 Dialog.Text = NPCStringReactionRepeat(LinkRandPhrase("Сведения стоят денег. За скромные 1000 золотых я расскажу все, что знаю.",
-                "Что-то я запамятовал. Но, возможно, 1000 монет освежат мою память.",
-                "Я готов рассказать все, что знаю. Но не бесплатно - 1000 золотых, на меньшее я не согласен."),
+                 Dialog.Text = NPCStringReactionRepeat(LinkRandPhrase("Сведения стоят денег. За скромные 1000 золотых я расскажу всё, что знаю.",
+                "Что-то я запамятовал" + NPCharSexPhrase(NPChar,"","а") + ". Но, возможно, 1000 монет освежат мою память.",
+                "Я готов" + NPCharSexPhrase(NPChar,"","а") + " рассказать всё, что знаю. Но не бесплатно - 1000 золотых, на меньшее я не соглас" + NPCharSexPhrase(NPChar,"ен","на") + "."),
                 "Больше мне нечего добавить. А теперь прошу меня извинить, но дела не ждут.",
                 "", "", "block", 1, npchar, Dialog.CurrentNode);
 
@@ -897,10 +896,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
     			AddQuestRecord("Gen_LoanTakeChest", "3");
                 CloseQuestHeader("Gen_LoanTakeChest");
 
-				pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-				if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-				if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-				if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+				AchievementsCounter_genquests(1);
 			}
 			else
 			{
@@ -1336,7 +1332,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги мужика
 		case "MechanicIsPrison_man":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на фрегате?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_man_1":
@@ -1346,7 +1342,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		break;
 		case "MechanicIsPrison_man_2":
 			dialog.text = "А без Механика нам не обойтись?";
-			link.l1 = "Ведекер нам нужен. На фрегат мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
+			link.l1 = "Ведекер нам нужен. На клиппер мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
 			link.l1.go = "MechanicIsPrison_man_3";
 		break;
 		case "MechanicIsPrison_man_3":
@@ -1371,7 +1367,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги бабы
 		case "MechanicIsPrison_woman":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на фрегате?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_woman_1":

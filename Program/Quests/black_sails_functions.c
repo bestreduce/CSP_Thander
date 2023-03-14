@@ -202,7 +202,7 @@ void BSOnTheHorizon_start(string qName)
 void BSOnTheHorizon_Flint();
 {
 	sld = GetCharacter(NPC_GenerateCharacter("Flint", "BS_Flint_0", "man", "man", 999, PIRATE, -1, true));
-	FantomMakeCoolestSailor(sld, SHIP_NL_PinnaceofWar47, "Морж", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	FantomMakeCoolestSailor(sld, SHIP_NEPTUN, "Морж", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 	FantomMakeCoolFighter(sld, 100, 100, 100, "blade43", "pistol4", 1000);
 	SetSPECIAL(sld, 10, 10, 10, 10, 10, 10, 10);
 	sld.name = "Джеймс";
@@ -277,15 +277,15 @@ void BSOnTheHorizon_SeaBattle()
 		sld = GetCharacter(NPC_GenerateCharacter("BSOnTheHorizon_enemyfleet"+i, "off_eng_"+(rand(1)+1), "man", "man", 999, ENGLAND, -1, true));
 		if (i == 1)
 		{
-			sld.Ship.Type = GenerateShipExt(SHIP_FASTFRIGATE, true, sld);
+			sld.Ship.Type = GenerateShipExt(SHIP_NIGHTMARE, true, sld);
 			sld.Ship.Name = "Денуво";
 			sld.Name = "Денуво";
 			sld.Lastname = "Антитампер";
 		}
-		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_FR_ESSEX, true, sld);
-		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_FEARLESS, true, sld);
+		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, sld);
+		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
 		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
-		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_NL_FWZP, true, sld);
+		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_FWZP, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 
@@ -463,6 +463,7 @@ void BSCourtlyPassions_dungeon(string _quest)
 {
 	WaitDate("",0,0,0,24 - sti(environment.time),5);
 	LAi_LocationDisableMonGenTimer("FortFrance_dungeon", 3);//Лок спавна скелетов
+	LAi_LocationDisableToughSkeletonTimer("FortFrance_dungeon", 3); //ПК не пускать
 	DoQuestFunctionDelay("LockWeapons", 0);
 	chrDisableReloadToLocation = true;
 	sld = GetCharacter(NPC_GenerateCharacter("BS_Vein", "BS_Vein", "man", "man", 99, PIRATE, -1, true));
@@ -607,8 +608,8 @@ void BSCourtlyPassions_SeaBattle()
 	Group_SetType("BSCourtlyPassions_SeaBattle", "pirate");
 	sld = CharacterFromID("BS_Vein");
 	//LAi_SetHP(sld, 20, 20);
-	sld.Ship.Type = GenerateShipExt(SHIP_PDN, true, sld);
-	FantomMakeCoolestSailor(sld, SHIP_PDN, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	sld.Ship.Type = GenerateShipExt(SHIP_PRINCE_H, true, sld);
+	FantomMakeCoolestSailor(sld, SHIP_PRINCE_H, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 50);
@@ -712,7 +713,7 @@ void BSChaseBegun()
 	sld.lastname 	= "Вейн";
 	sld.dialog.filename = "Quest\BlackSails\Pogonya_Nachalas.c";
 	sld.DeckDialogNode = "BS_PN_shipV";
-	FantomMakeCoolestSailor(sld, SHIP_PDN, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	FantomMakeCoolestSailor(sld, SHIP_PRINCE_H, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 	Group_AddCharacter("Flint_Group", sld.id);
 	Fantom_SetBalls(sld, "war");
 	LAi_SetImmortal(sld, true);
@@ -1181,9 +1182,9 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 	for (int i = 0; i < 5; i++)
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("BSBons"+i, "off_eng_"+(rand(1)+1), "man", "man", 999, ENGLAND, 8, true));
-		FantomMakeCoolSailor(sld, SHIP_NL_PinnaceofWar47, "Морж", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+		FantomMakeCoolSailor(sld, SHIP_NEPTUN, "Морж", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 		sld.AlwaysEnemy = true;
-		sld.Ship.Type = GenerateShipExt(SHIP_FEARLESS, true, sld);
+		sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
 
 		Group_AddCharacter(sGroup, sld.id);
 		if (i == 0)
@@ -1194,7 +1195,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 				{
 					if (!CheckAttribute(pchar, "BSBonsSpawned"))
 					{
-						FantomMakeCoolestSailor(sld, SHIP_FASTFRIGATE, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+						FantomMakeCoolestSailor(sld, SHIP_NIGHTMARE, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 						sld.Name = "Билли";
 						sld.Lastname = "Бонс";
 						sld.Model = "BS_Billy";
@@ -1216,7 +1217,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 					}
 					else
 					{
-						FantomMakeCoolestSailor(sld, SHIP_BATTLEMANOWAR, "Скарборо", CANNON_TYPE_CANNON_LBS42, 100, 100, 100);
+						FantomMakeCoolestSailor(sld, SHIP_PRINCE, "Скарборо", CANNON_TYPE_CANNON_LBS42, 100, 100, 100);
 						FaceMaker(sld);
 						sScarboro = " со 'Скарборо' во главе";
 						FantomMakeCoolFighter(sld, 100, 100, 100, "blade33", "pistol4", 1000);
@@ -1319,10 +1320,10 @@ void BSUrka_Curacao_SeaBattle()
 			//sld.Name = "Денуво";
 			//sld.Lastname = "Антитампер";
 		}
-		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_FRIGATE_SAT, true, sld);
-		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_WARSHIP, true, sld);
+		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, sld);
+		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, sld);
 		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
-		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_SUPERBE, true, sld);
+		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA_H, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_LINK2, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 
@@ -1497,7 +1498,7 @@ void BSUrka_PlaceUrka()
 	Group_SetType("BSUrka_SeaBattle", "pirate");
 
 	sld = GetCharacter(NPC_GenerateCharacter("BSUrka_enemyfleet", "off_spa_"+(rand(1)+1), "man", "man", 999, SPAIN, -1, true));
-	sld.Ship.Type = GenerateShipExt(SHIP_SP_SANFELIPE, true, sld);
+	sld.Ship.Type = GenerateShipExt(SHIP_SANFELIPE, true, sld);
 	sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 
 	sld.ship.Crew.Morale = 100;
@@ -1951,7 +1952,7 @@ void BSHangover_Cave(string q)
 {
 	chrDisableReloadToLocation = true;
 	LAi_LocationDisableMonGenTimer("barbados_cave", 3);
-	pchar.DisableToughSkeleton = true;
+	LAi_LocationDisableToughSkeletonTimer("barbados_cave", 3); //ПК не пускать
 
 	sld = CharacterFromID("BS_Silver");
 	ChangeCharacterAddressGroup(sld, pchar.location, "item", "berglar1");
@@ -2029,7 +2030,7 @@ void BSHangover_CaveEntrance(string qName)
 	PChar.quest.BSUrka_SeaBattleEnded.over = "yes";
 	pchar.quest.BSCourtlyPassions_DontStart.over = "yes";
 	chrDisableReloadToLocation = true;
-	DeleteAttribute(pchar, "DisableToughSkeleton");
+	LAi_LocationDisableToughSkeletonTimer("barbados_cave", -1);
 
 	for (int i = 1; i <= 4; i++)
 	{

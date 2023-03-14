@@ -398,7 +398,7 @@ void ProcessDialogEvent()
 		//Если мы остались верны Флинту, то следующий диалог:
 
 		case "BS_NU_33_Ya_Ne_Krisa":
-			FantomMakeCoolestSailor(npchar, SHIP_FRIGATE_H, "Рейнджер", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+			FantomMakeCoolestSailor(npchar, SHIP_DIANA, "Рейнджер", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 			SetCompanionIndex(PChar, -1, GetCharacterIndex(npchar.id));//вейн присоединяется к эскадре
 			BSRepairShip(npchar);
 			SetShipRemovable(npchar, false);

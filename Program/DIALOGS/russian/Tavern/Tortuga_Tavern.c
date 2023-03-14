@@ -228,7 +228,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             // DOZOR -->
 		case "Dozor_1":
 			TakeNItems(PChar, "Dozor_Mekakhrom", 1);
-			dialog.text = "А-а! Так это ты, дозорный? Стало быть, отгадал уже три загадки, молодец! Вот тебе Мекахром с четвёртой загадкой. Удачи тебе справиться с ней, она чуток посложнее остальных будет.";
+			dialog.text = "А-а! Так это ты, дозорн"+GetSexPhrase("ый","ая")+"? Стало быть, отгадал"+GetSexPhrase("","а")+" уже три загадки, молодец! Вот тебе Мекахром с четвёртой загадкой. Удачи тебе справиться с ней, она чуток посложнее остальных будет.";
 			link.l1 = "Бывай.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("DozorTortugaTavernGetItem");

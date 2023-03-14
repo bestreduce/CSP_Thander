@@ -427,7 +427,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "ShipWreck_3":
-			dialog.text = RandPhraseSimple("Из всей команды посчастливилось выжить только " + ShipWreck_GetStringQty(sti(pchar.GenQuest.ShipWreck.Qty)) + ". Остальные погибли… некоторые уже здесь - от ран и лихорадки",
+			dialog.text = RandPhraseSimple("Из всей команды посчастливилось выжить только " + ShipWreck_GetStringQty(sti(pchar.GenQuest.ShipWreck.Qty)) + ". Остальные погибли... некоторые уже здесь - от ран и лихорадки",
 				"Посчастливилось лишь " + ShipWreck_GetStringQty(sti(pchar.GenQuest.ShipWreck.Qty)) + ". Остальные покоятся, кто в морской пучине, кто в песчаных дюнах этого пляжа...");
 			link.l1 = LinkRandPhrase("Вам не позавидуешь. Но такова жизнь моряка - любой из нас мог оказаться на вашем месте",
 				"Понимаю... Все мы в руках Господа, но у него видимо слишком много забот, чтобы помнить о каждом.",
@@ -893,7 +893,7 @@ void ProcessDialogEvent()
 		case "ShipWreck_30":
 			if(pchar.GenQuest.ShipWreck == "SailorsSaved")
 			{
-				dialog.text = "Спасибо Вам огромное, капитан " + GetFullName(pchar) + "! Вы для нас сделали столько, что любая благодарность будет недостаточна… И хотя все наши пожитки и ломанного гроша не стоят, разрешите подарить Вам этот амулет. Он может быть очень полезен капитану, часто вступающему в морские бои.";
+				dialog.text = "Спасибо Вам огромное, капитан " + GetFullName(pchar) + "! Вы для нас сделали столько, что любая благодарность будет недостаточна... И хотя все наши пожитки и ломанного гроша не стоят, разрешите подарить Вам этот амулет. Он может быть очень полезен капитану, часто вступающему в морские бои.";
 				link.l1 = "Спасибо за подарок. Вещь действительно очень нужная!.. Прощайте капитан " + pchar.GenQuest.ShipWreck.Name + " и да сопутствует Вам удача в морских походах.";
 				link.l1.go = "ShipWreck_47";
 			}
@@ -2285,7 +2285,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "CaptainComission_6_21":
-			dialog.text = "Мне не оставляют выбора... Нужную сумму - 150 000 золотых, я уже собрал. Хочу просить вас доставить её в " + XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.PiratesCity + "Acc") + " и привезти " + GetStrSmallRegister(XI_ConvertString("Family" + pchar.GenQuest.CaptainComission.FamilyType + "Gen")) + " сюда. За услугу готов заплатить 40 000, которые вы получите по возвращении.";
+			dialog.text = "Мне не оставляют выбора... Нужную сумму - 150000 золотых, я уже собрал. Хочу просить вас доставить её в " + XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.PiratesCity + "Acc") + " и привезти " + GetStrSmallRegister(XI_ConvertString("Family" + pchar.GenQuest.CaptainComission.FamilyType + "Gen")) + " сюда. За услугу готов заплатить 40000, которые вы получите по возвращении.";
 			link.l1 = "Хорошо, я готов"+ GetSexPhrase("","а") +" этим заняться.";
 			link.l1.go = "CaptainComission_6_22";
 			link.l2 = "К сожалению, у меня несколько другие планы.";
@@ -2411,7 +2411,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "CaptainComission_30":
-			dialog.text = "Спасибо, капитан, вы оказали неоценимую услугу всей нашей семье. Вот ваше вознаграждение... Здесь три сундука - это как раз 40 000 пиастров. Извините, но я поспешу ему навстречу.";
+			dialog.text = "Спасибо, капитан, вы оказали неоценимую услугу всей нашей семье. Вот ваше вознаграждение... Здесь три сундука - это как раз 40000 пиастров. Извините, но я поспешу ему навстречу.";
 			link.l1 = "Конечно-конечно, счастливой встречи и всего наилучшего.";
 			link.l1.go = "CaptainComission_30_1";
 			if(CheckAttribute(pchar, "GenQuest.CaptainComission.SlaveAddMoney"))
@@ -3169,11 +3169,12 @@ void ProcessDialogEvent()
 		break;
 
 		case "CaptainComission_305":
-			sTemp = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name") + "Gen"));
+			string sTempAcc = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name") + "Acc"));
+			sTemp = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name") + "Gen"));//здесь нужен винительный падеж? его нет в коммон ини пока что
 			dialog.text = "Ну хорошо, чтоб не водить вас за нос, расскажу всё по порядку.\n" +
 				"Во время одного из патрульных рейдов мне повстречалось судно, шедшее под флагом " + NationNameGenitive(sti(pchar.GenQuest.CaptainComission.Nation)) + ". Приказ лечь в дрейф был проигнорирован. " +
 				"Когда после короткой погони мы настигли " + sTemp + " '" + pchar.GenQuest.CaptainComission.VictimShipName + "', беглецы подняли пиратский флаг. Поскольку дело было уже далеко от форта, пришлось принимать бой в одиночку. Нам повредили утлегарь, поэтому абордажа избежать не удалось.\n" +
-				"Мы уже приготовились было к смерти, но, благодаря Пресвятой Деве Марии и взводу мушкетёров, нам удалось перебить пиратов. Каково же было наше ликование, когда обнаружилось, что трюм " + sTemp + " под завязку набит " + GetStrSmallRegister(XI_ConvertString(Goods[sti(pchar.GenQuest.CaptainComission.Goods)].Name + "Abl")) + ". " +
+				"Мы уже приготовились было к смерти, но, благодаря Пресвятой Деве Марии и взводу мушкетёров, нам удалось перебить пиратов. Каково же было наше ликование, когда обнаружилось, что трюм " + sTempAcc + " под завязку набит " + GetStrSmallRegister(XI_ConvertString(Goods[sti(pchar.GenQuest.CaptainComission.Goods)].Name + "Abl")) + ". " +
 				"Мы решили, что это Знак Божий и достойная компенсация за наши раны и смерть товарищей...\nК тому времени уже сгустились сумерки. Мы завели " + sTemp +" в ближайшую бухту, содержимое трюма вывезли на берег и надёжно спрятали, а " + sTemp + " отогнали подальше в море и взорвали. Наутро я отрапортовал по службе о потоплении пиратского судна, но ни слова не упомянул о содержимом трюма.";
 			link.l1 = "Но видать, кто-то всё-таки проболтался...";
 			link.l1.go = "CaptainComission_307";

@@ -479,9 +479,12 @@ void FaceMaker(aref rCharacter)
 		case "PGG_Devlin_0":	rCharacter.FaceId = 1; break;
 		case "PGG_ShMor_0":		rCharacter.FaceId = 508; break;
 		case "PGG_Mary":		rCharacter.FaceId = 517; break;
-		case "ozg_green":		rCharacter.FaceId = 287; break;
+		case "ozg_green":		rCharacter.FaceId = 287; break;	//Джеймс Кэллоу
 		case "PGG_Chard_0":		rCharacter.FaceId = 211; break;
 		case "PGG_Tich_0":		rCharacter.FaceId = 540; break;
+		case "Maltese":			rCharacter.FaceId = 296; break;	//Мальтиец Жаквин де Массе
+		case "Animists1":		rCharacter.FaceId = 297; break;	//Сатанист
+		case "Animists2":		rCharacter.FaceId = 297; break;	//Лорд Чёрное Солнце
 		else rCharacter.FaceId 	= 478; break;
 	}
 	if (InterfaceStates.VISUAL_CIRASS && !CheckAttribute(rCharacter,"VISUAL_CIRASS"))
@@ -522,8 +525,8 @@ void FaceMaker(aref rCharacter)
 	}
 }
 
-//Создадим вражеских фантомов - команда для ЛГ
-string GetRandSkelModel()
+//Создадим вражеских фантомов
+string GetRandSkelModel()	//Рыболюди (Летучий Голландец)
 {
 	string emodel = "mummy";
 
@@ -537,7 +540,7 @@ string GetRandSkelModel()
     return emodel;
 }
 
-string GetRandSkelModelClassic()
+string GetRandSkelModelClassic()	//Скелеты
 {
 	string emodel = "mummy";
 
@@ -551,26 +554,42 @@ string GetRandSkelModelClassic()
     return emodel;
 }
 
-// boal 22.04.04 выбор модели зависимо от типа
-void SetCaptanModelByEncType(ref Chref, string sFantomType)
+string GetRandSatanistMode()	//Сатанисты
 {
-    string ModelPirate = "Albermal"; // значит баг
+	string emodel = "mummy";
 
-	if (sti(Chref.nation) == PIRATE) sFantomType = "pirate"; // иначе баг
+	switch (rand(0))
+    {
+        case 0: emodel = "animists1";   break;
+    }
+    return emodel;
+}
 
-    switch (sFantomType)
+// boal 22.04.04 выбор модели зависимо от типа
+string GetCaptainModelByNation(int iNation, string sFantomType)
+{
+	if (iNation == PIRATE) sFantomType = "pirate"; // иначе баг
+
+	switch (sFantomType)
 	{
-		case "trade":
-            ModelPirate = "trader_" + (rand(15) + 1);
+	case "trade":
+		return "trader_" + (rand(15) + 1);
 		break;
-		case "war":
-			ModelPirate = "off_" + NationShortName(sti(Chref.nation)) + "_" + (rand(1) + 1);
+	case "war":
+		return "off_" + NationShortName(iNation) + "_" + (rand(1) + 1);
 		break;
-		case "pirate":
-            ModelPirate = "officer_" + (rand(63) + 1);
+	case "pirate":
+		return "officer_" + (rand(63) + 1);
 		break;
 	}
-	Chref.model = ModelPirate;
+
+	Log_Info("ERROR: wrong fantom type '" + sFantomType + "'");
+	return "Albermal";
+}
+
+void SetCaptanModelByEncType(ref Chref, string sFantomType)
+{
+	Chref.model = GetCaptainModelByNation(sti(Chref.nation), sFantomType);
 	FaceMaker(Chref);
 }
 

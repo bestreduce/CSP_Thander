@@ -94,6 +94,10 @@ options
 options_start
 Buccaneer's Reef
 
+#Конфиги
+engine.ini
+
+.vscode
 .idea
 *.ilk
 .gitattributes

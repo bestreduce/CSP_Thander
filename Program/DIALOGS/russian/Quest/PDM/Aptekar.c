@@ -121,7 +121,7 @@ void ProcessDialogEvent()
 		
 		case "Markus_3":
 			dialog.text = "Ах да, конечно. Держите, "+Plata1+" пиастров ваши. Сейчас бы мне поспать...";
-			link.l1 = "Выздоравливайте, "+GetAddress_Form(NPChar)+", а теперь я покину вас.";
+			link.l1 = "Выздоравливайте, минхер, а теперь я покину вас.";
 			link.l1.go = "exit";
 			AddMoneyToCharacter(pchar, sti(Plata1));
 			AddCharacterExpToSkill(pchar, "Leadership", 60);
@@ -250,7 +250,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Pablo_Loco_Pravilno":
-			if ("корицы и аниса" == GetStrSmallRegister(dialogEditStrings[1]) || "корица и анис" == GetStrSmallRegister(dialogEditStrings[1]) || "запах корицы и аниса" == GetStrSmallRegister(dialogEditStrings[1]) || "запахи корицы и аниса" == GetStrSmallRegister(dialogEditStrings[1]) || "анис и корица" == GetStrSmallRegister(dialogEditStrings[1]) || "аниса и корицы" == GetStrSmallRegister(dialogEditStrings[1]) || "запах аниса и корицы" == GetStrSmallRegister(dialogEditStrings[1]) || "запахи аниса и корицы" == GetStrSmallRegister(dialogEditStrings[1]))
+			string answer = GetStrSmallRegister(dialogEditStrings[1])
+			if (HasSubStr(answer, "кориц") && HasSubStr(answer, "анис"))
 			{
 				Dialog.text = "Пахнет корицей и анисом? Я знать такую траву. Она может лечить, а может убить. Скажи мне, зачем тебе нужна эта трава?";
 				Link.l1 = "Доктор Алюмнус послал меня за ней.";
@@ -345,7 +346,7 @@ void ProcessDialogEvent()
 			GiveItem2Character(PChar, "PDM_Trava_Tzes_Umrat");
 			AddQuestRecord("PDM_Aptekar", "8");
 
-			sld = CharacterFromID("Doktor_Alumnus")
+			sld = CharacterFromID("Doktor_Alumnus");
 			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
 			sld.dialog.currentnode   = "Alumnus_Finish_Zadanie";
 		break;

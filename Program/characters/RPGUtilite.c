@@ -271,6 +271,7 @@ void SetRandSPECIAL(ref _refCharacter)  // Для всех
                (4 + rand(6)),
                (4 + rand(6)),
                (2 + rand(8)));
+	if (CheckAttribute(_refCharacter,"id") && HasSubStr(_refCharacter.id,"Fort Commander"))  _refCharacter.SPECIAL.Perception = 10;
 }
 
  void SetRandSPECIAL_PGG(ref _refCharacter)  //WW для ПГГ
@@ -978,17 +979,14 @@ string GetReputationName(int reputation)
         return "REPUTATIONT_BAD_2";
     if(reputation<41)
         return "REPUTATIONT_BAD_1";
-    if(reputation<51)
-        return "REPUTATIONT_NEUTRAL";
     if(reputation<61)
-        return "REPUTATIONT_GOOD_1";
+        return "REPUTATIONT_NEUTRAL";
     if(reputation<71)
-        return "REPUTATIONT_GOOD_2";
+        return "REPUTATIONT_GOOD_1";
     if(reputation<81)
+        return "REPUTATIONT_GOOD_2";
+    if(reputation<91)
         return "REPUTATIONT_GOOD_3";
-    if(reputation<=90)
-        return "REPUTATIONT_GOOD_4";
-
 	return "REPUTATIONT_GOOD_4";
 }
 // to_do  del
@@ -1136,6 +1134,59 @@ int SetCharacterSkillBySculArtefact(ref _refCharacter, string _skillName)
     return 0;
 }
 
+int SetCharacterSkillByHaosArtefact(ref _refCharacter, string _skillName)
+{	
+    if (_skillName == SKILL_CANNONS || _skillName == SKILL_ACCURACY || _skillName == SKILL_F_HEAVY || _skillName == SKILL_FENCING || _skillName == SKILL_LEADERSHIP)
+	{
+       if (IsEquipCharacterByItem(_refCharacter, "PKM_SvtvA_amulet") && GetCharacterItem(_refCharacter, "PKM_SvtvA_pismo3")>0)
+       {
+           switch (_skillName)
+           {
+               case  SKILL_CANNONS:
+                   return 15;
+               break;
+
+               case  SKILL_ACCURACY:
+                   return 15;
+               break;
+
+               case  SKILL_F_HEAVY:
+                   return 15;
+               break;
+
+               case  SKILL_FENCING:
+                   return 15;
+               break;
+           }
+       }
+       else
+       {
+			if (IsEquipCharacterByItem(_refCharacter, "PKM_SvtvA_amulet"))
+			{
+				switch (_skillName)
+				{
+					case  SKILL_LEADERSHIP:
+						return -20;
+					break;
+				}
+				switch (_skillName)
+				{
+					case  SKILL_F_HEAVY:
+						return 15;
+					break;
+				}
+				switch (_skillName)
+				{
+					case  SKILL_FENCING:
+						return 15;
+					break;
+				}
+			}
+		}
+	}
+    return 0;
+}
+
 // Warship 25.10.08 Учет одежды
 int SetCharacterSkillBySuit(ref rChar, String sSkillName)
 {
@@ -1258,6 +1309,7 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		///////////// Иконки слева (Камни/бижутерия) <--
 
 		///////////// Иконки по центру (Комплексные бафы от идолов)  -->
+		skillN = skillN + SetCharacterSkillByHaosArtefact(_refCharacter, skillName);
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "DeSouzaCross", 30);			// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "DeSouzaCross", 20);		// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_COMMERCE, "DeSouzaCross", 10);		// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
@@ -1529,7 +1581,7 @@ void AddCharacterExpToSkillSquadron(ref _refCharacter, string _skill, float _add
     int cn,i;
 	ref chref;
 
-	for(i=0; i<7; i++)
+	for(i=0; i<COMPANION_MAX; i++)
 	{
 		cn = GetCompanionIndex(_refCharacter,i);
 		if(cn!=-1)
@@ -1723,6 +1775,10 @@ bool CheckForExchangeAllowed(ref _chref)
 
 int GetMaxItemsWeight(ref _chref)
 {
+	if (CheckAttribute(_chref, "UnlimitedWeight"))
+	{
+		return 9999999; // бесконечный переносимый
+	}
 	if (CheckAttribute(_chref, "Skill.Fencing"))
     {
         int iBonus = 0;
@@ -2632,6 +2688,7 @@ void SetAllAchievements(int level)
 	pchar.achievements.AchOrion = level; // Чокопай 100 ---
 	pchar.achievements.AchRabotorg = level; // Торгораб 100 ---
 	pchar.achievements.AchKondotier = level; // Шишкоёб 100 ---
+	pchar.achievements.AchDozor = level; // Дозорный 100
 	pchar.achievements.AchTich = level; // Чернобород 100 ---
 	pchar.achievements.AchRagnar = level; // Суровый викинг 100 ---
 	pchar.achievements.AchSalazar = level; // Тухлый испанец 100 ---
@@ -2656,9 +2713,9 @@ void SetAllAchievements(int level)
 	pchar.achievements.Nation_quest_S = level; // Выполнение национальной линейки квестов 100 ---
 	pchar.achievements.Nation_quest_P = level; // Выполнение национальной линейки квестов 100 ---
 
-	// Всего очков доступных для получения: 7600 (по 100-175 на каждое достижение) - мне лень пересчитывать (Калькулятор запили, Грегг, блеать! (c) LEOPARD :) )
-	// Гарантированно можно получить 6800 очков достижений, если исключать 4 линейки наций, линейки за персонажей и опционалки
-	// Всего достижений: 47
+	// Всего очков доступных для получения: 7700 (по 100-175 на каждое достижение) - мне лень пересчитывать (Калькулятор запили, Грегг, блеать! (c) LEOPARD :) )
+	// Гарантированно можно получить 6900 очков достижений, если исключать 4 линейки наций, линейки за персонажей и опционалки
+	// Всего достижений: 48
 	// При пересчёте возможных к получению в 1 партии был максимум в... 5150
 }
 
@@ -2887,7 +2944,7 @@ void initNewMainCharacter()
     DeleteAttribute(pchar, "Ship");
     if (sti(ch.nation) != PIRATE)
 	{
-		pchar.Ship.Type = GenerateShipExt((SHIP_BERMSLOOP + rand(11)), 0, pchar);
+		pchar.Ship.Type = GenerateShipExt((SHIP_KETCH + rand(11)), 0, pchar);
 		SetBaseShipData(pchar);
 		pchar.Ship.Name = RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple(RandPhraseSimple("Быстрый вепрь", "Боевой тигр"), "Транспортер"), "Антилопа"), "Экстра"), "Молния"), "Дельфин"), "Загадочный"), "Ужасный");
 		SetCrewQuantityFull(pchar);
@@ -2900,7 +2957,7 @@ void initNewMainCharacter()
 	}
 	else
 	{
-		pchar.Ship.Type = GenerateShipExt((SHIP_BERMSLOOP + rand(11)), 0, pchar);
+		pchar.Ship.Type = GenerateShipExt((SHIP_KETCH + rand(11)), 0, pchar);
 		SetBaseShipData(pchar);
 		pchar.Ship.Name = "Возмездие";
 		SetCrewQuantityFull(pchar);

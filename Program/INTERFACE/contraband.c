@@ -332,14 +332,12 @@ void ShowGoodsInfo(int iGoodIndex)
 void IDoExit(int exitCode)
 {
 	pchar.ContraFilter = FIS_FilterState;
-	if(GetSummonSkillFromName(GetMainCharacter(), "Sneak") < Rand(120) && !CheckAttribute(pchar,"ContraInter"))
+	if(GetSummonSkillFromName(GetMainCharacter(), "Sneak") < Rand(120) && !CheckAttribute(pchar,"quest.Contraband.InterruptionGot"))
 	{
 		PChar.GenQuest.contraTravel.PatrolFight = true;
+		PChar.quest.Contraband.InterruptionGot = true;
 		DoQuestCheckDelay("Rand_ContrabandInterruption", 0.1);
-		for (int i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE/2); i++)
-		{
-			characters[GetCharacterIndex("Rand_Smug0"+i)].ContrabandInterruption = true;
-		}
+		ContrabandInterruptionSetStatus(true);
 	}
 	DeleteAttribute(pchar,"Goods.Store.Contraband");
 	//Log_Info(pchar.Goods.Store.Contraband);
@@ -347,7 +345,7 @@ void IDoExit(int exitCode)
 	{
 		pchar.quest.Contraband.SneakGot = true;
 		AddCharacterExpToSkill(Pchar, "Sneak", 100);
-		SetTimerCondition("ContraSneakGot", 0, 0, 1, false);
+		SetTimerCondition("ContraClearGot", 0, 0, 1, false);
 	}
 
 	ChangeContrabandRelation(GetMainCharacter(), 15);

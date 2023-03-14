@@ -57,7 +57,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Step_4":
-			dialog.text = "50 000 золотом.";
+			dialog.text = "50000 золотом.";
 			if(makeint(Pchar.money) >= 50000)
 			{
 			link.l1 = "Хм, немало. Но если дело того стоит... соглас"+ GetSexPhrase("ен","на") +".";

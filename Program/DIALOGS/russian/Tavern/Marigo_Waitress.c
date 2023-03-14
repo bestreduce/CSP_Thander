@@ -34,7 +34,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "FindDesouzaHolWaitress_3";
 		break;
 		case "FindDesouzaHolWaitress_3":
-			dialog.text = "Мне все ещё ничего не ясно, но почему-то хочется вам верить. Элихио тоже не был похож на опасного преступника, которым его описывали эти люди.";
+			dialog.text = "Мне всё ещё ничего не ясно, но почему-то хочется вам верить. Элихио тоже не был похож на опасного преступника, которым его описывали эти люди.";
 			link.l1 = "Элихио? Это его ищут инквизиторы?";
 			link.l1.go = "FindDesouzaHolWaitress_4";
 		break;

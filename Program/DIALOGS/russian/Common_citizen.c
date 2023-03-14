@@ -120,14 +120,14 @@ void ProcessDialogEvent()
                 //LinkRandPhrase("Я " + GetFullName(Pchar) + ", капитан.", "Меня зовут " + GetFullName(Pchar) + ".", "Можешь называть меня капитан " + GetFullName(Pchar));				
 				Link.l1.go = "Meeting";
 				
-				if (pchar.questTemp.AnjelikaTichPrologue6 == "ATP6")	//Sinistra Пролог Анжелики Шарп
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue6") && pchar.questTemp.AnjelikaTichPrologue6 == "ATP6")	//Sinistra Пролог Анжелики Шарп
 				{					
 					dialog.text = LinkRandPhrase("Весь город сегодня обсуждает только одну новость – неудавшуюся попытку захвата нашей колонии.", "Нет, но вы подумайте каковы храбрецы, решили атаковать укрепления нашего города! И на что они только рассчитывали? Я думаю, эта авантюра была обречена на провал, когда только родилась в голове того, кто её придумал.", "Признаюсь, когда началась стрельба, меня охватила паника.");
 					link.l1 = "";
 					link.l1.go = "exit";
 					LAi_CharacterDisableDialog(npchar);
 				}
-				if (pchar.questTemp.AnjelikaTichPrologue == "ATP" && pchar.questTemp.AnjelikaTichPrologue2 == "ATP2")	//Sinistra Пролог Анжелики Шарп
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP" && pchar.questTemp.AnjelikaTichPrologue2 == "ATP2")	//Sinistra Пролог Анжелики Шарп
 				{
 					pchar.ATP_MirJitId = npchar.id;
 					
@@ -148,7 +148,7 @@ void ProcessDialogEvent()
 					break;
 					}
 				}
-				if (pchar.questTemp.AnjelikaTichPrologue == "ATP")	//Sinistra Пролог Анжелики Шарп
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP")	//Sinistra Пролог Анжелики Шарп
 				{
 					pchar.ATP_MirJitId = npchar.id;
 					

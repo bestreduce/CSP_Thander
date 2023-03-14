@@ -845,8 +845,8 @@ void ATpr_OboronaSD_9(string qName)
 {
 	CreateLocationParticles("shipfire", "rld", "loc6", -3.0, 0, 0, "");
 	CreateLocationParticles("ShipExplode", "rld", "loc6", 0, 0, 0, "boom");
-	CreateLocationParticles("Ship_cannon_fire", "rld", "loc21", 0, -90, 0, "");
-	CreateLocationParticles("cancloud_fire_big", "rld", "loc21", 0, -90, 0, "");
+	CreateLocationParticles("Ship_cannon_fire", "quest", "quest21", 0, -90, 0, "");
+	CreateLocationParticles("cancloud_fire_big", "quest", "quest21", 0, -90, 0, "");
 	PlayVoice("Sea Battles\sdavl_kriki_002.wav");
 	PlaySound("Sea Battles\vistrel_orudiya_004.wav");
 	
@@ -875,8 +875,8 @@ void ATpr_OboronaSD_11(string qName)
 {
 	CreateLocationParticles("shipfire", "rld", "loc9", -3.0, 0, 0, "");
 	CreateLocationParticles("ShipExplode", "rld", "loc9", 0, 0, 0, "boom");
-	CreateLocationParticles("Ship_cannon_fire", "rld", "loc22", 0, -90, 0, "");
-	CreateLocationParticles("cancloud_fire_big", "rld", "loc22", 0, -90, 0, "");
+	CreateLocationParticles("Ship_cannon_fire", "quest", "quest22", 0, -90, 0, "");
+	CreateLocationParticles("cancloud_fire_big", "quest", "quest22", 0, -90, 0, "");
 	PlayVoice("Sea Battles\sdavl_kriki_004.wav");
 	PlaySound("Sea Battles\vistrel_orudiya_005.wav");
 	
@@ -901,7 +901,7 @@ void ATpr_OboronaSD_12(string qName)
         ChangeCharacterAddressGroup(sld, "SantoDomingo_ExitTown", "rld",  "loc0");
     }
 	LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-	LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, false);			//true - если помирить
+	LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, false);
 	LAi_group_SetCheck("EnemyFight", "ATpr_3Volna");
 	DoQuestFunctionDelay("ATpr_OboronaSD_13", 3.0);
 	DoQuestFunctionDelay("ATpr_OboronaSD_12_1", 7.3);
@@ -1026,8 +1026,8 @@ void ATpr_OboronaSD_19(string qName)
 void ATpr_OboronaSD_20(string qName)
 {
 	CreateLocationParticles("ShipExplode", "rld", "loc10", 0, 0, 0, "boom");
-	CreateLocationParticles("Ship_cannon_fire", "rld", "loc22", 0, -90, 0, "cannon_fire_2");
-	CreateLocationParticles("Bombard", "rld", "loc22", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Ship_cannon_fire", "quest", "quest22", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Bombard", "quest", "quest22", 0, -90, 0, "cannon_fire_2");
 	//PlayVoice("Sea Battles\sdavl_kriki_004.wav");
 	PlaySound("Sea Battles\vistrel_orudiya_004.wav");	
 	
@@ -1036,8 +1036,8 @@ void ATpr_OboronaSD_20(string qName)
 void ATpr_OboronaSD_21(string qName)
 {
 	CreateLocationParticles("ShipExplode", "rld", "loc13", 0, 0, 0, "boom");
-	CreateLocationParticles("Ship_cannon_fire", "rld", "loc23", 0, -90, 0, "cannon_fire_2");
-	CreateLocationParticles("Bombard", "rld", "loc23", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Ship_cannon_fire", "quest", "quest23", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Bombard", "quest", "quest23", 0, -90, 0, "cannon_fire_2");
 	//PlayVoice("Sea Battles\sdavl_kriki_004.wav");
 	PlaySound("Sea Battles\vistrel_orudiya_005.wav");
 }
@@ -1045,8 +1045,8 @@ void ATpr_OboronaSD_22(string qName)
 {
 	//CreateLocationParticles("shipfire", "rld", "loc15", -3.0, 0, 0, "");
 	CreateLocationParticles("ShipExplode", "rld", "loc15", 0, 0, 0, "boom");
-	CreateLocationParticles("Bombard", "rld", "loc22", 0, -90, 0, "cannon_fire_2");
-	CreateLocationParticles("Ship_cannon_fire", "rld", "loc22", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Bombard", "quest", "quest22", 0, -90, 0, "cannon_fire_2");
+	CreateLocationParticles("Ship_cannon_fire", "quest", "quest22", 0, -90, 0, "cannon_fire_2");
 	//PlayVoice("Sea Battles\sdavl_kriki_004.wav");
 	PlaySound("Sea Battles\vistrel_orudiya_004.wav");
 }

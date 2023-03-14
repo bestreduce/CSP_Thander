@@ -2316,7 +2316,7 @@ void InitIslands()
 		Islands[n].reload_enable = true;
 		Islands[n].hidden = true;
 		Islands[n].colonyquantity = 0;
-		Islands[n].jungle.patch = "StLucia_jungles";
+		Islands[n].jungle.patch = "StLucia_jungle";
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "StLucia";
@@ -2352,6 +2352,8 @@ void InitIslands()
 		Islands[n].filespath.models = "islands\KhaelRoa";
 		Islands[n].refl_model = "KhaelRoa_refl";
 		Islands[n].locators = "KhaelRoa_locators";
+		Islands[n].ImmersionDistance = 4000;
+		Islands[n].ImmersionDepth = 10000;
 		Islands[n].colonyquantity = 0;
 		Islands[n].TexturePath = "LostShipsCity";
 		Islands[n].visible = true;

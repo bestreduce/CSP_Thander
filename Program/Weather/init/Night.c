@@ -1,13 +1,13 @@
-//0,1,2,3,4,5 - ночь
-//6,7,8,9,10 - утро
-//11,12,13,14,15,16,17,18 - день
-//19,20,21,22,23 - вечер
+//0,1,2,3,4,5 - пїЅпїЅпїЅпїЅ
+//6,7,8,9,10 - пїЅпїЅпїЅпїЅ
+//11,12,13,14,15,16,17,18 - пїЅпїЅпїЅпїЅ
+//19,20,21,22,23 - пїЅпїЅпїЅпїЅпїЅ
 //0-6
 int Whr_InitNight(int n)
 {
 
 // ====================================================================
-// Ночь 0 часов
+// пїЅпїЅпїЅпїЅ 0 пїЅпїЅпїЅпїЅпїЅ
 
 	Weathers[n].id = "0 Hour";
 	Weathers[n].Hour.Min = 0;
@@ -37,7 +37,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -52,12 +52,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,2,2,2);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,5,15,25);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -81,7 +81,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,30,30,30);
+	Weathers[n].Sun.Color = argb(0,20,40,60);
 	Weathers[n].Sun.Ambient = argb(0,28,28,35);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
 	Weathers[n].Sun.HeightAngle = 0.30;
@@ -194,13 +194,13 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
 
 // ====================================================================
-// Ночь 1 час	
+// пїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅ	
 	 
 	Weathers[n].id = "1 Hour";
 	Weathers[n].Hour.Min = 1;
@@ -230,7 +230,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -245,12 +245,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,2,2,2);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,5,15,25);
 		
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -275,8 +275,8 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,30,30,30);
-	Weathers[n].Sun.Ambient = argb(0,30,25,25);
+	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Ambient = argb(0,30,30,40);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
 	Weathers[n].Sun.HeightAngle = 0.30;
 	
@@ -382,13 +382,13 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
 
 // ====================================================================
-// Ночь 2 часа		 
+// пїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅ		 
 
 	Weathers[n].id = "2 Hour";
 	Weathers[n].Hour.Min = 2;
@@ -418,7 +418,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -433,12 +433,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,4,6,9);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,5,15,25);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -463,8 +463,8 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,30,30,30);
-	Weathers[n].Sun.Ambient = argb(0,25,28,28);
+	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Ambient = argb(0,30,30,38);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(190.0);
 	Weathers[n].Sun.HeightAngle = 0.20;
 	
@@ -570,13 +570,13 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
 
 // ====================================================================
-// Ночь 3 часа		 
+// пїЅпїЅпїЅпїЅ 3 пїЅпїЅпїЅпїЅ		 
 
 	Weathers[n].id = "3 Hour";
 	Weathers[n].Hour.Min = 3;
@@ -606,7 +606,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -621,12 +621,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,4,6,9);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,5,15,25);
 		
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -651,7 +651,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,40,40,40);
+	Weathers[n].Sun.Color = argb(0,10,30,50);
 	Weathers[n].Sun.Ambient = argb(0,30,30,30);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(130.0);
 	Weathers[n].Sun.HeightAngle = 0.50;
@@ -758,13 +758,13 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
 
 // ====================================================================
-// Ночь 4 часа
+// пїЅпїЅпїЅпїЅ 4 пїЅпїЅпїЅпїЅ
 
 	Weathers[n].id = "4 Hour";
 	Weathers[n].Hour.Min = 4;
@@ -794,7 +794,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -809,12 +809,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 500;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,4,6,9);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,5,15,25);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -839,8 +839,8 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,30,30,25);
-	Weathers[n].Sun.Ambient = argb(0,48,48,43);
+	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Ambient = argb(0,38,38,33);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(320.0);
 	Weathers[n].Sun.HeightAngle = 0.28;
 	
@@ -946,13 +946,13 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
 
 // ====================================================================
-// Ночь 5 часов
+// пїЅпїЅпїЅпїЅ 5 пїЅпїЅпїЅпїЅпїЅ
 
 	Weathers[n].id = "5 Hour";
 	Weathers[n].Hour.Min = 5;
@@ -982,7 +982,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -997,12 +997,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,4,6,9);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,15,15,25);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -1027,8 +1027,8 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,30,30,25);
-	Weathers[n].Sun.Ambient = argb(0,58,58,53);
+	Weathers[n].Sun.Color = argb(0,20,30,50);
+	Weathers[n].Sun.Ambient = argb(0,48,48,43);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(320.0);
 	Weathers[n].Sun.HeightAngle = 0.28;
 
@@ -1134,7 +1134,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 5.0;
+	Weathers[n].Wind.Speed.Min = 2.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;

@@ -11,6 +11,8 @@ int heroQty = 0;
 int descWrong = 0;
 string totalInfo;
 string totalInfoChar;
+int expval = 0;
+int minval = 0;
 
 void InitInterface(string iniName)
 {
@@ -77,6 +79,8 @@ void InitInterface(string iniName)
 
 	SetFormatedText("EXP_SLIDE_MIN", "Min");
 	SetFormatedText("EXP_SLIDE_MAX", "Max");
+	expval = 5+makeint(10*(1.0-stf(GameInterface.nodes.EXP_SLIDE.value)));
+	SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666));
 
 	//SetFormatedText("DESC_TITLE", "Внимание!");
 	SetFormatedText("DESC_TEXT", "Начало новой игры - это важный этап, в котором Вам предстоит настроить игру под себя. \n\nВсе стартовые параметры, которые Вы сейчас укажете в данном меню, будут действовать до конца партии! Поставив не ту 'галочку' или, наоборот, не включив - можно серьёзно усложнить себе игру. Для каждой опции есть описание, которое выводится при зажатии правой клавиши мыши на ней. \nТеперь внимание! Чтобы начать игру, Вам просто нужно нажать правой кнопкой мыши по кнопке 'Соглашаюсь!' или 'Давай, поехали уже!'. \n\nУдачи, корсар, попутного ветра!");
@@ -88,8 +92,7 @@ void InitInterface(string iniName)
 
     heroQty   = sti(GetNewMainCharacterParam("hero_qty"));
 
-
-		SetVariable(true);
+	SetVariable(true);
 
 	TmpI_ShowLevelComplexity();
 	TmpI_ShowOffAmount();
@@ -263,6 +266,22 @@ void SetByDefault()
 	else
 	{
 		CheckButton_SetState("CHECK_DIFFICULTY_WEIGHT",1,false);
+	}
+	if(bShootOnlyEnemy)
+	{
+		CheckButton_SetState("CHECK_SHOOTONLYENEMY",1,true);
+	}
+	else
+	{
+		CheckButton_SetState("CHECK_SHOOTONLYENEMY",1,false);
+	}
+	if(bWorldAlivePause)
+	{
+		CheckButton_SetState("CHECK_WORLDPAUSE",1,true);
+	}
+	else
+	{
+		CheckButton_SetState("CHECK_WORLDPAUSE",1,false);
 	}
 	/*if(bModDamage)
 	{
@@ -499,6 +518,29 @@ void IProcessFrame()
 	{
 		bDifficultyWeight = false;
 	}
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_SHOOTONLYENEMY", 3, 1))
+	{
+		bShootOnlyEnemy = true;
+	}
+	else
+	{
+		bShootOnlyEnemy = false;
+	}
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_WORLDPAUSE", 3, 1))
+	{
+		bWorldAlivePause = true;
+	}
+	else
+	{
+		bWorldAlivePause = false;
+	}
+	minval = makeint(5 + MOD_SKILL_ENEMY_RATE * 5 / 1.666666666);
+	if (minval < 10) minval = 10;
+	SetFormatedText("EXP_SLIDE_MIN", "Min\n"+makeint(15 + MOD_SKILL_ENEMY_RATE * 15 / 1.666666666));
+	SetFormatedText("EXP_SLIDE_MAX", "Max\n"+minval);
+	expval = 5+makeint(10*(1.0-stf(GameInterface.nodes.EXP_SLIDE.value)));
+	if (makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666) < 10) SetFormatedText("EXP_SLIDE_VALUE", "10");
+	else SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666));
 	/*if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_MOD_DAMAGE", 3, 1))
 	{
 		bModDamage = true;
@@ -1214,6 +1256,16 @@ void ShowInfo()
 			sHeader = XI_ConvertString("DifficultyWeight");
 			sText1 = GetRPGText("DifficultyWeight_hint");
 		break;
+		
+		case "CHECK_SHOOTONLYENEMY":
+			sHeader = XI_ConvertString("ShootOnlyEnemy");
+			sText1 = GetRPGText("ShootOnlyEnemy_hint");
+		break;
+		
+		case "CHECK_WORLDPAUSE":
+			sHeader = XI_ConvertString("WorldPause");
+			sText1 = GetRPGText("WorldPause_hint");
+		break;
 
 		case "CHECK_MOD_DAMAGE":
 			sHeader = XI_ConvertString("CHECK_MOD_DAMAGE");
@@ -1549,7 +1601,7 @@ void TmpI_ShowDefendersAmount()
 
 void StopBlind_Hint()
 {
-SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE,"NOOB_HINT_STR", 5, 0);
+	SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE,"NOOB_HINT_STR", 5, 0);
 }
 
 void DisableEnable_CheckProcess() // ugeen 2016

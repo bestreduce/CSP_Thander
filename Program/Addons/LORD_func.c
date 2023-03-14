@@ -13,7 +13,7 @@ string GetPGGDialog(ref rChar)
         return "pgg_dialog.c";
     break;
     case "woman":
-        return "pgg_dialog_town.c";
+        return "PGG_dialog.c";
     break;
     }
 }

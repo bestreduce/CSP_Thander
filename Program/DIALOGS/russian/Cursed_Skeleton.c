@@ -38,7 +38,7 @@ void ProcessDialogEvent()
 				}
 				link.l3 = "Умри, отродье!";
 				link.l3.go = "skel_fight";
-				if (pchar.questTemp.AnjelikaTichPrologue == "ATP")	//Sinistra Пролог Анжелика Тич
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP")	//Sinistra Пролог Анжелика Тич
 				{
 					dialog.text = "Не бойся меня, я хорошая нежить. Бери что хочешь, ни в чём себе не отказывай.";
 					link.l1 = "(шок) Мама дорогая!";
@@ -242,7 +242,7 @@ void SelectCursedRendom()
 		int howStore = 0;
 		for(n=0; n<MAX_COLONIES; n++)
 		{
-			if (colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && colonies[n].id != "FortOrange")
+			if (colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE)
 			{
 				storeArray[howStore] = n;
 				howStore++;

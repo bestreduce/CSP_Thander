@@ -304,9 +304,9 @@ void UpdateCrewInColonies()
 					eSoldiers  = 45;
 				break;
 				case HOLLAND:
-					eSailors   = 25;
-					eCannoners = 25;
-					eSoldiers  = 5;
+					eSailors   = 30;
+					eCannoners = 30;
+					eSoldiers  = 10;
 				break;
 			}
 			rTown.Ship.Crew.Exp.Sailors   = eSailors   + rand(2*eSailors)   + rand(10);

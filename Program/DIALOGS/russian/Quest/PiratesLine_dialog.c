@@ -564,7 +564,7 @@ void ProcessDialogEvent()
 			link.l1.go = "FriendLinney_1";
 		break;
 		case "FriendLinney_1":
-			dialog.text = "Хм, может и приятели…";
+			dialog.text = "Хм, может, и приятели...";
 			link.l1 = "Меня зовут " + GetFullName(pchar) + ", я выполняю поручение Моргана. Стив долго не возвращался, а поскольку он собирал сведения для Моргана, Генри послал меня выяснить его судьбу.";
 			link.l1.go = "FriendLinney_2";
 		break;

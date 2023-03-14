@@ -220,11 +220,6 @@ void QuestComplete(string sQuestName, string qname)
 				//LAi_RemoveCheckMinHP(sld);  можно пальнуть в спину, тогда по идее будет бой
 				LAi_type_actor_Reset(sld);
 				LAi_ActorGoToLocation(sld, "reload", sTemp, "none", "", "", "", 4.0);
-
-				sld = characterFromID(PChar.HunterCost.TempHunterType + "LandHunter02" + i);
-				//LAi_RemoveCheckMinHP(sld);  можно пальнуть в спину, тогда по идее будет бой
-				LAi_type_actor_Reset(sld);
-				LAi_ActorGoToLocation(sld, "reload", sTemp, "none", "", "", "", 4.0);
 			}
         break;
 		case "GoAway_PGGHunters_Land":
@@ -437,7 +432,7 @@ void QuestComplete(string sQuestName, string qname)
             chrDisableReloadToLocation = true;
             Pchar.GenQuestFort.FarLocator = true;
 			sTemp = "officers"; // не везде есть! :(
-            for (i = 0; i < MAX_TOWN_CREW; i++)
+            for (i = 0; i < MAX_TOWN_CREW + MOD_SKILL_ENEMY_RATE/2; i++)
             {
 				sld = SetFantomSkeletForts(sTemp, "", "TOWN_BATTLE_SOLDIERS", "GhostShipCrew");
 				if (sld.location.locator == "")
@@ -456,9 +451,8 @@ void QuestComplete(string sQuestName, string qname)
             {
             	SetFantomDefenceForts("goto", "", iTemp, LAI_GROUP_PLAYER);
             }
-            //#20190505-03
-            int nTmpEsc = makeint(MOD_SKILL_ENEMY_RATE);
-            for (i = 0; i < nTmpEsc; i++)
+
+            for (i = MOD_SKILL_ENEMY_RATE/2; i < 6; i++)
             {
             	SetFantomDefenceForts("goto", "", iTemp, LAI_GROUP_PLAYER);
             }
@@ -1249,8 +1243,9 @@ void QuestComplete(string sQuestName, string qname)
 				"Грохоту было - весь город переполошился, а в местной лавке крышу ядром проломило! Да только без толку всё. Местные-то - скупщики значит, в джунглях спрятались, а капитан морем ушёл. Как есть, с носом нашу эскадру оставил! Так из бухты вырулил - любой лоцман позавидует!", Pchar.quest.contraband.City, 3, 5, "");
 		break;
 
-		case "ContraSneakGot":
+		case "ContraClearGot":
 			DeleteAttribute(pchar,"quest.Contraband.SneakGot");
+			DeleteAttribute(pchar,"quest.Contraband.InterruptionGot");
 		break;
 		case "Rand_ContrabandAtSeaEnded":
 			StopCoastalGuardPursuit();
@@ -1432,7 +1427,7 @@ void QuestComplete(string sQuestName, string qname)
             attrName = "";
             if (pchar.CargoQuest.iTradeIsland != pchar.CargoQuest.iTradeColony)
             {
-                attrName = ", что находится на " + XI_ConvertString(pchar.CargoQuest.iTradeIsland+"Dat");
+                attrName = ", что находится на " + XI_ConvertString(pchar.CargoQuest.iTradeIsland+"Voc");
             }
             AddQuestUserData("DELIVERY_TRADE_QUEST", "island", attrName);
     		AddQuestUserData("DELIVERY_TRADE_QUEST", "sTermsDelivery", FindRussianDaysString(makeint(pchar.CargoQuest.iDaysExpired)));
@@ -1616,10 +1611,7 @@ void QuestComplete(string sQuestName, string qname)
 				RemoveCharacterCompanion(Pchar, characterFromID("QuestTrader"));
 				CloseQuestHeader("convoy_quest");
 
-				pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-				if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-				if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-				if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+				AchievementsCounter_genquests(1);
 			}
 			pchar.quest.generate_convoy_quest_progress = "";
 			GetCharacterPos(pchar, &locx, &locy, &locz);
@@ -1683,7 +1675,7 @@ void QuestComplete(string sQuestName, string qname)
             ReOpenQuestHeader("convoy_quest");
 			AddQuestRecord("convoy_quest", "1");
 			AddQuestUserData("convoy_quest", "sSex", GetSexPhrase("ся","ась"));
-			sTemp = XI_ConvertString("Colony" + pchar.quest.destination + "Gen") + ", что на " + XI_ConvertString(GetIslandByCityName(pchar.quest.destination) + "Dat") + ",";
+			sTemp = XI_ConvertString("Colony" + pchar.quest.destination + "Gen") + ", что на " + XI_ConvertString(GetIslandByCityName(pchar.quest.destination) + "Voc") + ",";
 			AddQuestUserData("convoy_quest", "sCity", sTemp);
 			AddQuestUserData("convoy_quest", "sDay", FindRussianDaysString(sti(pchar.ConvoyQuest.iDay)));
             AddQuestUserData("convoy_quest", "sMoney", FindRussianMoneyString(sti(pchar.ConvoyQuest.convoymoney)));
@@ -1853,7 +1845,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "LandEnc_RaidersOver": //чистим за собой
-			sTemp = "EncRaiders_" + pchar.quest.(qname).LocIdx;
+			sTemp = "TimeRaiders_" + pchar.quest.(qname).LocIdx;
 			iTemp = sti(pchar.quest.(sTemp).EncQty);
 			sTemp = "Gang" + pchar.quest.(qname).LocIdx + "_";
 			for(i = 0; i < iTemp; i++)
@@ -1867,7 +1859,7 @@ void QuestComplete(string sQuestName, string qname)
 			//#20190328-03
 			LAi_group_SetAlarm(sTemp, LAI_GROUP_PLAYER, 0.0);
 			pchar.quest.(qname).over = "yes";
-			sTemp = "EncRaiders_" + pchar.quest.(qname).LocIdx;
+			sTemp = "TimeRaiders_" + pchar.quest.(qname).LocIdx;
 			pchar.quest.(sTemp).over = "yes";
 			sTemp = pchar.quest.(qname).LocIdx;
 			DeleteAttribute(pchar, "GenQuest." + sTemp); //трем нацию и имя
@@ -2401,7 +2393,7 @@ void QuestComplete(string sQuestName, string qname)
 					}
 					//<-- генерим ранг
 					// sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "spy", "spy", Rank, PIRATE, 0, true)); // LEO: Убрал от бугуртов недовольных - Gregg :)
-					if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "spy", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
+					if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
 					else sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man", Rank, PIRATE, 0, true));
 					sld.dialog.filename = "MayorQuests_dialog.c";
 					sld.dialog.currentnode = "SeekSpy_house";
@@ -2690,7 +2682,9 @@ void QuestComplete(string sQuestName, string qname)
 			//сформируем строку с типом корабля, пригодится
 			sld = characterFromId("MQPirate");
 			iTemp = RealShips[sti(sld.ship.type)].basetype;
-			pchar.GenQuest.DestroyPirate.ShipType = GetShipSexWord(ShipsTypes[iTemp].name, "пиратский ", "пиратскую ") + XI_ConvertString(ShipsTypes[iTemp].name+"Gen");
+			pchar.GenQuest.DestroyPirate.ShipType = GetShipSexWord(ShipsTypes[iTemp].name,
+				"пиратский " + XI_ConvertString(ShipsTypes[iTemp].name),
+				"пиратскую " + XI_ConvertString(ShipsTypes[iTemp].name + "Gen"));
 			//прерывание на смерть пирата
 			pchar.quest.DestroyPirate.win_condition.l1 = "NPC_Death";
 			pchar.quest.DestroyPirate.win_condition.l1.character = "MQPirate";
@@ -2986,7 +2980,7 @@ void QuestComplete(string sQuestName, string qname)
 		////////////////////////////////////////////////////////////////////////
 		case "Berglars_Ostin":
 			chrDisableReloadToLocation = true;
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "spy", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man", 30, SPAIN, -1, false));
 			FantomMakeCoolFighter(sld, 30, 100, 70, "blade32", "pistol5", 50);
 			sld.name 	= "Альберто";
@@ -3315,10 +3309,7 @@ void QuestComplete(string sQuestName, string qname)
 			AddQuestUserData("GivePrisonFree", "sName", pchar.questTemp.jailCanMove.Deliver.name);
 			CloseQuestHeader("GivePrisonFree");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
             chrDisableReloadToLocation = false;
 			iTemp = GetCharacterIndex(pchar.questTemp.jailCanMove.Deliver.Id);
@@ -3546,7 +3537,7 @@ void QuestComplete(string sQuestName, string qname)
                 LAi_LocationFightDisable(&Locations[FindLocation("Villemstad_Bank")], true); // вертаем запрет на боевки
                 sld = characterFromID("Villemstad_usurer");
                 ChangeCharacterAddressGroup(sld, "Villemstad_Bank", "goto", "goto1");
-	            LAi_SetBarmanType(sld);
+	            LAi_SetOwnerType(sld);
                 LAi_SetHP(sld, 80, 80); //вертаем ростовщика если убит
                 pchar.quest.Intelligence_Curacao_OutTown.over = "yes";
             }
@@ -3558,7 +3549,7 @@ void QuestComplete(string sQuestName, string qname)
 				pchar.questTemp.abordage = 0; // запрещаем абордаж повторно - это сброс запрета
 
                 sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_hol_2", "man", "man", 23, HOLLAND, 0, true));
-                FantomMakeCoolSailor(sld, SHIP_BRIGHEAVY, "", CANNON_TYPE_CANNON_LBS32, 95, 95, 95);
+                FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "", CANNON_TYPE_CANNON_LBS32, 95, 95, 95);
                 FantomMakeCoolFighter(sld, 25, 90, 50, BLADE_LONG, "pistol3", 100);
                 sld.DontRansackCaptain = true; //квестовые не сдаются
                 sld.SinkTenPercent = true; // уходим с повреждениями
@@ -3723,7 +3714,7 @@ void QuestComplete(string sQuestName, string qname)
         	sld.Abordage.Enable = false; // НЕЛЬЗЯ!
 			sld.greeting = "Gr_MiddPirate";
             LAi_SetStayTypeNoGroup(sld);
-            FantomMakeCoolSailor(sld, SHIP_SALAMANDER, "Фаворит", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
+            FantomMakeCoolSailor(sld, SHIP_ESSEX, "Фаворит", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
             FantomMakeCoolFighter(sld, 28, 70, 40, BLADE_LONG, "pistol4", 100);
             sld.Ship.Stopped = true;
             sld.DeckDialogNode = "First time";
@@ -4122,13 +4113,13 @@ void QuestComplete(string sQuestName, string qname)
                 {
                     attrName = "SpaOfficer1";
                     Rank = 40;
-                    ShipType = SHIP_BATTLESHIP;
+                    ShipType = SHIP_REDOUTABLE;
                 }
                 if (i==2)
                 {
                     attrName = "off_spa_2";
                     Rank = 30;
-                    ShipType = SHIP_FRIGATE_SAT;
+                    ShipType = SHIP_CECILIA;
                 }
                 sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_"+i, attrName, "man", "man", Rank, SPAIN, 0, true));
                 FantomMakeCoolSailor(sld, ShipType, "", CANNON_TYPE_CANNON_LBS32, 95, 90, 90);
@@ -4205,7 +4196,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_SP_SANFELIPE;
+                        ShipType = SHIP_SANFELIPE;
                         Model = "off_spa_1";
                         Rank = 40;
                         Blade = "blade33";
@@ -4223,7 +4214,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade24";
                     break;
                     case 4:
-                        ShipType = SHIP_FR_TRINITY;
+                        ShipType = SHIP_TRINITY;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade34";
@@ -4235,13 +4226,13 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade26";
                     break;
                     case 6:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Model = "off_spa_2";
                         Rank = 33;
                         Blade = "blade28";
                     break;
                     case 7:
-                        ShipType = SHIP_ZEVENPROVINCIEN;
+                        ShipType = SHIP_CRISTIAN;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -4407,13 +4398,13 @@ void QuestComplete(string sQuestName, string qname)
                     switch (i)
                     {
                         case 1:
-                            ShipType = SHIP_SALAMANDER;
+                            ShipType = SHIP_ESSEX;
                             Model = "off_eng_1";
                             Rank = 23;
                             Blade = "blade33";
                         break;
                         case 2:
-                            ShipType = SHIP_BRIGHEAVY;
+                            ShipType = SHIP_BRIG_NV;
                             Model = "off_eng_2";
                             Rank = 19;
                             Blade = "blade28";
@@ -4774,7 +4765,7 @@ void QuestComplete(string sQuestName, string qname)
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "officer_15", "man", "man", 30, PIRATE, 0, true));
             sld.Dialog.Filename    = "Quest\HolLineNpc_2.c";
 			sld.DontRansackCaptain = true;
-            FantomMakeCoolSailor(sld, SHIP_BRIGHEAVY, "Ла Рошель", CANNON_TYPE_CULVERINE_LBS24, 90, 80, 80);
+            FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "Ла Рошель", CANNON_TYPE_CULVERINE_LBS24, 90, 80, 80);
             FantomMakeCoolFighter(sld, 30, 100, 40, "blade24", "pistol3", 80);
 			Group_AddCharacter("Pirate_Attack", "CaptainAttack_1");
             // ==> стравливание
@@ -4864,7 +4855,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_BELLONA;
+                        ShipType = SHIP_PAVEL;
                         Model = "SpaOfficer2";
                         Rank = 28;
                         Blade = "blade24";
@@ -4888,7 +4879,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade33";
                     break;
                     case 5:
-                        ShipType = SHIP_FRIGATEMEDIUM;
+                        ShipType = SHIP_POSTILLIONEN;
                         Model = "off_spa_1";
                         Rank = 36;
                         Blade = "blade28";
@@ -4995,7 +4986,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_SP_SANFELIPE;
+                        ShipType = SHIP_SANFELIPE;
                         Model = "off_spa_1";
                         Rank = 45;
                         Blade = "blade33";
@@ -5007,13 +4998,13 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 3:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Model = "off_spa_1";
                         Rank = 33;
                         Blade = "blade24";
                     break;
                     case 4:
-                        ShipType = SHIP_FR_TRINITY;
+                        ShipType = SHIP_TRINITY;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade34";
@@ -5025,7 +5016,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "topor2";
                     break;
                     case 6:
-                        ShipType = SHIP_ZEVENPROVINCIEN;
+                        ShipType = SHIP_CRISTIAN;
                         Model = "off_spa_2";
                         Rank = 32;
                         Blade = "topor2";
@@ -5120,7 +5111,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_SP_SANFELIPE;
+                        ShipType = SHIP_SANFELIPE;
                         Model = "off_spa_1";
                         Rank = 42;
                         Blade = "blade33";
@@ -5132,19 +5123,19 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade33";
                     break;
                     case 3:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Model = "off_spa_2";
                         Rank = 32;
                         Blade = "blade28";
                     break;
                     case 4:
-                        ShipType = SHIP_BELLONA;
+                        ShipType = SHIP_PAVEL;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade24";
                     break;
                     case 5:
-                        ShipType = SHIP_FR_TRINITY;
+                        ShipType = SHIP_TRINITY;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade34";
@@ -5162,7 +5153,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 8:
-                        ShipType = SHIP_ZEVENPROVINCIEN;
+                        ShipType = SHIP_CRISTIAN;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -5246,7 +5237,7 @@ void QuestComplete(string sQuestName, string qname)
         	sld.location	= "Villemstad_Bank";
         	sld.location.group = "barmen";
         	sld.location.locator = "stay";
-        	LAi_SetBarmanType(sld);
+        	LAi_SetOwnerType(sld);
         	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
         break;
 
@@ -5627,7 +5618,7 @@ void QuestComplete(string sQuestName, string qname)
 					switch (i)
 					{
 						case 1:
-							ShipType = SHIP_SURPRISE;
+							ShipType = SHIP_BELLE;
 							Model = "off_fra_1";
 							Rank = 42;
 							Blade = "blade33";
@@ -5639,32 +5630,32 @@ void QuestComplete(string sQuestName, string qname)
 							Blade = "blade33";
 						break;
 						case 3:
-							ShipType = SHIP_SURPRISE;
+							ShipType = SHIP_BELLE;
 							Model = "off_fra_2";
 							Rank = 32;
 							Blade = "blade28";
 						break;
 						case 4:
-							ShipType = SHIP_SURPRISE;
+							ShipType = SHIP_BELLE;
 							Model = "off_fra_1";
 							Rank = 35;
 							Blade = "blade24";
 						break;
 						case 5:
-							ShipType = SHIP_BATTLECORVETTE;
+							ShipType = SHIP_PANDORA;
 							Model = "off_fra_1";
 							Rank = 35;
 							Blade = "blade34";
 						break;
 						case 6:
-							ShipType = SHIP_BRIGHEAVY;
+							ShipType = SHIP_BRIG_NV;
 							Model = "off_hol_2";
 							Rank = 29;
 							Blade = "blade26";
 							//iTemp = HOLLAND;
 						break;
 						case 7:
-							ShipType = SHIP_DUTCHPINNACE;
+							ShipType = SHIP_DEBRACKW;
 							Model = "off_fra_2";
 							Rank = 33;
 							Blade = "blade28";
@@ -5731,7 +5722,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Model = "SpaOfficer1";
                         Rank = 30;
                         Blade = "blade26";
@@ -5780,7 +5771,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 35;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -5792,7 +5783,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 33;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CANNON_LBS32;
@@ -5804,7 +5795,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 5:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 34;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CANNON_LBS32;
@@ -5906,7 +5897,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
 					case 1:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 42;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -5918,7 +5909,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 36;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -5930,7 +5921,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 5:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 37;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CANNON_LBS32;
@@ -6039,7 +6030,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS32;
                     break;
                     case 5:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 30;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -6154,7 +6145,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 37;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -6166,7 +6157,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 5:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 39;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -6603,7 +6594,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     /*case 4:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 32;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -6727,7 +6718,7 @@ void QuestComplete(string sQuestName, string qname)
             // ==> Испанский кэп
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_spa_1", "man", "man", 35, SPAIN, -1, true));
 			sld.DontRansackCaptain = true;
-			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
+			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION_H, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
             FantomMakeCoolFighter(sld, 35, 100, 90, BLADE_LONG, "pistol3", 150);
     		Group_AddCharacter("Spa_Attack", "CaptainAttack_1");
             // ==> стравливание
@@ -6798,7 +6789,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
 					case 1:
-                        ShipType = SHIP_SP_SANFELIPE;
+                        ShipType = SHIP_SANFELIPE;
                         Rank = 40;
                         Blade = "topor2";
 						iTemp = CANNON_TYPE_CANNON_LBS42;
@@ -6816,7 +6807,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS32;
                     break;
                     case 4:
-                        ShipType = SHIP_WARSHIP;
+                        ShipType = SHIP_INGERMANLAND;
                         Rank = 35;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -6840,7 +6831,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 8:
-                        ShipType = SHIP_BATTLESHIP;
+                        ShipType = SHIP_REDOUTABLE;
                         Rank = 37;
                         Blade = "blade35";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
@@ -7770,25 +7761,25 @@ void QuestComplete(string sQuestName, string qname)
 					break;
 					case 2:
 						iCannonType = CANNON_TYPE_CANNON_LBS32;
-						iShipType = SHIP_BELLONA;
+						iShipType = SHIP_PAVEL;
 						sShipName = "";
 						Blade = "topor2";
 					break;
 					case 3:
 						iCannonType = CANNON_TYPE_CULVERINE_LBS32;
-						iShipType = SHIP_WARSHIP;
+						iShipType = SHIP_INGERMANLAND;
 						sShipName = "";
 						Blade = "blade15";
 					break;
 					case 4:
 						iCannonType = CANNON_TYPE_CANNON_LBS32;
-						iShipType = SHIP_WARSHIP;
+						iShipType = SHIP_INGERMANLAND;
 						sShipName = "";
 						Blade = "blade31";
 					break;
 					case 5:
 						iCannonType = CANNON_TYPE_CANNON_LBS32;
-						iShipType = SHIP_BATTLECORVETTE;
+						iShipType = SHIP_PANDORA;
 						sShipName = "";
 						Blade = "blade21";
 					break;
@@ -7908,7 +7899,7 @@ void QuestComplete(string sQuestName, string qname)
         case "Ascold_InGraveAfterFight":
 			pchar.questTemp.Ascold = "Ascold_MummyIsLive";
 		    LAi_LocationFightDisable(&Locations[FindLocation("Guadeloupe_Cave")], true);
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "spy", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man", 100, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, 100, 100, 100, "blade28", "", 3000);
 			sld.name = "Лейф";
@@ -8023,7 +8014,7 @@ void QuestComplete(string sQuestName, string qname)
 			SetQuestHeader("Pir_Line_6_Jackman");
 			AddQuestRecord("Pir_Line_6_Jackman", "4");
 			AddQuestUserData("Pir_Line_6_Jackman", "sSex", GetSexPhrase("уничтожил своего 'родственничка', похож он был на меня очень сильно. Кто он, откуда, чем занимался","уничтожила свою 'сестричку', похожа она была на меня очень сильно. Кто она, откуда, чем занималась"));
-			QuestSetCurrentNode("Jackman", "PL_Q6_after");
+			pchar.questTemp.piratesLine = "PL_Q6_AfterBattle";
 		break;
 
 
@@ -9183,12 +9174,12 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "CheckDefenceColonyUptade_2":
-			SetTimerCondition("CheckDefenceColonyUptade_3", 0, 0, 40, false);
+			SetTimerCondition("CheckDefenceColonyUptade_3", 0, 0, 120, false);
 		break;
 
 		case "CheckDefenceColonyUptade_3":
 			CheckDefenceColony();
-			SetTimerCondition("CheckDefenceColonyUptade_4", 0, 0, 38, false);
+			SetTimerCondition("CheckDefenceColonyUptade_4", 0, 0, 118, false);
 		break;
 
 		case "CheckDefenceColonyUptade_4":
@@ -9632,19 +9623,19 @@ void QuestComplete(string sQuestName, string qname)
 		Lai_SetPlayerType(pchar);
 	break;
 	case "ChangeLukesHome":
-			sld = CharacterFromID("Old Friend");
-			sld.City = RandomCityEnemy();
-			Log_TestInfo(sld.City);
-			ChangeCharacterAddressGroup(sld,RandomHouse(sld),"goto","goto1");
-			LAi_SetActorType(sld);
-			LAi_ActorDialog(sld, Pchar,"", 20.0,10.0)
-			Pchar.Luke.City = sld.City;
-			DeleteAttribute(Pchar,"Quest.Luke");
-			AddQuestRecord("Silence_Price","4");
-			AddQuestUserData("Silence_Price","sSex",GetSexPhrase("ся","ась"));
-			Pchar.quest.GetSpawnPirate.win_condition.l1 = "ExitFromLocation";
-			Pchar.quest.GetSpawnPirate.win_condition.l1.location = Pchar.location;
-			Pchar.quest.GetSpawnPirate.function = "GetSpawnPirate";
+		sld = CharacterFromID("Old Friend");
+		sld.City = RandomCityEnemy();
+		Log_TestInfo(sld.City);
+		ChangeCharacterAddressGroup(sld,RandomHouse(sld),"goto","goto1");
+		LAi_SetActorType(sld);
+		LAi_ActorDialog(sld, Pchar,"", 20.0,10.0)
+		Pchar.Luke.City = sld.City;
+		DeleteAttribute(Pchar,"Quest.Luke");
+		AddQuestRecord("Silence_Price","4");
+		AddQuestUserData("Silence_Price","sSex",GetSexPhrase("ся","ась"));
+		Pchar.quest.GetSpawnPirate.win_condition.l1 = "Location";
+		Pchar.quest.GetSpawnPirate.win_condition.l1.location = "LaVega_town";
+		Pchar.quest.GetSpawnPirate.function = "GetSpawnPirate";
 	break;
 	case "PirateGoOut":
 		sld = CharacterFromID("Anri");
@@ -9829,7 +9820,6 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_ActorDialog(sld, pchar, "", -1, 0);
 			Locations[FindLocation("PortRoyal_town")].reload.l23.disable = false;   //открывает архитектора
         break;
-
 //========================  Квест "Проклятый идол".  =======================
 
 		case "PDM_CI_SpawnJC":
@@ -9915,6 +9905,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto4");
 			sld.name = "Матрос";
 			sld.lastname = "";
+			sld.lifeday = 0;
 			LAi_SetActorType(sld);
 			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
 			sld.dialog.currentnode = "Matros_preduprejdaet";
@@ -9924,6 +9915,8 @@ void QuestComplete(string sQuestName, string qname)
 			{
 				sTemp = "shipowner_"+(rand(28)+1);
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Matrosiki_"+i, sTemp, "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				sld.lifeday = 0;
+				LAi_CharacterDisableDialog(sld);
 				PlaceCharacter(sld, "goto", "random");
 				LAi_SetWarriorType(sld);
 				LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
@@ -10469,15 +10462,12 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "PDM_CL_Antonio_Ubit":
-			sld = CharacterFromID("PDM_CL_Antonio")
-			ChangeCharacterAddressGroup(sld, "Maracaibo_town", "none", "");
 			sld = CharacterFromID("PDM_CL_Anto2")
-			ChangeCharacterAddressGroup(sld, "Maracaibo_town", "none", "");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
 			Group_SetAddress("PDM_el_tib", "none", "", "");
 			sld = CharacterFromID("PDM_Octavio_Lambrini")
 			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_2_1";
-			DeleteAttribute(pchar, "questTemp.PDM_CL_Tavern");
 			DeleteAttribute(pchar, "questTemp.PDM_CL_Ishem");
 			AddQuestRecord("PDM_Clan_Lambrini", "3");
 			AddQuestUserData("PDM_Clan_Lambrini", "sSex", GetSexPhrase("ен","на"));
@@ -10589,7 +10579,7 @@ void QuestComplete(string sQuestName, string qname)
 				PGG_ChangeRelation2MainCharacter(CharacterFromID(pchar.LambriniPGG), -200);
 			}
 			sld = CharacterFromID(pchar.LambriniPGG);
-			sld.dialog.filename = "pgg_dialog_town.c";
+			sld.dialog.filename = "PGG_dialog.c";
 			sld.dialog.currentnode = "First time";
 			DeleteAttribute(sld, "PGGAi.DontUpdate");
 			DeleteAttribute(sld, "LambiniAsoleda");
@@ -10667,7 +10657,7 @@ void QuestComplete(string sQuestName, string qname)
 				ChangeCharacterAddressGroup(sld, pchar.location, "randitem",  "randitem10");
 			}
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, false);			//true - если помирить
+			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, false);
 			LAi_group_SetCheck("EnemyFight", "PDM_Apt_Canibaly_Pobeda");
 		break;
 		
@@ -10683,6 +10673,999 @@ void QuestComplete(string sQuestName, string qname)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////   	КВЕСТЫ "Проклятие Дальних Морей" КОНЕЦ
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+////  	КВЕСТЫ "Пираты Карибского Моря" НАЧАЛО  	 ////	 		   Sinistra			    ////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//========================  Квест "Странные вещи творятся на архипелаге"  =============================
+
+		case "PKM_SvtvA_SpawnQuest":
+			//******Странные вещи творятся на архипелаге******
+			//Девушки ищут детей
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_1", "girl_9", "woman", "woman", 1, HOLLAND, -1, false));
+			sld.name	= "Жаннеке";
+			sld.lastname	= "Блинкерхоф";
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "First time";
+			LAi_SetStayType(sld);
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			LAi_SetImmortal(sld, true);
+			sld.City = "Marigo";
+			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
+			ChangeCharacterAddressGroup(sld,"Marigo_town","quest","quest4");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_2", "girl_6", "woman", "woman", 1, HOLLAND, -1, false));
+			sld.name	= "Райан";
+			sld.lastname	= "Леккерс";
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "First time";
+			LAi_SetStayType(sld);
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			LAi_SetImmortal(sld, true);
+			sld.City = "Marigo";
+			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
+			ChangeCharacterAddressGroup(sld,"Marigo_town","quest","quest5");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_3", "girl_1", "woman", "woman", 1, HOLLAND, -1, false));
+			sld.name	= "Лизбет";
+			sld.lastname	= "Шефольд";
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "First time";
+			LAi_SetStayType(sld);
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			LAi_SetImmortal(sld, true);
+			sld.City = "Marigo";
+			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
+			ChangeCharacterAddressGroup(sld,"Marigo_town","quest","quest3");
+		break;
+
+		case "PKM_SvtvA_SprositKapitanov_v_more":
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_SprositKapitanov_v_more");
+		break;
+		
+		case "PKM_SvtvA_DostavkaPisma_Gorod_1":
+			LAi_LocationFightDisable(loadedLocation, true);
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+			sld = GetCharacter(NPC_GenerateCharacter("SatanaElita_11", "Animists1", "man", "man", 60, PIRATE, -1, true));
+			sld.name = "Загадочный человек";
+			sld.lastname = "";
+			FantomMakeCoolFighter(sld, 70, 100, 100, BLADE_LONG, "", 200);
+			LAi_SetStayType(sld);
+			sld.talker = 6;
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Satanist_v_gorode_1";
+			ChangeCharacterAddressGroup(sld, pchar.location, "quest",  "quest1");
+			DeleteAttribute(sld, "items");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			for (i=1; i<=5; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("SatanaElita_"+i, "Animists1", "man", "man", 60, PIRATE, -1, true));
+				FantomMakeCoolFighter(sld, 70, 100, 100, BLADE_LONG, "pistol1", 200);
+				LAi_SetStayType(sld);
+				LAi_CharacterDisableDialog(sld);
+				ChangeCharacterAddressGroup(sld, pchar.location, "quest",  "quest1");
+				DeleteAttribute(sld, "items");
+				sld.SaveItemsForDead = true;
+				GiveItem2Character(sld, "PKM_SvtvA_znachok");
+				AddItems(sld, "mineral3", rand(7)-4);
+			}
+			for (i=6; i<=8; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("SatanaElita_"+i, "Animists1_mush_x", "man", "mushketer", 70, PIRATE, -1, false));
+				sld.MusketerDistance = 0;
+				ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto19");
+				LAi_CharacterDisableDialog(sld);
+				LAi_SetWarriorType(sld);
+				LAi_SetActorType(sld);
+				LAi_ActorTurnToCharacter(sld, pchar);
+				DeleteAttribute(sld, "items");
+				sld.SaveItemsForDead = true;
+				GiveItem2Character(sld, "PKM_SvtvA_znachok");
+				AddItems(sld, "mineral3", rand(7)-4);
+			}
+			for (i=9; i<=10; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("SatanaElita_"+i, "Animists1_mush_x", "man", "mushketer", 70, PIRATE, -1, false));
+				sld.MusketerDistance = 0;
+				ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto1");
+				LAi_CharacterDisableDialog(sld);
+				LAi_SetWarriorType(sld);
+				LAi_SetActorType(sld);
+				LAi_ActorTurnToCharacter(sld, pchar);
+				DeleteAttribute(sld, "items");
+				sld.SaveItemsForDead = true;
+				GiveItem2Character(sld, "PKM_SvtvA_znachok");
+				AddItems(sld, "mineral3", rand(7)-4);
+			}
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Jitel1", "Citiz_2", "man", "man", 1, SPAIN, -1, false));
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto20");
+			LAi_SetActorType(sld);
+			LAi_ActorGoToLocator(sld, "soldiers", "protector4", "", -1);
+			
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Jitel2", "Citiz_5", "man", "man", 1, SPAIN, -1, false));
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto20");
+			LAi_SetActorType(sld);
+			LAi_ActorGoToLocator(sld, "goto", "goto21", "", -1);
+			
+			DoQuestCheckDelay("PKM_SvtvA_Satamist_lutuet_1", 1.3);
+			DoQuestCheckDelay("PKM_SvtvA_Satamist_lutuet_2", 1.9);
+			LAi_SetActorType(pchar);
+		break;
+		
+		case "PKM_SvtvA_Satamist_lutuet_1":
+			sld = CharacterFromID("SatanaElita_2")
+			LAi_SetActorType(sld);
+			LAi_ActorAnimation(sld, "shot", "PKM_SvtvA_Satamist_lutuet_3", 1.0);
+		break;
+		case "PKM_SvtvA_Satamist_lutuet_2":
+			sld = CharacterFromID("SatanaElita_5")
+			LAi_SetActorType(sld);
+			LAi_ActorAnimation(sld, "shot", "PKM_SvtvA_Satamist_lutuet_4", 1.0);
+		break;
+		
+		case "PKM_SvtvA_Satamist_lutuet_3":
+			LAi_KillCharacter(CharacterFromID("PKM_SvtvA_Jitel1"));
+		break;
+		case "PKM_SvtvA_Satamist_lutuet_4":
+			LAi_KillCharacter(CharacterFromID("PKM_SvtvA_Jitel2"));
+			
+			LAi_SetPlayerType(pchar);
+		break;
+		
+		case "PKM_SvtvA_DostavkaPisma_Gorod_2":		//Битва в городе
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			AddQuestRecord("PKM_Animists", "9");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("ся","ась"));
+			pchar.questTemp.PKM_SvtvA_SanJuanChurch_1_Dobro = "Church1";
+			PChar.quest.PKM_SvtvA_SJ_B1.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B2.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B3.over = "yes";
+			pchar.questTemp.PKM_SvtvA_DralisVG = "DVG";
+		break;
+		
+		case "PKM_SvtvA_DostavkaPisma_Buhta_2":		//Битва в бухте без разговора
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			AddQuestRecord("PKM_Animists", "10");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("ся","ась"));
+			pchar.questTemp.PKM_SvtvA_SanJuanChurch_1_Dobro = "Church1";
+			PChar.quest.PKM_SvtvA_SJ_B1.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B2.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B3.over = "yes";
+		break;
+		
+		case "PKM_SvtvA_DostavkaPisma_Buhta_3":		//Битва в бухте с разговором и отказываемся отдавать письмо
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			AddQuestRecord("PKM_Animists", "11");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ёл","ла"));
+			pchar.questTemp.PKM_SvtvA_SanJuanChurch_1_Dobro = "Church1";
+			PChar.quest.PKM_SvtvA_SJ_B1.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B2.over = "yes";
+			PChar.quest.PKM_SvtvA_SJ_B3.over = "yes";
+		break;
+		
+		case "PKM_SvtvA_DostavkaPisma_Buhta_1":
+			LAi_LocationFightDisable(loadedLocation, true);
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			sld.name = "Загадочный человек";
+			sld.lastname = "";
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade5", "", 0);
+			LAi_SetActorType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Satanist_v_buhte_1";
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto1");
+			LAi_ActorDialog(sld, pchar, "", -1, 0);
+			DeleteAttribute(sld, "items");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			for (i=2; i<=4; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("Satanist_"+i, "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade5", "", 0);
+				LAi_SetActorType(sld);
+				LAi_CharacterDisableDialog(sld);
+				ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto1");
+				LAi_ActorFollow(sld, pchar, "", -1);
+				DeleteAttribute(sld, "items");
+				sld.SaveItemsForDead = true;
+				GiveItem2Character(sld, "PKM_SvtvA_znachok");
+				AddItems(sld, "mineral3", rand(7)-4);
+			}		
+		break;
+		
+		case "PKM_SvtvA_Маёнез_потопили":		//Поражение
+			PChar.quest.PKM_SvtvA_TA_horosho.over = "yes";
+			
+			AddQuestRecord("PKM_Animists", "16");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ен","на"));
+			CloseQuestHeader("PKM_Animists");
+		break;
+		
+		case "PKM_SvtvA_Ангела_потопили":		//Победа
+			AddQuestRecord("PKM_Animists", "17");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("ёл","ла"));
+			
+			pchar.questTemp.PKM_SvtvA_Znakomstvo_s_Malta = true;
+		break;
+		
+		case "PKM_SvtvA_Zasada2":
+			LAi_LocationFightDisable(loadedLocation, true);
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			sld.name = "Загадочный человек";
+			sld.lastname = "";
+			LAi_SetActorType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Satanist_zasada2";
+			ChangeCharacterAddressGroup(sld, pchar.location, "patrol",  "patrol17");
+			LAi_ActorDialog(sld, pchar, "", 1.4, 0);
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			for (i=2; i<=3; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("Satanist_"+i, "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				sld.DontChangeBlade = true;
+				sld.DontChangeGun = true;
+				sld.DeleteFood = true;
+				LAi_SetActorType(sld);
+				LAi_CharacterDisableDialog(sld);
+				ChangeCharacterAddressGroup(sld, pchar.location, "patrol",  "patrol17");
+				LAi_ActorFollow(sld, characterFromID("Satanist_1"), "", -1);
+				sld.SaveItemsForDead = true;
+				GiveItem2Character(sld, "PKM_SvtvA_znachok");
+				AddItems(sld, "mineral3", rand(7)-4);
+			}
+		break;
+		
+		case "PKM_SvtvA_Zasada2_Pobeda":
+			AddQuestRecord("PKM_Animists", "20");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			
+			pchar.questTemp.PKM_SvtvA_PismoKlermon = true;
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Krisa", "Priest_3", "man", "man", 10, PIRATE, -1, true));  //Предатель
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 50, 50, "blade5", "", 120);
+			sld.name = "отец";
+			sld.lastname = "Гарет";
+			LAi_SetActorType(sld);
+			sld.SaveItemsForDead = true;
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			ChangeCharacterAddressGroup(sld, "FortFrance_church", "barmen", "bar1");
+		break;
+		
+		case "PKM_SvtvA_Нападение_в_церкви":
+			sld = CharacterFromID("Satanist_Krisa");
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Сатанист_крыса";
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
+		break;
+		
+		case "PKM_SvtvA_Нападение_в_церкви_Победа":
+			LAi_LocationFightDisable(loadedLocation, true);
+			LAi_SetFightMode(pchar, false);
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+			LAi_SetActorType(pchar);
+			
+			sld = CharacterFromID("FortFrance_Priest");
+			LAi_SetActorType(sld);
+			LAi_ActorFollow(sld, pchar, "", -1);
+			
+			sld = CharacterFromID("Maltese");
+			LAi_SetActorType(sld);
+			LAi_ActorFollow(sld, pchar, "", -1);
+			
+			DoQuestFunctionDelay("PKM_SvtvA_Malta_na_pomosh_2", 1.5);
+		break;
+		
+		case "PKM_SvtvA_PriestVernuDialog":
+			sld = CharacterFromID("FortFrance_Priest");
+			LAi_SetPriestType(sld);
+			sld.dialog.filename = "Common_church.c";
+			sld.dialog.currentnode = "First time";
+		break;
+		
+		case "PKM_SvtvA_MalteseMertv":
+			LAi_KillCharacter(pchar);
+			Log_info("Жаквин погиб!");
+		break;
+		
+		case "PKM_SvtvA_IdemSledom":
+			pchar.GenQuestBox.CommonRoom_MH4.box2.items.PKM_SvtvA_znachok = 666;
+			pchar.GenQuestBox.CommonRoom_MH4.box2.items.PKM_SvtvA_pismo3 = 1;
+			
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1 = "Timer";
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.hour = sti(GetTime() + 1);
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.day = GetAddingDataDay(0, 0, 0);
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 0);
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.year = GetAddingDataYear(0, 0, 0);
+			PChar.quest.PKM_SvtvA_IdemSledom.win_condition = "PKM_SvtvA_IdemSledom2";
+			
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition.l1 = "item";
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition.l1.item = "PKM_SvtvA_pismo3";
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition = "PKM_SvtvA_Chitaem";			
+		break;
+		
+		case "PKM_SvtvA_IdemSledom2":
+			DeleteAttribute(&locations[FindLocation("CommonRoom_MH4")], "box2");
+		break;
+		
+		case "PKM_SvtvA_TuremchikQuest":
+			DoQuestCheckDelay("PKM_SvtvA_TuremchikQuest2", 0.2);
+			
+			SetTimerCondition("PKM_SvtvA_TuremchikKonets", 0, 0, 1, false);
+		break;
+		
+		case "PKM_SvtvA_Chitaem":
+			ChangeItemDescribe("PKM_SvtvA_amulet", "itmdescr_PKM_SvtvA_amulet_Sila");
+		break;
+		
+		case "PKM_SvtvA_TuremchikQuest2":
+			sld = CharacterFromID("PortPaxJailOff");
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Разговор с тюремщиком";
+		break;
+		
+		case "PKM_SvtvA_TuremchikKonets":
+			sld = CharacterFromID("Satanist_Uchitel");
+			LAi_KillCharacter(sld);
+			
+			sld = CharacterFromID("PortPaxJailOff");
+			sld.dialog.filename = "Common_Prison.c";
+			sld.dialog.currentnode = "First_officer";
+			
+			CloseQuestHeader("PKM_Animists");
+		break;
+		
+		case "PKM_SvtvA_TuremchikDialog":
+			sld = CharacterFromID("PortPaxJailOff");
+			sld.dialog.filename = "Common_Prison.c";
+			sld.dialog.currentnode = "First_officer";
+		break;
+		
+		case "PKM_SvtvA_UchitelPassakir":
+			Island_SetReloadEnableGlobal("PuertoRico", false);
+			bQuestDisableMapEnter = true;
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+			
+			DoQuestCheckDelay("PKM_SvtvA_UchitelNaPalube", 3.0);
+		break;
+		
+		case "PKM_SvtvA_UchitelNaPalube":
+			DoQuestReloadToLocation("Ship_deck", "goto", "goto4", "PKM_SvtvA_UchitelNaPalube2");
+		break;
+		
+		case "PKM_SvtvA_UchitelNaPalube2":
+			for (i=1; i<=4; i++)
+			{
+				sTemp = "shipowner_"+(rand(28)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA__Matrosiki_"+i, sTemp, "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				sld.lifeday = 0;
+				LAi_CharacterDisableDialog(sld);
+				PlaceCharacter(sld, "goto", "random");
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+			}
+			LAi_SetActorType(pchar);
+			sld = CharacterFromID("Satanist_Uchitel");
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Обманываем Учителя";
+			ChangeCharacterAddressGroup(sld, "Ship_deck", "goto", "goto3");
+			DoQuestCheckDelay("PKM_SvtvA_UchitelNaPalube3", 2.8);
+			LAi_ActorDialogDelay(sld, pchar, "", 2.8);
+		break;
+		
+		case "PKM_SvtvA_UchitelNaPalube3":
+			LAi_SetPlayerType(pchar);
+		break;
+		
+		case "PKM_SvtvA_UchitelvTaverne":
+			sld = CharacterFromID("Satanist_Uchitel");
+			FantomMakeCoolFighter(sld, 12, 60, 60, BLADE_LONG, "", 100);
+			sld.SaveItemsForDead = true;
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(10)-2);
+			AddItems(sld, "jewelry1", 3);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Обманываем Учителя_4";
+			ChangeCharacterAddressGroup(sld, "SanJuan_tavern_upstairs", "goto", "goto3");
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
+		break;
+		
+		case "PKM_SvtvA_UbivaemUchitelya":
+			Island_SetReloadEnableGlobal("PuertoRico", true);
+			bQuestDisableMapEnter = false;
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			pchar.location.from_sea = "SanJuan_town";
+			
+			AddQuestRecord("PKM_Animists", "33");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			
+			locations[FindLocation("Guadeloupe_deadlock")].models.day.charactersPatch = "jungle9_patch";
+			locations[FindLocation("Guadeloupe_deadlock")].models.night.charactersPatch = "jungle9_patch";
+			Locations[FindLocation("Guadeloupe_deadlock")].models.always.l4 = "jungle9_nowall";
+			
+			PChar.quest.LogovoSatanistov.win_condition.l1 = "location";
+			PChar.quest.LogovoSatanistov.win_condition.l1.location = "Cave_Satanists";
+			PChar.quest.LogovoSatanistov.win_condition = "LogovoSatanistov";
+		break;
+		
+		case "LogovoSatanistov":
+			chrDisableReloadToLocation = true;
+			
+			//КУХНЯ
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetHP(sld, 1.0, 1.0);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_SetSitType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "sit",  "sit32");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			AddItems(sld, "food2", 12);
+			GiveItem2Character(sld, "mineral9");
+			AddItems(sld, "food3", 12);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			sld.lifeday = 0;
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_2", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetHP(sld, 1.0, 1.0);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_SetSitType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "sit",  "sit34");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			GiveItem2Character(sld, "mineral9");
+			AddItems(sld, "mineral3", rand(7)-4);
+			AddItems(sld, "food5", 9);
+			GiveItem2Character(sld, "mineral9");
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			sld.lifeday = 0;
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_3", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 50, 50, "blade5", "", 0);
+			LAi_SetHP(sld, 1.0, 1.0);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_SetActorType(sld);
+			LAi_ActorAnimation(sld, "lay_2", "", 2.0);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "sit",  "sit36");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			sld.lifeday = 0;
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_4", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetHP(sld, 1.0, 1.0);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_SetSitType(sld);
+			sld.nonTable = true;
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "sit",  "sit35");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			sld.lifeday = 0;
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_5", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetHP(sld, 1.0, 1.0);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto9");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			sld.lifeday = 0;
+			
+			PChar.quest.PKM_SvtvA_KuhnyaStels1.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_KuhnyaStels1.win_condition.l1.character = "Satanist_Kuhnya_1";
+			PChar.quest.PKM_SvtvA_KuhnyaStels1.win_condition = "PKM_SvtvA_KuhnyaStels";
+			
+			PChar.quest.PKM_SvtvA_KuhnyaStels2.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_KuhnyaStels2.win_condition.l1.character = "Satanist_Kuhnya_2";
+			PChar.quest.PKM_SvtvA_KuhnyaStels2.win_condition = "PKM_SvtvA_KuhnyaStels";
+			
+			PChar.quest.PKM_SvtvA_KuhnyaStels3.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_KuhnyaStels3.win_condition.l1.character = "Satanist_Kuhnya_3";
+			PChar.quest.PKM_SvtvA_KuhnyaStels3.win_condition = "PKM_SvtvA_KuhnyaStels";
+			
+			PChar.quest.PKM_SvtvA_KuhnyaStels4.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_KuhnyaStels4.win_condition.l1.character = "Satanist_Kuhnya_4";
+			PChar.quest.PKM_SvtvA_KuhnyaStels4.win_condition = "PKM_SvtvA_KuhnyaStels";
+			
+			PChar.quest.PKM_SvtvA_KuhnyaStels5.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_KuhnyaStels5.win_condition.l1.character = "Satanist_Kuhnya_5";
+			PChar.quest.PKM_SvtvA_KuhnyaStels5.win_condition = "PKM_SvtvA_KuhnyaStels";
+			
+			//ТЮРЬМА
+			
+			//Пленники
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_1", "barmen_6", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetStayType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Спасите, помогите1";
+			sld.lifeday = 0;
+			LAi_SetImmortal(sld, true);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto20");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_2", "officer_20", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetStayType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Спасите, помогите2";
+			sld.lifeday = 0;
+			LAi_SetImmortal(sld, true);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto21");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_3", "Priest_4", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			sld.name = "падре";
+			sld.lastname = "Домингес";
+			LAi_SetStayType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Домингес в клетке";
+			sld.lifeday = 0;
+			LAi_SetImmortal(sld, true);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto22");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_4", "Slave3", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetStayType(sld);
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Спасите, помогите3";
+			sld.lifeday = 0;
+			LAi_SetImmortal(sld, true);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto23");
+			
+			//Охрана
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Turma_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto3");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Turma");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Turma_2", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto4");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Turma");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Turma_3", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto19");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Turma");
+			
+			
+			LAi_group_SetRelation("Satanist_Turma", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_SetLookRadius("Satanist_Turma", 4.0);
+			LAi_group_SetHearRadius("Satanist_Turma", 2.0);
+			LAi_group_SetSayRadius("Satanist_Turma", 10.0);
+			
+			//ВХОД ЛОГОВА
+						
+			//Охрана входа
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Vhod_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto16");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Vhod");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Vhod_2", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto17");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Vhod");
+			
+			LAi_group_SetRelation("Satanist_Vhod", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_SetLookRadius("Satanist_Vhod", 4.0);
+			LAi_group_SetHearRadius("Satanist_Vhod", 2.0);
+			LAi_group_SetSayRadius("Satanist_Vhod", 10.0);
+			
+			//Красивое убийство		
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Vhod_3", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
+			LAi_SetGuardianType(sld);
+			LAi_SetHP(sld, 1.0, 1.0);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto7");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Satanist_Vhod2");
+			
+			LAi_group_SetRelation("Satanist_Vhod2", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_SetLookRadius("Satanist_Vhod2", 4.0);
+			LAi_group_SetHearRadius("Satanist_Vhod2", 0.0);
+			LAi_group_SetSayRadius("Satanist_Vhod2", 0.0);
+			
+			//ТРОННЫЙ ЗАЛ
+			
+			//Чёрное Солнце
+			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 1000);
+			LAi_SetHP(sld,600,600);
+			LAi_SetDltHealth(sld, 130.0);
+			sld.name = "Лорд Чёрное Солнце";
+			sld.lastname = "";
+			sld.FaceId = 297;
+			LAi_SetHuberType(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "sit",  "sit1");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+			LAi_SetImmortal(sld, true);
+			SetCharacterPerk(sld, "Energaiser");
+			GiveItem2Character(sld, "cirass3");
+			EquipCharacterbyItem(sld, "cirass3");
+			sld.SuperShooter  = true;
+			if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
+			
+			//Одержимый#1
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_1", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto50");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_sluga");	
+			LAi_SetImmortal(sld, true);
+			
+			//Одержимый#2
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_2", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto51");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_sluga");
+			LAi_SetImmortal(sld, true);
+			
+			//Одержимый#3
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_3", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto52");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_sluga");
+			LAi_SetImmortal(sld, true);
+			
+			//Одержимый#4
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_4", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto53");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_sluga");
+			LAi_SetImmortal(sld, true);
+			
+			//Одержимый#5
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_5", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetActorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto54");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_sluga");
+			LAi_SetImmortal(sld, true);
+			
+			//Солдат#1
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_1", "Animists1", "man", "man", sti(pchar.rank) + 3, PIRATE, -1, true));
+			LAi_SetStayType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto55");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+			LAi_SetImmortal(sld, true);
+			
+			//Солдат#2
+			sld = GetCharacter(NPC_GenerateCharacter("Satanist_2", "Animists1", "man", "man", sti(pchar.rank) + 3, PIRATE, -1, true));
+			LAi_SetStayType(sld);
+			LAi_CharacterDisableDialog(sld);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto56");
+			sld.SaveItemsForDead = true;
+			GiveItem2Character(sld, "PKM_SvtvA_znachok");
+			AddItems(sld, "mineral3", rand(7)-4);
+			sld.DontChangeBlade = true;
+			sld.DontChangeGun = true;
+			sld.DeleteFood = true;
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+			LAi_SetImmortal(sld, true);
+			
+			PChar.quest.PKM_SvtvA_Altar.win_condition.l1 = "locator";
+			PChar.quest.PKM_SvtvA_Altar.win_condition.l1.location = "Cave_Satanists";
+			PChar.quest.PKM_SvtvA_Altar.win_condition.l1.locator_group = "quest";
+			PChar.quest.PKM_SvtvA_Altar.win_condition.l1.locator = "quest1";
+			PChar.quest.PKM_SvtvA_Altar.function = "PKM_SvtvA_RazgovorZKnyazem";
+			
+			//
+			DoQuestFunctionDelay("PKM_SvtvA_SatanistyAnimation", 1.0);
+		break;
+		
+		case "PKM_SvtvA_KuhnyaStels":
+			PChar.quest.PKM_SvtvA_KuhnyaStels1.over = "yes";
+			PChar.quest.PKM_SvtvA_KuhnyaStels2.over = "yes";
+			PChar.quest.PKM_SvtvA_KuhnyaStels3.over = "yes";
+			PChar.quest.PKM_SvtvA_KuhnyaStels4.over = "yes";
+			PChar.quest.PKM_SvtvA_KuhnyaStels5.over = "yes";
+			sld = CharacterFromID("Satanist_Kuhnya_1");
+			LAi_SetWarriorType(sld);
+			LAi_SetHP(sld, 180.0, 180.0);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto", "goto42");
+			sld = CharacterFromID("Satanist_Kuhnya_2");
+			LAi_SetWarriorType(sld);
+			LAi_SetHP(sld, 180.0, 180.0);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto", "goto41");
+			sld = CharacterFromID("Satanist_Kuhnya_3");
+			LAi_SetWarriorType(sld);
+			LAi_SetHP(sld, 180.0, 180.0);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto", "goto39");
+			sld = CharacterFromID("Satanist_Kuhnya_4");
+			LAi_SetWarriorType(sld);
+			LAi_SetHP(sld, 180.0, 180.0);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto", "goto38");
+			sld = CharacterFromID("Satanist_Kuhnya_5");
+			LAi_SetWarriorType(sld);
+			LAi_SetHP(sld, 180.0, 180.0);
+			LAi_group_MoveCharacter(sld, "Satanist_Kuhnya");
+			LAi_group_SetRelation("Satanist_Kuhnya", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_FightGroups("Satanist_Kuhnya", LAI_GROUP_PLAYER, false);
+			LAi_group_SetCheck("Satanist_Kuhnya", "PKM_SvtvA_Satanist_Kuhnya_Pobeda");
+		break;
+		
+		case "PKM_SvtvA_Satanist_Kuhnya_Pobeda":
+			pchar.questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda = true;
+			sld = CharacterFromID("Satanist_Kuhnya_1");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Kuhnya_2");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Kuhnya_3");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Kuhnya_4");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Kuhnya_5");
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+		break;
+		
+		case "PKM_SvtvA_Lord_Haos_Padet":
+			Log_info("Лорд Чёрное Солнце слабеет!!!");
+			Log_info("Нельзя давать ему передышки!!!");
+			
+			sld = CharacterFromID("Chernoe_Solntse");
+			LAi_SetHP(sld,1200,1200);
+			LAi_SetCurHP(sld, 500.0);
+			LAi_SetDltHealth(sld, 4.0);
+			LAi_SetCheckMinHP(sld, 10, true, "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem");
+			
+			if (!CheckAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda"))
+			{
+				for (i=1; i<=5; i++)
+				{
+					sld = CharacterFromID("Satanist_Kuhnya_"+i);
+					LAi_SetWarriorType(sld);
+					LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+				}
+			}
+			for (i=1; i<=3; i++)
+			{
+				sld = CharacterFromID("Satanist_Turma_"+i);
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+			}
+			for (i=1; i<=3; i++)
+			{
+				sld = CharacterFromID("Satanist_Vhod_"+i);
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, "Chernoe_Solntse");
+			}
+			LAi_group_SetSayRadius("Chernoe_Solntse", 100.0);
+			LAi_group_SetRelation("Chernoe_Solntse", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+		break;
+		
+		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem":		
+			DoQuestCheckDelay("hide_weapon", 1.2);
+			sld = CharacterFromID("Chernoe_Solntse");
+			LAi_SetActorType(sld);
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Mefisto");
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Лорд_Хаоса_3";
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
+		break;
+		
+		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":		
+			AddQuestRecord("PKM_Animists", "34");
+			chrDisableReloadToLocation = false;
+			
+			for (i=1; i<=4; i++)
+			{
+				sld = CharacterFromID("Plennik_u_satanistov_"+i);
+				ChangeCharacterAddressGroup(sld, "none", "", "");
+				LAi_SetImmortal(sld, false);
+			}
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda");
+			
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition.l1 = "location";
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition.l1.location = "Guadeloupe";
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition = "PKM_SvtvA_Bitva_s_Mefisto";
+		break;
+		
+		case "PKM_SvtvA_Bitva_s_Mefisto":
+			Island_SetReloadEnableGlobal("Guadeloupe", false);
+			bQuestDisableMapEnter = true;
+		
+			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse2", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 400);
+			AddCharacterHealth(sld, 30);
+			//LAi_SetHP(sld,600,600);
+			sld.name = "Лорд Чёрное Солнце";
+			sld.lastname = "";
+			sld.FaceId = 297;
+			//sld = CharacterFromID("Chernoe_Solntse");
+			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS16, 100, 100, 100);
+			//FantomMakeCoolSailor(sld, SHIP_BRIGANTINE, "Мэри Селест", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
+			sld.DontRansackCaptain = true;
+			sld.DontHitInStorm = true;
+			sld.SinkTenPercent = false;
+			sld.AlwaysSandbankManeuver = true;
+			sld.SaveItemsForDead = true;
+			sld.AnalizeShips = true;
+			sld.GenQuest.CrewSatanistMode = true;
+			
+			GiveItem2Character(sld, "cirass3");
+			EquipCharacterbyItem(sld, "cirass3");
+			SetCharacterGoods(sld, GOOD_SLAVES, 300);
+			
+			Group_FindOrCreateGroup("Enemy_Attack");
+			Group_SetType("Enemy_Attack", "war");
+			Group_AddCharacter("Enemy_Attack", "Chernoe_Solntse2");
+
+			Group_SetGroupCommander("Enemy_Attack", "Chernoe_Solntse2");
+			Group_SetPursuitGroup("Enemy_Attack", PLAYER_GROUP);
+			Group_SetAddress("Enemy_Attack", "Guadeloupe", "quest_ships", "Quest_ship_1");
+			Group_LockTask("Enemy_Attack");
+			
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto_Pobeda.win_condition.l1 = "NPC_Death";
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto_Pobeda.win_condition.l1.character = "Chernoe_Solntse2";
+			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto_Pobeda.win_condition = "PKM_SvtvA_Bitva_s_Mefisto_Pobeda";
+			AddQuestRecord("PKM_Animists", "35");
+		break;
+		
+		case "PKM_SvtvA_Bitva_s_Mefisto_Pobeda":		
+			CloseQuestHeader("PKM_Animists");
+			Island_SetReloadEnableGlobal("Guadeloupe", true);
+			bQuestDisableMapEnter = false;
+			
+			sld = CharacterFromID("SanJuan_Priest");
+			sld.name		= "падре Домингес";
+			sld.lastname = "";
+			
+			pchar.questTemp.PKM_SvtvA_Clermon_Final = true;
+			pchar.questTemp.PKM_SvtvA_Gubernator_Final = true;
+			
+			sld = CharacterFromID("PKM_SvtvA_Devushka_1")
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Verni_detey_11";
+			
+			sld = CharacterFromID("PKM_SvtvA_Devushka_2")
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Verni_detey_11";
+			
+			sld = CharacterFromID("PKM_SvtvA_Devushka_3")
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Verni_detey_11";
+		break;
+		
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+////   	КВЕСТЫ "Пираты Карибского Моря" КОНЕЦ
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //========================  Квест "Спасение на рифах".  =======================
@@ -11336,25 +12319,95 @@ void QuestComplete(string sQuestName, string qname)
 			PChar.quest.SCQ_Prytki_PokinuliZonu.win_condition = "SCQ_Prytki_PokinuliZonu";
 			
 			sld = CharacterFromID(pchar.DevushkaVPrytki);
-			sld.dialog.currentnode = "SCQ_Prytki_Dengi";
+			sld.dialog.currentnode = "SCQ_Prytki_Trah";
+			if (rand(3) == 3)
+			{
+				sld.dialog.currentnode = "SCQ_Prytki_Trah";
+			}
+			else
+			{
+				sld.dialog.currentnode = "SCQ_Prytki_Dengi";
+			}
 		break;
 		
 		case "SCQ_Prytki_VremyVishlo":
 			DeleteAttribute(pchar, "showTimer");
 			ClearAllLogStrings();
+			Log_info("Время вышло, девушка ушла по своим делам");
 			sld = CharacterFromID(pchar.DevushkaVPrytki);
 			sld.lifeday = 0;
 			ChangeCharacterAddressGroup(sld, "none", "", "");
 			InterfaceStates.Buttons.Save.enable = true;
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			PChar.quest.SCQ_Prytki_PokinuliZonu.over = "yes";
 		break;
 		
 		case "SCQ_Prytki_PokinuliZonu":
 			DeleteAttribute(pchar, "showTimer");
 			ClearAllLogStrings();
+			//Log_info("Правило нарушено, девушка больше не играет с нами в прятки");
 			sld = CharacterFromID(pchar.DevushkaVPrytki);
 			sld.lifeday = 0;
 			ChangeCharacterAddressGroup(sld, "none", "", "");
 			InterfaceStates.Buttons.Save.enable = true;
+			//bDisableFastReload = false;
+			//chrDisableReloadToLocation = false;
+		break;
+		
+		case "SCQ_Prytki_V_Komnate":
+			sld = CharacterFromID(pchar.DevushkaVPrytki);
+			if (rand(2) == 2)
+			{
+				sld.dialog.currentnode = "SCQ_Prytki_Ooops_Eto_Lovushka";
+			}
+			else
+			{
+				sld.dialog.currentnode = "SCQ_Prytki_Trah_3";
+			}
+			LAi_SetActorType(sld);
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
+		break;
+		
+		case "SCQ_Prytki_V_Komnate_Ooops_Eto_Lovushka":
+			LAi_SetPlayerType(pchar);
+			for (i=1; i<=2; i++)
+			{
+				sTemp = "pirate_"+(rand(24)+1);					
+				sld = GetCharacter(NPC_GenerateCharacter("Bandit_Prytki_"+i, sTemp, "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				LAi_SetActorType(sld);
+				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1_back");
+			}
+			sld = CharacterFromID(pchar.DevushkaVPrytki);
+			LAi_SetActorType(sld);
+			LAi_ActorRunToLocation(sld, "reload", "reload1_back", "none", "", "", "", 1);
+			sld = CharacterFromID("Bandit_Prytki_1");
+			sld.dialog.filename = "Quest/ForAll_dialog.c";
+			sld.dialog.currentnode = "SCQ_Prytki_Ooops_Eto_Lovushka_3";
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
+		break;
+		
+		case "SCQ_Prytki_V_Komnate_Final":
+			InterfaceStates.Buttons.Save.enable = true;
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			AddCharacterExpToSkill(pchar, "FencingLight", 5);
+			AddCharacterExpToSkill(pchar, "Fencing", 5);
+			AddCharacterExpToSkill(pchar, "FencingHeavy", 5);
+		break;
+		
+//========================  "Проверка знаний"  =======================
+
+		case "SCQ_Zachet_VremyVishlo":
+			DialogExit();
+			DeleteAttribute(pchar, "showTimer");
+			ClearAllLogStrings();
+			sld = CharacterFromID(pchar.StudentZachet);
+			sld.dialog.filename = "Quest/ForAll_dialog.c";
+			sld.dialog.currentnode = "SCQ_Proverka_Znani_VremyVishlo";
+			sld.lifeday = 0;
+			LAi_SetActorType(sld);
+			LAi_ActorDialogNow(sld, Pchar, "", -1);
 		break;
 		
 
@@ -11672,20 +12725,34 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 		case "SpawnSalasarSupports_3":
 			LAi_group_SetRelation("ReefAssholes", LAI_GROUP_PLAYER, LAI_GROUP_FRIEND);
-			LAi_SetFightMode(pchar, false);
-			LAi_LockFightMode(pchar, false);
 			LAi_LocationFightDisable(loadedLocation, true);
+			LAi_SetFightMode(pchar, false);
+			LAi_LockFightMode(pchar, true);
 			sld = CharacterFromID("salasar");
 			LAi_SetActorTypeNoGroup(sld);
 			sld.dialog.filename = "Salasar.c";
 			sld.dialog.currentnode = "Last";
 			LAi_ActorDialog(sld, pchar, "", 4.0, 0);
+			int salnum = sld.num;
+			int npclocnum = sld.locid;
+			for(i = 0; i < 10; i++)
+			{
+				sld = CharacterFromID("SalSupp"+i);
+				LAi_KillCharacter(sld);
+				sld = CharacterFromID("SalSupps"+i);
+				LAi_KillCharacter(sld);
+			}
+			for(i = 0; i < salnum; i++)
+			{
+				sld = CharacterFromID("Skelet"+npclocnum+"_"+i);
+				LAi_KillCharacter(sld);
+			}
 		break;
 		case "SpawnGiantEvilSkeleton":
 			if (loadedLocation.id != "DeckWithReefs" || CheckAttribute(pchar,"GiantEvilSkeletonSpawned")) {chrDisableReloadToLocation = false; break;}
 			scareOfficers(50);
 			log_info("Хранитель грота был пробуждён.");
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_spy", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_0", "skeleton", "Giant", iRank, PIRATE, 1, true));
 			sld.name = "Хранитель";
 			sld.lastname = "Грота";
@@ -11756,6 +12823,22 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_group_MoveCharacter(sld, "player");
 			LAi_SetActorType(sld);
 			LAi_ActorDialog(sld, pchar, "", 1.0, 0);
+		break;
+		
+		case "MG_ObezyanaKill":
+			SetTimerCondition("MG_ObezyanaSkelet", 0, 0, 3, false);
+		break;
+		
+		case "MG_ObezyanaSkelet":
+			sld = GetCharacter(NPC_GenerateCharacter("MG_ObezyanaSkelet", "Monkey", "monkey", "monkey", sti(pchar.rank), PIRATE, -1, true));
+			sld.name = "Джеки";
+			sld.lastname = "";
+			LAi_SetWarriorType(sld);
+			LAi_CharacterDisableDialog(sld);
+			LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+			//sld.RebirthPhantom = true;
+			LAi_SetLoginTime(sld, 21.99, 6.0);
+			ChangeCharacterAddressGroup(sld, "Guadeloupe_deadlock", "monsters", "monster6");
 		break;
 	}
 }
@@ -12013,8 +13096,8 @@ void QuestCursedSceleton()
 {
 	ref sld;
 	//sld = GetCharacter(CharacterFromID("CursedSkeleton"));
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_spy", sti(pchar.rank)+20, PIRATE, 1, true));
-	else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+	else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
 	FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 100, 100, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 	DeleteAttribute(sld, "SuperShooter");
 	int hitpoints = rand(sti(pchar.rank)*15)+1000;

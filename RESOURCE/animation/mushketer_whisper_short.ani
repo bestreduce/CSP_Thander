@@ -1504,42 +1504,74 @@ event = "Jump pause", 3621 , normal
 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 [Sit_Look_Around]
-speed = 2.
+speed = 1.5
 loop = true
 type = normal
-	start_time = 2655
-	end_time = 2729
+	start_time = 3929
+	end_time = 4003
 	data = "Blend time", "0.3"		; sec
 
 [Sit_Lower_head]
 speed = 1.
 loop = true
 type = normal
-	start_time = 3001
-	end_time = 3101
+	start_time = 3878
+	end_time = 3928
 	data = "Blend time", "0.3"		; sec
 
 [Sit_Idle01]
-speed = 2.
+speed = 1.
 loop = true
 type = normal
-	start_time = 2589
-	end_time = 2639
+	start_time = 3878
+	end_time = 3928
 	data = "Blend time", "0.3"		; sec
 
 [Sit_Idle02]
 speed = 1.
 loop = true
 type = normal
-	start_time = 2725
-	end_time = 3000
+	start_time = 3878
+	end_time = 3928
+	data = "Blend time", "0.3"		; sec
+	
+[Sit_Idle03]
+speed = 1.
+loop = true
+type = normal
+	start_time = 3878
+	end_time = 3928
+	data = "Blend time", "0.3"		; sec
+	
+[Sit_Idle04]
+speed = 1.
+loop = true
+type = normal
+	start_time = 3878
+	end_time = 3928
+	data = "Blend time", "0.3"		; sec
+	
+[Sit_Idle05]
+speed = 1.
+loop = true
+type = normal
+	start_time = 3878
+	end_time = 3928
+	data = "Blend time", "0.3"		; sec
+	
+[Sit_Idle06]
+speed = 1.
+loop = true
+type = normal
+	start_time = 3878
+	end_time = 3928
 	data = "Blend time", "0.3"		; sec
 
 [Sit_Death]
 speed = 1.
 type = normal
-	start_time = 2640
-	end_time = 2654
+	start_time = 3878
+	end_time = 3928
 	data = "Blend time", "0.1"		; sec
 	data = "Probability", "1.0"
 	data = "Angle", "340.0"

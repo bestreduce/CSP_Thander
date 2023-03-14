@@ -84,7 +84,7 @@ void ProcessDialogEvent()
 				break;
             }
 			//Sinistra Пролог Анжелика Тич
-            if (pchar.questTemp.AnjelikaTichPrologue == "ATP")
+            if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP")
             {
                 dialog.Text = "Здравствуйте, сеньорита! Желаете что-нибудь прикупить? Может быть вам нужна соль? У меня много соли! Ах... Какая соль!",
                 Link.l1 = "Сеньор, с вами всё в порядке?";
@@ -116,7 +116,7 @@ void ProcessDialogEvent()
 		//Black sails
 		case "BS_NPVK_2":
             dialog.text = "Обратитесь к мисс Гатри, она недавно прибыла с Нассау и взяла под контроль сделки с призами. На Бермудах сам Джекмен к ней с поклоном заходит.";
-            link.l1 = "Хм. Гатри… Что – то знакомое. Хорошо, до встречи.";
+            link.l1 = "Хм. Гатри... Что – то знакомое. Хорошо, до встречи.";
 			link.l1.go = "exit";
 
 			sld = CharacterFromID("Pirates_trader");
@@ -209,7 +209,7 @@ void ProcessDialogEvent()
 											"! Похоже, собирается шторм","! Поднимается сильный ветер") +", не правда ли?"));
 
 			link.l1 = NPCharRepPhrase(npchar,
-			            pcharrepphrase(LinkRandPhrase("Ты все ещё жив, ", "И я тебе "+ GetSexPhrase("рад","рада") +", ","Мы с тобой знали времена и получше, ")
+			            pcharrepphrase(LinkRandPhrase("Ты всё ещё жив, ", "И я тебе "+ GetSexPhrase("рад","рада") +", ","Мы с тобой знали времена и получше, ")
 									  +LinkRandPhrase("каналья!","дружище!","морской волк!") +" А я "+ GetSexPhrase("думал","думала") +", "
 									  +LinkRandPhrase("твоя жена уже сгрызла тебя с элем!","тебя сожрали термиты!", "твоя старуха сжила тебя со свету!"),
 						               LinkRandPhrase("Добрый день, ","Доброго здоровья, ","Привет, ") + GetAddress_FormToNPC(NPChar)+" " +GetFullName(Npchar)
@@ -708,7 +708,7 @@ void ProcessDialogEvent()
 		case "business":
 			iTest = 0;
     		//квест Синей Птицы, начальный диалог
-			if (pchar.questTemp.BlueBird == "begin" && sti(npchar.nation) != PIRATE && npchar.city != "Panama" && pchar.rank >= 10)
+			if (pchar.questTemp.BlueBird == "begin" && sti(npchar.nation) != PIRATE && npchar.city != "Panama" && pchar.rank >= 4)
 			{
 				dialog.text = RandPhraseSimple("Капитан, прошу вас, помогите нам!!!", "Капитан, я прошу у вас помощи от имени всех торговцев!");
 				link.l1 = "Что случилось? Чем я могу вам помочь?";
@@ -891,7 +891,7 @@ void ProcessDialogEvent()
 			else
 			{
 				// проверка на проф пригодность -->
-				if (isBadReputation(pchar, 42))
+				if (isBadReputation(pchar, 40))
 				{
 					dialog.text = RandSwear() + "Ты ведь " + GetFullName(pchar)+ ", не так ли? О тебе " +
 								  RandPhraseSimple("ходят ужасные слухи","говорят не лучшим образом") + ", я не хочу иметь с тобой дело.";
@@ -971,31 +971,33 @@ void ProcessDialogEvent()
 							npchar.iTradeIsland1 = GetIslandByCityName(Characters[sti(npchar.storeMan1)].city);
 							npchar.iTradeIsland2 = GetIslandByCityName(Characters[sti(npchar.storeMan2)].city);
 							npchar.iTradeIsland3 = GetIslandByCityName(Characters[sti(npchar.storeMan3)].city);
-
-							if (CheckOfficersPerk(pchar,"Trader"))
+							int iGetMaxDays1 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city));
+							int iGetMaxDays2 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city));
+							int iGetMaxDays3 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city));
+							if(CheckOfficersPerk(pchar,"Trader"))
 							{
-								npchar.iDaysExpired1 = (GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city))/2 - drand(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan1)].city),GetArealByCityName(NPChar.city))/20 * 4))) * 2 + 1 + drand(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan1)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
-								npchar.iDaysExpired2 = (GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city))/2 - drand1(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan2)].city),GetArealByCityName(NPChar.city))/20 * 4))) * 2 + 1 + drand1(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan2)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
-								npchar.iDaysExpired3 = (GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city))/2 - drand2(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan3)].city),GetArealByCityName(NPChar.city))/20 * 4))) * 2 + 1 + drand2(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan3)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
+								npchar.iDaysExpired1 = iGetMaxDays1 - drand(MakeInt(iGetMaxDays1/2.5)) + 1 + drand(MakeInt(3*iGetMaxDays1/8) - 1));
+								npchar.iDaysExpired2 = iGetMaxDays2 - drand1(MakeInt(iGetMaxDays2/2.5)) + 1 + drand1(MakeInt(3*iGetMaxDays2/8) - 1));
+								npchar.iDaysExpired3 = iGetMaxDays3 - drand2(MakeInt(iGetMaxDays3/2.5)) + 1 + drand2(MakeInt(3*iGetMaxDays3/8) - 1));
 							}
-							else //Lipsar переделал формулы (ВСЕ(Почти)). Что бы поменять кол-во дней просто меняеете цифры вот тут -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------> Сверху торгаш Снизу обычный. А так же тут ---------------------------------------------------------------------------------------------->
+							else //Lipsar переделал формулы (ВСЕ(Почти))
 							{
-								npchar.iDaysExpired1 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city))/2 - MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city))/20 * 4) + 1 + drand(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan1)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
-								npchar.iDaysExpired2 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city))/2 - MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city))/20 * 4) + 1 + drand1(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan2)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
-								npchar.iDaysExpired3 = GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city))/2 - MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city))/20 * 4) + 1 + drand2(MakeInt(GetMaxDaysFromIsland2Island(GetArealByCityName(Characters[sti(npchar.storeMan3)].city),GetArealByCityName(NPChar.city))/8 * 3) - 1));
+								npchar.iDaysExpired1 = 2*iGetMaxDays1/3 + 1 + drand(MakeInt(3*iGetMaxDays1/8) - 1));
+								npchar.iDaysExpired2 = 2*iGetMaxDays2/3 + 1 + drand1(MakeInt(3*iGetMaxDays2/8) - 1));
+								npchar.iDaysExpired3 = 2*iGetMaxDays3/3 + 1 + drand2(MakeInt(3*iGetMaxDays3/8) - 1));
 							}
 
 							if(CheckOfficersPerk(pchar,"Trader"))
 							{
-								npchar.iMoney1 = makeint(sti(npchar.iQuantityGoods1) / sti(Goods[sti(npchar.iTradeGoods1)].Units) * sti(Goods[sti(npchar.iTradeGoods1)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city)) / 2 / (sti(npchar.iDaysExpired1)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
-								npchar.iMoney2 = makeint(sti(npchar.iQuantityGoods2) / sti(Goods[sti(npchar.iTradeGoods2)].Units) * sti(Goods[sti(npchar.iTradeGoods2)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city)) / 2 / (sti(npchar.iDaysExpired2)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
-								npchar.iMoney3 = makeint(sti(npchar.iQuantityGoods3) / sti(Goods[sti(npchar.iTradeGoods3)].Units) * sti(Goods[sti(npchar.iTradeGoods3)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city)) / 2 / (sti(npchar.iDaysExpired3)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
+								npchar.iMoney1 = makeint(sti(npchar.iQuantityGoods1) / sti(Goods[sti(npchar.iTradeGoods1)].Units) * sti(Goods[sti(npchar.iTradeGoods1)].Weight) * iGetMaxDays1 / 2 / (sti(npchar.iDaysExpired1)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
+								npchar.iMoney2 = makeint(sti(npchar.iQuantityGoods2) / sti(Goods[sti(npchar.iTradeGoods2)].Units) * sti(Goods[sti(npchar.iTradeGoods2)].Weight) * iGetMaxDays2 / 2 / (sti(npchar.iDaysExpired2)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
+								npchar.iMoney3 = makeint(sti(npchar.iQuantityGoods3) / sti(Goods[sti(npchar.iTradeGoods3)].Units) * sti(Goods[sti(npchar.iTradeGoods3)].Weight) * iGetMaxDays3 / 2 / (sti(npchar.iDaysExpired3)/2)) * (9 + sti(pchar.Skill.Commerce) / 18);
 							}
 							else
 							{
-								npchar.iMoney1 = makeint(sti(npchar.iQuantityGoods1) / sti(Goods[sti(npchar.iTradeGoods1)].Units) * sti(Goods[sti(npchar.iTradeGoods1)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan1)].city)) / 2 / sti(npchar.iDaysExpired1)) * (9 + sti(pchar.Skill.Commerce) / 20);
-								npchar.iMoney2 = makeint(sti(npchar.iQuantityGoods2) / sti(Goods[sti(npchar.iTradeGoods2)].Units) * sti(Goods[sti(npchar.iTradeGoods2)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan2)].city)) / 2 / sti(npchar.iDaysExpired2)) * (9 + sti(pchar.Skill.Commerce) / 20);
-								npchar.iMoney3 = makeint(sti(npchar.iQuantityGoods3) / sti(Goods[sti(npchar.iTradeGoods3)].Units) * sti(Goods[sti(npchar.iTradeGoods3)].Weight) * GetMaxDaysFromIsland2Island(GetArealByCityName(NPChar.city),GetArealByCityName(Characters[sti(npchar.storeMan3)].city)) / 2 / sti(npchar.iDaysExpired3)) * (9 + sti(pchar.Skill.Commerce) / 20);
+								npchar.iMoney1 = makeint(sti(npchar.iQuantityGoods1) / sti(Goods[sti(npchar.iTradeGoods1)].Units) * sti(Goods[sti(npchar.iTradeGoods1)].Weight) * iGetMaxDays1 / 2 / sti(npchar.iDaysExpired1)) * (9 + sti(pchar.Skill.Commerce) / 20);
+								npchar.iMoney2 = makeint(sti(npchar.iQuantityGoods2) / sti(Goods[sti(npchar.iTradeGoods2)].Units) * sti(Goods[sti(npchar.iTradeGoods2)].Weight) * iGetMaxDays2 / 2 / sti(npchar.iDaysExpired2)) * (9 + sti(pchar.Skill.Commerce) / 20);
+								npchar.iMoney3 = makeint(sti(npchar.iQuantityGoods3) / sti(Goods[sti(npchar.iTradeGoods3)].Units) * sti(Goods[sti(npchar.iTradeGoods3)].Weight) * iGetMaxDays3 / 2 / sti(npchar.iDaysExpired3)) * (9 + sti(pchar.Skill.Commerce) / 20);
 							}
 							SaveCurrentQuestDateParam("CargoQuest");
 							NPChar.sNation1 = XI_ConvertString("Colony"+Characters[sti(npchar.storeMan1)].city);
@@ -1006,15 +1008,15 @@ void ProcessDialogEvent()
 							NPChar.sTemp3 = "";
 							if (npchar.iTradeIsland1 != Characters[sti(npchar.storeMan1)].city)
 							{
-								NPChar.sTemp1 = ", что на " + XI_ConvertString(npchar.iTradeIsland1+"Dat");
+								NPChar.sTemp1 = ", что на " + XI_ConvertString(npchar.iTradeIsland1+"Voc");
 							}
 							if (npchar.iTradeIsland2 != Characters[sti(npchar.storeMan2)].city)
 							{
-								NPChar.sTemp2 = ", что на " + XI_ConvertString(npchar.iTradeIsland2+"Dat");
+								NPChar.sTemp2 = ", что на " + XI_ConvertString(npchar.iTradeIsland2+"Voc");
 							}
 							if (npchar.iTradeIsland3 != Characters[sti(npchar.storeMan3)].city)
 							{
-								NPChar.sTemp3 = ", что на " + XI_ConvertString(npchar.iTradeIsland3+"Dat");
+								NPChar.sTemp3 = ", что на " + XI_ConvertString(npchar.iTradeIsland3+"Voc");
 							}
 
 							//dialog.text =  "Одну минуту, сейчас найду свой журнал\nВот, что мне нужно сейчас доставить. Груз " + GetGoodsNameAlt(sti(npchar.iTradeGoods1))+ " в количестве " + FindRussianQtyString(sti(npchar.iQuantityGoods1)) + " в город " + NPChar.sNation1 + NPChar.sTemp1 + " за " +  FindRussianDaysString(makeint(sti(npchar.iDaysExpired1))) +", вознаграждение - " +FindRussianMoneyString(sti(npchar.iMoney1)) + ". Ещё есть груз " + GetGoodsNameAlt(sti(npchar.iTradeGoods2))+ " в количестве " + FindRussianQtyString(sti(npchar.iQuantityGoods2)) + " в город " + NPChar.sNation2 + NPChar.sTemp2 + " за " +  FindRussianDaysString(makeint(sti(npchar.iDaysExpired2))) +", вознаграждение - " +FindRussianMoneyString(sti(npchar.iMoney2)) + ". А также груз " + GetGoodsNameAlt(sti(npchar.iTradeGoods3))+ " в количестве " + FindRussianQtyString(sti(npchar.iQuantityGoods3)) + " в город " + NPChar.sNation3 + NPChar.sTemp3 + " за " +  FindRussianDaysString(makeint(sti(npchar.iDaysExpired3))) +", вознаграждение - " +FindRussianMoneyString(sti(npchar.iMoney3)) + ".";
@@ -1142,10 +1144,7 @@ void ProcessDialogEvent()
 			    AddQuestUserData("DELIVERY_TRADE_QUEST", "sTargetColony",XI_ConvertString("Colony"+pchar.CargoQuest.iTradeColony+"Dat"));
                 CloseQuestHeader("DELIVERY_TRADE_QUEST");
 
-				pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-				if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-				if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-				if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+				AchievementsCounter_genquests(1);
 
                 break;
             }
@@ -1186,10 +1185,7 @@ void ProcessDialogEvent()
 					AddQuestRecord("DELIVERY_TRADE_QUEST", "Late1Day");
 					CloseQuestHeader("DELIVERY_TRADE_QUEST");
 
-					pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-					if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-					if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-					if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+					AchievementsCounter_genquests(1);
 				}
 				else
 				{
@@ -1215,10 +1211,7 @@ void ProcessDialogEvent()
 					AddQuestUserData("DELIVERY_TRADE_QUEST", "sTargetColony",XI_ConvertString("Colony"+pchar.CargoQuest.iTradeColony+"Gen"));
 					CloseQuestHeader("DELIVERY_TRADE_QUEST");
 
-					pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-					if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-					if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-					if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+					AchievementsCounter_genquests(1);
 				}
 			}
 			SaveCurrentNpcQuestDateParam(Npchar, "Cooldown");
@@ -1267,11 +1260,7 @@ void ProcessDialogEvent()
 		    AddQuestUserData("DELIVERY_TRADE_QUEST", "sTargetColony",XI_ConvertString("Colony"+pchar.CargoQuest.iTradeColony+"Gen"));
             CloseQuestHeader("DELIVERY_TRADE_QUEST");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
-
+			AchievementsCounter_genquests(1);
 		break;
 
 		case "generate_quest_not_closed":

@@ -13,28 +13,6 @@ void LoginCharactersInLocation(ref loc)
         ClearCharacterExpRate(&Characters[i]);
 		LoginCharacter(&Characters[i], locID);
 	}
-	if(actLoadFlag)
-	{
-		for(i = 0; i < MAX_CHARS_IN_LOC; i++)
-		{
-			if(CheckAttribute(&Characters[LOC_FANTOM_CHARACTERS + i], "isLogin"))
-                	continue;
-            DelBakSkillAttr(&Characters[LOC_FANTOM_CHARACTERS + i]); // boal оптимизация скилов
-            ClearCharacterExpRate(&Characters[LOC_FANTOM_CHARACTERS + i]);
-			LoginCharacter(&Characters[LOC_FANTOM_CHARACTERS + i], locID);
-		}
-	}
-
-	// boal пленники в трюм  и фантомы на палубе
-	for(i = FANTOM_CHARACTERS; i < TOTAL_CHARACTERS; i++)
-	{
-		//#20210221-01
-		if(CheckAttribute(&Characters[i], "isLogin"))
-				continue;
-        DelBakSkillAttr(&Characters[i]); // boal оптимизация скилов
-        ClearCharacterExpRate(&Characters[i]);
-        LoginCharacter(&Characters[i], locID);
-	}
 	LocAi_PostInit(loc);
 	// boal dead can be searched 14.12.2003 -->
 	Dead_Char_num = 0; // трупов нет
@@ -85,7 +63,7 @@ void LoginCharacter(aref chr, string locID)
 
 void LogoffCharacter(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
         DelBakSkillAttr(chr); // fix
 		LAi_CharacterLogoff(chr);
@@ -171,7 +149,7 @@ bool ChangeCharacterAddressGroup(ref character, string location_id, string group
 	}
 	else
 	{
-		if (location_id == character.location && IsEntity(character)) //boal fix 26/06/05
+		if (location_id == character.location && IsEntity(&character)) //boal fix 26/06/05
 		{
 			TeleportCharacterToLocator(character, group, locator);
 			character.location = location_id;

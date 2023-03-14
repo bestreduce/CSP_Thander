@@ -68,9 +68,13 @@ void SetShipTuningMastMultiplier(ref chr, float fValue)
 {
 	ref rShip = &RealShips[sti(chr.ship.type)];
 	float value = stf(rShip.MastMultiplier);
-	value = value - fValue;
-	rShip.MastMultiplier = value;
-	chr.ship.MastMultiplier = value;
+	if (!CheckAttribute(rShip, "Untuned.MastMultiplier"))
+	{
+		rShip.Untuned.MastMultiplier = value;
+	}
+	value = value - fValue;	
+	rShip.MastMultiplier = value; 
+	chr.ship.MastMultiplier = value; 
 }
 
 void SetShipBermudeTuningF(ref chr, string sStat)

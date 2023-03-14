@@ -116,7 +116,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "DH_mercLeft");
 			pchar.location.from_sea = "Villemstad_town"
 			setWDMPointXZ(pchar.location.from_sea);  // коорд на карте
-			pchar.Ship.Type = GenerateShipExt(SHIP_EMPRESS, 0, pchar);
+			pchar.Ship.Type = GenerateShipExt(SHIP_SCHOONER_B, 0, pchar);
 			ref shTo = &RealShips[sti(Pchar.Ship.Type)];
 			shTo.SpeedRate        = 17.0;
 			shTo.HP = 1900;
@@ -474,7 +474,7 @@ void ProcessDialogEvent()
 		break;
 		case "DH_mercenary_temple_afterstash_1":
 			dialog.Text = "Что? ";
-			Link.l1 = "Все готовы выдвигаться, нельзя терять времени. Корабль все ещё ждёт нас, а альтернативный путь ... займёт слишком много времени. ";
+			Link.l1 = "Все готовы выдвигаться, нельзя терять времени. Корабль всё ещё ждёт нас, а альтернативный путь ... займёт слишком много времени. ";
 			Link.l1.go = "DH_mercenary_temple_afterstash_2";
 		break;
 		case "DH_mercenary_temple_afterstash_2":
@@ -670,7 +670,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			NextDiag.CurrentNode = "Second Time";
 			if (npchar.sex != "woman")	npchar.Dialog.FileName = "PGG_dialog.c";
-			else	npchar.Dialog.FileName = "pgg_dialog_town.c";
+			else	npchar.Dialog.FileName = "PGG_dialog.c";
 			//PGG_ChangeRelation2MainCharacter(npchar, 25);
 			DoQuestFunctionDelay("DarkHuman_Amatike", 1.0);
 			//LAi_SetWarriorType(npchar);

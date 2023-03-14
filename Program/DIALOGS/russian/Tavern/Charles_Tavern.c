@@ -6,7 +6,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Какие вопросы?", "Что вам угодно, " + GetAddress_Form(NPChar) + "?"), "Совсем недавно вы пытались задать мне вопрос, " + GetAddress_Form(NPChar) + "...", "В течение этого дня вы уже третий раз говорите о каком-то вопросе...",
                           "Опять вопросы будем задавать?", "block", 1, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить"), "Хм, что-то с памятью моей стало...",
+			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить..."), "Хм, что-то с памятью моей стало...",
                       "Да уж, действительно в третий раз...", "Да нет, какие вопросы...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			if (pchar.questTemp.MC == "toSeekSister")
@@ -14,7 +14,29 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = "Дружище, я ищу юную леди по имени Элизабет Шеппард. Ты о такой не слышал?";
 				link.l1.go = "MCLiz";
 			}
+			if (CheckAttribute(pchar, "questTemp.PKM_SvtvA_NevisTaverna_1"))
+			{
+				link.l1 = "Меня интересует, не заходило ли в порт судно - чёрный фрегат.";
+				link.l1.go = "BlackFregat_1";
+			}
 		break;
+//========================  Квест "Странные вещи творятся на архипелаге" ==>
+		case "BlackFregat_1":
+			dialog.text = "Чёрный фрегат? Дайте подумать... Нет, к нам он точно не заходил\nНо, я знаю одного типа, который, похоже, с ним сталкивался.";
+			link.l1 = "И? Как я могу поговорить с этим человеком?";
+			link.l1.go = "BlackFregat_2";
+		break;
+		case "BlackFregat_2":
+			dialog.text = "Да вон он сидит за маленьким круглым столиком. Если я не ошибаюсь, то его имя Баллтезар Фигуейдал.";
+			link.l1 = "Хорошо. Пойду, поговорю с ним.";
+			link.l1.go = "exit";
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_NevisTaverna_1");
+			
+			sld = CharacterFromID("PKM_SvpvA_Shturman_1")
+			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Shturman_v_taverne_2";			
+		break;
+//========================  Квест "Странные вещи творятся на архипелаге" <==		
 		case "MCLiz":
 			dialog.text = "Мисс Лиз Шеппард - жительница нашего города. А что вам нужно от неё?";
 			link.l1 = "Понимаешь, она кое-что забыла в заливе Маракайбо...";

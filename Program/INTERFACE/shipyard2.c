@@ -7,7 +7,7 @@ int iTunPoints = 8;
 int iTimeMake, iShipPoints, iQBorders, iPriceOrder;
 int iQMAX, iQMIN, iFreeSP, iFreeTP;
 bool Tune_Sheme[10] = {0,0,0,0,0,0,0,0,0,0};//элементы 0(заголовок таблицы) и 2(паруса) пропускаем. просто для удобства
-float Ship_Sheme[11] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-10.0};//тип флоат, чтоб не преобразовывать лишний раз при умножении на коэффициент, по факту - целые
+float Ship_Sheme[11] = {10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0};//тип флоат, чтоб не преобразовывать лишний раз при умножении на коэффициент, по факту - целые
 int CannonTypes[16] = {1000,7,0,8,1,9,2,10,3,11,4,12,5,13,6,14};// #define CANNON_TYPE_CULVERINE_LBS8	0, #define CANNON_TYPE_CANNON_LBS8		7
 
 string CurTable, CurRow, sNation;
@@ -20,11 +20,12 @@ int sundukSum;//на все апгрейды одинаковое колво с�
 int Tun_Mater1[10];//кол-во товар
 int Tun_Mater2[10];//кол-во предмет
 int Tun_Mater3[10];//кол-во деньги	//gold
-string sAdd[10] = {"","\nкорпус: ","","\nмачты: ","\nскорость: ","\nманёвренность: ","\nбейдевинд: ","\nдэдвейт: ","\nкоманда: ","\nкалибр: "};
+string sAdd[10] = {"","\nкорпус: ","","\nмачты: ","\nскорость: ","\nманёвренность: ","\nбейдевинд: ","\nдедвейт: ","\nкоманда: ","\nкалибр: "};
 
 void InitInterface_R(string iniName, ref _shipyarder)
 {
 	GameInterface.title = "titleShipyard";
+	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
 
 	refNPCShipyard  = _shipyarder;
 
@@ -53,7 +54,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	if (iTest != -1) {rColony = GetColonyByIndex(iTest);}
 	refStore = &stores[sti(rColony.StoreNum)];
 
-	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+	if (iTunPoints < 1) SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, "TunSheme", -1, 1, 0);//если тюнинга нет из-за низкого навыка, отключаем клики по кнопкам
 
 	SetEventHandler("InterfaceBreak","ProcessExitCancel",0);
 	SetEventHandler("exitCancel","ProcessExitCancel",0);
@@ -63,6 +64,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	SetEventHandler("CheckButtonChange", "ProcessFilter", 0);
 	SetEventHandler("TableSelectChange", "TableSelectChange", 0);
 	SetEventHandler("ExitMsgMenu", "ExitMsgMenu", 0);
+	SetEventHandler("OnTableClick", "OnTableClick", 0);
 
 	EI_CreateFrame("SHIP_BIG_PICTURE_BORDER",156,40,366,275); // tak from SHIP_BIG_PICTURE
 	EI_CreateHLine("SHIP_BIG_PICTURE_BORDER", 161,246,361,1, 4);
@@ -80,7 +82,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	SetFormatedText("HERO_RANK",refNPCShipyard.Rank);
 
 	SetFormatedText("HERO_SKILL","" + iYarderSkill);
-	SetFormatedText("HERO_QBORDERS", iQBorders*100/9 + "%");
+	SetFormatedText("HERO_QBORDERS", iQBorders*10 + "%");
 	SetFormatedText("HERO_SHIPPOINTS",iFreeSP + "/" + iShipPoints);
 	SetFormatedText("HERO_TUNPOINTS",iFreeTP + "/" + iTunPoints);
 
@@ -110,6 +112,7 @@ void IDoExit(int exitCode)
 	DelEventHandler("CheckButtonChange", "ProcessFilter");
 	DelEventHandler("TableSelectChange", "TableSelectChange");
 	DelEventHandler("ExitMsgMenu", "ExitMsgMenu");
+	DelEventHandler("OnTableClick", "OnTableClick");
 
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
@@ -440,6 +443,14 @@ void FillShipyardTable()
 	GameInterface.TABLE_SHIPYARD.hr.td6.scale = 0.9;
 	GameInterface.TABLE_SHIPYARD.select = 0;
 	GameInterface.TABLE_SHIPYARD.top = 0;
+//--> mod tablesort
+	GameInterface.TABLE_SHIPYARD.hr.td1.sorttype = "string";
+	GameInterface.TABLE_SHIPYARD.hr.td2.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td3.sorttype = "string";
+	GameInterface.TABLE_SHIPYARD.hr.td4.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td5.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td6.sorttype = "";
+//<-- mod tablesort
 
 	int	iStart = 0;
 	int iEnd = -1;
@@ -951,4 +962,18 @@ void CalcTuningPrice()
 	Tun_Mater2[i] = makeint((7-shipClass)/2 * fQuestShip);
 	if (Tun_Mater2[i] < 1) Tun_Mater2[i] = 1;
 	Tun_Mater3[i] = makeint((100 * cannonQ * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+}
+
+void OnTableClick()
+{
+	string sControl = GetEventData();
+	int iRow = GetEventData();
+	int iColumn = GetEventData();
+
+	//string sRow = "tr" + (iRow + 1);
+	if (sControl == "TABLE_SHIPYARD")
+	{
+		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+		Table_UpdateWindow(sControl);
+	}
 }

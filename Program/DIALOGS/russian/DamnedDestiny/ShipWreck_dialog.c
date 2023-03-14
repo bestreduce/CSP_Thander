@@ -10,7 +10,7 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	string sName = GetNameLugger(PChar, "f");
+	string sName = GetFullName(PChar);
 	string sCharacter = "";
 
 	int iShip = 0;
@@ -31,12 +31,12 @@ void ProcessDialogEvent()
 
 		case "1":
 			dialog.text = "Спасибо, Господи!!!";
-			link.l1 = "Моё имя " + GetNameLugger(PChar, "f") + "! Я капитан корабля ''" + PChar.Ship.Name + "''. Что с вами случилось?";
+			link.l1 = "Моё имя " + GetFullName(PChar) + "! Я капитан корабля ''" + PChar.Ship.Name + "''. Что с вами случилось?";
 			link.l1.go = "2";
 		break;
 
 		case "2":
-			dialog.text = "Я - капитан " + GetNameLugger(NPChar, "f") + ". Неделю назад мы попали в шторм.";
+			dialog.text = "Я - капитан " + GetFullName(NPChar) + ". Неделю назад мы попали в шторм.";
 			link.l1 = "Чёрт вас раздери - наверное это было торнадо!";
 			link.l1.go = "3";
 		break;
@@ -70,8 +70,8 @@ void ProcessDialogEvent()
 		case "5":
 			sCharacter = PChar.GenerateShipWreck.CharacterID;
 			SetCameraDialogMode(CharacterFromID(sCharacter));
-			dialog.text = GetNameLugger(CharacterFromID(sCharacter), "f") + ": " + GetNameLugger(NPChar, "n") + ", этот пакет ты вскроешь по прибытии на землю. Но не раньше. Там дополнительные инструкции.";
-			link.l1 = GetNameLugger(NPChar, "f") + ": Понял, капитан.";
+			dialog.text = GetFullName(CharacterFromID(sCharacter)) + ": " + GetNameLugger(NPChar, "n") + ", этот пакет ты вскроешь по прибытии на землю. Но не раньше. Там дополнительные инструкции.";
+			link.l1 = GetFullName(NPChar) + ": Понял, капитан.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ShipWreckInSeaWaitEnd");
 		break;
@@ -95,7 +95,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "9":
-			dialog.text = "Отправляйтесь в путь. Удачи, " + GetNameLugger(PChar, "f") + "!";
+			dialog.text = "Отправляйтесь в путь. Удачи, " + GetFullName(PChar) + "!";
 			link.l1 = "До свидания.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ShipWreckInSeaWaitEndToSea");
@@ -150,7 +150,7 @@ void ProcessDialogEvent()
 
 		case "17":
 			dialog.text = "Мерзав" + GetSexPhrase("ец","ка") +"! Что тебе нужно?";
-			link.l1 = "Всего лишь ваше золото, " + GetAddress_FormToNPC(NPChar) + " " + GetNameLugger(NPChar, "f") + ".";
+			link.l1 = "Всего лишь ваше золото, " + GetAddress_FormToNPC(NPChar) + " " + GetFullName(NPChar) + ".";
 			link.l1.go = "18";
 		break;
 
@@ -184,7 +184,7 @@ void ProcessDialogEvent()
 
 		case "22":
 			dialog.text = "Я не люблю ждать.";
-			link.l1 = "Остынь. Я капитан " + GetNameLugger(PChar, "f") + ".";
+			link.l1 = "Остынь. Я капитан " + GetFullName(PChar) + ".";
 			link.l1.go = "23";
 		break;
 
@@ -195,7 +195,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "24":
-			dialog.text = "Якорь мне в глотку. Я штурман этого корабля - " + GetNameLugger(NPChar, "f") + ". Так что тебе нужно здесь?";
+			dialog.text = "Якорь мне в глотку. Я штурман этого корабля - " + GetFullName(NPChar) + ". Так что тебе нужно здесь?";
 			link.l1 = "Хочу поговорить с капитаном.";
 			link.l1.go = "25";
 		break;
@@ -290,7 +290,7 @@ void ProcessDialogEvent()
 
 		case "36":
 			dialog.text = "Как ты со мной говоришь, собака?";
-			link.l1 = "Я все ещё могу отличить кровь человека. Ни в какой шторм вы не попадали. Не знаю, кто из вас рубил мачты и рвал паруса. А также поджигал эти бочонки с порохом, но он явно был не в своём уме. То, что ваш капитан приболел, расскажете морскому патрулю, который возьмёт вас на абордаж и перевешает как бунтовщиков, на вон той единственной мачте. Так вот, мерзкие крысы, вы хотите жить?";
+			link.l1 = "Я всё ещё могу отличить кровь человека. Ни в какой шторм вы не попадали. Не знаю, кто из вас рубил мачты и рвал паруса. А также поджигал эти бочонки с порохом, но он явно был не в своём уме. То, что ваш капитан приболел, расскажете морскому патрулю, который возьмёт вас на абордаж и перевешает как бунтовщиков, на вон той единственной мачте. Так вот, мерзкие крысы, вы хотите жить?";
 			link.l1.go = "37";
 		break;
 
@@ -301,7 +301,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.GenerateShipWreck.ToSquadron) == 1)
 			{
 				SetCameraDialogMode(CharacterFromID(sCharacter));
-				link.l1 = GetNameLugger(CharacterFromID(sCharacter), "f") + ": Остынь, " + GetNameLugger(NPChar, "n") + ". У него больше людей и целый корабль.";
+				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Остынь, " + GetNameLugger(NPChar, "n") + ". У него больше людей и целый корабль.";
 				link.l1.go = "38";
 			}
 			else
@@ -400,7 +400,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.GenerateShipWreck.ToSquadronWithMoney) == 1)
 			{
 				SetCameraDialogMode(CharacterFromID(sCharacter));
-				link.l1 = GetNameLugger(CharacterFromID(sCharacter), "f") + ": Вот деньги, " + GetNameLugger(NPChar, "n") + ", у нас нет выхода.";
+				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Вот деньги, " + GetNameLugger(NPChar, "n") + ", у нас нет выхода.";
 				link.l1.go = "49";
 			}
 			else
@@ -447,14 +447,14 @@ void ProcessDialogEvent()
 		break;
 
 		case "NewCap_2":
-			dialog.text = "Меня зовут " + GetNameLugger(NPChar, "f") + " - я настоящий капитан корабля. Около месяца назад меня абордировало пиратское судно. Я бы не разговаривал с вами сейчас, если бы вовремя не подоспел военный патруль. Мы кое как отбились, а вражеский корабль на всех парусах уплыл. \n Догнать его патрулю не удалось. Я торговец, постоянно перевожу товары. В одном из портов мне пришлось нанять новую команду. Из старых членов осталось не больше тридцати... А теперь нас осталось всего " + sti(PChar.GenerateShipWreck.PrisonedCrew) + " человек. Неделю назад я понял, что нанял отпетых негодяев. \n В одну из ночей, накачавшись ромом, они сбили замок на арсенале и вооружившись, начали громить корабль, попутно убивая всех, кто им встретится. Не знаю, как так получилось, но они сами срубили мачты и подорвали несколько бочечек с порохом. Хорошо, что пробоины были небольшие. Протрезвев, они загнали нас в эту каюту. Что было дальше, вы понимаете сами.";
+			dialog.text = "Меня зовут " + GetFullName(NPChar) + " - я настоящий капитан корабля. Около месяца назад меня абордировало пиратское судно. Я бы не разговаривал с вами сейчас, если бы вовремя не подоспел военный патруль. Мы кое как отбились, а вражеский корабль на всех парусах уплыл. \n Догнать его патрулю не удалось. Я торговец, постоянно перевожу товары. В одном из портов мне пришлось нанять новую команду. Из старых членов осталось не больше тридцати... А теперь нас осталось всего " + sti(PChar.GenerateShipWreck.PrisonedCrew) + " человек. Неделю назад я понял, что нанял отпетых негодяев. \n В одну из ночей, накачавшись ромом, они сбили замок на арсенале и вооружившись, начали громить корабль, попутно убивая всех, кто им встретится. Не знаю, как так получилось, но они сами срубили мачты и подорвали несколько бочечек с порохом. Хорошо, что пробоины были небольшие. Протрезвев, они загнали нас в эту каюту. Что было дальше, вы понимаете сами.";
 			link.l1 = "Да, ваши шансы прожить ещё один день, были равны нулю.";
 			link.l1.go = "NewCap_3";
 		break;
 
 		case "NewCap_3":
 			dialog.text = "Как вас зовут?";
-			link.l1 = GetNameLugger(PChar, "f") + ", капитан корабля ''" + PChar.Ship.Name + "''.";
+			link.l1 = GetFullName(PChar) + ", капитан корабля ''" + PChar.Ship.Name + "''.";
 			link.l1.go = "NewCap_4";
 		break;
 

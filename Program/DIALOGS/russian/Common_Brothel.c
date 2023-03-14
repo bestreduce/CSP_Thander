@@ -81,7 +81,6 @@ void ProcessDialogEvent()
 					dialog.text = "Ты вернулся...";
 					link.l1 = "Я правда пытался тебе помочь и отнести деньги в церковь. Но как оказалось, таким как я добрые дела противопоказаны. В результате  моей попытки погибло много невинных. Забери свои деньги, я не в силах тебе помочь.";
 					link.l1.go = "ResultChurch_2";
-					LocatorReloadEnterDisable(pchar.HellSpawnLocation, "reload7_back", false);
 					break;
 				}
 			}
@@ -1132,8 +1131,8 @@ void ProcessDialogEvent()
 				switch(npchar.quest.choice)
 				{
 					case "0":
-						dialog.text = LinkRandPhrase("Тебе понравилось?", "Ну, что скажешь? Всё в порядке?", "Как дела,"+ GetSexPhrase(" корсар, все"," все") +" нормально?");
-						Link.l1 = RandPhraseSimple(""+ GetSexPhrase("Конечно, всё в порядке","А ты и впрямь... умеешь") +".", ""+ GetSexPhrase("Все в норме, крошка","Ты знаешь, я вполне довольна") +".");
+						dialog.text = LinkRandPhrase("Тебе понравилось?", "Ну, что скажешь? Всё в порядке?", "Как дела,"+ GetSexPhrase(" корсар, всё"," всё") +" нормально?");
+						Link.l1 = RandPhraseSimple(""+ GetSexPhrase("Конечно, всё в порядке","А ты и впрямь... умеешь") +".", ""+ GetSexPhrase("Всё в норме, крошка","Ты знаешь, я вполне довольна") +".");
 						Link.l1.go = "exit";
 					break;
 					case "1":

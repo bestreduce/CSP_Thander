@@ -176,12 +176,12 @@ void ProcessDialogEvent()
 		case "Konec":
 			DialogExit();
 			
-			sld = CharacterFromID("PDM_NK_Viktor")
+			sld = CharacterFromID("PDM_NK_Viktor");
 			sld.lifeday = 0;
 			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Viktor_Poka";
 			
-			sld = CharacterFromID("Andreas_Fickler")
+			sld = CharacterFromID("Andreas_Fickler");
 			sld.lifeday = 0;
 			
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "7");
@@ -203,11 +203,11 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 150);
 			AddCharacterExpToSkill(pchar, "Commerce", 220);
 			AddCharacterExpToSkill(pchar, "Sneak", 150);
-			sld = CharacterFromID("PDM_NK_Viktor")
+			sld = CharacterFromID("PDM_NK_Viktor");
 			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Viktor_Poka";
 			sld.lifeday = 0;
-			sld = CharacterFromID("Andreas_Fickler")
+			sld = CharacterFromID("Andreas_Fickler");
 			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Fickler_11";
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "3");
@@ -251,7 +251,7 @@ void ProcessDialogEvent()
 			dialog.text = "Ты пожалеешь об этих словах, ничтожество!";
 			link.l1 = "Меньше слов - к делу!";
 			link.l1.go = "fight_right_now";
-			sld = CharacterFromID("PDM_NK_Viktor")
+			sld = CharacterFromID("PDM_NK_Viktor");
 			if (MOD_SKILL_ENEMY_RATE <= 6)
 			{
 				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "Pistol1", DopHP);
@@ -307,7 +307,7 @@ void ProcessDialogEvent()
 			dialog.text = "Спасибо, к-капитан! Вы не п-п-пожалеете об этом!");
 			link.l1 = "Добро пожаловать на борт, Андреас.";
 			link.l1.go = "Fickler_Nanyat";
-			sld = CharacterFromID("Andreas_Fickler")
+			sld = CharacterFromID("Andreas_Fickler");
 			sld.Dialog.Filename = "Enc_Officer_dialog.c";
 			AddDialogExitQuestFunction("LandEnc_OfficerHired");
 			Pchar.questTemp.HiringOfficerIDX = GetCharacterIndex(sld.id);
@@ -328,14 +328,14 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "6");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("ся","ась"));
 			CloseQuestHeader("PDM_Neputyovy_kaznachey");
-			sld = CharacterFromID("Andreas_Fickler")
+			sld = CharacterFromID("Andreas_Fickler");
 			sld.lifeday = 0;
 			LAi_CharacterDisableDialog(sld);
 			DialogExit();
 		break;
 
 		case "Fickler_Nanyat":
-			sld = CharacterFromID("Andreas_Fickler")
+			sld = CharacterFromID("Andreas_Fickler");
 			SetCharacterRemovable(sld, false);
 			LAi_SetActorType(sld);
 			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_NK_NaKorabl", 0.5);

@@ -560,6 +560,12 @@ void ShowInfoWindow()
 			sText4 += "\nНа показатель данного умения действует штраф от недостатка навигации.";
         }
 	}
+	if (sCurrentNode == "TABLE_SPECIAL" && HasSubStr("Charisma",GameInterface.(CurTable).(CurRow).UserData.ID))
+	{
+		sText3 = "Ниже показано количество уже нанятых и доступных к найму на текущий момент офицеров.\nРассчитывается как удвоенный показатель Лидерства + (чистый Авторитет/20)."
+		int numnum = (GetNotQuestPassengersQuantity(Pchar) + GetCompanionQuantity(Pchar) - 1);
+		sText4 = "Нанято: "+numnum+"\nВсего доступно к найму: "+GetCharacterMaxOfficersQty(Pchar);
+	}
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), sText4, argb(255,255,196,196), sPicture, sGroup, sGroupPicture, 64, 64);
 
 }
@@ -922,7 +928,7 @@ string ShowStatValue(string type)
 			return value;
 		break;
 		case "energychar":
-			float fMultiplierE = 1.6666667;
+			float fMultiplierE = 1.30 + (GetCharacterSPECIALSimple(xi_refCharacter,SPECIAL_S)/10.0);//влияние силы на скорость восстановления энергии
 			if(CheckCharacterPerk(xi_refCharacter, "Energaiser")) // скрытый перк боссов и ГГ
 			{
 				fMultiplierE = fMultiplierE * 1.5;
@@ -1134,6 +1140,11 @@ string CheckForSpecial(string type)
 					float CB = 0.0;
 					if (CheckAttribute(weapon,"special.valueBB")) BB = sti(weapon.special.valueBB);
 					if (CheckAttribute(weapon,"special.valueCB")) CB = sti(weapon.special.valueCB);
+					if (CheckCharacterPerk(xi_refCharacter, "HardHitter"))
+					{
+						BB += 5.0;
+						CB += 5.0;
+					}
 					if (LAi_GetBladeFencingType(xi_refCharacter) == "FencingHeavy")
 					{
 						coeff = makefloat(GetCharacterSkillSimple(xi_refCharacter,"FencingHeavy"))/20;
@@ -1206,6 +1217,10 @@ string CheckForSpecial(string type)
 					if (LAi_GetBladeFencingType(xi_refCharacter) == "FencingHeavy")
 					{
 						coeff = makefloat(GetCharacterSkillSimple(xi_refCharacter,"FencingHeavy"))/20;
+						if (CheckCharacterPerk(xi_refCharacter, "HardHitter"))
+						{
+							coeff += 5.0;
+						}
 						if(HasSubStr(xi_refCharacter.equip.blade, "topor")) return FloatToString(8.0+(coeff*2),1)+"%/"+FloatToString(8.0+(coeff*2),1)+"%";
 						return FloatToString(5.0+(coeff*2),1)+"%/"+FloatToString(5.0+(coeff*2),1)+"%";
 					}
@@ -1931,7 +1946,7 @@ void AcceptAddOfficer()
 
 				//Boyer mod
 				//default:
-					SetOfficersIndex(pchar, nCurScrollNum - 6, iChar);
+					SetOfficersIndex(pchar, -1, iChar);//назначаем в первый свободный слот, а не куда-то конкретно
 					bNeedFollow = true;
 				break;
 				//End Boyer add
@@ -2009,7 +2024,7 @@ void AcceptRemoveOfficer()
 		break;
 		//Boyer mod
 		//default:
-			RemoveOfficersIndex(pchar, GetOfficersIndex(pchar, nCurScrollNum - 6));
+			RemoveOfficersIndex(pchar, iChar);
 		break;
 		//End Boyer mod
 	}
@@ -2340,4 +2355,9 @@ void AcceptPerk()
     FillPerksTable(GameInterface.(CurTable).(CurRow).UserData.Type, false);
     // перерисуем все <--
 	ExitPerkMenu();
+	int iCurrentNode = nCurScrollNum;
+	FillCharactersScroll();
+	GameInterface.CHARACTERS_SCROLL.current = iCurrentNode;
+	SetCurrentNode("CHARACTERS_SCROLL");
+	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_REFRESH_SCROLL,"CHARACTERS_SCROLL",-1);
 }

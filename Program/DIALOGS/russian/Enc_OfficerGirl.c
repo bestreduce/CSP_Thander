@@ -269,7 +269,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "contract4":
-			dialog.text = "Вполне, капитан. Я согласен.";
+			dialog.text = "Вполне, капитан. Я соглас" + GetSexPhrase("ен.","сна.");
 			AddMoneyToCharacter(Pchar, -sti(NPChar.contractMoney));
 			SetCharacterPerk(NPChar, "EnergyPlus");
 			SetCharacterPerk(NPChar, "HPPlus");
@@ -777,7 +777,7 @@ void ProcessDialogEvent()
 		break;
 		case "Helen_2":
 			dialog.Text = "Почему, как ты думаешь, я всё ещё здесь? Уже пыталась, так он разделал меня под орех и пощадил на первый раз.";
-			Link.l1 = "И ты хочешь, чтобы я тебе помог с этим? И тогда присоединишься?";
+			Link.l1 = "И ты хочешь, чтобы я тебе помог"+GetSexPhrase("","ла")+" с этим? И тогда присоединишься?";
 			Link.l1.go = "Helen_3";
 		break;
 		case "Helen_3":
@@ -845,6 +845,7 @@ void ProcessDialogEvent()
 		break;
 		case "Helen_Bastard_exit":
 			pchar.HelenQuest = 1;
+			AddDialogExitQuest("MainHeroFightModeOn");
 			DialogExit();
 			LAi_SetImmortal(NPChar,false);
 			LAi_group_MoveCharacter(npchar, "EnemyFight");

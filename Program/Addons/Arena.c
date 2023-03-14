@@ -107,8 +107,8 @@ void GenerateArenaDuel()
 	Characters[iCharacter].skill.FencingHeavy = iFencingHeavy;
 	Characters[iCharacter].skill.LeaderShip = iLeaderShip;
 	Characters[iCharacter].model = "officer_" + (rand(63)+1);
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) Characters[iCharacter].model.animation = "spy"; // LEO: Превозмогаторам страдать 15.12.2021
-	else Characters[iCharacter].model.animation = "man_fast";
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) Characters[iCharacter].model.animation = "man_fast"; // LEO: Превозмогаторам страдать 15.12.2021
+	else Characters[iCharacter].model.animation = "man";
 	Characters[iCharacter].greeting = "Gr_ArenaMember";
 
 	SetRandomNameToCharacter(&Characters[iCharacter]);
@@ -662,11 +662,11 @@ void ArenaEtapsSetRound(int iEtap)
 	switch(sType)
 	{
 		case "crabBig": sModel = "crabBig"; sAnimation = "crabBig"; sSex = "crab"; break;
-		case "Skel": sModel = "Skel"; sAnimation = "man_fast"; sSex = "skeleton"; break; // LEO: Ловкач
-		case "SkelOld": sModel = "Skel_"; sAnimation = "man_fast"; sSex = "skeleton"; break; // LEO: Ловкач
+		case "Skel": sModel = "Skel"; sAnimation = "skeleton"; sSex = "skeleton"; break; // LEO: Ловкач
+		case "SkelOld": sModel = "Skel_"; sAnimation = "skeleton"; sSex = "skeleton"; break; // LEO: Ловкач
 		case "monkey": sModel = "monkey"; sAnimation = "monkey"; sSex = "monkey"; break;
 		case "crabBigKing": sModel = "crabBigKing"; sAnimation = "crabBigKing"; sSex = "crab"; break;
-		case "SkelKing": sModel = "skeletcap"; sAnimation = "spy"; sSex = "skeleton"; break; // LEO: Анимка "spy" хоть где то должна работать
+		case "SkelKing": sModel = "skeletcap"; sAnimation = "skeleton_fast"; sSex = "skeleton"; break; // LEO: Ловкач
 	}
 
 	int iChar = 0;
@@ -982,21 +982,10 @@ void ArenaEtapsSetMonsterAttributes(ref monster, int iEtap)
 	SetEnergyToCharacter(PChar);
 	LAi_SetCurHPMax(PChar);
 
-	if (MOD_SKILL_ENEMY_RATE == 10)
-	{
-		TakeNItems(monster, "BackPack5", 1);
-		EquipCharacterbyItem(monster, "BackPack5");
-		TakeNItems(monster, "potion2", 50);
-		TakeNItems(monster, "Food"+(2+rand(3)), 30);
-		TakeNItems(monster, "Food"+(2+rand(3)), 30);
-	}
-	else
-	{
-		TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
-		TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
-		TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
-		TakeNItems(monster, "Food"	 + (1+rand(2)), 20);
-	}
+	TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
+	TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
+	TakeNItems(monster, "potion" + (rand(3)+1), (rand(10)+10));
+	TakeNItems(monster, "Food"	 + (1+rand(2)), 20);
 
 	RemoveCharacterEquip(monster, BLADE_ITEM_TYPE);
 	RemoveCharacterEquip(monster, GUN_ITEM_TYPE);
@@ -1042,8 +1031,8 @@ void GenerateArenaTournament()
 	for(int i=1; i <= 7; i++)
 	{
 		int iRank2 = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE;
-		if (iMoney >= 1000000 && bHardAnimations) iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "spy", iRank2, PIRATE, -1, true);
-		else iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "man_fast", iRank2, PIRATE, -1, true);
+		if (iMoney >= 1000000 && bHardAnimations) iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "man_fast", iRank2, PIRATE, -1, true); // LEO: Превозмогаторам страдать 15.12.2021
+		else iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "man", iRank2, PIRATE, -1, true);
 
 		chr = &Characters[iChar];
 		DeleteAttribute(chr, "items");
@@ -1070,31 +1059,7 @@ void GenerateArenaTournament()
 		iNumPosition = GetNumPositionForCharInTournament();
 		chr.greeting = "Gr_ArenaMember";
 
-		if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
-		{
-			string cirnum;
-			switch (rand(4))
-			{
-				case 0: cirnum = "cirass1"; break;
-				case 1: cirnum = "cirass2"; break;
-				case 2: cirnum = "cirass3"; break;
-				case 3: cirnum = "cirass4"; break;
-				case 4: cirnum = "cirass5"; break;
-			}
-			if (CheckAttribute(chr, "HeroModel")) // все, у кого есть что одеть
-			{
-				switch (cirnum)
-				{
-					case "cirass1": chr.model = GetSubStringByNum(chr.HeroModel, 1); break;
-					case "cirass2": chr.model = GetSubStringByNum(chr.HeroModel, 2); break;
-					case "cirass3": chr.model = GetSubStringByNum(chr.HeroModel, 3); break;
-					case "cirass4": chr.model = GetSubStringByNum(chr.HeroModel, 4); break;
-					case "cirass5": chr.model = GetSubStringByNum(chr.HeroModel, 5); break;
-				}
-			}
-			chr.cirassId = Items_FindItemIdx(cirnum);
-			Log_TestInfo("Персонаж "+chr.name+" получил кирасу "+cirnum);
-		}
+		if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0) SetFantomWearCirass(chr);
 
 		//SetNewModelToChar(chr);
 		SetRandomNameToCharacter(chr);
@@ -3720,7 +3685,7 @@ void ArenaReGenerate(string qName)
 {
 	GenerateArena();
 	Log_TestInfo("На арене сгенерировались новые соревнования.");
-	AddSimpleRumourToAllNations("Я где-то слышал, что на Доминике в Поселении Фехтовальщиков недавно начались соревнования. Эх, будь я половчее - непременно попытал бы счастья там.", 5, 1);
+	AddSimpleRumourToAllNations("Поговаривают, что на Доминике в Поселении Фехтовальщиков недавно начались соревнования. Эх, будь я половчее - непременно попытал бы счастья там.", 5, 1);
 }
 
 void ArenaBileterGiveItems(ref chr)

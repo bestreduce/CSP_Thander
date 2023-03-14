@@ -73,7 +73,7 @@ void ProcessDialogEvent()
 
 			mc = GetMainCharacter();
 
-			mc.Ship.Type = GenerateShipExt(SHIP_SOPHIE, true, mc);
+			mc.Ship.Type = GenerateShipExt(SHIP_VEINARD, true, mc);
 			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
 			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
@@ -205,7 +205,7 @@ void ProcessDialogEvent()
 			//Старт за Шарпов
 			if (CheckAttribute(pchar, "questTemp.Sharp.Entered_Shore"))
 			{
-				dialog.Text = "Если верить подсказкам на карте, сокровища должны быть где-то неподалеку.";
+				dialog.Text = "Если верить подсказкам на карте, сокровища должны быть где-то неподалёку.";
 				bMonstersGen = true;
 				DeleteAttribute(pchar, "questTemp.Sharp.Entered_Shore");
 				Link.l1 = "Нужно отыскать грот.";
@@ -482,7 +482,7 @@ void ProcessDialogEvent()
 	        	Link.l8 = "Мне не мешало бы отдохнуть...";
 	    		Link.l8.go = "TalkSelf_StartWait";
 	    	}
-			if(!CheckAttribute(pchar,"bookreadtoday") && CheckAttribute(pchar,"booktime") && !bDisableMapEnter && Pchar.questTemp.CapBloodLine == false && PChar.location != "Deck_Near_Ship" && findsubstr(PChar.location, "_shipyard" , 0) == -1 && PChar.location != "CommonPackhouse_2" && !CheckAttribute(pchar,"GenQuest.CannotWait")) // 21.03.09 Warship fix Во время линейки Блада отдыхать нельзя
+			if (!CheckAttribute(pchar,"bookreadtoday") && (GetCharacterEquipByGroup(pchar, BOOK_ITEM_TYPE) != "") && !bDisableMapEnter && Pchar.questTemp.CapBloodLine == false && PChar.location != "Deck_Near_Ship" && findsubstr(PChar.location, "_shipyard" , 0) == -1 && PChar.location != "CommonPackhouse_2" && !CheckAttribute(pchar,"GenQuest.CannotWait")) // 21.03.09 Warship fix Во время линейки Блада отдыхать нельзя
 	        {
 	        	Link.l9 = "Почитать книгу.";
 	    		Link.l9.go = "ReadBook";
@@ -846,26 +846,10 @@ void ProcessDialogEvent()
 		break;
 
 		case "ReadBook":
-			Dialog.Text = "Ну что-ж, почитал"+GetSexPhrase("","а")+" пару часов...";
+			Dialog.Text = "Почитал" + GetSexPhrase("","а") + " пару часов...";
 			WasteTime(4);
-			pchar.booktime = sti(pchar.booktime) - 1;
+			TryReadBook();
 			pchar.bookreadtoday = true;
-			if (sti(pchar.booktime) <= 0)
-			{
-				AddCharacterExpToSkill(pchar, pchar.booktype, sti(pchar.bookbonus));
-				int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
-				Log_Info(GetFullName(pchar) + " изучил книгу ''"+LanguageConvertString(idLngFile, pchar.bookname)+"'' и увеличил навык ''"+XI_ConvertString(pchar.booktype)+"''");
-				LanguageCloseFile(idLngFile);
-				DeleteAttribute(pchar,"booktime");
-				DeleteAttribute(pchar,"booktime.full");
-				DeleteAttribute(pchar,"bookbonus");
-				DeleteAttribute(pchar,"booktime");
-				DeleteAttribute(pchar,"booktype");
-				DeleteAttribute(pchar,"bookreadtoday");
-				string sEquipItem = GetCharacterEquipByGroup(pchar, BOOK_ITEM_TYPE);
-				RemoveCharacterEquip(pchar, BOOK_ITEM_TYPE);
-				RemoveItems(pchar, sEquipItem, 1);
-			}
 			Link.l6 = "Всё, хватит на сегодня.";
 			Link.l6.go = "exit";
 		break
@@ -1404,7 +1388,7 @@ void ProcessDialogEvent()
 			//initMainCharacterItem();
             mc = GetMainCharacter();
 
-			mc.Ship.Type = GenerateShipExt(SHIP_SOPHIE, true, mc);
+			mc.Ship.Type = GenerateShipExt(SHIP_VEINARD, true, mc);
 			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
 			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
@@ -1599,7 +1583,7 @@ void PirateProcess()
     PChar.GenQuest.VideoAVI        = "Pirate";
     PChar.GenQuest.VideoAfterQuest = "pir_flag_rise";
 
-    DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
+    //DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
 }
 
 void EnglandProcess()
@@ -1609,7 +1593,7 @@ void EnglandProcess()
     PChar.GenQuest.VideoAVI        = "England";
     PChar.GenQuest.VideoAfterQuest = "eng_flag_rise";
 
-    DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
+    //DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
 }
 
 void FranceProcess()
@@ -1618,7 +1602,7 @@ void FranceProcess()
     PChar.GenQuest.VideoAVI        = "France";
     PChar.GenQuest.VideoAfterQuest = "fra_flag_rise";
 
-    DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
+    //DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
 }
 
 void SpainProcess()
@@ -1627,7 +1611,7 @@ void SpainProcess()
     PChar.GenQuest.VideoAVI        = "Spain";
     PChar.GenQuest.VideoAfterQuest = "spa_flag_rise";
 
-    DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
+    //DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
 }
 
 void HollandProcess()
@@ -1636,6 +1620,6 @@ void HollandProcess()
     PChar.GenQuest.VideoAVI        = "Holland";
     PChar.GenQuest.VideoAfterQuest = "hol_flag_rise";
 
-    DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
+    //DoQuestCheckDelay("PostVideo_Start", 0); WasteTime(1);
 }
 

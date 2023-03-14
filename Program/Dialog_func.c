@@ -188,6 +188,12 @@ string RandExclamation()
 //                Выбор фраз для диалога
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // boal 13.03.2004 -->
+string IfPhraseSimple(bool cond, string v1, string v2)
+{
+	if (cond) return v1;
+	else return v2;
+}
+
 string RandPhraseSimple(string Var1, string Var2);
 {
 	int RandP;
@@ -535,6 +541,9 @@ string GetPortByCityName(string city) // имена портов по город
 		break;
 		case "Beliz":
             return "Beliz_town";
+		break;
+		case "Nassau":
+            return "Nassau_town";
 		break;
 	}
 	return "";
@@ -1185,3 +1194,12 @@ String ChangeNameCase(String _nameType, String _name, String _toCase)
 	return "";
 }
 // <-- Warship 07.08.09
+string GetIndianName(int Sex) //Jason имена индейцев
+{
+	string nameid;
+	
+	if (Sex == MAN) nameid = "l" + rand(99);
+	else nameid = "l" + (100+rand(68));
+
+	return Names.Indian.(nameId);
+}

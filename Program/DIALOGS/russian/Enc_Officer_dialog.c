@@ -752,7 +752,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "contract4":
-			dialog.text = "Вполне, капитан. Я согласен.";
+			dialog.text = "Вполне, капитан. Я соглас"+NPCharSexPhrase(NPChar,"ен","на")+".";
 			AddMoneyToCharacter(Pchar, -sti(NPChar.contractMoney));
 			SetCharacterPerk(NPChar, "EnergyPlus");
 			SetCharacterPerk(NPChar, "HPPlus");
@@ -779,7 +779,7 @@ void ProcessDialogEvent()
 				//pchar.quest.(immortal_officer).function = "Remove_Contract_Officer";
 			}
 			// DeleteAttribute(NPChar, "contractMoney");//Mett: это можно заблокировать по желанию, мб потом понадобиться для перерасчёта суммы контракта
-			Link.l1 = "Вот и отлично! Договорились";
+			Link.l1 = "Вот и отлично! Договорились.";
 			Link.l1.go = "Exit";
 		break;
 		
@@ -835,7 +835,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "WantToGo_free";
 			if (sti(Pchar.money) >= sti(NPChar.rank)*250)
 			{
-				Link.l2 = LinkRandPhrase("Да-а, вот видишь, как всё обернулось... а я ведь на тебя рассчитывал... Ну, раз решение принято - давай расставаться. Вот тебе "+sti(NPChar.rank)*250+" золотых за верную службу. И не держи зла, если когда обидел.", "Ну что ж, я зла не держу и худого не помню. Раз решил - иди. Да держи "+sti(NPChar.rank)*250+" золотых на дорожку. Это всегда пригодится.", "Ясно... рано или поздно это должно было случиться. Презентую тебе "+sti(NPChar.rank)*250+" золотых на обустройство личной жизни. Да здоровье поправь, морская служба она не сахар - на всю жизнь след оставляет...");
+				Link.l2 = LinkRandPhrase("Да-а, вот видишь, как всё обернулось... а я ведь на тебя рассчитывал" + GetSexPhrase("","а") + "... Ну, раз решение принято - давай расставаться. Вот тебе "+sti(NPChar.rank)*250+" золотых за верную службу. И не держи зла, если когда обидел" + GetSexPhrase(".","а."), "Ну что ж, я зла не держу и худого не помню. Раз решил - иди. Да держи "+sti(NPChar.rank)*250+" золотых на дорожку. Это всегда пригодится.", "Ясно... рано или поздно это должно было случиться. Презентую тебе "+sti(NPChar.rank)*250+" золотых на обустройство личной жизни. Да здоровье поправь, морская служба она не сахар - на всю жизнь след оставляет...");
 				Link.l2.go = "Im_kind_A2_1";
 			}
 			Link.l3 = LinkRandPhrase("Вот, значит, как. А ты хоть понимаешь, что сейчас твой уход для меня, как нож в спину? Не могу сейчас я тебя отпустить - даже не проси и не думай.", "Вот это новость! О таких вещах принято предупреждать заранее. Так что о личной жизни пока забудь. Когда придёт время, я сам"+ GetSexPhrase("","а") +" предложу тебе отставку.", "Никаких отставок. У меня каждый человек на счету. Не могу я, из личной прихоти каждого, командой разбрасываться. Служи, пока я сам"+ GetSexPhrase("","а") +" не приму решение.");
@@ -866,7 +866,7 @@ void ProcessDialogEvent()
 		dialog.text = LinkRandPhrase("Ну, это меняет дело. "+sti(NPChar.rank)*500+" золотых на руки и я остаюсь.", "Ну, пожалуй за "+sti(NPChar.rank)*500+" золотых я бы остался.", "Хм, раз пошёл такой разговор, то за "+sti(NPChar.rank)*500+" золотых можно и послужить ещё.");
 		if (sti(Pchar.money) >= sti(NPChar.rank)*500)
 		{
-			Link.l1 = RandPhraseSimple("Вот и договорились.", "Хорошо. Хотя мог"+ NPCharSexPhrase(NPChar,"","ла") +" бы быть поскромнее...", "Экие у тебя аппетиты! Ну, раз обещал - держи.");
+			Link.l1 = RandPhraseSimple("Вот и договорились.", "Хорошо. Хотя мог"+ NPCharSexPhrase(NPChar,"","ла") +" бы быть поскромнее...", "Экие у тебя аппетиты! Ну, раз обещал"+ GetSexPhrase("","а") +" - держи.");
 			Link.l1.go = "WantToGo_Stay_ForMoney";
 		}
 		Link.l2 = LinkRandPhrase("Ну, это ты загибаешь. За такие деньги можно двух офицеров нанять. Пожалуй, проще тебя отпустить.", "Высоко же ты себя ценишь. Пожалуй, отпущу на вольные хлеба. Но увидишь - там тоже не мёдом намазано.", "Я не готов"+ GetSexPhrase("","а") +" платить такие деньги. Можешь идти, но назад не просись - я измен не прощаю.");
@@ -882,7 +882,10 @@ void ProcessDialogEvent()
 
 	case "WantToGo_Stay_ForMoney":
 		Diag.TempNode = "Hired";
-		NPChar.greeting = "Gr_Officer";
+		if (NPChar.sex != "woman")
+		{
+			NPChar.greeting = "Gr_Officer";
+		}
 		AddMoneyToCharacter(Pchar, -(makeint(sti(NPChar.rank)*500)));
 		Npchar.loyality = makeint(Npchar.loyality) + 1;
             Diag.CurrentNode = Diag.TempNode;
@@ -1400,8 +1403,8 @@ void ProcessDialogEvent()
 			if (sti(Pchar.money) >= sti(NPChar.rank)*500)
 			{
 				Link.l4 = "Постой... Не хочу отпускать тебя с пустыми руками. Вот держи "+sti(NPChar.rank)*500+" золотых, пригодятся, пока будешь искать новую работу.";
+				Link.l4.go = "Im_kind_A2";
 			}
-			Link.l4.go = "Im_kind_A2";
 		break;
 
 		case "Return_items_A2":
@@ -1993,10 +1996,14 @@ void ProcessDialogEvent()
 				attrLoc = "l" + iTemp;
 				NPChar.Temp.(attr) = attr;
 				Link.(attrLoc) = "В " + XI_ConvertString("Colony" + attr + "Dat");
+				if (IsColonyEnemyToMainCharacter(attr)) {
+					Link.(attrLoc).go = "CompanionTravel_EnemyColony";
+					continue;
+				}
 				Link.(attrLoc).go = "CompanionTravelToColony_" + attr;
 			}
-				Link.l99 = "Я передумал"+ GetSexPhrase("","а") +". Ничего не нужно.";
-				Link.l99.go = "exit";
+			Link.l99 = "Я передумал"+ GetSexPhrase("","а") +". Ничего не нужно.";
+			Link.l99.go = "exit";
 		break;
 
 		case "TravelToPiratesTowns":
@@ -2007,7 +2014,7 @@ void ProcessDialogEvent()
 				Link.l2.go = "TravelToLeFransua";
 				Link.l3 = "Ла Вега";
 				Link.l3.go = "TravelToLaVega";
-				Link.l4 = "Пуэро-Принсипе";
+				Link.l4 = "Пуэрто-Принсипе";
 				Link.l4.go = "TravelToPuertoPrincipe";
 				Link.l5 = "Форт Оранж";
 				Link.l5.go = "TravelToFortOrange";
@@ -2158,10 +2165,10 @@ void ProcessDialogEvent()
 		int nFind = findSubStr(Dialog.CurrentNode, "CompanionTravelToColony_", 0);
 		string idxVal;
 		string nodName;
-		if(nFind == 0)
+		if (nFind == 0)
 		{
-            idxVal = strcut(Dialog.CurrentNode, 24, strlen(Dialog.CurrentNode)-1);
-            nodName = "CompanionTravelToColony_" + idxVal;
+			idxVal = strcut(Dialog.CurrentNode, 24, strlen(Dialog.CurrentNode) - 1);
+			nodName = "CompanionTravelToColony_" + idxVal;
 			for (i = 1; i < COMPANION_MAX; i++)
 			{
 				int cn;									// Companion index
@@ -2169,15 +2176,17 @@ void ProcessDialogEvent()
 				if (cn == -1) continue;
 				if (NPChar.name == characters[cn].name) NPChar.realcompanionidx = &characters[cn].index;
 			}
-			characters[sti(NPChar.realcompanionidx)].CompanionTravel.ToColonyID = NPChar.Temp.(idxVal);
-			characters[sti(NPChar.realcompanionidx)].CompanionTravel.Days = makeint(GetDistanceToColony2D(NPChar.Temp.(idxVal))/300+1.0);
-			dialog.Text = "Вы выбрали колонию "+XI_ConvertString("Colony" + characters[sti(NPChar.realcompanionidx)].CompanionTravel.ToColonyID + "Gen")+", капитан?";
+			aref rCTravel;
+			makearef(rCTravel, characters[sti(NPChar.realcompanionidx)].CompanionTravel);
+			rCTravel.ToColonyID = NPChar.Temp.(idxVal);
+			rCTravel.Days = makeint(GetDistanceToColony2D(NPChar.Temp.(idxVal)) / 300 + 1.0);
+			dialog.Text = "Вы выбрали колонию " + XI_ConvertString("Colony" + rCTravel.ToColonyID + "Gen") + ", капитан?";
 			Link.l1 = "Да, именно её.";
-            Link.l1.go = "CompanionTravel_PrepareStart";
-			Link.l2 = "Нет, я передумал"+ GetSexPhrase("","а")+", не бери в голову.";
-            Link.l2.go = "exit";
-            break;
-        }
+			Link.l1.go = "CompanionTravel_PrepareStart";
+			Link.l2 = "Нет, я передумал" + GetSexPhrase("", "а") + ", не бери в голову.";
+			Link.l2.go = "exit";
+			break;
+		}
 
 		case "CompanionTravel_EnemyColony":
 			dialog.Text = "Капитан, но я же не cмогу ждать вас в колонии, которая к нам враждебна!";
@@ -2270,6 +2279,9 @@ void ProcessDialogEvent()
 					Group_DeleteGroup(NPChar.CompanionTravel.GroupID); // Потрём группу
 					SetCompanionIndex(PChar, -1, sti(NPChar.index));
 					PChar.CompanionTravel = sti(PChar.CompanionTravel) - 1; // Этого компаньона взяли обратно в эскадру
+					AddQuestRecord("CompanionTravel", "2");
+					AddQuestUserData("CompanionTravel", "sCapName", GetFullName(NPChar)); 
+					AddQuestUserData("CompanionTravel", "sShipInfo", GetStrSmallRegister(XI_ConvertString(RealShips[sti(NPChar.Ship.Type)].Basename + "Dat")) + " '" + NPChar.Ship.name + "'");
 					if(GetAttrValue(PChar, "CompanionTravel") == 0) CloseQuestHeader("CompanionTravel");
 					DeleteAttribute(NPChar, "CompanionTravel");
 					for(iTemp=1; iTemp<=3; iTemp++) // Нужно, чтоб была свободная группа
@@ -2279,7 +2291,7 @@ void ProcessDialogEvent()
 						{
 							if (PChar.CompanionTravel.(attr).ID == NPChar.ID)
 							{
-								DeleteAttribute(PChar,"CompanionTravel."+(attr)+".ID");
+								DeleteAttribute(PChar,"CompanionTravel."+(attr));//фикс - удаляем всю ветку
 								DeleteAttribute(NPChar,"Tasks.Clone");
 							}
 						}
@@ -2306,7 +2318,10 @@ void ProcessDialogEvent()
 				Group_DeleteGroup(NPChar.CompanionTravel.GroupID);
 				SetCompanionIndex(PChar, -1, sti(NPChar.index));
 				PChar.CompanionTravel = sti(PChar.CompanionTravel) - 1; // Этого компаньона взяли обратно в эскадру
-				if(GetAttrValue(PChar, "CompanionTravel") == 0) CloseQuestHeader("CompanionTravel");
+				AddQuestRecord("CompanionTravel", "2");
+				AddQuestUserData("CompanionTravel", "sCapName", GetFullName(NPChar)); 
+				AddQuestUserData("CompanionTravel", "sShipInfo", GetStrSmallRegister(XI_ConvertString(RealShips[sti(NPChar.Ship.Type)].Basename + "Dat")) + " '" + NPChar.Ship.name + "'");
+				if(GetAttrValue(PChar, "CompanionTravel") == 0) CloseQuestHeader("CompanionTravel"); 
 				DeleteAttribute(NPChar, "CompanionTravel");
 				for(iTemp=1; iTemp<=3; iTemp++) // Нужно, чтоб была свободная группа
 				{
@@ -2315,7 +2330,7 @@ void ProcessDialogEvent()
 					{
 						if (PChar.CompanionTravel.(attr).ID == NPChar.ID)
 						{
-							DeleteAttribute(PChar,"CompanionTravel."+(attr)+".ID");
+							DeleteAttribute(PChar,"CompanionTravel."+(attr));
 							DeleteAttribute(NPChar,"Tasks.Clone");
 						}
 					}

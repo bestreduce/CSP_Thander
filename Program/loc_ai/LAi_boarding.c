@@ -27,7 +27,7 @@ float boarding_enemy_crew_per_chr = 1.0;
 int   boarding_enemy_crew_start   = 0; //sd
 
 ref    boarding_enemy;
-object boarding_adr[4];
+object boarding_adr[10];
 float  boarding_exp = 0;
 float  boarding_player_hp = 40;
 float  boarding_enemy_hp = 40;
@@ -85,8 +85,24 @@ void LAi_StartBoarding(int locType, ref echr, bool isMCAttack)
 	//ResetSoundScheme();
 	ResetSound(); // new
 	PauseAllSounds();
-	sTemp = RealShips[sti(echr.Ship.Type)].BaseName;
-	Pchar.Encyclopedia.(sTemp) = "1";
+
+	if(sti(RealShips[sti(echr.Ship.Type)].BaseType) <= SHIP_OCEAN)//не исследуем квестовые, и лодку с фортом
+	{	
+		sTemp = RealShips[sti(echr.Ship.Type)].BaseName;
+		Pchar.Encyclopedia.(sTemp) = "1";
+	}
+	if(bFillEncyShips) 
+	{
+		aref aShips;
+		makearef(aShips, Pchar.Encyclopedia);
+		int Sum = GetAttributesNum(aShips);
+		if (Sum != sti(pchar.questTemp.shipsearchcount)) 
+		{
+			pchar.questTemp.shipsearchcount = Sum;
+			log_info("Исследован корабль: " + XI_Convertstring(sTemp) + ". Исследовано - " + pchar.questTemp.shipsearchcount + " кораблей!");
+			if (pchar.questTemp.shipsearchcount == "124") UnlockAchievement("AchShipSearch",3);//почему 124? сумма же 125.
+		}
+	}
 
 	bQuestCheckProcessFreeze = true;//fix
 
@@ -1030,30 +1046,6 @@ void LAi_SetBoardingActors(string locID)
 				xhp = GetBoarding_player_hp(boarding_player_hp);
 				LAi_SetHP(chr, xhp, xhp);
 			}*/
-			if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
-			{
-				string cirnum;
-				switch (rand(4))
-				{
-					case 0: cirnum = "cirass1"; break;
-					case 1: cirnum = "cirass1"; break;
-					case 2: cirnum = "cirass2"; break;
-					case 3: cirnum = "cirass3"; break;
-					case 4: cirnum = "cirass4"; break;
-				}
-				if (CheckAttribute(chr, "HeroModel")) // все, у кого есть что одеть
-				{
-					switch (cirnum)
-					{
-						case "cirass1": chr.model = GetSubStringByNum(chr.HeroModel, 1); break;
-						case "cirass2": chr.model = GetSubStringByNum(chr.HeroModel, 2); break;
-						case "cirass3": chr.model = GetSubStringByNum(chr.HeroModel, 3); break;
-						case "cirass4": chr.model = GetSubStringByNum(chr.HeroModel, 4); break;
-					}
-				}
-				chr.cirassId = Items_FindItemIdx(cirnum);
-				Log_TestInfo("Персонаж "+chr.name+" получил кирасу "+cirnum);
-			}
 		}
 		//ставим своих мушкетеров -->
 		if (CheckOfficersPerk(mchr, "MusketsShoot") && !CheckAttribute(boarding_enemy, "GenQuest.CrewSkelMode"))
@@ -1166,6 +1158,12 @@ void LAi_SetBoardingActors(string locID)
 				}
 				model = "cirass" + xhp;
 				chr.cirassId  = Items_FindItemIdx(model);
+				if (!checkattribute(chr,"heromodel")) 
+				{
+					DeleteAttribute(chr,"VISUAL_CIRASS");
+					FaceMaker(chr);
+				}
+				CheckForCirass(chr);
 				Log_TestInfo("На капитане кираса " + model);
 		    }
 			//}
@@ -1186,30 +1184,6 @@ void LAi_SetBoardingActors(string locID)
 		}
 		chr.AboardFantom = true;
 		AddCharHP(chr, boarding_enemy_hp); // влияение опыта и морали в НР
-		if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
-		{
-			string cirnum1;
-			switch (rand(4))
-			{
-				case 0: cirnum1 = "cirass1"; break;
-				case 1: cirnum1 = "cirass1"; break;
-				case 2: cirnum1 = "cirass2"; break;
-				case 3: cirnum1 = "cirass3"; break;
-				case 4: cirnum1 = "cirass4"; break;
-			}
-			if (CheckAttribute(chr, "HeroModel")) // все, у кого есть что одеть
-			{
-				switch (cirnum1)
-				{
-					case "cirass1": chr.model = GetSubStringByNum(chr.HeroModel, 1); break;
-					case "cirass2": chr.model = GetSubStringByNum(chr.HeroModel, 2); break;
-					case "cirass3": chr.model = GetSubStringByNum(chr.HeroModel, 3); break;
-					case "cirass4": chr.model = GetSubStringByNum(chr.HeroModel, 4); break;
-				}
-			}
-			chr.cirassId = Items_FindItemIdx(cirnum1);
-			Log_TestInfo("Персонаж "+chr.name+" получил кирасу "+cirnum1);
-		}
 	}
 	//ставим вражеских мушкетеров -->
 	if (CheckCharacterPerk(boarding_enemy, "MusketsShoot") || IsFort)
@@ -1285,6 +1259,12 @@ string LAi_GetBoardingModel(ref rCharacter, ref ani)
 	if (CheckAttribute(rCharacter, "GenQuest.CrewSkelModeClassic"))
     {
         model = GetRandSkelModelClassic();
+		ani = "man";
+		return model;
+    }
+	if (CheckAttribute(rCharacter, "GenQuest.CrewSatanistMode"))
+    {
+        model = GetRandSatanistMode();
 		ani = "man";
 		return model;
     }

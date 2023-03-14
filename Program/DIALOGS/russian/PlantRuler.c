@@ -69,7 +69,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "trade_good_3":
-			slaveCount = func_min(NPchar.HeroSlaveCount, NPchar.SlavesLimit);
+			slaveCount = func_min(sti(NPchar.HeroSlaveCount), sti(NPchar.SlavesLimit));
 			dialog.text = "Сейчас я могу купить у вас до " + slaveCount + " рабов ценой по 215 за единицу. Итого, " + FindRussianMoneyString(slaveCount * 215) + ". Устраивает?";
 			Link.l1 = "Вполне.";
 			link.l1.go = "trade_good_4";
@@ -78,10 +78,10 @@ void ProcessDialogEvent()
 		break;
 
 		case "trade_good_4":
-			slaveCount = func_min(NPchar.HeroSlaveCount, NPchar.SlavesLimit);
+			slaveCount = func_min(sti(NPchar.HeroSlaveCount), sti(NPchar.SlavesLimit));
 
 			AddMoneyToCharacter(PChar, 215 * slaveCount);
-			npchar.SlavesLimit = npchar.SlavesLimit - slaveCount;
+			npchar.SlavesLimit = sti(npchar.SlavesLimit) - slaveCount;
 
 			slavePartCount = func_min(slaveCount, sti(PChar.Ship.Cargo.Goods.Slaves));
 			PChar.Ship.Cargo.Goods.Slaves = sti(PChar.Ship.Cargo.Goods.Slaves) - slavePartCount;

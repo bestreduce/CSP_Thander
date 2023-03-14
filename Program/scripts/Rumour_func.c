@@ -76,7 +76,7 @@ void SelectAction(ref rid) //CASE с действиями для слухов
 			    ref rtmp;
                 rtmp = &otmp;
         	    rtmp.colony = GetConvertStr(rcolony.id+" Town", "LocLables.txt");
-                rid.text = GetAssembledString( rid.text, rtmp);
+                rid.text = GetAssembledString(rid.text, rtmp);
             }
             else rid.text = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; // нету слухов
 
@@ -514,6 +514,7 @@ int AddTemplRumour(string stName, int nid )//добавляет шаблонны
 	lngFileID = LanguageOpenFile("RumourTexts.txt");
 
 	string tid = CurTpl.name+"_t"+rand(sti(CurTpl.texts)-1);
+	CurTpl.curtid = tid;
 	ttttstr = LanguageConvertString(lngFileID, tid);
 
 //navy --> изменил вызов функции, параметр ссылка на копию шаблона, можно вешать аттрибуты какие нужны при вызове инита.
@@ -549,6 +550,7 @@ int ReplaceTemlpRumour(int rNum, string stName, int nid )//заменяет ша
     lngFileID = LanguageOpenFile("RumourTexts.txt");
 
     string tid = CurTpl.name+"_t"+rand(sti(CurTpl.texts)-1);
+	CurTpl.curtid = tid;
     ttttstr = LanguageConvertString(lngFileID, tid);
     string sTemp = CurTpl.function;
 

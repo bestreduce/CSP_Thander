@@ -133,7 +133,7 @@ void InitInterface(string iniName)
     // новая игра
     NewGameBegin();
     iTurnGame = 1; // игра первая
-	WaitDate("",0,0,0, 0, 15);
+	WaitDate("",0,0,0, 0, 5);
 	SetFormatedText("INFO_TEXT_DATE", GetQuestBookData());
     iHeroLose = 0;
     iHeroWin  = 0;
@@ -190,7 +190,7 @@ void Exit()
 			Statistic_AddValue(Pchar, "GameCards_Lose", iHeroLose);
 
 			bQuestCheckProcessFreeze = true;
-			//WaitDate("",0,0,0, 0, iTurnGame*15);
+			//WaitDate("",0,0,0, 0, iTurnGame*5);
 			bQuestCheckProcessFreeze = false;
 			RefreshLandTime();
 			EndCancelInterface(true);
@@ -227,7 +227,7 @@ void Exit2()
 		if (npchar.id == "BlackBeardNPC" && iHeroWin >= 3) npchar.Cards = true;
 
 		bQuestCheckProcessFreeze = true;
-		//WaitDate("",0,0,0, 0, iTurnGame*15);
+		//WaitDate("",0,0,0, 0, iTurnGame*5);
 		bQuestCheckProcessFreeze = false;
 		RefreshLandTime();
 		EndCancelInterface(true);
@@ -256,7 +256,7 @@ void ProcessCommandExecute()
                         dir_i = -dir_i_start;
                         dir_i_start = dir_i;
                         iTurnGame++;
-						WaitDate("",0,0,0, 0, 15);
+						WaitDate("",0,0,0, 0, 5);
 						SetFormatedText("INFO_TEXT_DATE", GetQuestBookData());
                         NewGameBegin();
                         openExit = false;
@@ -665,7 +665,7 @@ bool CheckGame()
 			else
 			{
 				bStartGame = 100; //признах запрета новой игры
-				sTemp += NewStr() + "Все, с меня хватит!";
+				sTemp += NewStr() + "Всё, с меня хватит!";
 			}
 		}
 		SetFormatedText("INFO_TEXT", sTemp);
@@ -792,7 +792,7 @@ void OpenCards();
 		else
 		{
 			bStartGame = 100; //признах запрета новой игры
-			sTemp += NewStr() + "Все, с меня хватит!";
+			sTemp += NewStr() + "Всё, с меня хватит!";
 		}
 	}
     SetFormatedText("INFO_TEXT", sTemp);
@@ -832,7 +832,7 @@ string CheckChardGames(string sTemp)
 			sTemp = "Ха-ха-ха! Ты, бы играть сначала научилась, девочка. Гони сюда мои денежки.";
 			AddMoneyToCharacter(pchar, -200000);
 		}
-		sTemp += NewStr() + "Все, хватит игр на сегодня.";
+		sTemp += NewStr() + "Всё, хватит игр на сегодня.";
 	}
 	return sTemp;
 }
@@ -850,13 +850,13 @@ string CheckBlackGames(string sTemp)
 		openExit = true;
 		if (iHeroWin == 3)
 		{
-			sTemp = RandSwear() + "Ладно, ты выиграл 3 раза. Впечатляющее везение!";
+			sTemp = RandSwear() + "Ладно, ты выиграл"+ GetSexPhrase("","а") +" 3 раза. Впечатляющее везение!";
 		}
 		else
 		{
 			sTemp = "Ха-ха-ха! Тебе явно стоит ещё подучиться.";
 		}
-		sTemp += NewStr() + "Все, хватит игр на сегодня.";
+		sTemp += NewStr() + "Всё, хватит игр на сегодня.";
 	}
 	return sTemp;
 }

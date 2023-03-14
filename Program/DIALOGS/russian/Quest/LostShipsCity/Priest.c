@@ -317,7 +317,7 @@ void ProcessDialogEvent()
 			}
 			if (!CheckAttribute(NextDiag, NodeName+".l3") && pchar.questTemp.LSC == "toSeekOldCitizen")
 			{
-				link.l3 = "Скажите, падре, вы давно здесь живете?";
+				link.l3 = "Скажите, падре, вы давно здесь живёте?";
 				link.l3.go = "ansewer_3";
 			}
 			link.l10 = "Нет вопросов. Извините, святой отец...";
@@ -552,6 +552,8 @@ void ProcessDialogEvent()
 		break;
 		case "TradeMed2":
 			npchar.amount = GetStrSmallRegister(dialogEditStrings[1]);
+			npchar.amount = func_min((sti(npchar.amount),sti(pchar.Ship.Cargo.Goods.Medicament));//фикс, нельзя продать больше, чем привёз
+			npchar.amount = func_max((sti(npchar.amount),1);
 			NPChar.sumtotal = sti(npchar.amount)*10;
 			//dialog.text = "Значит, что получается? Я беру лекарства по 10 за ед. Итого, "+NPChar.sumtotal+" золотых за "+npchar.amount+" ед. За каждые 15 тысяч идёт кредитный сундук. Предложение устраивает?";
 			dialog.text = "Значит, что получается? Я беру лекарства по 10 за ед. Итого, "+NPChar.sumtotal+" золотых за "+npchar.amount+" ед. Предложение устраивает?";
@@ -586,6 +588,8 @@ void ProcessDialogEvent()
 		break;
 		case "TradeCloth2":
 			npchar.amount = GetStrSmallRegister(dialogEditStrings[1]);
+			npchar.amount = func_min((sti(npchar.amount),sti(pchar.Ship.Cargo.Goods.Clothes));//фикс, нельзя продать больше, чем привёз
+			npchar.amount = func_max((sti(npchar.amount),1);
 			NPChar.sumtotal = sti(npchar.amount)*5;
 			//dialog.text = "Значит, что получается? Я беру одежду по 5 за ед. Итого, "+NPChar.sumtotal+" золотых за "+npchar.amount+" ед. За каждые 15 тысяч идёт кредитный сундук. Предложение устраивает?";
 			dialog.text = "Значит, что получается? Я беру одежду по 5 за ед. Итого, "+NPChar.sumtotal+" золотых за "+npchar.amount+" ед. Предложение устраивает?";

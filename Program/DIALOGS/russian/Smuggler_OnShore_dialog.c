@@ -16,13 +16,13 @@ void ProcessDialogEvent()
 
 	switch(Dialog.CurrentNode)
 	{
-        case "exit":
+		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			NPChar.quest.meeting = NPC_Meeting;
 			DialogExit();
 		break;
 
-        case "First time":
+		case "First time":
 			Diag.TempNode = "first time";
 			if(CheckAttribute(PChar, "quest.Contraband.active"))
 			{
@@ -96,11 +96,9 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-//================ METRO ====================
-				//если заплатил, то разговаривают, иначе посылают
-				if (CheckAttribute(PChar, "GenQuest.contraTravel.payed") && sti(PChar.GenQuest.contraTravel.payed) == true)
+				if (CheckAttribute(PChar, "GenQuest.contraTravel.payed") && sti(PChar.GenQuest.contraTravel.payed) == true) //если заплатил, то разговаривают, иначе посылают
 				{
-                    dialog.Text = RandPhraseSimple("Ага, наконец-то!!! Вот и ты, а то мы уж заждались совсем. Идём, мы отчаливаем.", "Пошевеливайся, тут повсюду патрули. Нужно быстрее убраться отсюда!");
+					dialog.Text = RandPhraseSimple("Ага, наконец-то!!! Вот и ты, а то мы уж заждались совсем. Идём, мы отчаливаем.", "Пошевеливайся, тут повсюду патрули. Нужно быстрее убраться отсюда!");
 					//по заданию губернатора, истребление контры, только эта ветка.
 					if (CheckAttribute(pchar, "GenQuest.KillSmugglers") && pchar.GenQuest.KillSmugglers == "" && pchar.GenQuest.KillSmugglers.Areal == GiveArealByLocation(&locations[FindLocation(pchar.location)]))
 					{
@@ -129,7 +127,7 @@ void ProcessDialogEvent()
 					{
 						if (chrDisableReloadToLocation) // ещё бой идёт
 						{
-						    dialog.Text = "Патруль! Мы тебя не знаем, ты нас не знаешь.";
+							dialog.Text = "Патруль! Мы тебя не знаем, ты нас не знаешь.";
 							Link.l1 = "Да уж...";
 							Link.l1.go = "Exit";
 							break;
@@ -142,39 +140,29 @@ void ProcessDialogEvent()
 					//тут все ок, отправляемся.
 					Link.l2 = "Уже иду.";
 					Link.l2.go = "Exit";
-					//а это патруль...
-					if (GetSummonSkillFromNameToOld(Pchar, SKILL_SNEAK) < frandSmall(13.0*(1.0 - pow(0.9, sti(PChar.rank)))) && !CheckAttribute(PChar, "GenQuest.contraTravel.PatrolFight"))
-					{
-						AddDialogExitQuest("Rand_ContrabandInterruption");
-						PChar.GenQuest.contraTravel.PatrolFight = true;
-					}
-					else
-					{
-						//поместим Грея в локацию.
-						refStore = CharacterFromID("Abracham_Gray");
-						ChangeCharacterAddressGroup(refStore, "Ship_deck", "goto", "goto2");
-						refStore.dialog.Filename = "Smuggler_Ship_dialog.c";
-                        refStore.dialog.CurrentNode = "Travel_talkStart";
-						//поплыл, иначе RemoveTravelSmugglers грохнет всю ветку
-						PChar.GenQuest.contraTravel.ship = true;
-						PChar.quest.Munity = "";  // признак выхода с палубы
+					
+					//поместим Грея в локацию.
+					refStore = CharacterFromID("Abracham_Gray");
+					ChangeCharacterAddressGroup(refStore, "Ship_deck", "goto", "goto2");
+					refStore.dialog.Filename = "Smuggler_Ship_dialog.c";
+					refStore.dialog.CurrentNode = "Travel_talkStart";
+					//поплыл, иначе RemoveTravelSmugglers грохнет всю ветку
+					PChar.GenQuest.contraTravel.ship = true;
+					PChar.quest.Munity = "";  // признак выхода с палубы
 
-						SetLaunchFrameFormParam("Прошло " + sti(Pchar.GenQuest.contraTravel.destination.days) + " дней." + NewStr() + "Палуба корабля контрабандистов.",
-						                        "Reload_To_Location", 0.1, 5.0);
-                        bQuestCheckProcessFreeze = true;
-						WaitDate("", 0, 0, sti(Pchar.GenQuest.contraTravel.destination.days), rand(20), 0);
-						bQuestCheckProcessFreeze = false;
-						MakeCloneShipDeck(refStore, true); // подмена палубы
-						SetLaunchFrameReloadLocationParam("Ship_deck", "reload", "reload1", "Travel_talkOnDeck");
-						AddDialogExitQuest("LaunchFrameForm");
-						AddCharacterExpToSkill(Pchar, "Sneak", 50);
-					}
-//================ METRO ====================
+					SetLaunchFrameFormParam("Прошло " + sti(Pchar.GenQuest.contraTravel.destination.days) + " дней." + NewStr() + "Палуба корабля контрабандистов.",
+																	"Reload_To_Location", 0.1, 5.0);
+											bQuestCheckProcessFreeze = true;
+					WaitDate("", 0, 0, sti(Pchar.GenQuest.contraTravel.destination.days), rand(20), 0);
+					bQuestCheckProcessFreeze = false;
+					MakeCloneShipDeck(refStore, true); // подмена палубы
+					SetLaunchFrameReloadLocationParam("Ship_deck", "reload", "reload1", "Travel_talkOnDeck");
+					AddDialogExitQuest("LaunchFrameForm");
+					AddCharacterExpToSkill(Pchar, "Sneak", 50);
 				}
 				else
 				{
-                    // если таможня уже бежит
-					if (CheckAttribute(NPChar, "ContrabandInterruption"))
+					if (CheckAttribute(NPChar, "ContrabandInterruption")) // если таможня уже бежит
 					{
 						if (CheckAttribute(PChar, "GenQuest.contraTravel.PatrolFight"))
 						{
@@ -188,7 +176,7 @@ void ProcessDialogEvent()
 							dialog.Text = RandPhraseSimple("Спасибо за помощь. Мы не забудем этого. Отправляемся.", "Молодец! Отлично сражал"+ GetSexPhrase("ся","ась") +". Идем.");
 							ChangeContrabandRelation(PChar, 5);
 							DeleteAttribute(PChar,"GenQuest.contraTravel.PatrolFight");
-							DeleteAttribute(NPChar,"ContrabandInterruption");
+							ContrabandInterruptionSetStatus(false);
 							AddCharacterExpToSkill(Pchar, "Sneak", 50);
 							Link.l2 = "Уже иду.";
 							Link.l2.go = "Exit";
@@ -226,8 +214,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Exit_fight":
-            //DeleteAttribute(Pchar, "quest.Contraband");
-            DeleteAttribute(Pchar, "quest.Contraband.active");
+			//DeleteAttribute(Pchar, "quest.Contraband");
+			DeleteAttribute(Pchar, "quest.Contraband.active");
 			DeleteAttribute(Pchar, "quest.Contraband.counter");
 			DeleteAttribute(Pchar, "quest.Contraband.price1");
 			DeleteAttribute(Pchar, "quest.Contraband.price2");
@@ -265,8 +253,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Exit_Cancel":
-            DeleteAttribute(Pchar, "quest.Contraband");
-            CloseQuestHeader("Gen_Contraband");
+			DeleteAttribute(Pchar, "quest.Contraband");
+			CloseQuestHeader("Gen_Contraband");
 			Pchar.quest.Rand_Smuggling.over = "yes";
 			RemoveSmugglersFromShore();
 			Diag.CurrentNode = Diag.TempNode;
@@ -275,17 +263,17 @@ void ProcessDialogEvent()
 		break;
 
 		case "Cancellation":
-            if (sti(Pchar.quest.Contraband.Counter) == 0)
-            {
-    			dialog.Text = "Отменяется? Ты что, смеёшься?";
-    			Link.l1 = "Совершенно серьезно.";
-    			Link.l1.go = "Cancellation_1";
+			if (sti(Pchar.quest.Contraband.Counter) == 0)
+			{
+				dialog.Text = "Отменяется? Ты что, смеёшься?";
+				Link.l1 = "Совершенно серьезно.";
+				Link.l1.go = "Cancellation_1";
 			}
 			else
-            {
-    			dialog.Text = "Ну и ладно. Мы и так неплохо поторговали.";
-    			Link.l1 = "Точно!";
-    			Link.l1.go = "Finish_exit";
+			{
+				dialog.Text = "Ну и ладно. Мы и так неплохо поторговали.";
+				Link.l1 = "Точно!";
+				Link.l1.go = "Finish_exit";
 			}
 		break;
 
@@ -319,7 +307,7 @@ void ProcessDialogEvent()
 			}
 		break;
 
-        case "GenQuestKillContraband_1":
+		case "GenQuestKillContraband_1":
 			//счётчик подстав по "метро"...
 			if(CheckAttribute(PChar, "GenQuest.contraTravel.active") && sti(PChar.GenQuest.contraTravel.active) == true)
 			{
@@ -333,46 +321,46 @@ void ProcessDialogEvent()
 
 		case "Exchange":
 			// сама торговля -->
-            if(FindFirstContrabandGoods(Pchar) == -1 && sti(Pchar.quest.Contraband.Counter) == 0)
-            {
+			if(FindFirstContrabandGoods(Pchar) == -1 && sti(Pchar.quest.Contraband.Counter) == 0)
+			{
 				dialog.Text = "Ну, и чего ты здесь делаешь? У тебя же ничего нет, что можно продать! Все, что лежит у тебя в трюме, можно купить в городе!";
 				Link.l1 = "Не повезло.";
 				Link.l1.go = "Exit";
 			}
 			else
 			{
-                // установим окружение -->
-                if (sti(Pchar.quest.Contraband.Counter) == 0) // не торговали ещё
-                {
-                    if(drand(11) == 3)
-                    {
-        				dialog.Text = "Так-так... пожалуй, мы заберём твой товар бесплатно. Врядли ты побежишь жаловаться властям.";
-        				Link.l1 = "Что ж, попробуйте!";
-        				Link.l1.go = "Exit_fight";
-                        break;
-        			}
-        			// море и солдаты на суше НЕЗАВИСИМЫ!!!
-        			if(GetSummonSkillFromNameToOld(Pchar, SKILL_SNEAK) < dRand(12))
-        			{
-                        SetCoastalGuardPursuit();
-        			}
-        			// при убегании от патруля на карту - корабли трём
-        			SetTimerCondition("Rand_ContrabandInterruptionAtSeaEnded", 0, 0, 2, false);// если в порту сидим, спим, то 2 день
+				// установим окружение -->
+				if (sti(Pchar.quest.Contraband.Counter) == 0) // не торговали ещё
+				{
+					if(drand(11) == 3)
+					{
+						dialog.Text = "Так-так... пожалуй, мы заберём твой товар бесплатно. Врядли ты побежишь жаловаться властям.";
+						Link.l1 = "Что ж, попробуйте!";
+						Link.l1.go = "Exit_fight";
+										break;
+					}
+					// море и солдаты на суше НЕЗАВИСИМЫ!!!
+					if(GetSummonSkillFromNameToOld(Pchar, SKILL_SNEAK) < dRand(12))
+					{
+						SetCoastalGuardPursuit();
+					}
+					// при убегании от патруля на карту - корабли трём
+					SetTimerCondition("Rand_ContrabandInterruptionAtSeaEnded", 0, 0, 2, false);// если в порту сидим, спим, то 2 день
 
-                    Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition.l1 = "MapEnter";
-        			Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition = "Rand_ContrabandAtSeaEnded";
-    			}
-    			// установим окружение <--
-                dialog.Text = RandPhraseSimple("Итак, какой груз ты хотел"+ GetSexPhrase("","а") +" продать?",
-                                          "Что продаёшь?");
-               Link.l1 = "Ну давай посмотрим.";
+					Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition.l1 = "MapEnter";
+					Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition = "Rand_ContrabandAtSeaEnded";
+				}
+				// установим окружение <--
+				dialog.Text = RandPhraseSimple("Итак, какой груз ты хотел"+ GetSexPhrase("","а") +" продать?",
+																	"Что продаёшь?");
+				Link.l1 = "Ну давай посмотрим.";
 				Link.l1.go = "Exchange1";
 				if (sti(Pchar.quest.Contraband.Counter) == 0)
-    			{
-        			Link.l99 = "Пожалуй, я передумал"+ GetSexPhrase("","а") +".";
-    				Link.l99.go = "Cancellation";
+				{
+					Link.l99 = "Пожалуй, я передумал"+ GetSexPhrase("","а") +".";
+					Link.l99.go = "Cancellation";
 				}
-            }
+			}
 		break;
 
 		case "Exchange1":
@@ -383,24 +371,28 @@ void ProcessDialogEvent()
 		break;
 
 		case "Finish_exit":
-            // таможня на суше
-            if(GetSummonSkillFromName(pchar, "Sneak") < Rand(120))
+			// таможня на суше
+			if(GetSummonSkillFromName(pchar, "Sneak") < Rand(120) && !CheckAttribute(pchar,"quest.Contraband.InterruptionGot"))
 			{
-				AddDialogExitQuest("Rand_ContrabandInterruption");
-				for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE/2); i++)
-				{
-					characters[GetCharacterIndex("Rand_Smug0"+i)].ContrabandInterruption = true;
-				}
+				Pchar.GenQuest.contraTravel.PatrolFight = true;
+				Pchar.quest.Contraband.InterruptionGot = true;
+				DoQuestCheckDelay("Rand_ContrabandInterruption", 0.1);
+				ContrabandInterruptionSetStatus(true);
 			}
-			AddCharacterExpToSkill(Pchar, "Sneak", 100);
+			if (!CheckAttribute(pchar,"quest.Contraband.SneakGot"))
+			{
+				pchar.quest.Contraband.SneakGot = true;
+				AddCharacterExpToSkill(Pchar, "Sneak", 100);
+				SetTimerCondition("ContraСlearGot", 0, 0, 1, false);
+			}
 			Diag.CurrentNode = Diag.TempNode;
 			NPChar.quest.meeting = NPC_Meeting;
 			DialogExit();
 			ChangeContrabandRelation(pchar, 15);
-            OfficersReaction("bad");
-            ChangeCharacterReputation(pchar, -1);
+			OfficersReaction("bad");
+			ChangeCharacterReputation(pchar, -1);
 
-            CloseQuestHeader("Gen_Contraband");
+			CloseQuestHeader("Gen_Contraband");
 
 			DeleteAttribute(Pchar, "quest.Contraband.active");
 			DeleteAttribute(Pchar, "quest.Contraband.counter");

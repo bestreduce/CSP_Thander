@@ -9,6 +9,9 @@ int shipIndex;
 int upgradevalue;
 int uptype = 0;
 string SellState = "Max";
+string sCabins[8] = {"Cabin_Small","New_Cabin1","Cabin_Medium","Cabin_Medium2","New_Cabin2","Cabin_Quest","Cabin","Cabin_Huge"};//берём из SetCabinTypeEx
+int iCabinsNum = 8;//число видов кают
+int iCurCabin = 0;
 
 int nCurScrollOfficerNum;
 
@@ -81,8 +84,10 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	SetEventHandler("OpenShipUp","OpenShipUp",0);
 	SetEventHandler("CloseShipUp", "CloseShipUp",0);
 	SetEventHandler("ExitChangeHullMenu", "ExitChangeHullMenu",0);
+	SetEventHandler("ExitChangeCabinMenu", "ExitChangeCabinMenu",0);
 	SetEventHandler("CheckButtonChange","procCheckBoxChange",0);
 	SetEventHandler("SelectShipyard","SelectShipyard",0);
+	SetEventHandler("OnTableClick", "OnTableClick", 0);
     //////////////////
     EI_CreateFrame("SHIP_BIG_PICTURE_BORDER",156,40,366,275); // tak from SHIP_BIG_PICTURE
     EI_CreateHLine("SHIP_BIG_PICTURE_BORDER", 161,246,361,1, 4);
@@ -159,8 +164,10 @@ void IDoExit(int exitCode)
 	DelEventHandler("OpenShipUp","OpenShipUp");
 	DelEventHandler("CloseShipUp","CloseShipUp");
 	DelEventHandler("ExitChangeHullMenu", "ExitChangeHullMenu");
+	DelEventHandler("ExitChangeCabinMenu", "ExitChangeCabinMenu");
 	DelEventHandler("CheckButtonChange","procCheckBoxChange");
 	DelEventHandler("SelectShipyard","SelectShipyard");
+	DelEventHandler("OnTableClick", "OnTableClick");
 
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
@@ -218,6 +225,13 @@ void ProcessCommandExecute()
 			}
 		break;
 
+		case "BUTTON_CABIN":
+			if (comName=="click" || comName=="activate")
+			{
+			    ShowChangeCABINMenu();
+			}
+		break;
+
 		case "CHANGE_HULL_LEFT":
 			if(comName=="click")
 			{
@@ -236,6 +250,27 @@ void ProcessCommandExecute()
 			if(comName=="click")
 			{
 				SetNewHullToCharacterShip();
+			}
+		break;
+
+		case "CHANGE_CABIN_LEFT":
+			if(comName=="click")
+			{
+				SelectChangeCABIN(true);
+			}
+		break;
+
+		case "CHANGE_CABIN_RIGHT":
+			if(comName=="click")
+			{
+				SelectChangeCABIN(false);
+			}
+		break;
+
+		case "CHANGE_CABIN_OK":
+			if(comName=="click")
+			{
+				SetNewCABINToCharacterShip();
 			}
 		break;
 
@@ -1051,6 +1086,14 @@ void FillShipyardTable()
 	GameInterface.TABLE_SHIPYARD.hr.td6.scale = 0.9;
 	GameInterface.TABLE_SHIPYARD.select = 0;
 	GameInterface.TABLE_SHIPYARD.top = 0;
+//--> mod tablesort
+	GameInterface.TABLE_SHIPYARD.hr.td1.sorttype = "string";
+	GameInterface.TABLE_SHIPYARD.hr.td2.sorttype = "string";
+	GameInterface.TABLE_SHIPYARD.hr.td3.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td4.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td5.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td6.sorttype = "";
+//<-- mod tablesort
 
 	aref   arDest, arImt;
 	string sAttr;
@@ -1087,6 +1130,7 @@ void FillShipyardTable()
 
 		k++;
 		GameInterface.TABLE_SHIPYARD.(row).sShipId = sAttr;
+		GameInterface.TABLE_SHIPYARD.(row).index = i;
         GameInterface.TABLE_SHIPYARD.(row).td1.icon.texture = "interfaces\\ships\\" + sShip + ".tga.tx";
 		GameInterface.TABLE_SHIPYARD.(row).td1.icon.uv = "0,0,1,1";
 		GameInterface.TABLE_SHIPYARD.(row).td1.icon.width = 46;
@@ -1114,7 +1158,7 @@ string GetShipsType(ref refBaseShip)
 	string spectypes = "";
 	if (refBaseShip.Type.War == true) spectypes = "Военный";
 	if (refBaseShip.Type.Merchant == true) spectypes = "Торговый";
-	if (refBaseShip.Type.Merchant == true && refBaseShip.Type.War == true) spectypes = "Универс.";
+	if (refBaseShip.Type.Merchant == true && refBaseShip.Type.War == true) spectypes = "Универс";//не ставить точку - будет крашить сортировка в таблице
 	return spectypes;
 }
 
@@ -1178,6 +1222,7 @@ void SetButtionsAccess()
 	//#20180922-01
     SetSelectable("BUTTON_PAINT", true);
 	SetSelectable("SHIPSUP_BUTTON", true);
+	SetSelectable("BUTTON_CABIN", true);
 
     if (bShipyardOnTop)
     {
@@ -1185,6 +1230,7 @@ void SetButtionsAccess()
     	SetSelectable("BUTTON_SELL", false);
     	//#20180922-01
     	SetSelectable("BUTTON_PAINT", false);
+    	SetSelectable("BUTTON_CABIN", false);
 		SetSelectable("SHIPSUP_BUTTON", false);
     	if (shipIndex == -1)// проверка на цену
     	{
@@ -1212,7 +1258,7 @@ void SetButtionsAccess()
     else
     {
         SetSelectable("BUTTON_BUY", false);
-
+		if (!checkAttribute(xi_refCharacter, "ship.soiling")) xi_refCharacter.ship.soiling = 0;//фикс ошибок в логах
         if (GetHullPercent(xi_refCharacter) < 100 || GetSailPercent(xi_refCharacter) < 100 || sti(xi_refCharacter.ship.soiling) > 0)
         {
             SetSelectable("BUTTON_REPAIR", true);
@@ -1223,6 +1269,7 @@ void SetButtionsAccess()
             SetSelectable("BUTTON_REPAIR", false);
             //#20180922-01
             SetSelectable("BUTTON_PAINT", false);
+            SetSelectable("BUTTON_CABIN", false);
 			SetSelectable("SHIPSUP_BUTTON", false);
         }
         else
@@ -1233,6 +1280,7 @@ void SetButtionsAccess()
     	        SetSelectable("BUTTON_SELL", false);
                 //#20180922-01
                 SetSelectable("BUTTON_PAINT", false);
+	            SetSelectable("BUTTON_CABIN", false);
 				SetSelectable("SHIPSUP_BUTTON", false);
     	    }
     	    else {
@@ -1545,7 +1593,7 @@ void SendCrewToPchar(ref chref)
 	if (GetCrewQuantity(pchar) < GetMaxCrewQuantity(pchar))
 	{
 		int crewn = GetMaxCrewQuantity(pchar) - GetCrewQuantity(pchar);
-		float fTemp =  stf(GetCrewQuantity(pchar) + crewn);
+		float fTemp =  stf(GetMaxCrewQuantity(pchar));
 		float fTemp2 =  stf(GetCrewQuantity(pchar) + GetCrewQuantity(chref));
 
 		if (GetCrewQuantity(chref)>crewn)
@@ -1579,6 +1627,8 @@ void SendCrewToPchar(ref chref)
 		}
 		else
 		{
+			if (fTemp2 != 0)//фикс - убираем из лога ошибки деления на ноль
+			{
 			pchar.Ship.Crew.Exp.Sailors   = (stf(pchar.Ship.Crew.Exp.Sailors)*GetCrewQuantity(pchar) +
 												stf(chref.Ship.Crew.Exp.Sailors)*GetCrewQuantity(chref)) / fTemp2;
 			pchar.Ship.Crew.Exp.Cannoners   = (stf(pchar.Ship.Crew.Exp.Cannoners)*GetCrewQuantity(pchar) +
@@ -1590,6 +1640,7 @@ void SendCrewToPchar(ref chref)
 														stf(chref.Ship.Crew.morale)*GetCrewQuantity(chref)) / fTemp2;
 			SetCrewQuantity(pchar,GetCrewQuantity(pchar)+GetCrewQuantity(chref));
 			Log_Info("Команда с проданного корабля перешла на ваш корабль.");
+			}
 		}
 	}
 	else
@@ -1612,7 +1663,7 @@ int SendCrewToShip(ref chref, ref chreff, int crewnum)
 {
 	int crewn = GetMaxCrewQuantity(chreff) - GetCrewQuantity(chreff);
 	if (crewn == 0) return crewnum;
-	float fTemp =  stf(GetCrewQuantity(chreff) + crewn);
+	float fTemp =  stf(GetMaxCrewQuantity(chreff));
 	float fTemp2 =  stf(GetCrewQuantity(chreff) + crewnum);
 
 	if (crewnum>crewn)
@@ -1632,6 +1683,8 @@ int SendCrewToShip(ref chref, ref chreff, int crewnum)
 	}
 	else
 	{
+		if (fTemp2 != 0)//фикс - убираем из лога ошибки деления на ноль
+		{
 		chreff.Ship.Crew.Exp.Sailors   = (stf(chreff.Ship.Crew.Exp.Sailors)*GetCrewQuantity(chreff) +
 											stf(chref.Ship.Crew.Exp.Sailors)*crewnum) / fTemp2;
 		chreff.Ship.Crew.Exp.Cannoners   = (stf(chreff.Ship.Crew.Exp.Cannoners)*GetCrewQuantity(chreff) +
@@ -1644,6 +1697,7 @@ int SendCrewToShip(ref chref, ref chreff, int crewnum)
 		SetCrewQuantity(chreff,GetCrewQuantity(chreff)+crewnum);
 		Log_Info("Команда с проданного корабля перешла на корабль компаньона "+chreff.name+" "+chreff.lastname+".");
 		crewn = 0;
+		}
 	}
 	return crewn;
 }
@@ -1671,7 +1725,7 @@ void SendOptCrewToPchar(ref chref)
 	if (GetCrewQuantity(pchar) < GetOptCrewQuantity(pchar))
 	{
 		int crewn = GetOptCrewQuantity(pchar) - GetCrewQuantity(pchar);
-		float fTemp =  stf(GetCrewQuantity(pchar) + crewn);
+		float fTemp =  stf(GetOptCrewQuantity(pchar));
 		float fTemp2 =  stf(GetCrewQuantity(pchar) + GetCrewQuantity(chref));
 
 		if (GetCrewQuantity(chref)>crewn)
@@ -1705,6 +1759,8 @@ void SendOptCrewToPchar(ref chref)
 		}
 		else
 		{
+			if (fTemp2 != 0)//фикс - убираем из лога ошибки деления на ноль
+			{
 			pchar.Ship.Crew.Exp.Sailors   = (stf(pchar.Ship.Crew.Exp.Sailors)*GetCrewQuantity(pchar) +
 												stf(chref.Ship.Crew.Exp.Sailors)*GetCrewQuantity(chref)) / fTemp2;
 			pchar.Ship.Crew.Exp.Cannoners   = (stf(pchar.Ship.Crew.Exp.Cannoners)*GetCrewQuantity(pchar) +
@@ -1716,6 +1772,7 @@ void SendOptCrewToPchar(ref chref)
 														stf(chref.Ship.Crew.morale)*GetCrewQuantity(chref)) / fTemp2;
 			SetCrewQuantity(pchar,GetCrewQuantity(pchar)+GetCrewQuantity(chref));
 			Log_Info("Команда с проданного корабля перешла на ваш корабль.");
+			}
 		}
 	}
 	else
@@ -1739,7 +1796,7 @@ int SendOptCrewToShip(ref chref, ref chreff, int crewnum)
 	if (GetCrewQuantity(chreff) >= GetOptCrewQuantity(chreff)) return crewnum;
 	int crewn = GetOptCrewQuantity(chreff) - GetCrewQuantity(chreff);
 	if (crewn == 0) return crewnum;
-	float fTemp =  stf(GetCrewQuantity(chreff) + crewn);
+	float fTemp =  stf(GetOptCrewQuantity(chreff));
 	float fTemp2 =  stf(GetCrewQuantity(chreff) + crewnum);
 
 	if (crewnum>crewn)
@@ -1759,6 +1816,8 @@ int SendOptCrewToShip(ref chref, ref chreff, int crewnum)
 	}
 	else
 	{
+		if (fTemp2 != 0)//фикс - убираем из лога ошибки деления на ноль
+		{
 		chreff.Ship.Crew.Exp.Sailors   = (stf(chreff.Ship.Crew.Exp.Sailors)*GetCrewQuantity(chreff) +
 											stf(chref.Ship.Crew.Exp.Sailors)*crewnum) / fTemp2;
 		chreff.Ship.Crew.Exp.Cannoners   = (stf(chreff.Ship.Crew.Exp.Cannoners)*GetCrewQuantity(chreff) +
@@ -1771,6 +1830,7 @@ int SendOptCrewToShip(ref chref, ref chreff, int crewnum)
 		SetCrewQuantity(chreff,GetCrewQuantity(chreff)+crewnum);
 		Log_Info("Команда с проданного корабля перешла на корабль компаньона "+chreff.name+" "+chreff.lastname+".");
 		crewn = 0;
+		}
 	}
 	return crewn;
 }
@@ -2140,6 +2200,7 @@ void RepairOk()
 		DeleteAttribute(xi_refCharacter, "ship.sails");
 		DeleteAttribute(xi_refCharacter, "ship.masts");
 	}
+	ReSetCannons(xi_refCharacter);
 	///
 	ExitRepairMenu();
 	st = sti(GameInterface.SHIPS_SCROLL.current);
@@ -2149,6 +2210,143 @@ void RepairOk()
    	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,"SHIPS_SCROLL",-1);
 	OnShipScrollChange();
 	SetButtionsAccess();
+}
+
+void ReSetCannons(ref chr)
+{
+    if (GetCannonQuantity(chr) <= 0) return;
+    //if (GetCannonQuantity(chr) <= GetCannonsNum(chr)) return;
+	// сначала все убрать
+	int CannonsType = sti(chr.Ship.Cannons.Type);
+    if (GetCannonsNum(chr) > 0)
+    {
+		SetCannonsToBort(chr, "fcannon", 0);
+	    SetCannonsToBort(chr, "bcannon", 0);
+	    SetCannonsToBort(chr, "rcannon", 0);
+	    SetCannonsToBort(chr, "lcannon", 0);
+    }
+    // потом все выставить раскидав по бортам
+    int idx = GetCannonGoodsIdxByType(CannonsType);
+    int fb, lb, rb, bb;
+    int qty;
+
+    if (idx != -1)
+    {
+    	qty = GetCargoGoods(chr, idx);
+
+    	rb = GetBortCannonsMaxQty(chr, "rcannon");
+
+    	if (rb  > (qty / 2)) rb = qty / 2;
+    	qty = qty - rb;
+    	if (qty < 0) qty = 0;
+
+    	lb = GetBortCannonsMaxQty(chr, "lcannon");
+    	if (lb > qty) lb = qty;
+    	qty = qty - lb;
+    	if (qty < 0) qty = 0;
+
+    	bb = GetBortCannonsMaxQty(chr, "bcannon");
+    	if (bb > qty) bb = qty;
+    	qty = qty - bb;
+    	if (qty < 0) qty = 0;
+
+    	fb = GetBortCannonsMaxQty(chr, "fcannon");
+    	if (fb > qty) fb = qty;
+
+    	SetCannonsToBort(chr, "fcannon", fb);
+	    SetCannonsToBort(chr, "bcannon", bb);
+	    SetCannonsToBort(chr, "rcannon", rb);
+	    SetCannonsToBort(chr, "lcannon", lb);
+    }
+}
+
+/// установить орудия по борту (сперва расчитать дельту было стало - лишнее в запасы)
+void SetCannonsToBort(ref chr, string sBort, int iQty)
+{
+	int     curQty = GetBortCannonsQty(chr, sBort);
+	int     maxQty = GetBortCannonsMaxQty(chr, sBort);
+	int     i, delta;
+	string  attr;
+	int     center, left, right; // счетчики орудий для распределения
+	bool    bLeft; // направление хода
+	string  sBort_real;
+
+	if(sBort == "rcannon") sBort_real = "cannonr";
+	if(sBort == "lcannon") sBort_real = "cannonl";
+	if(sBort == "fcannon") sBort_real = "cannonf";
+	if(sBort == "bcannon") sBort_real = "cannonb";
+
+	if (iQty > maxQty) iQty = maxQty;
+	if (iQty < 0) iQty = 0;
+
+	int idx = GetCannonGoodsIdxByType(sti(chr.Ship.Cannons.Type));
+    delta = iQty - curQty;
+    if (delta > 0)
+    {
+    	if (GetCargoGoods(chr, idx) < delta) iQty = curQty + GetCargoGoods(chr, idx);
+    }
+	if (iQty > curQty)
+	{ // списать со склада
+		RemoveCharacterGoodsSelf(chr, idx, (iQty - curQty));
+	}
+	else
+	{
+		if (iQty < curQty)
+		{// лишние на склад
+			SetCharacterGoods(chr, idx, GetCargoGoods(chr, idx) + (curQty - iQty)); // этот метод, тк перегруз может быть, а  AddCharacterGoodsSimple режет перегруз
+		}
+	}
+	// нулим колво пушек на борту и распределяем заново от центра (как они на модели по номерам не знаю, допуск, что подряд)
+	for (i = 0; i < maxQty; i++)
+	{
+		attr = "c" + i;
+		chr.Ship.Cannons.borts.(sBort).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет её
+		chr.Ship.Cannons.borts.(sBort_real).damages.(attr) = 1.0; // поломана на 100 процентов, не палит, те нет её
+	}
+	// распределяем
+	if (iQty > 0)
+	{
+		center = makeint(maxQty / 2); // целочисленное деление
+		left   = center - 1;
+		right  = center;
+		i = 0; // сколько распределили уже
+		bLeft = true;
+		while (i < iQty)
+		{
+			if (bLeft)
+			{
+				if (left >= 0)
+				{
+					attr = "c" + left;
+					left--;
+				}
+				else
+				{
+					attr = "c" + right;
+					right++;
+				}
+				if (right < maxQty) bLeft = false;
+			}
+			else
+			{
+				if (right < maxQty)
+				{
+					attr = "c" + right;
+					right++;
+				}
+				else
+				{
+					attr = "c" + left;
+					left--;
+				}
+				if (left >= 0) bLeft = true;
+			}
+			chr.Ship.Cannons.borts.(sBort).damages.(attr) = 0.0; // новая, не битая
+			chr.Ship.Cannons.borts.(sBort_real).damages.(attr) = 0.0; // новая, не битая
+			i++;
+		}
+	}
+	RecalculateCargoLoad(chr);  // пересчет, тк пушки снялись
 }
 
 void RepairAll()
@@ -2610,5 +2808,122 @@ int CalculateHullChangePrice(int value)
 		break;
 	}
 }
-
 // Lugger: Смена разцветки корпуса <--
+
+//Смена каюты -->
+void ExitChangeCABINMenu()
+{
+	HideChangeCABINMenu();
+	OnShipScrollChange();
+}
+
+void HideChangeCABINMenu()
+{
+	XI_WindowShow("CHANGE_CABIN_WINDOW", false);
+	XI_WindowDisable("CHANGE_CABIN_WINDOW", true);
+	XI_WindowDisable("MAIN_WINDOW", false);
+	SetCurrentNode("TABLE_OTHER");
+	sMessageMode = "";
+}
+
+void ShowChangeCABINMenu()
+{
+	XI_WindowShow("CHANGE_CABIN_WINDOW", true);
+	XI_WindowDisable("CHANGE_CABIN_WINDOW", false);
+	XI_WindowDisable("MAIN_WINDOW", true);
+	SetCurrentNode("CHANGE_CABIN_CANCEL");
+
+	ref refShip = GetRealShip(sti(xi_refCharacter.Ship.Type));
+	for (int i=0;i<iCabinsNum;i++)
+	{
+		if (sti(refShip.Class)==7) break;
+		if (refShip.CabinType != sCabins[i]) continue;
+		iCurCabin = i; 
+		break;
+	}
+	SetChangeCABINInfo();
+}
+
+void SetChangeCABINInfo()
+{
+	string sTexture = GetShipTexturesForChangeCABIN();
+	SetNewPicture("CHANGE_CABIN_TYPE", sTexture);
+	int iMoney = CalculateCABINChangePrice();
+	SetFormatedText("CHANGE_CABIN_MONEY", "Цена: " + iMoney);
+
+	bool isNewCabin = true;
+	ref refShip = GetRealShip(sti(xi_refCharacter.Ship.Type));
+	if (!isCabinforClass(sti(refShip.Class))) 
+	{
+		isNewCabin = false;
+		SetFormatedText("CHANGE_CABIN_MONEY", "Эта каюта не подходит по размеру к кораблю.");
+	}
+	if (sti(refShip.Class)<7 && refShip.CabinType == sCabins[iCurCabin]) 
+	{
+		isNewCabin = false; 
+		SetFormatedText("CHANGE_CABIN_MONEY", "Это Ваша каюта.");
+	}
+
+	if (isNewCabin && sti(PChar.money) > iMoney) SetSelectable("CHANGE_CABIN_OK", true);
+											else SetSelectable("CHANGE_CABIN_OK", false);
+}
+
+bool isCabinforClass(int iClass)
+{
+	switch (iClass)
+	{
+	case 7: return false; break;
+	case 6: if (iCurCabin>-1 && iCurCabin<2) return true; break; 
+	case 5: if (iCurCabin>-1 && iCurCabin<2) return true; break;//№0-1
+	case 4: if (iCurCabin>1 && iCurCabin<5) return true; break;	//№2-4
+	case 3: if (iCurCabin>1 && iCurCabin<5) return true; break; 
+	case 2: if (iCurCabin>4 && iCurCabin<8) return true; break;	//№5-7
+	case 1: if (iCurCabin>4 && iCurCabin<8) return true; break; 
+	}
+	return false;
+}
+
+string GetShipTexturesForChangeCABIN()
+{
+	int nLoc = FindLocation(sCabins[iCurCabin]);
+	if (nLoc >= 0 && CheckAttribute(&Locations[nLoc],"image")) 
+	return Locations[nLoc].image;
+}
+
+void SelectChangeCABIN(bool bLeft)
+{
+	if (bLeft) iCurCabin--; else iCurCabin++;
+	if (iCurCabin < 0) iCurCabin = iCabinsNum-1;
+	if (iCurCabin == iCabinsNum) iCurCabin = 0;
+	SetChangeCABINInfo();
+}
+
+void SetNewCABINToCharacterShip()
+{
+	ref refShip = GetRealShip(sti(xi_refCharacter.Ship.Type));
+	refShip.CabinType = sCabins[iCurCabin];
+
+	int iMoney = CalculateCABINChangePrice();
+	AddMoneyToCharacter(PChar, -iMoney);
+	ExitChangeCABINMenu();
+}
+
+int CalculateCABINChangePrice()
+{	//10ая часть цены корабля с учётом наценки конкретного верфиста
+	return makeint(GetShipBuyPrice(sti(xi_refCharacter.Ship.Type), refNPCShipyard)/10);
+}
+//Смена каюты <--
+
+void OnTableClick()
+{
+	string sControl = GetEventData();
+	int iRow = GetEventData();
+	int iColumn = GetEventData();
+
+	//string sRow = "tr" + (iRow + 1);
+	if (sControl == "TABLE_SHIPYARD")
+	{
+		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+		Table_UpdateWindow(sControl);
+	}
+}

@@ -29,9 +29,6 @@ String sInterfaceType;
 
 int iLinesCount = 0;
 
-int lastsort = 0;//мало??? - нужно для каждой таблицы запоминать, если в интерфейсе их может быть несколько???
-bool blastsort;
-
 int chestsnum;
 int curchest = 1;
 aref box1;
@@ -41,6 +38,7 @@ aref box4;
 
 void InitInterface_RS(string iniName, ref itemsRef, string faceID)
 {
+	ReplaceTreasureMapPartCopies(itemsRef, PChar);
 	if (loadedLocation.id == Get_My_Cabin())
 	{
 		aref chests;
@@ -125,6 +123,13 @@ void InitInterface_RS(string iniName, ref itemsRef, string faceID)
 	GameInterface.TABLE_LIST.hr.td4.textoffset = "0, 2";
 	GameInterface.TABLE_LIST.hr.td5.str = "Кол-во";
 	GameInterface.TABLE_LIST.hr.td5.scale = 0.9;
+//--> mod tablesort
+	GameInterface.TABLE_LIST.hr.td1.sorttype = "";//числа - любое значение кроме "string"
+	GameInterface.TABLE_LIST.hr.td2.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td3.sorttype = "string";
+	GameInterface.TABLE_LIST.hr.td4.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td5.sorttype = "";
+//<-- mod tablesort
 
 	FillCharactersScroll();
 
@@ -158,6 +163,11 @@ void InitInterface_RS(string iniName, ref itemsRef, string faceID)
 	else
 	{
 		GameInterface.strings.CharName = GetFullName(refCharacter);
+		if (sInterfaceType == INTERFACETYPE_DEADMAN)
+		{
+			CreateString(true, "CharName2", "", FONT_NORMAL, COLOR_MONEY, 645, 108, SCRIPT_ALIGN_RIGHT, 1.0);
+			GameInterface.strings.CharName2 = GetFullName(refToChar);//имя трупа показываем под картинкой черепа
+		}
 	}
 
 	SetCharWeight();
@@ -859,6 +869,7 @@ void FillCharactersScroll()
 			{
 				if(sCharID == characters[_curCharIdx].ID) continue;
 
+				ReplaceTreasureMapPartCopies(GetCharacter(_curCharIdx), PChar); // на всякий случай
 				SetCharacterMoneyToGold(GetCharacter(_curCharIdx));
 				iSetCharIDToCharactersArroy(GetCharacter(_curCharIdx)); // Пометим его для удаления золота и дачи денег
 				attributeName = "pic" + (m + 1);
@@ -882,7 +893,7 @@ void FillCharactersScroll()
 			}
 		}
 	}
-	if (HasSubStr(loadedLocation.id,"_bank"))
+	if (HasSubStr(loadedLocation.id,"_bank") && Pchar.SystemInfo.CabinType != "")//фикс - ошибки в логе, если ГГ без корабля и каюты
 	{
 		ref cabinloc = &locations[FindLocation(Pchar.SystemInfo.CabinType)];
 		chestsnum = 0;
@@ -962,6 +973,7 @@ void AddToTable(ref rChar)
 		sList = "tr" + n;
 		rItem = &Items[FindItem("Gold")];
 		GameInterface.TABLE_LIST.(sList).id = "Gold";
+		GameInterface.TABLE_LIST.(sList).index = n;
 		GameInterface.TABLE_LIST.(sList).td1.str = iLeftQty;
 		GameInterface.TABLE_LIST.(sList).td1.scale = 0.8;
 		GameInterface.TABLE_LIST.(sList).td2.str = "-";
@@ -1144,20 +1156,9 @@ void OnTableClick()
 	int iRow = GetEventData();
 	int iColumn = GetEventData();
 
-	string sRow = "tr" + (iRow + 1);
+	//string sRow = "tr" + (iRow + 1);
 //--> mod tablesort
-	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 ))
-		{
-		if (lastsort == iColumn) {bLastSort = !bLastSort;} else {lastsort = iColumn; bLastSort = 1;}//запоминаем сортировку и меняем направление сортировки, если это повторный клик по колонке
-//todo - разобраться, как заблокировать активацию двойного клика на заголовке - подменять его на ординарные как-то
-//todo - устанавливать стрелочку направления сортировки по запомненным значениям переменных - но тут нужно как-то узнавать ширину колонок таблицы, чтобы пересчитать координаты???
-//todo - не забыть, что может быть несколько таблиц на одном интерфейсе - надо ещё и последнюю таблицы запоминать и сбрасывать(?) сортировку при смене или запоминать для каждой?
-		if (iColumn == 3)
-			SortTable(sControl, iColumn, 1, bLastSort, iLinesCount);//3 колонка - текстовая
-		else
-			SortTable(sControl, iColumn, 0, !bLastSort, iLinesCount);//остальные колонки - числа
-		}
-//вызывать направление сортировки разными действиями - ЛКМ/ПКМ??
+	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
 //<-- mod tablesort
 	Table_UpdateWindow(sControl);
 }
@@ -1508,7 +1509,7 @@ void onTableRemoveAllBtnClick()
 }
 
 // инфа о предмете
-void ShowGoodsInfo(int sItem)
+void ShowGoodsInfo(string sItem)
 {
 	int itemIndex = FindItem(sItem);
 	string GoodName = Items[itemIndex].name;

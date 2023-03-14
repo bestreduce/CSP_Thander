@@ -60,7 +60,7 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, -15000);
 			AddMoneyToCharacter(npchar, 15000);
 			AddCharacterGoods(pchar, GOOD_SLAVES, 100);
-			AddQuestUserData("pSQ", "sText", "О рабах моему работодателю знать не обязательно, не напрасно же я выложил"+ GetSexPhrase("","а") +" за них 15 000 пиастров.");
+			AddQuestUserData("pSQ", "sText", "О рабах моему работодателю знать не обязательно, не напрасно же я выложил"+ GetSexPhrase("","а") +" за них 15000 пиастров.");
 		break;
 		case "pirateStartQuest_Smuggler3_5":
 			dialog.text = "Вот чёрт! Теперь все понятно. Придётся вытрясти из тебя деньги вместе с кишками и твоей поганой душонкой!";

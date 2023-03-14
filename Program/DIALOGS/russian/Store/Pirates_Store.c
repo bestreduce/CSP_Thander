@@ -11,22 +11,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = HeroStringReactionRepeat("Знаешь, " + NPChar.name + ", как-нибудь в следующий раз.", "Точно, "+ GetSexPhrase("забыл","забыла") +" что-то...",
                       "Да уж, действительно в третий раз...", "Гм, не буду...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
-			if (pchar.questTemp.BlueBird == "toBermudes")
+
+			if(CheckAttribute(pchar, "questTemp.BlueBird"))
 			{
-				link.l1 = "Уважаемый, я ищу один необычный корабль, шебеку 'Синяя Птица'. Ничего о ней не слышали? За любую информацию о ней я "+ GetSexPhrase("готов","готова") +" заплатить...";
-				link.l1.go = "BlueBird_1";
-			}
-			if(CheckAttribute(pchar, "questTemp.Headhunter"))
-			{
-				bOk = pchar.questTemp.Headhunter == "end_quest_full" || pchar.questTemp.BlueBird == "weWon" || pchar.questTemp.BlueBird == "returnMoney" || pchar.questTemp.BlueBird == "over";
-	    		if (bOk && !CheckAttribute(pchar,"questTemp.BlueBird.speakWon"))
-    			{
-		    		link.l1 = "А где Паскаль Вуазье?";
-	    			link.l1.go = "BlueBird_3";
-    			}
-			}
-			if(!CheckAttribute(pchar, "questTemp.Headhunter"))
-			{
+				if (pchar.questTemp.BlueBird == "toBermudes")
+				{
+					link.l1 = "Уважаемый, я ищу один необычный корабль, шебеку 'Синяя Птица'. Ничего о ней не слышали? За любую информацию о ней я "+ GetSexPhrase("готов","готова") +" заплатить...";
+					link.l1.go = "BlueBird_1";
+				}
 				bOk = pchar.questTemp.BlueBird == "weWon" || pchar.questTemp.BlueBird == "returnMoney" || pchar.questTemp.BlueBird == "over";
 	    		if (bOk && !CheckAttribute(pchar,"questTemp.BlueBird.speakWon"))
     			{

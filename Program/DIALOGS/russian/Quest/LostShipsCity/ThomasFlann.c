@@ -26,7 +26,7 @@ void ProcessDialogEvent()
 				if (CheckAttribute(loadedLocation, "storm"))
 				{
 					dialog.text = "Приветствую "+ GetSexPhrase("нового гражданина","новую гражданку") +" Города! Очень рады тебя видеть. Извини, забыл представиться. Меня зовут " + GetFullName(npchar) + ", я здесь живу.";
-					link.l1 = "Это я понял"+ GetSexPhrase("","а") +". Ну а я - " + GetFullName(pchar) + ". Слушай, вы что, в постоянных штормах живете?";
+					link.l1 = "Это я понял"+ GetSexPhrase("","а") +". Ну а я - " + GetFullName(pchar) + ". Слушай, вы что, в постоянных штормах живёте?";
 					link.l1.go = "FS_1";
 				}
 				else

@@ -1024,7 +1024,7 @@ int LocationInitMartinique(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore38";
 	locations[n].id.label = "Shore38";
-	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
+	locations[n].image = "loading\jonny_load\shores\Shore12.tga";
 	locations[n].worldmap = "Shore38";
 	//Sound
 	locations[n].type = "seashore";

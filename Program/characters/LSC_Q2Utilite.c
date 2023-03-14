@@ -220,7 +220,7 @@ void SetHalfPerksToChar(ref _ch, bool _isOfficer)
 void RemoveAllCharacterItems(ref _ch, bool _removemoney)
 {
 	// сносим нафик всю экипировку
-	if(_ch == GetMainCharacter())
+	if(IsMainCharacter(_ch))
 	{
 		StoreEquippedMaps(_ch);
 		_ch.MapsAtlasCount = 0;
@@ -338,6 +338,7 @@ void CleanAllCabinBoxes()
     }
 }
 
+/*	//устарел и нигде не используется. ссылается на старые номера кораблей
 // Метод вернет случайный тип корабля, который зависит от класса шипа персонажа
 int RandShipFromShipClass(ref _ch)
 {
@@ -346,7 +347,7 @@ int RandShipFromShipClass(ref _ch)
 	switch(iShipClass)
 	{
 		case 1:
-			iShipType = SHIP_WARSHIP + rand(2);
+			iShipType = SHIP_INGERMANLAND + rand(2);
 			break;
 
 		case 2:
@@ -375,7 +376,7 @@ int RandShipFromShipClass(ref _ch)
 	}
 	return iShipType;
 }
-
+*/
 // Проверка, есть ли у ГГ казначей
 bool IsPCharHaveTreasurer()
 {
@@ -586,10 +587,12 @@ void initStartState2Character(ref ch)
 	SelectSlavetraderRendom(); //это непосредственно выбор
 	// ==> квест Изабеллы
 	IsabellaInit();
-	//==>квест История давней дружбы Lipsar
+	// ==> квест История давней дружбы Lipsar
 	SilencePriceInit();
 	// ==> Квесты Проклятие Дальних Морей Sinistra
 	PDMQuestsInit();
+	// ==> Квесты Пираты Карибского Моря
+	PKMQuestsInit();
 	// ==> Квесты Корсары: Сундук Мертвеца
 	KSMQuestsInit();
 	// ==> Все остальные НПС
@@ -650,6 +653,8 @@ void initStartState2Character(ref ch)
 	pchar.quest.MC_startInCaracas.function = "MC_startInCaracas";
 	//ситуации в море
 	ch.CanGenerateShipSituation = true;
+	//считаем кол во квестов у губеров
+	MayorQuestCounter();
 }
 
 //==> eddy. квестовая обработка 'ноль часов'.
@@ -1454,6 +1459,22 @@ int SelectQuestions()
 void PoormansInit()
 {
 	ref sld;
+	//нищий в Нассау
+	sld = GetCharacter(NPC_GenerateCharacter("Nassau_Poorman", "panhandler_"+(rand(5)+1), "man", "man", 5, ENGLAND, -1, false));
+	sld.city = "Nassau";
+	sld.location	= "Nassau_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto6";
+	sld.forStay.locator = "goto6"; //где генеримся в случае стояния
+	sld.forSit.locator0 = "goto15";
+	sld.forSit.locator1 = "goto17"; //три локатора, где генеримся в случае сидения
+	sld.forSit.locator2 = "goto4";
+	sld.Dialog.Filename = "Common_poorman.c";
+	LAi_SetPoorType(sld);
+	LAi_SetHP(sld, 50.0, 50.0);
+	LAi_SetLoginTime(sld, 9.0, 21.99);
+	sld.greeting = "Gr_poorman";
+	LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
 	//нищий в Сент-Джонсе
 	sld = GetCharacter(NPC_GenerateCharacter("SentJons_Poorman", "panhandler_"+(rand(5)+1), "man", "man", 5, ENGLAND, -1, false));
 	sld.city = "SentJons";
@@ -1743,7 +1764,7 @@ void PoormansInit()
 	sld.greeting = "Gr_poorman";
 	LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
 	//заказчик нищих
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "spy", 30, PIRATE, -1, false)); // LEO: Страдать превозмогаторам 07.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man_fast", 30, PIRATE, -1, false)); // LEO: Страдать превозмогаторам 07.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man", 30, PIRATE, -1, false));
 	sld.name = "Оливер";
 	sld.lastname = "Траст";
@@ -1799,11 +1820,11 @@ string Sharp_choiceAction()
 		sBack = GetSharpRumour_toCityTarget();
 		pchar.questTemp.Sharp.count = sti(pchar.questTemp.Sharp.count) + 1; //счетчик
 		AddQuestRecord("SharpPearl", "2");
-		AddQuestUserData("SharpPearl", "sOldTarget", XI_ConvertString("Colony" + sCity + "Dat"));
+		AddQuestUserData("SharpPearl", "sOldTarget", XI_ConvertString("Colony" + sCity + "Voc"));
 		AddQuestUserData("SharpPearl", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc"));
 		if (GetIslandByCityName(pchar.questTemp.Sharp.City) != pchar.questTemp.Sharp.City)
 		{
-			AddQuestUserData("SharpPearl", "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(pchar.questTemp.Sharp.City) + "Dat"));
+			AddQuestUserData("SharpPearl", "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(pchar.questTemp.Sharp.City) + "Voc"));
 		}
 		//запускаем опять Шарпа на карту
 		sld = characterFromId("Sharp");
@@ -1950,7 +1971,7 @@ string BlueBurd_setTradeShip()
 	makearef(aName, pchar.questTemp.BlueBird);
 	SetRandomNameToShip(aName);
 	AddQuestRecord("Xebeca_BlueBird", "10");
-	AddQuestUserData("Xebeca_BlueBird", "sCity", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Dat"));
+	AddQuestUserData("Xebeca_BlueBird", "sCity", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Voc"));
 	AddQuestUserData("Xebeca_BlueBird", "sShipName", "'" + aName.Ship.Name + "'");
 	AddQuestUserData("Xebeca_BlueBird", "sCity_2", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Gen"));
 	AddQuestUserData("Xebeca_BlueBird", "sTradeName", GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")));
@@ -2016,6 +2037,28 @@ string GetQuestNationsCity(int _nation)
 	}
 	if (howStore == 0) return "none";
 	iRes = storeArray[cRand(howStore-1)];
+	return colonies[iRes].id;
+}
+
+string GetQuestNationsPrison(int _nation)//ищем город определенной нации, проверять наличие тавернщика и тюремного босса
+{
+	int n, iRes;
+    int fortArray[MAX_COLONIES];
+    int howStore = 0;
+
+	for(n=0; n<MAX_COLONIES; n++)
+	{
+		if (colonies[n].nation != "none"  && colonies[n].id != "Panama" && sti(colonies[n].nation) == _nation && GiveArealByLocation(loadedLocation) != colonies[n].island) //не на свой остров
+		{
+			if (GetCharacterIndex(colonies[n].id + "_tavernkeeper") > 0 && !CheckAttribute(colonies[n], "HasNoFort"))
+			{
+				fortArray[howStore] = n;
+				howStore++;
+			}
+		}
+	}
+	if (howStore == 0) return "none";
+	iRes = fortArray[cRand(howStore-1)];
 	return colonies[iRes].id;
 }
 
@@ -2259,7 +2302,7 @@ void PortmansBook_writeQuestBook(ref rid)
 		AddQuestUserData(sTitle, "sTargetCity", XI_ConvertString("Colony" + sld.quest.targetCity + "Acc"));
 		if (GetIslandByCityName(sld.quest.targetCity) != sld.quest.targetCity)
 		{
-			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Dat"));
+			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Voc"));
 		}
 	}
 }
@@ -2319,7 +2362,7 @@ void PortmansSeekShip_writeQuestBook(ref rid)
 		AddQuestUserData(sTitle, "sTargetCity", XI_ConvertString("Colony" + sld.quest.targetCity + "Acc"));
 		if (GetIslandByCityName(sld.quest.targetCity) != sld.quest.targetCity)
 		{
-			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Dat"));
+			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Voc"));
 		}
 	}
 }
@@ -2391,7 +2434,7 @@ void CitizSeekCap_writeQuestBook(ref rid)
 		AddQuestUserData(sTitle, "sTargetCity", XI_ConvertString("Colony" + sld.quest.targetCity + "Acc"));
 		if (GetIslandByCityName(sld.quest.targetCity) != sld.quest.targetCity)
 		{
-			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Dat"));
+			AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(sld.quest.targetCity) + "Voc"));
 		}
 	}
 }
@@ -2856,7 +2899,7 @@ void LoginDeadmansGod()
 	LAi_SetFightMode(pchar, false);
 	LAi_LockFightMode(pchar, false);
 	LAi_LocationFightDisable(loadedLocation, true);
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "spy", 100, PIRATE, 0, true));
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man_fast", 100, PIRATE, 0, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man", 100, PIRATE, 0, true));
     FantomMakeCoolFighter(sld, 100, 100, 100, "toporAZ", "pistol5", 3000);
 	sld.name = "Миктлантекутли";
@@ -2906,7 +2949,7 @@ void TenoRoundTempleChestOpen()
 
 void LoginDeadmansGod2()
 {
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "spy", 60, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "man_fast", 60, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "man", 60, PIRATE, 0, true));
     FantomMakeCoolFighter(sld, 60, 100, 100, "blade201", "", 2500);
 	sld.name = "Юм";
@@ -2928,7 +2971,7 @@ void LoginUmSamilGuards()
 	chrDisableReloadToLocation = true;
 	for(int i = 0; i < 3; i++)
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("UmSamilGuard"+i, "Chavinavi_1", "skeleton", "spy", 55, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("UmSamilGuard"+i, "Chavinavi_1", "skeleton", "man_fast", 55, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("UmSamilGuard"+i, "Chavinavi_1", "skeleton", "man", 55, PIRATE, 0, true));
 		if (i == 0) FantomMakeCoolFighter(sld, 55, 90, 90, "blade37", "", 750);
 		if (i == 1) FantomMakeCoolFighter(sld, 55, 90, 90, "blade39", "", 750);
@@ -3165,3 +3208,13 @@ void MaryCelesteInit()
 
 	trace("Бригантина Мэри Селест вышла из " + character.fromCity + " и направилась в " + character.toShore);
 }
+void MayorQuestCounter()
+{
+	for(int i = 0; i<4; i++)
+	{
+		string sNationname = GetNationNameByType(i);
+		pchar.(sNationname).quest.mayor = 0;
+		pchar.(sNationname).quest.mayor.done = false;
+	}
+}
+		

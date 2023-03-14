@@ -258,7 +258,7 @@ void AzzyCheckSumControl()
 // репутация плохого парня с границами
 bool isBadReputation(ref _pchar, int _rep)
 {
-    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) >= _rep)
+    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) > _rep)
     {
         return false;// good guy
     }
@@ -719,6 +719,18 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 		_location.box1.items.Lilarcor_Sword1 = 1);
         ok = false;
 	}
+	//Квест "Странные вещи творятся на архипелаге", Мефисто, драгоценности
+	if (_npchar.id == "Chernoe_Solntse2")
+	{
+        DeleteAttribute(_location, "box1");
+        _location.box1.money = 10000;
+		_location.box1.items.jewelry5 = 100+rand(20);
+        _location.box1.items.jewelry17 = 100+rand(20);
+        _location.box1.items.jewelry3 = 40+rand(10);
+		_location.box1.items.jewelry18 = 15+rand(10);
+		_location.box1.items.PKM_SvtvA_amulet = 1;
+        ok = false;
+	}
 
     if (ok) // не квестовый
     {
@@ -1027,7 +1039,7 @@ void GiveGunAmmunition(ref _Character, string sItem)
 {
 	ref itm = ItemsFromID(sItem);
 	TakeNItems(_Character,itm.type.t1.bullet, 30+rand(20));
-	AddItems(_Character, itm.type.t1.gunpowder, 30+rand(20)); // Warship. Порох
+	if(itm.type.t1.gunpowder != "") AddItems(_Character, itm.type.t1.gunpowder, 30+rand(20));// порох при необходимости
 	LAi_SetCharacterUseBullet(_Character, itm.type.t1.bullet);
 }
 
@@ -1035,7 +1047,7 @@ void GiveGunAmmunitionPchar(ref _Character, string sItem, int qty)
 {
 	ref itm = ItemsFromID(sItem);
 	TakeNItems(_Character,itm.type.t1.bullet, qty);
-	AddItems(_Character, itm.type.t1.gunpowder, qty); // Warship. Порох
+	if(itm.type.t1.gunpowder != "") AddItems(_Character, itm.type.t1.gunpowder, qty);// порох при необходимости
 	LAi_SetCharacterUseBullet(_Character, itm.type.t1.bullet);
 }
 
@@ -2486,8 +2498,8 @@ void SilencePriceInit()
 void PDMQuestsInit()
 {
 	ref sld;
-	//******Альбрех Пальцфер Sinistra******
-	//Альбрех Пальцфер
+	//******Альбрехт Цальпфер Sinistra******
+	//Альбрехт Цальпфер
 	sld = GetCharacter(NPC_GenerateCharacter("Albreht_Zalpfer", "Mechanic", "man", "man", 6, ENGLAND, -1, false));
 	sld.name	= "Альбрехт";
 	sld.lastname	= "Цальпфер";
@@ -2506,7 +2518,7 @@ void PDMQuestsInit()
 	//******Проклятый идол Sinistra******
 	//Джеймс Кэллоу
 	pchar.quest.PDM_CI_SpawnJC.win_condition.l1 = "Rank";
-	pchar.quest.PDM_CI_SpawnJC.win_condition.l1.value = 5;
+	pchar.quest.PDM_CI_SpawnJC.win_condition.l1.value = 4;
 	pchar.quest.PDM_CI_SpawnJC.win_condition.l1.operation = ">=";
 	PChar.quest.PDM_CI_SpawnJC.win_condition = "PDM_CI_SpawnJC";
 
@@ -2598,13 +2610,23 @@ void PDMQuestsInit()
 	sld.City = "Marigo";
 	ChangeCharacterAddressGroup(sld,"Farmacia","barmen","stay");
 }
+//Пираты Карибского Моря
+void PKMQuestsInit()
+{
+	//******Странные вещи творятся на архипелаге******
+	//Девушки ищут детей
+	pchar.quest.PKM_SvtvA_SpawnQuest.win_condition.l1 = "Rank";
+	pchar.quest.PKM_SvtvA_SpawnQuest.win_condition.l1.value = 10;
+	pchar.quest.PKM_SvtvA_SpawnQuest.win_condition.l1.operation = ">=";
+	PChar.quest.PKM_SvtvA_SpawnQuest.win_condition = "PKM_SvtvA_SpawnQuest";
+}
 //Сундук Мертвеца
 void KSMQuestsInit()
 {
 	//******Спасение на рифах******
 	//Джеймс Аллока
 	pchar.quest.KSM_Snr_Alloka_Spawn.win_condition.l1 = "Rank";
-	pchar.quest.KSM_Snr_Alloka_Spawn.win_condition.l1.value = 5;
+	pchar.quest.KSM_Snr_Alloka_Spawn.win_condition.l1.value = 4;
 	pchar.quest.KSM_Snr_Alloka_Spawn.win_condition.l1.operation = ">=";
 	PChar.quest.KSM_Snr_Alloka_Spawn.win_condition = "KSM_Snr_Alloka_Spawn";
 }
@@ -2634,13 +2656,15 @@ void VSEnpcInit()
 	sld = GetCharacter(NPC_GenerateCharacter("VSE_Admir_3", "sold_spa_3", "man", "man", 10, SPAIN, -1, true));
 	sld.Dialog.Filename = "Admiralty.c";
 	sld.dialog.currentnode = "Strajniki";
+	sld.CityType = "soldier";
 	LAi_SetPatrolType(sld);
 	LAi_SetImmortal(sld, true);
 	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 	sld.city = "SantoDomingo";
 	ChangeCharacterAddressGroup(sld,"SantoDomingo_Admiralty","goto","goto2");
+	
 	//Глаша уборщица в резиденции Мариго
-	sld = GetCharacter(NPC_GenerateCharacter("CleanUpGrandmatha", "BaynesWife", "woman", "towngirl", 1, Holland, 1, false));
+	sld = GetCharacter(NPC_GenerateCharacter("CleanUpGrandmatha", "BaynesWife", "woman", "towngirl", 1, Holland, -1, false));
 	ChangeCharacterAddressGroup(sld, "Marigo_hall", "goto", "goto11");
 	LAi_SetCitizenType(sld);
 	sld.name = "уборщица Глаша";
@@ -2650,11 +2674,26 @@ void VSEnpcInit()
 	sld.city = "Marigo";
 	sld.dialog.filename = "Janitor.c";
 	sld.dialog.currentnode = "First";
+	
 	//Девушка с нежданным наследством
 	pchar.quest.CSP_NN_SpawnGirl.win_condition.l1 = "Rank";
 	pchar.quest.CSP_NN_SpawnGirl.win_condition.l1.value = 10;
 	pchar.quest.CSP_NN_SpawnGirl.win_condition.l1.operation = ">=";
 	PChar.quest.CSP_NN_SpawnGirl.function = "UnexpectedInheritance";
+	
+	//Джеки
+	sld = GetCharacter(NPC_GenerateCharacter("MG_Obezyana", "Koata1", "monkey", "monkey", 1, PIRATE, -1, false));
+	LAi_SetHP(sld, 1.0, 1.0);
+	sld.name = "Джеки";
+	sld.lastname = "";
+	LAi_SetWarriorType(sld);
+	//LAi_SetMonkeyType(sld);
+	LAi_CharacterDisableDialog(sld);
+	ChangeCharacterAddressGroup(sld, "Guadeloupe_deadlock", "monsters", "monster6");
+	
+	PChar.quest.MG_ObezyanaKill.win_condition.l1 = "NPC_Death";
+	PChar.quest.MG_ObezyanaKill.win_condition.l1.character = "MG_Obezyana";
+	PChar.quest.MG_ObezyanaKill.win_condition = "MG_ObezyanaKill";
 }
 void OfficerGirlInit()
 {
@@ -3148,21 +3187,29 @@ void SetSkeletonsToLocation(aref _location)
 	int rNum = drand(num);
 	for(int i = 0; i < num; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", iRank, PIRATE, 1, true));
-		//если квест по зачистке от нечисти - скелетов делаем круче
-		if (CheckAttribute(_location, "DestroyGhost"))
+		if (_location.id == "dungeon_02")
 		{
-			FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
-			DeleteAttribute(sld, "SuperShooter");
+			sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*5);
 		}
 		else
 		{
-			if (i == rNum && sti(pchar.rank) > 5)
+			sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", iRank, PIRATE, 1, true));
+			//если квест по зачистке от нечисти - скелетов делаем круче
+			if (CheckAttribute(_location, "DestroyGhost"))
 			{
-				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3);
+				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 				DeleteAttribute(sld, "SuperShooter");
 			}
-			else SetFantomParamFromRank(sld, iRank, true);
+			else
+			{
+				if (i == rNum && sti(pchar.rank) > 5)
+				{
+					FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3);
+					DeleteAttribute(sld, "SuperShooter");
+				}
+				else SetFantomParamFromRank(sld, iRank, true);
+			}
 		}
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
@@ -3270,11 +3317,13 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 			if (GetDataDay() == 3 && GetDataMonth() == 3 && GetTime() >= 3.0 && GetTime() < 4.0 && loc == "MountainPath" && !CheckAttribute(pchar,"salasarmet") && CheckAttribute(pchar,"SalasarEventKnow"))
 			{
 				pchar.salasarmet = true;
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "spy", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "man_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 				else sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "skeleton", iRank, PIRATE, 1, true));
 				sld.name = "Армандо";
 				sld.lastname = "Салазар";
 				sld.SaveItemsForDead = true;
+				sld.locid = _location.index;
+				sld.num = num;
 				if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
 
 				SetSPECIAL(sld, 10,10,10,10,10,10,10); // SPECIAL (Сила, Восприятие, Выносливость, Лидерство, Обучаемость, Реакция, Удача)
@@ -3358,6 +3407,26 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 		LAi_group_SetRelation("ReefAssholes", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 		LAi_group_Attack(sld, Pchar);
 		LAi_group_SetLookRadius("ReefAssholes", 1000.0);
+	}
+}
+
+// заменяем копии частей карты
+void ReplaceTreasureMapPartCopies(ref boxRef, ref charRef) {
+	bool isPart1 = GetCharacterItem(charRef, "map_part1") != 0;
+	bool isPart2 = GetCharacterItem(charRef, "map_part2") != 0;
+	
+	// если есть обе части, просто скипаем
+	if (isPart1 && isPart2) return;
+
+	// подменяем части карты
+	if (GetCharacterItem(boxRef, "map_part1") != 0 && isPart1) {
+		AddItems(boxRef, "map_part2", 1);
+		RemoveItems(boxRef, "map_part1", 1);
+	}
+	
+	if (GetCharacterItem(boxRef, "map_part2") != 0 && isPart2) {
+		AddItems(boxRef, "map_part1", 1);
+		RemoveItems(boxRef, "map_part2", 1);
 	}
 }
 

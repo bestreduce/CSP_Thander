@@ -29,6 +29,14 @@ void LAi_LocationDisableMonGenTimer(string locationId, int Days)
 	location.monstersTimer = Days;
 }
 
+//Запрет генерации Проклятого Кэпа в локации locationId на Days дней
+void LAi_LocationDisableToughSkeletonTimer(string locationId, int Days)
+{
+	ref location = &locations[FindLocation(locationId)];
+	SaveCurrentNpcQuestDateParam(location, "ToughSkeletonTimer");
+	location.ToughSkeletonTimer = Days;
+}
+
 //сброс таймера на генерацию монстров
 void LAi_LocationResetMonGenTimer(string locationId)
 {

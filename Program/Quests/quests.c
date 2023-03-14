@@ -251,7 +251,7 @@ string GetQuestBookDataDigit()
 {
 	string result = "";
 
-	result = GetTimeString() + " " + GetCurrentDate();
+	result = GetStringDate(GetDataYear(), GetDataMonth(), GetDataDay()) + " " + GetTimeString();
 
     return result;
 }
@@ -587,7 +587,7 @@ ref CharacterFromID(string characterID)
     int i = GetCharacterIndex(characterID);
     if (i < 0 && MOD_BETTATESTMODE == "On" && characterID != "Flint")
 	{
-		Log_Info("Error: Не найдет НПС с characterID = "+characterID);
+		Log_TestInfo("Error: Не найдет НПС с characterID = "+characterID);
 		trace("Error: Не найдет НПС с characterID = "+characterID);
 	}
     if (i>=0)

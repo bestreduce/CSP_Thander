@@ -1,15 +1,15 @@
-string sEType[10] = {"blade","spyglass","cirass","BackPack","talisman","jewelry_indian_left","jewelry_indian_right","indian_center","idols_left","idols_right"};
+string sEType[8] = {"blade","cirass","talisman","jewelry_indian_left","jewelry_indian_right","indian_center","idols_left","idols_right"};
 int CheckItemInSets(ref _character, string sItemName)
 {
 	if (!checkattribute(_character, "selectedSet")) return 0; //у этого персонажа не было сохранено комплектов
 	int i, q;
 	string sSET, sTemp;
-	for(i=1;i<10;i++)
+	for(i=1;i<10;i++)//9 комплектов???
 	{
 		if (_character.selectedSet == i) continue;//текущий комплект уже скрыт в списке перемещения предметов
 		sSET = "Set" + i;
 		if (!checkattribute(_character, sSET)) continue; //нет комплекта
-		for (q=0;q<10;q++)
+		for (q=0;q<8;q++)
 		{
 			sTemp = sEType[q];
 			if(_character.(sSET).(sTemp) == sItemName && GetCharacterEquipByGroup(_character, sTemp) != sItemName) return i;
@@ -958,7 +958,7 @@ void SetShipQualityTable(ref _chr, string _bar1, string _bar7, string _bar2, str
 	float fCrew = 100;
 	ref refShip = GetRealShip(iShip);
 
-	if (sti(refShip.BaseType) <= SHIP_SP_SANFELIPE)//рассчитываем качество только для НЕквестовых кораблей
+	if (sti(refShip.BaseType) <= SHIP_OCEAN)//рассчитываем качество только для НЕквестовых кораблей
 	{
 		ref rBaseShip = GetShipByType(sti(refShip.BaseType));
 		float fTemp;
@@ -1144,69 +1144,112 @@ int GetTradeItemPrice(string sItemID, int tradeType)
 	else
 	{
 		skillModify = 0.70 + skillDelta*0.019;
-		if(CheckOfficersPerk(pchar,"AdvancedCommerce"))	skillModify += 0.05;
-		if(CheckOfficersPerk(pchar,"Trader")) { skillModify += 0.05; }
+		if (CheckOfficersPerk(pchar,"AdvancedCommerce"))	skillModify += 0.05;
+		if (CheckOfficersPerk(pchar,"Trader")) { skillModify += 0.05; }
 	}
 
 	return makeint(makefloat(itmprice)*skillModify);
 }
 
-int strcmp(string a, string b)
+//--> mod tablesort		Qwerry, St.
+//идея необходимости сортировки в таблицах:	DiamiR
+//версия для OS		с визуальной индикацией и автозапоминанием и автоопределением параметров		на MS использовалось другое сравнение строк 	strcmp()
+void SortTable(string sControl,int iColumn)
 {
-	return 0;
-}
-
-//--> mod tablesort
-void SortTable(string sControl,int iColumn, bool bIsString, bool bAsc, int _iLinesCount)
-{
-	bool bNoSize;
-	if (_iLinesCount < 1) {bNoSize = true; _iLinesCount = 998;} else bNoSize = false;//если число строк не передано, ставим 998 строк для цикла
-	string sColumn = "td" + iColumn;
 	int m, n;
-	string sCurRow, sNextRow, sRow;
-	sRow = "tr" + 999;//пузырёк
+	bool bIsString = false;
+	string sColumn = "td" + iColumn;
+	if (checkattribute(&GameInterface, sControl + ".hr." + sColumn + ".sorttype"))
+		{if(GameInterface.(sControl).hr.(sColumn).sorttype == "string") bIsString = true;}
+	else return; //если атрибут .sorttype не поставили, значит сортировать не нужно
+//TO DO		убрать это деление на строки, автоматически определять - текст или число сортируем
+
+	bool bAsc = true;
+	if (checkattribute(&GameInterface, sControl + ".hr." + sColumn + ".sortdir"))
+		{if(GameInterface.(sControl).hr.(sColumn).sortdir == "dec") bAsc = false;}
+	//атрибут .sortdir = "dec" указываем, если нужно, чтобы при первом клике сортировалось в обратном направлении
+
+	aref aRows;
+	makearef(aRows, GameInterface.(sControl));
+	//в коде заполнения таблиц не должно быть пустых строк - проверить везде, чтобы все фильтрации выполнялись до первой записи в строчку
+	int iLinesCount = 0;
+	for (n = 0; n < GetAttributesNum(aRows); n++)
+	{
+		if (HasSubStr(GetAttributeName(GetAttributeN(aRows, n)), "tr")) iLinesCount++;
+	}
+
+	if (iLinesCount < 3) return;//две строки нет смысла сортировать
+
+	if (checkattribute(&GameInterface, sControl + ".hr.sortedColumn"))//таблица уже сортировалось ранее
+	{
+		if (iColumn == sti(GameInterface.(sControl).hr.sortedColumn)) //повторный клик по той же колонке - просто реверс
+		{
+			ReverseTable(sControl, iLinesCount);
+			if (GameInterface.(sControl).hr.(sColumn).icon.image  == "downbutton") bAsc = true; else bAsc = false;
+			DrawSortDir(sControl, iColumn, bAsc);
+			return;
+		}
+		string sTemp = sControl + ".hr.td" + GameInterface.(sControl).hr.sortedColumn + ".icon";
+		DeleteAttribute(&GameInterface, sTemp);//стираем стрелку сортировки с предыдушей колонки
+	}
+
+trace("SortTable(sControl = " + sControl + ", iColumn = " +  iColumn + ") iLinesCount = " + iLinesCount + ", bIsString = " + bIsString + ", bAsc = " + bAsc);
+
+	string sRow, sNewRow, sSortedString, sLast;
 	aref aCurRow, aNextRow, aRow;
 
-	for (m = 0; m < _iLinesCount-2; m++)
+	if (sti(GameInterface.(sControl).select))
 	{
-		for (n = 0; n < _iLinesCount-2; n++)
-		{
-		sCurRow = "tr" + (n + 1);
-		sNextRow = "tr" + (n + 2);
-		if (bNoSize) {if (!checkattribute(&GameInterface,sControl + "." + sNextRow)) {_iLinesCount = n+2; bNoSize = false; break;}}//если число строк не было указано, проверяем, не кончилась ли таблица
-//находим число строк - проверить, что это оптимально, и что мусорное значение не сломает//TODO - обязательно разобраться!!! ВАЖНО!!!
+		sRow = "tr" + GameInterface.(sControl).select;
+		sLast = GameInterface.(sControl).(sRow).index;//запоминаем номер выбранной строки, чтобы выделить её же после сортировки
+//TO DO везде нужно заполнять индекс
+	}
 
-//TODO - убрать это деление на строки, автоматически определять - текст или число сортируем
-		if (bIsString)//строки
+	if (bIsString)//строки
+	{
+		object oSorted, oTableCopy;
+		string sAdd;
+		int iAdd;
+		for (n = 0; n < iLinesCount; n++)
+		{
+			sRow = "tr" + (n + 1);
+			sSortedString = GameInterface.(sControl).(sRow).(sColumn).str;
+			sSortedString = strreplace(sSortedString, ".", ",");//фикс краша из-за точек	подменяем их на запятые
+			sAdd = ""; iAdd = 0;
+			while (checkattribute(oSorted, sSortedString + sAdd)) {iAdd++; sAdd = DigitsToString(iAdd, 3);}//фикс Краша из-за дубликатов
+																//до 1000 одинаковых значений в одной таблице - дальше краш, увеличьте
+			sSortedString += sAdd;
+			oSorted.(sSortedString) = sRow;
+		}
+		aref rootItems;
+		makearef(rootItems, oSorted);
+		sort(rootItems);
+		aref aTable, aTableCopy;
+		makearef(aTable, GameInterface.(sControl));
+		makearef(aTableCopy, oTableCopy.(sControl));
+		CopyAttributes(aTableCopy, aTable);
+		for (n = 0; n < iLinesCount; n++)
+		{
+			sRow = "tr" + (n + 1);
+			makearef(aCurRow, aTable.(sRow));
+			sNewRow = GetAttributeValue(GetAttributeN(rootItems, n));
+			makearef(aNextRow, aTableCopy.(sNewRow));
+			CopyAttributes(aCurRow, aNextRow);
+		}
+		if (!bAsc) ReverseTable(sControl, iLinesCount); //нужна было сортировка по убыванию
+	}
+	else//числа
+	{
+		string sCurRow, sNextRow;
+		sRow = "trx";//пузырёк
+//TO DO		полный двойной цикл - поискать более оптимальную сортировку
+		for (m = 0; m < iLinesCount-1; m++)
+		{
+			for (n = 0; n < iLinesCount-1; n++)
 			{
-			if (bAsc)//по возрастанию
-				{
-				if (strcmp (GameInterface.(sControl).(sCurRow).(sColumn).str, GameInterface.(sControl).(sNextRow).(sColumn).str)>0)
-					{
-					makearef(aRow, GameInterface.(sControl).(sRow));
-					makearef(aCurRow, GameInterface.(sControl).(sCurRow));
-					makearef(aNextRow, GameInterface.(sControl).(sNextRow));
-					CopyAttributes(aRow, aCurRow);
-					CopyAttributes(aCurRow, aNextRow);
-					CopyAttributes(aNextRow, aRow);
-					}
-				}
-				else//по убыванию
-				{
-				if (strcmp (GameInterface.(sControl).(sCurRow).(sColumn).str, GameInterface.(sControl).(sNextRow).(sColumn).str)<0)
-					{
-					makearef(aRow, GameInterface.(sControl).(sRow));
-					makearef(aCurRow, GameInterface.(sControl).(sCurRow));
-					makearef(aNextRow, GameInterface.(sControl).(sNextRow));
-					CopyAttributes(aRow, aCurRow);
-					CopyAttributes(aCurRow, aNextRow);
-					CopyAttributes(aNextRow, aRow);
-					}
-				}
-			}
-			else//числа
-			{
-			if (bAsc)//по возрастанию
+				sCurRow = "tr" + (n + 1);
+				sNextRow = "tr" + (n + 2);
+				if (bAsc)//по возрастанию
 				{
 				if (stf(GameInterface.(sControl).(sCurRow).(sColumn).str) > stf(GameInterface.(sControl).(sNextRow).(sColumn).str))
 					{
@@ -1220,7 +1263,7 @@ void SortTable(string sControl,int iColumn, bool bIsString, bool bAsc, int _iLin
 				}
 				else
 				{
-				if (stf(GameInterface.(sControl).(sCurRow).(sColumn).str) < stf(GameInterface.(sControl).(sNextRow).(sColumn).str))
+					if (stf(GameInterface.(sControl).(sCurRow).(sColumn).str) < stf(GameInterface.(sControl).(sNextRow).(sColumn).str))
 					{
 					makearef(aRow, GameInterface.(sControl).(sRow));
 					makearef(aCurRow, GameInterface.(sControl).(sCurRow));
@@ -1230,6 +1273,63 @@ void SortTable(string sControl,int iColumn, bool bIsString, bool bAsc, int _iLin
 					CopyAttributes(aNextRow, aRow);
 					}
 				}
+			}
+		}
+		DeleteAttribute(&GameInterface, sControl + "." + sRow);//удаляем пузырёк, будет портить число строк в таблице
+	}
+	DrawSortDir(sControl, iColumn, bAsc);
+	ResetSelectedRow(sControl, sLast, iLinesCount)
+}
+
+void DrawSortDir(string sControl, int iColumn, bool bAsc)
+{
+	string sColumn = "td" + iColumn;
+	GameInterface.(sControl).hr.(sColumn).icon.group  = "MAIN_ICONS";//рисуем стрелку направления сортировки
+	GameInterface.(sControl).hr.(sColumn).icon.width  = 8;
+	GameInterface.(sControl).hr.(sColumn).icon.height = 16;
+	GameInterface.(sControl).hr.(sColumn).icon.valign = "bottom";
+	GameInterface.(sControl).hr.(sColumn).icon.offset = "0,8";//смещаем на половину высоты ниже границы между заголовком и первой строкой	//Тут проблема - есть же таблицы, где заголовок спрятан - проверить
+	if 	(bAsc) 	GameInterface.(sControl).hr.(sColumn).icon.image  = "upbutton";
+		else	GameInterface.(sControl).hr.(sColumn).icon.image  = "downbutton"; //при изменении картинки - менять и чуть выше, искать: 	.icon.image  == "
+	GameInterface.(sControl).hr.sortedColumn = iColumn;
+}
+
+void ReverseTable(string sControl,int iLinesCount)
+{
+	string sFirstRow, sLastRow;
+	string sRow = "trx";
+	aref aFirstRow, aLastRow, aRow;
+	for (int n = 0; n < iLinesCount/2; n++)
+	{
+		sFirstRow = "tr" + (n + 1);
+		sLastRow = "tr" + (iLinesCount - n);
+		makearef(aRow, GameInterface.(sControl).(sRow));
+		makearef(aFirstRow, GameInterface.(sControl).(sFirstRow));
+		makearef(aLastRow, GameInterface.(sControl).(sLastRow));
+		CopyAttributes(aRow, aFirstRow);
+		CopyAttributes(aFirstRow, aLastRow);
+		CopyAttributes(aLastRow, aRow);
+	}
+	if (sti(GameInterface.(sControl).select))//не меняем, если было 0
+	{
+		n = iLinesCount + 1 - sti(GameInterface.(sControl).select);
+		GameInterface.(sControl).select = n;
+	}
+	DeleteAttribute(&GameInterface, sControl + "." + sRow);//удаляем пузырёк, будет портить число строк в таблице
+}
+
+void ResetSelectedRow(string sControl, string sLastIdx, int iLinesCount)
+{
+	string sRow;
+	if (sti(GameInterface.(sControl).select))//не меняем, если было 0, т.е. ничего не выделено
+	{
+		for (int n = 1; n <= iLinesCount; n++)
+		{
+			sRow = "tr" + n;
+			if (GameInterface.(sControl).(sRow).index == sLastIdx)
+			{
+				GameInterface.(sControl).select = n;
+				break;
 			}
 		}
 	}

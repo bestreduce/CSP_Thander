@@ -879,7 +879,7 @@ void AddGoldToCharacter(int iGold)
 {
 	PChar.Mines.Temp.GoldQuantity = 0;
 	PChar.Mines.GoldQuantity = sti(PChar.Mines.GoldQuantity) - iGold;
-	RemoveCharacterGoods(PChar, GOOD_GOLD, -iGold);
+	AddCharacterGoods(PChar, GOOD_GOLD, iGold);
 	MinesInfo();
 }
 
@@ -934,7 +934,7 @@ void AddSilverToCharacter(int iSilver)
 {
 	PChar.Mines.Temp.SilverQuantity = 0;
 	PChar.Mines.SilverQuantity = sti(PChar.Mines.SilverQuantity) - iSilver;
-	RemoveCharacterGoods(PChar, GOOD_SILVER, -iSilver);
+	AddCharacterGoods(PChar, GOOD_SILVER, iSilver);
 	MinesInfo();
 }
 
@@ -989,7 +989,7 @@ void AddIronToCharacter(int iIron)
 {
 	PChar.Mines.Temp.IronQuantity = 0;
 	PChar.Mines.IronQuantity = sti(PChar.Mines.IronQuantity) - iIron;
-	RemoveCharacterGoods(PChar, GOOD_IRON, -iIron);
+	AddCharacterGoods(PChar, GOOD_IRON, iIron);
 	MinesInfo();
 }
 

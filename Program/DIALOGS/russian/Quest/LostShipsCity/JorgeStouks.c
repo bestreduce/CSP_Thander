@@ -344,7 +344,7 @@ void ProcessDialogEvent()
 			}
 			if (!CheckAttribute(NextDiag, NodeName+".l2"))
 			{
-				link.l2 = "Вы сами давно здесь живете?";
+				link.l2 = "Вы сами давно здесь живёте?";
 				link.l2.go = "ansewer_2";
 			}
 			if (!CheckAttribute(NextDiag, NodeName+".l3"))

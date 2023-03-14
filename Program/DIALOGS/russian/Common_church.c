@@ -1050,7 +1050,7 @@ void ProcessDialogEvent()
 		case "GenQuest_Church_1_Start_2":
 			PChar.GenQuest.ChurchQuest_1.QuestTown = NPChar.City;
 			Church_GenQuest1_InitStartParam(NPChar);
-			dialog.text = "Вот как! Это хорошо... Но дело крайне деликатное... Некоторое время назад настоятель церкви " + PChar.GenQuest.ChurchQuest_1.ToName + " из " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.ToColony + "Gen") + ", что на " + XI_ConvertString(PChar.GenQuest.ChurchQuest_1.ToIsland + "Dat") + " попросил у меня на время несколько богословских трудов и древних рукописей из церковной библиотеки. Так как просьба была подкреплена требованием архиепископа не препятствовать распространению благостного света знаний, отказать я не мог, хотя и предполагал, что сложность морских путешествий не позволит ему вернуть рукописи в срок...\nНе могли бы вы поспособствовать разрешению этой проблемы?";
+			dialog.text = "Вот как! Это хорошо... Но дело крайне деликатное... Некоторое время назад настоятель церкви " + PChar.GenQuest.ChurchQuest_1.ToName + " из " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.ToColony + "Gen") + ", что на " + XI_ConvertString(PChar.GenQuest.ChurchQuest_1.ToIsland + "Voc") + " попросил у меня на время несколько богословских трудов и древних рукописей из церковной библиотеки. Так как просьба была подкреплена требованием архиепископа не препятствовать распространению благостного света знаний, отказать я не мог, хотя и предполагал, что сложность морских путешествий не позволит ему вернуть рукописи в срок...\nНе могли бы вы поспособствовать разрешению этой проблемы?";
 			link.l1 = "Боюсь, " + LinkRandPhrase("падре", "святой отец", "отец мой") + ", что не оправдаю вашего доверия. Дело слишком деликатное, и для его решения нужно быть изрядным дипломатом.";
 			link.l1.go = "exit";
 			link.l2 = LinkRandPhrase("Падре", "Святой отец", "Отец мой") + ", ваше поручение не представляется мне сложным. Я сегодня же отправлюсь в путь.";
@@ -1337,10 +1337,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sSex", GetSexPhrase("ся","ась"));
 			CloseQuestHeader(sTitle);
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(npchar, "quest.DestroyGhost");
 			//#20170727-01 Bug fix church skeleton quest infinite reputation
@@ -1416,10 +1413,7 @@ void ProcessDialogEvent()
 			sTitle = pchar.questTemp.different.Church_NightGuard + "Church_NightGuard";
 			CloseQuestHeader(sTitle);
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(pchar, "questTemp.different.Church_NightGuard");
 			ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 5);
@@ -1435,10 +1429,7 @@ void ProcessDialogEvent()
 			sTitle = pchar.questTemp.different.Church_NightGuard + "Church_NightGuard";
 			CloseQuestHeader(sTitle);
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(pchar, "questTemp.different.Church_NightGuard");
 			ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 5);
@@ -1604,7 +1595,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.different = "HostessChurch_return"; //флаг на возвращение
 		break;
 		case "HostessChurch_call":
-			if (isBadReputation(pchar, 5))
+			if (isBadReputation(pchar, 10))
 			{
 				if (rand(100) < GetCharacterSkill(pchar, "Fortune")) //рендом вешаем на удачу
 				{
@@ -1735,7 +1726,7 @@ void Church_GenQuest1_InitStartParam(ref chr)
 	//string sColony = FindNonEnemyColonyForAdventure(GetCityNation(PChar.GenQuest.ChurchQuest_1.QuestTown), PChar.GenQuest.ChurchQuest_1.QuestTown, true);
 	PChar.GenQuest.ChurchQuest_1.IslandId = colonies[FindColony(PChar.GenQuest.ChurchQuest_1.QuestTown)].Island;
 	PChar.GenQuest.ChurchQuest_1.ToColony = sColony;
-	PChar.GenQuest.ChurchQuest_1.ToIsland = colonies[FindColony(sColony)].Island;
+	PChar.GenQuest.ChurchQuest_1.ToIsland = colonies[FindColony(sColony)].IslandLable;
 	PChar.GenQuest.ChurchQuest_1.ToName = characters[GetCharacterIndex(sColony + "_Priest")].Name;
 
 	// Чтоб жизнь мёдом не казалась... Какие сцены будут в квесте, определяем в самом начале.

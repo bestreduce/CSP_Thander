@@ -33,6 +33,7 @@ void PrepareDefaultOption(ref optref)
 	*/
 	optref.alwaysrun = true;
 	optref.video.grassquantity = 0;
+	optref.video.FlagAllWdm = 2;
 	optref.seadetails = 1.0;
 	//#20171223-01 Camera perspective option
     optref.perspdetails = 0.0;
@@ -74,6 +75,7 @@ void GetRealOptions(ref optref)
 	optref.cameramode.follow_on = !locCameraEnableSpecialMode;
 
 	optref.video.grassquantity = iGrassQuality;
+	optref.video.FlagAllWdm = iFlagAllWdm;
 	if( CheckAttribute(&InterfaceStates,"SeaDetails") ) {
 		optref.seadetails = stf(InterfaceStates.SeaDetails);
 	}
@@ -446,6 +448,9 @@ void SetCurentOptions(ref optref)
 
 	if( CheckAttribute(optref,"video.grassquantity") ) {
 		iGrassQuality = sti(optref.video.grassquantity);
+	}
+	if( CheckAttribute(optref,"video.FlagAllWdm") ) {
+		iFlagAllWdm = sti(optref.video.FlagAllWdm);
 	}
 	if( CheckAttribute(optref,"seadetails") ) {
 		InterfaceStates.SeaDetails = stf(optref.seadetails);

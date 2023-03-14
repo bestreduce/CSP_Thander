@@ -186,14 +186,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "MasterKeys_2";
 		break;
 		case "MasterKeys_2":
-			dialog.text = "Ага. Вот он сидит, справа от тебя за круглым столиком.";
+			dialog.text = "Ага. Вон он сидит, в углу у входа в таверну. В красной рубахе он.";
 			link.l1 = "Понял"+ GetSexPhrase("","а") +", спасибо.";
 			link.l1.go = "exit";
 			pchar.questTemp.LSC = "toMasterKeys";
 		break;
 
 		case "MasterKeysNM":
-			dialog.text = "Да вот же он, на своём обычном месте справа от тебя за столиком.";
+			dialog.text = "Да вот же он, на своём обычном месте в углу, у входа в таверну.";
 			link.l1 = "А-а-а, спасибо...";
 			link.l1.go = "exit";
 			if (!LAi_CheckLocatorFree("sit", "sit1"))

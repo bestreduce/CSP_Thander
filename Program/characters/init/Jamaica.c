@@ -32,7 +32,9 @@ int CreateJamaicaCharacters(int n)
 
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "PortRoyal_Priest";
-	ch.model	= "priest_1";
+	ch.name		= "отец Бернард";
+	ch.lastname = "";
+	ch.model	= "Priest_2";
 	ch.model.animation = "man";
 	ch.sex = "man";
 	ch.City = "PortRoyal";
@@ -284,7 +286,7 @@ int CreateJamaicaCharacters(int n)
 	ch.Dialog.Filename = "Common_Store.c";
 	ch.quest.type = "trader";
 	ch.nation = HOLLAND;
-	LAi_SetBarmanType(ch);
+	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";

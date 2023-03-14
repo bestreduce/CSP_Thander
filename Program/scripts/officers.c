@@ -149,6 +149,22 @@ void OfficersReactionResult()
 		if (iPassenger != -1)
 		{
 			sld = GetCharacter(iPassenger);
+			if (sld.name == "Виспер" && !CheckAttribute(sld, "PGGWhisperQuestStart") && !CheckAttribute(pchar,"GiantEvilSkeleton"))
+			{
+				if (GetCharacterShipClass(PChar) <= 4 && pchar.rank >= 15)
+				{
+					if (PlaceCharacter(sld, "goto", "random_must_be_near") != "")
+					{
+						sld.dialog.filename = "PGG_dialog.c";
+						sld.dialog.currentnode = "Whisper_Officer";
+						
+						LAi_SetActorType(sld);
+						LAi_ActorDialog(sld, pchar, "", 2.0, 0);
+						chrDisableReloadToLocation = true;
+						DoQuestCheckDelay("OpenTheDoors", 5.0);
+					}
+				}
+			}
 			if(sld.id == "W_Chinaman" && !CheckAttribute(sld, "ChinamanAskedSword") && sti(sld.rank) > 7)
 			{
 				if (PlaceCharacter(sld, "goto", "random_must_be_near") != "")

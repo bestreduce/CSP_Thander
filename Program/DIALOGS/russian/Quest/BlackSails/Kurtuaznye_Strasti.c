@@ -80,7 +80,7 @@ void ProcessDialogEvent()
 			LAi_SetActorTypeNoGroup(sld);
 			LAi_ActorTurnToCharacter(npchar, sld);
 			LAi_ActorTurnToCharacter(sld, npchar);
-            dialog.text = "Кхгм… Да да, мы это сделаем, капитан.";
+            dialog.text = "Кхгм... Да да, мы это сделаем, капитан.";
             link.l1 = "";
 			link.l1.go = "BS_KS_6_1";
 		break;
@@ -317,7 +317,7 @@ void ProcessDialogEvent()
 
 		case "BS_KS_20":
             dialog.text = "Привествую, "+GetSexPhrase("месье","мадемуазель")+". Какими судьбами?";
-            link.l1 = "Я хочу провести время с одной из двоих красоток. Кажется, мне приглянулась Максин.";
+            link.l1 = "Я хочу провести время с одной из твоих красоток. Кажется, мне приглянулась Максин.";
 			link.l1.go = "BS_KS_21";
 		break;
 
@@ -439,6 +439,7 @@ void ProcessDialogEvent()
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
 			LAi_SetActorTypeNoGroup(npchar);
 			LAi_ActorRunToLocation(npchar, "reload", "reload1", Get_My_Cabin(), "", "", "", 10);
+			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
 
 		//Файт. Как только минусуем его подсосов – Вейн удирает.  Было бы круто, чтоб прям удирал в каждой локе. Улицы – за воротами – и т.д. прям до Ле Марен. В бухте пачка пиратов с его корабля, опять файт мясной. Вейн – удирает после их гибели в море. Выходим в море. «Рейнджер» - корабль Вейна линейный бриг. Морской файт – абордаж. После первой стадии в каюте – диалог.

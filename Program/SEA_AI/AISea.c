@@ -285,21 +285,25 @@ void SeaAI_SetCaptainFree(ref rCharacter, ref refEnemyCharacter)
 
 bool SeaAI_SetOfficer2ShipAfterAbordage(ref refMyCharacter, ref refEnemyCharacter)
 {
-	int iMyCharacterIndex = sti(refMyCharacter.index);
-	int iEnemyCharacterIndex = sti(refEnemyCharacter.index);
+	int iMyCharacterIndex = sti(refMyCharacter.index);//refEnemyCharacter - предыдущий капитан, refMyCharacter - новый назначенец
 	if (bSeaActive)
 	{
-		if (CheckAttribute(refEnemyCharacter, "SeaAI.Group.Name")) // fix 01/08/06 группы может не быть
+		if (CheckAttribute(refEnemyCharacter, "SeaAI.Group.Name"))
 		{
 			Group_DelCharacter(refEnemyCharacter.SeaAI.Group.Name, refEnemyCharacter.id);
 		}
 		SendMessage(&AISea, "laa", AI_MESSAGE_SET_OFFICER_2_SHIP, refMyCharacter, refEnemyCharacter);
 		Event("eSwitchPerks", "l", iMyCharacterIndex);
 		Event(SHIP_UPDATE_PARAMETERS, "lf", iMyCharacterIndex, 1.0);		// Parameters
-		if (CheckAttribute(refMyCharacter, "curshipnum"))  DeleteAttribute(refMyCharacter, "curshipnum"));
-		refMyCharacter.curshipnum = sti(refEnemyCharacter.curshipnum);
-		DeleteAttribute(refEnemyCharacter, "curshipnum");
-		Ships[sti(refMyCharacter.curshipnum)] = iMyCharacterIndex; // вот где собака то порылась !!!!!
+		if (CheckAttribute(refEnemyCharacter, "curshipnum"))  //фикс - возможно, curshipnum уже был стёрт со старого кэпа при обмене кораблями
+		{
+			refMyCharacter.curshipnum = sti(refEnemyCharacter.curshipnum);
+			DeleteAttribute(refEnemyCharacter, "curshipnum");
+		}
+		if (CheckAttribute(refMyCharacter, "curshipnum"))  
+		{
+			Ships[sti(refMyCharacter.curshipnum)] = iMyCharacterIndex;
+		}
 
 		Group_AddCharacter(PLAYER_GROUP, refMyCharacter.id);
 		UpdateRelations();
@@ -308,7 +312,7 @@ bool SeaAI_SetOfficer2ShipAfterAbordage(ref refMyCharacter, ref refEnemyCharacte
 	return true;
 }
 
-int SeaAI_GetRelation(int iCharacterIndex1, int iCharacterIndex2)
+int SeaAI_GetRelation(int iCharacterIndex1, int iCharacterIndex2) // FPSTODO: слишком часто вызывается
 {
  	int iRelation = RELATION_NEUTRAL;
 	/*if (bSeaActive)

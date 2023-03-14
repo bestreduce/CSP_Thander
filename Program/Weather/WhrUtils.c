@@ -32,7 +32,10 @@ int Whr_GetLong(aref arRef, string sAttribute)
 
 string Whr_GetString(aref arRef, string sAttribute)
 {
-	return arRef.(sAttribute);
+	string result = "none";
+	if (CheckAttribute(arRef, sAttribute)) result = arRef.(sAttribute);
+	else trace("ERROR: not found attribute '" + sAttribute + "' for Whr_GetString");
+	return result;
 }
 
 

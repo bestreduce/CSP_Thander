@@ -87,12 +87,12 @@ void ProcessDialogEvent()
 		}
 		switch (iClass)
 		{
-			case 6: RealShips[sti(compref.Ship.Type)].HullArmor = 12+(rand(1)*hullarmor); break;
-			case 5: RealShips[sti(compref.Ship.Type)].HullArmor = 16+(rand(1)*hullarmor); break;
-			case 4: RealShips[sti(compref.Ship.Type)].HullArmor = 20+(rand(2)*hullarmor); break;
-			case 3: RealShips[sti(compref.Ship.Type)].HullArmor = 24+(rand(2)*hullarmor); break;
-			case 2: RealShips[sti(compref.Ship.Type)].HullArmor = 32+(rand(2)*hullarmor); break;
-			case 1: RealShips[sti(compref.Ship.Type)].HullArmor = 42+(rand(2)*hullarmor); break;
+			case 6: RealShips[sti(compref.Ship.Type)].HullArmor = 8+(rand(1)*hullarmor); break;
+			case 5: RealShips[sti(compref.Ship.Type)].HullArmor = 12+(rand(1)*hullarmor); break;
+			case 4: RealShips[sti(compref.Ship.Type)].HullArmor = 16+(rand(2)*hullarmor); break;
+			case 3: RealShips[sti(compref.Ship.Type)].HullArmor = 22+(rand(2)*hullarmor); break;
+			case 2: RealShips[sti(compref.Ship.Type)].HullArmor = 28+(rand(2)*hullarmor); break;
+			case 1: RealShips[sti(compref.Ship.Type)].HullArmor = 34+(rand(2)*hullarmor); break;
 		}
 
 		NPChar.reputation = sti(NPChar.reputation) + (8 - iClass);//минимальная репа ~12. две единицы репы ~ одна единица навыка корабела
@@ -316,7 +316,7 @@ void ProcessDialogEvent()
 				{
 					if (!CheckAttribute(npchar, "Findship") || GetNpcQuestPastDayParam(npchar, "Findship") >= 20)
 					{
-						SelectFindship_ShipType(); //выбор типа корабля
+						SelectFindship_ShipType(sti(npchar.nation)); //выбор типа корабля
 						pchar.GenQuest.Findship.Shipyarder.ShipBaseName = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.Findship.Shipyarder.ShipType), "Name") + ""));
 						pchar.GenQuest.Findship.Shipyarder.City = npchar.city; //город квестодателя
 						dialog.text = "Да, у меня есть проблема, требующая решения. Мне поступил заказ. Моему клиенту как можно скорее требуется " + pchar.GenQuest.Findship.Shipyarder.ShipBaseName + ". Однако у меня на верфи сейчас такого корабля нет, сделать его за два месяца у меня тоже нет возможности\nЕсли вы сможете доставить мне такой корабль, я буду весьма вам благодарен и заплачу сумму, в полтора раза превышающую его продажную стоимость.";
@@ -715,25 +715,9 @@ void ProcessDialogEvent()
 		break;
 
 		case "shipyard1":
-			ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
-			if (sti(Pchar.Ship.Type) == SHIP_NOTUSED || ok)
-			{
-				NextDiag.CurrentNode = NextDiag.TempNode;
-				DialogExit();
-				LaunchShipyard1(npchar);
-			}
-			else
-			{
-				dialog.text = NPCharRepPhrase(npchar, pcharrepphrase("Дуришь меня? А где же твой корабль? У пирса его нет!",
-																	 "Клянусь дьяволом, тебе не обмануть меня! У пирса нет твоего корабля!"),
-													  pcharrepphrase("Я не вижу вашего корабля в порту, капитан " +GetFullName(pchar)+ ". Надеюсь, это не 'Летучий голландец'?",
-																	 "Капитан, удобнее чинить корабль в доке. Пришвартуйте корабль и приходите."));
-				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, ещё увидимся!",
-																 "Я не хотел"+ GetSexPhrase("","а") +" вас обмануть " +GetFullName(npchar)+ ", корабль на другой стороне острова."),
-												  pcharrepphrase("Нет. Мой корабль называется Black Perl. Что это ты побелел? Ха-ха! Шутка!",
-																 "Спасибо за совет, обязательно им воспользуюсь."));
-				link.l1.go = "exit";
-			}
+			NextDiag.CurrentNode = NextDiag.TempNode;
+			DialogExit();
+			LaunchShipyard1(npchar);
 		break;
 
 		case "Cannons":
@@ -1089,7 +1073,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("ShipyardsMap", "1");
 			AddQuestUserData("ShipyardsMap", "sSex", GetSexPhrase("","а"));
 			AddQuestUserData("ShipyardsMap", "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
-			AddQuestUserData("ShipyardsMap", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.different.ShipyardsMap.city + "Dat"));
+			AddQuestUserData("ShipyardsMap", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.different.ShipyardsMap.city + "Voc"));
 			AddQuestUserData("ShipyardsMap", "sShip", pchar.questTemp.different.ShipyardsMap.what);
 		break;
 
@@ -1184,7 +1168,7 @@ void ProcessDialogEvent()
 						AddMoneyToCharacter(pchar, 6000 * GetCharacterSPECIALSimple(PChar, SPECIAL_L));
 					break;
 					case 5:
-						dialog.text = "О! Это очень, очень ценный чертёж! Я готов заплатить вам за него 60 000 золотом. Оплату произведу кредитными сундуками. Не возражаете?";
+						dialog.text = "О! Это очень, очень ценный чертёж! Я готов заплатить вам за него 60000 золотом. Оплату произведу кредитными сундуками. Не возражаете?";
 						link.l1 = "Нет, конечно! Прекрасно!";
 						link.l1.go = "ShipyardsMapOk_5";
 						NPChar.reputation = sti(NPChar.reputation) + 5;
@@ -1219,10 +1203,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("ShipyardsMap", "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			CloseQuestHeader("ShipyardsMap");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 		break;
 
 		case "ShipyardsMapOk_5":
@@ -1238,10 +1219,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("ShipyardsMap", "iMoney", sti(pchar.questTemp.different.ShipyardsMap.chance)*1000);
 			CloseQuestHeader("ShipyardsMap");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(pchar, "questTemp.different.ShipyardsMap");
 		break;
@@ -1428,55 +1406,17 @@ bool CheckForFlyingDuchmanSails(ref _char)
 	return false;
 }
 
-void SelectFindship_ShipType()
+void SelectFindship_ShipType(int iNation)
 {
-	int iRank,g,pcharRank;
+	int iRank, pcharRank;
 	pcharRank = sti(pchar.rank);
-	iRank = 0;
-	if (pcharRank > 4) iRank = 1;
-	if (pcharRank > 9) iRank = 2;
-	if (pcharRank > 13) iRank = 3;
-	if (pcharRank > 17) iRank = 4;
-	if (pcharRank > 20) iRank = 5;
-	if (pcharRank > 25) iRank = 6;
-
-	switch (iRank)
-	{
-		case 0:
-			g = rand(11);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_BERMSLOOP + g;//ур 0-4, кор 3-14
-		break;
-
-		case 1:
-			g = rand(12);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_POLACCA + g;//ур 5-9, кор 15-27
-		break;
-
-		case 2:
-			g = rand(23);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_BRIG + g;//ур 10-13, кор 28-51
-		break;
-
-		case 3:
-			g = rand(31);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_PINNACE + g;//ур 14-17, кор 52-83
-		break;
-
-		case 4:
-			g = rand(10);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_GALEON50 + g;//ур 18-20, кор 84-94
-		break;
-
-		case 5:
-			g = rand(9);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_OXFORD + g;//ур 21-25, кор 95-104
-		break;
-
-		case 6:
-			g = rand(10);
-			pchar.GenQuest.Findship.Shipyarder.ShipType = SHIP_POSEIDON + g;//ур 26+, кор 105-116
-		break;
-	}
+	iRank = 6;
+	if (pcharRank > 4) iRank = 5;
+	if (pcharRank > 9) iRank = 4;
+	if (pcharRank > 14) iRank = 3;
+	if (pcharRank > 19) iRank = 2;
+	if (pcharRank > 25) iRank = 1;
+	pchar.GenQuest.Findship.Shipyarder.ShipType = GetShipTypeExtNotNation(iRank, iRank, "", iNation);
 }
 
 
@@ -1500,7 +1440,7 @@ string checkOrderMatherial(ref NPChar)
 	string sLeft = "";
 	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 
-	for (int k=0;k<8;k++)
+	for (int k=1;k<10;k++)
 	{
 		sGood1 = g_ShipBermudeTuningGoods[k];
 		amount = GetSquadronGoods(Pchar, FindGood(sGood1)) - sti(NPChar.questtemp.(sGood1));

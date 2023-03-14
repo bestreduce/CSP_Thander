@@ -443,7 +443,7 @@ void ProcessDialogEvent()
 
 		case "FinalPL_3":
 			CloseQuestHeader("PDM_Novaya_Rodina");
-            sld = CharacterFromID("Hugo_Lesopilka")
+            sld = CharacterFromID("Hugo_Lesopilka");
 			sld.lifeday = 0;
 			ChangeCharacterReputation(pchar, -5);
 			NextDiag.CurrentNode = NextDiag.TempNode;

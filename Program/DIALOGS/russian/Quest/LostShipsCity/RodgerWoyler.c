@@ -328,7 +328,7 @@ void ProcessDialogEvent()
 			}
 			if (!CheckAttribute(NextDiag, NodeName+".l4") && pchar.questTemp.LSC == "toSeekOldCitizen")
 			{
-				link.l4 = "Вы давно уже здесь живете?";
+				link.l4 = "Вы давно уже здесь живёте?";
 				link.l4.go = "ansewer_4";
 			}
 			link.l10 = "Нет вопросов. Извините...";

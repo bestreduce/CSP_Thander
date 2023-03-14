@@ -156,14 +156,14 @@ void ProcessDialogEvent()
 		break;
 
 		case "20":
-			dialog.text = "20 000 тысяч.";
+			dialog.text = "20000 пиастров.";
 			link.l1 = "Чего?!";
 			link.l1.go = "21";
 		break;
 
 		case "21":
 			dialog.text = "...(усмехаясь)... Так ты так ничего и не понял"+ GetSexPhrase("","а") +", "+ GetSexPhrase("сынок","дочка") +"?";
-			link.l1 = "Я понял"+ GetSexPhrase("","а") +", что если соглашусь, то мои кровно заработанные 20 000 - коту под хвост!";
+			link.l1 = "Я понял"+ GetSexPhrase("","а") +", что если соглашусь, то мои кровно заработанные 20000 - коту под хвост!";
 			link.l1.go = "22";
 		break;
 
@@ -222,7 +222,7 @@ void ProcessDialogEvent()
 			NPChar.NeedMoney = 20000;
 			if(sti(PChar.money) >= sti(NPChar.NeedMoney))
 			{
-				link.l1 = "Все 20 000 здесь.";
+				link.l1 = "Все 20000 здесь.";
 				link.l1.go = "26";
 			}
 

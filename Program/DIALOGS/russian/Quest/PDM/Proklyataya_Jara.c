@@ -69,7 +69,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			pchar.questTemp.PDM_PJ_KV = "KupitVino";
 			pchar.questTemp.PDM_PJ_SS = "SdatSoldata";
-			sld = CharacterFromID("PDM_PJ_Strajnik_1")
+			sld = CharacterFromID("PDM_PJ_Strajnik_1");
 			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Mne_Jarko_5_EsheRaz";
 		break;
@@ -175,7 +175,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddQuestRecord("PDM_Proklyataya_Jara", "3");
 			pchar.questTemp.PDM_PJ_KR = "KupitRom";
-			sld = CharacterFromID("PDM_PJ_Strajnik_2")
+			sld = CharacterFromID("PDM_PJ_Strajnik_2");
 			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Ya_Toje_Hochu_5_EsheRaz";
 			LAi_SetGuardianType(sld);
@@ -219,7 +219,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 170);
 			AddCharacterExpToSkill(pchar, "Commerce", 80);
 			
-			sld = CharacterFromID("PDM_PJ_Strajnik_1")
+			sld = CharacterFromID("PDM_PJ_Strajnik_1");
 			LAi_SetActorType(sld);
 			LAi_ActorAnimation(sld, "stun_1", "", 1.0);
 			LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");

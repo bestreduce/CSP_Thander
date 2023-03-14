@@ -78,7 +78,7 @@ int CreateDominicaCharacters(int n)
 	ch.Dialog.Filename = "Common_Store.c";
 	ch.quest.type = "trader"; ch.Merchant.type = "street";
 	ch.nation = FRANCE;
-	LAi_SetBarmanType(ch);
+	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";

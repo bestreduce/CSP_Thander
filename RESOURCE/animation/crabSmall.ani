@@ -2,6 +2,49 @@
 animation = crabSmall.an
 
 
+
+[idle_stand]
+	start_time = 0
+	end_time = 16
+	data = "Blend time", "0.4"		; sec
+	data = "Probability", "1.0"
+
+[idle]
+	start_time = 0
+	end_time = 16
+	data = "Blend time", "0.4"		; sec
+	data = "Probability", "1.0"
+
+[eat]
+	start_time = 0
+	end_time = 16
+	data = "Blend time", "0.4"		; sec
+	data = "Probability", "1.0"
+
+
+[run]
+	loop = true
+	type = normal
+	start_time = 17
+	end_time = 33
+	speed = 0.4
+
+	data = "Blend time", "0.05"		; sec
+	data = "Walk speed", "0.05"		; m/sec
+	data = "Turn speed", "0.15"		; rad/sec
+
+[panic_run]	
+	loop = true
+	type = normal
+	start_time = 17
+	end_time = 33
+	speed = 0.7
+
+	data = "Blend time", "0.05"		; sec
+	data = "Walk speed", "0.05"		; m/sec
+	data = "Turn speed", "0.15"		; rad/sec
+
+
 ;===================================================================================
 ;Анимация Стояния
 ;===================================================================================

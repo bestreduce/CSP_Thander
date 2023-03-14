@@ -1094,7 +1094,7 @@ void BLI_SetPossibleCommands()
 		// boal запрет всех переходов
 		if (chrDisableReloadToLocation) bTmpBool = false;
 		if (!CheckAttribute(loadedLocation,"fastreload")) bTmpBool = false;  // в каюте некуда переходить
-		if (bTmpBool) // все ещё можно переходить, провер§ем город враг
+		if (bTmpBool) // всё ещё можно переходить, провер§ем город враг
 		{
 		    string sNation = Colonies[FindColony(loadedLocation.fastreload)].nation;
 			if (sNation != "none")
@@ -1407,21 +1407,17 @@ bool SetReloadIcons()
 			makearef(locList,objFastReloadTable.table.(outGroupName));
 			nq = GetAttributesNum(locList);
 			// to port icon
-			if( GetCharacterShipType(pchar)!=SHIP_NOTUSED )
-			{
-				if( CheckFastJump(Locations[idxloc].id, pchar.location.from_sea) )
-				{
 					objLandInterface.UserIcons.port.enable = true;
-					objLandInterface.UserIcons.port.pic = 26;
-					objLandInterface.UserIcons.port.selpic = 10;
-					objLandInterface.UserIcons.port.tex = 1;
-					objLandInterface.UserIcons.port.name = "reloadtoport";
-					objLandInterface.UserIcons.port.location = pchar.location.from_sea;
-					objLandInterface.UserIcons.port.locator = "reload1";
-					objLandInterface.UserIcons.port.note = GetNodeForIcon(1, 10);
-					bUse = true;
-				}
-			}
+                    objLandInterface.UserIcons.port.pic = 26;
+                    objLandInterface.UserIcons.port.selpic = 10;
+                    objLandInterface.UserIcons.port.tex = 1;
+                    objLandInterface.UserIcons.port.name = "reloadtoport";
+                    string townsack = Locations[idxloc].townsack;
+                    if(townsack != "LeFransua" && townsack != "PuertoPrincipe") objLandInterface.UserIcons.port.location = townsack+"_town";
+					else objLandInterface.UserIcons.port.location = townsack+"_port";
+                    objLandInterface.UserIcons.port.locator = "reload1";
+                    objLandInterface.UserIcons.port.note = GetNodeForIcon(1, 10);
+                    bUse = true;
 			for(i=0; i<nq; i++)
 			{
 				curloc = GetAttributeN(locList,i);

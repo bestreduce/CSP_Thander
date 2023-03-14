@@ -458,7 +458,7 @@ void LAi_CheckKillCharacter(aref chr)
 		}
 		if(IsCharacterPerkOn(chr, "Adventurer"))
 		{
-			if (!CheckAttribute(chr, "ScriptedDeath") && !CheckAttribute(chr, "Adventurers_Luck") && rand(15) <= GetCharacterSPECIALSimple(chr, SPECIAL_L))
+			if (!CheckAttribute(chr, "ScriptedDeath") && !CheckAttribute(chr, "Adventurers_Luck") && rand(10) <= GetCharacterSPECIALSimple(chr, SPECIAL_L))
 			{
 				chr.Adventurers_Luck = true;
 				int hitpoints = LAi_GetCharacterMaxHP(chr) / 2;
@@ -574,27 +574,16 @@ ref LAi_CreateFantomCharacter(string model, string group, string locator)
 //Создать фантомного персонажа
 ref LAi_CreateFantomCharacterEx(string model, string ani, string group, string locator)
 {
-	//Ищем свободное место для персонажа
-	for(int i = 0; i < MAX_CHARS_IN_LOC; i++)
-	{
-		if(CheckAttribute(&Characters[LOC_FANTOM_CHARACTERS + i], "id") == false) break;
-		if(Characters[LOC_FANTOM_CHARACTERS + i].id == "") break;
-	}
-	if(i >= MAX_CHARS_IN_LOC)
-	{
-		for(i = 0; i < MAX_CHARS_IN_LOC; i++)
-		{
-			if(!IsEntity(&Characters[LOC_FANTOM_CHARACTERS + i])) break;
-		}
-		if(i >= MAX_CHARS_IN_LOC) i = 0;
-	}
-	ref chr = &Characters[LOC_FANTOM_CHARACTERS + i];
-
+	// --> mitrokosta переделка, убрал "фантомов". выигрыш в перформансе мизерный, зато привет раздвоению
+	int index = FindFirstEmptyCharacter();
+	ref chr = GetCharacter(index);
+	InitCharacter(chr, index);
+	chr.lifeday = 0; // сотрется при смене локации
+	// <--
 	//Заполняем поля персонажа
-	chr.id = "Location fantom character <" + i + ">";
-	chr.index = LOC_FANTOM_CHARACTERS + i;
+	chr.id = "Location fantom character <" + index + ">";						   
 	//address
-	if(IsEntity(loadedLocation) != true)
+	if(IsEntity(&loadedLocation) != true)
 	{
 		chr.location = "none";
 	}else{
@@ -673,6 +662,20 @@ ref LAi_CreateFantomCharacterEx(string model, string ani, string group, string l
 	}
 	LAi_AddLoginedCharacter(chr);
 	// boal del lag Event("Fantom_FillSkills", "a", chr);
+	if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
+	{
+		string cirnum;
+		switch (rand(4))
+		{
+			case 0: cirnum = "cirass1"; break;
+			case 1: cirnum = "cirass1"; break;
+			case 2: cirnum = "cirass2"; break;
+			case 3: cirnum = "cirass3"; break;
+			case 4: cirnum = "cirass4"; break;
+		}
+		chr.cirassId = Items_FindItemIdx(cirnum);
+		Log_TestInfo("Персонаж "+chr.name+" получил кирасу "+cirnum);
+	}
 	if(!CreateCharacter(chr))
 	{
 		Trace("LAi_CreateFantomCharacter -> CreateCharacter return false");
@@ -694,30 +697,6 @@ ref LAi_CreateFantomCharacterEx(string model, string ani, string group, string l
 	if(SendMessage(chr, "lss", MSG_CHARACTER_ENTRY_TO_LOCATION, group, locator) == false)
 	{
 		Trace("LAi_CreateFantomCharacter -> can't teleportation character to <" + group + "::" + locator + ">");
-	}
-	if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
-	{
-		string cirnum;
-		switch (rand(4))
-		{
-			case 0: cirnum = "cirass1"; break;
-			case 1: cirnum = "cirass1"; break;
-			case 2: cirnum = "cirass2"; break;
-			case 3: cirnum = "cirass3"; break;
-			case 4: cirnum = "cirass4"; break;
-		}
-		if (CheckAttribute(chr, "HeroModel")) // все, у кого есть что одеть
-        {
-			switch (cirnum)
-			{
-				case "cirass1": chr.model = GetSubStringByNum(chr.HeroModel, 1); break;
-				case "cirass2": chr.model = GetSubStringByNum(chr.HeroModel, 2); break;
-				case "cirass3": chr.model = GetSubStringByNum(chr.HeroModel, 3); break;
-				case "cirass4": chr.model = GetSubStringByNum(chr.HeroModel, 4); break;
-			}
-		}
-		chr.cirassId = Items_FindItemIdx(cirnum);
-		Log_TestInfo("Персонаж "+chr.name+" получил кирасу "+cirnum);
 	}
 	return chr;
 }
@@ -1075,6 +1054,16 @@ void Dead_AddLoginedCharacter(aref chr)
 				count = GetCharacterItem(chref, itemID);
 				RemoveItems(chref, itemID, count);
 			}
+			//Sinistra - еду на костёр
+			if (CheckAttribute(chr, "DeleteFood"))
+			{
+				TakeNItems(chref, "food1", -10);
+				TakeNItems(chref, "food2", -10);
+				TakeNItems(chref, "food3", -10);
+				TakeNItems(chref, "food4", -10);
+				TakeNItems(chref, "food5", -10);
+				TakeItemFromCharacter(chref, "spyglass3");
+			}
 
 	        //BLI_UpdateOfficers();// fix проверки на офов, не пропадала иконка
 			// Генерим предметы
@@ -1404,6 +1393,8 @@ bool LAi_CheckLocatorFree(string _group, string _locator)
 	if(!CheckAttribute(loadedLocation, at)) return false;
 	aref grp;
 	makearef(grp, loadedLocation.(at));
+	if (!CheckAttribute(grp, "x") || !CheckAttribute(grp, "y") || !CheckAttribute(grp, "z"))
+		{trace("ERROR: cannot find xyz position for '" + at + "'"); return false;}
 	float lx = stf(grp.x);
 	float ly = stf(grp.y);
 	float lz = stf(grp.z);

@@ -1,14 +1,28 @@
 #define FANTOM_SHIPS_QTY 150
 #define INVALID_SHIP_TYPE			-1
 
-ref Fantom_GetNextFantom()
-{
-	iNumFantoms++;
-	return &Characters[FANTOM_CHARACTERS + iNumFantoms];
+int seaFantomsNum; // mitrokosta перенес из глобалов
+int seaFantoms[MAX_SHIPS_ON_SEA];
+
+ref CreateSeaFantom() {
+	int index = FindFirstEmptyCharacter();
+	seaFantoms[seaFantomsNum] = index;
+	seaFantomsNum++;
+	return GetCharacter(index);
 }
 
+void ClearSeaFantoms() {
+	for (int i = 0; i < seaFantomsNum; i++) {
+		int index = seaFantoms[i];
+		if (!CheckAttribute(GetCharacter(index),"lifeday")) continue;
+		InitCharacter(GetCharacter(index), index);
+		FreeCharacter(index);
+	}
+	
+	seaFantomsNum = 0;
+}
 // -> ugeen 26.01.09
-int Fantom_GenerateEncounterExt(string sGroupName, object oResult, int iEType, int iNumWarShips, int iNumMerchantShips, int iNation)
+int Fantom_GenerateEncounterExt(string sGroupName, int iEType, int iNumWarShips, int iNumMerchantShips, int iNation)
 {
 	aref	aWar, aMerchant;
 	ref		rEnc;
@@ -21,7 +35,7 @@ int Fantom_GenerateEncounterExt(string sGroupName, object oResult, int iEType, i
 
 	if(iEType == ENCOUNTER_TYPE_BARREL || iEType == ENCOUNTER_TYPE_BOAT)
 	{
-		ref rFantom = GetFantomCharacter(iNumFantoms);
+		ref rFantom = CreateSeaFantom();
 
 		DeleteAttribute(rFantom, "relation");
 		DeleteAttribute(rFantom, "abordage_twice");
@@ -29,7 +43,6 @@ int Fantom_GenerateEncounterExt(string sGroupName, object oResult, int iEType, i
 		DeleteAttribute(rFantom, "ransom");
 
 		rFantom.SeaAI.Group.Name = sGroupName;
-		iNumFantoms++;
 		return 0;
 	}
 
@@ -53,6 +66,53 @@ int Fantom_GenerateEncounterExt(string sGroupName, object oResult, int iEType, i
 	return iNumWarShips + iNumMerchantShips;
 }
 
+int Fantom_GenerateShips_ForEnc_v2(ref rEnc, int iEType, string sGroupName)//iEType вообще не нужен??? просто не ставить атрибут новой системы на эти типы энок и они будут работать по старой функции
+{																			//хотя - это бред. всё равно старую полностью вырежем
+	ref rFantom;
+	int iShipSum = 0;
+	if(iEType == ENCOUNTER_TYPE_BARREL || iEType == ENCOUNTER_TYPE_BOAT)
+	{
+		rFantom = CreateSeaFantom();
+
+		DeleteAttribute(rFantom, "relation");
+		DeleteAttribute(rFantom, "abordage_twice");
+		DeleteAttribute(rFantom, "QuestDate");
+		DeleteAttribute(rFantom, "ransom");
+
+		rFantom.SeaAI.Group.Name = sGroupName;
+		iNumFantoms++;
+		return 0;
+	}
+
+	aref arShips, arShipModes, arShipType;
+	makearef(arShips, rEnc.shiptypes);
+	makearef(arShipModes, rEnc.shipmodes);
+	int iShipType;
+	string sFantomType;
+
+	for (int i=0; i<GetAttributesNum(arShips); i++)
+	{
+		rFantom = CreateSeaFantom();
+
+		DeleteAttribute(rFantom, "relation");
+		DeleteAttribute(rFantom, "abordage_twice");
+		DeleteAttribute(rFantom, "QuestDate");
+		DeleteAttribute(rFantom, "ransom");
+		DeleteAttribute(rFantom, "DontRansackCaptain");
+
+		iShipType = GetAttributeValue(GetAttributeN(arShips, i));
+		sFantomType = GetAttributeValue(GetAttributeN(arShipModes, i));
+		rFantom.Ship.Type = GenerateShipExt(iShipType, 0, rFantom);
+		rFantom.Ship.Mode = sFantomType;
+		rFantom.SeaAI.Group.Name = sGroupName;
+		rFantom.Charge.Type = GOOD_BALLS;
+
+		iNumFantoms++;
+		iShipSum++;
+	}
+	return iShipSum;
+}
+
 int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string sGroupName, string sFantomType, int iEncounterType, int iNation)
 {
 	int iShips[FANTOM_SHIPS_QTY];
@@ -62,7 +122,7 @@ int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string
 	string sAttr;
 	bool bOk;
 
-	for (i=SHIP_TARTANE; i<=SHIP_SP_SANFELIPE; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
+	for (i=SHIP_TARTANE; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
 	{
 		object rShip = GetShipByType(i);
 		if (!checkAttribute(rship, "class"))
@@ -99,7 +159,7 @@ int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string
 
 	int iBaseShipType = iShips[rand(iShipsNum - 1)];
 
-	ref rFantom = GetFantomCharacter(iNumFantoms);
+	ref rFantom = CreateSeaFantom();
 
 	DeleteAttribute(rFantom, "relation");
 	DeleteAttribute(rFantom, "abordage_twice");
@@ -111,7 +171,7 @@ int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string
 	rFantom.Ship.Mode = sFantomType;
 	rFantom.Charge.Type = GOOD_BALLS;
 
-	iNumFantoms++;
+
 
 	int iRealShipType = GenerateShipExt(iBaseShipType, 0, rFantom);
 
@@ -161,7 +221,7 @@ int Fantom_GetShipType(int iClassMin, int iClassMax, string sShipType)
 	int i, iShipsNum;
 	iShipsNum = 0;
 
-	for (i=SHIP_TARTANE; i<=SHIP_SP_SANFELIPE; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
+	for (i=SHIP_TARTANE; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
 	{
 		object rShip = GetShipByType(i);
 		if (!checkAttribute(rship, "class"))
@@ -193,7 +253,7 @@ int Fantom_GetShipType(int iClassMin, int iClassMax, string sShipType)
 // мктод этот походу левый, тк перекрывается в сиа.с
 void Fantom_AddFantomCharacter(string sGroupName, int iShipType, string sFantomType, int iEncounterType)
 {
-	ref rFantom = GetFantomCharacter(iNumFantoms);
+	ref rFantom = CreateSeaFantom();
 
 
 
@@ -212,8 +272,6 @@ void Fantom_AddFantomCharacter(string sGroupName, int iShipType, string sFantomT
 	rFantom.Ship.Type = iShipType;
 	rFantom.Ship.Mode = sFantomType;
 	rFantom.Charge.Type = GOOD_BALLS;
-
-	iNumFantoms++;
 }
 // на деле этот метод бесполезен, тк золото в сундуке генерится в др месте, а то что, в к3 тут были распределения опыта и команды вообще позорище.
 void Fantom_SetRandomMoney(ref rFantom, string sFantomType)
@@ -414,7 +472,7 @@ void Fantom_SetSails(ref rFantom, string sFantomType)
 void Fantom_SetBalls(ref rFantom, string sFantomType)
 {
 	int iKClass = 7 - GetCharacterShipClass(rFantom);
-	float fK = 1;	
+	float fK = 2;	
 	
 	int nShipType = sti(rFantom.ship.type);
 	ref refBaseShip = GetRealShip(nShipType);
@@ -443,7 +501,7 @@ void Fantom_SetBalls(ref rFantom, string sFantomType)
 	iKClass = iKClass * fK;
     // boal 20.01.2004 -->
 	Fantom_SetCharacterGoods(rFantom, GOOD_BALLS,    MakeInt(19 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(18 * iCannons * fK + rand(MakeInt(20 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(11 * iCannons * fK + rand(MakeInt(20 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_KNIPPELS, MakeInt(9 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_GRAPES,   MakeInt(7 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_POWDER,   MakeInt(35 * iCannons * fK + rand(MakeInt(30 * iKClass))), 0);
@@ -802,124 +860,59 @@ void Fantom_SetUpgrade(ref rFantom, string sFantomType)
 		case "pirate":   // апгрейдим параметр(ы)  шипа пиратских случаек
 			if(i < (7 - iSClass)*4)
 			{
-				GenerateShipUpgradeParameters(rFantom);
+				GenerateShipBermudes(rFantom);
 			}
 		break;
 		case "hunter":   // апгрейдим параметр(ы) шипа ДУ или ОЗГов
 			if(i < ((7 - iSClass)*4 +10))
 			{
-				GenerateShipUpgradeParameters(rFantom);
+				GenerateShipBermudes(rFantom);
 			}
 		break;
 	}
 }
 
-void GenerateShipUpgradeParameters(ref rFantom)
+void GenerateShipBermudes(ref rFantom)//бермудки не должны идти группами. Каждая должна генерится сама по себе
 {
-	int i = rand(100);
-
-	if(i < 30)
+	int iP = 0;
+	int iT = 0; 
+	int iW = 0;
+	string sFantomType = rFantom.Ship.Mode;
+	switch (sFantomType)
 	{
-		SetShipBermudeTuningSpeedRate(rFantom);
-		return;
+		case "pirate":	iP = 20; break;//допшансы конкретных бермудок от типа фантома
+		case "trade":	iT = 20; break;
+		case "war":		iW = 20; break;
 	}
-	if((i >= 30) && (i < 45))
-	{
-		SetShipBermudeTuningSpeedRate(rFantom);
-		if(rand(1) == 0)
-		{
-			SetShipBermudeTuningTurnRate(rFantom);
-		}
-		else
-		{
-			SetShipBermudeTuningWindAgainstSpeed(rFantom);
-		}
-		return;
-	}
-	if((i >= 45) && (i < 60))
-	{
-		SetShipBermudeTuningSpeedRate(rFantom);
-		SetShipBermudeTuningTurnRate(rFantom);
-		SetShipBermudeTuningWindAgainstSpeed(rFantom);
-		if(rand(1) == 0)
-		{
-			SetShipBermudeTuningCapacity(rFantom);
-		}
-		else
-		{
-			SetShipBermudeTuningMaxCrew(rFantom);
-		}
-		return;
-	}
-	if((i >= 60) && (i < 75))
-	{
-		SetShipBermudeTuningSpeedRate(rFantom);
-		SetShipBermudeTuningTurnRate(rFantom);
-		SetShipBermudeTuningWindAgainstSpeed(rFantom);
-		SetShipBermudeTuningCapacity(rFantom);
-		SetShipBermudeTuningMaxCrew(rFantom);
-		if(rand(1) == 0)
-		{
-			SetShipBermudeTuningMaxCaliber(rFantom);
-		}
-		else
-		{
-			SetShipBermudeTuningHP(rFantom);
-			SetShipBermudeTuningMastMultiplier(rFantom);
-		}
-		return;
-	}
-	if((i >= 75) && (i < 80))
-	{
-		SetShipBermudeTuningSpeedRate(rFantom);
-		SetShipBermudeTuningTurnRate(rFantom);
-		SetShipBermudeTuningWindAgainstSpeed(rFantom);
-		SetShipBermudeTuningCapacity(rFantom);
-		SetShipBermudeTuningMaxCrew(rFantom);
-		SetShipBermudeTuningMaxCaliber(rFantom);
-		SetShipBermudeTuningHP(rFantom);
-		SetShipBermudeTuningMastMultiplier(rFantom);
-		return;
-	}
-	if(i >=80)
-	{
-		int irand = rand(8);
-		if(irand == 0) SetShipBermudeTuningSpeedRate(rFantom);
-		if(irand == 1) SetShipBermudeTuningTurnRate(rFantom);
-		if(irand == 2) SetShipBermudeTuningWindAgainstSpeed(rFantom);
-		if(irand == 3) SetShipBermudeTuningCapacity(rFantom);
-		if(irand == 4) SetShipBermudeTuningMaxCrew(rFantom);
-		if(irand == 5) SetShipBermudeTuningMaxCaliber(rFantom);
-		if(irand == 6) SetShipBermudeTuningHP(rFantom);
-		if(irand == 7) SetShipBermudeTuningMastMultiplier(rFantom);
-	}
+	if ( rand(100) > 15 ) SetShipBermudeTuningSpeedRate(rFantom); //85% для всех типов - и кто прошёл рандом в предыдущих функциях
+	if ( rand(100) > (60-iW) ) SetShipBermudeTuningTurnRate(rFantom);  
+	if ( rand(100) > (60-iP) ) SetShipBermudeTuningWindAgainstSpeed(rFantom);
+	if ( rand(100) > (80-iT) ) SetShipBermudeTuningCapacity(rFantom);
+	if ( rand(100) > (80-iP-iW) ) SetShipBermudeTuningMaxCrew(rFantom);
+	if ( rand(100) > (90-iP-iW) ) SetShipBermudeTuningMaxCaliber(rFantom);//например, повышенный шанс пиратам и военным. 30% вместо 10% у торговцев
+	if ( rand(100) > (90-iW) ) SetShipBermudeTuningHP(rFantom);
+	if ( rand(100) > (90-iT) ) SetShipBermudeTuningMastMultiplier(rFantom);
 }
 
-// eddy. подбор типа корабля для фантома от ранга и нац. принадлежности
+// eddy. подбор типа корабля для фантома от ранга ГГ с учётом нац. принадлежности, и типа занятий
 void SetShipToFantom(ref _chr, string _type, bool _setgoods)
 {
 	int ShipType;
 	int Nation = sti(_chr.nation);
 	int Rank = sti(pchar.rank);
-	switch (_type)
-	{
-		case "trade":
-			if (Rank >= 1 && Rank <= 5){ShipType = 3 + rand(11);} // 6 класс
-			if (Rank >= 5 && Rank <= 10){ShipType = 3 + rand(24);} // 6 - 5 класс
-			if (Rank >= 10 && Rank <= 15){ShipType = 15 + rand(36);} // 5 - 4 класс
-			if (Rank >= 15 && Rank <= 20){ShipType = 28 + rand(55);} // 4 - 3 класс
-			if (Rank >= 20 && Rank <= 30){ShipType = 52 + rand(52);} // 3 - 2 класс
-			if (Rank > 30){	ShipType = 84 + rand(40);} // 2 - 1 класс
-		break;
-		case "pirate":
-			if (Rank >= 1 && Rank <= 5){ShipType = 3 + rand(11);} // 6 класс
-			if (Rank >= 5 && Rank <= 10){ShipType = 3 + rand(24);} // 6 - 5 класс
-			if (Rank >= 10 && Rank <= 15){ShipType = 15 + rand(36);} // 5 - 4 класс
-			if (Rank >= 15 && Rank <= 20){ShipType = 28 + rand(55);} // 4 - 3 класс
-			if (Rank >= 20 && Rank <= 30){ShipType = 52 + rand(52);} // 3 - 2 класс
-			if (Rank > 30){	ShipType = 84 + rand(40);} // 2 - 1 класс
-		break;-
-	}
+	int iClassMin,iClassMax;
+
+	if (Rank >= 1 && Rank <= 5) {iClassMin = 6; iClassMax = 6;} // 6 класс
+	if (Rank >= 5 && Rank <= 10) {iClassMin = 6; iClassMax = 5;} // 6 - 5 класс
+	if (Rank >= 10 && Rank <= 15) {iClassMin = 5; iClassMax = 4;} // 5 - 4 класс
+	if (Rank >= 15 && Rank <= 20) {iClassMin = 4; iClassMax = 3;} // 4 - 3 класс
+	if (Rank >= 20 && Rank <= 30) {iClassMin = 3; iClassMax = 2;} // 3 - 2 класс
+	if (Rank > 30) {iClassMin = 2; iClassMax = 1;} // 2 - 1 класс
+	string sType = "";
+	if (_type == "trade") sType = "merchant";
+	if (_type == "pirate") sType = "war";
+	ShipType = GetShipTypeExt(iClassMin, iClassMax, sType, Nation);
+
 	_chr.Ship.Type = GenerateShipExt(ShipType, true, _chr);
 	SetRandomNameToShip(_chr);
     SetBaseShipData(_chr);

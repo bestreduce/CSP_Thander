@@ -1,4 +1,5 @@
-#define MAX_CANNON_DAMAGE_DISTANCE				3.0
+#define MAX_CANNON_DAMAGE_DISTANCE	2.0 //дальность расчета урона по пушке, если снаряд попал ближе этого числа(в метрах?), то расчёт идёт
+
 
 void DeleteCannonsEnvironment()
 {
@@ -38,6 +39,7 @@ bool Cannon_LoadBall()
 	{
 		AddCharacterGoodsCannon(aCharacter, iBallType, -1);
 		AddCharacterGoodsCannon(aCharacter, GOOD_POWDER, -1);
+		if (IsMainCharacter(aCharacter)) BI_UpdateLoadedProjectiles();
 		// boal <--
 		return true;
 	}
@@ -194,7 +196,7 @@ float Cannon_GetFireTime()
 
 void Cannon_FireCannon()
 {
-	float fX, fY, fZ, fSpeedV0, fDirAng, fHeightAng, fCannonDirAng, fMaxFireDistance;
+	float fX, fY, fZ, fSpeedV0, fFireDirection, fFireHeightAngle, fCannonDirAng, fMaxFireDistance, fAngle;
 
 	aref aCharacter = GetEventData();
 
@@ -204,12 +206,13 @@ void Cannon_FireCannon()
 	fY = GetEventData();
 	fZ = GetEventData();
 	fSpeedV0 = GetEventData();
-	fDirAng = GetEventData();
-	fHeightAng = GetEventData();
+	fFireDirection = GetEventData();
+	fFireHeightAngle = GetEventData();
 	fCannonDirAng = GetEventData();
 	fMaxFireDistance = GetEventData();
+	fAngle = GetEventData();
 	 // boal навел порядок по оптимизации
-	Ball_AddBall(aCharacter, fX, fY, fZ, fSpeedV0, fDirAng, fHeightAng, fCannonDirAng, fMaxFireDistance);
+	Ball_AddBall(aCharacter, fX, fY, fZ, fSpeedV0, fFireDirection, fFireHeightAngle, fCannonDirAng, fMaxFireDistance, fAngle);
 }
 
 // Damage 2 cannon from balls
@@ -250,9 +253,10 @@ float Cannon_DamageEvent()
 		CreateBlast(x,y,z);
 		CreateParticleSystem("blast_inv", x, y, z, 0.0, 0.0, 0.0, 0);
 		Play3DSound("cannon_explosion", x, y, z);
-		if (sti(aCharacter.index) == GetMainCharacterIndex())
+		if (IsMainCharacter(aCharacter))
 		{
 		    Log_Info(XI_ConvertString("Cannon_DamageEvent"));
+		    BI_UpdateCannons();
 		}
 		aCharacter.Ship.Cargo.RecalculateCargoLoad = true; // boal 27.07.06 пушки - груз
 	}

@@ -147,7 +147,7 @@ void onLoadReInit()
 //Borrowed from GOF reinit.c
 void ClearAllFantomShips()
 {
-	int  i;
+	/*int  i;
 	ref  chr;
 	for (i = 0; i < REAL_SHIPS_QUANTITY; i++)
 	{
@@ -180,7 +180,7 @@ void ClearAllFantomShips()
         	{
 			DeleteAttribute(&RealShips[i], "");
 		}
-	}
+	}*/
 }
 
 void RemoveShipFromShipyard(ref NPChar)

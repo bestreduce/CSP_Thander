@@ -368,11 +368,11 @@ void ProcessDialogEvent()
 		case "TakeGun_1":
 			iGunGoods = pchar.questTemp.PrisonGun.Goods;
 			amount = sti(pchar.questTemp.PrisonGun.Qty);
-			iTemp = makeint(sti(pchar.questTemp.PrisonGun.Sum))/12000;
+			iTemp = makeint(sti(pchar.questTemp.PrisonGun.Sum)/15000 + 0.5);
 			dialog.Text = RandPhraseSimple("Мне привезли деньги на орудия в кредитных сундуках. Получите, пожалуйста, положенные вам "+ iTemp +" сундуков.","А как же иначе! Но мне привезли деньги в кредитных сундуках. Согласно нашего уговора вам положено "+ iTemp +" сундуков. Вот, извольте получить.");
 			Link.l1 = "Сундуки - значит, сундуки. Благодарствую. С вами приятно иметь дело.";
             Link.l1.go = "TakeGun_2";
-			TakeNItems(pchar, "chest", makeint(sti(pchar.questTemp.PrisonGun.Sum)/12000));
+			TakeNItems(pchar, "chest", iTemp);
 			Log_Info("Вы получили кредитные сундуки");
 			PlaySound("interface\important_item.wav");
 			//AddMoneyToCharacter(pchar, makeint(pchar.questTemp.different.PrisonGun.Sum));
@@ -1182,10 +1182,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("GivePrisonFree", "sName", pchar.questTemp.jailCanMove.Name);
 			CloseQuestHeader("GivePrisonFree");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(pchar, "questTemp.jailCanMove.Item1");
 			DeleteAttribute(pchar, "questTemp.jailCanMove.Item2");
@@ -1224,10 +1221,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("GivePrisonFree", "sSex", GetSexPhrase("","а"));
 			CloseQuestHeader("GivePrisonFree");
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(pchar, "questTemp.jailCanMove.Item1");
 			DeleteAttribute(pchar, "questTemp.jailCanMove.Item2");
@@ -1476,6 +1470,7 @@ string GenQuestPrison_GenerateBlade() // клинки и другое
 void GetGunType()
 {
 		int iGunType;
+		ref rCannon;
 		if(makeint(pchar.rank) < 5) { iGunType = rand(1); }	//24
 		if(makeint(pchar.rank) >= 6 && makeint(pchar.rank) < 13) { iGunType = rand(3); } //24&&32
 		if(makeint(pchar.rank) >= 13 && makeint(pchar.rank) < 20) { iGunType = rand(2)+2; } //32&&42
@@ -1485,31 +1480,36 @@ void GetGunType()
 		{
 			case 0:
 				pchar.questTemp.PrisonGun.Goods = GOOD_CANNON_24;
-				pchar.questTemp.PrisonGun.Price = 900 + GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/100*175;
+				rCannon = GetGoodByType(GOOD_CANNON_24);
+				pchar.questTemp.PrisonGun.Price = sti(rCannon.Cost) + 175*GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/200;
                 pchar.questTemp.PrisonGun.Qty = sti(makeint(pchar.rank)*5+30+rand(sti(pchar.rank)));
 				pchar.questTemp.PrisonGun.Text = "пушки 24 калибра";
 			break;
 			case 1:
 				pchar.questTemp.PrisonGun.Goods = GOOD_CULVERINE_24;
-				pchar.questTemp.PrisonGun.Price = 1100 + GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/100*225;
+				rCannon = GetGoodByType(GOOD_CULVERINE_24);
+				pchar.questTemp.PrisonGun.Price = sti(rCannon.Cost) + 225*GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/200;
                 pchar.questTemp.PrisonGun.Qty = sti(makeint(pchar.rank)*5+20+rand(sti(pchar.rank)));
 				pchar.questTemp.PrisonGun.Text = "кулеврины 24 калибра";
 			break;
 			case 2:
 				pchar.questTemp.PrisonGun.Goods = GOOD_CANNON_32;
-				pchar.questTemp.PrisonGun.Price = 1300 + GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/100*275;
+				rCannon = GetGoodByType(GOOD_CANNON_32);
+				pchar.questTemp.PrisonGun.Price = sti(rCannon.Cost) + 275*GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/200;
                 pchar.questTemp.PrisonGun.Qty = sti(makeint(pchar.rank)*4+10+rand(sti(pchar.rank)));
 				pchar.questTemp.PrisonGun.Text = "пушки 32 калибра";
 			break;
 			case 3:
 				pchar.questTemp.PrisonGun.Goods = GOOD_CULVERINE_32;
-				pchar.questTemp.PrisonGun.Price = 1500 + GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/100*325;
+				rCannon = GetGoodByType(GOOD_CULVERINE_32);
+				pchar.questTemp.PrisonGun.Price = sti(rCannon.Cost) + 325*GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/200;
                 pchar.questTemp.PrisonGun.Qty = sti(makeint(pchar.rank)*4+10+rand(sti(pchar.rank)));
 				pchar.questTemp.PrisonGun.Text = "кулеврины 32 калибра";
 			break;
 			case 4:
 				pchar.questTemp.PrisonGun.Goods = GOOD_CANNON_42;
-				pchar.questTemp.PrisonGun.Price = 2100 + GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/100*425;
+				rCannon = GetGoodByType(GOOD_CANNON_42);
+				pchar.questTemp.PrisonGun.Price = sti(rCannon.Cost) + 425*GetCharacterSPECIALSimple(PChar, SPECIAL_C)*GetSummonSkillFromName(pchar, SKILL_COMMERCE)/200;
                 pchar.questTemp.PrisonGun.Qty = sti(makeint(pchar.rank)*3+20+rand(sti(pchar.rank)));
 				pchar.questTemp.PrisonGun.Text = "пушки 42 калибра";
 			break;

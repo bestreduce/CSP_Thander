@@ -10,7 +10,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                       "Да уж, действительно в третий раз...", "Извините, но портовые дела меня сейчас не интересуют.", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			//ОЗГ, Крыса
-			if (pchar.questTemp.Headhunter == "Rat" && pchar.questTemp.Headhunter.countP == 0)
+			if (checkattribute(pchar, "questTemp.Headhunter") && pchar.questTemp.Headhunter == "Rat" && pchar.questTemp.Headhunter.countP == 0)
 			{
 				link.l1 = "Говорят, не так давно, по выходу из вашего порта, пропало торговое судно. Не можете рассказать об этом поподробнее?";
 				link.l1.go = "Rat_portmanP";

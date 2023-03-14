@@ -1,12 +1,10 @@
-// -------------------------------------------------------------
-// Mett: настройки мор¤
-// Sith: доработка настроек и адаптаци¤ под разное врем¤ суток, добавлена суша
-// заготовки на разные типы волнени¤ и врем¤ суток:
-// штиль, легкий ветер, слабый ветер, умеренный ветер, свежий ветер,
-// сильный ветер, крепкий ветер, очень крепкий ветер, шторм
+﻿// -------------------------------------------------------------
+// Mett: настройки моря
+// заготовки на разные типы волнения:
+// штиль, легкий бриз, бриз, умеренный бриз, сильный бриз, шторм
 // -------------------------------------------------------------
 
-object PSea;	//объект дл¤ хранени¤ настроек пресетов
+object PSea;	//объект для хранения настроек пресетов
 
 //выбераем нужный пресет от силы ветра в море
 string WhrGetSeaPresetFromWind(float fWind)
@@ -23,19 +21,19 @@ string WhrGetSeaPresetFromWind(float fWind)
 	if(fWind > 13.8) sPreset = "near_gale";
 	if(fWind > 17.1) sPreset = "gale";
 	if(FindLocation(sLocation) != -1){
-		if (fWind > 10.0) sPreset = "strong_breeze_land";
-		else{
-			sPreset = "light_breeze_land";
-		}
+	if (fWind > 1.0) sPreset = "light_breeze_land";
+	if (fWind > 10.0) sPreset = "strong_breeze_land";
+	if (fWind > 20.0) sPreset = "storm_land";
 	}
 	if(CheckAttribute(&WeatherParams, "Storm") && sti(WeatherParams.Storm) == 1) sPreset = "storm";
 	return sPreset;
 }
 
 //настройки пресетов
-void WhrSetSeaPreset(string sPreset)
+void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 {
-	Sea.MaxSeaDistance = 2000.0;
+	ref Whr = &Weathers[iCurWeatherNum];
+	Sea.MaxSeaDistance = 8000.0;
 	string sMoveSpeed1, sMoveSpeed2
 	float fAmp1, fAnimSpeed1, fScale1;
 	float fAmp2, fAnimSpeed2, fScale2;
@@ -43,7 +41,7 @@ void WhrSetSeaPreset(string sPreset)
 	float fFoamK, fFoamV, fFoamUV, fFoamTexDisturb;
 	float fReflection, fTransparency, fFrenel, fAttenuation;
 	int iWaterColor;
-	int iSkyColor = argb(0,125,125,125);
+	int iSkyColor = argb(0,255,255,255);
 
 	switch(sPreset)
 	{
@@ -64,39 +62,39 @@ void WhrSetSeaPreset(string sPreset)
 			fFoamV = 1.75;
 			fFoamUV = 1.0;
 			fFoamTexDisturb = 0.5;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
 				fReflection = 0.5;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.3;
-				fReflection = 0.6;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
 			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 				fFoamK = 0.5;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,105,170);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.5;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "light_breeze": //легкий ветер
-			fAmp1 = 3.0;
+			fAmp1 = fWind * 0.625 + 1;//3.0;
 			fAnimSpeed1 = 2.5;
 			fScale1 = 1.0;
 			sMoveSpeed1 = "0.0, 0.0, 2.5";
@@ -112,39 +110,39 @@ void WhrSetSeaPreset(string sPreset)
 			fFoamV = 4.0;
 			fFoamUV = 1.0;
 			fFoamTexDisturb = 0.7;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
-				fReflection = 0.5;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.3;
 				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
 			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 				fFoamK = 0.5;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,100,160);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.5;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "gentle_breeze":	//слабый ветер
-			fAmp1 = 4.0;
+			fAmp1 = fWind * 0.75 + 1;//5.0;
 			fAnimSpeed1 = 1.25;
 			fScale1 = 0.6;
 			sMoveSpeed1 = "0.0, 0.0, 2.0";
@@ -155,46 +153,46 @@ void WhrSetSeaPreset(string sPreset)
 			sMoveSpeed2 = "-2.0, 0.0, 0.0";
 
 			fBumpScale = 0.05;
-			fPosShift = 1.1;
+			fPosShift = 2.0;
 
-			fFoamV = 3.5;
+			fFoamV = fAmp1 * 0.85;//4.25;
 			fFoamUV = 0.65;
 			fFoamTexDisturb = 0.5;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
-				fReflection = 0.5;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.3;
 				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
 			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 				fFoamK = 0.5;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,95,160);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.5;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "moderate_breeze":	//умеренный ветер
-			fAmp1 = 6.0;
+			fAmp1 = fWind * 0.75 + 1;//7.0;
 			fAnimSpeed1 = 3.0;
-			fScale1 = 0.35;
+			fScale1 = 0.4;
 			sMoveSpeed1 = "0.0, 0.0, 3.5";
 
 			fAmp2 = 2.0;
@@ -205,44 +203,44 @@ void WhrSetSeaPreset(string sPreset)
 			fBumpScale = 0.08;
 			fPosShift = 1.75;
 
-			fFoamV = 4.5;
-			fFoamUV = 0.45;
+			fFoamV = fAmp1 * 0.75;//5.0;
+			fFoamUV = 0.6;
 			fFoamTexDisturb = 0.5;
-			fFrenel = 0.3;
+			fFrenel = 0.7;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
-				fReflection = 0.5;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.3;
 				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
 			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 				fFoamK = 0.5;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,90,150);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.5;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "fresh_breeze":// свежий ветер
-			fAmp1 = 8.0;
+			fAmp1 = fWind * 0.75 + 1;//9.0;
 			fAnimSpeed1 = 1.5;
-			fScale1 = 0.35;
+			fScale1 = 0.30;
 			sMoveSpeed1 = "0.0, 0.0, 3.0";
 
 			fAmp2 = 3.0;
@@ -253,90 +251,90 @@ void WhrSetSeaPreset(string sPreset)
 			fBumpScale = 0.075;
 			fPosShift = 0.95;
 
-			fFoamV = 6.0;
+			fFoamV = fAmp1 * 0.75;//7.0;
 			fFoamUV = 0.45;
 			fFoamTexDisturb = 0.5;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
-				fReflection = 0.5;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.2;
 				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
-			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
+			if( GetTime() >= 10.0 && GetTime() < 20.0 )	{
 				fFoamK = 0.2;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,85,140);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 20.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.3;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "strong_breeze":// сильный ветер
-			fAmp1 = 12.0;
+			fAmp1 = fWind * 1 + 1;//15;
 			fAnimSpeed1 = 2.0;
-			fScale1 = 0.35;
+			fScale1 = 0.30;
 			sMoveSpeed1 = "0.0, 0.0, 4.0";
 
 			fAmp2 = 3.0;
-			fAnimSpeed2 = 4.0;
+			fAnimSpeed2 = 3.0;
 			fScale2 = 1.0;
 			sMoveSpeed2 = "0.0, 0.0, -1.0";
 
 			fBumpScale = 0.075;
-			fPosShift = 0.95;
+			fPosShift = 3.0;
 
-			fFoamV = 8.0;
+			fFoamV = fAmp1 * 0.65;//8.0;
 			fFoamUV = 0.3;
 			fFoamTexDisturb = 0.7;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
-				fFoamK = 0.1;
-				fReflection = 0.5;
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
+				fFoamK = 0.05;
+				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.1;
 				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
-			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
+			if( GetTime() >= 10.0 && GetTime() < 20.0 )	{
 				fFoamK = 0.2;
-				fReflection = 0.8;
-				fTransparency = 0.3;
-				iWaterColor = argb(0,0,80,120);
+				fReflection = 0.7;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,80,130);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
-				fFoamK = 0.2;
+			if( GetTime() >= 20.0 && GetTime() < 22.0 )	{
+				fFoamK = 0.1;
 				fReflection = 0.6;
-				fTransparency = 0.3;
+				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,80);
 			}}}}
 		break;
 
 		case "near_gale"://крепкий ветер
-			fAmp1 = 16.0;
+			fAmp1 = fWind * 1.15 + 1;//20.0;
 			fAnimSpeed1 = 1.75;
 			fScale1 = 0.20;
 			sMoveSpeed1 = "0.0, 0.0, 5.0";
@@ -347,39 +345,39 @@ void WhrSetSeaPreset(string sPreset)
 			sMoveSpeed2 = "0.0, 0.0, -1.0";
 
 			fBumpScale = 0.075;
-			fPosShift = 2.0;
+			fPosShift = 4.0;
 
-			fFoamV = 11.0;
+			fFoamV = fAmp1 * 0.70;//12.0;
 			fFoamUV = 0.30;
 			fFoamTexDisturb = 0.5;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 21.0) {
+			if (GetTime() < 5.0 || GetTime() >= 22.0) {
 				fFoamK = 0.1;
 				fReflection = 0.3;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,10,20);
+				iWaterColor = argb(0,10,25,40);
 			} else {
-			if( GetTime() >= 6.0 && GetTime() < 10.0 ) {
+			if( GetTime() >= 5.0 && GetTime() < 10.0 ) {
 				fFoamK = 0.1;
-				fReflection = 0.5;
+				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,5,30,50);
+				iWaterColor = argb(0,10,40,70);
 			} else {
 			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 				fFoamK = 0.2;
-				fReflection = 0.5;
+				fReflection = 0.7;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,0,80,120);
+				iWaterColor = argb(0,0,75,120);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
 				}
 			} else {
-			if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
 				fFoamK = 0.2;
-				fReflection = 0.5;
+				fReflection = 0.6;
 				fTransparency = 0.1;
-				iWaterColor = argb(0,0,55,80);
+				iWaterColor = argb(0,0,50,70);
 			}}}}
 		break;
 
@@ -395,15 +393,15 @@ void WhrSetSeaPreset(string sPreset)
 			sMoveSpeed2 = "0.0, 0.0, -1.0";
 
 			fBumpScale = 0.08;
-			fPosShift = 1.8;
+			fPosShift = 3.8;
 
-			fFoamV = 20.0;
-			fFoamUV = 0.2;
+			fFoamV = 21.0;
+			fFoamUV = 0.20;
 			fFoamTexDisturb = 0.7;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 20.0) {
-				fFoamK = 0.05;
+			if (GetTime() < 6.0 || GetTime() >= 22.0) {
+				fFoamK = 0.025;
 				fReflection = 0.3;
 				fTransparency = 0.1;
 				iWaterColor = argb(0,5,10,20);
@@ -414,16 +412,22 @@ void WhrSetSeaPreset(string sPreset)
 				fTransparency = 0.1;
 				iWaterColor = argb(0,5,30,60);
 			} else {
-			if( GetTime() >= 10.0 && GetTime() < 20.0 )	{
-				fFoamK = 0.2;
-				fReflection = 0.5;
+			if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
+				fFoamK = 0.1;
+				fReflection = 0.6;
 				fTransparency = 0.1;
 				iWaterColor = argb(0,0,55,90);
-			}}}
+			} else {
+			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
+				fFoamK = 0.1;
+				fReflection = 0.5;
+				fTransparency = 0.1;
+				iWaterColor = argb(0,0,50,70);
+			}}}}
 		break;
 
 		case "storm"://шторм
-			fAmp1 = 64.0;
+			fAmp1 = fWind * 2 + 1;//64;
 			fAnimSpeed1 = 2.25;
 			fScale1 = 0.075;
 			sMoveSpeed1 = "12.0, 0.0, 0.0";
@@ -434,14 +438,14 @@ void WhrSetSeaPreset(string sPreset)
 			sMoveSpeed2 = "0.0, 0.0, 4.0";
 
 			fBumpScale = 0.05;
-			fPosShift = 2.0;
+			fPosShift = 5.0;
 
-			fFoamV = 36.0;
-			fFoamUV = 0.25;
+			fFoamV = fAmp1 * 0.6;//42.0;
+			fFoamUV = 0.3;
 			fFoamTexDisturb = 0.7;
-			fFrenel = 0.3;
+			fFrenel = 0.6;
 			fAttenuation = 0.3;
-			if (GetTime() < 6.0 || GetTime() >= 20.0) {
+			if (GetTime() < 6.0 || GetTime() >= 21.0) {
 				fFoamK = 0.02;
 				fReflection = 0.3;
 				fTransparency = 0.1;
@@ -453,7 +457,7 @@ void WhrSetSeaPreset(string sPreset)
 				fTransparency = 0.1;
 				iWaterColor = argb(0,5,30,40);
 			} else {
-			if( GetTime() >= 10.0 && GetTime() < 20.0 )	{
+			if( GetTime() >= 10.0 && GetTime() < 21.0 )	{
 				fFoamK = 0.03;
 				fReflection = 0.5;
 				fTransparency = 0.1;
@@ -503,6 +507,27 @@ void WhrSetSeaPreset(string sPreset)
 			fFoamTexDisturb = 0.7;
 			fFrenel = 0.3;
 			fAttenuation = 0.3;
+		break;
+
+		case "storm_land": //сильный ветер суша
+			fAmp1 = 20.0;
+			fAnimSpeed1 = 2.0;
+			fScale1 = 0.125;
+			sMoveSpeed1 = "8.0, 0.0, 0.0";
+
+			fAmp2 = 6.0;
+			fAnimSpeed2 = 6.0;
+			fScale2 = 0.55;
+			sMoveSpeed2 = "0.0, 0.0, -1.0";
+
+			fBumpScale = 0.08;
+			fPosShift = 3.8;
+
+			fFoamV = 15.0;
+			fFoamUV = 0.20;
+			fFoamTexDisturb = 0.7;
+			fFrenel = 0.6;
+			fAttenuation = 0.3;
 		break;	
 	}
 
@@ -542,7 +567,7 @@ void WhrSetNewSea(float fWind)
 {
 	string sPreset = WhrGetSeaPresetFromWind(fWind);
 
-	WhrSetSeaPreset(sPreset);
+	WhrSetSeaPreset(iCurWeatherNum, sPreset, fWind);
 
 	Sea.Sea2.Amp1 = Whr_GetFloat(PSea, "Amp1");
 	Sea.Sea2.AnimSpeed1 = Whr_GetFloat(PSea, "AnimSpeed1");

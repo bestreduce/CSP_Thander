@@ -874,16 +874,21 @@ object g_TmpModelVariable; // код от к3, в скриптах нет воо
 
 void spawnToughSkeleton(aref _location)
 {
-	if (drand(100) < 16 && CheckAttribute(_location, "locators.monsters") && !bMonstersGen && _location.type == "cave" && !CheckAttribute(pchar, "cursed.waitingSkull") && !CheckAttribute(pchar, "DisableToughSkeleton") && pchar.rank >= 3 && pchar.sex != "skeleton")
+	if(CheckAttribute(_location, "ToughSkeletonTimer"))
 	{
-		if (!CheckAttribute(pchar, "cursed.quest") || GetQuestPastDayParam("pchar.questTemp.Cursed") >= 180)
+		if (GetNpcQuestPastDayParam(_location, "ToughSkeletonTimer") <= sti(_location.ToughSkeletonTimer)) return;//в этой локации запрещена генерация проклятого кэпа
+			else DeleteAttribute(_location, "ToughSkeletonTimer");
+	}
+	if (drand(100) < 50 && CheckAttribute(_location, "locators.monsters") && !bMonstersGen && _location.type == "cave" && !CheckAttribute(pchar, "cursed.waitingSkull") && pchar.rank >= 3 && pchar.sex != "skeleton")
+	{
+		if (!CheckAttribute(pchar, "cursed.quest") || GetQuestPastDayParam("pchar.questTemp.Cursed") >= 90)
 		{
 			pchar.cursed.quest = true;
 			ref sld;
 
 			//LAi_group_Delete("EnemyFight");
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_spy", sti(pchar.rank)+20, PIRATE, 1, true));
-			else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+			else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
 			FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 100, 100, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 			DeleteAttribute(sld, "SuperShooter");
 			int hitpoints = rand(sti(pchar.rank)*15)+1000;

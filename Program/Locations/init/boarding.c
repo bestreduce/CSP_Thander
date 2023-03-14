@@ -2645,6 +2645,104 @@ int LocationInitBoarding(int n)
 
 	n = n + 1;
 
+	//ID
+	Locations[n].id = "New_Cabin3"; // fight
+	Locations[n].id.label = "cabine";
+	Locations[n].filespath.models = "locations\decks\nc_cabin3";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin3.tga";
+	//Sound
+	locations[n].type = "boarding_cabine";
+
+	//Models
+	//Always
+	Locations[n].models.always.l1 = "nc_cabin3";
+	Locations[n].models.always.window = "nc_cabin3_glass";
+	Locations[n].models.always.window.tech = "LocationWindows";
+	Locations[n].models.always.window.level = 65531;
+	//Day
+	//VolumeLight
+	Locations[n].models.day.vlight = "nc_cabin3_rays";
+	Locations[n].models.day.vlight.uvslide.v0 = -0.05;
+    Locations[n].models.day.vlight.uvslide.v1 = 0.0;
+	Locations[n].models.day.vlight.tech = "LocationWaterFall";
+	Locations[n].models.day.vlight.level = 99950;
+	Locations[n].models.day.locators = "nc_cabin3_ld";
+	Locations[n].models.day.charactersPatch = "nc_cabin3_pd";
+	//Night
+	Locations[n].models.night.locators = "nc_cabin3_ln";
+	Locations[n].models.night.charactersPatch = "nc_cabin3_pn";
+
+	//Environment
+	Locations[n].environment.sea = "true";
+	Locations[n].environment.weather = "true";
+
+	Locations[n].locators_radius.reload.reload1 = 0.5;
+    Locations[n].locators_radius.rld.loc0 = 0.5;
+    Locations[n].locators_radius.rld.loc1 = 0.5;
+    Locations[n].locators_radius.box.box1 = 0.6;
+
+    Locations[n].boarding = "true";
+	Locations[n].boarding.nextdeck = "";
+	Locations[n].camshuttle = 1;
+	Locations[n].boarding.locatorNum = 1;
+	Locations[n].CabinType = true;
+	locations[n].environment.weather.rain = false;
+	Locations[n].boarding.Loc.Hero = "loc0";
+    Locations[n].boarding.Loc.Capt = "loc1";
+
+	n = n + 1;
+
+	//ID
+	Locations[n].id = "My_New_Cabin3"; // peace
+	Locations[n].id.label = "cabine";
+	Locations[n].filespath.models = "locations\decks\nc_cabin3";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin3.tga";
+	//Sound
+	locations[n].type = "ship_cabin"; // nc_mod
+
+	//Models
+	//Always
+	Locations[n].models.always.l1 = "nc_cabin3";
+	Locations[n].models.always.window = "nc_cabin3_glass";
+	Locations[n].models.always.window.tech = "LocationWindows";
+	Locations[n].models.always.window.level = 65531;
+	//Day
+	//VolumeLight
+	Locations[n].models.day.vlight = "nc_cabin3_rays";
+	Locations[n].models.day.vlight.uvslide.v0 = -0.05;
+    Locations[n].models.day.vlight.uvslide.v1 = 0.0;
+	Locations[n].models.day.vlight.tech = "LocationWaterFall";
+	Locations[n].models.day.vlight.level = 99950;
+	Locations[n].models.day.locators = "nc_cabin3_ld";
+	Locations[n].models.day.charactersPatch = "nc_cabin3_pd";
+	//Night
+	Locations[n].models.night.locators = "nc_cabin3_ln";
+	Locations[n].models.night.charactersPatch = "nc_cabin3_pn";
+
+	//Environment
+	Locations[n].environment.sea = "true";
+	Locations[n].environment.weather = "true";
+
+	locations[n].box1 = Items_MakeTime(0, 1, 1, 2003);
+
+	Locations[n].locators_radius.reload.reload1 = 0.5;
+    Locations[n].locators_radius.rld.loc0 = 0.5;
+    Locations[n].locators_radius.rld.loc1 = 0.5;
+    Locations[n].locators_radius.box.box1 = 0.6;
+
+    LAi_LocationFightDisable(&Locations[n], true);
+
+    Locations[n].reload.l1.name = "reload1";
+	Locations[n].reload.l1.go = "My_Deck";
+	Locations[n].reload.l1.emerge = "reload1";
+	Locations[n].reload.l1.label = "Deck.";
+
+	Locations[n].boarding = "true";
+	Locations[n].camshuttle = 1;
+	locations[n].environment.weather.rain = false;
+
+	n = n + 1;
+	
 	///// -------------------- New Cabins (nc_mod) -------------------- /////
 
 	/////////////////////////////////////////////

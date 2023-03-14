@@ -16,6 +16,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1 = "Тебе ни о чём не говорит имя Карла?";
                 link.l1.go = "PDM_ONV_SJ_1";
             }
+			if (CheckAttribute(pchar, "questTemp.PKM_SvtvA_PoiskPadre_Tavern"))	//Квест "Странные вещи творятся на архипелаге"
+            {
+                link.l1 = "Хотелось бы узнать, какие слухи ходят о похищении местного священника.";
+                link.l1.go = "PKM_SvtvA_PPT_1";
+            }
 
             // ==> Проверяем поле состояния квестов. Эдди.
 			switch(pchar.questTemp.State)
@@ -64,6 +69,77 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Как же ты меня выручил. Спасибо!";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.PDM_ONV_SanJuan");
+		break;
+		
+		case "PKM_SvtvA_PPT_1":	//Квест "Странные вещи творятся на архипелаге"
+			dialog.text = "Да об этом вся колония говорит! Представляете, прямо посреди белого дня ворвались в церковь, и похитили его! Никто даже глазом не успел моргнуть, как они исчезли!";
+			link.l1 = "И кто это были? Люди в красных балахонах?";
+			link.l1.go = "PKM_SvtvA_PPT_2";
+		break;
+		
+		case "PKM_SvtvA_PPT_2":
+			dialog.text = "Нет. Это были обычные головорезы. Но странно, что вы упомянули о людях в красных балахонах...";
+			link.l1 = "Да? Почему же?";
+			link.l1.go = "PKM_SvtvA_PPT_3";
+		break;
+		
+		case "PKM_SvtvA_PPT_3":
+			dialog.text = "Дело в том, что недавно появился тут парень одетый точь-в-точь, как вы сказали...";
+			link.l1 = "Да неужели? И что же произошло дальше?";
+			link.l1.go = "PKM_SvtvA_PPT_4";
+		break;
+		
+		case "PKM_SvtvA_PPT_4":
+			dialog.text = "Да ничего, что могло бы вас заинтересовать. Это наши внутренние проблемы.";
+			link.l1 = "Может быть, ты, всё-таки, мне о них расскажешь? Мне кажется, что эти два события связанны между собой.";
+			link.l1.go = "PKM_SvtvA_PPT_5";
+		break;
+		
+		case "PKM_SvtvA_PPT_5":
+			dialog.text = "Может вы и правы. Так и быть расскажу. Значится так\nНедели три назад появился у нас этот парень в красной хламиде. Вежливый такой, никому слова дурного не скажет\n";
+			link.l1 = "Продолжай.";
+			link.l1.go = "PKM_SvtvA_PPT_6";
+		break;
+		
+		case "PKM_SvtvA_PPT_6":
+			dialog.text = "Ну, на него как-то все начали коситься, но ничего плохого он не делал, с молодёжью вот, правда, общался, но мы даже рады были - в кои-то веки они не шлялись без дела.";
+			link.l1 = "И?";
+			link.l1.go = "PKM_SvtvA_PPT_7";
+		break;
+		
+		case "PKM_SvtvA_PPT_7":
+			dialog.text = "Хех, а потом что-то произошло. Теперь почитай все молодые парни собираются в какой-то поход вместе с ним\nСын кузнеца вон вообще из дома ушёл, кузнец пошёл разговаривать с этим типом, да выбежал из его дома, как ошпаренный, а ночью напился да утоп - понесла его нелёгкая на пристань\nА сын его даже глазом не повёл. Живёт, как ни в чём ни бывало.";
+			link.l1 = "Да, странно всё это. А где я могу найти этого парня??";
+			link.l1.go = "PKM_SvtvA_PPT_8";
+		break;
+		
+		case "PKM_SvtvA_PPT_8":
+			dialog.text = "Сына кузнеца-то? Да он шляется где-то по городу. А этот тип в балахоне пропал куда-то.";
+			link.l1 = "Хорошо, схожу, поговорю с ним, как его звать?";
+			link.l1.go = "PKM_SvtvA_PPT_9";
+		break;
+		
+		case "PKM_SvtvA_PPT_9":
+			dialog.text = "Джордано, его имечко.";
+			link.l1 = "Спасибо.";
+			link.l1.go = "PKM_SvtvA_PPT_10";
+		break;
+		
+		case "PKM_SvtvA_PPT_10":
+			DialogExit();
+			
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_PoiskPadre_Tavern");
+			AddQuestRecord("PKM_Animists", "25");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			
+			sld = GetCharacter(NPC_GenerateCharacter("PKM_Jordano", "Jordano", "man", "man1", 10, PIRATE, -1, false));
+			sld.name = "Джордано";
+			sld.lastname = "";
+			LAi_SetStayType(sld);
+			sld.City = "SanJuan";
+			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Джордано_1";
+			ChangeCharacterAddressGroup(sld, "SanJuan_town", "patrol", "patrol16");
 		break;
 
 	}

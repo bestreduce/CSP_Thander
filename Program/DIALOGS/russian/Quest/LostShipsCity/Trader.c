@@ -10,8 +10,6 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	if (CheckAttribute(npchar, "quest.takeMap")) Log_SetStringToLog("Статус: " + npchar.quest.takeMap);
-
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":

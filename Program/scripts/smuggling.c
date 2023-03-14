@@ -589,3 +589,14 @@ int GetContrabandGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref
 
     return MakeInt(priceModify * basePrice * tradeModify * skillModify * _qty * costModify * cModify + 0.5);
 }
+
+void ContrabandInterruptionSetStatus(bool status) {
+	for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE/2); i++) {
+		ref randSmug = &characters[GetCharacterIndex("Rand_Smug0"+i)];
+		if (status) {
+			randSmug.ContrabandInterruption = true;
+		} else {
+			DeleteAttribute(randSmug, "ContrabandInterruption");
+		}
+	}
+}

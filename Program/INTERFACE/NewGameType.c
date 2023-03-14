@@ -112,15 +112,20 @@ void CalculateInfoData()
 
 	makearef(rootItems, pchar.CheckEnemyCompanionDistance);
 
+	if (GetAttributesNum(rootItems) == 0)
+	{
+		trace("ERROR: NewGameType cannot find ships in contact")
+		return
+	}
+	if (GetAttributesNum(rootItems) == 1)
+	{
+		totalInfo = xiStr("MSG_LeaveBattle_3");
+		sEnd = xiStr("MSG_LeaveBattle_4");
+	}
 	if (GetAttributesNum(rootItems) > 1)
 	{
 		totalInfo = xiStr("MSG_LeaveBattle_1");
 		sEnd = xiStr("MSG_LeaveBattle_2");
-	}
-	else
-	{
-		totalInfo = xiStr("MSG_LeaveBattle_3");
-		sEnd = xiStr("MSG_LeaveBattle_4");
 	}
 	cn = sti(GetAttributeValue(GetAttributeN(rootItems, 0)));
 	if (cn != -1)

@@ -72,7 +72,7 @@ void ProcessDialogEvent()
 
 			dialog.text = NPCharSexPhrase(npchar, "Хотите прикупить снаряжение для себя или своих офицеров, капитан? Тогда вы обратились по адресу!", "Ой, капитан, я так и знала, что вы подойдёте именно ко мне!.. Могу предложить снаряжение для вас и ваших офицеров, а также множество других необходимых вещей.");
 			//--> Sinistra. Пролог Анжелика Тич
-			if (pchar.questTemp.AnjelikaTichPrologue == "ATP")
+			if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP")
 			{
    				dialog.text = NPCharSexPhrase(npchar, "Подходите, выбирайте, сеньорита. Всё высшего качества!", "Ой, сеньорита, я так и знала, что вы подойдёте именно ко мне!.. Не стесняйтесь, выбирайте!");
 			}

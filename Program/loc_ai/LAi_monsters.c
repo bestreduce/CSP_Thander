@@ -264,6 +264,7 @@ bool LAi_CreateEncounters(ref location)
 			pchar.quest.(str).win_condition.l1.date.month = GetAddingDataMonth(0, 0, 1);
 			pchar.quest.(str).win_condition.l1.date.year  = GetAddingDataYear(0, 0, 1);
 			pchar.quest.(str).win_condition               = "LandEnc_RaidersOver";
+			pchar.quest.(str).EncQty = num; //кол-во бандитов
 			pchar.quest.(str).LocIdx = location.index;
 		break;
 		//------------------ Спасаем девку в пампасах ----------------------
@@ -739,7 +740,8 @@ bool LAi_CreateEncounters(ref location)
 
 				DeleteAttribute(chr, "equip");
 				DeleteAttribute(chr, "items");
-				DeleteAttribute(chr, "perks.list");
+				DeleteAllPerksExceptChar(chr);
+				//DeleteAttribute(chr, "perks.list");
 
 				if(chr.model == "Canib_boss") // Глава каннибалов круче своих по экипировке
 				{
@@ -789,7 +791,8 @@ bool LAi_CreateEncounters(ref location)
 					TakeNItems(chr, "potion1", 7);
 					TakeNItems(chr, "potion2", 7);
 					FantomMakeCoolFighter(chr, iScl*0.80, iScl*2.55, iScl*0.35, _Blade, "", 300);
-					DeleteAttribute(chr, "perks.list");
+					DeleteAllPerksExceptChar(chr);
+					//DeleteAttribute(chr, "perks.list");
 					AddBonusEnergyToCharacter(chr, 200);
 					SetCharacterPerk(chr, "BasicDefense");
                     SetCharacterPerk(chr, "Tireless");
@@ -805,7 +808,8 @@ bool LAi_CreateEncounters(ref location)
 					_Blade = GiveRandomBladeByType("indian");
 					FantomMakeCoolFighter(chr, iScl*0.55, iScl*1.90, iScl*0.25, _Blade, "", 150);
 					AddBonusEnergyToCharacter(chr, 30);
-					DeleteAttribute(chr, "perks.list");
+					DeleteAllPerksExceptChar(chr);
+					//DeleteAttribute(chr, "perks.list");
 					SetCharacterPerk(chr, "BasicDefense");
 					SetCharacterPerk(chr, "AdvancedDefense");
                     SetCharacterPerk(chr, "Tireless");

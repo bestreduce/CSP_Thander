@@ -64,7 +64,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "Jamaica_ratF_3":
-			dialog.text = "Не знаю, "+ GetSexPhrase("дружище","мэм") +". Знал - подсказал бы.";
+			dialog.text = "Не знаю, "+ GetSexPhrase("дружище","мэм") +". Знал бы - подсказал.";
 			link.l1 = "Ладно, все понятно. Пойду, у кого ещё поспрашиваю...";
 			link.l1.go = "exit";
 			AddQuestRecord("Slavetrader", "21_4");

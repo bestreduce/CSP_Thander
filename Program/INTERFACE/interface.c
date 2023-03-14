@@ -1710,6 +1710,7 @@ void procInfoShow()
 
 			//LayerCreate("inf_realize", 1);
 			//LayerSetRealize("inf_realize", 1);
+			//LayerSetRealize(INFO_REALIZE);
 		}
 	}
 	else
@@ -1978,6 +1979,15 @@ void StartLanguageSetting(string lngID)
 	if( LoadSegment(segmentName) )
 	{
 		InitPiratesNames();
+		UnloadSegment(segmentName);
+	} else {
+		Trace("Error! Can`t Load Segment: " + segmentName);
+	}
+	
+	segmentName = "Characters\" + LanguageGetLanguage() + "\Indian_names.c";
+	if( LoadSegment(segmentName) )
+	{
+		InitIndianNames();
 		UnloadSegment(segmentName);
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);

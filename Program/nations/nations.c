@@ -6,9 +6,9 @@ void Nation_InitAfterLoading()
 {
 	int i,j;
 	// check version
-	int version_number = 099;
+	int version_number = 99;
 	if( CheckAttribute(pchar,"version_number") ) {
-		version_number = pchar.version_number;
+		version_number = sti(pchar.version_number);
 	}
 
 	if( version_number < 104 )
@@ -227,7 +227,7 @@ int GetRelation(int iCharacterIndex1, int iCharacterIndex2)
 	return NationsRelations[iNation1 * MAX_NATIONS + iNation2];
 }
 
-int GetRelationEvent()
+int GetRelationEvent() // FPSTODO: в бою вызывается слишком часто, оптимизировать
 {
 	int iCharacterIndex1 = GetEventData();
 	int iCharacterIndex2 = GetEventData();
@@ -437,4 +437,9 @@ int GetEnemyNationToMainCharacter()
 void DelCharacterRelation(int iCharacterIndex1)
 {
 	DeleteAttribute(&Characters[iCharacterIndex1], "relation");
+}
+
+bool IsColonyEnemyToMainCharacter(string colonyID) {
+	ref rColony = GetColonyByIndex(FindColony(colonyID));
+	return GetNationRelation(GetBaseHeroNation(), sti(rColony.nation)) == RELATION_ENEMY;
 }

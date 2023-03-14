@@ -2222,6 +2222,7 @@ void EncGirl_DeathSimple(string qName)
 		CloseQuestHeader("JungleGirl");
 	}
 	ChangeCharacterReputation(pchar, -30);
+	pchar.quest.EncGirl_DeliveBack.over = "yes";
 	pchar.quest.DeleteGirlGroup.win_condition.l1 = "ExitFromLocation";
     pchar.quest.DeleteGirlGroup.win_condition.l1.location = pchar.location;
     pchar.quest.DeleteGirlGroup.function = "EncGirl_DeleteGirlGroup";
@@ -2514,8 +2515,8 @@ void EncGirl_RapersChest(string qName)
 
 void EncGirl_TreasureLose(string qName)
 {
-	ref location = &Locations[FindLocation(pchar.GenQuest.EncGirl.Treasure.Location)];
-	string boxId = pchar.GenQuest.EncGirl.Treasure.Locator;
+	ref location = &Locations[FindLocation(pchar.GenQuest.TreasureEncGirl)];
+	string boxId = pchar.GenQuest.TreasureEncGirlBox;
 
 	pchar.quest.EncGirl_RapersTreasure.over = "yes";
 
@@ -3540,7 +3541,7 @@ void CaptainComission_PirateAttack_DieHard(string qName)
 void CaptainComission_GaleonInit(ref chref)
 {
 	pchar.GenQuest.CaptainComission.Nation = chref.nation;
-	pchar.GenQuest.CaptainComission.City = GetQuestNationsCity(sti(chref.nation));
+	pchar.GenQuest.CaptainComission.City = GetQuestNationsPrison(sti(chref.nation));
 	pchar.GenQuest.CaptainComission.Name = GenerateRandomName_Generator(sti(chref.nation), "man");
 	pchar.GenQuest.CaptainComission.ShipName = chref.Back.Ship.Name;
 	pchar.GenQuest.CaptainComission.City1 = FindAlliedColonyForNationExceptColony(pchar.GenQuest.CaptainComission.City);

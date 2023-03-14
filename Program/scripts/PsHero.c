@@ -70,7 +70,7 @@ void InitPsHeros()
 
 			if (rand(4) < 3)
 			{
-				ch.Ship.Type = GenerateShipExt((SHIP_BERMSLOOP + rand(11)), 0, ch);
+				ch.Ship.Type = GenerateShipExt((SHIP_KETCH + rand(11)), 0, ch);
 				SetBaseShipData(ch);
 				SetRandomNameToShip(ch);
 
@@ -276,8 +276,7 @@ void PGG_DailyUpdateEx(int i)
 				DeleteAttribute(chr, "PGGAi.Rebirth");
 				DeleteAttribute(chr, "Ship");
 				chr.Ship.Type = SHIP_NOTUSED;
-				if (chr.sex != "woman")	chr.Dialog.FileName = "PGG_dialog.c";
-				else	chr.Dialog.FileName = "pgg_dialog_town.c";
+				chr.Dialog.FileName = "PGG_dialog.c";
 				chr.Dialog.CurrentNode = "Second Time";
 
 				chr.PGGAi.DontUpdate = true;
@@ -1153,7 +1152,7 @@ void PGG_UpdateEquip(ref chr)
 	if (bShipNotUsed || bOk)
 	{
 		n = 0;
-		for (i = 0; i <= SHIP_SP_SANFELIPE; i++)
+		for (i = 0; i <= SHIP_OCEAN; i++)
 		{
 			if (CheckAttribute(&ShipsTypes[i], "Class") && sti(ShipsTypes[i].Class) >= iClass && prevClass > sti(ShipsTypes[i].Class))
 			{
@@ -1196,7 +1195,6 @@ void PGG_UpdateEquip(ref chr)
 			}
 		}
 	}
-	Fantom_SetBalls(chr, "pirate");
 //--------------------------------------------------
 // Blade & Gun Section
 //--------------------------------------------------
@@ -1318,7 +1316,7 @@ void PGG_UpdateShipEquip(ref chr)
 	if (chr.HeroParam.HeroType == "Merchant")
 	{
 		Fantom_SetCannons(chr, "trade");
-		Fantom_SetBalls(chr, "trade");
+		Fantom_SetBalls(chr, "pirate");
 		Fantom_SetGoods(chr, "trade");
 	}
 	else
@@ -1389,35 +1387,26 @@ void AddRemoveGoodsInStore(string _town, int _tradeGoods, int _quantityGoods, bo
 //==================================================
 // Locations
 //==================================================
-//Найти город назначения для персонажа
+//Mett: найти город назначения для персонажа, дописал под новый расчет дистанции между колониями
 string PGG_FindTargetTown(ref chr)
 {
-	int iRnd, iNum, iMin, iMax;
-	aref arDest;
-	string sAttr;
-	string sCurTown = chr.PGGAi.location.town;
+    string sCurTown = chr.PGGAi.location.town;
 
-	makearef(arDest, NullCharacter.TravelMap.(sCurTown));
-	iNum = GetAttributesNum(arDest);
-	iRnd = rand(iNum-1);
-	sAttr = "t" + iRnd;
+    int i = 1;
+    string sTargetIsland = GetRandomIslandId();    //получаем рандомный остров
+    while (GetCityNameByIsland(sTargetIsland) == "None" || GetCityNameByIsland(sTargetIsland) == "Caiman" || GetCityNameByIsland(sTargetIsland) == "LostShipsCity") //ищем есть ли на острове колония
+    {
+        i++;
+        sTargetIsland = GetRandomIslandId();    //ищем повторно
+    }
+    string sTargetTown = FindTownOnIsland(sTargetIsland); //присваеваем колонию, в которую направляемся
 
-	if (iRnd == -1)
-	{
-		trace("ОШИБКА: <PsHero.c>: Не могу найти путь из " + sCurTown);
-	}
-	//необитаемые острова, там нет городов, туда не плаваем.
-	while (arDest.(sAttr).town == "")
-	{
-		sAttr = "t" + rand(iNum-1);
-	}
+    chr.PGGAi.Task.Target = sTargetTown;
+    chr.PGGAi.Task.Target.days = CalculateColonyDistance(sCurTown, sTargetTown) + rand(2);    //новый расчет дней на дорогу
 
-	chr.PGGAi.Task.Target = arDest.(sAttr).town;
-	iMin = sti(arDest.(sAttr).town.days.min);
-	iMax = sti(arDest.(sAttr).town.days.max);
-	chr.PGGAi.Task.Target.days = iMin + rand(iMax-iMin);
+    Log_TestInfo("PGG_FindTargetTown: для " + chr.id + " выбрана колония " + sTargetTown + ", количество попыток " + i);
 
-	return arDest.(sAttr).town;
+    return sTargetTown;
 }
 
 //получить ID случайного города по нации. Будет для раскидывания ПГГ в начале игры по миру.
@@ -1739,9 +1728,9 @@ void PGG_OnInit_WaitInTavern(ref rTmpl)
 {
 	object oPrm;
 	ref chr = GetCharacter(sti(pchar.questTemp.PGG_Rumour));
-
 	oPrm.PsHero_Name = GetFullName(chr);
 	oPrm.Town_Name = XI_ConvertString("Colony" + chr.PGGAi.location.town + "Gen");
+	if (chr.sex == "woman") ttttstr = LanguageConvertString(LanguageOpenFile("RumourTexts.txt"), rTmpl.curtid+"W");
 	ttttstr = GetAssembledString(ttttstr, &oPrm);
 }
 
@@ -1751,6 +1740,7 @@ void PGG_OnInit_WorkOnMayor(ref rTmpl)
 	ref chr = GetCharacter(sti(pchar.questTemp.PGG_Rumour));
 
 	oPrm.PsHero_Name = GetHeroName(sti(chr.PGGAi.HeroNum));
+	if (chr.sex == "woman") ttttstr = LanguageConvertString(LanguageOpenFile("RumourTexts.txt"), rTmpl.curtid+"W");
 	ttttstr = GetAssembledString(ttttstr, &oPrm);
 
 	rTmpl.City = chr.PGGAi.location.town;
@@ -1760,11 +1750,11 @@ void PGG_OnInit_SailToIsland(ref rTmpl)
 {
 	object oPrm;
 	ref chr = GetCharacter(sti(pchar.questTemp.PGG_Rumour));
-
 	oPrm.PsHero_Name = GetFullName(chr);
 	oPrm.To = "в";
 	if (chr.PGGAi.Task.Target == "Tortuga") oPrm.To = "на";
 	oPrm.Town_Name = XI_ConvertString("Colony" + chr.PGGAi.Task.Target + "Acc");
+	if (chr.sex == "woman") ttttstr = LanguageConvertString(LanguageOpenFile("RumourTexts.txt"), rTmpl.curtid+"W");
 	ttttstr = GetAssembledString(ttttstr, &oPrm);
 
 	rTmpl.actualtime = sti(chr.PGGAi.Task.Target.days);
@@ -1778,8 +1768,9 @@ void PGG_OnInit_WorkOnStore(ref rTmpl)
 
 	iGood = sti(chr.PGGAi.Task.Target.Goods);
 	oPrm.PsHero_Name = GetFullName(chr);
-	oPrm.Good = XI_ConvertString(Goods[iGood].name);
+	oPrm.Good = XI_ConvertString(Goods[iGood].name + "Gen");
 	oPrm.Town_Name = XI_ConvertString("Colony" + chr.PGGAi.Task.Target + "Acc");
+	if (chr.sex == "woman") ttttstr = LanguageConvertString(LanguageOpenFile("RumourTexts.txt"), rTmpl.curtid+"W");
 	ttttstr = GetAssembledString(ttttstr, &oPrm);
 
 	rTmpl.actualtime = sti(chr.PGGAi.Task.Target.days);
@@ -1848,6 +1839,8 @@ string PGG_Event_WorkWithContra(ref rRum)
 
 	oPrm.PsHero_Name = GetFullName(chr);
 	oPrm.ContraPlace = GetConvertStr(sSmugglersLocation, "LocLables.txt");
+
+	if (chr.sex == "woman") rRum.text = LanguageConvertString(LanguageOpenFile("RumourTexts.txt"), rRum.curtid+"W");
 
 	return GetAssembledString(rRum.text, &oPrm);
 }
@@ -1930,24 +1923,23 @@ bool PGG_CheckForQuestOffer(ref chr)
 {
 	bool retVal = false;
 
-	if (rand(2) == 1 || CheckAttribute(chr, "PGGWhisperQuestStart")) return retVal; // пусть сам ГГ тоже подходит, а не только ПГГ достает, второй заход в таврену может вынудить подойти ПГГ
-	//не забыть вернуть вероятности и условия
+	if (rand(2) == 1 || CheckAttribute(chr, "PGGWhisperQuestStart")) return retVal;
 	int iTst = 110 - PGG_ChangeRelation2MainCharacter(chr, 0); //зависит от отношения, лучше = чаще
-	// пусть будет честный тест
 	if (bBettaTestMode && CheckAttribute(PChar, "PGGAlwaysQuest")) iTst = 10; //в версии нет этого аттрибута
 
-	int iDays = GetQuestPastDayParam("QuestOffer");
 	bool bOkWhisper = !CheckAttribute(pchar,"GiantEvilSkeleton") && chr.name == "Виспер";
-	bool bOk = PGG_IsQuestAvaible() || bOkWhisper);
+	bool bOkShip = sti(chr.Ship.Type) != SHIP_NOTUSED && sti(PChar.Ship.Type) != SHIP_NOTUSED && GetCharacterShipClass(PChar) <= 4;
+	bool bOkRnd = rand(100) > iTst;
+	int  iDays = GetQuestPastDayParam("QuestOffer");
+	bool bOkDaysPassed = iDays > 25 + drand(10);
+	bool bOkCompanionsMax = GetCompanionQuantity(PChar) < COMPANION_MAX;
+	bool bOk = PGG_IsQuestAvaible() || bOkWhisper;
 
-	if (sti(chr.Ship.Type) != SHIP_NOTUSED && sti(PChar.Ship.Type) != SHIP_NOTUSED && rand(100) > iTst && iDays > 25 + drand(10))
+	if (bOk && bOkShip && bOkRnd && bOkDaysPassed && bOkCompanionsMax)																					
 	{
-		if (GetCharacterShipClass(PChar) <= 4 && GetCompanionQuantity(PChar) < COMPANION_MAX && bOk)
-		{
-			chr.PGGAi.ActiveQuest.QstNumber = 0;
-			retVal = true;
-			SaveCurrentQuestDateParam("QuestOffer"); // какое-то время ПГГ не будут докучать нам
-		}
+		chr.PGGAi.ActiveQuest.QstNumber = 0;
+		retVal = true;
+		SaveCurrentQuestDateParam("QuestOffer"); // какое-то время ПГГ не будут докучать нам
 	}
 
 	if (retVal)
@@ -1962,7 +1954,7 @@ bool PGG_CheckForQuestOffer(ref chr)
 		chr.PGGAi.ActiveQuest = 1;
 		LAi_SetActorType(chr);
 		LAi_ActorDialog(chr, pchar, "", 2.0, 0);
-		DoQuestCheckDelay("OpenTheDoors", 5.0);      // fix
+		DoQuestCheckDelay("OpenTheDoors", 5.0);
 	}
 	return retVal;
 }
@@ -1988,23 +1980,22 @@ void PGG_Q1RemoveShip(string qName)
 
 	Group_SetAddress("PGGQuest", "None", "", "");
 	Group_DelCharacter("PGGQuest", chr.id);
-//	Group_DeleteGroup("PGGQuest");
-	//#20180927-01
+
 	if (CheckAttribute(PChar, "GenQuest.PGG_Quest.Stage") && sti(PChar.GenQuest.PGG_Quest.Stage) < 2 && sti(PChar.GenQuest.PGG_Quest.Stage) >= -1)
 	{
 		chr.Dialog.CurrentNode = "Second Time";
-		DeleteAttribute(chr, "PGGAi.ActiveQuest");
-		DeleteAttribute(PChar, "GenQuest.PGG_Quest");
-		//#20180927-01
 		int nRelChange = -10;
-		if(sti(PChar.GenQuest.PGG_Quest.Stage) == -1)
-            nRelChange = -20;
+		if(sti(PChar.GenQuest.PGG_Quest.Stage) == -1) nRelChange = -20;
 		PGG_ChangeRelation2MainCharacter(chr, nRelChange);
 		if (chr.sex != "woman")CloseQuestHeader("Gen_PGGQuest1");
 		else CloseQuestHeader("Gen_PGGQuest1woman");
 	}
+	
+	DeleteAttribute(chr, "PGGAi.ActiveQuest");
+	DeleteAttribute(PChar, "GenQuest.PGG_Quest");
 	DeleteAttribute(chr, "AlwaysFriend");
 }
+
 void PGG_Q1AcceptedQuestDeleteFantom(string qName)
 {
 	ref chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
@@ -2133,7 +2124,7 @@ void PGG_Q1AfterSeaFight(string qName)
 void PGG_Q1PlaceShipsNearIsland()
 {
 	ref chr;
-	string sTmp, sLoc, sType;
+	string sCharId, sLoc, sType;
 	int i, iRnd, iNation, iLifeDay, iRank, iGoods, iSpace;
 
 	sLoc = PChar.GenQuest.PGG_Quest.Island;
@@ -2142,51 +2133,16 @@ void PGG_Q1PlaceShipsNearIsland()
 	iNation = sti(PChar.GenQuest.PGG_Quest.Nation);
 	iLifeDay = sti(PChar.GenQuest.PGG_Quest.Days);
 
-	iRnd = 3 + rand(2);
+	iRnd = 3 + drand(2);
 	for (i = 0; i < iRnd; i++)
 	{
-		sTmp = "pirate_" + i;
-		chr = GetCharacter(NPC_GenerateCharacter("RandQuestCap_0" + i, sTmp, "man", "man", MakeInt(iRank/2 + rand(iRank)), iNation, iLifeDay, true));
-		chr.AlwaysSandbankManeuver = true;
+		sCharId = "RandQuestCap_0" + i;
+
+		if (i < 2) chr = PGG_Q1CreateWarShip(sCharId); // первые два военные, остальные торговые
+		else       chr = PGG_Q1CreateTradeShip(sCharId);
+
 		SetCharacterPerk(chr,PerksChars());
-		if (i < 2)
-		{
-			//Lipsar правки в спавне-->
-			CreatePGG_War(chr, iNation, pchar);
-			SetRandomNameToShip(chr);
-			SetBaseShipData(chr);
-			SetCrewQuantityFull(chr);
-			Fantom_SetCannons(chr, "war"); //fix
-			Fantom_SetBalls(chr, "pirate");
-			Fantom_SetGoods(chr, "war");
-			iSpace = GetCharacterFreeSpace(chr, iGoods)/rand(10);
-			// iSpace = MakeInt(iSpace/(2+rand(1)));
-			if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.Goods.Qty")) PChar.GenQuest.PGG_Quest.Goods.Qty = 0;
-			PChar.GenQuest.PGG_Quest.Goods.Qty = sti(PChar.GenQuest.PGG_Quest.Goods.Qty) + iSpace;
-			Fantom_SetCharacterGoods(chr, iGoods, iSpace, 1);
-			SetRandomNameToShip(chr);
-			SetFantomParamHunter(chr); //крутые парни
-			SetCaptanModelByEncType(chr, "war");//
-		}
-		else
-		{
-			CreatePGG_Trade(chr, iNation, pchar);
-			SetRandomNameToShip(chr);
-			SetBaseShipData(chr);
-			SetCrewQuantityFull(chr);
-			Fantom_SetCannons(chr, "trade");
-			Fantom_SetBalls(chr, "trade");
-			iSpace = GetCharacterFreeSpace(chr, iGoods)/(1+rand(1));
-			// iSpace = MakeInt(iSpace/2 + rand(iSpace/2));
-			if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.Goods.Qty")) PChar.GenQuest.PGG_Quest.Goods.Qty = 0;
-			PChar.GenQuest.PGG_Quest.Goods.Qty = sti(PChar.GenQuest.PGG_Quest.Goods.Qty) + iSpace;
-			Fantom_SetCharacterGoods(chr, iGoods, iSpace, 1);
-//			SetCrewQuantityOverMax()
-			SetSeaFantomParam(chr, "trade");
-			SetCaptanModelByEncType(chr, "trade");
-//			PChar.Quest.(sTmp).win_condition.l1 = "NPC_Death";
-		}
-		//<--Lipsar правки в спавне
+		chr.AlwaysSandbankManeuver = true;
 		Group_AddCharacter("PGGQuest", chr.id);
 		chr.AlwaysEnemy = true;
 	}
@@ -2202,6 +2158,64 @@ void PGG_Q1PlaceShipsNearIsland()
 	PChar.Quest.PGGQuest1_CheckStartState.win_condition.l1 = "Location";
 	PChar.Quest.PGGQuest1_CheckStartState.win_condition.l1.Location = PChar.GenQuest.PGG_Quest.Island;
 	PChar.Quest.PGGQuest1_CheckStartState.function = "PGG_Q1CheckStartState";
+}
+
+ref PGG_Q1CreateWarShip(string sCharId)
+{
+	int iRank = sti(PChar.Rank);
+	int iGoods = sti(PChar.GenQuest.PGG_Quest.Goods);
+	int iNation = sti(PChar.GenQuest.PGG_Quest.Nation);
+	int iLifeDay = sti(PChar.GenQuest.PGG_Quest.Days);
+
+	ref chr = GetCharacter(NPC_GenerateCharacter(sCharId, GetCaptainModelByNation(iNation, "war"), "man", "man", MakeInt(iRank / 2 + rand(iRank)), iNation, iLifeDay, true));
+	chr.EncType = "war";
+
+	CreatePGG_War(chr, iNation, pchar);
+	SetRandomNameToShip(chr);
+	SetBaseShipData(chr);
+	SetCrewQuantityFull(chr);
+
+	Fantom_SetCannons(chr, chr.EncType);
+	Fantom_SetBalls(chr, chr.EncType);
+	Fantom_SetGoods(chr, chr.EncType);
+	int iSpace = GetCharacterFreeSpace(chr, iGoods) / (4 + drand(2));
+	if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.Goods.Qty")) PChar.GenQuest.PGG_Quest.Goods.Qty = 0;
+	PChar.GenQuest.PGG_Quest.Goods.Qty = sti(PChar.GenQuest.PGG_Quest.Goods.Qty) + iSpace;
+	Fantom_SetCharacterGoods(chr, iGoods, iSpace, 1);
+
+	SetRandomNameToShip(chr);
+	SetFantomParamHunter(chr);
+	SetCaptanModelByEncType(chr, chr.EncType);
+
+	return chr;
+}
+
+ref PGG_Q1CreateTradeShip(string sCharId)
+{
+	int iRank = sti(PChar.Rank);
+	int iGoods = sti(PChar.GenQuest.PGG_Quest.Goods);
+	int iNation = sti(PChar.GenQuest.PGG_Quest.Nation);
+	int iLifeDay = sti(PChar.GenQuest.PGG_Quest.Days);
+
+	ref chr = GetCharacter(NPC_GenerateCharacter(sCharId, GetCaptainModelByNation(iNation, "trade"), "man", "man", MakeInt(iRank / 2 + rand(iRank)), iNation, iLifeDay, true));
+	chr.EncType = "trade";
+
+	CreatePGG_Trade(chr, iNation, pchar);
+	SetRandomNameToShip(chr);
+	SetBaseShipData(chr);
+	SetCrewQuantityFull(chr);
+
+	Fantom_SetCannons(chr, chr.EncType);
+	Fantom_SetBalls(chr, chr.EncType);
+	int iSpace = GetCharacterFreeSpace(chr, iGoods) * 3 / (3 + drand(2));//везде один и тот же дранд. Чем больше кораблей, тем меньше в каждом из трюмов, но общая сумма всё-таки больше
+	if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.Goods.Qty")) PChar.GenQuest.PGG_Quest.Goods.Qty = 0;
+	PChar.GenQuest.PGG_Quest.Goods.Qty = sti(PChar.GenQuest.PGG_Quest.Goods.Qty) + iSpace;
+	Fantom_SetCharacterGoods(chr, iGoods, iSpace, 1);
+
+	SetSeaFantomParam(chr, chr.EncType);
+	SetCaptanModelByEncType(chr, chr.EncType);
+
+	return chr;
 }
 
 void PGG_Q1PGGDead(string qName)
@@ -2238,22 +2252,22 @@ void PGG_Q1PGGDead(string qName)
 		PChar.Quest.PGGQuest1_Time2Late.Over = "yes";
 		PChar.Quest.PGGQuest1_Time2Fight.Over = "yes";
 
-		DeleteAttribute(PChar, "GenQuest.PGG_Quest");
 	}
 	else
 	{
-		PChar.GenQuest.PGG_Quest.PGGid.Dead = 1;
 		if (chr.sex != "woman")AddQuestRecord("Gen_PGGQuest1", "q1_PGGDead");
 		else AddQuestRecord("Gen_PGGQuest1woman", "q1_PGGDead");
 		if (chr.sex != "woman")AddQuestUserData("Gen_PGGQuest1", "sPsName", GetFullName(chr));
 		else AddQuestUserData("Gen_PGGQuest1woman", "sPsName", GetFullName(chr));
 	}
+	PChar.GenQuest.PGG_Quest.PGGid.Dead = 1;
 	DeleteAttribute(chr, "PGGAi.ActiveQuest");
 	PChar.Quest.PGGQuest1_GroupDead.Over = "yes";
 	PChar.Quest.PGGQuest1_Time2Late.Over = "yes";
 	PChar.Quest.PGGQuest1_Time2Fight.Over = "yes";
 	if (chr.sex != "woman")CloseQuestHeader("Gen_PGGQuest1");
 	else CloseQuestHeader("Gen_PGGQuest1woman");
+	DeleteAttribute(PChar, "GenQuest.PGG_Quest");
 }
 
 void PGG_Q1CheckStartState(string qName)
@@ -2617,34 +2631,32 @@ void PGG_Q1FightOnShore()
 
 	chrDisableReloadToLocation = true;
 	//our
+	iRnd = 10 + drand(15) + MOD_SKILL_ENEMY_RATE;
 	if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.PGGid.Dead"))
 	{
 		chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
 		ChangeCharacterAddressGroup(chr,pchar.location, "officers", "sea_1");
-		SetCharacterPerk(chr,PerksChars());
 		LAi_SetWarriorType(chr);
 		LAi_SetImmortal(chr, false);
 		if (relation != "PGGTemp") LAi_SetCheckMinHP(chr, 1, true, "PGG_CheckHP");
 		LAi_group_MoveCharacter(chr, relation);
-
-		iRnd = 10 + drand(15) + MOD_SKILL_ENEMY_RATE;
+	}
+	else
+	{
+		iRnd = makeint(iRnd/2);
+	}
 		PChar.GenQuest.PGG_Quest.GrpID.Qty = iRnd;
 		PChar.GenQuestFort.FarLocator = false;
-		sLoc = LAi_FindNPCLocator("officers");
+		sLoc = LAi_FindNPCLocator("officers_sea");
 		for (i = 1; i < iRnd; i++)
 		{
-			if (i % 3 != 0)
-			{
 			chr = SetFantomDefenceForts("officers", sLoc, PIRATE, relation);
-			}
-			else
-			{
-			chr = SetFantomDefenceForts("enc02", "",PIRATE, relation);
-			}
-			FantomMakeCoolFighterWRankDepend(chr,sti(pchar.rank),25+rand(75),25+rand(75),50);
+			chr.id = "ally" + i;
+			SetCharacterPerk(chr,PerksChars());
+			FantomMakeCoolFighterWRankDepend(chr,sti(pchar.rank),25+drand(75),25+drand(75),50);
+			
 		}
 		Pchar.GenQuestFort.FarLocator = true;
-	}
 
 	//enemy
 	iRnd = 15 + drand(15) + MOD_SKILL_ENEMY_RATE + GetOfficersQuantity(pchar);
@@ -2663,7 +2675,7 @@ void PGG_Q1FightOnShore()
 		}
 		chr.id = "pirate_" + i;
 		SetCharacterPerk(chr,PerksChars());
-		FantomMakeCoolFighterWRankDepend(chr,sti(pchar.rank),25+rand(75),25+rand(75),50);
+		FantomMakeCoolFighterWRankDepend(chr,sti(pchar.rank),25+drand(75),25+drand(75),50);
 	}
 	//натравим.
 	LAi_group_SetHearRadius("PGGTmp", 100.0);
@@ -2691,21 +2703,25 @@ void PGG_Q1AfterShoreFight()
 	PChar.GenQuest.PGG_Quest.Goods.Taken = 500 + drand(500) + MakeInt(GetSquadronFreeSpace(PChar, sti(PChar.GenQuest.PGG_Quest.Goods)) / (3 + drand(2)))
 	chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
 	LAi_RemoveCheckMinHP(chr); //fix
-	if(!CheckAttribute(PChar,"PGG_EnemyPP"))
+	if(CheckAttribute(PChar,"GenQuest.PGG_Quest.PGGid.Dead"))
 	{
-	if (!CheckAttribute(PChar, "Quest.PGGQuest1_PGGDead.PGG_Dead"))
-	{
-		DoQuestCheckDelay("hide_weapon", 2.0);
-		PChar.Quest.PGGQuest1_PGGDead.Over = "yes";
-		chr.Dialog.CurrentNode = "Quest_1_SharePrise";
-		LAi_SetImmortal(chr, false);
-		LAi_SetActorType(chr);
-		LAi_ActorFollow(chr,pchar, "", 8.0);
-		LAi_SetStayType(chr);
-		LAi_SetActorType(chr);
-		LAi_ActorDialog(chr, pchar, "", 20.0, 0);
+		SetCharacterGoods(PChar, sti(PChar.GenQuest.PGG_Quest.Goods), sti(PChar.GenQuest.PGG_Quest.Goods.Taken) + GetCargoGoods(PChar, sti(PChar.GenQuest.PGG_Quest.Goods)));
+		chrDisableReloadToLocation = false;
+		PChar.Quest.PGGQuest1_EndExitSea.Over = "Yes";
+		PChar.Quest.PGGQuest1_EndExitLoc.Over = "Yes";
+		PChar.Quest.PGGQuest1_Time2Late_01.Over = "Yes";
+		PChar.Quest.PGGQuest1_Time2Late_02.Over = "Yes";
+		DeleteAttribute(PChar, "DisableBIFace");
+		DeleteAttribute(PChar,"Quest.PGGQuest1.SeaBattle");
+		DeleteAttribute(chr, "PGGAi.ActiveQuest");
+		DeleteAttribute(chr, "AlwaysFriend");
+		DeleteAttribute(PChar, "GenQuest.PGG_Quest");
+		DeleteAttribute(PChar,"PGG_FightOnShore");
+		DeleteAttribute(loadedLocation,"disableencounters");
+		DeleteAttribute(PChar,"GenQuest.PGG_Quest.PGGid.Dead");
+		return;
 	}
-	else
+	if(!CheckAttribute(PChar,"PGG_EnemyPP"))
 	{
 		DoQuestCheckDelay("hide_weapon", 2.0);
 		ChangeCharacterAddressGroup(chr,pchar.location,"reload", "sea");
@@ -2717,7 +2733,6 @@ void PGG_Q1AfterShoreFight()
 		LAi_SetStayType(chr);
 		LAi_SetActorType(chr);
 		LAi_ActorDialog(chr, pchar, "", 20.0, 0);
-	}
 	}
 	else
 	{

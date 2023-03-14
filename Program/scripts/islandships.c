@@ -113,6 +113,10 @@ void GenerateIslandShips(string sIslandID)
 
 							AddItems(chr,"potion2",10);
 
+							Ship_SetTaskDefend(SECONDARY_TASK,iChar,GetFortCommanderIdx(Colonies[i].id));
+
+							characters[iChar].Task.Lock = true;
+
 							if(defendersCount > 0) SetCrewQuantityFull(chr);
 							else SetCrewQuantity(chr, GetOptCrewQuantity(chr));
 

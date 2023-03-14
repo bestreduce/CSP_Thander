@@ -79,9 +79,6 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 
 		SetShipRemovable(xi_refCharacter, true);
 		SetCharacterRemovable(xi_refCharacter, true); // разрешить обмен после абордажа
-
-		DeleteParticles();
-		CreateParticleEntity();
 	}
 	
 	bool bOk = !bSeaActive && LAi_grp_alarmactive;
@@ -135,6 +132,7 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 	SetEventHandler("HIRE_ADD_BUTTON","HIRE_ADD_BUTTON",0);
 	SetEventHandler("HIRE_REMOVE_BUTTON", "HIRE_REMOVE_BUTTON", 0);
 	SetEventHandler("HIRE_REMOVE_ALL_BUTTON", "HIRE_REMOVE_ALL_BUTTON", 0);
+	SetEventHandler("OnTableClick", "OnTableClick", 0);
     //////////////////
     EI_CreateFrame("SHIP_BIG_PICTURE_BORDER",9,53,219,313); // tak from SHIP_BIG_PICTURE
     EI_CreateHLine("SHIP_BIG_PICTURE_BORDER", 14,284,214,1, 4);
@@ -184,6 +182,15 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 	GameInterface.TABLE_LIST.hr.td6.str = "Пачка/Вес";
 	GameInterface.TABLE_LIST.hr.td6.scale = 0.8;
 	GameInterface.TABLE_LIST.select = 0;
+//--> mod tablesort
+	GameInterface.TABLE_LIST.hr.td1.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td2.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td3.sorttype = "string";
+	GameInterface.TABLE_LIST.hr.td4.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td5.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td6.sorttype = "string";
+//<-- mod tablesort
+
 	OnShipScrollChange();
 	sMessageMode = "";
 	SetGoodsArrows();
@@ -449,6 +456,7 @@ void IDoExit(int exitCode)
 	DelEventHandler("HIRE_ADD_BUTTON","HIRE_ADD_BUTTON");
 	DelEventHandler("HIRE_REMOVE_BUTTON", "HIRE_REMOVE_BUTTON");
 	DelEventHandler("HIRE_REMOVE_ALL_BUTTON", "HIRE_REMOVE_ALL_BUTTON");
+	DelEventHandler("OnTableClick", "OnTableClick");
 	UpdateRelations();
     if(bSeaActive)
     {
@@ -814,7 +822,7 @@ void OnShipScrollChange()
 	else
 	{  // не наш, значит убит или сдался
 		// Warship 09.07.09 Мэри Селест и (20.08.09) генер "Пираты на необитайке"
-		if(xi_refCharacter.id == "BS_Vein" || xi_refCharacter.id == "MaryCelesteCapitan" || xi_refCharacter.Id == "PiratesOnUninhabited_BadPirate" || (refCharacter != PChar) || CheckAttribute(refCharacter,"GenQuest.ShipSituation.Explosion") || xi_refCharacter.Id == "ShipWreck_0")
+		if(xi_refCharacter.id == "BS_Vein" || xi_refCharacter.id == "MaryCelesteCapitan" || xi_refCharacter.Id == "PiratesOnUninhabited_BadPirate" || (refCharacter.index != PChar.index) || CheckAttribute(refCharacter,"GenQuest.ShipSituation.Explosion") || xi_refCharacter.Id == "ShipWreck_0")
 		{
 			SetSelectable("CAPTAN_BUTTON", false);
 			SetSelectable("SWAP_BUTTON", false);
@@ -1790,6 +1798,7 @@ void SwapProcess()
 		FillScrollImageWithCompanions("SHIPS_SCROLL", COMPANION_MAX);
 		SeaAI_SwapShipAfterAbordage(refCharacter, xi_refCharacter);
 	}
+	BI_UpdateCannons();
 }
 
 //////////////
@@ -2850,4 +2859,20 @@ string GetOfficerPosition(string sCharacter)
 	}
 
 	return XI_ConvertString("passengership");
+}
+
+void OnTableClick()
+{
+	string sControl = GetEventData();
+	int iRow = GetEventData();
+	int iColumn = GetEventData();
+
+	//string sRow = "tr" + (iRow + 1);
+//--> mod tablesort
+	if (sControl == "TABLE_LIST")
+	{
+		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+		Table_UpdateWindow(sControl);
+	}
+//<-- mod tablesort
 }

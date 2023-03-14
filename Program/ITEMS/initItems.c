@@ -2555,7 +2555,7 @@ int InitItems()
 	itm.picIndex = 11;
 	itm.picTexture = "ITEMS_14";
 	itm.price = 4900;
-	itm.Weight = 12.0;
+	itm.Weight = 22.0;
 	itm.dmg_min = 60.0;
 	itm.dmg_max = 140.0;
 	itm.piercing = 110.0;
@@ -3417,6 +3417,7 @@ int InitItems()
 	itm.picTexture = "ITEMS_12";
 	itm.price = 0;
 	itm.Weight = 0.1;
+	itm.ItemType = "QUESTITEMS";
 	n++;
 
     // eddy торговые грамоты <--
@@ -7820,6 +7821,18 @@ int InitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
+	
+	makeref(itm,Items[n]);
+	itm.id = "Joker";	// Джокер
+	itm.groupID = TALISMAN_ITEM_TYPE;
+	itm.name = "itmname_Joker";
+	itm.describe = "itmdescr_Joker";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_20";
+	itm.price = 25000;
+	itm.weight = 0.5;
+	itm.ItemType = "QUESTITEMS";
+	n++;
 	/////////////////////////////////////////////////////////
 	/////		-->		CSP Книги 56 штук				/////
 	/////////////////////////////////////////////////////////
@@ -9170,19 +9183,6 @@ int InitItems()
 	itm.weight = 0.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
-	//Джокер "Проигравшийся игрок"
-	makeref(itm,Items[n]);
-	itm.id = "Joker";
-	itm.groupID = TALISMAN_ITEM_TYPE;
-	itm.name = "itmname_Joker";
-	itm.describe = "itmdescr_Joker";
-	itm.picIndex = 7;
-	itm.picTexture = "ITEMS_20";
-	itm.price = 20000;
-	itm.weight = 0.5;
-	itm.ItemType = "QUESTITEMS";
-	n++;
 
 	makeref(itm,Items[n]);	//Квест "Аптекарь"
 	itm.id = "PDM_Heal_Poroshok";	//Целебный порошок
@@ -9239,6 +9239,60 @@ int InitItems()
 	itm.weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
+	
+	makeref(itm,Items[n]);	//Квест "Странные вещи творятся на архипелаге"
+	itm.id = "PKM_SvtvA_amulet";	//Амулет главного сатаниста
+	itm.groupID = INDIAN_CENTER_ITEM_TYPE;
+	itm.name = "itmname_PKM_SvtvA_amulet";
+	itm.describe = "itmdescr_PKM_SvtvA_amulet";
+	itm.picIndex = 11;
+	itm.picTexture = "ITEMS_20";
+	itm.price = 30000;
+	itm.weight = 0.2;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	makeref(itm,Items[n]);	//Квест "Странные вещи творятся на архипелаге"
+	itm.id = "PKM_SvtvA_znachok";	//Значок рядового сатаниста
+	itm.name = "itmname_PKM_SvtvA_znachok";
+	itm.describe = "itmdescr_PKM_SvtvA_znachok";
+	itm.picIndex = 12;
+	itm.picTexture = "ITEMS_4";
+	itm.price = 66;
+	itm.weight = 0.1;
+	n++;
+	
+	makeref(itm,Items[n]);	//Квест "Странные вещи творятся на архипелаге"
+	itm.id = "PKM_SvtvA_pismo1";	//Письмо для падре Домингеса
+	itm.name = "itmname_PKM_SvtvA_pismo1";
+	itm.describe = "itmdescr_PKM_SvtvA_pismo1";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_12";
+	itm.price = 0;
+	itm.weight = 0.1;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	makeref(itm,Items[n]);	//Квест "Странные вещи творятся на архипелаге"
+	itm.id = "PKM_SvtvA_pismo2";	//Письмо для отца Клермона
+	itm.name = "itmname_PKM_SvtvA_pismo2";
+	itm.describe = "itmdescr_PKM_SvtvA_pismo2";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_12";
+	itm.price = 0;
+	itm.weight = 0.1;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	makeref(itm,Items[n]);
+	itm.id = "PKM_SvtvA_pismo3";	//Книга Хаоса
+	itm.name = "itmname_PKM_SvtvA_pismo3";
+	itm.describe = "itmdescr_PKM_SvtvA_pismo3";
+	itm.picIndex = 2;
+	itm.picTexture = "ITEMS_20";
+	itm.price = 5000;
+	itm.weight = 0.7;
+	n++;
 
 	//InitGunExt(id,	sAttr,  sBullet,  sGunPowder, DmgMin_NC, DmgMax_NC, DmgMin_C, DmgMax_C, EnergyP_NC, EnergyP_C, Stun_NC, Stun_C, MultiDamage, MisFire, SelfDamage, Explosion,Accuracy,ChargeSpeed,isDefault);
 	InitGunExt(		 "pistol1", "t1",  	     "cartridge",               "",  20.0, 100.0,  20.0, 100.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 30,  8, 0);
@@ -9256,13 +9310,13 @@ int InitItems()
 	InitGunExt(		 "pistol7shotgun", "t1", "grapeshot",       "12_gauge",  80.0, 200.0,  50.0, 180.0,  0.0,  0.0, 0, 1, 1, 2, 1, 1, 80, 52, 1);
 	InitGunExt(		 "pistol7shotgun", "t2", 	"bullet",       "12_gauge", 100.0, 300.0, 100.0, 300.0,  0.0,  0.0, 1, 0, 0, 2, 0, 0, 80, 52, 0);
 	InitGunExt(		 "pistol8", "t1", 	     "grapeshot",      "gunpowder",  50.0, 100.0,  50.0, 100.0,  5.0,  5.0, 1, 1, 1, 0, 1, 1, 50, 20, 1);
-	InitGunExt(		 "pistol8", "t2", 		   "harpoon",      "gunpowder", 150.0, 250.0, 150.0, 250.0,  20.0, 20.0,0, 1, 0, 0, 0, 0, 20, 35, 0);
-	InitGunExt(		 "pistol8", "t3", 		  "GunEchin",               "", 120.0, 220.0, 120.0, 220.0,  20.0, 20.0,0, 1, 1, 0, 0, 0, 20, 30, 0);
+	InitGunExt(		 "pistol8", "t2", 		   "harpoon",      "gunpowder", 150.0, 250.0, 150.0, 250.0,  20.0, 20.0,0, 1, 0, 0, 0, 0, 60, 30, 0);
+	InitGunExt(		 "pistol8", "t3", 		  "GunEchin",               "", 120.0, 220.0, 120.0, 220.0,  20.0, 20.0,0, 1, 1, 0, 0, 0, 40, 25, 0);
 	InitGunExt(		 "pistol9", "t1", 	     "cartridge",               "",  50.0, 160.0,  40.0, 140.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 45, 25, 0);
 	InitGunExt(		 "pistol9", "t2", 		    "bullet",      "gunpowder",  50.0, 160.0,  40.0, 140.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 45, 50, 1);
 	InitGunExt( 	 "pistol_grapebok", "t1","grapeshot",      "gunpowder",  30.0, 110.0,  30.0, 110.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);
-	InitGunExt(		 "howdah", "t1",         "grapeshot",      "gunpowder",  50.0,  85.0,  40.0,  70.0,  5.0,  5.0, 1, 1, 1, 0, 0, 1, 50, 40, 1);
-    InitGunExt(		 "howdah", "t2",          "GunEchin",               "", 115.0, 215.0, 115.0, 215.0,  20.0, 20.0,0, 1, 1, 0, 0, 0, 20, 60, 0);
+	InitGunExt(		 "howdah", "t1",         "grapeshot",      "gunpowder",  50.0,  85.0,  40.0,  70.0,  5.0,  5.0, 1, 1, 1, 0, 0, 1, 45, 35, 1);
+    InitGunExt(		 "howdah", "t2",          "GunEchin",               "", 115.0, 215.0, 115.0, 215.0,  20.0, 20.0,0, 1, 1, 0, 0, 0, 35, 45, 0);
 
 	InitGunExt(		"mushket", "t1", 	             "cartridge",               "", 100.0, 150.0, 100.0, 150.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0,  80,  20, 0);
 	InitGunExt(		"mushket", "t2", 		            "bullet",      "gunpowder", 100.0, 150.0, 100.0, 150.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0,  80,  40, 1);

@@ -500,7 +500,7 @@ void ProcessDialogEvent()
 			link.l1.go = "pirateStartQuest_Smuggler_3";
 		break;
 		case "pirateStartQuest_Smuggler_3":
-			dialog.text = "Это обойдётся тебе в 30 000 пиастров, по 300 за раба. Есть столько?";
+			dialog.text = "Это обойдётся тебе в 30000 пиастров, по 300 за раба. Есть столько?";
 			link.l1 = "По рукам.";
 			link.l1.go = "pirateStartQuest_Smuggler_4";
 		break;

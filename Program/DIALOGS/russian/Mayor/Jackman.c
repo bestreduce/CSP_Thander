@@ -185,7 +185,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.pirateVikingQuest = "0";
 		break;
 		case "pirateVikingQuest_1":
-			dialog.text = "Законы братства, Кодекс, пиратская честь… Пфф… Детские шалости это. Ты ещё Либерталию вспомни, которую Шарп построить пытался. Ха-ха! Тут у нас баланс сил существует, власти закрывают глаза на наши делишки, если мы их делишкам не мешаем. А вдруг в Европе мир подпишут? Так и патенты отзовут, а все бравые каперы в один миг преступниками станут. И приплывут карательные эскадры. Нас с тобой ловить. А такие капитаны, как этот викинг, репутацию нам всем портят. Смекаешь?";
+			dialog.text = "Законы братства, Кодекс, пиратская честь... Пфф... Детские шалости это. Ты ещё Либерталию вспомни, которую Шарп построить пытался. Ха-ха! Тут у нас баланс сил существует, власти закрывают глаза на наши делишки, если мы их делишкам не мешаем. А вдруг в Европе мир подпишут? Так и патенты отзовут, а все бравые каперы в один миг преступниками станут. И приплывут карательные эскадры. Нас с тобой ловить. А такие капитаны, как этот викинг, репутацию нам всем портят. Смекаешь?";
 			link.l1 = "Понял"+ GetSexPhrase("","а") +", дал ты мне пищу для размышлений. Где искать этого викинга?";
 			link.l1.go = "pirateVikingQuest_2";
 		break;
@@ -216,7 +216,7 @@ void ProcessDialogEvent()
         case "I_know_you_good":
             dialog.text = NPCStringReactionRepeat(GetFullName(pchar) + ", рад тебя видеть! Зачем пожаловал"+ GetSexPhrase("","а") +" на этот раз?",
                          "Ну что тебе ещё?", "Долго это будет продолжаться? Если тебе делать нечего, не отвлекай других!",
-                         "Ты "+ GetSexPhrase("хороший капер","хорошая девушка") +", поэтому живи пока. Но общаться и разговаривать с тобой я больше не желаю.", "repeat", 10, npchar, Dialog.CurrentNode);
+                         "Ты "+ GetSexPhrase("хороший капер","хорошая девушка") +", поэтому живи пока. Но общаться и разговаривать с тобой я больше не желаю.", "repeat", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Да, собственно, просто так заглянул"+ GetSexPhrase("","а") +", проведать. Ничего по делу нет.",
                                                "Ничего, просто так...",
                                                "Хорошо, Джекмен, извини...",
@@ -251,11 +251,23 @@ void ProcessDialogEvent()
 				link.l1 = "Кажется, у нас есть с тобой общее дело. Эдвард Лоу.";
 				link.l1.go = "PL_Q3_2";
 			}
-			if (CheckAttribute(pchar,"pchar.questTemp.piratesLine.T1") && pchar.questTemp.piratesLine.T1 == "KillLoy_GoodWork" && !CheckAttribute(npchar, "quest.PQ3"))
+			if (CheckAttribute(pchar,"questTemp.piratesLine.T1") && pchar.questTemp.piratesLine.T1 == "KillLoy_GoodWork" && !CheckAttribute(npchar, "quest.PQ3"))
 			{
 				dialog.text = "Вернул"+ GetSexPhrase("ся","ась") +"! Да не с пустыми руками!";
 				link.l1 = "Готов"+ GetSexPhrase("","а") +" сообщить, что Эдвард Лоу умер с ужасом в глазах и твоим именем в ушах.";
 				link.l1.go = "PL_SEAWOLF";
+			}
+			if(CheckAttribute(pchar, "questTemp.piratesLine") && pchar.questTemp.piratesLine == "waiting_Q6") 
+			{
+				dialog.text = "О-о-о, кого я вижу?! Глазам не верю!";
+				link.l1 = "Морган послал к тебе сказать, что капитан Гудли мертв.";
+				link.l1.go = "PL_Q6_1";
+			}
+			if(CheckAttribute(pchar, "questTemp.piratesLine") && pchar.questTemp.piratesLine == "PL_Q6_AfterBattle") 
+			{
+				dialog.text = "Джон уже рассказал мне о твоей операции с "+ GetSexPhrase("двойником","'сеcтричкой'") +". Тебе удалось узнать что-нибудь конкретное?";
+				link.l1 = "Поговорить удалось, да и только. Он"+ GetSexPhrase("","а") +" слишком торопил"+ GetSexPhrase("ся","ась") +", видать, боял"+ GetSexPhrase("ся","ась") +" сболтнуть что-то лишнее.";
+				link.l1.go = "PL_Q6_after_1";
 			}
 			if (pchar.questTemp.piratesLine == "Panama_backToShip")
 			{
@@ -397,10 +409,13 @@ void ProcessDialogEvent()
 			}
 			if (bOk)
 			{
-				dialog.text = "Именно этих слов я и ждал. Вижу, что ещё и мой бриг сумел"+ GetSexPhrase("","а") +" прихватить! Молодец. Ты доказал"+ GetSexPhrase("","а") +", что ты – Вол"+ GetSexPhrase("к","чица") +"! Поэтому с чистым сердцем отдаю тебе 'Морского Волка', владей по праву! Хотел бы я иметь "+ GetSexPhrase("такого парня","такую лихую деваху") +", как ты, в своей команде!";
+				//dialog.text = "Именно этих слов я и ждал. Вижу, что ещё и мой бриг сумел"+ GetSexPhrase("","а") +" прихватить! Молодец. Ты доказал"+ GetSexPhrase("","а") +", что ты – Вол"+ GetSexPhrase("к","чица") +"! Поэтому с чистым сердцем отдаю тебе 'Морского Волка', владей по праву! Хотел бы я иметь "+ GetSexPhrase("такого парня","такую лихую деваху") +", как ты, в своей команде!";
+				dialog.text = "Именно этих слов я и ждал. Вижу, что ещё и мой бриг сумел"+ GetSexPhrase("","а") +" прихватить! Молодец. Ты доказал"+ GetSexPhrase("","а") +", что ты – Вол"+ GetSexPhrase("к","чица") +"! Уважаю таких людей!";
 				link.l1 = "Я - свободный капитан, Джекмен. Но твои слова - честь для меня!";
-				link.l1.go = "exit";
-				AddQuestRecord("Pir_Line_3_KillLoy", "19");
+				link.l1.go = "PL_SEAWOLF_2";
+				link.l2 = "Твои слова - честь для меня, Джекман! А ты хочешь 'Морского Волка' назад? Думаю, что вполне могу вернуть его. Мне кажется, он для тебя многое значил.";
+				link.l2.go = "PL_SEAWOLF_3";
+				
 			}
 			else
 			{
@@ -412,12 +427,82 @@ void ProcessDialogEvent()
 				AddQuestUserData("Pir_Line_3_KillLoy", "sSex", GetSexPhrase("","а"));
 			}
 		break;
-		//********************* пиратка, квест №6. двойник *********************
-		case "PL_Q6":
-			dialog.text = "О-о-о, кого я вижу?! Глазам не верю!";
-			link.l1 = "Морган послал к тебе сказать, что капитан Гудли мертв.";
-			link.l1.go = "PL_Q6_1";
+		case "PL_SEAWOLF_2":
+			pchar.questTemp.BrigSW_gift = true;
+			dialog.text = "Поэтому с чистым сердцем отдаю тебе 'Морского Волка', владей по праву! Хотел бы я иметь "+ GetSexPhrase("такого парня","такую лихую деваху") +", как ты, в своей команде!";
+			link.l1 = "Благодарю от всего сердца, Джекман!";
+			link.l1.go = "exit";
+			AddQuestRecord("Pir_Line_3_KillLoy", "19");
 		break;
+		case "PL_SEAWOLF_3":
+			dialog.text = "Неожиданно! Не ждал такого предложения... Я согласен, всё-таки 'Волк' занимает в моём сердце важное место. Но не могу отпустить тебя без подарка за такое. Вот, возьми-ка его. Ты не можешь даже представить, каких трудов мне в своё время стоило его добыть, но теперь с чистой совестью дарю его тебе. Пользуйся!"; //Также, отдаю тебе один из своих кораблей. Просто так, в знак хорошего отношения.
+			link.l1 = "Благодарю от всего сердца, Джекман!";
+			link.l1.go = "exit";
+			GiveItem2Character(pchar,"mushket6");
+			log_info("Джекман подарил вам свой башенный мушкетон!");
+			int chComp1;
+			ref swchar;
+			if (RealShips[sti(pchar.ship.type)].Name == "BrigSW1")
+			{
+				DeleteAttribute(pchar, "ship");
+				pchar.ship.name = "";
+				pchar.ship.type = SHIP_NOTUSED;
+			}
+			else
+			{
+				for (int x=1; x<=COMPANION_MAX; x++)
+				{
+					chComp1 = GetCompanionIndex(pchar, x);
+					if(chComp1 != -1 && RealShips[sti(characters[chComp1].ship.type)].Name == "BrigSW1")
+					{
+						swchar = &characters[chComp1];
+						RemoveCharacterCompanion(PChar, swchar);
+						AddPassenger(PChar, swchar, false);
+						//swchar.ship.type = GenerateShipTop(SHIP_MIRAGE, true, swchar);
+						break;
+					}
+				}
+			}
+			/*SetBaseShipData(swchar);
+			swchar.ship.name = "Мираж";
+			ref VeryRealShip = GetRealShip(sti(swchar.Ship.Type));
+			DeleteAttribute(VeryRealShip,"EmblemedSails");
+			DeleteAttribute(VeryRealShip,"shipsails");
+			VeryRealShip.ship.upgrades.sails = 3;
+			
+			SetShipBermudeTuningSpeedRate(swchar);
+			SetShipBermudeTuningTurnRate(swchar);
+			SetShipBermudeTuningWindAgainstSpeed(swchar);
+			SetShipBermudeTuningCapacity(swchar);
+			SetShipBermudeTuningMaxCrew(swchar);
+			SetShipBermudeTuningHP(swchar);
+			SetShipBermudeTuningMastMultiplier(swchar);
+			VeryRealShip.Tuning.CuBot = true;
+			
+			VeryRealShip.MaxCaliber = 20;
+			VeryRealShip.Tuning.Cannon = true;
+			VeryRealShip.CannonsQuantity = 22;
+			swchar.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS20;
+			
+			SetCharacterGoods(swchar, GOOD_BALLS, 200);
+			SetCharacterGoods(swchar, GOOD_GRAPES, 400);
+			SetCharacterGoods(swchar, GOOD_KNIPPELS, 200);
+			SetCharacterGoods(swchar, GOOD_BOMBS, 400);;
+			SetCharacterGoods(swchar, GOOD_FOOD, 1000);
+			SetCharacterGoods(swchar, GOOD_MEDICAMENT, 500);
+			SetCharacterGoods(swchar, GOOD_POWDER, 2000);
+			SetCharacterGoods(swchar, GOOD_WEAPON, 300);
+			
+			SetCrewQuantityFull(swchar);
+			AddCrewMorale(swchar, 100);
+			ChangeCrewExp(swchar, "Sailors", 100);
+			ChangeCrewExp(swchar, "Cannoners", 100);
+			ChangeCrewExp(swchar, "Soldiers", 100);*/
+			AddQuestRecord("Pir_Line_3_KillLoy", "19_2");
+			AddQuestUserData("Pir_Line_3_KillLoy", "sSex2", GetSexPhrase("","а"));
+		break;
+		
+		//********************* пиратка, квест №6. двойник *********************
 		case "PL_Q6_1":
 			dialog.text = "Вот так, значит... Новость не из приятных... И как это случилось?";
 			link.l1 = "Я убил"+ GetSexPhrase("","а") +" его в резиденции Моргана... Понимаешь, тут история такая неприятная. Я по его поручению убрал"+ GetSexPhrase("","а") +" Джона Эйвори, а оказалось, что это доверенное лицо Моргана.";
@@ -468,11 +553,6 @@ void ProcessDialogEvent()
 			Group_SetTaskNone("LidsGroup");
 		break;
 
-		case "PL_Q6_after":
-			dialog.text = "Джон уже рассказал мне о твоей операции с "+ GetSexPhrase("двойником","'сеcтричкой'") +". Тебе удалось узнать что-нибудь конкретное?";
-			link.l1 = "Поговорить удалось, да и только. Он"+ GetSexPhrase("","а") +" слишком торопил"+ GetSexPhrase("ся","ась") +", видать, боял"+ GetSexPhrase("ся","ась") +" сболтнуть что-то лишнее.";
-			link.l1.go = "PL_Q6_after_1";
-		break;
 		case "PL_Q6_after_1":
 			dialog.text = "Это плохо. За тобой шлейф какой-то тянется, сплошные курьёзы. Пока удача на твоей стороне, но стоит тебе оступиться - и тогда конец! Морган тебе не поможет.";
 			link.l1 = "Я понимаю. "+ GetSexPhrase("Двойник","'Сестричка'") +" явно что-то знал"+ GetSexPhrase("","а") +"... Надо пытаться выяснить, кто за всем этим стоит.";
@@ -514,7 +594,7 @@ void ProcessDialogEvent()
 			dialog.text = NPCStringReactionRepeat("М-да, знаменитое стало корыто, что и говорить... А тебе-то зачем понадобилась эта шебека?",
 				"Мы уже говорили об этой шебеке.",
 				"Опять про то же?",
-                "Что?! Опять?! Ну с меня хватит...", "repeat", 10, npchar, Dialog.CurrentNode);
+                "Что?! Опять?! Ну с меня хватит...", "repeat", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Да видишь ли, очень ей интересуются одна группа товарищей...",
 				"Да, Джекмен, верно.",
                 "Хм, ноты попутал"+ GetSexPhrase("","а") +", пардон...",
@@ -1157,12 +1237,12 @@ void SetMushketCapitainInWorld()
 	//создаём кэпов
 	int Rank = sti(pchar.rank) + 15;
 	if (Rank > 30) Rank = 30;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "spy", Rank, PIRATE, -1, true));
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man_fast", Rank, PIRATE, -1, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man", Rank, PIRATE, -1, true));
 	sld.name = "Альберт";
 	sld.lastname = "Зиверт";
  	SetCaptanModelByEncType(sld, "pirate");
-	FantomMakeCoolSailor(sld, SHIP_BRIGQEEN, "Стрела", CANNON_TYPE_CANNON_LBS20, 100, 100, 100);
+	FantomMakeCoolSailor(sld, SHIP_BRIGVALCIRIA, "Стрела", CANNON_TYPE_CANNON_LBS20, 100, 100, 100);
 	FantomMakeCoolFighter(sld, 20, 50, 50, "blade34", "pistol2", 50);
 	sld.Ship.Mode = "pirate";
 	DeleteAttribute(sld, "SinkTenPercent");

@@ -259,7 +259,7 @@ void ProcessDialogEvent()
         	sld.name 	= "Антонио";
         	sld.lastname = "де Баррас";
         	LAi_SetStayTypeNoGroup(sld);
-            FantomMakeCoolSailor(sld, SHIP_WARSHIP, "Изабелла", CANNON_TYPE_CULVERINE_LBS32, 100, 100, 100);
+            FantomMakeCoolSailor(sld, SHIP_INGERMANLAND, "Изабелла", CANNON_TYPE_CULVERINE_LBS32, 100, 100, 100);
             FantomMakeCoolFighter(sld, 40, 100, 100, "blade32", "pistol5", 150);
           	ChangeCharacterAddressGroup(sld, "Tortuga_tavern_upstairs", "goto", "goto1");
             DialogExit();

@@ -121,11 +121,9 @@ void DeleteShipEnvironment()
 	DelEventHandler("Ship_SailsMoveSound", "Ship_SailsMoveSound");
 	DelEventHandler("Ship_BortReloadEvent", "Ship_BortReloadEvent");
 
-	for (int i=0; i<iNumShips; i++)
-	{
-		// delete particles from ship/etc
-		SendMessage(&Characters[Ships[i]], "l", MSG_SHIP_SAFE_DELETE);
-	}
+	int i = 0;
+	for(i = 0; i < GetArraySize(&LoadedChars); i++) LoadedChars[i] = 0; // clear array of loaded chars on sea
+	for(i = 0; i<iNumShips; i++) SendMessage(&Characters[Ships[i]], "l", MSG_SHIP_SAFE_DELETE); // delete particles from ship/etc
 
 	// scan characters for delete snd id's
 	DeleteEntitiesByType("ship");
@@ -318,6 +316,7 @@ void Ship_NationAgressive(ref rMainGroupCharacter, ref rCharacter)// ком гр
 
     if (CheckAttribute(rCharacter, "Coastal_Captain")) return;  // есть флаг есть, то нет ругани, это таможенник и квестовый
 
+	if (rCharacter.relation.1 == 3) return; // Если атакуем враждебный корабль под союзным флагом
 	//--> eddy. квест мэра на пирата
 	if (rCharacter.id == "MQPirate" && sti(rCharacter.nation) != PIRATE)
 	{
@@ -774,7 +773,7 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType)
 		rCharacter.seatime = 0;
 		rCharacter.lastupdateseatime = 0;
 	}
-	if (iCharacterIndex >= FANTOM_CHARACTERS)
+	if (CheckAttribute(GetCharacter(iCharacterIndex), "SeaFantom"))
 	{
 		SetBaseShipData(rCharacter);
 		Ship_SetFantomData(rCharacter);
@@ -894,6 +893,7 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType)
 	}
 
 	Ships[iNumShips] = iCharacterIndex;
+	LoadedChars[iNumShips] = iCharacterIndex; // после загрузки локации в море
 	rCharacter.curshipnum = iNumShips;
 	trace("AIShip  iNumShips : " + iNumShips + " ShipModelrList : " + ShipModelrList[iNumShips] + " ShipName : " + rCharacter.Ship.Name + " Ships = " + Ships[iNumShips]);
 	iNumShips++;
@@ -1067,6 +1067,7 @@ void Ship_ChangeCharge(ref rCharacter, int iNewChargeType)
 	//fix Ship_PlaySound3D(rCharacter, "reloadstart_" + rGood.name, 1.0);
 
 	Ship_ClearBortsReloadedEvent(rCharacter);
+	BI_UpdateLoadedProjectiles(); // обновим иконки и текста заряженных снарядов в BattleInterface
 }
 
 void Ship_OnCreate()
@@ -1244,23 +1245,13 @@ void Ship_CheckSituation()
 		//Lipsar --->ИИ сторожей
 		if (bIsDefender)
 		{
-			int attackChar = sti(rCharacter.Ship.LastBallCharacter);
-			if (attackChar == -1)
-			{
-				if (GetNationRelation2MainCharacter(sti(rCharacter.nation)) == RELATION_ENEMY)
-					attackChar = GetMainCharacterIndex();
-				else
-				{
-					if (CheckAttribute(PChar, "Ship.LastBallCharacter") && (PChar.Ship.LastBallCharacter != -1))
-					{
-						if (GetNationRelation2Character(sti(rCharacter.nation), PChar.Ship.LastBallCharacter) == RELATION_ENEMY)
-							attackChar = PChar.Ship.LastBallCharacter;
-					}
-				}
-			}
-
+			ref rTargetedChar = GetFortCommander(rCharacter.IslandShips);
+			int attackChar;
+			if(CheckAttribute(rTargetedChar,"Ship.LastBallCharacter")) attackChar = sti(rTargetedChar.Ship.LastBallCharacter);
+			else attackChar = sti(rCharacter.Ship.LastBallCharacter);
 			if (attackChar != -1)
 			{
+				if(CheckAttribute(Characters[attackChar],"IslandShips") || attackChar == sti(rTargetedChar.index)) return;
 				Group_SetEnemyToCharacter(sGroupID, attackChar);
 				SetCharacterRelationBoth(sti(rCharacter.index), attackChar, RELATION_ENEMY);
 				Group_SetTaskAttack(sGroupID, Ship_GetGroupID(GetCharacter(attackChar)));
@@ -1268,6 +1259,7 @@ void Ship_CheckSituation()
 				DoQuestCheckDelay("NationUpdate", 0.5);
 				return;
 			}
+			else return;
 		}//<---Lipsar ИИ сторожей
 		if (CheckAttribute(rCharacter, "SeaAI.Task.Target"))
 		{
@@ -1877,7 +1869,7 @@ int Ship_FindOtherBallType(ref rCharacter, float fMinEnemyDistance, bool bBalls,
 }
 
 // event: indicate that ball is not enough for fire for main character
-void Ship_NotEnoughBalls()
+void Ship_NotEnoughBalls() // FPSTODO: зачем вызывается так часто?
 {
 	bNotEnoughBalls = GetEventData();
 	// boal -->
@@ -1892,7 +1884,7 @@ void Ship_NotEnoughBalls()
 
 }
 
-int Ship_GetCurrentBallsNum()
+int Ship_GetCurrentBallsNum() // FPSTODO: вызывается каждый кадр, юзать кэш, прибавка минимальна
 {
 	aref aCharacter = GetEventData();
 	return GetCargoGoods(aCharacter,sti(aCharacter.Ship.Cannons.Charge.Type));
@@ -2065,7 +2057,7 @@ void Ship_ApplyCrewHitpoints(ref rOurCharacter, float fCrewHP)
 	// boal fix утопленников   <--
 }
 
-void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, float fCannonDamageMultiply, int iBallType)
+void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, int iBallType)
 {         // че-то распук метод "неподецки" - переделал 29.07.06 boal
 	if (LAi_IsImmortal(rOurCharacter))
 	{
@@ -2076,18 +2068,11 @@ void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, float f
 		fCrewHP = fCrewHP / MOD_Complexity_1_DMG;
 	}
 	ref rBaseShip = GetRealShip(GetCharacterShipType(rOurCharacter));
-	float fMinusC = sti(RealShips[sti(rOurCharacter.Ship.Type)].HullArmor)*0.04; //защищает так же как и броня корпуса, как бомбы - на 30%
-	//множитель картечи - 0,2*1,15
-	//log_info(FloatToString(fMinusC,2));
-	//Log_Info("fMinusC "+fMinusC);
-	if (fMinusC < 0.0) fMinusC = 0.0;
-	float fDamage = fCrewHP - fMinusC;
-	//Log_Info("fDamage "+fDamage);
-	if (iBallType == GOOD_GRAPES)
-	{
-		if(fDamage < 1)
-			fDamage = 1;//имитация огня по палубе/в пушки - а то совсем жирно будет
-	}
+
+	float fDamage = fCrewHP;
+//Log_Info("fDamage "+fDamage);
+	if (iBallType == GOOD_GRAPES) if(fDamage < 1) fDamage = 1;//имитация огня по палубе/в пушки - а то совсем жирно будет
+
 	float fMultiply = 1.0 - (0.5 * stf(rOurCharacter.TmpSkill.Defence)); // было 0.05 - что полная хрень, тк скил 0..1
 
 	if(CheckOfficersPerk(rOurCharacter, "Doctor2"))
@@ -2204,27 +2189,7 @@ void Ship_ApplyHullHitpointsWithCannon(ref rOurCharacter, float fHP, int iKillSt
 	if (sti(rOurCharacter.TmpPerks.ShipDefenseProfessional))	fMinus = 0.35;
 	if (CheckAttribute(&RealShips[sti(rOurCharacter.Ship.Type)], "Tuning.HullSpecial")) fMinus = fMinus+0.35;
 
-	int fMinusC = sti(RealShips[sti(rOurCharacter.Ship.Type)].HullArmor);
-	/*int shipclass = sti(RealShips[sti(rOurCharacter.Ship.Type)].Class);
-	switch (shipclass)
-	{
-		case 6: fMinusC = 12;
-		break;
-		case 5: fMinusC = 16;
-		break;
-		case 4: fMinusC = 20;
-		break;
-		case 3: fMinusC = 24;
-		break;
-		case 2: fMinusC = 32;
-		break;
-		case 1: fMinusC = 42;
-		break;
-	}*/
 	float fDam = fHP * (1.0 + fPlus - fMinus);
-	//Log_Info("До снижения "+fDam);
-	fDam = fDam - fMinusC;
-	//Log_Info("После снижения "+fDam);
 	if (fDam < 1.0) fDam = 1;
 	fCurHP = stf(rOurCharacter.Ship.HP) - fDam;
 	if (fCurHP <= 0.0)
@@ -2293,7 +2258,7 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 					if (isPgg && !isntPgg1 && !isntPgg2)
 					{
 						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
+						if(IsMainCharacter(rKillerCharacter))
 						{
 
 							PChar.PGG_Enemy = "1";
@@ -2319,7 +2284,7 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 					if (isPgg && !isntPgg1 && !isntPgg2)
 					{
 						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
+						if(IsMainCharacter(rKillerCharacter))
 						{
 							PChar.PGG_Enemy = "1";
 						}
@@ -2335,11 +2300,11 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 			        // boal statistic info 17.12.2003 -->
 	                Statistic_AddValue(rKillerCharacter, "KillAbordShip_" + rBaseShip.Class, 1);
 	                // boal statistic info 17.12.2003 <--
-					if (rKillerCharacter == pchar) FlagPerkForCapturedShip(rDead);
+					if (IsMainCharacter(rKillerCharacter)) FlagPerkForCapturedShip(rDead);
 					if (isPgg && !isntPgg1 && !isntPgg2)
 					{
 						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
+						if(IsMainCharacter(rKillerCharacter))
 						{
 
 							PChar.PGG_Enemy = "1";
@@ -2691,12 +2656,22 @@ void Ship_HullHitEvent()
 	bool	bSeriousBoom = false;
 	bool	bInflame = false;
     bool    isOurCompanion   = IsCompanion(rOurCharacter);
-    float   fTmpCannonDamage = 0;
 
     if (bDead) return; // фикс, не нужно обсчитывать труп
-	// Cannon damage multiply
+
 	ref rCannon = GetCannonByType(sti(rBallCharacter.Ship.Cannons.Type));
 	float fCannonDamageMultiply = stf(rCannon.DamageMultiply);
+
+	float fMinusArmor = stf(RealShips[sti(rOurCharacter.Ship.Type)].HullArmor)/4.0;
+	if (fMinusArmor > fCannonDamageMultiply*0.75) fMinusArmor = fCannonDamageMultiply*0.75;//больше 75% урона броня не поглощает
+	fCannonDamageMultiply = (fCannonDamageMultiply - fMinusArmor);
+
+//Так броня урезает и криты. Увеличил их немного, но вообще-то там итак много было
+
+//Кулеврины получаются всё равно что пушки на пару калибров меньше, но с более быстрой перезарядкой			
+//с этим надо что-то делать			Вообще-то кулеврины должны дольше перезаряжаться. Не урезать урон, но уменьшить перезарядку??? - будет меньше дпс, но логично и одинаково эффективно против брони
+//для начала нужно убрать резкий скачок урона с 24 до 32			И ещё раз обсудить выпиливание возможности бермудить калибр. 
+//Если не выпиливаем, то урон пушек должен расти плавно на множитель, например х1.2 каждый следующий, если выпиливаем, то можно сохранить прибавки +4
 
 	//float fDistanceDamageMultiply = Bring2Range(1.2, 0.25, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
 
@@ -2726,24 +2701,20 @@ void Ship_HullHitEvent()
 			Play3DSound("bomb2bort", x, y, z);
 		break;
 	}
-	fTmpCannonDamage = fCannonDamageMultiply * stf(rBall.DamageHull);
-	if (rand(2) == 1) CreateParticleSystem("blast", x, y, z, 0.0, 0.0, 0.0, 0);// boal fix
+	CreateParticleSystem("blast", x, y, z, 0.0, 0.0, 0.0, 0);// boal fix
 
     if (sti(rOurCharacter.TmpPerks.ShipDefenseProfessional) && rand(1000) < 700) { bSeriousBoom = false; }				// no seriouse boom
 
-    float fCrewDamage;
-	if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType == GOOD_GRAPES) fCrewDamage = (stf(rBall.DamageCrew)*0.75) * fCannonDamageMultiply * AIShip_isPerksUse(rBallCharacter.TmpPerks.CrewDamageUp, 1.0, 1.15);
-	else fCrewDamage = stf(rBall.DamageCrew) * fCannonDamageMultiply * AIShip_isPerksUse(rBallCharacter.TmpPerks.CrewDamageUp, 1.0, 1.15);
-	//Log_Info("fCrewDamage "+fCrewDamage);
-
+    float fCrewDamage = stf(rBall.DamageCrew) * fCannonDamageMultiply * AIShip_isPerksUse(rBallCharacter.TmpPerks.CrewDamageUp, 1.0, 1.15);
+	if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType == GOOD_GRAPES) fCrewDamage = 0.75 * fCrewDamage;
+//Log_Info("fCrewDamage "+fCrewDamage);
+// fHP = fDistanceDamageMultiply * fCannonDamageMultiply * stf(rBall.DamageHull) * (8.0 + frnd() * 4.0); // LEO: Забекапил
+	fHP = fCannonDamageMultiply * stf(rBall.DamageHull) / 1.4;	//без НИ делим: 	было 	х1.5 	от ядер, х2.5 	от бомб
+	if (iBallType == GOOD_BOMBS) fHP *= 1.1;					//					стало 	х1,07	от ядер, х1.96	от бомб
 	if (bSeriousBoom)
 	{
-		fCrewDamage = fCrewDamage * 7.0;
-		// fHP = fDistanceDamageMultiply * fCannonDamageMultiply * stf(rBall.DamageHull) * (8.0 + frnd() * 4.0); // LEO: Забекапил
-		fHP = fCannonDamageMultiply * stf(rBall.DamageHull) * 4; // 4.0
-		if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType != GOOD_GRAPES) fHP *= 1.25;
-		Ship_ApplyHullHitpointsWithCannon(rOurCharacter, fHP, KILL_BY_BALL, iBallCharacterIndex);
-
+		fCrewDamage = fCrewDamage * 8.0;
+		fHP = fHP * 6.0; // 4.0
 		if (iBallCharacterIndex == nMainCharacterIndex)
 		{
 			Log_SetStringToLog(LanguageConvertString(iSeaSectionLang, "Ship_critical"));
@@ -2764,9 +2735,6 @@ void Ship_HullHitEvent()
 	}
 	else
 	{
-		fHP = fCannonDamageMultiply * stf(rBall.DamageHull);
-		if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType != GOOD_GRAPES) fHP *= 1.35; // LEO: (fHP *= 1.25;) - этого мало оказалось
-		Ship_ApplyHullHitpointsWithCannon(rOurCharacter, fHP, KILL_BY_BALL, iBallCharacterIndex);
 		// boal  check skill -->
 		if (!isOurCompanion && IsCompanion(rBallCharacter))
 		{
@@ -2780,7 +2748,9 @@ void Ship_HullHitEvent()
 	//fDistanceDamageMultiply = Bring2Range(1.0, 0.66, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
 	//fCrewDamage *= fDistanceDamageMultiply;//добавлено НЕБОЛЬШОЕ влияние дистанции для нормального урона
 	//Log_Info("fDistanceDamageMultiply "+fDistanceDamageMultiply);
-	Ship_ApplyCrewHitpointsWithCannon(rOurCharacter, fCrewDamage, fCannonDamageMultiply, iBallType);
+	if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType != GOOD_GRAPES) fHP *= 1.35; // LEO: (fHP *= 1.25;) - этого мало оказалось
+	Ship_ApplyHullHitpointsWithCannon(rOurCharacter, fHP, KILL_BY_BALL, iBallCharacterIndex);
+	Ship_ApplyCrewHitpointsWithCannon(rOurCharacter, fCrewDamage, iBallType);
 
 	if (bInflame == true && fFirePlaceDistance < 4.0 && iFirePlaceIndex >= 0)
 	{
@@ -2797,7 +2767,6 @@ void Ship_HullHitEvent()
 		{
 			Ship_Serious_Boom(x, y, z);
 		}
-		fTmpCannonDamage = fTmpCannonDamage * 6.0;
 		//boal 27.09.05 -->
 		if ((GetCargoGoods(rOurCharacter, GOOD_POWDER) / 20.0) > (GetCargoMaxSpace(rOurCharacter) * 0.25) && rand(1) == 1)
 		{
@@ -2814,7 +2783,7 @@ void Ship_HullHitEvent()
 		//boal 27.09.05 <--
 		}
 	}
-    SendMessage(&AISea, "laffff", AI_MESSAGE_CANNONS_BOOM_CHECK, rOurCharacter, fTmpCannonDamage, x, y, z);  // fix перенес с проверкой на труп
+    SendMessage(&AISea, "laffff", AI_MESSAGE_CANNONS_BOOM_CHECK, rOurCharacter, fHP, x, y, z);  // fix перенес с проверкой на труп
 	// boal 290704 раз в минуту проверяем обиду на гл героя, если жухлит через желтый прицел -->
 	//Log_Info(rOurCharacter.id);
 	//Log_Info(" LastBallCharacter = "+rOurCharacter.Ship.LastBallCharacter);
@@ -2904,7 +2873,6 @@ void Ship_SetFantomData(ref rFantom)
 	if (CheckAttribute(rFantom, "Ship.Masts")) { DeleteAttribute(rFantom, "Ship.Masts"); }
 	if (CheckAttribute(rFantom, "Ship.Blots")) { DeleteAttribute(rFantom, "Ship.Blots"); }
 	if (CheckAttribute(rFantom, "Ship.Sails")) { DeleteAttribute(rFantom, "Ship.Sails"); }
-
 }
 
 void CharacterUpdateShipFromBaseShip(int iCharacterIndex)
@@ -3561,7 +3529,7 @@ void Ship_UpdateParameters()
 	float	fWindPower = Whr_GetWindSpeed() / WIND_NORMAL_POWER;
 	float	fWindDotShip = GetDotProduct(Whr_GetWindAngle(), stf(arCharShip.Ang.y));		// Wind.ay | Ship.ay
     // boal -->
-	fShipSpeed = (fShipSpeed * fWindPower);  // boal крейсерская скорость до уменьшений при данном ветре.
+	fShipSpeed = fShipSpeed * fWindPower;  // boal крейсерская скорость до уменьшений при данном ветре.
 	arCharShip.MaxSpeedZ = fShipSpeed;
 	arCharShip.MaxSpeedZ = Sea_ApplyMaxSpeedZ(arCharShip, fWindDotShip); // учет парусов в др месте
 	// boal <--
@@ -3588,7 +3556,7 @@ void Ship_UpdateParameters()
     		}
     		else
     		{
-    		    fTRFromSpeed = 1.0 - 0.5 * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));
+    		    fTRFromSpeed = 1.0 - 0.75 * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));
     		}
         }
 	}
@@ -3600,7 +3568,7 @@ void Ship_UpdateParameters()
 		}
 		else
 		{
-		    fTRFromSpeed = 1.0 - (0.5 - MOD_SKILL_ENEMY_RATE*0.005) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));
+		    fTRFromSpeed = 1.0 - (0.75 - MOD_SKILL_ENEMY_RATE*0.005) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));//чем медленнее текущая скорость корабля, тем медленнее он поворачивает
 		}
 	}
 	// boal зависимость от скорости на маневр <--
@@ -3611,9 +3579,12 @@ void Ship_UpdateParameters()
     // Apply arcade mode
 	if (iArcadeSails == 1)
 	{
-		//arCharShip.MaxSpeedZ = 6.0 * stf(arCharShip.MaxSpeedZ);
-		arCharShip.MaxSpeedZ = (2.5 * stf(arCharShip.MaxSpeedZ));
+		arCharShip.MaxSpeedZ = (3.0 * stf(arCharShip.MaxSpeedZ));
 		arCharShip.MaxSpeedY = (2.0 * stf(arCharShip.MaxSpeedY));
+	}
+	else
+	{
+		arCharShip.MaxSpeedZ = (1.2 * stf(arCharShip.MaxSpeedZ));
 	}
 
 	// calculate immersion
@@ -4157,6 +4128,7 @@ void Ship_LoadShip()
 		ShipModelrList[iNumShips] = GetCurrentModelrNumber();
 
 		Ships[iNumShips] = iCharacterIndex;
+		LoadedChars[iNumShips] = iCharacterIndex; // после загрузки сейва в море
 		rCharacter.curshipnum = iNumShips;
 		Dev_Trace("Ship_LoadShip = " + iCharacterIndex + " id = " + rCharacter.id + " iNumShips = " + iNumShips + " curshipnum = " + rCharacter.curshipnum + " ShipModelrList[iNumShips] = " + ShipModelrList[iNumShips]);
 		Event(SHIP_UPDATE_PARAMETERS, "lf", iCharacterIndex, stf(rCharacter.Ship.Speed.z));		// Parameters      после создания корабля
@@ -4981,23 +4953,23 @@ void FlagPerkForCapturedShip(ref refChar)
 	switch(sti(refChar.nation))
 	{
 		case PIRATE:
-			sMessage = xiStr("NewFlagPirate");
+			sMessage = "Получен пиратский флаг";
 			sPerk = "FlagPir";
 		break;
 		case ENGLAND:
-			sMessage = xiStr("NewFlagEngland");
+			sMessage = "Получен английский флаг";
 			sPerk = "FlagEng";
 		break;
 		case SPAIN:
-			sMessage = xiStr("NewFlagSpain");
+			sMessage = "Получен испанский флаг";
 			sPerk = "FlagSpa";
 		break;
 		case FRANCE:
-			sMessage = xiStr("NewFlagFrance");
+			sMessage = "Получен французский флаг";
 			sPerk = "FlagFra";
 		break;
 		case HOLLAND:
-			sMessage = xiStr("NewFlagHolland");
+			sMessage = "Получен голландский флаг";
 			sPerk = "FlagHol";
 		break;
 	}

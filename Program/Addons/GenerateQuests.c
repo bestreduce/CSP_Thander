@@ -10,7 +10,7 @@ void QuestDuelCheckPossibility(ref loc)
 	if(loc.type != "town") { return; }
 
 	if(loc.id == "Bridgetown_Plantation" || loc.id == "Pirates_town" || loc.id == "Caiman_town" || loc.id == "LeFransua_town"
-	|| loc.id == "FortOrange_town" || loc.id == "LaVega_ExitTown" || loc.id == "LaVega_town" || loc.id == "PuertoPrincipe_town"
+	|| loc.id == "LaVega_ExitTown" || loc.id == "LaVega_town" || loc.id == "PuertoPrincipe_town"
 	|| loc.id == "Caiman_ExitTown") { return; }
 
 	if(!GetCanTakeDuelQuest(loc)) { return; }
@@ -149,7 +149,7 @@ void QuestDuelGenerateCharacters()
 				}
 
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -167,7 +167,7 @@ void QuestDuelGenerateCharacters()
 				}
 
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -177,7 +177,7 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Mercenary_" + rand(100000);
 				sModel = GetModelForQuestDuel(19, "officer");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -196,7 +196,7 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Relative_" + rand(100000);
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -207,7 +207,7 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Relative_" + rand(100000);
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -1106,7 +1106,7 @@ void ShipWreckLoginToWorldMap(string qName)
 
 	chr.mapEnc.type = "warrior";
 	chr.mapEnc.worldMapShip = "ranger";
-	chr.mapEnc.Name = "сильно потрёпанный неизвестный корабль прямо по курсу";
+	chr.mapEnc.Name = "Вижу сильно потрёпанный неизвестный корабль прямо по курсу";
 
 	//Map_CreateWarrior("", sGroup, 30);
 	Map_CreateSlowMerch("",sGroup, 30);
@@ -1253,6 +1253,7 @@ void ShipWreckInSeaWaitEndToSea()
 	AddQuestRecord("ShipWreck", "1");
 	AddQuestUserData("ShipWreck", "sCharacter", GetNameLugger(chr, "f"));
 	AddQuestUserData("ShipWreck", "sShipName", chr.Ship.Name);
+	AddQuestUserData("ShipWreck", "sSex1", GetSexPhrase("отпетым мерзавцем", "отпетой мерзавкой"));
 	AddQuestUserData("ShipWreck", "sMoney", sti(PChar.GenerateShipWreck.Money));
 
 	LAi_SetWarriorType(chr);
@@ -1286,6 +1287,7 @@ void ShipWreckBattleWithSailor()
 void ShipWreckBattleWithSailorWinner(string qName)
 {
 	AddQuestRecord("ShipWreck", "2");
+	AddQuestUserData("ShipWreck", "sSex2", GetSexPhrase("", "а"));
 	chrDisableReloadToLocation = false;
 
 	string sCharacter = PChar.GenerateShipWreck.CharacterID;
@@ -1351,7 +1353,7 @@ void ShipWreckInTown(string qName)
 	RemovePassenger(PChar, chr);
 
 	string sLocator = "reload1_back";
-	if(PChar.location == "Pirates_town" || PChar.location == "PuertoPrincipe_town" || PChar.location == "LaVega_town" || PChar.location == "LeFransua_town" || PChar.location == "FortOrange_town")
+	if(PChar.location == "Pirates_town" || PChar.location == "PuertoPrincipe_town" || PChar.location == "LaVega_town" || PChar.location == "LeFransua_town")
 	{
 		sLocator = "reload1";
 	}
@@ -1383,6 +1385,7 @@ void ShipWreckInTownSuccess()
 	ChangeCharacterReputation(PChar, 10);
 
 	AddQuestRecord("ShipWreck", "4");
+	AddQuestUserData("ShipWreck", "sSex2", GetSexPhrase("", "а"));
 	CloseQuestHeader("ShipWreck");
 
 	PChar.GenerateShipWreck.Block = true;
@@ -1610,6 +1613,7 @@ void ShipWreckBanditsOneTypeEnd()
 
 		AddQuestRecord("ShipWreck", sNotice);
 		AddQuestUserData("ShipWreck", "sNavigator", GetNameLugger(chr, "f"));
+		AddQuestUserData("ShipWreck", "sSex2", GetSexPhrase("", "а"));
 		PChar.GenerateShipWreck.GoodsChange.Yes = false;
 	}
 
@@ -1769,6 +1773,7 @@ void ShipWreckBanditsNewCapAdd()
 	Ship_FlagRefresh(chr);
 
 	AddQuestRecord("ShipWreck", "6");
+
 	CloseQuestHeader("ShipWreck");
 
 	PChar.GenerateShipWreck.Block = true;

@@ -32,6 +32,8 @@ int CreatePuertoRicoCharacters(int n)
 
 	makeref(ch,Characters[n]);			//Священик
 	ch.id = "SanJuan_Priest";
+	ch.name		= "падре Домингес";
+	ch.lastname = "";
 	ch.model	= "priest_4";
 	ch.model.animation = "man";
 	ch.sex = "man";

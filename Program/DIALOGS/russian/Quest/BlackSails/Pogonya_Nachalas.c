@@ -192,7 +192,7 @@ void ProcessDialogEvent()
 			LAi_group_SetHearRadius("BSChaseBegun_shore_fight", 100.0);
 			LAi_group_SetRelation("BSChaseBegun_shore_fight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("BSChaseBegun_shore_fight", LAI_GROUP_PLAYER, true);
-
+			AddDialogExitQuest("MainHeroFightModeOn");
 			//pchar.quest.BSChaseBegun_shore_fight_end.win_condition.l1 = "Group_Death";//условие победы
 			//pchar.quest.BSChaseBegun_shore_fight_end.win_condition.l1.group = "BSChaseBegun_shore_fight";//какую группу уничтожить
 			//pchar.quest.BSChaseBegun_shore_fight_end.function = "BSChaseBegun_shore_fight_end";

@@ -312,5 +312,5 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.TradeOff = true;
 	rCannon.hp = 80.0;
-	InitBaseCannons_CalcSpeedV0(&rCannon,1600.0);
+	InitBaseCannons_CalcSpeedV0(&rCannon,1520.0);
 }

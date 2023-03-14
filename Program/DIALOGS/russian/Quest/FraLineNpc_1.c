@@ -388,6 +388,7 @@ void ProcessDialogEvent()
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
 			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
 			DialogExit();
+			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
  		case "Step_F5_8":
 			dialog.text = "От такого рода почитания я бы с удовольствием отказалась.";

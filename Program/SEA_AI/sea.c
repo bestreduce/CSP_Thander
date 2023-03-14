@@ -142,9 +142,13 @@ void DeleteSeaEnvironment()
 
 	// delete masts fall modules
 		DeleteEntitiesByType("mast");
+		
+	// delete hulls fall modules
+	DeleteEntitiesByType("hull");	
 
  	// delete particle system
 	//	DeleteParticles();
+	ClearSeaFantoms();
 
 	// delete our group
 		Group_DeleteGroup(PLAYER_GROUP);
@@ -371,7 +375,9 @@ void Sea_LandLoad()
 		DeleteAttribute(pchar, "CheckStateOk"); // проверка протектором
 		Group_FreeAllDead();
 	}
-
+	
+	PerkLoad(true);
+	
 	if (sborCancelledByPatent)
 	{
 		Log_Info("Пропуск в порт колонии бесплатен благодаря патенту.");
@@ -533,6 +539,7 @@ void Sea_MapLoad()
 	SeaMapLoadZ = stf(pchar.Ship.Pos.z);
 	SeaMapLoadAY = stf(pchar.Ship.Ang.y);
 	CheckWoundedOfficers();
+	PerkLoad(true);
 }
 
 // нигде не пользуетя, может глючить для абордажа
@@ -643,23 +650,6 @@ void SeaLogin(ref Login)
 	pchar.Ship.POS.Mode = SHIP_SAIL;
 	pchar.location = sIslandID;
 
-	// clear old fantom relations in our character
-		if (CheckAttribute(pchar, "Relation"))
-		{
-			aref	arRelations; makearef(arRelations, pchar.Relation);
-			int		iNumRelations = GetAttributesNum(arRelations);
-			for (i=0; i<iNumRelations; i++)
-			{
-				aref arRelation = GetAttributeN(arRelations, i);
-				string sRName = GetAttributeName(arRelation);
-				if (sti(sRName) >= FANTOM_CHARACTERS)
-				{
-					DeleteAttribute(arRelations, sRName);
-					iNumRelations--;
-					i--;
-				}
-			}
-		}
 
 	// Quest check
 	Event(EVENT_SEA_LOGIN, "");
@@ -917,17 +907,14 @@ void SeaLogin(ref Login)
 		iNation = sti(rEncounter.Nation);
 		}
 
-		int iNumFantomShips = Fantom_GenerateEncounterExt(sGName, &oResult, iEncounterType, iNumWarShips, iNumMerchantShips, iNation);
-
-		//Lipsar 2 ряда кораблей
-		/*if(iEncounterType != ENCOUNTER_TYPE_ALONE && iNumFantomShips > SHIPS_NUM_DOUBLE)
-            SendMessage(&AISea, "lsl", AI_MESSAGE_GROUP_SET_LINES, sGName, 2);
-		//Lipsar*/
+		int iNumFantomShips;
+		if (checkattribute(rEncounter, "v2")) iNumFantomShips = Fantom_GenerateShips_ForEnc_v2(rEncounter, iEncounterType, sGName);
+			else iNumFantomShips = Fantom_GenerateEncounterExt(sGName, iEncounterType, iNumWarShips, iNumMerchantShips, iNation);
 
 		// Ugeen --> генерация параметров	для спецэнкаунтеров
 		if (iEncounterType == ENCOUNTER_TYPE_BARREL || iEncounterType == ENCOUNTER_TYPE_BOAT)
 		{
-			iFantomIndex = FANTOM_CHARACTERS + iNumFantoms;
+			iFantomIndex = seaFantoms[seaFantomsNum - 1];
 			rFantom = &Characters[iFantomIndex];
 			rFantom.id = iFantomIndex;
 			rFantom.index = iFantomIndex;
@@ -1008,8 +995,9 @@ void SeaLogin(ref Login)
 		{
 			for (j=0; j<iNumFantomShips; j++)
 			{
-				iFantomIndex = FANTOM_CHARACTERS + iNumFantoms - iNumFantomShips + j;
+				iFantomIndex = seaFantoms[seaFantomsNum - iNumFantomShips + j];
 				rFantom = &Characters[iFantomIndex];
+				rFantom.SeaFantom = true;
                 DeleteAttribute(rFantom, "items"); // boal 28.07.04 фикс кучи сабель, когда идёт в плен
 				rFantom.id = "fenc_" + iFantomIndex;
                 // boal 26.02.2004 -->
@@ -1027,7 +1015,7 @@ void SeaLogin(ref Login)
                 rFantom.EncType      = rEncounter.Type; // тип  war, trade pirate
                 rFantom.RealEncounterType = iEncounterType;//boal
                 rFantom.EncGroupName = sGName;
-                rFantom.MainCaptanId = Characters[iFantomIndex - j].id;
+                rFantom.MainCaptanId = Characters[seaFantoms[seaFantomsNum - iNumFantomShips]].id;
 				rFantom.WatchFort = true; //следить за фортом
 				rFantom.AnalizeShips = true; //анализить враждебные корабли сразу же с загрузки и далее
 				if(rand(10) == 1) rFantom.DontRansackCaptain = true;
@@ -1043,6 +1031,8 @@ void SeaLogin(ref Login)
 
 				SetRandomNameToCharacter(rFantom);
 				SetRandomNameToShip(rFantom);
+
+				//rFantom.GroupShipPos_event = "CalculateGroupShipPos";
 
 				SetSeaFantomParam(rFantom, rEncounter.Type); // все там
 
@@ -1102,8 +1092,6 @@ void SeaLogin(ref Login)
 
 				// add fantom
 				Group_AddCharacter(sGName, rFantom.id);
-
-				// add to sea
 				Ship_Add2Sea(iFantomIndex, 0, rEncounter.Type);
 			}
 		}
@@ -1269,6 +1257,8 @@ void Sea_LoginGroup(string sGroupID)
 		return;
 	}
 	Group_SetGroupCommander(sGroupID, rGroupCommander.id);  // странная проверка и назначение, но было и пусть будет
+
+	//&Characters[GetCharacterIndex(rGroupCommander.id)].GroupShipPos_event = "CalculateGroupShipPos";
 
 	// set location near
 	if (CheckAttribute(rGroup, "location.neargroup"))
@@ -1712,42 +1702,74 @@ void ReconnectShips()
 #event_handler("CalculateGroupShipPos", "CalculateGroupShipPos")
 ref CalculateGroupShipPos()
 {
+	float distanceBetweenShips = 200.0;//TO DO сделать расстояние между кораблей от их базовых размеров??? или регулируемым в настройках?
 	int shipIndex = GetEventData();
 	float centerPosX = GetEventData();
 	float rotation = GetEventData();
 	float centerPosZ = GetEventData();
-	int shipCount = GetCompanionQuantity(PChar);
-
-	float distanceBetweenShips = 200.0;
-
+	aref aShipChar = GetEventData();
+	int shipCount;
+	if (IsCompanion(aShipChar)) shipCount = GetCompanionQuantity(pchar); 
+						else shipCount = Group_GetLiveCharactersNum(aShipChar.SeaAI.Group.Name);//костыль - для ГГ Group_GetLiveCharactersNum не работает
 	float result[3];
 	result[0] = centerPosX;
 	result[1] = rotation;
 	result[2] = centerPosZ;
+	float offset_in_line, offset_sign; 
 
-	if (shipIndex == 0)
+	if (shipcount < 4)	//не строить в две колонны, если меньше 4 кораблей
 	{
-		if (CheckAttribute(pchar,"Do180Turn") && pchar.Do180Turn == true)
+		offset_sign = 0; 
+		offset_in_line = shipIndex;
+		if (CheckAttribute(aShipChar,"Do180Turn") && aShipChar.Do180Turn == true) 
 		{
-			result[1] = rotation-180.0;
-			pchar.Do180Turn = false;
+			if (shipIndex == 0) Group_SetDo180Turn(aShipChar.SeaAI.Group.Name); 
+			result[1] = rotation-PI;//радианы
+			aShipChar.Do180Turn = false;
+			offset_in_line = shipCount - 1 - offset_in_line;
 		}
-		return &result;
 	}
-
-	if ((shipIndex == 1) && (shipCount == 2))
+	else
 	{
-		result[0] -= distanceBetweenShips * sin(rotation);
-		result[2] -= distanceBetweenShips * cos(rotation);
-		return &result;
+		if (shipcount > 11)	//делаем три колонны - Золотой Флот
+		{
+			//при тесте ЗФ спавнится в обратном порядке - в конце три сан-фелиппе, дальше алексисы, впереди галеоны		И флагман не выдвигается вперёд. строятся прямоугольником
+			offset_in_line = makeint((shipIndex + 2) / 3);
+			int iTemp = shipIndex % 3; 
+			switch (iTemp)
+			{
+				case 0: offset_sign = 0; break;
+				case 1: offset_sign = -1; break;
+				case 2: offset_sign = 1; break;
+			}
+//		2	5	8	11
+//	1	4	7	10	13
+//		3	6	9	12
+		}
+		else
+		{//стандарт - от 4 до 11 кораблей - в две колонны
+			offset_sign = -0.433;//чётный
+			if ((shipIndex % 2) == 0) offset_sign = 0.433;//нечётный
+			offset_in_line = makeint((shipIndex + 1) / 2);
+			if (shipIndex == 0) {offset_sign = 0; offset_in_line = 0;} //флагман в точку
+		
+			if (CheckAttribute(aShipChar,"Do180Turn") && aShipChar.Do180Turn == true) 
+			{
+				if (shipIndex == 0) Group_SetDo180Turn(aShipChar.SeaAI.Group.Name); 
+				result[1] = rotation-PI;//радианы
+				aShipChar.Do180Turn = false;
+				offset_in_line = makeint((shipCount - shipIndex)/2);
+				if (shipIndex == 0) offset_in_line -= 0.134;
+			}
+			else 
+			{
+				if (shipcount == (shipIndex+1) && (shipIndex % 2) == 1) { offset_in_line -= 0.134; offset_sign = 0; }//последний _И_ чётный	
+			}
+			if (offset_in_line > 0) offset_in_line -= 0.134;
+		}
 	}
-
-	float offset_sign = -0.4;
-	if ((shipIndex % 2) == 0) offset_sign = 0.4;
-
-	int offset_in_line = makeint((shipCount - shipIndex - 1) / 2) + 1;
-
 	result[0] -= distanceBetweenShips * (offset_in_line * sin(rotation) + offset_sign * cos(rotation));
 	result[2] -= distanceBetweenShips * (offset_in_line * cos(rotation) - offset_sign * sin(rotation));
+//log_info("|shipCount - " +shipCount + "|shipIndex - " +shipIndex + "|offset_sign - " +offset_sign + "|offset_in_line - " +offset_in_line + "|result[0] - " +result[0] + "|result[2] - " +result[2] + "|result[1] - " +result[1]);
 	return &result;
 }

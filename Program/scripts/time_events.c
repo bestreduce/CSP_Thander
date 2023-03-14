@@ -114,44 +114,36 @@ void WorldSituationsUpdate()
 			if(pchar.repairDefenders != GetDataMonth())
 			{
 				pchar.repairDefenders = GetDataMonth();
-			ref _rChar;//Lipsar ---> Ремонт сторожей
-			for (int i = 0; i< MAX_COLONIES; i++)
-			{
-
-				if (Colonies[i].island == sIslandID)
-				{
-					if (colonies[i].nation != "none" && colonies[i].id != "Caiman" && !CheckAttribute(&colonies[i], "HasNoFort") && !CheckAttribute(&colonies[i], "Siege") && !CheckAttribute(&colonies[i], "DontSetShipInPort"))
+				int iCounter = 0;
+				ref _rChar;//Lipsar ---> Ремонт сторожей
+				for (int j=GlobalCharacters; j<MAX_CHARACTERS; j++)
 					{
-						bool FortDefender;
-						ref FortChref = GetFortCommander(colonies[i].id);
-							for (int j=GlobalCharacters; j<MAX_CHARACTERS; j++)
+						
+						if (CheckAttribute(&characters[j], "fortDefender") && CheckAttribute(&characters[j], "IslandShips"))
 							{
-								if (CheckAttribute(&characters[j], "fortDefender") && CheckAttribute(&characters[j], "IslandShips"))
+								iCounter++;
+								_rChar = &characters[j];
+								if(!bSeaActive && iCounter < MOD_DEFENDERS_RATE * 23)
 								{
-									_rChar = &characters[j];
-									if(!bSeaActive)
-									{
-										DeleteAttribute(_rChar, "ship.masts");
-										DeleteAttribute(_rChar, "ship.sails");
-										_rChar.Ship.HP = GetCharacterShipHP(_rChar);
-										_rChar.Ship.SP = 100;
-										SetCrewQuantityFull(_rChar);
-										SetCharacterGoods(_rChar, GOOD_BALLS, 2000);
-										SetCharacterGoods(_rChar, GOOD_GRAPES, 2000);
-										SetCharacterGoods(_rChar, GOOD_KNIPPELS, 2000);
-										SetCharacterGoods(_rChar, GOOD_BOMBS, 2000);
-										SetCharacterGoods(_rChar, GOOD_POWDER, 8000);
-										SetCharacterGoods(_rChar, GOOD_FOOD, 2000);
-										SetCharacterGoods(_rChar, GOOD_WEAPON, 1500);
-										SetCharacterGoods(_rChar, GOOD_MEDICAMENT, 1000);
-										SetCharacterGoods(_rChar, GOOD_PLANKS, 800);
-										SetCharacterGoods(_rChar, GOOD_SAILCLOTH, 800);
-									}
+									DeleteAttribute(_rChar, "ship.masts");
+									DeleteAttribute(_rChar, "ship.sails");
+									_rChar.Ship.HP = GetCharacterShipHP(_rChar);
+									_rChar.Ship.SP = 100;
+									SetCrewQuantityFull(_rChar);
+									SetCharacterGoods(_rChar, GOOD_BALLS, 2000);
+									SetCharacterGoods(_rChar, GOOD_GRAPES, 2000);
+									SetCharacterGoods(_rChar, GOOD_KNIPPELS, 2000);
+									SetCharacterGoods(_rChar, GOOD_BOMBS, 2000);
+									SetCharacterGoods(_rChar, GOOD_POWDER, 8000);
+									SetCharacterGoods(_rChar, GOOD_FOOD, 2000);
+									SetCharacterGoods(_rChar, GOOD_WEAPON, 1500);
+									SetCharacterGoods(_rChar, GOOD_MEDICAMENT, 1000);
+									SetCharacterGoods(_rChar, GOOD_PLANKS, 800);
+									SetCharacterGoods(_rChar, GOOD_SAILCLOTH, 800);
 								}
 							}
+							if (iCounter == MOD_DEFENDERS_RATE * 23) break;
 					}
-				}
-			}
 			Log_TestInfo("Ремонт сторожей");//Lipsar <--- Ремонт сторожей
 			}
 		break;
@@ -517,40 +509,10 @@ void CheckBook()//Проверка книги только на глобалке
 		DeleteAttribute(pchar,"bookreadtoday");
 		return;
 	}
+
 	if (IsEntity(&worldMap) != 0)//учёт чтения на глобалке
 	{
-		if (CheckAttribute(pchar,"booktype"))
-		{
-			if (sti(pchar.booktime) > 0)
-			{
-				pchar.booktime = sti(pchar.booktime)-1;
-				//if (sti(pchar.booktime) != 0)Log_Info("Осталось "+pchar.booktime+" дней по полного изучения книги.");
-				//if (sti(pchar.booktime) == 0)Log_Info("Последний день изучения книги!");
-			}
-			if (sti(pchar.booktime) <= 0)
-			{
-				if (pchar.booktype == "Defense") pchar.booktype = "Defence";
-				if (pchar.booktype == "Defenсe") pchar.booktype = "Defence";//Whut?
-				AddCharacterExpToSkill(pchar, pchar.booktype, sti(pchar.bookbonus));
-				int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
-				Log_Info(GetFullName(pchar) + " изучил книгу ''"+LanguageConvertString(idLngFile, pchar.bookname)+"'' и увеличил навык ''"+XI_ConvertString(pchar.booktype)+"''");
-				LanguageCloseFile(idLngFile);
-				DeleteAttribute(pchar,"booktime");
-				DeleteAttribute(pchar,"booktime.full");
-				DeleteAttribute(pchar,"bookbonus");
-				DeleteAttribute(pchar,"booktype");
-				DeleteAttribute(pchar,"bookreadtoday");
-				string sEquipItem = GetCharacterEquipByGroup(pchar, BOOK_ITEM_TYPE);
-				RemoveCharacterEquip(pchar, BOOK_ITEM_TYPE);
-				RemoveItems(pchar, sEquipItem, 1);
-
-				pchar.questTemp.bookcount = sti(pchar.questTemp.bookcount) + 1;
-				// Открываем достижения
-				if(sti(pchar.questTemp.bookcount) >= 3) UnlockAchievement("books", 1);
-				if(sti(pchar.questTemp.bookcount) >= 6) UnlockAchievement("books", 2);
-				if(sti(pchar.questTemp.bookcount) >= 10) UnlockAchievement("books", 3);
-			}
-		}
+		TryReadBook();
 	}
 }
 

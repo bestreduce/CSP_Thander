@@ -7,7 +7,7 @@ void InitGoods()
 	Goods[GOOD_BALLS].Weight		= 1;
 	Goods[GOOD_BALLS].Units			= 20;
 	Goods[GOOD_BALLS].SpeedV0		= 1.0;
-	Goods[GOOD_BALLS].DamageHull	= 1.5;
+	Goods[GOOD_BALLS].DamageHull	= 1.5;		//ВНИМАНИЕ. в AIShip добавил множители, чтоб без НИ исправить. 		ядра 1.5/1.4=1.07		бомбы 2.5/1.4*1.1=1.965
 	Goods[GOOD_BALLS].DamageRig		= 0.0;
 	Goods[GOOD_BALLS].DamageCrew	= 0.025;
 	Goods[GOOD_BALLS].AfraidWater = 0;    // рудимент от к3
@@ -19,7 +19,7 @@ void InitGoods()
 	Goods[GOOD_GRAPES].Cost			= 12;
 	Goods[GOOD_GRAPES].Weight		= 1;
 	Goods[GOOD_GRAPES].Units		= 20;
-	Goods[GOOD_GRAPES].SpeedV0		= 0.55;
+	Goods[GOOD_GRAPES].SpeedV0		= 0.55;//30%
 	Goods[GOOD_GRAPES].DamageHull	= 0.01;
 	Goods[GOOD_GRAPES].DamageRig	= 0.0;
 	Goods[GOOD_GRAPES].DamageCrew	= 0.2;
@@ -31,7 +31,7 @@ void InitGoods()
 	Goods[GOOD_KNIPPELS].Cost		= 26;
 	Goods[GOOD_KNIPPELS].Weight		= 2;
 	Goods[GOOD_KNIPPELS].Units		= 20;
-	Goods[GOOD_KNIPPELS].SpeedV0	= 0.9;
+	Goods[GOOD_KNIPPELS].SpeedV0	= 0.9;//81%
 	Goods[GOOD_KNIPPELS].DamageHull = 0.01;
 	Goods[GOOD_KNIPPELS].DamageRig	= 1.0;
 	Goods[GOOD_KNIPPELS].DamageCrew = 0.04;
@@ -43,7 +43,7 @@ void InitGoods()
 	Goods[GOOD_BOMBS].Cost			= 60;
 	Goods[GOOD_BOMBS].Weight		= 2;
 	Goods[GOOD_BOMBS].Units			= 20;
-	Goods[GOOD_BOMBS].SpeedV0		= 0.65;
+	Goods[GOOD_BOMBS].SpeedV0		= 0.7;//49%
 	Goods[GOOD_BOMBS].DamageHull	= 2.5;
 	Goods[GOOD_BOMBS].DamageRig		= 0.0;
 	Goods[GOOD_BOMBS].DamageCrew	= 0.06;
@@ -295,7 +295,7 @@ void InitGoods()
 	Goods[GOOD_SILVER].Units	    = 1;
 	Goods[GOOD_SILVER].AfraidWater = 0;
 	Goods[GOOD_SILVER].canbecontraband	= 0;
-	Goods[GOOD_SILVER].Norm          = 2500;
+	Goods[GOOD_SILVER].Norm          = 1500;
 
 	Goods[GOOD_GOLD].Name		    = "Gold";
 	Goods[GOOD_GOLD].Weight	        = 2;
@@ -303,7 +303,7 @@ void InitGoods()
 	Goods[GOOD_GOLD].Units	        = 1;
 	Goods[GOOD_GOLD].AfraidWater = 0;
 	Goods[GOOD_GOLD].canbecontraband	= 0;
-	Goods[GOOD_GOLD].Norm          = 1500;
+	Goods[GOOD_GOLD].Norm          = 1000;
 
 	Goods[GOOD_IRON].Name		    = "Iron";
 	Goods[GOOD_IRON].Weight	    	= 2;
@@ -311,7 +311,7 @@ void InitGoods()
 	Goods[GOOD_IRON].Units	    = 1;
 	Goods[GOOD_IRON].AfraidWater = 0;
 	Goods[GOOD_IRON].canbecontraband	= 0;
-	Goods[GOOD_GOLD].Norm          = 2500;
+	Goods[GOOD_IRON].Norm          = 2500;
 
 	Goods[GOOD_TOOLS].Name		    = "Tools";
 	Goods[GOOD_TOOLS].Weight	    = 2;
@@ -319,7 +319,7 @@ void InitGoods()
 	Goods[GOOD_TOOLS].Units	    	= 1;
 	Goods[GOOD_TOOLS].AfraidWater = 0;
 	Goods[GOOD_TOOLS].canbecontraband	= 0;
-	Goods[GOOD_GOLD].Norm          = 500;
+	Goods[GOOD_TOOLS].Norm          = 500;
 
 	Goods[GOOD_WEAPON].Name	  	    = "Weapon";
 	Goods[GOOD_WEAPON].Weight	    = 1;
@@ -348,7 +348,7 @@ void InitGoods()
 	Goods[GOOD_POWDER].AfraidWater = 1;
 	Goods[GOOD_POWDER].type				= TRADE_TYPE_AMMUNITION;
 	Goods[GOOD_POWDER].canbecontraband	= 0;
-	Goods[GOOD_FOOD].Norm          = 12000;
+	Goods[GOOD_POWDER].Norm          = 12000;
 
 	Goods[GOOD_MEDICAMENT].Name		    = "Medicament";
 	Goods[GOOD_MEDICAMENT].Weight	    = 1;

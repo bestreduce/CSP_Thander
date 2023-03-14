@@ -109,6 +109,7 @@ void FillMapsTable()
 	if(CheckAttribute(pchar, "showlastmap")) { selectedId = pchar.showlastmap; }
 
 	GameInterface.TABLE_MAPS.hr.td1.str = "";
+	GameInterface.TABLE_MAPS.hr.td1.sorttype = "string";
 	SetFormatedText("STR_1", XI_ConvertString("Select map"));
 	Table_UpdateWindow("TABLE_MAPS");
 
@@ -150,7 +151,7 @@ void FillMapsTable()
 	GameInterface.TABLE_MAPS.select = iSelected;
 	CurRow   =  "tr" + (iSelected);
 	SetNewMapPicture();
-
+	SortTable("TABLE_MAPS", 1);
 	Table_UpdateWindow("TABLE_MAPS");
 	LanguageCloseFile(idLngFile);
 }
@@ -228,7 +229,7 @@ void SelectRColony()
 
 void DoTeleport(float x, float y, string mapid)
 {
-	log_info(FloatToString(x,1)+" "+FloatToString(y,1)+" "+mapid+" "+loadedLocation.islandId);
+	//log_info(FloatToString(x,1)+" "+FloatToString(y,1)+" "+mapid+" "+loadedLocation.islandId);
 	
 	aref mapname,shorename,shorenum;
 	string shore_name,shore_numname;
@@ -250,7 +251,7 @@ void DoTeleport(float x, float y, string mapid)
 				if (CC(x,y,sti(shorename.(shore_numname).X),sti(shorename.(shore_numname).Y),gridsize) && loadedLocation.id != shore_name)
 				{
 					pchar.quest.waithours = 1+rand(1);
-					if (!HasSubStr(shore_name,"Entr"))
+					if (!HasSubStr(shore_name,"Entr") && !HasSubStr(shore_name,"ExitTown"))
 					{
 						setCharacterShipLocation(pchar, shore_name);
 						setWDMPointXZ(shore_name);
@@ -275,6 +276,7 @@ bool CC(float x, float y, int dx, int dy, int gridsize)
 
 bool CWMC(float x, float z, float x2, float z2)
 {
+	//log_info(worldMap.playerShipX+" "+worldMap.playerShipZ);
 	if (stf(worldMap.playerShipX) >= x-100 && stf(worldMap.playerShipX) <= z+100 && stf(worldMap.playerShipZ) >= x2-100 && stf(worldMap.playerShipZ) <= z2+100) return true;
 	return false;
 }
@@ -538,7 +540,7 @@ void InitMapTeleport()
 		oMapTeleport.map_beliz.Beliz_CaveEntrance_2.Pos0.X = 140;
 		oMapTeleport.map_beliz.Beliz_CaveEntrance_2.Pos0.Y = 510;
 	}
-	if (CWMC(574,924,-969,-929))
+	if (CWMC(574,924,-1000,-900))
 	{
 		oMapTeleport.map_cumana.island = "Mein";
 		oMapTeleport.map_cumana.Cumana_ExitTown.Pos0.X = 340;

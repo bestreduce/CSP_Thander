@@ -15,7 +15,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Step_E6_1";
             }
 		break;
-
+		
         case "Step_E6_1":
 			dialog.text = "Да, он посещает церковь, но очень редко.";
 			link.l1 = "Что он за человек?";

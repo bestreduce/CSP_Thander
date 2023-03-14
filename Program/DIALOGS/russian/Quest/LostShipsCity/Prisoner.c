@@ -366,7 +366,7 @@ void ProcessDialogEvent()
 				GetCharacterPos(npchar, &locx, &locy, &locz);
 				ChangeCharacterAddressGroup(npchar, npchar.location, "goto", LAi_FindNearestFreeLocator("goto", locx, locy, locz));
 			}
-			sld.dialog.currentnode = "AfterFightCasper";
+			//sld.dialog.currentnode = "AfterFightCasper";//фикс - sld - вообще рандомный непись, а диалог прописывается позже в квестреакциях
 			LAi_SetActorType(npchar);
 			LAi_group_MoveCharacter(npchar, LAI_GROUP_PLAYER);
 			LAi_ActorFollowEverywhere(npchar, "", -1);

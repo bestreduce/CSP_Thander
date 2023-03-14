@@ -185,6 +185,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			LAi_group_MoveCharacter(npchar, "SPAIN_CITIZENS");
 			LAi_group_Attack(NPChar, Pchar);
 			DialogExit();
+			AddDialogExitQuest("MainHeroFightModeOn");
         break;
 //========================== Квест "Охота на ведьму" ==================================
 		case "PDM_ONV_WOMAN":

@@ -19,19 +19,18 @@ int sundukSum;//на все апгрейды одинаковое колво с�
 int Tun_Mater1[10];//кол-во товар
 int Tun_Mater2[10];//кол-во предмет
 int Tun_Mater3[10];//кол-во деньги	//gold
-string sAdd[10] = {"","\nкорпус: ","","\nмачты: ","\nскорость: ","\nманёвренность: ","\nбейдевинд: ","\nдэдвейт: ","\nкоманда: ","\nкалибр: "};
-
-int lastsort = 0;
-bool blastsort;
+string sAdd[10] = {"","\nкорпус: ","","\nмачты: ","\nскорость: ","\nманёвренность: ","\nбейдевинд: ","\nдедвейт: ","\nкоманда: ","\nкалибр: "};
 
 void InitInterface_R(string iniName, ref _shipyarder)
 {
 	GameInterface.title = "titleShipyard";
+	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
 
 	refNPCShipyard  = _shipyarder;
 	sNation = GetNationNameByType(sti(refNPCShipyard.nation));
 
-	if (refNPCShipyard.id != "Pirates_shipyarder") {iYarderSkill = sti(refNPCShipyard.reputation)/2+50; iTunPoints = (iYarderSkill-41)/18;}
+	SetNodeUsing("Check_Material", false);
+	if (refNPCShipyard.id != "Pirates_shipyarder") {iYarderSkill = sti(refNPCShipyard.reputation)/2+50; iTunPoints = (iYarderSkill-41)/18; SetNodeUsing("Check_Material", true);}
 	//берём за навык кораблестроения репутацию верфиста и приводим к отрезку (56:100)
 
 	iShipPoints = 6 + iYarderSkill/6 - (MOD_SKILL_ENEMY_RATE)/3;//целые переменные делятся с округлением вниз
@@ -47,7 +46,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	if (iTest != -1) {rColony = GetColonyByIndex(iTest);}
 	refStore = &stores[sti(rColony.StoreNum)];
 
-	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+	if (iTunPoints < 1) SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, "TunSheme", -1, 1, 0);//если тюнинга нет из-за низкого навыка, отключаем клики по кнопкам
 
 	SetEventHandler("InterfaceBreak","ProcessExitCancel",0);
 	SetEventHandler("exitCancel","ProcessExitCancel",0);
@@ -75,7 +74,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	SetFormatedText("HERO_RANK",refNPCShipyard.Rank);
 
 	SetFormatedText("HERO_SKILL","" + iYarderSkill);
-	SetFormatedText("HERO_QBORDERS", iQBorders*100/9 + "%");
+	SetFormatedText("HERO_QBORDERS", iQBorders*10 + "%");
 	SetFormatedText("HERO_SHIPPOINTS",iFreeSP + "/" + iShipPoints);
 	SetFormatedText("HERO_TUNPOINTS",iFreeTP + "/" + iTunPoints);
 
@@ -215,7 +214,7 @@ void FillShipParam()
 		DeleteAttribute(rRealShip, "Untuned");
 
 		rRealShip.HP = stf(rBaseShip.HP) * (1 + Ship_Sheme[1]/10.0*SHIP_STAT_RANGE_REQUEST);
-		rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - (Ship_Sheme[3] * 0.03);
+		rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - (Ship_Sheme[3] * 0.03 * SHIP_STAT_RANGE_REQUEST/SHIP_STAT_RANGE_DRAFT);
 		rRealShip.SpeedRate = stf(rBaseShip.SpeedRate) * (1 + Ship_Sheme[4]/10.0*SHIP_STAT_RANGE_REQUEST);
 		rRealShip.TurnRate = stf(rBaseShip.TurnRate) * (1 + Ship_Sheme[5]/10.0*SHIP_STAT_RANGE_REQUEST);
 		rRealShip.WindAgainstSpeed = stf(rBaseShip.WindAgainstSpeed) * (1 + Ship_Sheme[6]/10.0*SHIP_STAT_RANGE_REQUEST);
@@ -435,16 +434,24 @@ void FillShipyardTable()
 	GameInterface.TABLE_SHIPYARD.hr.td6.scale = 0.9;
 	GameInterface.TABLE_SHIPYARD.select = 0;
 	GameInterface.TABLE_SHIPYARD.top = 0;
+//--> mod tablesort
+	GameInterface.TABLE_SHIPYARD.hr.td1.sorttype = "string";
+	GameInterface.TABLE_SHIPYARD.hr.td2.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td3.sorttype = "string";//нарушение сортировки 1 - 10 - 2, нужно проверять длину строки и дописывать в начале 0 коротким
+	GameInterface.TABLE_SHIPYARD.hr.td4.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td5.sorttype = "";
+	GameInterface.TABLE_SHIPYARD.hr.td6.sorttype = "";
+//<-- mod tablesort
 
 	int	iStart = 0;
 	int iEnd = -1;
 	switch (FIS_FilterState)
 	{
 	case 7:
-		{iStart = SHIP_BERMSLOOP; iEnd = SHIP_SP_SANFELIPE;}
+		{iStart = SHIP_KETCH; iEnd = SHIP_OCEAN;}
 	break;
 	case 1:
-		{iStart = SHIP_POSEIDON; iEnd = SHIP_SP_SANFELIPE;}
+		{iStart = SHIP_POSEIDON; iEnd = SHIP_OCEAN;}
 	break;
 	case 2:
 		{iStart = SHIP_GALEON50; iEnd = SHIP_HEAVYLINESHIP;}
@@ -453,13 +460,13 @@ void FillShipyardTable()
 		{iStart = SHIP_PINNACE; iEnd = SHIP_CARRACA;}
 	break;
 	case 4:
-		{iStart = SHIP_BRIG; iEnd = SHIP_LYDIA;}
+		{iStart = SHIP_BRIG; iEnd = SHIP_HERCULES;}
 	break;
 	case 5:
 		{iStart = SHIP_POLACCA; iEnd = SHIP_SHNYAVA;}
 	break;
 	case 6:
-		{iStart = SHIP_BERMSLOOP; iEnd = SHIP_SOPHIE;}
+		{iStart = SHIP_KETCH; iEnd = SHIP_VEINARD;}
 	break;
 	}
 	iEnd++;
@@ -476,7 +483,7 @@ void FillShipyardTable()
 
 		if (ShipsTypes[i].nation.(sNation))
 		{
-			if (i>=SHIP_FR_TRINITY && !isCapital) continue;//мановары только в столицах
+			if (i>=SHIP_TRINITY && !isCapital) continue;//мановары только в столицах
 		}
 		else continue;//пропускаем корабли без нации верфиста
 
@@ -490,7 +497,7 @@ void FillShipyardTable()
 		GameInterface.TABLE_SHIPYARD.(row).td1.icon.offset = "0, 1";
 		GameInterface.TABLE_SHIPYARD.(row).td1.textoffset = "51,0";
 
-		if (i >= SHIP_FR_TRINITY)
+		if (i >= SHIP_TRINITY)
 		{
 			switch (sNation)
 			{
@@ -568,13 +575,23 @@ void SetButtionsAccess()
 	int iRank = sti(pchar.rank);
 	string sText = "Заказать";
 	if (iPriceOrder > sti(pchar.Money)) SetSelectable("BUTTON_BUY", false); else SetSelectable("BUTTON_BUY", true);
-
-	if (iRank<4 && iClass<6) {SetSelectable("BUTTON_BUY", false); sText = "c 4 ранга";}
-	if (iRank<9 && iClass<5) {SetSelectable("BUTTON_BUY", false); sText = "c 9 ранга";}
-	if (iRank<14 && iClass<4) {SetSelectable("BUTTON_BUY", false); sText = "c 14 ранга";}
-	if (iRank<19 && iClass<3) {SetSelectable("BUTTON_BUY", false); sText = "c 19 ранга";}
-	if (iRank<29 && iClass<2) {SetSelectable("BUTTON_BUY", false); sText = "c 29 ранга";}
-	if (refNPCShipyard.id != "Pirates_shipyarder" && sti(RealShips[iShip].basetype) >= SHIP_FR_TRINITY && !CheckCharacterItem(Pchar, "patent_" + NationShortName(sti(refNPCShipyard.nation))) && sText == "Заказать")
+	if (bRankRequirement)
+	{
+//		if (iRank<-4 && iClass<6) {SetSelectable("BUTTON_BUY", false); sText = "c -4 ранга";}
+//		if (iRank<1 && iClass<5) {SetSelectable("BUTTON_BUY", false); sText = "c 1 ранга";}
+		if (iRank<6 && iClass<4) {SetSelectable("BUTTON_BUY", false); sText = "c 6 ранга";}
+		if (iRank<12 && iClass<3) {SetSelectable("BUTTON_BUY", false); sText = "c 12 ранга";}
+		if (iRank<20 && iClass<2) {SetSelectable("BUTTON_BUY", false); sText = "c 20 ранга";}
+	}
+	else
+	{
+//		if (iRank<-8 && iClass<6) {SetSelectable("BUTTON_BUY", false); sText = "c -8 ранга";}
+//		if (iRank<-3 && iClass<5) {SetSelectable("BUTTON_BUY", false); sText = "c -3 ранга";}
+		if (iRank<2 && iClass<4) {SetSelectable("BUTTON_BUY", false); sText = "c 2 ранга";} 
+		if (iRank<8 && iClass<3) {SetSelectable("BUTTON_BUY", false); sText = "c 8 ранга";}
+		if (iRank<16 && iClass<2) {SetSelectable("BUTTON_BUY", false); sText = "c 16 ранга";}//снижаем требования ранга ГГ
+	}
+	if (refNPCShipyard.id != "Pirates_shipyarder" && sti(RealShips[iShip].basetype) >= SHIP_TRINITY && !CheckCharacterItem(Pchar, "patent_" + NationShortName(sti(refNPCShipyard.nation))) && sText == "Заказать")
 	{SetSelectable("BUTTON_BUY", false); sText = "нет патента";}
 	SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"BUTTON_BUY", 0, "#" + sText);
 }
@@ -992,19 +1009,10 @@ void OnTableClick()
 	int iRow = GetEventData();
 	int iColumn = GetEventData();
 
-	string sRow = "tr" + (iRow + 1);
+	//string sRow = "tr" + (iRow + 1);
 	if (sControl == "TABLE_SHIPYARD")
-		{
-		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 ))
-			{
-			if (iColumn == 3) return;//эти колонки не сортируем
-			if (lastsort == iColumn) {bLastSort = !bLastSort;} else {lastsort = iColumn; bLastSort = 1;}
-
-			if (iColumn == 1)
-				SortTable(sControl, iColumn, 1, bLastSort, -1);//текст
-			else
-				SortTable(sControl, iColumn, 0, !bLastSort, -1);//числа
-			}
+	{
+		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
 		Table_UpdateWindow(sControl);
-		}
+	}
 }

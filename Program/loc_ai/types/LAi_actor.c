@@ -51,7 +51,7 @@ void LAi_type_actor_Init(aref chr)
         if (sAni == "mushketer")
             isMusk = true;
 	}
-	if (isMusk && !CheckAttribute(chr, "isMusketer.weapon") && chr.index != getmaincharacterindex() && chr != GetMainCharacter())
+	if (isMusk && !CheckAttribute(chr, "isMusketer.weapon") && !isMainCharacter(chr))
 	{
         while (FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE) != "")
         {
@@ -308,6 +308,10 @@ bool LAi_type_actor_Error(aref chr, bool lockTest)
 			Trace("Actor error: character <" + chr.id + "> now is do template <" + chr.chr_ai.tmpl + ">, his not is free for new task");
 			return true;
 		}
+	}
+	if (chr == NullCharacter) {
+		Trace("Actor error: character is NullCharacter");
+		return true;
 	}
 	return false;
 }
@@ -571,6 +575,14 @@ void LAi_ActorSetLayMode(aref chr)
 	BeginChangeCharacterActions(chr);
 	chr.actions.idle.i1 = "Lay_1";
 	EndChangeCharacterActions(chr);
+}
+
+//Установить анимацию губернатора
+void LAi_ActorSetHuberMode(aref chr)
+{
+	if(LAi_type_actor_Error(chr, false)) return;
+	chr.chr_ai.type.mode = "sit";
+	LAi_SetHuberSitAnimation(chr);
 }
 
 //------------------------------------------------------------------------------------------

@@ -1034,18 +1034,18 @@ void LAi_AllCharactersUpdate(float dltTime)
 					}
 					else
 					{	
-						if(chr.chr_ai.backuptype == "officer")
+						if(!CheckAttribute(chr, "chr_ai.backuptype"))
 						{
-							//Log_TestInfo("Type restoration: officer");
-							DeleteAttribute(chr, "chr_ai.backuptype");
-							LAi_SetOfficerType(chr);
-							LAi_tmpl_SetFollow(chr, pchar, -1.0);
+							//Log_TestInfo("Type restoration: warrior");
+							LAi_SetWarriorTypeNoGroup(chr);
 							LAi_SetFightMode(chr, true);
 						}
 						else
 						{
-							//Log_TestInfo("Type restoration: warrior");
-							LAi_SetWarriorTypeNoGroup(chr);
+							//Log_TestInfo("Type restoration: officer");
+							DeleteAttribute(chr, "chr_ai.backuptype");
+							LAi_SetOfficerType(chr);
+							LAi_type_officer_FindTarget(chr);
 							LAi_SetFightMode(chr, true);
 						}
 					}
@@ -1138,7 +1138,7 @@ void LAi_AllCharactersUpdate(float dltTime)
 							}
 							else
 							{
-									if(!CheckAttribute(pchar, "autofood") && pchar.foodquery > 0)
+								if(!CheckAttribute(pchar, "autofood") && pchar.foodquery > 0)
 								{
 									pchar.foodquery = sti(pchar.foodquery)-1;
 									EatSomeFood();
@@ -1151,7 +1151,7 @@ void LAi_AllCharactersUpdate(float dltTime)
 					}
 				}
 			}
-			if (sti(chr.index) == GetMainCharacterIndex() && CheckAttribute(pchar, "autofood") && !CheckAttribute(chr, "noeat"))
+			if (sti(chr.index) == GetMainCharacterIndex() && CheckAttribute(pchar, "autofood") && !CheckAttribute(pchar,"chr_ai.swift") &&  !CheckAttribute(chr, "noeat"))
 			{
 				if(chr_ai.energy < (LAi_GetCharacterMaxEnergy(chr) * (sti(PChar.autofood_use) * 0.01)) && LAi_IsFightMode(pchar))
 				{
@@ -1304,25 +1304,6 @@ float GetCharacterRegenHPForBlooding(aref chr, bool useItms) // Новая фу�
 
 	return fMultiplier;
 }
-
-int BookTime(ref refchar, int tier)//книги, расчёт длительности - Gregg
-{
-	int Intel = GetCharacterSPECIALSimple(refchar, SPECIAL_I);
-	int time = 0;
-	switch (tier)
-	{
-		case 1: time = 4;
-		break;
-		case 2: time = 7;
-		break;
-		case 3: time = 15;
-		break;
-		case 4: time = 30;
-		break;
-	}
-	return makeint(time+((10-Intel)*(time*0.285)));
-}
-
 
 void EatSomeFood()
 {

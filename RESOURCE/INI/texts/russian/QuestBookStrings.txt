@@ -1,3 +1,5 @@
+PKM_Animists {Странные вещи творятся на архипелаге}
+
 AT_Mechty_Sbivautsya {Мечты сбываются}
 
 KSM_Spasenie_na_rifah {Чудесное спасение на рифах}
@@ -204,9 +206,9 @@ GhostShipQuest {Корабль-призрак}
 
 Gen_CityCapture {Хроника захвата городов}
 
-Gen_Contraband  {Сбыт контрабанды}
+Gen_Contraband {Сбыт контрабанды}
 
-Gen_ContrabandTravel  {Плавание с контрабандистами}
+Gen_ContrabandTravel {Плавание с контрабандистами}
 
 Gen_StrangeInfo {Странные слухи}
 

@@ -18,7 +18,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 		break;
 		case "BlueBird_1":
-			if (isBadReputation(pchar, 5))
+			if (isBadReputation(pchar, 10))
 			{
 				dialog.text = NPCStringReactionRepeat("Я не буду разговаривать о Паскале с человеком, имеющим репутацию, подобную вашей. Я готов заниматься с вами торговлей, не более.",
 					"Я уже все вам сказал.",

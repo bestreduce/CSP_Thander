@@ -81,7 +81,7 @@ void ProcessDialogEvent()
 
 			dialog.text = "Прекрасно. Я к вашим услугам, " + GetFullName(PChar) + ".";
 
-			Link.l3 = "Я хочу оставить здесь офицера для обучение.";
+			Link.l3 = "Я хочу оставить здесь офицера для обучения.";
 			Link.l3.go = "ShipStock_1";
 
 			if (sti(NPChar.Portman) > 0)
@@ -96,7 +96,7 @@ void ProcessDialogEvent()
 		case "again":
 			dialog.text = "Что-то ещё?";
 
-			Link.l3 = "Я хочу оставить здесь офицера для обучение.";
+			Link.l3 = "Я хочу оставить здесь офицера для обучения.";
 			Link.l3.go = "ShipStock_1";
 
 			if (sti(NPChar.Portman) > 0)

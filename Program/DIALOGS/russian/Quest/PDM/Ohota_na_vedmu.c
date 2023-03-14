@@ -37,7 +37,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Ohota_na_vedmu", "1");
 			AddQuestUserData("PDM_Ohota_na_vedmu", "sSex", GetSexPhrase("","а"));
 
-			sld = CharacterFromID("PDM_Isp_sekr_guber")
+			sld = CharacterFromID("PDM_Isp_sekr_guber");
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);
 			LAi_ActorGoToLocator(sld, "reload", "reload3_back", "PDM_ONV_BARTO_Ischezni", -1);
@@ -47,7 +47,7 @@ void ProcessDialogEvent()
 			sld.name = "Карла ";
 			sld.lastname = "";
 			sld.city = "Havana";
-			ChangeCharacterAddressGroup(sld, "Havana_tavern", "goto", "goto13");
+			ChangeCharacterAddressGroup(sld, "Havana_tavern", "goto", "goto5");
 			LAi_SetWaitressType(sld);
 			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "First_Carla_1";
@@ -81,7 +81,7 @@ void ProcessDialogEvent()
 			LocatorReloadEnterDisable("Havana_ExitTown", "reload2_back", true);
 			LocatorReloadEnterDisable("Havana_ExitTown", "reload3_back", true);
 
-			sld = CharacterFromID("PDM_ONV_Carla")
+			sld = CharacterFromID("PDM_ONV_Carla");
 			LAi_SetActorType(sld);
 			sld.lifeday = 0;
 			LAi_ActorRunToLocator(sld, "reload", "reload1_back", "PDM_ONV_Clara_Ischezni", -1);
@@ -163,11 +163,11 @@ void ProcessDialogEvent()
 			dialog.text = "Английское правительство сослало его. Они выдвинули против него фальшивые обвинения. Он был очень благородным человеком с прекрасным характером. Мы познакомились пятнадцать лет назад в Европе. Тогда он был молодым дипломатом, мы встречались при дворе. Один из моих агентов пересёкся с ним в Порт-Рояле. Его выбросили на улицу после того, как обвинили в хищении. Лишённый своего титула, он согласился стать моим секретарем.";
 			link.l1 = "Кажется, я встречал"+ GetSexPhrase("","а")+" его. Бартоломью, вы говорите? Кажется, на площади, он искал девушку из таверны по имени Карла.";
 			link.l1.go = "RazgovorSGuberom_5";
-			sld = CharacterFromID("PDM_ONV_SoldatGub_1")
+			sld = CharacterFromID("PDM_ONV_SoldatGub_1");
 			LAi_SetActorType(sld);
 			sld.lifeday = 0;
 			LAi_ActorGoToLocator(sld, "goto", "goto3", "STRAJIschezni", 3);
-			sld = CharacterFromID("PDM_ONV_SoldatGub_2")
+			sld = CharacterFromID("PDM_ONV_SoldatGub_2");
 			LAi_SetActorType(sld);
 			sld.lifeday = 0;
 			LAi_ActorGoToLocator(sld, "goto", "goto3", "STRAJIschezni", 3);
@@ -217,7 +217,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Ohota_na_vedmu", "5");
 			AddQuestUserData("PDM_Ohota_na_vedmu", "sSex1", GetSexPhrase("ся","ась"));
 			AddQuestUserData("PDM_Ohota_na_vedmu", "sSex2", GetSexPhrase("ен","на"));
-			sld = CharacterFromID("PDM_ONV_Sin")
+			sld = CharacterFromID("PDM_ONV_Sin");
 			ChangeCharacterAddressGroup(sld, "none", "", "");
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -267,7 +267,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "RazgovorSViktorom_COD":
-			sld = CharacterFromID("PDM_ONV_Viktor_Martos")
+			sld = CharacterFromID("PDM_ONV_Viktor_Martos");
 			sld.lifeday = 0;
 
 			AddQuestRecord("PDM_Ohota_na_vedmu", "11");
@@ -391,7 +391,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "NaKoster_COD":
-			sld = CharacterFromID("AntonioDeSouza")
+			sld = CharacterFromID("AntonioDeSouza");
 			ChangeCharacterAddressGroup(sld, "Santiago_town", "none", "");
 
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_ONV_Inkvizitor", "priest", "man", "man", 10, SPAIN, -1, false));
@@ -446,43 +446,43 @@ void ProcessDialogEvent()
 			link.l1.go = "Inqizitor_Kazn_nachalo_2";
 			PlaySound("Kopcapkz\Voices\PDM\Witch\Fon.wav");
 
-			sld = CharacterFromID("PDM_ONV_Jitel_1")
+			sld = CharacterFromID("PDM_ONV_Jitel_1");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_2")
+			sld = CharacterFromID("PDM_ONV_Jitel_2");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_3")
+			sld = CharacterFromID("PDM_ONV_Jitel_3");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_4")
+			sld = CharacterFromID("PDM_ONV_Jitel_4");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_5")
+			sld = CharacterFromID("PDM_ONV_Jitel_5");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_6")
+			sld = CharacterFromID("PDM_ONV_Jitel_6");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_7")
+			sld = CharacterFromID("PDM_ONV_Jitel_7");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_8")
+			sld = CharacterFromID("PDM_ONV_Jitel_8");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_9")
+			sld = CharacterFromID("PDM_ONV_Jitel_9");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_10")
+			sld = CharacterFromID("PDM_ONV_Jitel_10");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_11")
+			sld = CharacterFromID("PDM_ONV_Jitel_11");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_12")
+			sld = CharacterFromID("PDM_ONV_Jitel_12");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_13")
+			sld = CharacterFromID("PDM_ONV_Jitel_13");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Jitel_14")
+			sld = CharacterFromID("PDM_ONV_Jitel_14");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Podjigatel")
+			sld = CharacterFromID("PDM_ONV_Podjigatel");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
-			sld = CharacterFromID("PDM_ONV_Carla")
+			sld = CharacterFromID("PDM_ONV_Carla");
 			LAi_ActorTurnToCharacter(CharacterFromID("PDM_ONV_Carla"), pchar);
 		break;
 
 		case "Inqizitor_Kazn_nachalo_2":
 			SetMusic("none");
-			sld = CharacterFromID("PDM_ONV_Inkvizitor")
+			sld = CharacterFromID("PDM_ONV_Inkvizitor");
 			LAi_ActorTurnToCharacter(sld, CharacterFromID("PDM_ONV_Carla"));
 			LAi_SetActorType(pchar);
 			LAi_ActorTurnToCharacter(pchar, CharacterFromID("PDM_ONV_Jitel_5"));
@@ -501,7 +501,7 @@ void ProcessDialogEvent()
 			link.l1.go = "Inqizitor_Kazn_4";
 			PlaySound("Kopcapkz\Voices\PDM\Witch\fire.wav");
 
-			sld = CharacterFromID("AntonioDeSouza")
+			sld = CharacterFromID("AntonioDeSouza");
 			ChangeCharacterAddressGroup(sld, "Santiago_Incquisitio", "sit", "armchair1");
 		break;
 
@@ -511,7 +511,7 @@ void ProcessDialogEvent()
 			PlaySound("Kopcapkz\Voices\PDM\Witch\scream.WAV");
 			CreateLocationParticles("shipfire", "merchant", "mrcActive2", 0, 0, 0, "");
 			LAi_SetActorType(pchar);
-			sld = CharacterFromID("PDM_ONV_Podjigatel")
+			sld = CharacterFromID("PDM_ONV_Podjigatel");
 			LAi_SetActorType(sld);
 			LAi_ActorGoToLocator(sld, "reload", "houseSp2", "PDM_ONV_PodjIschezni", -1);
 

@@ -59,8 +59,17 @@ void LAi_type_citizen_CharacterUpdate(aref chr, float dltTime)
 			{
 				if(InterfaceStates.EnabledQuestsMarks)
 				{
-					chr.quest.questflag.model = "exclamationmarkY";
-					chr.quest.questflag.technique = "RandItem";
+					if (CheckAttribute(chr,"dialog.filename") && chr.dialog.filename == "Sailor.c")
+					{
+						chr.talker = 0;
+						chr.quest.questflag.model = "questionmarkI";
+						chr.quest.questflag.technique = "RandItem";
+					}
+					else
+					{
+						chr.quest.questflag.model = "exclamationmarkY";
+						chr.quest.questflag.technique = "RandItem";
+					}
 				}
 				else
 				{

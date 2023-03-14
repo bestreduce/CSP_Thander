@@ -820,6 +820,7 @@ void ProcessDialogEvent()
            	link.l1 = "Хорошо, Аскольд.";
     		link.l1.go = "exit";
     		pchar.questTemp.Ascold = "Ascold_WateringMummy";
+		LAi_LocationDisableToughSkeletonTimer("Guadeloupe_Cave", 9999); //ПК не пускать 30 лет
     		GiveItem2Character(Pchar,"Ascold_rabble");
 		break;
 

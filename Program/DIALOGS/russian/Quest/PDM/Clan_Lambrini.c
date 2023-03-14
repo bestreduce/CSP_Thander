@@ -257,20 +257,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Octavio_1_10_EsheRaz";
 
-			sld = GetCharacter(NPC_GenerateCharacter("PDM_CL_Antonio", "SpaOfficer2", "man", "man", Rank, SPAIN, -1, false));
-			sld.name = "Антонио";
-			sld.lastname = "де Гальвес";
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
-			sld.dialog.currentnode   = "Antonio_1_1";
-			sld.greeting = "GR_Spainguard";
-			FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade30", "pistol2", DopHP);
-			sld.SaveItemsForDead = true;
-			LAi_SetWarriorType(sld);
-			LAi_SetLoginTime(sld, 12.0, 16.00);
-			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
-			sld.city = "Maracaibo";
-			ChangeCharacterAddressGroup(sld,"Maracaibo_town","goto","goto13");
-
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_CL_Anto2", "SpaOfficer2", "man", "man", Rank, SPAIN, -1, false));	//ВТОРОЙ
 			sld.name = "Антонио";
 			sld.lastname = "де Гальвес";
@@ -279,19 +265,19 @@ void ProcessDialogEvent()
 			sld.greeting = "GR_Spainguard";
 			if (pchar.rank <= 9)
 			{
-				FantomMakeCoolSailor(sld, SHIP_BRIGHEAVY, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
 			}
 			if (pchar.rank >= 10 && pchar.rank <= 14)
 			{
-				FantomMakeCoolSailor(sld, SHIP_FRIGATEMEDIUM, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_POSTILLIONEN, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
 			}
 			if (pchar.rank >= 15 && pchar.rank <= 19)
 			{
-				FantomMakeCoolSailor(sld, SHIP_DUTCHPINNACE, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS24, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_DEBRACKW, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS24, 100, 100, 100);
 			}
 			if (pchar.rank >= 20 && pchar.rank <= 25)
 			{
-				FantomMakeCoolSailor(sld, SHIP_FRIGATE_SAT, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS24, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_CECILIA, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS24, 100, 100, 100);
 			}
 			if (pchar.rank >= 26 && pchar.rank <= 32)
 			{
@@ -299,7 +285,7 @@ void ProcessDialogEvent()
 			}
 			if (pchar.rank >= 33)
 			{
-				FantomMakeCoolSailor(sld, SHIP_SHARK, "Эль Тибурон", CANNON_TYPE_CANNON_LBS42, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_ZEVENPROVINCIEN, "Эль Тибурон", CANNON_TYPE_CANNON_LBS42, 100, 100, 100);
 			}
 			sld.ship.Crew.Morale = Sila;								//Мораль
 			ChangeCrewExp(sld, "Sailors", Sila);						//Матросы
@@ -319,16 +305,15 @@ void ProcessDialogEvent()
 			Group_SetAddress("PDM_el_tib", "Maracaibo", "quest_ships", "reload_fort1");	//Установить местоположение
 			Group_LockTask("PDM_el_tib");
 
-			PChar.quest.PDM_CL_Antonio_Ubit.win_condition.l1 = "NPC_Death";
-			PChar.quest.PDM_CL_Antonio_Ubit.win_condition.l1.character = "PDM_CL_Antonio";
-			PChar.quest.PDM_CL_Antonio_Ubit.win_condition = "PDM_CL_Antonio_Ubit";
+//			PChar.quest.PDM_CL_Antonio_Ubit.win_condition.l1 = "NPC_Death";
+//			PChar.quest.PDM_CL_Antonio_Ubit.win_condition.l1.character = "PDM_CL_Antonio";
+//			PChar.quest.PDM_CL_Antonio_Ubit.win_condition = "PDM_CL_Antonio_Ubit";
 
 			PChar.quest.PDM_CL_Antonio_Ubit2.win_condition.l1 = "NPC_Death";
 			PChar.quest.PDM_CL_Antonio_Ubit2.win_condition.l1.character = "PDM_CL_Anto2";
 			PChar.quest.PDM_CL_Antonio_Ubit2.win_condition = "PDM_CL_Antonio_Ubit";
 
 			pchar.questTemp.PDM_CL_Ishem = "Ishem";
-			pchar.questTemp.PDM_CL_Tavern = "Tavern";
 
 			SetQuestHeader("PDM_Clan_Lambrini");
 			AddQuestRecord("PDM_Clan_Lambrini", "1");
@@ -424,7 +409,7 @@ void ProcessDialogEvent()
 			}
 			link.l1 = "Да, теперь никто не помешает тебе торговать в Маракайбо, Октавио. Прощай.";
 			link.l1.go = "exit";
-			sld = CharacterFromID("PDM_Octavio_Lambrini")
+			sld = CharacterFromID("PDM_Octavio_Lambrini");
 			sld.lifeday = 0;
 			AddMoneyToCharacter(pchar, sti(Plata1));
 			ChangeCharacterReputation(pchar, 2);
@@ -493,10 +478,9 @@ void ProcessDialogEvent()
 		break;
 
 		case "Antonio_1_11":
-			sld = CharacterFromID("PDM_Octavio_Lambrini")
+			sld = CharacterFromID("PDM_Octavio_Lambrini");
 			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_3_1";
-			DeleteAttribute(pchar, "questTemp.PDM_CL_Tavern");
 			DeleteAttribute(pchar, "questTemp.PDM_CL_Ishem");
 			PChar.quest.PDM_CL_Antonio_Ubit.over = "yes";
 			AddQuestRecord("PDM_Clan_Lambrini", "4");
@@ -556,7 +540,7 @@ void ProcessDialogEvent()
 			link.l1 = "Да, теперь никто не помешает тебе торговать в Маракайбо, Октавио. Прощай.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Octavio_3_3_EsheRaz";
-			sld = CharacterFromID("PDM_Octavio_Lambrini")
+			sld = CharacterFromID("PDM_Octavio_Lambrini");
 			sld.lifeday = 0;
 			AddMoneyToCharacter(pchar, sti(Plata1));
 			ChangeCharacterReputation(pchar, -2);
@@ -713,7 +697,7 @@ void ProcessDialogEvent()
 
 			LAi_CharacterDisableDialog(sld);
 			DoQuestFunctionDelay("PDM_CL_Pokupatel_Uhodit", 1.5);
-			sld = CharacterFromID("PDM_CL_Antonio3")
+			sld = CharacterFromID("PDM_CL_Antonio3");
 			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Antonio_5_1";
 			LAi_SetPlayerType(pchar);
@@ -750,7 +734,7 @@ void ProcessDialogEvent()
 			LocatorReloadEnterDisable("Shore37", "reload1_back", true);
 			LocatorReloadEnterDisable("Shore37", "boat", true);
 
-			sld = CharacterFromID("PDM_CL_Antonio3")
+			sld = CharacterFromID("PDM_CL_Antonio3");
 			LAi_SetActorType(sld);
 			ChangeCharacterAddressGroup(sld, "Shore37", "officers", "reload1_1");
 			LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);

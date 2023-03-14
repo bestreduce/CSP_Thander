@@ -796,12 +796,10 @@ void ProcessDialogEvent()
 		case "ATpr_SD_Koten_6_1":
 			dialog.text = "Вот, примерь.";
 			link.l1 = "Отвернись, переоденусь...";
-			link.l1.go = "ATpr_SD_Koten_6_2";
-			PlaySound("Interface\important_item.wav");
-			Log_info("Вы получили новый костюм");
+			link.l1.go = "ATpr_SD_Koten_6_3";
 		break;
 		
-		case "ATpr_SD_Koten_6_2":
+		/*case "ATpr_SD_Koten_6_2":
 			DialogExit();
 			SetLaunchFrameFormParam("Минута переодеваний...", "ATpr_Pereodevaemsya", 0, 2.0);
 			LaunchFrameForm();
@@ -809,15 +807,18 @@ void ProcessDialogEvent()
 			LAi_SetActorType(pchar);
 			sld = CharacterFromID("Gasten_Kotes")
 			LAi_SetActorType(sld);
-		break;
+		break;*/
 		
 		case "ATpr_SD_Koten_6_3":
 			dialog.text = "";
 			link.l1 = "Неплохо, неплохо. Пойдёт на первое время. Спасибо тебе, Гастен.";
 			link.l1.go = "ATpr_SD_Koten_7";
-			SetLaunchFrameFormParam("Минута переодеваний", "", 0, 2.0);
-			LaunchFrameForm();
-			WaitDate("", 0, 0, 0, 0, 1);
+			//SetLaunchFrameFormParam("Минута переодеваний", "", 0, 2.0);
+			//LaunchFrameForm();
+			//WaitDate("", 0, 0, 0, 0, 1);
+			
+			PlaySound("Interface\important_item.wav");
+			Log_info("Вы получили новый костюм");
 		break;
 		
 		case "ATpr_SD_Koten_7":
@@ -960,7 +961,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Ispa_Guber_5":
-			dialog.text = "В данном вопросе нельзя принимать поспешных решений. Но я вам могу точно сказать, что Испания просто так не оставит тот кровавый разбой, который учинили пираты. Рано или поздно в Ла Вега снова поднимут испанское знамя и справедливость восторжествует! А теперь я попрошу вас оставить меня, мне нужно работать.";
+			dialog.text = "В данном вопросе нельзя принимать поспешных решений. Но я вам могу точно сказать, что Испания просто так не оставит тот кровавый разбой, который учинили пираты. Рано или поздно в Ла Веге снова поднимут испанское знамя и справедливость восторжествует! А теперь я попрошу вас оставить меня, мне нужно работать.";
 			link.l1 = "Благодарю вас, ваше Превосходительство!";
 			link.l1.go = "Ispa_Guber_6";
 		break;

@@ -36,7 +36,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Sky.Color = argb(0,255,255,255);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = false;
@@ -51,11 +51,11 @@ int Whr_InitEvening(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 100;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
 	Weathers[n].Fog.Color = argb(0,77,104,134);
 	
 	Weathers[n].Rain.NumDrops = 0;
@@ -223,7 +223,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Sky.Color = argb(0,255,255,255);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = false;
@@ -238,11 +238,11 @@ int Whr_InitEvening(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 	
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 250;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
 	Weathers[n].Fog.Color = argb(0,77,104,134);
 
 	Weathers[n].Rain.NumDrops = 0;
@@ -411,7 +411,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Sky.Color = argb(0,255,255,255);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = false;
@@ -427,12 +427,12 @@ int Whr_InitEvening(int n)
 
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 250;
-	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;			
-	Weathers[n].Fog.IslandDensity = 0.0003;		
-	Weathers[n].Fog.SeaDensity = 0.00005;		
-	Weathers[n].Fog.Color = argb(0,58,74,87);
+	Weathers[n].Fog.Height = 500;
+	Weathers[n].Fog.Start = 0;
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;		
+	Weathers[n].Fog.Color = argb(0,80,60,60);
 	
 	Weathers[n].Rain.NumDrops = 0;													
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -577,7 +577,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Lighting = "evening22";
 	Weathers[n].LightingLm = "evening";
 
-	Weathers[n].InsideBack = "e";
+	//Weathers[n].InsideBack = "e";
 
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
@@ -598,7 +598,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Sky.Color = argb(0,255,255,255);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = false;
@@ -613,12 +613,12 @@ int Whr_InitEvening(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height =500;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,30,42,47);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,45,55,77);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -647,7 +647,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
 	Weathers[n].Sun.Color = argb(0,60,45,45);
-	Weathers[n].Sun.Ambient = argb(0,60,50,40);
+	Weathers[n].Sun.Ambient = argb(0,60,40,40);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(337.0);
 	Weathers[n].Sun.HeightAngle = 0.1;
 	
@@ -786,7 +786,7 @@ int Whr_InitEvening(int n)
 	Weathers[n].Sky.Color = argb(0,255,255,255);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 2000;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = true;
@@ -801,12 +801,12 @@ int Whr_InitEvening(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 500;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0005;
-	Weathers[n].Fog.IslandDensity = 0.0003;
-	Weathers[n].Fog.SeaDensity = 0.00005;
-	Weathers[n].Fog.Color = argb(0,8,19,29);
+	Weathers[n].Fog.Density = 0.0003;
+	Weathers[n].Fog.IslandDensity = 0.0002;
+	Weathers[n].Fog.SeaDensity = 0.00006;
+	Weathers[n].Fog.Color = argb(0,15,25,40);
 
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -849,7 +849,7 @@ int Whr_InitEvening(int n)
 	// Weathers[n].Sun.Glow.Color = argb(0,60,50,30);
 	Weathers[n].Sun.Glow.Color = argb(0,255,255,255);
 
-	Weathers[n].Sun.Overflow.Enable = false;
+	Weathers[n].Sun.Overflow.Enable = true;
 	Weathers[n].Sun.Overflow.Texture = "weather\lightning\flash.tga";
 	Weathers[n].Sun.Overflow.Color = argb(0, 100, 100, 100);
 	Weathers[n].Sun.Overflow.Size = 5500.0;

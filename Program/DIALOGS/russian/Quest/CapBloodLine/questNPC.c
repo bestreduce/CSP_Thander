@@ -337,7 +337,7 @@ void ProcessDialogEvent()
                 link.l1.go = "QSTStep_0";
     			link.l2 = "Эй, старина, ты чего? Совсем меня позабыл?";
                 link.l2.go = "QSTStep_1";
-    			link.l3 = "Боюсь, положение твоё серьёзное. Твой обман, э-э... Раф, был раскрыт. Если ты немедленно не вернёшь 30 000 ростовщику, тебя вздёрнут сегодня же!";
+    			link.l3 = "Боюсь, положение твоё серьёзное. Твой обман, э-э... Раф, был раскрыт. Если ты немедленно не вернёшь 30000 ростовщику, тебя вздёрнут сегодня же!";
                 link.l3.go = "QSTStep_2";
     		}
 
@@ -848,7 +848,7 @@ void ProcessDialogEvent()
 
         n = FindLocation("CommonStoneHouse");
         locations[n].private1.items.indian1 = 1;
-        locations[n].private1.items.EngTradeLicence = 1;
+        locations[n].private1.items.HolTradeLicence = 1;
         locations[n].private1.items.potionrum = 1;
         locations[n].private1.money = 6000;
 
@@ -873,7 +873,7 @@ void ProcessDialogEvent()
         ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "barmen","stay");
 
         pchar.quest.MoneyForDieke.win_condition.l1 = "item";
-        pchar.quest.MoneyForDieke.win_condition.l1.item= "EngTradeLicence";
+        pchar.quest.MoneyForDieke.win_condition.l1.item = "HolTradeLicence";
         pchar.quest.MoneyForDieke.function = "MoneyForDieke";
         AddQuestRecord("DiekeQuest", "3");
 
@@ -1094,7 +1094,7 @@ void ProcessDialogEvent()
 
     case "FStep_6":
 
-        dialog.text = "Выпьем... А это… такое... такое место... оно...";
+        dialog.text = "Выпьем... А это... такое... такое место... оно...";
     	link.l1 = "...";
         link.l1.go = "FStep_8";
        	link.l2 = "Ну? Что за место?!";
@@ -1189,7 +1189,7 @@ void ProcessDialogEvent()
         AddMoneyToCharacter(pchar, 55000);
         ChangeCharacterReputation(PChar, -10);
         AddCharacterExpToSkill(pchar, "Leadership", 30);
-        dialog.text = "Нет, подожди... смотри... у меня есть 55 000!.. Забирай все!";
+        dialog.text = "Нет, подожди... смотри... у меня есть 55000!.. Забирай всё!";
     	link.l1 = "Премного благодарен, дорогой друг.";
         link.l1.go = "Exit_Away";
         Pchar.questTemp.sLocator = "reload1_back";

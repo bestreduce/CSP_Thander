@@ -16,8 +16,9 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 	string sGunPowder;
 
 	DeleteAttribute(chr, "equip");
-	DeleteAttribute(chr, "perks.list"); // FIX 101104 убрать накопившиеся умения
-	SetSpeciality(chr, PerksChars());
+	//DeleteAttribute(chr, "perks.list"); // FIX 101104 убрать накопившиеся умения
+	//SetSpeciality(chr, PerksChars());
+	DeleteAllPerksExceptChar(chr);
 	DelBakSkillAttr(chr); // fix
 
 	if (chr.model.animation == "mushketer")
@@ -817,7 +818,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 			if (PerkTemplates[PERK_TEMPLATE_MELEE] >= 6)
 			{
-				chr.perks.list.HardHitter = "1";
 				chr.perks.list.Ciras = "1";
 			}
 			if (PerkTemplates[PERK_TEMPLATE_MELEE] >= 7)
@@ -841,6 +841,10 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 				chr.perks.list.SwordplayProfessional = "1";
 			}
 			if (PerkTemplates[PERK_TEMPLATE_MELEE] >= 12)
+			{
+				chr.perks.list.HardHitter = "1";
+			}
+			if (PerkTemplates[PERK_TEMPLATE_MELEE] >= 13)
 			{
 				chr.perks.list.GunProfessional = "1";
 			}

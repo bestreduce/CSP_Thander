@@ -23,6 +23,9 @@ bool ok;
 #define FIS_ALL		0		// Normal
 #define FIS_SHIP	1		// Show ship
 #define FIS_STORE	2		// Show store
+#define FIS_STORE_EXPORT	3		// Show store export
+#define FIS_STORE_IMPORT	4		// Show store import
+#define FIS_STORE_CONTRA	5		// Show store contra
 int FIS_FilterState;
 
 void InitInterface_R(string iniName, ref pStore)
@@ -35,6 +38,22 @@ void InitInterface_R(string iniName, ref pStore)
 	{
 		refShipChar = CharacterFromID(pchar.shiptrade.character);
 	}
+
+	if (refStore.Colony == "none")
+	{
+		bIsColony = false;
+		bIsPirateColony = false;
+	}
+	else
+	{
+		bIsColony = true;
+		bIsPirateColony = false;
+		if (sti(Colonies[FindColony(refStore.Colony)].Nation) == PIRATE)
+		{
+			bIsPirateColony = true;
+		}
+	}
+
 	GameInterface.TABLE_LIST.hr.td1.str = XI_ConvertString("In the hold");
 	GameInterface.TABLE_LIST.hr.td1.scale = 0.8;
 	GameInterface.TABLE_LIST.hr.td2.str = "Вес";
@@ -45,7 +64,7 @@ void InitInterface_R(string iniName, ref pStore)
 	GameInterface.TABLE_LIST.hr.td4.scale = 0.8;
 	GameInterface.TABLE_LIST.hr.td5.str = XI_ConvertString("Price buy");
 	GameInterface.TABLE_LIST.hr.td5.scale = 0.8;
-	if(refStore.Colony == "none")
+	if (!bIsColony)
 	{
 		GameInterface.TABLE_LIST.hr.td6.str = XI_ConvertString("In the hold");
 	}
@@ -60,6 +79,17 @@ void InitInterface_R(string iniName, ref pStore)
 	GameInterface.TABLE_LIST.hr.td8.scale = 0.8;
 	GameInterface.TABLE_LIST.hr.td9.str = "Общий вес";
 	GameInterface.TABLE_LIST.hr.td9.scale = 0.8;
+//--> mod tablesort
+	GameInterface.TABLE_LIST.hr.td1.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td2.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td3.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td4.sorttype = "string";
+	GameInterface.TABLE_LIST.hr.td5.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td6.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td7.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td8.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td9.sorttype = "";
+//<-- mod tablesort
 
 	FillShipsScroll();
 
@@ -71,6 +101,9 @@ void InitInterface_R(string iniName, ref pStore)
 	case FIS_ALL: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_ALL", 2, 1, 1); break;
 	case FIS_SHIP: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_SHIP", 2, 1, 1); break;
 	case FIS_STORE: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE", 2, 1, 1); break;
+	case FIS_STORE_EXPORT: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_EXPORT", 2, 1, 1); break;
+	case FIS_STORE_IMPORT: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_IMPORT", 2, 1, 1); break;
+	case FIS_STORE_CONTRA: SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_CONTRA", 2, 1, 1); break;
 	}
 
 	CreateString(true,"ShipName","",FONT_CAPTION,COLOR_NORMAL, 650,3,SCRIPT_ALIGN_CENTER,1.0);
@@ -105,25 +138,16 @@ void InitInterface_R(string iniName, ref pStore)
 
 	SetEventHandler("frame","ProcessFrame",1);
 
-	if(refStore.Colony == "none")
+	if (!bIsColony)
 	{
-
 		SetFormatedText("STORECAPTION1", XI_ConvertString(RealShips[sti(refShipChar.ship.type)].BaseName) + " - " + refShipChar.ship.name);
 		SetNewPicture("OTHER_PICTURE", "interfaces\portraits\256\face_" + its(refShipChar.FaceId) + ".tga");
 		SetNodeUsing("AUTOTRADE_ALL", false);//убираем автозакупку в море
 		SetNodeUsing("Autotrade_This", false);//убираем автозакупку в море
-		bIsColony = false;
-		bIsPirateColony = false;
 	}
 	else
 	{
 		SetFormatedText("STORECAPTION1", XI_ConvertString("Colony" + refStore.Colony) + ": " + XI_ConvertString("titleStore"));
-		bIsColony = true;
-		bIsPirateColony = false;
-		if (sti(Colonies[FindColony(refStore.Colony)].Nation) == PIRATE)
-		{
-			bIsPirateColony = true;
-		}
 	}
 
 	if (bSeaActive || !IsPCharHaveTreasurer()) {SetNodeUsing("Autotrade_All",  false); SetNodeUsing("Autotrade_This",  false);}//скрываем автозакупку без казначея и в море
@@ -253,6 +277,9 @@ void ProcCommand()
 		case "CB_SHIP":		if (comName == "click")ProcessFilter(nodName); break;
 		case "CB_ALL":		if (comName == "click")ProcessFilter(nodName); break;
 		case "CB_STORE":	if (comName == "click")ProcessFilter(nodName); break;
+		case "CB_STORE_EXPORT":	if (comName == "click")ProcessFilter(nodName); break;
+		case "CB_STORE_IMPORT":	if (comName == "click")ProcessFilter(nodName); break;
+		case "CB_STORE_CONTRA":	if (comName == "click")ProcessFilter(nodName); break;
 	}
 }
 
@@ -302,6 +329,9 @@ void AddToTable()
 		//// {*} BUHO-FIST - ADDED CODE - Filters at work.
 		if (sti(sStoreQ) == 0 && FIS_FilterState == FIS_STORE) continue;
 		if (sti(sShipQ) == 0 && FIS_FilterState == FIS_SHIP) continue;
+		if (tradeType != TRADE_TYPE_EXPORT && FIS_FilterState == FIS_STORE_EXPORT) continue;
+		if (tradeType != TRADE_TYPE_IMPORT && tradeType != TRADE_TYPE_AGGRESSIVE && FIS_FilterState == FIS_STORE_IMPORT) continue;
+		if (tradeType != TRADE_TYPE_CONTRABAND && FIS_FilterState == FIS_STORE_CONTRA) continue;
 		//// {*} BUHO END ADDITION
 
 		switch(tradeType)
@@ -400,8 +430,10 @@ void OnTableClick()
 	int iRow = GetEventData();
 	int iColumn = GetEventData();
 
-	string sRow = "tr" + (iRow + 1);
-	//Log_InfoOwn("OnTableClick  " + sRow + "   " + iColumn);
+	//string sRow = "tr" + (iRow + 1);
+//--> mod tablesort
+	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+//<-- mod tablesort
 	Table_UpdateWindow(sControl);
 }
 
@@ -421,6 +453,9 @@ void ShowHelpHint()
 		case "CB_SHIP":		bCheckboxes = True; break;
 		case "CB_ALL":		bCheckboxes = True; break;
 		case "CB_STORE":	bCheckboxes = True; break;
+		case "CB_STORE_EXPORT":	bCheckboxes = True; break;
+		case "CB_STORE_IMPORT":	bCheckboxes = True; break;
+		case "CB_STORE_CONTRA":	bCheckboxes = True; break;
 	}
 	if (bCheckboxes)
 	{
@@ -778,6 +813,12 @@ void ShowFoodInfo()
 void ProcessFilter(string sButton)
 {
 	nocheck = false;
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_SHIP", 2, 1, 0);
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_ALL", 2, 1, 0);
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE", 2, 1, 0);
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_EXPORT", 2, 1, 0);
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_IMPORT", 2, 1, 0);
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_CONTRA", 2, 1, 0);
 	switch (sButton)
 	{
 	case "CB_SHIP":
@@ -788,36 +829,30 @@ void ProcessFilter(string sButton)
 		  reload the table.
 		*/
 		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_SHIP", 2, 1, 1);
-		if (FIS_FilterState != FIS_SHIP)
-		{
-			// Button being selected.
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_ALL", 2, 1, 0);
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE", 2, 1, 0);
-			FIS_FilterState = FIS_SHIP;
-			AddToTable();
-		}
+		FIS_FilterState = FIS_SHIP;
 		break;
 	case "CB_ALL":
 		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_ALL", 2, 1, 1);
-		if (FIS_FilterState != FIS_ALL)
-		{
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_SHIP", 2, 1, 0);
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE", 2, 1, 0);
-			FIS_FilterState = FIS_ALL;
-			AddToTable();
-		}
+		FIS_FilterState = FIS_ALL;
 		break;
 	case "CB_STORE":
 		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE", 2, 1, 1);
-		if (FIS_FilterState != FIS_STORE)
-		{
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_SHIP", 2, 1, 0);
-			SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_ALL", 2, 1, 0);
-			FIS_FilterState = FIS_STORE;
-			AddToTable();
-		}
+		FIS_FilterState = FIS_STORE;
+		break;
+	case "CB_STORE_EXPORT":
+		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_EXPORT", 2, 1, 1);
+		FIS_FilterState = FIS_STORE_EXPORT;
+		break;
+	case "CB_STORE_IMPORT":
+		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_IMPORT", 2, 1, 1);
+		FIS_FilterState = FIS_STORE_IMPORT;
+		break;
+	case "CB_STORE_CONTRA":
+		SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "CB_STORE_CONTRA", 2, 1, 1);
+		FIS_FilterState = FIS_STORE_CONTRA;
 		break;
 	}
+	AddToTable();
 }
 
 void TransactionOK()
@@ -1172,8 +1207,10 @@ void Autotrade_Goods(ref rChar)
 	string sGood;
 	float fNeedCargo;
 	int iCurGoodQty, iNeedGoodsQty, iFreeCargo;
+	int iCurGoodSquadQty, iNeedGoodSquadQty, iNeedGoodSquad;
 	int iMoneyQty = 0;
 
+	bool bFraht;
 	rTreasurer = GetPCharTreasurerRef(); // Казначей. Ему даем экспу
 
 	for(i = 0; i < GOODS_QUANTITY; i++)
@@ -1185,10 +1222,20 @@ void Autotrade_Goods(ref rChar)
 		{
 			rChar.TransferGoods.(sGood) = 0;
 		}
+		bFraht = false; 
+		if (CheckQuestAttribute("generate_trade_quest_progress", "begin") || CheckQuestAttribute("generate_trade_quest_progress",  "failed"))//сейчас везём фрахт
+		{
+			if (makeint(pchar.CargoQuest.iTradeGoods) == i) //везём именно этот фрахт-товар
+			{
+				bFraht = true;
+				iCurGoodSquadQty = GetSquadronGoods(pchar,i);//всего в эскадре
+				iNeedGoodSquadQty = GetSquadronNeededGoods(pchar,i);//всего нужно экскадре по автозакупке
+				iNeedGoodSquad = iCurGoodSquadQty-iNeedGoodSquadQty-makeint(pchar.CargoQuest.iQuantityGoods);//столько не хватает эскадре с учетом автозакупок и фрахта
+			}
+		}
 
 		iCurGoodQty = GetCargoGoods(rChar, i); // Сколько этого товара есть сейчас
 		iNeedGoodsQty = sti(rChar.TransferGoods.(sGood)); // Сколько нужно ВСЕГО данного товара (не докупить!)
-//нужно ли чекать атрибут, если не заполнен - проверить логи
 
 		if(iCurGoodQty == iNeedGoodsQty) continue; // ничего не нужно
 
@@ -1202,6 +1249,9 @@ void Autotrade_Goods(ref rChar)
 					if (refStore.goods.(sGood).tradetype == TRADE_TYPE_CANNONS) continue;
 				}
 				iNeedGood = iCurGoodQty - iNeedGoodsQty; // Столько нужно продать
+				if (bFraht && iNeedGoodSquad < iNeedGood) iNeedGood = iNeedGoodSquad;
+				//Тут не учитывается вариант, что автозакупку можно провести только для одного корабля, и получится излишек, если на других неполное кол-во 
+				//То есть получается как бы принудительная закупка этого товара для всех кораблей, даже если нажата кнопка только для автозакупок на одном корабле. Не особо важно. 
 
 				/*if(!bIsColony)//если продаём на корабль в море
 				//Отключаю кнопку торговли в море, этот фрагмент пока не нужен

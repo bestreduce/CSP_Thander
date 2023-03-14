@@ -34,7 +34,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Fisher_Pedro_3":
-			dialog.text = "...(оживляясь)... Выходит, ты тот самый капитан, что ввязался в Дозор?";
+			dialog.text = "...(оживляясь)... Выходит, ты - "+ GetSexPhrase("тот капитан","та") +", что ввязал"+ GetSexPhrase("ся","ась") +" в Дозор?";
 			link.l1 = "Да, это я. У тебя есть что-нибудь для меня?";
 			link.l1.go = "Fisher_Pedro_4";
 		break;
@@ -409,6 +409,7 @@ void ProcessDialogEvent()
 			dialog.text = "Рад, что вы со мной согласились. Спасибо за игру. Удачи вам!";
 			link.l1 = "Счастливо оставаться.";
 			link.l1.go = "exit";
+			UnlockAchievement("AchDozor", 3);
 			AddDialogExitQuestFunction("DozorHappyEnd");
 		break;
 		// <-- НЕЗНАКОМЕЦ В ДОМЕ

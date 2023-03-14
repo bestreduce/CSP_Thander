@@ -76,14 +76,6 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(npchar, "none", "", "");
 			AddCharacterHealth(pchar, 30);
 			chrDisableReloadToLocation = false; //пока Салазар жив - хер, а не выход
-			ref sld;
-			for(i = 0; i < 10; i++)
-			{
-				sld = CharacterFromID("SalSupp"+i);
-				LAi_KillCharacter(sld);
-				sld = CharacterFromID("SalSupps"+i);
-				LAi_KillCharacter(sld);
-			}
 			DeleteAttribute(loadedLocation,"box1.items");
 			loadedLocation.box1.items.cirass5 = 1;
 			loadedLocation.box1.items.pistol8 = 1;

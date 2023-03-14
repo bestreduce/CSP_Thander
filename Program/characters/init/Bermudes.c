@@ -119,7 +119,7 @@ int CreateBermudesCharacters(int n)
 	ch.Dialog.Filename = "Common_Store.c";
 	ch.quest.type = "trader";
 	ch.nation = PIRATE;
-	LAi_SetBarmanType(ch);
+	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";

@@ -535,7 +535,7 @@ void SelectColony(int iColony)
 	string sColony = colonies[iColony].id;
 
 	int iColor;
-	int iDistance = CalculateDistance(iColony);
+	int iDistance = CalculateDistance1(iColony);
 
 	string sText;
 
@@ -692,7 +692,7 @@ void SelectColony(int iColony)
 }
 
 // to_Do del -->
-int CalculateDistance(int iColonyNumber)
+int CalculateDistance1(int iColonyNumber)
 {
 	int playership_x, playership_z;
 

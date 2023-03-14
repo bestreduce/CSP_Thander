@@ -1376,7 +1376,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore23";
 	locations[n].id.label = "Shore23";
-	locations[n].image = "loading\jonny_load\Shores\Shore09_Shore10.tga";
+	locations[n].image = "loading\jonny_load\Shores\Shore12.tga";
 	locations[n].worldmap = "Shore23";
 	//Sound
 	locations[n].type = "seashore";

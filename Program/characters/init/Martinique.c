@@ -33,6 +33,8 @@ int CreateMartiniqueCharacters(int n)
 
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "FortFrance_Priest";
+	ch.name		= "отец Клермон";
+	ch.lastname = "";
 	ch.model	= "priest_4";
 	ch.model.animation = "man";
 	ch.sex = "man";
@@ -275,7 +277,7 @@ int CreateMartiniqueCharacters(int n)
 	ch.Dialog.Filename = "Common_Store.c";
 	ch.quest.type = "trader";
 	ch.nation = PIRATE;
-	LAi_SetBarmanType(ch);
+	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";

@@ -253,7 +253,7 @@ bool GenerateMapEncounter_WriteNumShips(ref rEncounter, int iEncounterType, int 
 	{
 		DeleteAttribute(rEncounter, "NumWarShips");
 	}
-
+	SetShipTypesForEnc_v2(rEncounter);
 	return true;
 }
 
@@ -271,8 +271,6 @@ bool GenerateMapEncounter_Merchant(string sIslandID, ref iEncounter)
 	if (iEncounterType == -1) return false;
 	rEncounter.RealEncounterType = iEncounterType;
 
-	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //boal
-
 	// nation find
 	int iNation = GetRandomNationForMapEncounter(sIslandID, true);
 	if (iNation < 0)
@@ -289,9 +287,8 @@ bool GenerateMapEncounter_Merchant(string sIslandID, ref iEncounter)
 	rEncounter.Task = AITASK_MOVE;
 	// create move point coordinates here
 
+	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //Указываем нацию до числа кораблей, так как нация нужна для типа корабля
 	return GenerateMapEncounter_SetMapShipModel(rEncounter);
-
-	//return true;
 }
 
 bool GenerateMapEncounter_Special(string sIslandID, ref iEncounter)
@@ -308,8 +305,6 @@ bool GenerateMapEncounter_Special(string sIslandID, ref iEncounter)
 	if (iEncounterType == -1) return false;
 	rEncounter.RealEncounterType = iEncounterType;
 
-	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //boal
-
 	// nation find
 	int iNation = GetRandomNationForMapEncounter(sIslandID, true);
 	if (iNation < 0)
@@ -324,6 +319,7 @@ bool GenerateMapEncounter_Special(string sIslandID, ref iEncounter)
 
 	rEncounter.Task = AITASK_MOVE;
 
+	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //Указываем нацию до числа кораблей, так как нация нужна для типа корабля
 	return GenerateMapEncounter_SetMapShipModel(rEncounter);
 }
 
@@ -375,8 +371,6 @@ bool GenerateMapEncounter_War(string sIslandID, ref iEncounter, int iCharacterIn
 
 	rEncounter.RealEncounterType = iEncounterType;
 
-	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //boal
-
 	// nation find
 	if (iNation == -1)
 	{
@@ -418,6 +412,7 @@ bool GenerateMapEncounter_War(string sIslandID, ref iEncounter, int iCharacterIn
 
 	rEncounter.bUse = true;
 
+	GenerateMapEncounter_WriteNumShips(rEncounter, iEncounterType, 8); //Указываем нацию до числа кораблей, так как нация нужна для типа корабля
 	GenerateMapEncounter_SetMapShipModel(rEncounter);
 
 	return true;
@@ -471,7 +466,7 @@ bool GenerateMapEncounter_Alone(string sCharacterID, ref iEncounterIndex)
 			DeleteAttribute(rEncounter, "Task.Target");
 		}
 	}
-
+	//SetShipTypesForEnc_v2(rEncounter);
 	GenerateMapEncounter_SetMapShipModel(rEncounter);
 
 	// create move point coordinates here
@@ -572,4 +567,37 @@ bool GenerateMapEncounter_Battle(string sIslandID, ref iEncounter1, ref iEncount
 	GenerateMapEncounter_SetMapShipModel(rEncounter2);
 
 	return true;
+}
+
+void SetShipTypesForEnc_v2(ref rEncounter)
+{
+	int iWarClassMax, iWarClassMin, iMerchantClassMax, iMerchantClassMin;
+	int iRank = sti(pchar.Rank);
+	int iEType = sti(rEncounter.RealEncounterType);
+	Encounter_GetClassesFromRank(iEType, iRank, &iMerchantClassMin, &iMerchantClassMax, &iWarClassMin, &iWarClassMax);
+
+	int iNumMerch = 0; 
+	int iNumWar = 0; 
+	if (checkattribute(rEncounter, "NumWarShips")) iNumWar = sti(rEncounter.NumWarShips); 
+	if (checkattribute(rEncounter, "NumMerchantShips")) iNumMerch = sti(rEncounter.NumMerchantShips); 
+	int iNation = sti(rEncounter.Nation);
+	string sAttr;
+	int ishiptype;
+
+	for (int i=0; i<iNumMerch; i++)
+	{
+		sAttr = i;
+		ishiptype = GetShipTypeExt(iMerchantClassMin, iMerchantClassMax, "merchant", iNation);
+		rEncounter.shiptypes.(sAttr) = ishiptype;
+		rEncounter.shipmodes.(sAttr) = "trade";
+	}
+	for (i=iNumMerch; i<iNumMerch+iNumWar; i++)
+	{
+		sAttr = i;
+		ishiptype = GetShipTypeExt(iWarClassMin, iWarClassMax, "War", iNation);
+		rEncounter.shiptypes.(sAttr) = ishiptype;
+		if (iEType>ENCOUNTER_TYPE_PIRATE_SMALL-1 && iEType<ENCOUNTER_TYPE_PIRATE_LARGE+1) rEncounter.shipmodes.(sAttr) = "pirate";
+			else rEncounter.shipmodes.(sAttr) = "war";
+	}
+	rEncounter.v2 = true;//ставим атрибут, что для энки установлены конкретные типы кораблей //TODO - удалить. Это только для запуска без НИ
 }

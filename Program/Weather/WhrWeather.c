@@ -209,6 +209,11 @@ void CreateWeatherEnvironment()
 		// search weather for hour
 		for (int i=0;i<MAX_WEATHERS;i++)
 		{
+			if (CheckAttribute(&Weathers[i], "Bak.Sun.Ambient"))
+			{
+				Weathers[i].Sun.Ambient	= Weathers[i].Bak.Sun.Ambient;
+				Weathers[i].Sun.Color = Weathers[i].Bak.Sun.Color;
+			}
 			//navy --> чистим текущую погоду от остатков предыдущего дождя... иначе сохранненный дождь пойдет...
 			//или нужно всю погоду инитить заново... но лучше наверно так.
 			if (!bRain && sti(Weathers[i].Rain.NumDrops) > 0 && sti(Weathers[i].Rain.NumDrops) < 5100)
@@ -216,7 +221,7 @@ void CreateWeatherEnvironment()
 				Weathers[i].Rain.NumDrops = 0;
 				Weathers[i].Lightning.Enable = false;
 			}
-			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && !sti(WeatherParams.Rain.ThisDay) && CheckAttribute(&Weathers[i], "Bak"))
+			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && !sti(WeatherParams.Rain.ThisDay) && CheckAttribute(&Weathers[i], "Bak.Fog"))
 			{
 				Weathers[i].Fog.Color		= Weathers[i].Bak.Fog.Color;
 				Weathers[i].Fog.Height		= Weathers[i].Bak.Fog.Height;
@@ -291,28 +296,26 @@ void CreateWeatherEnvironment()
 			{
 				bWhrTornado = 1;
 			}
+			//малый шторм в локациях
 			if(CheckAttribute(&locations[iCurLocation], "alwaysStorm"))
 			{
-				if (fGetTime >= 6.0 && fGetTime < 10.0) locations[iCurLocation].QuestlockWeather = "Storm01_add";
-				else { if (fGetTime >= 10.0 && fGetTime < 18.0) locations[iCurLocation].QuestlockWeather = "Storm02_add";
-				else { if (fGetTime >= 18.0 && fGetTime < 22.0) locations[iCurLocation].QuestlockWeather = "Storm03_add";
-				else { locations[iCurLocation].QuestlockWeather = "Storm04_add";
-				}}}
-				if (CheckAttribute(&locations[iCurLocation], "alwaysStorm.WaveHeigh")) locations[iCurLocation].MaxWaveHeigh = 2.5; //установим уровень воды
+				if (GetTime() >= 6.0 && GetTime() < 10.0) locations[iCurLocation].QuestlockWeather = "Storm01_add";
+				if (GetTime() >= 10.0 && GetTime() < 18.0) locations[iCurLocation].QuestlockWeather = "Storm02_add";
+				if (GetTime() >= 18.0 && GetTime() < 22.0) locations[iCurLocation].QuestlockWeather = "Storm03_add";
+				if (GetTime() >= 22.0 && GetTime() <= 23.99) locations[iCurLocation].QuestlockWeather = "Storm04_add";
+				if (GetTime() >= 0 && GetTime() < 6.0) locations[iCurLocation].QuestlockWeather = "Storm04_add";
+				if (CheckAttribute(&locations[iCurLocation], "alwaysStorm.WaveHeigh")) locations[iCurLocation].MaxWaveHeigh = 4.5; //установим уровень воды
 			}
-			else
+			//большой шторм в локациях
+			if(CheckAttribute(&locations[iCurLocation], "alwaysStorm_2"))
 			{
-				if(CheckAttribute(&locations[iCurLocation], "alwaysStorm_2")) //COAS escape
-                {
-					WeatherParams.Storm = "1";
-                    if (fGetTime >= 6.0 && fGetTime < 10.0) locations[iCurLocation].QuestlockWeather = "Storm01";
-                    else { if (fGetTime >= 10.0 && fGetTime < 18.0) locations[iCurLocation].QuestlockWeather = "Storm02";
-                    else { if (fGetTime >= 18.0 && fGetTime < 22.0) locations[iCurLocation].QuestlockWeather = "Storm03";
-                    else { locations[iCurLocation].QuestlockWeather = "Storm04";
-                    }}}
-                    if (CheckAttribute(&locations[iCurLocation], "alwaysStorm_2.WaveHeigh")) locations[iCurLocation].MaxWaveHeigh = 28.0; //40.0;
+				if (GetTime() >= 6.0 && GetTime() < 10.0) locations[iCurLocation].QuestlockWeather = "Storm01";
+				if (GetTime() >= 10.0 && GetTime() < 18.0) locations[iCurLocation].QuestlockWeather = "Storm02";
+				if (GetTime() >= 18.0 && GetTime() < 22.0) locations[iCurLocation].QuestlockWeather = "Storm03";
+				if (GetTime() >= 22.0 && GetTime() <= 23.99) locations[iCurLocation].QuestlockWeather = "Storm04";
+				if (GetTime() >= 0 && GetTime() < 6.0) locations[iCurLocation].QuestlockWeather = "Storm04";
+				if (CheckAttribute(&locations[iCurLocation], "alwaysStorm_2.WaveHeigh")) locations[iCurLocation].MaxWaveHeigh = 40.0; //установим уровень воды
                 }
-			}
 			if(CheckAttribute(&locations[iCurLocation], "QuestlockWeather"))
 			{
 				iTestWeather = FindWeather(locations[iCurLocation].QuestlockWeather);
@@ -342,11 +345,11 @@ void CreateWeatherEnvironment()
 				}
 				if(CheckAttribute(&Islands[iCurLocation], "alwaysStorm"))
 				{
-					if (fGetTime >= 6.0 && fGetTime < 10.0) Islands[iCurLocation].QuestlockWeather = "Storm01";
-					else { if (fGetTime >= 10.0 && fGetTime < 18.0) Islands[iCurLocation].QuestlockWeather = "Storm02";
-					else { if (fGetTime >= 18.0 && fGetTime < 22.0) Islands[iCurLocation].QuestlockWeather = "Storm03";
-					else { Islands[iCurLocation].QuestlockWeather = "Storm04";
-					}}}
+					if (GetTime() >= 6.0 && GetTime() < 10.0) Islands[iCurLocation].QuestlockWeather = "Storm01";
+					if (GetTime() >= 10.0 && GetTime() < 18.0) Islands[iCurLocation].QuestlockWeather = "Storm02";
+					if (GetTime() >= 18.0 && GetTime() < 22.0) Islands[iCurLocation].QuestlockWeather = "Storm03";
+					if (GetTime() >= 22.0 && GetTime() <= 23.99) Islands[iCurLocation].QuestlockWeather = "Storm04";
+					if (GetTime() >= 0 && GetTime() < 6.0) Islands[iCurLocation].QuestlockWeather = "Storm04";
 				}
 				if(CheckAttribute(&Islands[iCurLocation], "QuestlockWeather"))
 				{
@@ -407,6 +410,26 @@ void CreateWeatherEnvironment()
 	sInsideBack = Whr_GetString(aCurWeather,"InsideBack");
 	bWeatherIsNight = Whr_GetLong(aCurWeather,"Night");
 	bWeatherIsLight = Whr_GetLong(aCurWeather,"Lights");
+	
+	if (CheckAttribute(loadedLocation, "type")) //Фикс освещения персонажей в тавернах.
+	{
+		if(loadedLocation.type == "tavern"
+					|| loadedLocation.type == "residence"
+					|| loadedLocation.type == "house"
+					|| loadedLocation.type == "shop"
+					|| loadedLocation.type == "shipyard"
+					|| loadedLocation.type == "church"
+					|| loadedLocation.type == "bank")
+		{
+			if (aCurWeather.Sun.Ambient != argb(0,50,50,50)) // Вдруг 24+ часа будете стоять в таверне, чтоб не перезаписался бэкап.
+				{
+					aCurWeather.Bak.Sun.Ambient	= aCurWeather.Sun.Ambient;
+					aCurWeather.Bak.Sun.Color = aCurWeather.Sun.Color;
+				}
+			aCurWeather.Sun.Ambient = argb(0,50,50,50);
+			aCurWeather.Sun.Color = argb(0,85,80,80); 
+		}
+	}
 
 	if(CheckAttribute(pchar, "wind.angle"))
 	{
@@ -504,7 +527,8 @@ void CreateWeatherEnvironment()
 					|| rLoc.type == "house"
 					|| rLoc.type == "shop"
 					|| rLoc.type == "shipyard"
-					|| rLoc.type == "church" )
+					|| rLoc.type == "church" 
+					|| rLoc.type == "cave")
 				{
 					//нет дождя
 					bRain = false;
@@ -528,10 +552,10 @@ void CreateWeatherEnvironment()
 	WhrCreateLightningEnvironment();
 	WhrCreateAstronomyEnvironment();
 	WhrCreateSkyEnvironment();
+	WhrCreateSeaEnvironment();
 
 	string sPreset = WhrGetSeaPresetFromWind(fWeatherSpeed);
-    //WhrSetSeaPreset(iCurWeatherNum, sPreset);
-	WhrCreateSeaEnvironment();
+    //WhrSetSeaPreset(iCurWeatherNum, sPreset, fWeatherSpeed);	
 
 	if(iLocation != -1)
 	{
@@ -667,6 +691,8 @@ int Whr_BlendLong(float fBlend, int i1, int i2)
 
 int Whr_BlendColor(float fBlend, int col1, int col2)
 {
+	int a1 = shr(and(col1,4278190080), 24); // get alpha 1
+	int a2 = shr(and(col2,4278190080), 24); // get alpha 2
 	int r1 = shr(and(col1,16711680), 16); // get red color 1
 	int r2 = shr(and(col2,16711680), 16); // get red color 2
 
@@ -679,6 +705,7 @@ int Whr_BlendColor(float fBlend, int col1, int col2)
 	int r = r1 + MakeInt(fBlend * (r2-r1));
 	int g = g1 + MakeInt(fBlend * (g2-g1));
 	int b = b1 + MakeInt(fBlend * (b2-b1));
+	int a = a1 + MakeInt(fBlend * (a2-a1));
 
 	return argb(0,r,g,b);
 }
@@ -720,7 +747,7 @@ void Whr_TimeUpdate()
 		//Island.LightingPath = GetLightingPath();
 		Island.LightingPath = "";
 		Island.FogDensity = Weather.Fog.IslandDensity;
-		Sea.Fog.SeaDensity = Weather.Fog.SeaDensity;
+		//Sea.Fog.SeaDensity = Weather.Fog.SeaDensity;
 	}
 
 	//navy --> Rain
@@ -861,7 +888,7 @@ void Whr_TimeUpdate()
 				}
 				Weathers[iBlendWeatherNum].Fog.Color = argb(0,50,60,65);
 				Weathers[iBlendWeatherNum].Fog.Height = 1000;
-				Weathers[iBlendWeatherNum].Fog.Density = 0.003;
+				Weathers[iBlendWeatherNum].Fog.Density = 0.0003;
 				Weathers[iBlendWeatherNum].Fog.SeaDensity = 0.0022;
 				Weathers[iBlendWeatherNum].Fog.IslandDensity = 0.0015;
 
@@ -1257,7 +1284,7 @@ bool Whr_isRainEnable()
 		}
 		/*else
 		{
-			if (CheckAttribute(loadedLocation, "type"))
+			if (IsEntity(loadedLocation) && CheckAttribute(loadedLocation, "type"))
 			{
 				// тип помещение
 				if(loadedLocation.type == "residence"

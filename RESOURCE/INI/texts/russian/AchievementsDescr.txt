@@ -278,7 +278,7 @@ Ghostship_quest_3{Корабль-призрак}
 Ghostship_quest_3_descr{Завершить квест 'Корабль-призрак'}
 Ghostship_quest_icon{AchFlyingDutchman}
 
-Bluebird_quest_3{Уничтожить шебеку 'Синяя Птица'}
+Bluebird_quest_3{Защитник купцов}
 Bluebird_quest_3_descr{Завершить квест 'Уничтожить шебеку 'Синяя Птица''}
 Bluebird_quest_icon{AchQuestComlite}
 
@@ -293,6 +293,10 @@ Mummydust_quest_icon{AchQuestComlite}
 Enchantcity_quest_3{Зачарованный город}
 Enchantcity_quest_3_descr{Завершить квест 'Зачарованный город'}
 Enchantcity_quest_icon{AchFregatQueen}
+
+AchDozor_3{Дозорный}
+AchDozor_3_descr{Завершить квест 'Дозор'}
+AchDozor_icon{AchDozor}
 
 Isabella_quest_3{История прекрасной Изабеллы}
 Isabella_quest_3_descr{Завершить квест 'История прекрасной Изабеллы'}

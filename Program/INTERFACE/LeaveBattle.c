@@ -97,15 +97,21 @@ void CalculateInfoData()
 
 	makearef(rootItems, pchar.CheckEnemyCompanionDistance);  // допущение, что один есть точно иначе форму не вызвать
 
+
+	if (GetAttributesNum(rootItems) == 0)
+	{
+		trace("ERROR: cannot find ships in contact")
+		return
+	}
+	if (GetAttributesNum(rootItems) == 1)
+	{
+		totalInfo = "Наш корабль ";
+		sEnd = " находится в контакте с противником."
+	}
 	if (GetAttributesNum(rootItems) > 1)
 	{
 		totalInfo = "Наши корабли ";
 		sEnd = " находятся в контакте с противником."
-	}
-	else
-	{
-		totalInfo = "Наш корабль ";
-		sEnd = " находится в контакте с противником."
 	}
 	cn = sti(GetAttributeValue(GetAttributeN(rootItems, 0)));
 	if (cn != -1)

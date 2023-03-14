@@ -220,6 +220,13 @@ void ProcessDialogEvent()
 				}
 				break;
 			}
+			//========================  Квест "Странные вещи творятся на архипелаге" ==>
+			if (CheckAttribute(pchar, "questTemp.PKM_SvtvA_NevisPortMan_1"))
+			{
+				link.l1 = "Меня интересует, не заходило ли в порт судно - чёрный фрегат.";
+				link.l1.go = "PKM_BlackFregat";
+			}
+			//========================  Квест "Странные вещи творятся на архипелаге" <==
 
 			dialog.text = "Прекрасно. Я к вашим услугам, " + GetFullName(PChar) + ".";
 			if(NPChar.city != "Pirates")
@@ -348,6 +355,15 @@ void ProcessDialogEvent()
 			Link.l15 = "Благодарю. До свидания.";
 			Link.l15.go = "exit";
 		break;
+		
+		//========================  Квест "Странные вещи творятся на архипелаге" ==>
+		case "PKM_BlackFregat":
+			dialog.text = "Чёрный фрегат? А имени у корабля нет? Как я по-вашему должен ответить, если в моём документе указаны все корабли с их именем, а не с цветом корпуса. Я не могу ничего больше вам сказать.";
+			link.l1 = "Извините, пойду дальше искать.";
+			link.l1.go = "exit";
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_NevisPortMan_1");
+		break;
+		//========================  Квест "Странные вещи творятся на архипелаге" <==	
 
 		case "Whisper_chard_quest":
 			SaveCurrentNpcQuestDateParam(npchar,"Whisper.LastSeenPortman");
@@ -454,7 +470,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			sQuestTitle = PChar.GenQuest.ChurchQuest_1.QuestTown + "ChurchGenQuest1";
 			AddQuestRecordEx(sQuestTitle, "ChurchGenQuest1", "5");
-			AddQuestUserData(sQuestTitle, "sColony", XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.CapGoToColony + "Dat"));
+			AddQuestUserData(sQuestTitle, "sColony", XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.CapGoToColony + "Voc"));
 			AddQuestUserData(sQuestTitle, "sName", PChar.GenQuest.ChurchQuest_1.CapFullName);
 			PChar.GenQuest.ChurchQuest_1.AskPortMan_InColony = PChar.GenQuest.ChurchQuest_1.CapGoToColony; // Спрашиваем портмана в колонии, куда отправился кэп.
 			if(rand(2) == 1)
@@ -924,15 +940,15 @@ void ProcessDialogEvent()
 			switch(attrL)
 			{
 				case "speedrate":
-					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + " скорость по ветру была более " + NPChar.Quest.BurntShip.ShipNeededValue + " узлов. Для капера это первейшая гордость была... Он просто велит своим молодчикам повесить меня на рее! Чёрт принёс его в нашу гавань вместе с его пиратской лоханкой...";
+					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Gen")) + " скорость по ветру была более " + NPChar.Quest.BurntShip.ShipNeededValue + " узлов. Для капера это первейшая гордость была... Он просто велит своим молодчикам повесить меня на рее! Чёрт принёс его в нашу гавань вместе с его пиратской лоханкой...";
 				break;
 
 				case "turnrate":
-					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + " манёвренность была более " + NPChar.Quest.BurntShip.ShipNeededValue + " единиц. Это для вояки первейшая гордость была... Он велит засечь меня шпицрутенами! Чёрт его надоумил оставить у меня свою посудину...";
+					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Gen")) + " манёвренность была более " + NPChar.Quest.BurntShip.ShipNeededValue + " единиц. Это для вояки первейшая гордость была... Он велит засечь меня шпицрутенами! Чёрт его надоумил оставить у меня свою посудину...";
 				break;
 
 				case "capacity":
-					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + " дедвейт был более " + NPChar.Quest.BurntShip.ShipNeededValue + " единиц водоизмещения. Для купца это первейшая гордость была... Он меня без суда четвертует. Чёрт его дёрнул именно у меня своё корыто оставить!";
+					attrL = "У его " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Gen")) + " дедвейт был более " + NPChar.Quest.BurntShip.ShipNeededValue + " единиц водоизмещения. Для купца это первейшая гордость была... Он меня без суда четвертует. Чёрт его дёрнул именно у меня своё корыто оставить!";
 				break;
 			}
 
@@ -978,22 +994,22 @@ void ProcessDialogEvent()
 			switch(attrL)
 			{
 				case "speedrate":
-					attrL = "скорости. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Acc")) + " скорость по ветру должна быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
+					attrL = "скорости. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " скорость по ветру должна быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
 
 				case "turnrate":
-					attrL = "манёвренности. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Acc")) + " манёвренность должна быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
+					attrL = "манёвренности. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " манёвренность должна быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
 
 				case "capacity":
-					attrL = "трюма. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Acc")) + " трюм должен быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
+					attrL = "трюма. У " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " трюм должен быть не менее " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
 			}
 
 			sTitle = "BurntShipQuest" + NPChar.location;
 			ReOpenQuestHeader(sTitle);
 			AddQuestRecordEx(sTitle, "BurntShipQuest", "1");
-			AddQuestUserDataForTitle(sTitle, "cityName", XI_ConvertString("Colony" + NPChar.city + "Dat"));
+			AddQuestUserDataForTitle(sTitle, "cityName", XI_ConvertString("Colony" + NPChar.city + "Voc"));
 			AddQuestUserData(sTitle, "portmanName", GetFullName(NPChar));
 			AddQuestUserData(sTitle, "cityName", XI_ConvertString("Colony" + NPChar.city + "Gen"));
 			AddQuestUserData(sTitle, "text", attrL);
@@ -1159,11 +1175,10 @@ void ProcessDialogEvent()
 
 		case "BurntShip19":
 			sld = &Characters[GetCompanionIndex(PChar, sti(NPChar.Quest.BurntShip.ShipCompanionIndex))];
-			//cn = GetShipSellPrice(sld, CharacterFromID(NPChar.city + "_shipyarder")) * 3;
-			cn = GetShipSellPrice(sld, CharacterFromID(NPChar.city + "_shipyarder")) * 2; // было x3 от продажной
+			cn = GetShipSellPrice(sld, CharacterFromID(NPChar.city + "_shipyarder")) * 1.2;
 			rRealShip = GetRealShip(GetCharacterShipType(sld));
-			if (sti(rRealShip.Stolen)) cn *= 3; // "ворованные" компенсируются
-
+			if (sti(rRealShip.Stolen)) cn *= 3;//"ворованные" компенсируются, но там вообще-то х4
+//почему считается цена привезенного корабля, а не цена сгоревшего? :)
 			dialog.text = "Да, великолепно! Я готов выдать ваше вознаграждение, " + FindRussianMoneyString(cn) + ". Именно так страховая контора оценила сгоревшее судно. Страховка выплачена кредитными сундуками - наличных денег нет, извините.";
 			link.l1 = "Э нет, такая сумма меня не устроит. Я уверен"+ GetSexPhrase("","а") +", что это судно стоит гораздо дороже.";
 			link.l1.go = "BurntShip21";
@@ -1178,7 +1193,7 @@ void ProcessDialogEvent()
 
 		case "BurntShip20_exit":
 			//AddMoneyToCharacter(PChar, sti(NPChar.Quest.BurntShip.Money));
-			TakeNItems(pchar, "chest", makeint(sti(NPChar.Quest.BurntShip.Money)/12000));
+			TakeNItems(pchar, "chest", makeint(sti(NPChar.Quest.BurntShip.Money)/15000 + 0.5));
 			Log_Info("Вы получили кредитные сундуки");
 			PlaySound("interface\important_item.wav");
 			sTitle = "BurntShipQuest" + NPChar.location;
@@ -1251,7 +1266,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.PortmansJornal.gem = GenQuestPortman_GenerateGem();
 		break;
 		case "PortmanQuest_2":
-			dialog.text = "Да, конечно! Его зовут " + npchar.quest.PortmansJornal.capName + ", он капитан " + GetStrSmallRegister(XI_ConvertString(npchar.quest.PortmansJornal.shipTapeName + "Acc")) + " с именем '" + npchar.quest.PortmansJornal.shipName + "'. Вышел он в море недавно, а направился в " + XI_ConvertString("Colony" + npchar.quest.PortmansJornal.city + "Acc") + ".";
+			dialog.text = "Да, конечно! Его зовут " + npchar.quest.PortmansJornal.capName + ", он капитан " + GetStrSmallRegister(XI_ConvertString(npchar.quest.PortmansJornal.shipTapeName + "Gen")) + " с именем '" + npchar.quest.PortmansJornal.shipName + "'. Вышел он в море недавно, а направился в " + XI_ConvertString("Colony" + npchar.quest.PortmansJornal.city + "Acc") + ".";
 			link.l1 = "Понятно. Ну что же, я его обязательно найду. Как быть с оплатой?";
 			link.l1.go = "PortmanQuest_3";
 		break;
@@ -1272,7 +1287,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sTargetCity", XI_ConvertString("Colony" + npchar.quest.PortmansJornal.city + "Acc"));
 			if (GetIslandByCityName(npchar.quest.PortmansJornal.city) != npchar.quest.PortmansJornal.city)
 			{
-				AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(npchar.quest.PortmansJornal.city) + "Dat"));
+				AddQuestUserData(sTitle, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(npchar.quest.PortmansJornal.city) + "Voc"));
 			}
 		break;
 		// -------------------------------- квест розыска украденного корабля ----------------------------------
@@ -1383,10 +1398,7 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(sTitle, "Portmans_SeekShip", "6");
 			CloseQuestHeader(sTitle);
 
-			pchar.questTemp.genquestcount = sti(pchar.questTemp.genquestcount) + 1;
-			if(sti(pchar.questTemp.genquestcount) >= 10) UnlockAchievement("gen_quests", 1);
-			if(sti(pchar.questTemp.genquestcount) >= 20) UnlockAchievement("gen_quests", 2);
-			if(sti(pchar.questTemp.genquestcount) >= 40) UnlockAchievement("gen_quests", 3);
+			AchievementsCounter_genquests(1);
 
 			DeleteAttribute(npchar, "quest.PortmansSeekShip");
 			npchar.quest = ""; //освобождаем личный флаг квеста для портмана
@@ -1416,17 +1428,17 @@ void ProcessDialogEvent()
 				license_expires = rand(2);
 		break;
 		case "CapitainList":
-			if (sti(npchar.quest.qty) > 0)
+			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) > 0)
 			{
 				dialog.text = "Есть отметившиеся капитаны. Кто конкретно вас интересует?";
-				makearef(arCapBase, npchar.quest.capitainsList);
-				for (i=0; i<sti(npchar.quest.qty); i++)
+				for (i=0; i<GetAttributesNum(arCapBase); i++)
 				{
 					arCapLocal = GetAttributeN(arCapBase, i);
 					sCapitainId = GetAttributeName(arCapLocal);
 					sld = characterFromId(sCapitainId);
 					attrL = "l" + i;
-					link.(attrL) = GetFullName(sld) + ", капитан " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Acc")) + " '" + sld.Ship.name + "'.";
+					link.(attrL) = GetFullName(sld) + ", капитан " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Gen")) + " '" + sld.Ship.name + "'.";
 					link.(attrL).go = "CapList_"+attrL;
 				}
 			}
@@ -1439,6 +1451,12 @@ void ProcessDialogEvent()
 		break;
 		case "CapList_l0":
 			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) <= 0) {
+				trace("ERROR: capitainsList is empty")
+				link.l2 = "Все, капитаны меня более не интересуют.";
+				link.l2.go = "node_2";
+				break;
+			}
 			arCapLocal = GetAttributeN(arCapBase,  0);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
@@ -1452,19 +1470,25 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(arCapLocal.QBString1, arCapLocal.QBString2, arCapLocal.QBQty);
 			AddQuestUserData(arCapLocal.QBString1, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(arCapLocal.QBString1, "sCapName", GetFullName(sld));
-			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Dat")));
+			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Voc")));
 			AddQuestUserData(arCapLocal.QBString1, "sShipName", sld.Ship.name);
 			AddQuestUserData(arCapLocal.QBString1, "sDate", arCapLocal.date);
 			AddQuestUserData(arCapLocal.QBString1, "sTargetCity", XI_ConvertString("Colony" + arCapLocal + "Acc"));
 			if (GetIslandByCityName(arCapBase.(sCapitainId)) != arCapBase.(sCapitainId))
 			{
-				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Dat"));
+				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Voc"));
 			}
 			//убираем из списка
 			DeleteAttribute(arCapBase, sCapitainId);
 		break;
 		case "CapList_l1":
 			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) <= 1) {
+				trace("ERROR: capitainsList is empty")
+				link.l2 = "Все, капитаны меня более не интересуют.";
+				link.l2.go = "node_2";
+				break;
+			}
 			arCapLocal = GetAttributeN(arCapBase,  1);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
@@ -1478,19 +1502,25 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(arCapLocal.QBString1, arCapLocal.QBString2, arCapLocal.QBQty);
 			AddQuestUserData(arCapLocal.QBString1, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(arCapLocal.QBString1, "sCapName", GetFullName(sld));
-			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Dat")));
+			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Voc")));
 			AddQuestUserData(arCapLocal.QBString1, "sShipName", sld.Ship.name);
 			AddQuestUserData(arCapLocal.QBString1, "sDate", arCapLocal.date);
 			AddQuestUserData(arCapLocal.QBString1, "sTargetCity", XI_ConvertString("Colony" + arCapLocal + "Acc"));
 			if (GetIslandByCityName(arCapBase.(sCapitainId)) != arCapBase.(sCapitainId))
 			{
-				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Dat"));
+				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Voc"));
 			}
 			//убираем из списка
 			DeleteAttribute(arCapBase, sCapitainId);
 		break;
 		case "CapList_l2":
 			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) <= 2) {
+				trace("ERROR: capitainsList is empty")
+				link.l2 = "Все, капитаны меня более не интересуют.";
+				link.l2.go = "node_2";
+				break;
+			}
 			arCapLocal = GetAttributeN(arCapBase,  2);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
@@ -1504,19 +1534,25 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(arCapLocal.QBString1, arCapLocal.QBString2, arCapLocal.QBQty);
 			AddQuestUserData(arCapLocal.QBString1, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(arCapLocal.QBString1, "sCapName", GetFullName(sld));
-			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Dat")));
+			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Voc")));
 			AddQuestUserData(arCapLocal.QBString1, "sShipName", sld.Ship.name);
 			AddQuestUserData(arCapLocal.QBString1, "sDate", arCapLocal.date);
 			AddQuestUserData(arCapLocal.QBString1, "sTargetCity", XI_ConvertString("Colony" + arCapLocal + "Acc"));
 			if (GetIslandByCityName(arCapBase.(sCapitainId)) != arCapBase.(sCapitainId))
 			{
-				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Dat"));
+				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Voc"));
 			}
 			//убираем из списка
 			DeleteAttribute(arCapBase, sCapitainId);
 		break;
 		case "CapList_l3":
 			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) <= 3) {
+				trace("ERROR: capitainsList is empty")
+				link.l2 = "Все, капитаны меня более не интересуют.";
+				link.l2.go = "node_2";
+				break;
+			}
 			arCapLocal = GetAttributeN(arCapBase,  3);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
@@ -1530,19 +1566,25 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(arCapLocal.QBString1, arCapLocal.QBString2, arCapLocal.QBQty);
 			AddQuestUserData(arCapLocal.QBString1, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(arCapLocal.QBString1, "sCapName", GetFullName(sld));
-			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Dat")));
+			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Voc")));
 			AddQuestUserData(arCapLocal.QBString1, "sShipName", sld.Ship.name);
 			AddQuestUserData(arCapLocal.QBString1, "sDate", arCapLocal.date);
 			AddQuestUserData(arCapLocal.QBString1, "sTargetCity", XI_ConvertString("Colony" + arCapLocal + "Acc"));
 			if (GetIslandByCityName(arCapBase.(sCapitainId)) != arCapBase.(sCapitainId))
 			{
-				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Dat"));
+				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Voc"));
 			}
 			//убираем из списка
 			DeleteAttribute(arCapBase, sCapitainId);
 		break;
 		case "CapList_l4":
 			makearef(arCapBase, npchar.quest.capitainsList);
+			if (GetAttributesNum(arCapBase) <= 4) {
+				trace("ERROR: capitainsList is empty")
+				link.l2 = "Все, капитаны меня более не интересуют.";
+				link.l2.go = "node_2";
+				break;
+			}
 			arCapLocal = GetAttributeN(arCapBase,  4);
 			sCapitainId = GetAttributeName(arCapLocal);
 			sld = characterFromId(sCapitainId);
@@ -1556,13 +1598,13 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(arCapLocal.QBString1, arCapLocal.QBString2, arCapLocal.QBQty);
 			AddQuestUserData(arCapLocal.QBString1, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(arCapLocal.QBString1, "sCapName", GetFullName(sld));
-			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Dat")));
+			AddQuestUserData(arCapLocal.QBString1, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Voc")));
 			AddQuestUserData(arCapLocal.QBString1, "sShipName", sld.Ship.name);
 			AddQuestUserData(arCapLocal.QBString1, "sDate", arCapLocal.date);
 			AddQuestUserData(arCapLocal.QBString1, "sTargetCity", XI_ConvertString("Colony" + arCapLocal + "Acc"));
 			if (GetIslandByCityName(arCapBase.(sCapitainId)) != arCapBase.(sCapitainId))
 			{
-				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Dat"));
+				AddQuestUserData(arCapLocal.QBString1, "sAreal", ", что находится на " + XI_ConvertString(GetIslandByCityName(arCapBase.(sCapitainId)) + "Voc"));
 			}
 			//убираем из списка
 			DeleteAttribute(arCapBase, sCapitainId);
@@ -1731,8 +1773,8 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = "Нет ли у вас места для ещё одного корабля?";
-					Link.l1 = "Да, точно. Спасибо.";
+					dialog.text = "У вас же итак слишком большая эскадра. В акватории уже не хватает места для ваших кораблей.";
+					Link.l1 = "Да, точно. Заберу в другой раз.";
 					Link.l1.go = "exit";
 				}
 			}
@@ -1881,2047 +1923,24 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 	int shipType, temp;
 	float neededValue;
 	String shipAttribute;
+	ref rBaseShip;
 
 	// TODO Пересмотреть зависимость от ранга
-	if (rank < 5) shipType = SHIP_BERMSLOOP + rand(11);
-	if (rank >= 5 && rank < 10) shipType = SHIP_POLACCA + rand(12);
-	if (rank >= 10 && rank < 15) shipType = SHIP_BRIG + rand(23);
-	if (rank >= 15 && rank < 20) shipType = SHIP_PINNACE + rand(31);
-	if (rank >= 20 && rank < 30) shipType = SHIP_GALEON50 + rand(20);
-	if (rank >= 30) shipType = SHIP_POSEIDON + rand(19);
-
-	switch(shipType)
+	if (rank < 5) temp = 6;
+	if (rank >= 5 && rank < 10) temp = 5;
+	if (rank >= 10 && rank < 15) temp = 4;
+	if (rank >= 15 && rank < 20) temp = 3;
+	if (rank >= 20 && rank < 30) temp = 2;
+	if (rank >= 30) temp = 1;
+	shipType = GetShipTypeExtNotNation(temp, temp, "", sti(_npchar.Nation));
+	rBaseShip = GetShipByType(shipType);
+	temp = 0;
+	if (rBaseShip.Type.Merchant == true) temp++;//для торговых и универсальных рандом от 1 до 2, для военных от 0 до 1
+	switch(temp+rand(1))
 	{
-		case SHIP_BERMSLOOP:
-			shipAttribute = "speedrate";
-	//				neededValue = 16.74 + fRandSmall(0.15);
-			else
-			{
-				if(temp == 1)
-				{
-	//						neededValue = 42.12 + fRandSmall(0.4);
-					shipAttribute = "turnrate";
-				}
-			else
-				{
-	//						neededValue = 864 + rand(8);
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_LUGGER_H:
-		temp = rand(3);
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-			{
-						shipAttribute = "turnrate";
-			}
-			else
-			{
-						 shipAttribute = "capacity";
-			}
-			}
-		break;
-
-		case SHIP_SLOOP:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-	//					neededValue = 14.9 + fRandSmall(0.14);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-	//						neededValue = 42.12 + fRandSmall(0.4);
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-	//						neededValue = 864 + rand(8);
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_BERMSLOOP:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_EMPRESS:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					//neededValue = 864 + rand(8);
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_PINK:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SPEEDY:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FR_SLOOP:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_Galeoth_h:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SLOOP_B:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_NEPTUNUS:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SOPHIE:
-			temp = rand(3);
-
-			if(temp == 2)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SCHOONER:
-			if(rand(3) == 0)
-			{
-				neededValue = 14.04 + fRandSmall(0.13);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				neededValue = 37.8 + fRandSmall(0.35);
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				neededValue = 1836 + rand(170);
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_POLACCA:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FR_POSTILLIONEN:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_COLONIALSCHOONER:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_XEBEC:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BATTLEXEBEC:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_XEBECLIGHT:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_SCHOONERLIGHT:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_MIRAGE:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_POLACRE:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_ENSLAVER:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_SHNYAVA:
-			if(rand(3) == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BARQUE:
-			neededValue = 1836 + rand(170);
-			shipAttribute = "capacity";
-		break;
-
-		case SHIP_CARAVEL:
-			neededValue = 3240 + rand(30);
-			shipAttribute = "capacity";
-		break;
-
-		case SHIP_BARKENTINE:
-			neededValue = 43.2 + fRandSmall(0.4);
-			shipAttribute = "turnrate";
-		break;
-
-		case SHIP_BRIGANTINE:
-			if(rand(3) == 1)
-			{
-				neededValue = 16.74 + fRandSmall(0.16);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				neededValue = 54.0 + fRandSmall(0.5);
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			neededValue = 3240 + rand(30);
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_CASTELF:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_DERFFLINGER:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_INTERCEPTOR:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_PO_FLEUT50:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FLEUT:
-			neededValue = 3240 + rand(30);
-			shipAttribute = "capacity";
-		break;
-
-		case SHIP_BRIG:
-			if(rand(3) == 1)
-			{
-				neededValue = 15.66 + fRandSmall(0.15);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				neededValue = 48.6 + fRandSmall(0.45);
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			neededValue = 3240 + rand(30);
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BRIGHEAVY:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_GREYHOUND:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_CORVETTELIGHT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_PACKET_BRIG:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_PDN:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_ENTERPRISE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_POLACRE_H:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FRIGATEMEDIUM:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_RaaFrigate:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_CARAVEL2:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FLEUTWAR:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FLEUTWARSAT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_GALEONTRADER:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_LYDIA:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-			shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_GALEON_L:
-			neededValue = 3672 + rand(34);
-			shipAttribute = "capacity";
-		break;
-
-		case SHIP_CORVETTE:
-			if(rand(3) == 1)
-			{
-				neededValue = 17.5 + fRandSmall(0.16);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				neededValue = 59.4 + fRandSmall(0.55);
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				neededValue = 4320 + rand(40);
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_CRIMSONBLOOD:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FRIGATE_l:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BATTLECORVETTE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BLACKANGEL:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_COASTALFRIGATE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FR_FRIGATE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_UNICORN:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_LINEFRIGATE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_LIGHTFRIGATE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BOUSSOLE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_SURPRISE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_SALAMANDER:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FRIGATE_SAT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_BATTLEFRIGATE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_NIGHTMARE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_MORDAUNT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_GALEON_H:
-			neededValue = 5022 + rand(47);
-			shipAttribute = "capacity";
-		break;
-
-		case SHIP_PINNACE:
-			if(rand(3) == 1)
-			{
-				neededValue = 14.04 + fRandSmall(0.13);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				neededValue = 59.4 + fRandSmall(0.55);
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				neededValue = 4320 + rand(40);
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_DUTCHPINNACE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_PINNACELIGHT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_XEBEKVT:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FELIPE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_JAMAICASHIP:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_THEBLACKPEARL:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_GALEON1:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_LA_MARIANNA:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_PIRATFASTGAL:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_REVENGE:
-			if(rand(3) == 1)
-			{
-				shipAttribute = "speedrate";
-			}
-			  else
-			{
-				shipAttribute = "turnrate";
-			}
-			else
-			{
-				shipAttribute = "capacity";
-			}
-		break;
-
-		case SHIP_FRIGATE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				neededValue = 15.44 + fRandSmall(0.14);
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					neededValue = 41.04 + fRandSmall(0.38);
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					neededValue = 3240 + rand(30);
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_AMSTERDAM:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_CARRACA:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_GALEON50:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FASTFRIGATE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FR_ESSEX:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FRIGATE_H:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_WARGALLEON2:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_NL_PINNACEOFWAR47:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_HOLLGALEON_H:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FEARLESS:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_NL_FWZP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_CONSTITUTION:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_OXFORD:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_DUTCHLINESHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_DUTCHSHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_NL_CONVOISHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_COURONNE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_ALEXIS:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_LINESHIPHEAVY:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_WARSHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_HEAVYWARSHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_POSEIDON:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_HMS_CENTURION:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_RESOLUTION:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FR_SUPERIORWARSHIP1:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_LINK:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SUPERBE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_BATTLESHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_LINK2:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_BELLONA:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_LINEARSHIP:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SHARK:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_ZEVENPROVINCIEN:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_FR_TRINITY:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_MANOWAR_FAST:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_BATTLEMANOWAR:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_MANOWAR_GUB:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_PRINCE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_MANOWAR:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_HMS_VICTORY:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
-		case SHIP_SP_SANFELIPE:
-			temp = rand(3);
-
-			if(temp == 0)
-			{
-				shipAttribute = "speedrate";
-			}
-			else
-			{
-				if(temp == 1)
-				{
-					shipAttribute = "turnrate";
-				}
-				else
-				{
-					shipAttribute = "capacity";
-				}
-			}
-		break;
-
+		case 0: shipAttribute = "turnrate"; break;
+		case 1: shipAttribute = "speedrate"; break;
+		case 2: shipAttribute = "capacity"; break;
 	}
 
 	neededValue = BurntShipQuest_GetMaxNeededValue(shipType, shipAttribute);
@@ -3992,7 +2011,7 @@ void SetJornalCapParam(ref npchar)
 	sld.quest.baseShore = GetIslandRandomShoreId(sTemp);
 	//на карту
 	sld.mapEnc.type = "trade";
-	sld.mapEnc.worldMapShip = "ranger";
+	sld.mapEnc.worldMapShip = "Galleon_red"; //стояла модель кораблекрушенца
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.PortmansJornal.shipTapeName) + " '" + npchar.quest.PortmansJornal.shipName + "'";
 	int daysQty = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity))+5; //дней доехать даём с запасом
 	Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, daysQty);

@@ -119,13 +119,13 @@ void ProcessDialogEvent()
 			if (!CheckAttribute(npchar, "quest.daily_sex") && sti(pchar.money) >= 10)
 			{
 				if (PChar.location == "SentJons_tavern" || PChar.location == "PortRoyal_tavern" || PChar.location == "Charles_tavern" || PChar.location == "Bridgetown_tavern" || 
-					PChar.location == "Portspein_tavern" || PChar.location == "Villemstad_tavern" || PChar.location == "Marigo_tavern" || PChar.location == "FortOrange_tavern" || 
-					PChar.location == "FortOrange_tavern" || PChar.location == "FortFrance_tavern" || PChar.location == "FortFrance_tavern" || PChar.location == "BasTer_tavern" || 
+					PChar.location == "PortSpein_tavern" || PChar.location == "Villemstad_tavern" || PChar.location == "Marigo_tavern" || PChar.location == "FortOrange_tavern" || 
+					PChar.location == "Nassau_tavern" || PChar.location == "FortFrance_tavern" || PChar.location == "BasTer_tavern" || PChar.location == "LeFransua_tavern" || 
 					PChar.location == "Tortuga_tavern" || PChar.location == "Caracas_tavern" || PChar.location == "Cumana_tavern" || PChar.location == "Cartahena_tavern" || 
 					PChar.location == "Maracaibo_tavern" || PChar.location == "PortoBello_tavern" || PChar.location == "SantaCatalina_tavern" || PChar.location == "Beliz_tavern" || 
 					PChar.location == "SantoDomingo_tavern" || PChar.location == "SanJuan_tavern" || PChar.location == "Santiago_tavern" || PChar.location == "Havana_tavern" || 
 					PChar.location == "PuertoPrincipe_tavern" || PChar.location == "PortPax_tavern" || PChar.location == "LaVega_tavern" || PChar.location == "Pirates_tavern" || 
-					PChar.location == "Panama_tavern" || PChar.location == "LeFransua_tavern")
+					PChar.location == "Panama_tavern")
 					{
 						Link.l3 = RandPhraseSimple("Милая, а давай снимем комнату и останемся вдвоём?","Дорогая, мне так хочется побыть с тобой наедине... может, снимем комнату и забудем обо всём на пару часов?");
 						Link.l3.go = "Mary_room_sex";
@@ -710,10 +710,14 @@ void ProcessDialogEvent()
 				attrLoc = "l" + iTemp;
 				NPChar.Temp.(attr) = attr;
 				Link.(attrLoc) = "В " + XI_ConvertString("Colony" + attr + "Dat");
+				if (IsColonyEnemyToMainCharacter(attr)) {
+					Link.(attrLoc).go = "CompanionTravel_EnemyColony";
+					continue;
+				}
 				Link.(attrLoc).go = "CompanionTravelToColony_" + attr;
 			}
-				Link.l99 = "Я передумал"+ GetSexPhrase("","а") +". Ничего не нужно.";
-				Link.l99.go = "exit";
+			Link.l99 = "Я передумал"+ GetSexPhrase("","а") +". Ничего не нужно.";
+			Link.l99.go = "exit";
 		break;
 
 		case "TravelToPiratesTowns":
@@ -875,10 +879,10 @@ void ProcessDialogEvent()
 		int nFind = findSubStr(Dialog.CurrentNode, "CompanionTravelToColony_", 0);
 		string idxVal;
 		string nodName;
-		if(nFind == 0)
+		if (nFind == 0)
 		{
-            idxVal = strcut(Dialog.CurrentNode, 24, strlen(Dialog.CurrentNode)-1);
-            nodName = "CompanionTravelToColony_" + idxVal;
+			idxVal = strcut(Dialog.CurrentNode, 24, strlen(Dialog.CurrentNode) - 1);
+			nodName = "CompanionTravelToColony_" + idxVal;
 			for (i = 1; i < COMPANION_MAX; i++)
 			{
 				int cn;									// Companion index
@@ -886,15 +890,17 @@ void ProcessDialogEvent()
 				if (cn == -1) continue;
 				if (NPChar.name == characters[cn].name) NPChar.realcompanionidx = &characters[cn].index;
 			}
-			characters[sti(NPChar.realcompanionidx)].CompanionTravel.ToColonyID = NPChar.Temp.(idxVal);
-			characters[sti(NPChar.realcompanionidx)].CompanionTravel.Days = makeint(GetDistanceToColony2D(NPChar.Temp.(idxVal))/300+1.0);
-			dialog.Text = "Вы выбрали колонию "+XI_ConvertString("Colony" + characters[sti(NPChar.realcompanionidx)].CompanionTravel.ToColonyID + "Gen")+", капитан?";
+			aref rCTravel;
+			makearef(rCTravel, characters[sti(NPChar.realcompanionidx)].CompanionTravel);
+			rCTravel.ToColonyID = NPChar.Temp.(idxVal);
+			rCTravel.Days = makeint(GetDistanceToColony2D(NPChar.Temp.(idxVal)) / 300 + 1.0);
+			dialog.Text = "Вы выбрали колонию " + XI_ConvertString("Colony" + rCTravel.ToColonyID + "Gen") + ", капитан?";
 			Link.l1 = "Да, именно её.";
-            Link.l1.go = "CompanionTravel_PrepareStart";
-			Link.l2 = "Нет, я передумал"+ GetSexPhrase("","а")+", не бери в голову.";
-            Link.l2.go = "exit";
-            break;
-        }
+			Link.l1.go = "CompanionTravel_PrepareStart";
+			Link.l2 = "Нет, я передумал" + GetSexPhrase("", "а") + ", не бери в голову.";
+			Link.l2.go = "exit";
+			break;
+		}
 
 		case "CompanionTravel_EnemyColony":
 			dialog.Text = "Капитан, но я же не cмогу ждать вас в колонии, которая к нам враждебна!";
@@ -987,6 +993,9 @@ void ProcessDialogEvent()
 					Group_DeleteGroup(NPChar.CompanionTravel.GroupID); // Потрём группу
 					SetCompanionIndex(PChar, -1, sti(NPChar.index));
 					PChar.CompanionTravel = sti(PChar.CompanionTravel) - 1; // Этого компаньона взяли обратно в эскадру
+					AddQuestRecord("CompanionTravel", "2");
+					AddQuestUserData("CompanionTravel", "sCapName", GetFullName(NPChar)); 
+					AddQuestUserData("CompanionTravel", "sShipInfo", GetStrSmallRegister(XI_ConvertString(RealShips[sti(NPChar.Ship.Type)].Basename + "Dat")) + " '" + NPChar.Ship.name + "'");
 					if(GetAttrValue(PChar, "CompanionTravel") == 0) CloseQuestHeader("CompanionTravel");
 					DeleteAttribute(NPChar, "CompanionTravel");
 					for(iTemp=1; iTemp<=3; iTemp++) // Нужно, чтоб была свободная группа
@@ -996,7 +1005,7 @@ void ProcessDialogEvent()
 						{
 							if (PChar.CompanionTravel.(attr).ID == NPChar.ID)
 							{
-								DeleteAttribute(PChar,"CompanionTravel."+(attr)+".ID");
+								DeleteAttribute(PChar,"CompanionTravel."+(attr));
 								DeleteAttribute(NPChar,"Tasks.Clone");
 							}
 						}
@@ -1023,6 +1032,9 @@ void ProcessDialogEvent()
 				Group_DeleteGroup(NPChar.CompanionTravel.GroupID);
 				SetCompanionIndex(PChar, -1, sti(NPChar.index));
 				PChar.CompanionTravel = sti(PChar.CompanionTravel) - 1; // Этого компаньона взяли обратно в эскадру
+				AddQuestRecord("CompanionTravel", "2");
+				AddQuestUserData("CompanionTravel", "sCapName", GetFullName(NPChar)); 
+				AddQuestUserData("CompanionTravel", "sShipInfo", GetStrSmallRegister(XI_ConvertString(RealShips[sti(NPChar.Ship.Type)].Basename + "Dat")) + " '" + NPChar.Ship.name + "'");
 				if(GetAttrValue(PChar, "CompanionTravel") == 0) CloseQuestHeader("CompanionTravel");
 				DeleteAttribute(NPChar, "CompanionTravel");
 				for(iTemp=1; iTemp<=3; iTemp++) // Нужно, чтоб была свободная группа
@@ -1032,7 +1044,7 @@ void ProcessDialogEvent()
 					{
 						if (PChar.CompanionTravel.(attr).ID == NPChar.ID)
 						{
-							DeleteAttribute(PChar,"CompanionTravel."+(attr)+".ID");
+							DeleteAttribute(PChar,"CompanionTravel."+(attr));
 							DeleteAttribute(NPChar,"Tasks.Clone");
 						}
 					}

@@ -1056,3 +1056,93 @@ data = "Turn speed", "5.5"
 	data = "Turn speed", "5.5"		; rad/sec
 
 	event = "swim", 245, normal
+	
+	; сидит за столом, руки на столе, смотрит по сторонам сучит ножками от нетерпения
+[Sit_Look_Around]
+	speed = 1.5
+	loop = true
+	type = normal
+	start_time = 995
+	end_time = 1046
+	data = "Blend time", "0.3"		; sec	
+	data = "Probability", "1.0"
+
+; сидит за столом, руки на столе, устало опускает голову вниз
+[Sit_Lower_head]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1046
+	end_time = 1141
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "1.0"
+
+; сидит за столом, облокачивается головой на правую руку
+[Sit_Idle01]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "1.0"
+
+; сидит за столом, поднимает правую руку, машет, улыбается
+[Sit_Idle02]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "0.1"
+
+; сидит за столом, отгоняет муху
+[Sit_Idle03]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "0.3"
+
+; сидит за столом, рыгает
+[Sit_Idle04]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "0.8"
+
+; сидит за столом обгладывает кость
+[Sit_Idle05]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "0.3"
+
+; сидит за столом есть вилкой
+[Sit_Idle06]
+	speed = 1.0
+	loop = true
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "0.3"
+
+[Sit_Death]
+	speed = 1.0
+	type = normal
+	start_time = 1142
+	end_time = 1193
+	data = "Blend time", "0.3"		; sec
+	data = "Probability", "1.0"
+	data = "Angle", "340.0"
+	loop = true

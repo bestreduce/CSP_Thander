@@ -187,7 +187,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Quest_Whisper_16":
-			dialog.text = "Я знаю, как заставить губернатора увести эскадру и часть солдат из форта. Если ты шепнёшь ему, что меня видели в Пуэрто Принсипе, не сомневаюсь, он отправит все силы на мою поимку. Меня уже давно разыскивают на этом острове.";
+			dialog.text = "Я знаю, как заставить губернатора увести эскадру и часть солдат из форта. Если ты шепнёшь ему, что меня видели в Пуэрто-Принсипе, не сомневаюсь, он отправит все силы на мою поимку. Меня уже давно разыскивают на этом острове.";
 			link.l1 = "Ты думаешь он просто так мне поверит?";
 			link.l1.go = "Quest_Whisper_18";
 		break;
@@ -223,7 +223,7 @@ void ProcessDialogEvent()
 
 		case "Quest_Whisper_end":
 			LocatorReloadEnterDisable("Santiago_Town", "basement1", false);
-			npchar.dialog.filename = "pgg_dialog_town.c";
+			npchar.dialog.filename = "PGG_dialog.c";
 			npchar.dialog.currentnode = "First time";
 			npchar.PGGWhisperQuestEnd = true;
 			DialogExit();
@@ -246,6 +246,34 @@ void ProcessDialogEvent()
 			}
 			npchar.dialog.currentnode = "Quest_Whisper_report";
 			LocatorReloadEnterDisable("Santiago_Town", "basement1", true);
+			if (CheckAttribute(NPChar, "payment") && npchar.payment == true)
+			{
+				CheckForReleaseOfficer(sti(npchar.index));
+				RemovePassenger(pchar, npchar);
+				RemoveCharacterCompanion(pchar, npchar);
+				LAi_SetWarriorType(npchar);
+				npchar.location = "none";
+				npchar.PGGAi.location.town = GetCurrentTown();
+				npchar.PGGAi.IsPGG = true;
+				int n = 0;
+				int aShips[SHIP_OCEAN];
+				for (i = 0; i <= SHIP_OCEAN; i++)
+				{
+					if (CheckAttribute(&ShipsTypes[i], "Class") && sti(ShipsTypes[i].Class) == GetCharacterShipClass(PChar))
+					{
+						aShips[n] = i;
+						n++;
+					}
+				}
+				i = rand(n-1);
+				int iType = aShips[i];
+				PGG_DebugLog(npchar.id + " Changed ship");
+				npchar.Ship.Type = GenerateShipExt(iType, rand(1), npchar);
+				SetBaseShipData(npchar);
+				if (!CheckAttribute(npchar, "Ship.Name")) SetRandomNameToShip(npchar);
+				PGG_UpdateShipEquip(npchar);
+				npchar.PGGAi.OwnShip = true;	
+			}
 			DialogExit();
 		break;
 
@@ -403,7 +431,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Quest_Whisper_Finish_NoHire":
-			npchar.dialog.filename = "pgg_dialog_town.c";
+			npchar.dialog.filename = "PGG_dialog.c";
 			npchar.dialog.currentnode = "First time";
 			LAi_SetActorTypeNoGroup(npchar);
 			LAi_ActorGoToLocation(npchar, "reload", "reload1_back", "none", "", "", "", -1);

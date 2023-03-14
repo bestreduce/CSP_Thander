@@ -416,8 +416,8 @@ int LocationInitSentMartin(int n)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Marigo_tavern";
 	locations[n].id.label = "Tavern";
-	locations[n].filespath.models = "locations\inside\tavern03\";
-	locations[n].image = "loading\jonny_load\inside\Tavern03.tga";
+	locations[n].filespath.models = "locations\inside\tavern06\";
+	locations[n].image = "loading\jonny_load\inside\Tavern06.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "Marigo";
@@ -428,18 +428,18 @@ int LocationInitSentMartin(int n)
  	locations[n].islandId = "SentMartin";
 	//Models
 	//Always
-	locations[n].models.always.tavern = "tavern03";
+	locations[n].models.always.tavern = "tavern06";
 	locations[n].models.always.tavern.level = 65538;
-	locations[n].models.always.locators = "tavern03_locators";
-	locations[n].models.always.window = "tavern03_window";
+	locations[n].models.always.locators = "tavern06_locators";
+	locations[n].models.always.window = "tavern06_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
-	locations[n].models.day.charactersPatch = "tavern03_patch";
+	locations[n].models.day.charactersPatch = "tavern06_patch";
 	//Night
-	locations[n].models.night.charactersPatch = "tavern03_patch";
+	locations[n].models.night.charactersPatch = "tavern06_patch";
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";

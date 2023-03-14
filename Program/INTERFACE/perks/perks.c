@@ -247,10 +247,6 @@ void procChrPerkDelay()
 		delay--;
 	}
 
-	if ((bSeaReloadStarted) && (!bCabinStarted) && (!bAbordageStarted))
-	{
-		delay = 0;
-	}
 	if( CheckAttribute(arPerk,"active") )
 	{
 		int iActive = sti(arPerk.active)-1;
@@ -290,7 +286,7 @@ void EnableUsingAbility(ref chref,string perkName)
 	Event("evntChrPerkDelay","sl",perkName, sti(chref.index));
 }
 
-void PerkLoad()
+void PerkLoad(bool noDelay)
 {
 //	int iRDTSC = RDTSC_B();
 	string locName = pchar.location;
@@ -299,24 +295,32 @@ void PerkLoad()
 
 	for(i=0; i<MAX_CHARACTERS; i++)
 	{
-			makearef(arPerksRoot,Characters[i].perks.list);
-			n = GetAttributesNum(arPerksRoot);
-			for(j=0; j<n; j++)
+		makearef(arPerksRoot,Characters[i].perks.list);
+		n = GetAttributesNum(arPerksRoot);
+		for(j=0; j<n; j++)
+		{
+			arPerk = GetAttributeN(arPerksRoot,j);
+			if( CheckAttribute(arPerk,"delay") )
 			{
-				arPerk = GetAttributeN(arPerksRoot,j);
-				if( CheckAttribute(arPerk,"delay") )
+				if (noDelay) {
+					DeleteAttribute(arPerk,"delay");
+					DeleteAttribute(arPerk,"active");
+					PostEvent("evntPerkAgainUsable",1);
+					continue;
+				}
+
+				tmpi = sti(arPerk.delay);
+				if( tmpi>0 )
 				{
-					tmpi = sti(arPerk.delay);
-					if( tmpi>0 )
-					{
-						PostEvent("evntChrPerkDelay",1000,"sl",GetAttributeName(arPerk),i);
-					}
+					PostEvent("evntChrPerkDelay",1000,"sl",GetAttributeName(arPerk),i);
 				}
 			}
+		}
 	}
 
 //	trace("TIME!!! PerkLoad() = " + RDTSC_E(iRDTSC));
 }
+
 // boal под новые слоты -->
 void ClearActiveChrPerks(ref chref)
 {

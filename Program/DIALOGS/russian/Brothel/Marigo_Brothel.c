@@ -29,6 +29,9 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					link.l1 = "Хех! Благодарю тебя, " + npchar.name + ". Ты мне здорово помогла!";
 					link.l1.go = "exit";
 					pchar.questTemp.Sharp = "toSharp_going"; //в бордели больше не заходить
+					pchar.questTemp.Sharp.count = 0; //счетчик нулим для след. раза
+					pchar.questTemp.Sharp.price = 5000+rand(20)*1000; //цена за наводку
+					pchar.questTemp.Sharp.price.evil = rand(1); //добрый или злой, для скидки
 					ReOpenQuestHeader("SharpPearl");
 					AddQuestRecord("SharpPearl", "1");
 					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Dat"));

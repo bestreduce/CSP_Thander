@@ -81,7 +81,8 @@ void Ball_FlyNearCamera()
 
 int ballNumber;
 
-void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0, float fDirAng, float fHeightAng, float fCannonDirAng, float fMaxFireDistance)
+// FPSTODO: метод очень тяжелый, особенно в замесах проседания видны невооруженным глазом
+void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0, float fDirAng, float fHeightAng, float fCannonDirAng, float fMaxFireDistance, float fAngle)
 {
 	int iCannonType = sti(aCharacter.Ship.Cannons.Type);
 	ref rCannon = GetCannonByType(iCannonType);
@@ -106,9 +107,9 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 	AIBalls.SizeMultiply      = rCannon.SizeMultiply;
 	AIBalls.TimeSpeedMultiply = rCannon.TimeSpeedMultiply;
 	AIBalls.MaxFireDistance   = fMaxFireDistance;
-	AIBalls.RawAng = fCannonDirAng;
-	float fTempDispersionY = Degree2Radian(5.0); // LEO: Важные параметры разброса снарядов - (15.0)
-	float fTempDispersionX = Degree2Radian(6.5); // (5.0)
+	AIBalls.RawAng = fAngle;
+	float fTempDispersionY = Degree2Radian(9.0); //отклонение по горизонтали	//LEO: Важные параметры разброса снарядов, ванильное: 15.0
+	float fTempDispersionX = Degree2Radian(6.5); //отклонение по вертикали		//(5.0)
 
 	//float fDamage2Cannons = 100.0;
 
@@ -122,13 +123,13 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 	float fCaliberPenalty = (GetCannonCaliber(iCannonType) - 6 - fCannons*2)/160;//-0.05...0.15
     float fAccuracy = (1.5 - stf(aCharacter.TmpSkill.Accuracy))/2 + fCaliberPenalty + fCannonsNumPenalty;
 	
-	fCannons = 15.0 + MOD_SKILL_ENEMY_RATE - fCannons;
+	fCannons = 15.0 + MOD_SKILL_ENEMY_RATE - fCannons;//сложность влияет на частоту нанесения урона! И на неписей тоже распространяется???
 
 	if (fCannons > 0.0 && RealShips[sti(aCharacter.ship.type)].BaseName != "fort") // fix
 	{
-		if (fCannons > rand(100) && !IsEquipCharacterByArtefact(aCharacter, "talisman3"))
+		if (fCannons > rand(200) && !IsEquipCharacterByArtefact(aCharacter, "talisman3"))//урон в 2 раза реже
 		{
-            fCannons = (rand(4) + 2.0*(1.65 - stf(aCharacter.TmpSkill.Cannons))) * 10;
+            fCannons = (frnd() + 3.0*(1.65 - stf(aCharacter.TmpSkill.Cannons))) * 5;//уменьшаю рандомный разброс урона, и сам урон примерно в 2 раза
 			SendMessage(&AISea, "laffff", AI_MESSAGE_CANNONS_BOOM_CHECK, aCharacter, fCannons, fx, fy, fz);  // fDamage2Cannons  там много делителей, потому много
 		}
 	}

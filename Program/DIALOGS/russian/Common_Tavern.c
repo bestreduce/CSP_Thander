@@ -241,7 +241,7 @@ void ProcessDialogEvent()
 				// ЧП
 
 				dialog.Text = LinkRandPhrase("Эй, " + GetAddress_Form(NPChar) + " " + PChar.name + "! " + TimeGreeting() + ".",
-                                    "О, какие у нас гости! Рад видеть вас, " + GetAddress_Form(NPChar) + " " + PChar.name + ".",
+                                    "О, какие у нас гости! Рад"+NPCharSexPhrase(NPChar,"","а")+" видеть вас, " + GetAddress_Form(NPChar) + " " + PChar.name + ".",
                                     "Хорошо, что вы заглянули ко мне, " + GetFullName(pchar) + ". Каков будет сегодня ваш заказ?");
 				Link.l1 = "Есть на острове парни, готовые уйти в плавание?";
 				Link.l1.go = "crew hire";
@@ -557,7 +557,7 @@ void ProcessDialogEvent()
 		break;
 	////////////////////////////////////////////////////////=============================================///////////////////////////////////////////////////////
         case "int_quests":
-			dialog.text = "Я весь внимание.";
+			dialog.text = "Я "+NPCharSexPhrase(NPChar,"весь внимание","слушаю")+".";
 			link.l1 = "Я ищу работу. Не поможешь мне?";
 			link.l1.go = "work";
 			//homo 15/06/06 слухи
@@ -1159,7 +1159,7 @@ void ProcessDialogEvent()
 						{
 							if (!CheckAttribute(PChar, "QuestTemp.AndreAbelQuest_StartQuest") && PChar.location == "FortFrance_tavern" && sti(pchar.rank) > 4) // не взята пиратская линейка
 							{
-								dialog.text = "Поговори вон с тем парнем, справа от лесницы. У него какие то проблемы";
+								dialog.text = "Поговори вон с тем парнем, справа от лестницы. У него какие то проблемы";
 								link.l1 = "Спасибо, вот я и наш"+GetSexPhrase("ел","ла")+" работу";
 								link.l1.go = "exit";
 								Log_TestInfo("Сопровождение флейта 'Орион' - сгенерился квестодатель в sit, sit7");
@@ -1892,7 +1892,7 @@ void ProcessDialogEvent()
 			link.l2.go = "meeting";
 		break;
 		case "Istoria_InesDias_9":
-			dialog.text = "И ты не так уж далёк от истины. Меня бросили в какую-то каюту, на время боя, чтобы заняться мной после\nНо, волею провидения, что-то у них там не сложилось, и пираты одолели-таки этих горе-вояк.";
+			dialog.text = "И ты не так уж дал"+GetSexPhrase("ёк","ека")+" от истины. Меня бросили в какую-то каюту, на время боя, чтобы заняться мной после\nНо, волею провидения, что-то у них там не сложилось, и пираты одолели-таки этих горе-вояк.";
 			link.l1 = "И ты попала в руки к пиратам?";
 			link.l1.go = "Istoria_InesDias_10";
 			link.l2 = "Мне уже всё понятно. Давай перейдём к делам.";

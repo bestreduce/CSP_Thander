@@ -9,9 +9,6 @@ ref chr;
 
 int iSelected; // курсор в таблице
 
-int lastsort = 0;
-bool blastsort;
-
 void InitInterface(string iniName)
 {
  	StartAboveForm(true);
@@ -27,6 +24,15 @@ void InitInterface(string iniName)
 		pchar.PGG_NotKilled = 0;
 	}
 
+	string sTemp = "";
+	if (!checkattribute(pchar, "buypgginfo")) {pchar.buyPGGinfo = 0; pchar.buyPGGinfo_Qty = " ";}//открыли первый раз до покупки, таблица должна быть пустой
+	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") 
+	{
+		sTemp += " (" + (PsHeroQty - sti(pchar.PGG_killed) - sti(pchar.PGG_NotKilled))+ " / " + (PsHeroQty - sti(pchar.PGG_NotKilled)) + ")";
+		pchar.buyPGGinfo_Qty = sTemp;
+	}
+	if (pchar.buyPGGinfo == "2") sTemp = pchar.buyPGGinfo_Qty + " (Записано " + FindRussianDaysString(GetQuestPastDayParam("buy_PGG_info")) + " дней назад)"; 
+
     SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero") + " (" + (PsHeroQty - sti(pchar.PGG_killed) - sti(pchar.PGG_NotKilled))+ " / " + (PsHeroQty - sti(pchar.PGG_NotKilled)) + ")");
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("MouseRClickUp","HideInfoWindow",0);
@@ -37,7 +43,7 @@ void InitInterface(string iniName)
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0); // выход из интерфейса
 	sMessageMode = "";
-	FillTable();
+	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") FillTable(); else RecallTable(); 
 }
 
 void ProcessBreakExit()
@@ -52,6 +58,7 @@ void ProcessCancelExit()
 
 void IDoExit(int exitCode)
 {
+	if (MOD_BETTATESTMODE != "On") RememberTable();//при читах не обновляем запомненное
     EndAboveForm(true);
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
 	DelEventHandler("MouseRClickUp","HideInfoWindow");
@@ -114,7 +121,19 @@ void FillTable()
 	GameInterface.TABLE_HERO.hr.td9.scale = 1.0;
 	GameInterface.TABLE_HERO.hr.td10.str = "Пиастры";
 	GameInterface.TABLE_HERO.hr.td10.scale = 1.0;
-
+//--> mod tablesort
+	//GameInterface.TABLE_HERO.hr.td1.sorttype = "string";//эту колонку не сортируем, не создаём атрибут!
+	GameInterface.TABLE_HERO.hr.td2.sorttype = "string";
+	GameInterface.TABLE_HERO.hr.td3.sorttype = "";//числа - любое значение кроме "string"
+	GameInterface.TABLE_HERO.hr.td4.sorttype = "";
+	GameInterface.TABLE_HERO.hr.td5.sorttype = "string";
+	GameInterface.TABLE_HERO.hr.td6.sorttype = "string";
+	GameInterface.TABLE_HERO.hr.td7.sorttype = "string";
+	GameInterface.TABLE_HERO.hr.td8.sorttype = "";
+	GameInterface.TABLE_HERO.hr.td9.sorttype = "";
+	GameInterface.TABLE_HERO.hr.td10.sorttype = "";
+	GameInterface.TABLE_HERO.hr.td10.sortdir = "dec";
+//<-- mod tablesort
 	for (i = 1; i <= PsHeroQty; i++)
 	{
 		chr = CharacterFromID("PsHero_" + i);
@@ -203,42 +222,45 @@ void TableSelectChange()
 	string sControl = GetEventData();
 	iSelected = GetEventData();
     CurTable = sControl;
-    CurRow   =  "tr" + (iSelected);
+    CurRow   =  "tr" + (iSelected);//разве не +1?
 }
 
 void ShowPGGInfo()
 {
-	if (CheckAttribute(&GameInterface, CurTable + "." + CurRow + ".index"))
-	{ // нет ПГГ в списке
-		chr = CharacterFromID("PsHero_" + GameInterface.TABLE_HERO.(CurRow).index);
-		SetSPECIALMiniTable("TABLE_SMALLSKILL", chr);
-		SetOTHERMiniTable("TABLE_SMALLOTHER", chr);
-		SetFormatedText("OFFICER_NAME", GetFullName(chr));
-		SetNewPicture("CHARACTER_BIG_PICTURE", "interfaces\portraits\256\face_" + chr.faceId + ".tga");
-		SetNewPicture("CHARACTER_FRAME_PICTURE", "interfaces\Frame3.tga");
-		int iShip = sti(chr.ship.type);
-		if (iShip != SHIP_NOTUSED)
-		{
-			ref refShip = GetRealShip(iShip);
-			string sShip = refShip.BaseName;
-			SetNewPicture("SHIP_BIG_PICTURE", "interfaces\ships\" + sShip + ".tga.tx");
+	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") 
+	{
+		if (CheckAttribute(&GameInterface, CurTable + "." + CurRow + ".index"))
+		{ // нет ПГГ в списке
+			chr = CharacterFromID("PsHero_" + GameInterface.TABLE_HERO.(CurRow).index);
+			SetSPECIALMiniTable("TABLE_SMALLSKILL", chr);
+			SetOTHERMiniTable("TABLE_SMALLOTHER", chr);
+			SetFormatedText("OFFICER_NAME", GetFullName(chr));
+			SetNewPicture("CHARACTER_BIG_PICTURE", "interfaces\portraits\256\face_" + chr.faceId + ".tga");
+			SetNewPicture("CHARACTER_FRAME_PICTURE", "interfaces\Frame3.tga");
+			int iShip = sti(chr.ship.type);
+			if (iShip != SHIP_NOTUSED)
+			{
+				ref refShip = GetRealShip(iShip);
+				string sShip = refShip.BaseName;
+				SetNewPicture("SHIP_BIG_PICTURE", "interfaces\ships\" + sShip + ".tga.tx");
+			}
+			else {SetNewPicture("SHIP_BIG_PICTURE", "interfaces\blank_ship2.tga.tx");}
+			SetNewPicture("SHIP_FRAME_PICTURE", "interfaces\Frame2.tga");
+			string texturedata;
+			if (IsCharacterPerkOn(chr, "Grunt")) texturedata = "INTERFACES\Sith\Char_Master.tga";
+			if (IsCharacterPerkOn(chr, "Trader")) texturedata = "INTERFACES\Sith\Char_Merchant.tga";
+			if (IsCharacterPerkOn(chr, "Fencer")) texturedata = "INTERFACES\Sith\Char_Corsair.tga";
+			if (IsCharacterPerkOn(chr, "Adventurer")) texturedata = "INTERFACES\Sith\Char_Adventurer.tga";
+			if (IsCharacterPerkOn(chr, "Buccaneer")) texturedata = "INTERFACES\Sith\Char_Inquisitor.tga";
+			if (IsCharacterPerkOn(chr, "Agent")) texturedata = "INTERFACES\Sith\Char_SecretAgent.tga";
+			if (IsCharacterPerkOn(chr, "SeaWolf")) texturedata = "INTERFACES\Sith\Char_SeaWolf.tga";
+			SetNewPicture("CHARACTER_PROFESSION", texturedata);
+	
+			XI_WindowShow("RPG_WINDOW", true);
+			XI_WindowDisable("RPG_WINDOW", false);
+			sMessageMode = "RPG_Hint";
 		}
-		else {SetNewPicture("SHIP_BIG_PICTURE", "interfaces\blank_ship2.tga.tx");}
-		SetNewPicture("SHIP_FRAME_PICTURE", "interfaces\Frame2.tga");
-		string texturedata;
-		if (IsCharacterPerkOn(chr, "Grunt")) texturedata = "INTERFACES\Sith\Char_Master.tga";
-		if (IsCharacterPerkOn(chr, "Trader")) texturedata = "INTERFACES\Sith\Char_Merchant.tga";
-		if (IsCharacterPerkOn(chr, "Fencer")) texturedata = "INTERFACES\Sith\Char_Corsair.tga";
-		if (IsCharacterPerkOn(chr, "Adventurer")) texturedata = "INTERFACES\Sith\Char_Adventurer.tga";
-		if (IsCharacterPerkOn(chr, "Buccaneer")) texturedata = "INTERFACES\Sith\Char_Inquisitor.tga";
-		if (IsCharacterPerkOn(chr, "Agent")) texturedata = "INTERFACES\Sith\Char_SecretAgent.tga";
-		if (IsCharacterPerkOn(chr, "SeaWolf")) texturedata = "INTERFACES\Sith\Char_SeaWolf.tga";
-		SetNewPicture("CHARACTER_PROFESSION", texturedata);
-
-		XI_WindowShow("RPG_WINDOW", true);
-		XI_WindowDisable("RPG_WINDOW", false);
-		sMessageMode = "RPG_Hint";
-	}
+	}//в запомненной таблице подробности о ПГГ не показываем, надо как-то отдельно запоминать эти данные
 }
 
 void ExitRPGHint()
@@ -263,23 +285,29 @@ void OnTableClick()
 	int iRow = GetEventData();
 	int iColumn = GetEventData();
 
-	string sRow = "tr" + (iRow + 1);
+	//string sRow = "tr" + (iRow + 1);
 //--> mod tablesort
-	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 ))
-		{
-		if (iColumn == 1) return;//эти колонки не сортируем
-
-		if (lastsort == iColumn) {bLastSort = !bLastSort;} else {lastsort = iColumn; bLastSort = 1;}//запоминаем сортировку и меняем направление сортировки, если это повторный клик по колонке
-//todo - разобраться, как заблокировать активацию двойного клика на заголовке - подменять его на ординарные как-то
-//todo - устанавливать стрелочку направления сортировки по запомненным значениям переменных - но тут нужно как-то узнавать ширину колонок таблицы, чтобы пересчитать координаты???
-//todo - не забыть, что может быть несколько таблиц на одном интерфейсе - надо ещё и последнюю таблицы запоминать и сбрасывать(?) сортировку при смене или запоминать для каждой?
-
-		if (iColumn == 3 || iColumn == 4 || iColumn == 8 || iColumn == 9 || iColumn == 10)
-			SortTable(sControl, iColumn, 0, !bLastSort, -1);//числа		//работает и без указания числа строк, вроде бы
-		else
-			SortTable(sControl, iColumn, 1, bLastSort, -1);//текст
-		}
-//вызывать направление сортировки разными действиями - ЛКМ/ПКМ??
+	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+//TO DO - разобраться, как заблокировать активацию двойного клика на заголовке - подменять его на ординарные как-то
 //<-- mod tablesort
 	Table_UpdateWindow(sControl);
+}
+void RecallTable()
+{
+	aref arTo;
+	aref arFrom;
+	makearef(arTo, GameInterface.TABLE_HERO);
+	makearef(arFrom, pchar.buyPGGinfo);
+    CopyAttributes(arTo,arFrom);
+	Table_UpdateWindow("TABLE_HERO");
+}
+
+void RememberTable()
+{
+	aref arTo;
+	aref arFrom;
+	makearef(arTo, pchar.buyPGGinfo);
+	makearef(arFrom, GameInterface.TABLE_HERO);
+	CopyAttributes(arTo,arFrom);//новое запомним
+	pchar.buyPGGinfo = "2";//таблица не купленная, а запомненная, второй раз так как затирается при копировании
 }

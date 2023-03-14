@@ -43,6 +43,13 @@ void InitInterface_R(string iniName, ref pTrader)
 	GameInterface.TABLE_LIST.hr.td6.scale = 0.9;
 	GameInterface.TABLE_LIST.hr.td7.str = "Вес";
 	GameInterface.TABLE_LIST.hr.td7.scale = 0.9;
+	GameInterface.TABLE_LIST.hr.td1.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td2.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td3.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td4.sorttype = "string";
+	GameInterface.TABLE_LIST.hr.td5.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td6.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td7.sorttype = "";
 
 	FillCharactersScroll();
 
@@ -372,6 +379,7 @@ void AddToTable()
 		//// {*} BUHO END ADDITION
 
 		GameInterface.TABLE_LIST.(row).id = sItem;
+		GameInterface.TABLE_LIST.(row).index = n;
 		GameInterface.TABLE_LIST.(row).td1.str = leftQty;
 		GameInterface.TABLE_LIST.(row).td2.str = FloatToString(GetItemWeight(sItem) * leftQty, 1);
 		GameInterface.TABLE_LIST.(row).td7.str = FloatToString(GetItemWeight(sItem), 1);
@@ -431,6 +439,9 @@ void OnTableClick()
 	int iColumn = GetEventData();
 
 	string sRow = "tr" + (iRow + 1);
+
+	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+
 	Table_UpdateWindow(sControl);
 }
 

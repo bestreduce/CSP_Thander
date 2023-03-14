@@ -108,13 +108,37 @@ void SetCurrentProfile( string sProfileName )
 	g_nFirstSaveIndex = -1;
 	FillSaveList( (g_nCurrentSaveIndex/MAX_SAVE_SLOTS) * MAX_SAVE_SLOTS );
 	if( bThisSave ) {
-		SelectSaveImage( g_nSaveQuantity );
+		setInitSelection( g_nSaveQuantity );
 	} else {
-		SelectSaveImage( 0 );
+		setInitSelection( 0 );
 	}
 	SetClickable("SAVESCROLL",g_nSaveQuantity>MAX_SAVE_SLOTS);
 	SendMessage( &GameInterface,"lslls",MSG_INTERFACE_MSG_TO_NODE, "SAVEINFO", 1, 1, "#"+XI_ConvertString("ProfileName")+": " + currentProfile );
 	LoadGameOptions();
+}
+
+void setInitSelection(int _sel)
+{
+    if(_sel < 0 || _sel > g_nSaveQuantity) {
+        _sel = 0;
+    }
+    int nTimeout = 100;
+    int nLinesPer = (MAX_SAVE_SLOTS / SLOTS_IN_LINE) - 1;
+    int nLineQ = makeint(g_nSaveQuantity / SLOTS_IN_LINE);
+    int nLine = 0;
+    if(nLineQ != 0)
+        nLine = makeint( makefloat(nLineQ) * (makefloat(_sel / SLOTS_IN_LINE) / makefloat(nLineQ) ));
+
+    int imgIdx = _sel + 1;
+    if(nLine > nLinesPer) {
+        FillSaveList(nLine * SLOTS_IN_LINE);
+        imgIdx = (_sel + 1) % SLOTS_IN_LINE;
+        nTimeout = 150;
+    }
+    if(imgIdx != 1)
+        SetSelecting(0,false);
+    string sName = "SAVEIMG" + imgIdx;
+    PostEvent("eventSaveClick", nTimeout, "ls", 0, sName);
 }
 
 void ProcessCancelExit()
@@ -494,6 +518,14 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 
 	g_nCurrentSaveIndex = nNewSaveIndex;
 	ReloadSaveInfo();
+	
+	if(g_nSaveQuantity > SLOTS_IN_LINE)
+	{	
+		int nLineQ = g_nSaveQuantity / SLOTS_IN_LINE;
+		int nLineCur = (g_nCurrentSaveIndex + 1) / SLOTS_IN_LINE;
+		//trace(" nLineQ " + nLineQ + " g_nCurrentSaveIndex " + g_nCurrentSaveIndex);
+		SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"SAVESCROLL",makefloat(nLineCur)/makefloat(nLineQ));
+	}
 
 	int nLeft = 0;
 	int nTop = 0;
@@ -560,6 +592,7 @@ void procSaveClick()
 
 void SelectSaveImage( int nSaveIndex )
 {
+	log_info(""+nSaveIndex);
 	int nLeft,nTop,nRight,nBottom;
 	bool bMakeMove = GetMoveToOtherSave( nSaveIndex, &nLeft,&nTop,&nRight,&nBottom );
 	if( bMakeMove ) {

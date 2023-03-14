@@ -304,9 +304,10 @@ float Fort_CannonDamage()
 	int iBallCharacterIndex = GetEventData();
 	int iFortCharacterIndex = GetEventData();
 
-
 	rBallCharacter = GetCharacter(iBallCharacterIndex);
 	rFortCharacter = GetCharacter(iFortCharacterIndex);
+
+	rFortCharacter.Ship.LastBallCharacter = iBallCharacterIndex;
 
 	aFortLabel = GetEventData();
 

@@ -32,22 +32,22 @@ void WhrCreateSeaEnvironment()
 	float FogDensity = 5.0;
 	float FogSeaDensity = 5.0;
 
-	if (FindLocation(sLocation) != -1)
+	if (FindLocation(sLocation) != -1 && !bCabinStarted)
 		{
 			Sea.LodScale = 32.0;
 			Sea.MaxVertices = 2000;
 			Sea.MaxIndices = 2600;
 			Sea.MaxWaveDistance = 10.0;
-			Sea.MaxDim = 65536;
-			Sea.MinDim = 64;
+			Sea.MaxDim = 65536 * 8;
+			Sea.MinDim = 128;
 			Sea.GridStep = GridStepPC*5.0;
 			if (CheckAttribute(aCurWeather, "Storm") && sti(aCurWeather.Storm) == true)
 			{
-				fMaxSeaHeight = 2.0;
+				fMaxSeaHeight = 4.5;
 			}
 			else
             {
-				fMaxSeaHeight = 0.5;
+				fMaxSeaHeight = 1.5;
 				// fMaxSeaHeight = 200.0;
 			}
 			FogDensity = 10.0;
@@ -134,8 +134,8 @@ void WhrCreateSeaEnvironment()
 		Sea.Sun.HeightAngle = Whr_GetFloat(aSea, "SunRoad.Special.HeightAngle");
 		Sea.Sun.AzimuthAngle = Whr_GetFloat(aSea, "SunRoad.Special.AzimuthAngle");
 	}
-	Sea.CubeMap.Size = 1024;	
-	Sea.CubeMap.VectorsSize = 512;
+	Sea.CubeMap.Size = 2048;	
+	Sea.CubeMap.VectorsSize = 1024;
 	
 	Sea.CubeMap.Format = "r5g6b5";
 
@@ -162,21 +162,22 @@ void WhrCreateSeaEnvironment()
 		WhrSetNewSea(fWeatherSpeed);
 		Sea.Sea2.FoamEnable = true;
 		Sea.Sea2.Reflection = 0.8;
-		if( GetTime() >= 23.0 || GetTime() < 7.0 ) {
+		if( GetTime() >= 23.0 || GetTime() < 6.0 ) {
 			Sea.Sea2.Transparency = 0.5;
-			Sea.Sea2.WaterColor = argb(0,0,40,40);
+			Sea.Sea2.Reflection = 0.3;
+			Sea.Sea2.WaterColor = argb(0,0,30,40);
 		} else {
-		if( GetTime() >= 7.0 && GetTime() < 9.0 ) {
+		if( GetTime() >= 6.0 && GetTime() < 9.0 ) {
 			Sea.Sea2.Transparency = 1.4;
-			Sea.Sea2.WaterColor = argb(0,0,140,120);
+			Sea.Sea2.WaterColor = argb(0,0,120,140);
 		} else {
 		if( GetTime() >= 9.0 && GetTime() < 10.0 ) {
 			Sea.Sea2.Transparency = 1.4;
-			Sea.Sea2.WaterColor = argb(0,0,170,150);
+			Sea.Sea2.WaterColor = argb(0,0,150,170);
 		} else {
 		if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
 			Sea.Sea2.Transparency = 1.4;
-			Sea.Sea2.WaterColor = argb(0,0,255,225);
+			Sea.Sea2.WaterColor = argb(0,0,200,225);
 			if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				Sea.Fog.SeaDensity = 0.02;
 				Sea.Sea2.Reflection = 0.3;
@@ -186,11 +187,11 @@ void WhrCreateSeaEnvironment()
 		} else {
 		if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
 			Sea.Sea2.Transparency = 1.0;
-			Sea.Sea2.WaterColor = argb(0,0,170,150);
+			Sea.Sea2.WaterColor = argb(0,0,150,170);
 		} else {
 		if( GetTime() >= 21.0 && GetTime() < 23.0 ) {
 			Sea.Sea2.Transparency = 1.0;
-			Sea.Sea2.WaterColor = argb(0,0,130,100);	
+			Sea.Sea2.WaterColor = argb(0,0,110,130);	
 		}}}}}}}
 	} else {
 		if(loc.type == "fort"){
@@ -238,18 +239,18 @@ void WhrCreateSeaEnvironment()
 		WhrSetNewSea(fWeatherSpeed);
 		Sea.Sea2.FoamEnable = true;
 		Sea.Sea2.Reflection = 0.6;
-		Sea.Sea2.Transparency = 0.3;
+		Sea.Sea2.Transparency = 1.3;
 		if( GetTime() >= 23.0 || GetTime() < 7.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,30,40);
+			Sea.Sea2.WaterColor = argb(0,0,30,30);
 		} else {
 		if( GetTime() >= 7.0 && GetTime() < 9.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,110,120);
+			Sea.Sea2.WaterColor = argb(0,0,75,110);
 		} else {
 		if( GetTime() >= 9.0 && GetTime() < 10.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,140,150);
+			Sea.Sea2.WaterColor = argb(0,0,90,140);
 		} else {
 		if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
-			Sea.Sea2.WaterColor = argb(0,0,160,170);
+			Sea.Sea2.WaterColor = argb(0,0,160,200);
 			if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				Sea.Fog.SeaDensity = 0.01;
 				Sea.Sea2.Reflection = 0.3;
@@ -265,19 +266,20 @@ void WhrCreateSeaEnvironment()
 		}}}}}}}
 	} else {
 		WhrSetNewSea(fWeatherSpeed);
+		//fMaxSeaHeight = 1.1;
 		Sea.Sea2.Reflection = 0.6;
 		Sea.Sea2.Transparency = 0.3;
 		if( GetTime() >= 23.0 || GetTime() < 7.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,30,40);
+			Sea.Sea2.WaterColor = argb(0,0,30,30);
 		} else {
 		if( GetTime() >= 7.0 && GetTime() < 9.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,110,120);
+			Sea.Sea2.WaterColor = argb(0,0,110,110);
 		} else {
 		if( GetTime() >= 9.0 && GetTime() < 10.0 ) {
-			Sea.Sea2.WaterColor = argb(0,0,140,150);
+			Sea.Sea2.WaterColor = argb(0,0,140,140);
 		} else {
 		if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
-			Sea.Sea2.WaterColor = argb(0,0,160,170);
+			Sea.Sea2.WaterColor = argb(0,0,160,200);
 			if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				Sea.Fog.SeaDensity = 0.01;
 				Sea.Sea2.Reflection = 0.3;
@@ -302,6 +304,7 @@ void WhrCreateSeaEnvironment()
 
 	Sea.MaxSeaHeight = fMaxSeaHeight;
 	Sea.isDone = "";
+	//Log_TestInfo("Whether Sea.MaxSeaHeight " + Sea.MaxSeaHeight);
 
 	if (bSeaActive && !bAbordageStarted)
 	{
@@ -315,7 +318,7 @@ void SetSeaSettings()
 	Sea.MaxVertices = MaxVertices;
 	Sea.MaxIndices = MaxIndices;
 	Sea.MaxWaveDistance = MaxWaveDistance;
-	Sea.MaxDim = 65536;
+	Sea.MaxDim = 65536 * 8;
 	Sea.MinDim = 128;
 	Sea.GridStep = 0.1 + 0.1 * (1.0 - stf(InterfaceStates.SeaDetails));
 

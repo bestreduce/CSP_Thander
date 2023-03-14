@@ -290,7 +290,7 @@ void AcceptAddOfficer()
 					pchar.Fellows.Passengers.carpenter = iChar;
 				break;
 				//default:
-					SetOfficersIndex(pchar, nCurScrollNum - 6, iChar);
+					SetOfficersIndex(pchar, -1, iChar);
 					bNeedFollow = true;
 				break;
 			}
@@ -367,7 +367,7 @@ void AcceptRemoveOfficer()
 			pchar.Fellows.Passengers.carpenter = -1;
 		break;
 		//default:
-			RemoveOfficersIndex(pchar, GetOfficersIndex(pchar, nCurScrollNum - 6));
+			RemoveOfficersIndex(pchar, iChar);
 		break;
 	}
 	attributeName2 = GetOfficerTypeByNum(nCurScrollNum);
@@ -747,7 +747,7 @@ void FillItemsTable(int _mode) // 1 - все 2 - оружие 3 - остальн
 		if (_mode == 2 && !ok && ok2) continue;
 		ok = ok || rItem.ItemType == "MAP";
 		if (_mode == 3 && ok && ok2) continue;
-		if (_mode == 4 && rItem.ItemType != "MAP") continue;
+		if (_mode == 4 && rItem.ItemType != "MAP" && rItem.id != "MapsAtlas") continue;
 
 		GameInterface.TABLE_ITEMS.(row).id = sGood;
 
@@ -814,6 +814,8 @@ void FillItemsSelected()
 	for(i = 0; i < q; i++)
 	{
 		sGood = GetAttributeValue(GetAttributeN(arEquip, i));
+		if (sGood == "") continue;
+
 		item = ItemsFromID(sGood);
 
 		switch (item.groupID)
@@ -917,10 +919,12 @@ float _GetAttackFactor(string sBladeID, ref rBlade, string sType, ref kPerk)
 	{
 		case "fast":
 		kAttackDmg = 0.7;
+		if (bAltBalanceProHits && rBlade.FencingType != "Fencing") kAttackDmg *= 0.7;
 		break;
 
 		case "force":
 		kAttackDmg = 1.0;
+		if (bAltBalanceProHits && rBlade.FencingType != "FencingLight") kAttackDmg *= 0.7;
 		break;
 
 		case "round":
@@ -929,15 +933,19 @@ float _GetAttackFactor(string sBladeID, ref rBlade, string sType, ref kPerk)
 		{
 			kAttackDmg = kAttackDmg * 1.3;
 		}
+		if (bAltBalanceProHits && rBlade.FencingType != "Fencing") kAttackDmg *= 0.7;
 		break;
 
 		case "break":
 		kAttackDmg = 3.0;
+		if (bAltBalanceProHits && rBlade.FencingType != "FencingHeavy") kAttackDmg *= 0.7;
+		//if (!CheckCharacterPerk(xi_refCharacter, "HardHitter")) kAttackDmg /= 2.0;
 		break;
 
 		case "fient":
 		kAttackDmg = 0.5;
 		if(CheckCharacterPerk(xi_refCharacter, "Agent")) kAttackDmg = kAttackDmg * 2;
+		if (bAltBalanceProHits && rBlade.FencingType != "FencingLight") kAttackDmg *= 0.7;
 		break;
 	}
 	float dmg = bladeDmg * kAttackDmg;
@@ -1036,6 +1044,21 @@ void TableSelectChange()
 void SetItemInfo()
 {
 	string sItemID = GameInterface.(CurTable).(CurRow).id;
+	if (sItemID == "letter_LSC" && CheckAttribute(pchar, "questTemp.LSC.poorName"))
+	{
+        AddQuestRecord("ISS_PoorsMurder", "11");
+        AddQuestUserData("ISS_PoorsMurder", "sSex", GetSexPhrase("ся","ась"));
+        AddQuestUserData("ISS_PoorsMurder", "sName", pchar.questTemp.LSC.poorName);
+        pchar.questTemp.LSC = "readyGoLSC";
+        DeleteAttribute(pchar, "questTemp.LSC.poorName");
+        int n = FindIsland("LostShipsCity");
+        Islands[n].visible = true;
+        Islands[n].reload_enable = true;
+        Islands[n].alwaysStorm = true; //живём в штормах
+        Islands[n].MaxSeaHeight = 2.0;
+        Islands[n].storm = true;
+        Islands[n].tornado = true;
+	}
 	ref item = ItemsFromID(sItemID);
 	SetFormatedText("INFO_TEXT", GetItemDescribe(sItemID));
 	SetNewGroupPicture("INFO_PIC", item.picTexture, "itm" + item.picIndex);
@@ -1175,6 +1198,16 @@ bool ThisItemCanBeEquip(string sItemID)
 	if(sItemID == "MapsAtlas")
 	{
 		return true;
+	}
+
+	if (sGroupID == BOOK_ITEM_TYPE)
+	{
+		string sId = rItem.id;
+		if (!CheckAttribute(xi_refCharacter, "books." + sId))
+		{
+			return true;
+		}
+		return sti(xi_refCharacter.books.(sId)) > 0;
 	}
 
 	if (sGroupID == BLADE_ITEM_TYPE && CheckAttribute(xi_refCharacter, "DontChangeBlade")) return false;
@@ -1642,7 +1675,6 @@ void EquipPress()
 		ApplayNewSkill(pchar, "", 0);
 		TakeNItems(pchar, sItemID, -1);
 		FillItemsTable(iCurTab);
-
 	}
 }
 void GetHigh()
@@ -2387,7 +2419,7 @@ void ReEquipCharacter()
 	if (!checkattribute(xi_refCharacter, sSET)) return; //не было сохранения этого комплекта
 
 	string sTemp;
-	for (int q=0;q<10;q++)
+	for (int q=0;q<8;q++)
 	{
 	sTemp = sEType[q];
 		if(xi_refCharacter.(sSET).(sTemp) != GetCharacterEquipByGroup(xi_refCharacter, sTemp))//если другой предмет, то снимаем старый, одеваем сохранённый
@@ -2405,7 +2437,7 @@ void SaveEquipSet()
 	xi_refCharacter.(sSET) = 1; //помечаем, что в этом комплекте что-то сохранено
 	if (!checkattribute(xi_refCharacter, sSET + ".nameset")) xi_refCharacter.(sSET).nameset = "Комплект " + iEQUIP_SET;//в первый раз записываем "Комплект N"
 	string sTemp;
-	for (int q=0;q<10;q++)
+	for (int q=0;q<8;q++)
 	{
 	sTemp = sEType[q];
 	xi_refCharacter.(sSET).(sTemp) = GetCharacterEquipByGroup(xi_refCharacter, sTemp);

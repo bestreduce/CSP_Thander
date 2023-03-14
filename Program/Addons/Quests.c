@@ -107,10 +107,7 @@ void DozorPrepare()
 
 void DozorPrepare_2()
 {
-	for(int d=1; d<=8; d++)
-	{
-		DozorSetRiddleQuestion(d);
-	}
+	for(int d=1; d<=8; d++)	{DozorSetRiddleQuestion(d);}
 
 	ref chr = GetCharacter(NPC_GenerateCharacter("Fabian Gronholm", "usurer_5", "man", "man", 1, PIRATE, -1, false));
 	chr.name = "Фабиан";
@@ -309,8 +306,8 @@ void DozorTerksInGrot(string _tmp)
 	{
 		switch(i)
 		{
-			case 1: sLocator = "monster1"; sModel = "pirate_" + (rand(25)+1); break;
-			case 2: sLocator = "monster2"; sModel = "pirate_" + (rand(25)+1); break;
+			case 1: sLocator = "monster1"; sModel = "pirate_" + (rand(24)+1); break;
+			case 2: sLocator = "monster2"; sModel = "pirate_" + (rand(24)+1); break;
 			case 3: sLocator = "monster3"; sModel = "citiz_" + (rand(11)+1); break;
 		}
 

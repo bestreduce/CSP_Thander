@@ -155,6 +155,11 @@ void ProcessDialogEvent()
 				Всё, всё по лору и все довольны без лишнего нытья.
 				*/
 			}
+			if(CheckAttribute(npchar,"patent.othertime") && !CheckAttribute(pchar, "EquipedPatentId"))
+			{
+				link.l16 = "Приветствую вас, " + npchar.name + " " + npchar.lastname + ". Я бы хотел вернутся к вопросу о патенте.";
+				link.l16.go = "Other time patent";
+			}
 		break;
 
 		case "build_ship":
@@ -513,6 +518,40 @@ void ProcessDialogEvent()
 			QuestSetCurrentNode("Henry Morgan", "Andre_Abel_Quest_Morgan_Dialog_16");
 			AddQuestRecord("Andre_Abel_Quest", "16");
 			AddQuestUserData("Andre_Abel_Quest", "sText", "К счастью, меня в очередной раз выручили деньги");
+		break;
+		case "Give Patent":
+			dialog.text = "О, да это же сам" + GetSexPhrase(" ","а ") + pchar.name + " " + pchar.lastname + ". Я уже заждался вас!";
+			link.l1 = "Приветствую, уважаемый " + npchar.name + " " + npchar.lastname + ". Спасибо за столь радушный приём. Чем вам обязан" + GetSexPhrase("?","а?");
+			link.l1.go = "Give Money";
+		break;
+		case "Give Money":
+			dialog.text = "Вы отличились, помогая нам в делах, и за это примите мои поздравления и моё предложение стать капером на службе у нашей нации!";
+			link.l1 = "Какая щедрость, очень вам благодар" + GetSexPhrase("ен! ", "на! ") + "С радостью приму ваше прделожение стать капером.";
+			link.l2 = "Какая щедрость, очень вам благодар" + GetSexPhrase("ен! ", "на! ") + "Но я отклоню ваше предложение."
+			link.l1.go = "Accept";
+			link.l2.go = "Refuse";
+		break;
+		case "Accept":
+			dialog.text = "Отлично! Тогда вот ваш каперский патент, надеюсь ваша служба принесёт ещё больше побед и славы!";
+			link.l1 = "";
+			link.l1.go = "Exit";
+			pchar.PatentNation = NationShortName(sti(npchar.nation));
+			GiveItem2Character(pchar, "patent_" + pchar.PatentNation);
+			EquipCharacterbyItem(pchar, "patent_" + pchar.PatentNation);
+			if(CheckAttribute(npchar,"patent.othertime")) DeleteAttribute(npchar,"patent.othertime"));
+		break;
+		case "Refuse":
+			dialog.text = "Как жаль, как жаль... Но ничего страшного, я уверен, что вы найдёте себя в другом деле! Но вы можете придти ко мне снова, если передумаете, помните об этом.";
+			link.l1 = "Спасибо, я буду помнить об этой возможности.";
+			link.l1.go = "Exit";
+			npchar.patent.othertime = true;
+		break;
+		case "Other time patent":
+			dialog.text = "О, вы вернулись. Решили, что всё таки хотите получить патент?";
+			link.l1 = "Да, я решил принять ваше предложение";
+			link.l2 = "Я всё таки ещё подумаю, досвидания";
+			link.l1.go = "Accept";
+			link.l2.go = "Refuse";
 		break;
 	}
 }

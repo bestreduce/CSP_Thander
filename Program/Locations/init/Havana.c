@@ -1263,7 +1263,7 @@ int LocationInitHavana(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore13";
 	locations[n].id.label = "Shore13";
-	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
+	locations[n].image = "loading\jonny_load\shores\Shore12.tga";
 	locations[n].worldmap = "Shore13";
 	//Sound
 	locations[n].type = "seashore";

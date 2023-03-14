@@ -1243,6 +1243,10 @@ bool DoMapToOtherKey(int keyIdx,int stickUp)
 
 	makearef(arControlGroup,objControlsState.keygroups.(groupName));
 	makearef(arKeyRoot,objControlsState.key_codes);
+	if (keyIdx >= GetAttributesNum(arKeyRoot)) {
+		trace("ERROR: DoMapToOtherKey keyIdx more than arKeyRoot length")
+		return false;
+	}
 	arKey = GetAttributeN(arKeyRoot,keyIdx);
 	keyCode = sti(GetAttributeValue(arKey));
 
@@ -1455,6 +1459,7 @@ void ShowInfo()
 		case "ALT_GUN_SOUNDS_CHECKBOX":
 			sHeader = XI_ConvertString("AltSoundsGun");
 			sText1 = XI_ConvertString("AltSoundsGun_descr");
+            PlayVoice("CSR\GUNSFIRE_ALT\Fort_cannon_0"+rand(5)+".wav");
 		break;
 
 		case "FLAGALLWDM_CHECKBOX":

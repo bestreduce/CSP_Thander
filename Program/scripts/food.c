@@ -124,7 +124,7 @@ void DailyRatsEatGoodsUpdate(ref chref)
         iQuantity = 1+ rand(makeint(iQuantity / (10+fSkill)));
         RemoveCharacterGoodsSelf(chref, iGoods, iQuantity);
         //PlaySound("interface\notebook.wav");
-                Log_SetStringToLog(RandSwear() + "Крысы на "+ XI_ConvertString(RealShips[sti(chref.Ship.Type)].BaseName+"Dat") + " ''" + chref.Ship.Name + "''" + LinkRandPhrase(" испортили ", " повредили ", " уничтожили ") +
+                Log_SetStringToLog(RandSwear() + "Крысы на "+ XI_ConvertString(RealShips[sti(chref.Ship.Type)].BaseName+"Voc") + " ''" + chref.Ship.Name + "''" + LinkRandPhrase(" испортили ", " повредили ", " уничтожили ") +
                            iQuantity + " шт. " + LanguageConvertString(iSeaGoods, "seg_" + Goods[iGoods].Name));
 
         Statistic_AddValue(pchar, "RatsEatGoods", iQuantity);
@@ -247,7 +247,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		{
 			if(GetCargoGoods(rChar, GOOD_MEDICAMENT) < 1)
 			{
-				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' от болезней умерло " + FindRussianSailorString(cn, "No") + "!");
+				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' от болезней умерло " + FindRussianSailorString(cn, "No") + "!");
 				iCrewQty = iCrewQty - cn;
 				Statistic_AddValue(pchar, "Sailors_dead", cn);
 				rChar.Ship.Crew.Quantity = iCrewQty;
@@ -266,7 +266,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 				RemoveCharacterGoodsSelf(rChar, GOOD_MEDICAMENT, cn);
 				if(GetCargoGoods(rChar, GOOD_MEDICAMENT) < 16)
 				{
-					if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' осталось мало медикаментов!");
+					if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' осталось мало медикаментов!");
 				}
 			}
 		}
@@ -279,7 +279,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		{
 			if(GetCargoGoods(rChar, GOOD_MEDICAMENT) < 1)
 			{
-				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' от болезней умерло " + FindRussianSailorString(cn, "No") + "!");
+				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' от болезней умерло " + FindRussianSailorString(cn, "No") + "!");
 				RemoveCharacterGoodsSelf(rChar, GOOD_SLAVES, cn);
 			}
 			else
@@ -305,7 +305,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 			cn = makeint(GetCargoGoods(rChar, GOOD_RUM) / iCrewQty);
 			if (cn < 1)
 			{
-				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' закончились запасы рома!");
+				if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' закончились запасы рома!");
 			}
 			// поднимем мораль
 			if(CheckShipSituationDaily_GenQuest(rChar) == 1) AddCrewMorale(rChar, 2);
@@ -352,7 +352,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		{
 			if(!IsCompanionTraveler)
 			{
-				Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' продовольствия осталось на " + FindRussianDaysString(cn) + "!");
+				Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' продовольствия осталось на " + FindRussianDaysString(cn) + "!");
 				Log_Info("Нужно срочно пополнить запасы!");
 				PlaySound("interface\notebook.wav");
 			}
@@ -379,7 +379,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		RemoveCharacterGoodsSelf(rChar, GOOD_FOOD, iCrewQty);
 		PlaySound("interface\notebook.wav");
 
-		if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' матросы голодают. Мораль команды падает!");
+		if(!IsCompanionTraveler) Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' матросы голодают. Мораль команды падает!");
 
 		if(sti(rChar.index) == GetMainCharacterIndex())
 		{
@@ -415,7 +415,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 			//int locidx = FindLocation(rChar.location); // не используется
 			if(IsEntity(worldMap) && GetCrewQuantity(rChar) > 0)
 			{
-				Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
+				Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
 				MunityOnShip("ShipMunity");
 			}
 		}
@@ -428,7 +428,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 			{
 				if(GetCrewQuantity(rChar) > 0)
 				{
-					Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Dat") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
+					Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
 					Log_SetStringToLog("Корабль выходит из эскадры");
 					Statistic_AddValue(PChar, "ShipMunity", 1);
 					RemoveCharacterCompanion(PChar, rChar);

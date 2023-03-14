@@ -1,7 +1,7 @@
 
-#define		COLONY_AUTO_PURCHASE_FOOD		50
-#define		COLONY_AUTO_PURCHASE_MEDICAMENT		60
-#define		COLONY_AUTO_PURCHASE_TOOLS		45
+#define		COLONY_AUTO_PURCHASE_FOOD		7
+#define		COLONY_AUTO_PURCHASE_MEDICAMENT		8
+#define		COLONY_AUTO_PURCHASE_TOOLS		23
 #define		COLONY_MIN_MORALE_DOWN			3
 
 #define 	COLONY_FOOD_POPULATION_DELIT		25
@@ -247,9 +247,9 @@ void LiveOfTheColonyUptade()
 		}
 	}
 
-	iQuantityResize = iPopulationQuantity / 10;
+	iQuantityResize = iPopulationQuantity / 5;
 	if(iQuantityResize < 12) iQuantityResize = 12;
-	if(iQuantityResize > 30) iQuantityResize = 30;
+	if(iQuantityResize > 60) iQuantityResize = 60;
 
 
 	if(iPopulationMorale < 40)
@@ -629,7 +629,7 @@ void CreateMutinyColony()
 
 	PChar.ColonyBuilding.Defence.Nation = PIRATE;
 	PChar.ColonyBuilding.Defence.Soldiers = iSoldiersQuantity;
-	PChar.ColonyBuilding.Defence.Soldiers.Delete = rand(1) + 3;
+	PChar.ColonyBuilding.Defence.Soldiers.Delete = rand(3) + 3;
 	PChar.ColonyBuilding.Defence.EnemyQuantity = iRebels;
 
 	Log_TestInfo("Кол-во мятежников: " + iRebels);
@@ -647,7 +647,7 @@ void CreateMutinyColony()
 
 	if(iRandMinus <= -7) { InstantColonyDefendLoose("Colony", "Mutiny"); return; }
 
-	int iRand = iRandMinus - rand(4);
+	int iRand = iRandMinus - rand(2);
 
 	int iEnd = 0;
 	if(iRand > 0) { iEnd = 1; }else{ iEnd = 0; }
@@ -859,7 +859,7 @@ void BattleMutinyColonyWinner(string _tmp)
 		}
 	}
 
-	int iSoldiersDead = iDead * 100;
+	int iSoldiersDead = iDead * 50;
 	ChangeColonySoldiers(-iSoldiersDead, false);
 
 	// Выключаем блокировку всех нападений -->
@@ -888,7 +888,7 @@ void ClearMutinyColony(string qName)
 		iSoldiers /= sti(PChar.ColonyBuilding.Defence.Soldiers.Delete);
 	}
 
-	int iSoldiersDead = iSoldiers * 100;
+	int iSoldiersDead = iSoldiers * 50;
 
 	int iRebels = sti(PChar.ColonyBuilding.Defence.EnemyQuantity);
 	int iMoney = sti(PChar.ColonyBuilding.Money);
@@ -1010,8 +1010,8 @@ void CreateLandDefenceColony()
 	PChar.ColonyBuilding.Defence.Soldiers = iSoldiersQuantity;
 	PChar.ColonyBuilding.Defence.Citizens = iCitizen;
 
-	PChar.ColonyBuilding.Defence.Soldiers.Delete = rand(1) + 1;
-	PChar.ColonyBuilding.Defence.Citizens.Delete = rand(1) + 1;
+	PChar.ColonyBuilding.Defence.Soldiers.Delete = rand(2) + 2;
+	PChar.ColonyBuilding.Defence.Citizens.Delete = rand(3) + 3;
 
 	PChar.ColonyBuilding.Defence.EnemyQuantity = iEnemy;
 
@@ -1027,7 +1027,7 @@ void CreateLandDefenceColony()
 
 	if(iRandMinus < -10) { InstantColonyDefendLoose("Colony", "BattleLand"); return; }
 
-	int iRand = iRandMinus - rand(4);
+	int iRand = iRandMinus - rand(2);
 
 	int iEnd = 0;
 	if(iRand > 0) { iEnd = 1; }else{ iEnd = 0; }
@@ -1296,7 +1296,7 @@ void BattleLandDefenceColonyWinner(string _tmp)
 		}
 	}
 
-	int iSoldiersDead = iDead * 100;
+	int iSoldiersDead = iDead * 50;
 	ChangeColonySoldiers(-iSoldiersDead, false);
 
 	iDead = 0;
@@ -1309,7 +1309,7 @@ void BattleLandDefenceColonyWinner(string _tmp)
 		}
 	}
 
-	iSoldiersDead = iDead * 70;
+	iSoldiersDead = iDead * 35;
 	ChangeColonyPopulation(-iSoldiersDead, false);
 
 	PChar.ColonyBuilding.Defence = false;
@@ -1344,8 +1344,8 @@ void ClearLandDefenceColony(string qName)
 		iCitizens /= sti(PChar.ColonyBuilding.Defence.Citizens.Delete);
 	}
 
-	int iSoldiersDead = iSoldiers*100;
-	int iCitizensDead = iCitizens*70;
+	int iSoldiersDead = iSoldiers*50;
+	int iCitizensDead = iCitizens*35;
 
 	if(iEnd == 1)
 	{
@@ -1527,13 +1527,13 @@ void CreateSeaDefenceColony()
 		iEnd = 1;
 	}
 
-	if(rand(5) > 4)
+	if(rand(9) > 8)
 	{
 		iEnd = 0;
 	}
 
 	PChar.ColonyBuilding.Defence.End = iEnd;
-	PChar.ColonyBuilding.Defence.KillShips = rand(1) * rand(1) * rand(1);
+	PChar.ColonyBuilding.Defence.KillShips = rand(1) * rand(1) * rand(1) * rand(1);
 
 	int iTime = 10 + rand(5) - iGuardianClass;
 	if(iTime < 7) { iTime = 7; }
@@ -1637,8 +1637,8 @@ void BattleSeaDefenceColony(string _tmp)
 	Group_SetEnemyToCharacter("ColonySeaAttacker", nMainCharacterIndex);
 	Group_SetTaskAttack("ColonySeaAttacker", PLAYER_GROUP);
 	Group_LockTask("ColonySeaAttacker");
-
-        UpdateRelations();
+	
+	UpdateRelations();
 
 	PChar.quest.BattleSeaDefenceColonyWinner.win_condition.l1 = "Group_Death";
 	PChar.quest.BattleSeaDefenceColonyWinner.win_condition.l1.group = "ColonySeaAttacker";
@@ -1712,7 +1712,7 @@ void ClearBattleSeaColony(string qName)
 
 	int iEnd = sti(PChar.ColonyBuilding.Defence.End);
 	int iSoldiers = sti(PChar.ColonyBuilding.Defence.Soldiers);
-	int iSoldiersDead = iSoldiers*(rand(3)+2);
+	int iSoldiersDead = iSoldiers/2;
 
 	int iNation = sti(PChar.ColonyBuilding.Defence.Nation);
 	string sNationName = GetNationNameByType(iNation) + "Abl";
@@ -1753,9 +1753,12 @@ void ClearBattleSeaColony(string qName)
 	}
 
 	int iKillShips = sti(PChar.ColonyBuilding.Defence.KillShips);
-	for(int ks = 1; ks <= iKillShips; ks++)
+	if (iKillShips > 0)
 	{
-		KillColonyGuarding(ks);
+		for(int ks = 1; ks <= iKillShips; ks++)
+		{
+			KillColonyGuarding(ks);
+		}
 	}
 
 	CheckDeadColonyGuard();

@@ -28,11 +28,24 @@ void InitInterface(string iniName)
 	InterfaceStack.SelectMenu_node = "LaunchQuestBook"; // запоминаем, что звать по Ф2
 	GameInterface.title = "titleQuestBook";
 
-	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED)
-	{
-	string sTemp = RealShips[sti(Pchar.Ship.Type)].BaseName;
-	Pchar.Encyclopedia.(sTemp) = "1";
+	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && sti(RealShips[sti(Pchar.Ship.Type)].BaseType) <= SHIP_OCEAN)//не исследуем квестовые, и лодку с фортом
+	{	
+		sTemp = RealShips[sti(Pchar.Ship.Type)].BaseName;
+		Pchar.Encyclopedia.(sTemp) = "1";//тут не нужно это. Нужно было при входе на корабль вставлять такое, а не только при абордаже
 	}
+	if(bFillEncyShips) 
+	{
+		aref aShips;
+		makearef(aShips, Pchar.Encyclopedia);
+		int Sum = GetAttributesNum(aShips);
+		if (Sum != sti(pchar.questTemp.shipsearchcount)) 
+		{
+			pchar.questTemp.shipsearchcount = Sum;
+			log_info("Исследован корабль: " + XI_Convertstring(sTemp) + ". Исследовано - " + pchar.questTemp.shipsearchcount + " кораблей!");
+			if (pchar.questTemp.shipsearchcount == "124") UnlockAchievement("AchShipSearch",3);//почему 124? сумма же 125.
+		}
+	}
+
 	if (InterfaceStates.AltFont == "0") SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,"RESOURCE\INI\INTERFACES\questbook_alt.ini");
 	else SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
 
@@ -490,6 +503,10 @@ void QuestTopChange()
 void SetQTextShow(aref pA,int qnum)
 {
 	// boal Покраска, выбрали 22.06.07 -->
+	if (qnum >= GetAttributesNum(pA)) {
+		trace("ERROR: SetQTextShow qnum more than pA length")
+		return;
+	}
 	aref arTopic = GetAttributeN(pA, qnum);
 	DeleteQuestHeaderColor(GetAttributeName(arTopic));
 	// boal <--
@@ -1215,7 +1232,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 		if(ach_id == "Nation_quest_E" || ach_id == "Nation_quest_F" || ach_id == "Nation_quest_H" || ach_id == "Nation_quest_S" || ach_id == "Nation_quest_P" || ach_id == "Isabella_quest" || ach_id == "LSC_quest" || ach_id == "Teno_quest" || ach_id == "Killbeggars_quest"
 		|| ach_id == "Ghostship_quest" || ach_id == "Bluebird_quest" || ach_id == "Berglarsgang_quest" || ach_id == "Mummydust_quest" || ach_id == "Enchantcity_quest"
 		|| ach_id == "ships" || ach_id == "bank_money" || ach_id == "CapBladLine" || ach_id == "WhisperLine" || ach_id == "AchShipSearch" || ach_id == "AchOrion" || ach_id == "AchRabotorg" || ach_id == "AchKondotier"
-		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil" || ach_id == "AchMapMaker")
+		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil" || ach_id == "AchDozor" || ach_id == "AchMapMaker")
 		{
 			// GameInterface.TABLE_ACHIEVEMENTS.(row).td1.str = "1 ур.";
 			GameInterface.TABLE_ACHIEVEMENTS.(row).td1.str = "1";
@@ -1438,7 +1455,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 
 		if(ach_id == "Nation_quest_E" || ach_id == "Nation_quest_F" || ach_id == "Nation_quest_H" || ach_id == "Nation_quest_S" || ach_id == "Nation_quest_P" || ach_id == "Isabella_quest" || ach_id == "LSC_quest" || ach_id == "Teno_quest" || ach_id == "Killbeggars_quest"
 		|| ach_id == "Ghostship_quest" || ach_id == "Bluebird_quest" || ach_id == "Berglarsgang_quest" || ach_id == "Mummydust_quest" || ach_id == "Enchantcity_quest" || ach_id == "CapBladLine" || ach_id == "WhisperLine" || ach_id == "AchOrion" || ach_id == "AchRabotorg" || ach_id == "AchKondotier"
-		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil")
+		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil" || ach_id == "AchDozor")
 		{
 			GameInterface.TABLE_ACHIEVEMENTS.(row).td4.str = "Не завершено...";
 		}
@@ -2359,7 +2376,7 @@ void FillShipInfoEncy(string _tabName)
 	makeref(refBaseShip,ShipsTypes[i]);
 	sShip = refBaseShip.Name;
 	chrefsp.Ship.Type = sShip;
-	if (!CheckAttribute(Pchar,"Encyclopedia."+sShip) && bFillEncyShips) continue;
+	if (i<SHIP_LUGGERQUEST && !CheckAttribute(Pchar,"Encyclopedia."+sShip) && bFillEncyShips) continue;//квестовые показываем! они же не идут в список достижения???
 
 	int nClass = sti(refBaseShip.Class);
 	string snation;
@@ -2389,10 +2406,9 @@ void FillShipInfoEncy(string _tabName)
 	GameInterface.(_tabName).(sRow).td4.scale = 0.8;
 
 	k++;
-	if(!CheckAttribute(refBaseShip,"QuestShip") && bFillEncyShips) pchar.questTemp.shipsearchcount = k;
+	//if(!CheckAttribute(refBaseShip,"QuestShip") && bFillEncyShips) pchar.questTemp.shipsearchcount = k;
 	}
 	ShowInfoWindowEncyShip();
-	if(bFillEncyShips && pchar.questTemp.shipsearchcount == "124") UnlockAchievement("AchShipSearch",3);
 	int iselected = FindLastShip(_tabName);//если отфильтровался, то вернётся -1
 	GameInterface.(_tabName).select = iselected+1;
 	if (iselected < 2) GameInterface.(_tabName).top = 0; else GameInterface.(_tabName).top = iselected-2;

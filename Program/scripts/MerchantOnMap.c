@@ -177,89 +177,33 @@ bool MerchantPrepare(int Mnation)
 int SetShipTypeMerchant(ref Cap)
 {
     int iShip, hcrew, irank;
+	int iClassMin, iClassMax;
 
-    if(makeint(pchar.rank) > 10)
+    if(makeint(pchar.rank) > 15)
     {
         irank = rand(2) + 3;
+		iClassMin = 3; 
+		iClassMax = 2;
     }
-
-    if(makeint(pchar.rank) > 6 && makeint(pchar.rank) < 11)
+    if(makeint(pchar.rank) > 10 && makeint(pchar.rank) < 16)
     {
-        irank = rand(2);
+        irank = rand(2) + 2;
+		iClassMin = 4; 
+		iClassMax = 3;
     }
-
-    switch (sti(Cap.nation))
+    if(makeint(pchar.rank) > 5 && makeint(pchar.rank) < 11)
     {
-        case ENGLAND:
-	        switch (irank)
-	        {
-	            case 0: iShip = SHIP_BRIG;     break;
-	            case 1: iShip = SHIP_BRIG;     break;
-	            case 2: iShip = SHIP_FLEUT;    break;
-	            case 3: iShip = SHIP_GALEON_L; break;
-	            case 4: iShip = SHIP_PINNACE;  break;
-	            case 5: iShip = SHIP_LINESHIP; break;
-
-	        }
-        break;
-
-        case FRANCE:
-	        switch (irank)
-	        {
-	            case 0: iShip = SHIP_FLEUT;     break;
-	            case 1: iShip = SHIP_GALEON_L;  break;
-	            case 2: iShip = SHIP_GALEON_L;  break;
-	            case 3: iShip = SHIP_PINNACE;   break;
-	            case 4: iShip = SHIP_PINNACE;   break;
-	            case 5: iShip = SHIP_LINESHIP;  break;
-
-	        }
-        break;
-
-        case SPAIN:
-	        switch (irank)
-	        {
-	            case 0: iShip = SHIP_CARAVEL;     break;
-	            case 1: iShip = SHIP_BRIG;        break;
-	            case 2: iShip = SHIP_PINNACE;     break;
-	            case 3: iShip = SHIP_GALEON_H;    break;
-	            case 4: iShip = SHIP_LINESHIP;    break;
-	            case 5: iShip = SHIP_WARSHIP;     break;
-	        }
-        break;
-
-        case HOLLAND:
-	        switch (irank)
-	        {
-	            case 0: iShip = SHIP_BRIG     break;
-	            case 1: iShip = SHIP_FLEUT    break;
-	            case 2: iShip = SHIP_FLEUT    break;
-	            case 3: iShip = SHIP_GALEON_L break;
-	            case 4: iShip = SHIP_PINNACE  break;
-	            case 5: iShip = SHIP_PINNACE  break;
-
-	        }
-        break;
-
-        case PIRATE:
-	        switch (irank)
-	        {
-	            case 0: iShip = SHIP_BRIG     break;
-	            case 1: iShip = SHIP_BRIG     break;
-	            case 2: iShip = SHIP_FLEUT    break;
-	            case 3: iShip = SHIP_GALEON_L break;
-	            case 4: iShip = SHIP_PINNACE  break;
-	            case 5: iShip = SHIP_CORVETTE break;
-	        }
-        break;
+        irank = rand(2) + 1;
+		iClassMin = 5; 
+		iClassMax = 4;
     }
-
-    if(makeint(pchar.rank) < 7)
+    if(makeint(pchar.rank) < 6)
     {
-        iShip = SHIP_LUGGER + rand(makeint(SHIP_BARQUE - SHIP_LUGGER));
+        iClassMin = 6;
+		iClassMax = 5;
         irank = 0;
     }
-
+	iShip = GetShipTypeExt(iClassMin, iClassMax, "Merchant", sti(Cap.nation))
     SetRandomNameToShip(Cap);
     Cap.Ship.Type = GenerateShipExt(iShip, 1, Cap);
     SetBaseShipData(Cap);
@@ -293,7 +237,7 @@ void SetMerchantShip(ref Cap, int igoods)
     irank = SetShipTypeMerchant(Cap);
     SetRandomNameToCharacter(Cap);
     SetCaptanModelByEncType(Cap, "trade");//
-    Cap.Ship.Mode = "Trade";
+    Cap.Ship.Mode = "trade";
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ref MerPrm;
     makeref(MerPrm, MerchantParam);
@@ -341,13 +285,12 @@ void SetMerchantShip(ref Cap, int igoods)
 
 string All_GetColony();
 {
-
-
     int locnum = FindLocation(pchar.location);
     if (locnum != -1 )
     {
 		if(CheckAttribute(locations[locnum],"townsack")) // если в городе <-- ugeen fix
 		{
+			if (locations[locnum].townsack == "Bahames") locations[locnum].townsack = "Nassau";//TO DO - удалить эту подмену позже - просто фикс, чтоб обойтись без НИ
 			return locations[locnum].townsack;
 		}
 		else // а если в джунглях или на побережье?

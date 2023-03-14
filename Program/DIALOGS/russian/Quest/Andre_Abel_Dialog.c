@@ -45,7 +45,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Andre_Abel_3":
-			dialog.text = "Но за работу я готов заплатить не более 3000 пиастров, и мне нужно уложиться в 15 дней.";
+			dialog.text = "Но за работу я готов заплатить не более 3000 пиастров, и мне нужно уложиться в 5 дней.";
 			link.l1 = "Хм, а с чем связаны такие жёсткие условия?";
 			link.l1.go = "Andre_Abel_5";
 			link.l2 = "Нет, не возьмусь. Вы меня слишком ограничиваете во времени.";
@@ -124,7 +124,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("Andre_Abel_Quest", "3");
 			AddQuestUserData("Andre_Abel_Quest", "sSex", GetSexPhrase("","а"));
 			PChar.Quest.Andre_Abel_Quest_2Days_Left.over = "yes";
-			SetFunctionTimerCondition("Andre_Abel_Quest_15_Days_Is_Left", 0, 0, 15, false);
+			SetFunctionTimerCondition("Andre_Abel_Quest_5_Days_Is_Left", 0, 0, 5, false);
 			SetFunctionNPCDeathCondition("Andre_Abel_Quest_Andre_Is_Dead", "Andre_Abel", false);
 			SetFunctionLocationCondition("Andre_Abel_Quest_Battle_With_Pirates_Squadron", "Hispaniola2", false);
 			SetFunctionExitFromLocationCondition("Andre_Abel_Quest_Delete_Andre_From_Tavern", PChar.location, false);
@@ -186,7 +186,7 @@ void ProcessDialogEvent()
 			chrDisableReloadToLocation = false;
 			LAi_LocationDisableOfficersGen("PortPax_town", false);
 			LAi_SetImmortal(NPChar, true);
-			PChar.Quest.Andre_Abel_Quest_15_Days_Is_Left.over = "yes";
+			PChar.Quest.Andre_Abel_Quest_5_Days_Is_Left.over = "yes";
 		break;
 
 		case "Andre_Abel_In_PortPax_2":

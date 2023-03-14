@@ -208,7 +208,7 @@ void CreateCharacters()
 	ReloadProgressUpdate();
 	Trace("Story: " + n);
 
-	CreateOtherCharacters();
+	n = CreateOtherCharacters(n);
 	globalCharacters = n;
 	MAX_CHARACTERS = globalCharacters;
 
@@ -222,7 +222,7 @@ void CreateCharacters()
 	//SetAllFellows();
 
 	//Post init
-	for(n=0; n<TOTAL_CHARACTERS; n++) // 1
+	for(n=0; n<MAX_CHARACTERS; n++) // 1
 	{
 		ref rCharacter = GetCharacter(n);
 

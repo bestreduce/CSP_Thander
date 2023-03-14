@@ -774,8 +774,10 @@ void SaveStartGameParam()
 	optref.StartGameParam.bFillEncyShips         = bFillEncyShips;
 	optref.StartGameParam.bDifficultyWeight      = bDifficultyWeight;
 	optref.StartGameParam.bModDamage      		 = bModDamage;
+	optref.StartGameParam.bShootOnlyEnemy		 = bShootOnlyEnemy;
 	optref.StartGameParam.iStealthSystem         = iStealthSystem;
-    // иначе сброс галки может быть optref.StartGameParam.bWorldAlivePause       = bWorldAlivePause;
+    // иначе сброс галки может быть 
+	optref.StartGameParam.bWorldAlivePause       = bWorldAlivePause;
 
     optref.StartGameParam.HeroType         = NullCharacter.HeroParam.HeroType;
     optref.StartGameParam.Nation           = NullCharacter.HeroParam.Nation;
@@ -898,7 +900,7 @@ void LoadStartGameParam()
     }
     if (CheckAttribute(optref, "StartGameParam.bWorldAlivePause"))
 	{
-    	//bWorldAlivePause = sti(optref.StartGameParam.bWorldAlivePause);
+    	bWorldAlivePause = sti(optref.StartGameParam.bWorldAlivePause);
     }
     //////
     if (CheckAttribute(optref, "StartGameParam.HeroType"))
@@ -945,6 +947,10 @@ void LoadStartGameParam()
 	if (CheckAttribute(optref, "StartGameParam.iStealthSystem"))
 	{
     	iStealthSystem = sti(optref.StartGameParam.iStealthSystem);
+    }
+	if (CheckAttribute(optref, "StartGameParam.bShootOnlyEnemy"))
+	{
+    	bShootOnlyEnemy = sti(optref.StartGameParam.bShootOnlyEnemy);
     }
 	int  heroQty   = sti(GetNewMainCharacterParam("ps_hero_qty"));
 	for (int n=1; n<=heroQty; n++)
@@ -1147,7 +1153,7 @@ string GetItemDescribe(string sItemID)
 			describeStr += GetAssembledString(
 				LanguageConvertString(lngFileID,"weapon blade parameters"),
 				arTemp) + newStr();
-
+			
 			if (CheckAttribute(arItm, "FencingType"))
 			{
     			arItm.FencingTypeName = XI_ConvertString(arItm.FencingType);
@@ -1157,6 +1163,7 @@ string GetItemDescribe(string sItemID)
 			{
                 describeStr += "ERROR" + newStr();
 			}
+			describeStr += newStr() + GetOtherBladeInfo(arItm) + newStr(); // EvgAnat
 		}
 	}
 
@@ -1192,23 +1199,19 @@ string GetItemDescribe(string sItemID)
 			}
 		}
 	}
+
 	describeStr += "\nЦена " + GetItemPrice(sItemID) + " / Вес " + FloatToString(GetItemWeight(sItemID), 2) + newStr();
 	if (CheckAttribute(arItm, "groupID"))//Книги, процент прочитанности - Gregg
 	{
-		if(arItm.groupID == BOOK_ITEM_TYPE)
+		if (arItm.groupID == BOOK_ITEM_TYPE)
 		{
-			if (CheckAttribute(pchar,"booktype") && pchar.bookname == arItm.name)//сейчас читаем книгу
+			string sId = arItm.id;
+			if (CheckAttribute(pchar, "books." + sId))
 			{
-				float value = ((sti(pchar.booktime)*100)/sti(pchar.booktime.full)-100)*(-1.0);
-				string text = FloatToString(value,1);
-				describeStr += "Прочитано примерно "+text+"%.";
-			}
-			string sBookname = arItm.name;
-			if (checkattribute(pchar,"halfreadbook."+sBookname))//книга, которую сняли недочитав
-			{
-				float value1 = ((sti(pchar.halfreadbook.(sBookname).booktime)*100)/sti(pchar.halfreadbook.(sBookname).booktime.full)-100)*(-1.0);
-				string text1 = FloatToString(value1,1);
-				describeStr += "Прочитано примерно "+text1+"%.";
+				int readtime = BookReadTime(sId);
+				float value = 100 * (1.0 - stf(pchar.books.(sId)) / readtime);
+				string text = FloatToString(value, 1);
+				describeStr += "Прочитано примерно " + text + "%.";
 			}
 		}
 	}
@@ -1335,6 +1338,7 @@ void Table_Clear(string sTableControl, bool bClearHeader, bool bClearContent, bo
 {
 	if (bClearHeader)
 	{
+		DeleteAttribute(&GameInterface, sTableControl + ".hr");
 	}
 
 	if (bClearContent)
@@ -1404,3 +1408,35 @@ void ScrollImage_SetPosition(string sControl, int iPosition)
 }
 
 // boal <--
+
+string GetOtherBladeInfo(ref arItm) // EvgAnat - добавление иконок спецэффектов ХО в инфошки
+{
+	aref arSpecial, arProp;
+	makearef(arSpecial, arItm.special);
+	string sName, sVal, sSymb, sInfo;
+	int n = GetAttributesNum(arSpecial);
+	int i;
+	sInfo = "";
+	for(i=0; i<n; i++)
+	{
+		arProp = GetAttributeN(arSpecial, i);
+		sName = GetAttributeName(arProp);
+		sVal = GetAttributeValue(arProp);
+		switch(sName)
+		{
+			case "valueBB":		sSymb = "‡";	break; 
+			case "valueCrB":	sSymb = "„";	break;
+			case "valueCB":		sSymb = "ƒ";	break;
+			case "valueSS":		sSymb = "…";	break;
+			case "valueStS":	sSymb = "†";	break;
+			case "valueT":		sSymb = "Š";	break;
+			case "valueB":		sSymb = "‰";	break;
+			case "valueP":		sSymb = "ˆ";	break;
+			case "valueV":		sSymb = "‹"; sVal = "50";	break; 
+		}
+		sInfo += sSymb + " " + sVal + "%   ";
+	}
+	if (sInfo != "")
+		sInfo = strcut(sInfo, 0, strlen(sInfo)-4);
+	return sInfo;
+}

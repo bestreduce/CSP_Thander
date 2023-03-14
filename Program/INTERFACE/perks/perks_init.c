@@ -34,6 +34,7 @@ void extrnInitPerks()
 
 	ChrPerksList.list.HardHitter.descr = "perkHardHitter";
 	ChrPerksList.list.HardHitter.BaseType = "self";
+	ChrPerksList.list.HardHitter.condition.SwordplayProfessional = true;
 
 	ChrPerksList.list.Tireless.descr = "perkTireless";
 	ChrPerksList.list.Tireless.BaseType = "self";

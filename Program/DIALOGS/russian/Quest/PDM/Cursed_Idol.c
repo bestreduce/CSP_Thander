@@ -23,14 +23,15 @@ void ProcessDialogEvent()
 			link.l1.go = "Vstrecha_2";
 			link.l2 = "Честно говоря, на самом деле я "+ GetSexPhrase("кроткий и мягкий","кроткая и мягкая") +". Извините, но я бы "+ GetSexPhrase("предпочёл","предпочла") +" ненадолго обратиться в паническое бегство.";
 			link.l2.go = "exit";
-			if (pchar.questTemp.AnjelikaTichPrologue == "ATP")
+			if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP")
 			{
 				dialog.text = "Я пью пену - волна...";
 				link.l1 = "...";
 				link.l1.go = "Slushat_Pesnu_1";
 				DeleteAttribute(link, "l2");
 			}
-			if (pchar.questTemp.AnjelikaTichPrologue == "ATP" && pchar.questTemp.ATPNapelsy == "Napelsy")
+			if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue") && pchar.questTemp.AnjelikaTichPrologue == "ATP" &&
+					CheckAttribute(pchar, "questTemp.ATPNapelsy") && pchar.questTemp.ATPNapelsy == "Napelsy")
 			{
 				dialog.text = "Это брюхо вспорол мне... Коралловый риф... Ла-ла-ла-ла-ла!";
 				link.l1 = "";
@@ -64,7 +65,7 @@ void ProcessDialogEvent()
 		case "Vstrecha_4":
 			DialogExit();
 			
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
 			sld.dialog.currentnode = "Vstrecha_4_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
@@ -152,7 +153,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("PDM_Cursed_Idol", "sSex", GetSexPhrase("","а"));
 			AddQuestUserData("PDM_Cursed_Idol", "sSex1", GetSexPhrase("ен","на"));
 
-			sld = CharacterFromID("LeFransua_Mayor")   //ссылается на персонажа
+			sld = CharacterFromID("LeFransua_Mayor");   //ссылается на персонажа
 			ChangeCharacterAddressGroup(sld, "LeFransua_town", "none", "");
 
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_LeFransua_Mayor_Klon", "huber_fra", "man", "man", 30, PIRATE, -1, false));   //ссылается на клона
@@ -333,7 +334,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Pablo_Loco_Idol_3":
-			sld = CharacterFromID("Pablo_Loco_Idol")
+			sld = CharacterFromID("Pablo_Loco_Idol");
 			LAi_SetActorType(sld);
 			LAi_ActorGoToLocation(sld, "reload", "reload5", "none", "", "", "", -1);
 
@@ -350,7 +351,7 @@ void ProcessDialogEvent()
 			LAi_LocationFightDisable(loadedLocation, false); //Разрешаем оружие
 			LAi_SetPlayerType(pchar);
 			LAi_SetFightMode(pchar, true);
-			sld = CharacterFromID("PDM_Pinki_Skelet")
+			sld = CharacterFromID("PDM_Pinki_Skelet");
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, "EnemyFight");
 			int j;
@@ -417,7 +418,7 @@ void ProcessDialogEvent()
 		case "CollowNeRad_2":
 			DialogExit();
 			
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_2_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
@@ -505,7 +506,7 @@ void ProcessDialogEvent()
 			dialog.text = "...";
 			link.l1 = "(Допивает ром)";
 			link.l1.go = "CollowOchenNeRad_4";
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			LAi_SetActorType(npchar);   //делает нпс актёром
 			ChangeCharacterAddressGroup(npchar, "LaVega_tavern", "tables", "stay1");
 			LAi_ActorGoToLocation(npchar, "reload", "reload1", "none", "", "", "", 3);  // идёт в определённый локатор.
@@ -628,7 +629,7 @@ void ProcessDialogEvent()
 			LAi_LocationFightDisable(loadedLocation, false); //Разрешаем оружие
 			LAi_SetPlayerType(pchar);
 			LAi_SetFightMode(pchar, true);
-			sld = CharacterFromID("PDM_PI_Bandit_1")
+			sld = CharacterFromID("PDM_PI_Bandit_1");
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, "EnemyFight");
 			for (i=1; i<=2; i++)
@@ -652,7 +653,7 @@ void ProcessDialogEvent()
 			LAi_LocationFightDisable(loadedLocation, false); //Разрешаем оружие
 			LAi_SetPlayerType(pchar);
 			LAi_SetFightMode(pchar, true);
-			sld = CharacterFromID("PDM_PI_Bandit_1")
+			sld = CharacterFromID("PDM_PI_Bandit_1");
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, "EnemyFight");
 			for (i=1; i<=2; i++)
@@ -676,10 +677,10 @@ void ProcessDialogEvent()
 			LAi_LocationFightDisable(loadedLocation, false); //Разрешаем оружие
 			LAi_SetPlayerType(pchar);
 			LAi_SetFightMode(pchar, true);
-			sld = CharacterFromID("PDM_PI_Bandit_1")
+			sld = CharacterFromID("PDM_PI_Bandit_1");
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, "EnemyFight");
-			sld = CharacterFromID("PDM_PI_Skel_Rostov")
+			sld = CharacterFromID("PDM_PI_Skel_Rostov");
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, "EnemyFight");
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);		//стравливаем
@@ -700,7 +701,7 @@ void ProcessDialogEvent()
 		case "Callow_POBEDA_2":
 			DialogExit();
 			
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
 			sld.dialog.currentnode = "Callow_POBEDA_2_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
@@ -717,7 +718,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Pistol", 100);			//добавить опыт к пистолетам
 			AddCharacterExpToSkill(pchar, "Fortune", 100);			//добавить опыт к удаче
 			AddCharacterExpToSkill(pchar, "Sneak", 50);     	    //добавить опыт к скрытности
-			sld = CharacterFromID("Tortuga_usurer")   //возвращаем ростовщика, если на скелетах убили
+			sld = CharacterFromID("Tortuga_usurer");   //возвращаем ростовщика, если на скелетах убили
 			ChangeCharacterAddressGroup(sld, "Tortuga_Bank", "barmen", "stay");
 		break;
 
@@ -731,7 +732,7 @@ void ProcessDialogEvent()
 			dialog.text = "";
 			link.l1 = "(допивает ром)";
 			link.l1.go = "FINAL";
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			AddPassenger(pchar, sld, false);
 			SetCharacterRemovable(sld, true);
 			sld.rank = 15;
@@ -772,7 +773,7 @@ void ProcessDialogEvent()
 		
 			AddQuestRecord("PDM_Cursed_Idol", "10");
 			CloseQuestHeader("PDM_Cursed_Idol");
-			sld = CharacterFromID("James_Callow")
+			sld = CharacterFromID("James_Callow");
 			ChangeCharacterAddressGroup(sld, "LaVega_town", "none", "");
 			AddSimpleRumourToAllNations("На Тортуге ростовщика нашли мёртвым в подсобке, доктор гарнизонный сказал, что от страха умер. Невероятно! А стены все измалёваны изображениями идола языческого.", 30, 1);
 			DeleteAttribute(pchar, "questTemp.PDM_CI_RostBlago");

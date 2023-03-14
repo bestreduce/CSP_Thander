@@ -124,6 +124,7 @@ void SetPlayerShipLocation(int location_index)
 //reload_group = xxx.reload
 int Reload(aref reload_group, string locator_name, string current_location)
 {
+	SetTimeScale(1.0);
 	//EmptySelectedTutorials();
 	SetReloadNextTipsImage();
 	dialogDisable = true;

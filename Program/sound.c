@@ -490,7 +490,7 @@ void SetStaticSounds (ref loc)
 
 }
 
-void SetSchemeForSea ()
+void SetSchemeForSea()
 {
 	ResetSoundScheme();
 
@@ -556,7 +556,7 @@ void SetSchemeForSea ()
 	ResumeAllSounds();
 }
 
-void SetSchemeForMap ()
+void SetSchemeForMap()
 {
 	ResetSoundScheme();
 	AddSoundScheme("sea_map");

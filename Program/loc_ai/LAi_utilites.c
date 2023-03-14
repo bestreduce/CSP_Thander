@@ -482,7 +482,7 @@ void CreateCitizens(aref loc)
 	}
 	// грузчики <--
 	//--> возможная генерация квестодателя на розыск капитанов
-	/*if (CheckAttribute(loc, "questSeekCap") && GetCharacterIndex("QuestCitiz_" + loc.fastreload) == -1)
+	if (CheckAttribute(loc, "questSeekCap") && GetCharacterIndex("QuestCitiz_" + loc.fastreload) == -1)
 	{
 		string sModel, sSex, sAnimation, sGr;
 		if (rand(1))
@@ -514,7 +514,7 @@ void CreateCitizens(aref loc)
         chr.chr_ai.type.checkFight = 999999.0;
 		LAi_group_MoveCharacter(chr, slai_group);
 		PlaceCharacter(chr, "goto", "random_free");
-	}*/
+	}
 }
 
 // плодим завсегдатеев в таверну, тоже фантомы-многоджневки (24ч) переработка boal 13.05.06
@@ -692,11 +692,12 @@ void CreateHabitues(aref loc)
 					SetNPCModelUniq(chr, "pirate", MAN);
 					chr.City = Colonies[iColony].id;
 					chr.CityType = "citizen";
-					sTemp = "sit"+rand(10);
+					sTemp = LAi_FindFreeRandomLocator("sit");
 					FreeSitLocator(loc.id, sTemp);
-					ChangeCharacterAddressGroup(chr, loc.id,"sit", sTemp); // может не быть вовсе, если все места занятыa
-					LAi_SetSitType(chr);
+					ChangeCharacterAddressGroup(chr, loc.id, "sit", sTemp);
 					LAi_group_MoveCharacter(chr, slai_group);
+					if (findsubstr(sTemp, "_bar" , 0) != -1) LAi_SetBarmanType(chr);
+					else LAi_SetSitType(chr);
 					chr.dialog.filename = "Enc_Treasure_dialog.c";
 					chr.dialog.currentnode = "first time";
 					chr.greeting = "Gr_Smuggler Agent";
@@ -728,19 +729,12 @@ void CreateHabitues(aref loc)
 					SetNPCModelUniq(chr, "pirate", MAN);
 					chr.City = Colonies[iColony].id;
 					chr.CityType = "citizen";
-					sTemp = PlaceCharacter(chr, "sit", "random_free"); // может не быть вовсе, если все места заняты
-					ReSitCharacterOnFree(chr, loc.id, sTemp);
-
-					LAi_SetSitType(chr);
-	/// ---> Navarra
-					///	if (findsubstr(sTemp, "sit_ground" , 0) != -1)
-						if (findsubstr(chr.location.locator, "sit_ground" , 0) != -1)
-						{	LAi_SetGroundSitType(chr);	}
-					///	if (findsubstr(sTemp, "sit_bar" , 0) != -1)
-						if (findsubstr(chr.location.locator, "sit_bar" , 0) != -1)
-						{	LAi_SetBarmanType(chr);		}
-	/// <--- Navarra
+					sTemp = LAi_FindFreeRandomLocator("sit");
+					FreeSitLocator(loc.id, sTemp);
+					ChangeCharacterAddressGroup(chr, loc.id, "sit", sTemp);
 					LAi_group_MoveCharacter(chr, slai_group);
+					if (findsubstr(sTemp, "_bar" , 0) != -1) LAi_SetBarmanType(chr);
+					else LAi_SetSitType(chr);
 					chr.dialog.filename = "Enc_Treasure_dialog.c";
 					chr.dialog.currentnode = "first time";
 					chr.greeting = "Gr_Smuggler Agent";
@@ -1148,7 +1142,6 @@ void CreatePearlVillage(aref loc)
 		ref chr;
 		int num, i, iMassive, iRank;
 		string sAnime;
-		string model[25];
 		loc.pearlVillage = false; //флаг не генерить пиплов
 		// ==> глава администрации
 		iRank = 20+rand(15);
@@ -1170,36 +1163,11 @@ void CreatePearlVillage(aref loc)
         pchar.GenQuestBox.(sTemp).box1.items.jewelry11 = rand(150) + rand(150);
         pchar.GenQuestBox.(sTemp).box2.items.jewelry12 = rand(250) + rand(250);
 		// ==> защитники, повоевать таки придётся
-		model[0] = "pirate_1";
-		model[1] = "pirate_2";
-		model[2] = "pirate_3";
-		model[3] = "pirate_4";
-		model[4] = "pirate_5";
-		model[5] = "pirate_6";
-		model[6] = "pirate_7";
-		model[7] = "pirate_8";
-		model[8] = "pirate_9";
-		model[9] = "pirate_10";
-		model[10] = "pirate_11";
-		model[11] = "pirate_12";
-		model[12] = "pirate_13";
-		model[13] = "pirate_14";
-		model[14] = "pirate_15";
-		model[15] = "pirate_16";
-		model[16] = "pirate_17";
-		model[17] = "pirate_18";
-		model[18] = "pirate_19";
-		model[19] = "pirate_20";
-		model[20] = "pirate_21";
-		model[21] = "pirate_22";
-		model[22] = "pirate_23";
-		model[23] = "pirate_24";
-		model[24] = "pirate_25";
 		num = rand(3) + 2;
 		for (i = 0; i < num; i++)
 		{
-			iMassive = rand(25);
-			chr = GetCharacter(NPC_GenerateCharacter("FightMan"+iPrefix+"_"+i, model[iMassive], "man", "man", 15, iPearNation, 30, true));
+			iMassive = 1 + rand(24);
+			chr = GetCharacter(NPC_GenerateCharacter("FightMan"+iPrefix+"_"+i, "pirate_" + iMassive, "man", "man", 15, iPearNation, 30, true));
 			SetFantomParamFromRank(chr, 15, true);
 			chr.dialog.Filename = "Pearl_dialog.c";
 			chr.dialog.currentnode = "PearlMan";
@@ -1211,6 +1179,7 @@ void CreatePearlVillage(aref loc)
 			SetFoodToCharacter(chr, 3, 20);
 		}
 		// ==> просто работники
+		string model[10];
 		model[0] = "indsair2";
 		model[1] = "indsar1";
 		model[2] = "barmen_1";
@@ -1223,25 +1192,26 @@ void CreatePearlVillage(aref loc)
 		model[9] = "barmen_9";
 		//Boyer change
 		num = rand(3) + 2;
-		for (i = 0; i < num; i++)
+		chr = GetCharacter(NPC_GenerateCharacter("WorkMan"+iPrefix+"_"+0, model[rand(1)], "man", "man", 7, iPearNation, 30, false));
+		chr.dialog.Filename = "Pearl_dialog.c";
+		chr.dialog.currentnode = "IndPearlMan";
+		chr.greeting = "Gr_PearlIndian";
+		chr.name = LinkRandPhrase("Венету", "Соколиный глаз", "Гойко Митич");
+		chr.lastname = "";
+		chr.CityType = "citizen";
+		chr.city = "SantaCatalina";
+		PlaceCharacter(chr, "goto", "random");
+		LAi_SetCitizenType(chr);
+		LAi_group_MoveCharacter(chr, "PearlGroup_"+iPrefix);
+		SetFoodToCharacter(chr, 3, 20);
+		for (i = 1; i < num; i++)
 		{
-			iMassive = rand(9);
+			iMassive = rand(7) + 2;
 			sAnime = "man"
-			if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1") sAnime = "man";
 			chr = GetCharacter(NPC_GenerateCharacter("WorkMan"+iPrefix+"_"+i, model[iMassive], "man", sAnime, 7, iPearNation, 30, false));
 			chr.dialog.Filename = "Pearl_dialog.c";
 			chr.dialog.currentnode = "PearlMan";
-			if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1")
-			{
-				chr.name = LinkRandPhrase("Венету", "Соколиный глаз", "Гойко Митич");
-				chr.lastname = "";
-				chr.dialog.currentnode = "IndPearlMan";
-				chr.greeting = "Gr_PearlIndian";
-			}
-			else
-			{
-				chr.greeting = "cit_common";
-			}
+			chr.greeting = "cit_common";
 			chr.CityType = "citizen";
 			chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
 
@@ -1271,6 +1241,103 @@ void CreatePearlVillage(aref loc)
 		//=========================== квесты в поселениях ================================
 		LAi_group_SetLookRadius("PearlGroup_"+iPrefix, 16);
 		LAi_group_SetHearRadius("PearlGroup_"+iPrefix, 10);
+	}
+}
+
+void CreateIndianVillage(aref loc) // Sinistra: деревня индейцев
+{
+	if (CheckAttribute(loc, "indianVillage"))
+	{
+		if (CheckNPCQuestDate(loc, "indian_date"))
+		{
+			SetNPCQuestDate(loc, "indian_date");
+			int i, iMassive;
+			int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+5;
+			int num = rand(2)+6; //кол-во 
+			ref chr;
+			string model[10];		
+			model[0] = "Itza_1";
+			model[1] = "Itza_2";
+			model[2] = "Itza_3";
+			model[3] = "Itza_4";
+			model[4] = "Itza_5";
+			model[5] = "Itza_6";
+			model[6] = "Itza_7";
+			model[7] = "Itza_8";
+			model[8] = "Miskito_1";
+			model[9] = "Miskito_2";
+			i = 0;
+			
+			while(i < num)
+			{
+				iMassive = rand(9);
+				if (model[iMassive] != "")
+				{
+					chr = GetCharacter(NPC_GenerateCharacter("Itza"+"_"+i, model[iMassive], "man", "man", iRank, PIRATE, 1, false));
+					SetFantomParamFromRank(chr, iRank, true);
+					chr.name = GetIndianName(MAN);
+					chr.lastname = "";
+					LAi_SetLoginTime(chr, 6.0, 21.99);
+					LAi_CharacterReincarnation(chr, true, true);
+					LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); 
+					chr.dialog.Filename = "indian_dialog.c";
+					chr.dialog.currentnode = "IndianMan";
+					chr.greeting = "indian_male";
+					GiveItem2Character(chr, LinkRandPhrase("topor_05","topor_05","topor_05"));
+					EquipCharacterbyItem(chr, LinkRandPhrase("topor_05","topor_05","topor_05"));
+					chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
+					PlaceCharacter(chr, "goto", "random");
+					LAi_SetWarriorType(chr);
+					LAi_group_MoveCharacter(chr, "ItzaIndian");
+					i++;
+					model[iMassive] = "";
+				}
+			}
+			if (rand(1) == 1) // сидячие у костерка
+			{
+				for (i=1; i<=2; i++)
+				{
+					chr = GetCharacter(NPC_GenerateCharacter("ItzaSit"+"_"+i, "Itza_"+(rand(7)+1), "man", "man", iRank, PIRATE, 1, false));
+					SetFantomParamFromRank(chr, iRank, false);
+					chr.name = GetIndianName(MAN);
+					chr.lastname = "";
+					chr.dialog.Filename = "Indian_dialog.c";
+					chr.dialog.currentnode = "IndianMan";
+					chr.greeting = "indian_male";
+					chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
+					ChangeCharacterAddressGroup(chr, "IndianVillage", "sit", "ground"+i);
+					LAi_SetGroundSitType(chr);
+					LAi_group_MoveCharacter(chr, "ItzaIndian");
+				}
+			}
+			for (i=1; i<=3; i++) // женщины
+			{
+				chr = GetCharacter(NPC_GenerateCharacter("ItzaWoman"+"_"+i, "squaw_"+i, "woman", "towngirl3", 10, PIRATE, 1, false));
+				SetFantomParamFromRank(chr, 10, false);
+				chr.name = GetIndianName(WOMAN);
+				chr.lastname = "";
+				LAi_SetLoginTime(chr, 6.0, 21.99);
+				chr.dialog.Filename = "Indian_dialog.c";
+				chr.dialog.currentnode = "IndianWoman";
+				chr.greeting = "cit_common";
+				RemoveAllCharacterItems(chr, true);
+				chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
+				PlaceCharacter(chr, "goto", "random");
+				LAi_SetCitizenType(chr);
+				LAi_group_MoveCharacter(chr, "ItzaIndian");
+			}
+			LAi_group_SetLookRadius("ItzaGroup", 16);
+			LAi_group_SetHearRadius("ItzaGroup", 10);
+			
+			chr = GetCharacter(NPC_GenerateCharacter("ItzaKrasavitsa", "TribeWife", "woman", "YokoDias", iRank, PIRATE, 1, false));
+			chr.name = "Шоко";
+			chr.lastname = "";
+			chr.dialog.Filename = "Indian_dialog.c";
+			chr.dialog.currentnode = "IndianWoman";
+			LAi_SetCitizenType(chr);
+			ChangeCharacterAddressGroup(chr, "IndianVillage", "quest", "teleport1");
+			
+		}
 	}
 }
 

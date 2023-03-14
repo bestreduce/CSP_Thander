@@ -31,27 +31,6 @@ void ExternControlsInit(bool bFirst, bool standart)
 	CI_CreateAndSetControls("", "TimeScaleSlowerBA", CI_GetKeyCode("VK_A_MINUS"), 0, false );
 	CI_CreateAndSetControls( "", "VK_PAUSETimePause", CI_GetKeyCode("VK_PAUSE"), 0, false );
 
-	if (MOD_BETTATESTMODE == "On")
-	{
-		// Teleport
-		CI_CreateAndSetControls( "", "TeleportActive", CI_GetKeyCode("VK_F4"), 0, false );
-		CI_CreateAndSetControls( "", "TeleportUp", CI_GetKeyCode("VK_UP"), 0, false );
-		CI_CreateAndSetControls( "", "TeleportDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-		CI_CreateAndSetControls( "", "TeleportSelect", CI_GetKeyCode("VK_RETURN"), 0, false );
-		// my scale
-		// weather
-		CI_CreateAndSetControls( "", "WhrPrevWeather", CI_GetKeyCode("VK_L_BREAKE"), 0, false );
-		CI_CreateAndSetControls( "", "WhrNextWeather", CI_GetKeyCode("VK_R_BREAKE"), 0, false );
-		CI_CreateAndSetControls( "", "WhrUpdateWeather", CI_GetKeyCode("VK_A_QUOTE"), 0, false );
-
-		CI_CreateAndSetControls( "", "CoastFoamLB", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-		CI_CreateAndSetControls( "", "CoastFoamRB", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-		CI_CreateAndSetControls( "", "CoastFoamINS", CI_GetKeyCode("VK_INSERT"), 0, true );
-		CI_CreateAndSetControls( "", "CoastFoamDEL", CI_GetKeyCode("VK_DELETE"), 0, true );
-		CI_CreateAndSetControls( "", "CoastFoamCopy", CI_GetKeyCode("KEY_C"), 0, true );
-	}
-	// boal <--
-
 	CI_CreateAndSetControls( "", "TimeScale", CI_GetKeyCode("KEY_R"), 0, false );
 
 	// Cameras =====================================================================
@@ -399,6 +378,26 @@ void ExternControlsInit(bool bFirst, bool standart)
 	CI_CreateAndSetControls( "", "gamestat", CI_GetKeyCode("VK_F1"), 0, true );
 	CI_CreateAndSetControls( "", "toplist", CI_GetKeyCode("VK_F2"), 0, true );
 	//CI_CreateAndSetControls( "", "gamechat", CI_GetKeyCode("VK_F3"), 0, true );
+
+	if (MOD_BETTATESTMODE == "On")
+	{
+		// Teleport
+		CI_CreateAndSetControls( "", "TeleportActive", CI_GetKeyCode("VK_F4"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportUp", CI_GetKeyCode("VK_UP"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportDown", CI_GetKeyCode("VK_DOWN"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportSelect", CI_GetKeyCode("VK_RETURN"), 0, false );
+		// my scale
+		// weather
+		CI_CreateAndSetControls( "", "WhrPrevWeather", CI_GetKeyCode("VK_L_BREAKE"), 0, false );
+		CI_CreateAndSetControls( "", "WhrNextWeather", CI_GetKeyCode("VK_R_BREAKE"), 0, false );
+		CI_CreateAndSetControls( "", "WhrUpdateWeather", CI_GetKeyCode("VK_A_QUOTE"), 0, false );
+
+		CI_CreateAndSetControls( "", "CoastFoamLB", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamRB", CI_GetKeyCode("VK_RBUTTON"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamINS", CI_GetKeyCode("VK_INSERT"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamDEL", CI_GetKeyCode("VK_DELETE"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamCopy", CI_GetKeyCode("KEY_C"), 0, true );
+	}
 
 	MapControlToGroup("ShipCamera_Turn_H", "NetShipControls");
 	MapControlToGroup("ShipCamera_Turn_V", "NetShipControls");

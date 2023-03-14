@@ -10,7 +10,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                       "Вы угадали, простите...", "Я понимаю...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			// ==> Проверяем поле состояния квестов.
-			if (CheckAttribute(pchar, "questTemp.PDM_PI_Rostov"))	//Квест "Аптекарь"
+			if (CheckAttribute(pchar, "questTemp.PDM_PI_Rostov"))	//Квест "Проклятый Идол"
 			{
     			link.l1 = "Я хочу преподнести вам дар. Я слышал"+ GetSexPhrase("","а") +", что вы интересуетесь драгоценными камнями... Что вы скажете по поводу этого идола?";
 				link.l1.go = "PDM_PI_Rostov_2";
@@ -67,8 +67,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;
 				sld.DontChangeBlade = true;
-				TakeItemFromCharacter(sld, "spyglass3");
-				TakeNItems(sld, "food1", -10);
+				//TakeItemFromCharacter(sld, "spyglass3");
+				sld.DeleteFood = true;
 				AddMoneyToCharacter(sld, 7000);
 				AddItems(sld, "jewelry1", 25);
 				AddItems(sld, "jewelry7", 10);
@@ -87,8 +87,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;
 				sld.DontChangeBlade = true;
-				TakeItemFromCharacter(sld, "spyglass3");
-				TakeNItems(sld, "food1", -10);
+				//TakeItemFromCharacter(sld, "spyglass3");
+				sld.DeleteFood = true;
 				AddMoneyToCharacter(sld, 7000);
 				AddItems(sld, "jewelry1", 25);
 				AddItems(sld, "jewelry7", 10);
@@ -107,8 +107,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;
 				sld.DontChangeBlade = true;
-				TakeItemFromCharacter(sld, "spyglass3");
-				TakeNItems(sld, "food1", -10);
+				//TakeItemFromCharacter(sld, "spyglass3");
+				sld.DeleteFood = true;
 				AddMoneyToCharacter(sld, 7000);
 				AddItems(sld, "jewelry1", 25);
 				AddItems(sld, "jewelry7", 10);

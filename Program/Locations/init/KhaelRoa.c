@@ -64,6 +64,7 @@ int LocationInitKhaelRoa(int n)
 	Locations[n].models.always.locators = "hram_l";
 	Locations[n].models.always.l1 = "Hram";
 	Locations[n].models.always.grasspatch = "hram_g";
+	Locations[n].models.always.grassPatch.texture = "grass\algaeU1.tga.tx";
 	//Day
 	Locations[n].models.day.charactersPatch = "Hram_p";
 	Locations[n].models.day.jumppatch = "hram_j";

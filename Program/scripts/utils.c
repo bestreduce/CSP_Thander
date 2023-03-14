@@ -161,6 +161,7 @@ void GenerateMaps(aref ch, int iProbability1, int iProbability2)
 	if(rand(iProbability2) == 1 && !CheckMainHeroMap("map_maine_2")) AddItems(ch, "map_maine_2", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_panama")) AddItems(ch, "map_panama", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_Bahames")) AddItems(ch, "map_Bahames", 1);
+	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_maracaibo")) AddItems(ch, "map_maracaibo", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_cumana")) AddItems(ch, "map_cumana", 1);
 }
 
@@ -547,6 +548,8 @@ void GiveItemToTrader(aref ch)
 	if(irand == 1) AddItems(ch, "CompCraft_Copper", Rand(8) + 1);	// Медь
 	irand = rand(6);
 	if(irand == 1) AddItems(ch, "CompCraft_Sulfur", Rand(5) + 2);	// Сера
+	irand = rand(2);
+	if(irand == 1) AddItems(ch, "CompCraft_Parchment", Rand(5) + 5); // Пергамент //Gregg - добавил бумагу лоточникам, а то реально задолбишься её фармить
 	irand = rand(4);
 	if(irand == 1  && rank >=5) AddItems(ch, "CompCraft_Grindstone", Rand(7) + 3);	// Оселок
 	irand = rand(9);
@@ -779,7 +782,7 @@ int SearchForMaxShip(aref chr, int isLock, int _tmp)
 		}
 		else
 		{
-			if (rand(100) > 70) rndShip = rand(SHIP_BATTLESHIP);
+			if (rand(100) > 70) rndShip = rand(SHIP_REDOUTABLE);
 			else rndShip = rand(SHIP_GALEON_L);
 		}
 
@@ -797,23 +800,33 @@ int SearchForMaxShip(aref chr, int isLock, int _tmp)
 	return rndShip;
 }
 
-int FindFirstEmptyCharacter()
-{
-	for(int i = GlobalCharacters; i<TOTAL_CHARACTERS; i++)
-	{
-		if (characters[i].id == "0")
-		{
-			if (i >= MAX_CHARACTERS) MAX_CHARACTERS = i+1; //сдвигаем планку НПС
-			//#20170912-02 Fix for RealShips/Character sails
-			DeleteAttribute(&characters[i], "ship.sails");
-			//#20170918-01 Fix for Abordage.Enable
-			DeleteAttribute(&characters[i], "Abordage.Enable");
-			return i;
-		}
-	}
+// --> mitrokosta оптимизация поиска пустых персонажей
+ 
+int freeCharacters[TOTAL_CHARACTERS];
+int firstFreeCharacter = -1;
 
-	return -1;
+int FindFirstEmptyCharacter() {
+							  
+	if (firstFreeCharacter == -1) {
+		if (MAX_CHARACTERS == TOTAL_CHARACTERS) {
+			return -1; // капут, массив заполнен
+		}
+		
+		firstFreeCharacter++;
+		freeCharacters[firstFreeCharacter] = MAX_CHARACTERS;
+		MAX_CHARACTERS++;
+	}
+	
+	int freeIndex = firstFreeCharacter;
+	firstFreeCharacter--;
+	return freeCharacters[freeIndex];
 }
+
+void FreeCharacter(int index) {
+	firstFreeCharacter++;
+	freeCharacters[firstFreeCharacter] = index;
+}
+// <--
 
 void AddGeometryToLocation(string LocationID, string ModelName)
 {
@@ -1172,6 +1185,11 @@ void EmptyAllFantomCharacter()
 	int cn = -1;
 	for (int i=GlobalCharacters; i<MAX_CHARACTERS; i++)
 	{
+		// mitrokosta фикс бесконечных переинитов
+		if (!CheckAttribute(&characters[i], "id") || characters[i].id == "0") {
+			continue;
+		}
+		
 		// отдельный код зачистки boal -->
 		if (LAi_IsDead(&characters[i]) && !CheckAttribute(&characters[i], "RebirthPhantom"))
 		{
@@ -1183,12 +1201,14 @@ void EmptyAllFantomCharacter()
 						if(cn != -1)
 						{
 							InitCharacter(&characters[cn], cn);
+	  						FreeCharacter(cn); // mitrokosta освободить в пул, иначе будет утечка
 						}
 					}
 				}
 				else
 				{
      				InitCharacter(&characters[i], i);
+	   		    	FreeCharacter(i); // mitrokosta освободить в пул, иначе будет утечка
 				}
 		}
 		else
@@ -1198,6 +1218,7 @@ void EmptyAllFantomCharacter()
 				characters[i].location != pchar.location) // не трем, если ГГ в локации,иначе горожане пропадают на лету
 			{ // время вышло
 				InitCharacter(&characters[i], i);  // тут проверку на компаньонов не нужно, тк они все одинаковые по времени
+	   		    FreeCharacter(i); // mitrokosta освободить в пул, иначе будет утечка
 			}
 		}
 		// boal <--
@@ -1612,30 +1633,7 @@ int NPC_GenerateCharacter(string _id, string _model, string _sex, string _ani, i
      	DeleteAttribute(ch, "LifeDay");
 	}
 	SetFoodToCharacter(ch, 5, 50);
-	if (IsCharacterPerkOn(ch, "Ciras") && rand(4)==0)
-	{
-		string cirnum;
-		switch (rand(4))
-		{
-			case 0: cirnum = "cirass1"; break;
-			case 1: cirnum = "cirass1"; break;
-			case 2: cirnum = "cirass2"; break;
-			case 3: cirnum = "cirass3"; break;
-			case 4: cirnum = "cirass4"; break;
-		}
-		if (CheckAttribute(ch, "HeroModel")) // все, у кого есть что одеть
-        {
-			switch (cirnum)
-			{
-				case "cirass1": ch.model = GetSubStringByNum(ch.HeroModel, 1); break;
-				case "cirass2": ch.model = GetSubStringByNum(ch.HeroModel, 2); break;
-				case "cirass3": ch.model = GetSubStringByNum(ch.HeroModel, 3); break;
-				case "cirass4": ch.model = GetSubStringByNum(ch.HeroModel, 4); break;
-			}
-		}
-		ch.cirassId = Items_FindItemIdx(cirnum);
-		Log_TestInfo("Персонаж "+ch.name+" получил кирасу "+cirnum);
-	}
+	if (IsCharacterPerkOn(ch, "Ciras") && rand(4)==0) SetFantomWearCirass(ch);
 
 	return  iChar;
 }
@@ -1889,6 +1887,8 @@ int SetCharToPrisoner(ref refEnemyCharacter)
 	    LAi_NoRebirthEnable(rChTo);
 
 	    SetCharacterRemovable(rChTo, true);
+		
+		FaceMaker(rChTo);
 
 	    AddPassenger(refMyCharacter,rChTo,true);
     }

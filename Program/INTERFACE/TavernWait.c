@@ -1,5 +1,5 @@
-int iChooseTime = 3;
 int iTime = 0;
+int iTimeM = 0;
 string sDate;
 bool days = false;
 
@@ -9,7 +9,7 @@ void InitInterface_GM(string iniName)
 
     BLI_DisableShow();
 
-    SetTimeScale(0.0);
+    /* SetTimeScale(0.0); */
 	locCameraSleep(true);
 
 	EngineLayersOffOn(true);
@@ -21,49 +21,66 @@ void InitInterface_GM(string iniName)
 	SetEventHandler("RefreshVariables","RefreshVariables",0);
     SetEventHandler("exitOk","Sleep",0);
 
-    SetFormatedText("TIME_TEXT", (iTime+1)+FindHourString(iTime+1));
-
     SetWariable();
 
     SetTimeSlider();
 
     ProcessFrame();
+	
+	SetFormatedText("TIME_TEXT", (iTime+1)+FindHourString(iTime+1) + " и " + (iTimeM+1) + FindMinuteString(iTimeM+1));
+	SetFormatedText("HOURS", "Часы");
+	SetFormatedText("MINUTES", "Минуты");
 
     SetFormatedText("CAPTION", "Отдых");
 }
 
 void ProcessFrame()
 {
-        if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 1))
-        {
-			days = false;
-			SetSelectable("SLIDE", false);
-			SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 0,0);
-        }
-
-        if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 2))
-        {
-			days = false;
-			SetSelectable("SLIDE", false);
-			SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 0,0);
-        }
-        if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3))
-        {
-			days = false;
-			SetSelectable("SLIDE", true);
-        }
-		if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4))
-        {
-			days = true;
-			SetSelectable("SLIDE", true);
-        }
+	SetSelectable("TIME_CHECK2", false);
+	
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 1))
+	{
+		days = false;
+		SetSelectable("SLIDE", false);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 0,0);
+		SetSelectable("SLIDE2", false);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE2", 0,0);
+		SetFormatedText("TIME_TEXT", "");
+	}
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 2))
+	{
+		days = false;
+		SetSelectable("SLIDE", false);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 0,0);
+		SetSelectable("SLIDE2", false);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE2", 0,0);
+		SetFormatedText("TIME_TEXT", "");
+	}
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3))
+	{
+		days = false;
+		SetSelectable("SLIDE", true);
+		SetSelectable("TIME_CHECK2", true);
+		if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK2", 3, 1) == 1) SetSelectable("SLIDE2", true);
+		else SetSelectable("SLIDE2", false);
+		SetFormatedText("HOURS", "Часы");
+	}
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4))
+	{
+		days = true;
+		SetSelectable("SLIDE", true);
+		SetSelectable("SLIDE2", false);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE2", 0,0);
+		SetFormatedText("HOURS", "Дни");
+	}
+	SetWariable();
 }
 
 void RefreshVariables()
 {
 	SetTimeSlider();
 	ChangeTimeProgress();
-	if(days == false) SetFormatedText("TIME_TEXT", (iTime+1) + FindHourString(iTime+1));
+	if(days == false) SetFormatedText("TIME_TEXT", (iTime+1) + FindHourString(iTime+1) + " и " + (iTimeM+1) + FindMinuteString(iTimeM+1));
 	else SetFormatedText("TIME_TEXT", "Дней: "+(iTime+1));
 }
 
@@ -74,7 +91,13 @@ void ChangeTimeProgress()
 	if(sNode == "SLIDE")
 	{
 		iTime = GetEventData();
-		if(days == false) SetFormatedText("TIME_TEXT", (iTime+1) + FindHourString(iTime+1));
+		if(days == false) SetFormatedText("TIME_TEXT", (iTime+1) + FindHourString(iTime+1) + " и " + (iTimeM+1) + FindMinuteString(iTimeM+1));
+		else SetFormatedText("TIME_TEXT", "Дней: "+(iTime+1));
+	}
+	if(sNode == "SLIDE2")
+	{
+		iTimeM = GetEventData();
+		if(days == false) SetFormatedText("TIME_TEXT", (iTime+1) + FindHourString(iTime+1) + " и " + (iTimeM+1) + FindMinuteString(iTimeM+1));
 		else SetFormatedText("TIME_TEXT", "Дней: "+(iTime+1));
 	}
 }
@@ -88,6 +111,12 @@ void SetTimeSlider()
 
 		SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 1,23);
 		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE", 0,iTime);
+		
+		GameInterface.nodes.SLIDE2.value = iTimeM;
+		GameInterface.nodes.SLIDE2.maxlimit = 59;
+
+		SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE,"SLIDE2", 1,59);
+		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"SLIDE2", 0,iTimeM);
 	}
 	else
 	{
@@ -120,8 +149,28 @@ void SetWariable()
 	{
 		sMinuts = "0" + sMinuts;
 	}
-
-	sTime = sHour + " : " + sMinuts;
+	
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3))
+	{
+		if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK2", 3, 1) == 0) iTimeM = -1;
+		string sHours = sti(worldMap.date.hour)+(iTime+1);
+		string sMinutes = sti(sMinuts) + (iTimeM+1);
+		if (sti(sMinutes) > 59) 
+		{
+			sMinutes = sti(sMinutes)-60; 
+			sHours = sti(sHours) + 1;
+		}
+		if (sti(sMinutes) < 10) sMinutes = "0"+(sMinutes);
+		if (sti(sHours)>23)
+		{
+			sHours = sti(sHours)-24;
+			SetFormatedText("CURRENTTIME_TEXT", "");
+			sDate = environment.date.day + " " + XI_ConvertString("target_month_" + environment.date.month) + " " + environment.date.year;
+			SendMessage(&GameInterface,"lsle",MSG_INTERFACE_MSG_TO_NODE,"CURRENTTIME_TEXT", 0,&sDate);
+		}
+		sTime = sHour + " : " + sMinuts + " -> " + sHours + " : " + sMinutes;
+	}
+	else sTime = sHour + " : " + sMinuts;
 
 	SendMessage(&GameInterface,"lsle",MSG_INTERFACE_MSG_TO_NODE,"CURRENTTIME_TEXT", 0,&sTime);
 
@@ -162,6 +211,11 @@ void Sleep()
     }
 	
 	pchar.quest.waithours = iAddtime;
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3))
+	{
+		AddTimeToCurrent(0, sti(iTimeM)+1);
+	}
+	
     if (days == false)
 	{
 		DoQuestFunctionDelay("WaitNextHours", 0.1);
@@ -205,6 +259,20 @@ string FindHourString(int iHour)
 	if(iHour > 21 && iHour < 25) sHour = " часа";
 
 	return sHour;
+}
+
+string FindMinuteString(int minute)
+{
+	string minuteR = " минут";
+
+	if(minute == 1 || minute == 21) minuteR = " минута";
+	if(minute > 1 && minute < 5) minuteR = " минуты";
+	if(minute > 21 && minute < 25) minuteR = " минуты";
+	if(minute > 31 && minute < 35) minuteR = " минуты";
+	if(minute > 41 && minute < 45) minuteR = " минуты";
+	if(minute > 51 && minute < 55) minuteR = " минуты";
+
+	return minuteR;
 }
 
 void Restore_HP()

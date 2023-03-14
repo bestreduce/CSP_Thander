@@ -205,7 +205,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Shadow.Density.Foot = argb(255,96,96,64);
 
 	Weathers[n].Lightning.Enable = false;
-	Weathers[n].Lightning.Texture = "weather\lightning\lightning.tga";
+	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1; 
 	Weathers[n].Lightning.SubTexY = 1;
@@ -214,7 +214,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
-	Weathers[n].Sky.Size = 512;
+	Weathers[n].Sky.Size = 2048.0;
 	Weathers[n].Sky.Angle = 0.0;
 
 	Weathers[n].Planets.enable = false;
@@ -229,11 +229,11 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 2000;
+	Weathers[n].Fog.Height = 1000;
 	Weathers[n].Fog.Start = 1;
-	Weathers[n].Fog.Density = 0.15;
-	Weathers[n].Fog.IslandDensity = 0.002;
-	Weathers[n].Fog.SeaDensity = 0.006;
+	Weathers[n].Fog.Density = 0.005;
+	Weathers[n].Fog.IslandDensity = 0.005;
+	Weathers[n].Fog.SeaDensity = 0.005;
 	Weathers[n].Fog.Color = argb(0,26,64,59);
 	
 	Weathers[n].Rain.NumDrops = 0;

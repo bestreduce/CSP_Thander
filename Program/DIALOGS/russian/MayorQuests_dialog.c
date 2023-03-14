@@ -252,8 +252,8 @@ void ProcessDialogEvent()
 			AddQuestUserData("MayorsQuestsList", "ColonyName", XI_ConvertString("Colony"+characters[GetCharacterIndex(pchar.GenQuest.SeekSpy.MayorId)].city+"Gen"));
 			AddQuestUserData("MayorsQuestsList", "MayorName", sTemp);
 			// слухи
-			AddSimpleRumour(RandPhraseSimple("Вы знаете, губернатор " + sTemp + " поручил "+ GetSexPhrase("некоему капитану","некой девушке-капитану") +" " + GetMainCharacterNameGen() + " найти в городе вражеского лазутчика. И вы знаете, "+ GetSexPhrase("он его нашёл","она его нашла") +" прямо на улицах!",
-				"Наш губернатор зал задание капитану " + GetMainCharacterNameGen() + " разыскать в городе вражеского агента. И "+ GetSexPhrase("этот капитан нашёл","эта девушка нашла") +" лазутчика среди горожан!"), sti(characters[sti(pchar.GenQuest.SeekSpy.MayorId)].nation), 5, 1);
+			AddSimpleRumour("Вы знаете, губернатор " + sTemp + " поручил "+ GetSexPhrase("некоему капитану","некой девушке-капитану") +" " + GetMainCharacterNameGen() + " найти в городе вражеского лазутчика. И вы знаете, "+ GetSexPhrase("он его нашёл","она его нашла") +" прямо на улицах!", sti(characters[sti(pchar.GenQuest.SeekSpy.MayorId)].nation), 5, 1);
+			AddSimpleRumourCity("Наш губернатор дал задание капитану " + GetMainCharacterNameGen() + " разыскать в городе вражеского агента. И "+ GetSexPhrase("этот капитан нашёл","эта девушка нашла") +" лазутчика среди горожан!", npchar.city, 5, 1, "");
 			pchar.quest.AllMayorsQuests_Late.over = "yes"; //снимаем общий таймер
 			pchar.GenQuest.SeekSpy = "FoundSpy"; //флаг нашёл шпиона
 			DeleteAttribute(pchar, "GenQuest.SeekSpy.City"); //не опрашивать более в городе

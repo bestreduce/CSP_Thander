@@ -243,10 +243,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "shipyard_dlg":
 			dialog.Text = "Могу предложить работу со штучными заказами - улучшаю характеристики местным лоханкам. Здесь совершенно не умеют строить нормальные корабли.";
-			Link.l1 = "Замечательно! Мне как раз нужно довести до ума свой кораблик. Может взглянете, что можно сделать?";
-			Link.l1.go = "ship_tunning_start";
-			link.l2 = "Нет, мне не нужно улучшений, я хочу просто воспользоваться услугами верфи.";
-			link.l2.go = "shipyard";
+			link.l1 = "Нет, мне не нужно улучшений, я хочу просто воспользоваться услугами верфи.";
+			link.l1.go = "shipyard";
 
 			if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 			{
@@ -258,6 +256,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l5 = "Готов ли заказанный мною корабль?";
 				link.l5.go = "shiporder1";
 			}
+			Link.l2 = "Замечательно! Мне как раз нужно довести до ума свой кораблик. Может взглянете, что можно сделать?";
+			Link.l2.go = "ship_tunning_start";
 
 			if ((RealShips[sti(Pchar.Ship.Type)].name == "Flyingdutchman1") && (pchar.location.from_sea == "Pirates_town"))
 			{
@@ -1744,9 +1744,9 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = "К вам Эдвард Лоу заходил?";
 				link.l1.go = "PL_Q3_1";
 			}
-			if (CheckAttribute(pchar, "questTemp.piratesLine.T1"))
+			if (CheckAttribute(pchar, "questTemp.piratesLine.T1") && !CheckAttribute(npchar, "quest.PQ4"))
             {
-				if (pchar.questTemp.piratesLine.T1 == "KillLoy_GoodWork")
+				if (CheckAttribute(pchar, "questTemp.BrigSW_gift"))
 				{
 					link.l1 = "Джекмен подарил мне 'Морского Волка'!";
 					link.l1.go = "PL_Q3_SW1";
@@ -1884,17 +1884,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "PL_Q3_SW1":
 			dialog.text = "Видел, видел, твоё прибытие. Не удержался, бегал на пристань поглядеть.\nДостойный подарок. Поздравляю и спасибо тебе! Спас"+ GetSexPhrase("","ла") +" старика.";
+			npchar.quest.PQ4 = true;
 			link.l1 = "Так уж и спас"+ GetSexPhrase("","ла") +"...";
 			link.l1.go = "exit";
 		break;
 		case "PL_Q3_SW2":
+			npchar.quest.PQ4 = true;
 			dialog.text = "Чёрт! Я так и знал... И что?";
 			link.l1 = "Он утонул, сожалею....";
 			link.l1.go = "PL_Q3_SW3";
 		break;
 		case "PL_Q3_SW3":
 			dialog.text = "Да уж, всё плохо.";
-			link.l1 = "Да не переживай ты, все утрясется...";
+			link.l1 = "Да не переживай ты, всё утрясется...";
 			link.l1.go = "exit";
 		break;
 //*************************** шебека Синяя Птица ***************************
@@ -2061,7 +2063,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "WarDogUpgrade_2":
 			dialog.text = "Ой, не смешите меня. Я же знаю, что это развалюха. Когда я его делал, был молодым, зелёным, глупым. Если бы я начал проектировать его сейчас, не допустил бы старых ошибок.";
-			link.l1 = "Неужели все настолько плохо? По мне так кораблик все ещё отличный. Получше многих посудин, что я повстречала на Карибах.";
+			link.l1 = "Неужели все настолько плохо? По мне так кораблик всё ещё отличный. Получше многих посудин, что я повстречала на Карибах.";
 			link.l1.go = "WarDogUpgrade_3";
 		break;
 
@@ -2104,7 +2106,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "WarDogUpgrade_6_1":
 			sld = GetCharacter(NPC_GenerateCharacter("W_Titanic", "off_eng_1", "man", "man", 99, ENGLAND, -1, true));
-			FantomMakeCoolestSailor(sld, SHIP_BATTLEMANOWAR, "Титаник", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
+			FantomMakeCoolestSailor(sld, SHIP_PRINCE, "Титаник", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
 			ref W_Titanic = &RealShips[sti(sld.Ship.Type)];
 			W_Titanic.HP = 30000;
 			W_Titanic.MastMultiplier = 0.01;

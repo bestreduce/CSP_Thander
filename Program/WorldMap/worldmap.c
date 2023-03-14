@@ -136,9 +136,102 @@ void wdmCreateWorldMap()
 	if(iFlagAllWdm == 2) worldMap.nationFlag.width = 96;
 	else worldMap.nationFlag.width = 48;
  	worldMap.nationFlag.height = 48;
-	worldMap.nationFlag.texName = "WorldMap/Interfaces/WorldMapEnsigns" + iFlagAllWdm + ".tga";
+	worldMap.nationFlag.texture = "WorldMap/Interfaces/WorldMapEnsigns" + iFlagAllWdm + ".tga";
 	//#20200226-03
-	worldMap.outputRum = true;
+	//worldMap.outputRum = true;
+
+
+
+	//float fHtRatio = stf(Render.screen_y) / iHudScale; // if it was not set earlier
+	float cx = stf(showWindow.right) - (128.0) * fHtRatio - 16.0 + 64.0;
+	float cy = -40.0 + 128.0 * fHtRatio;
+
+/*	текст из сломавшего флаги PR	https://github.com/storm-devs/storm-engine/pull/440
+	worldMap.sky.texture     = "WorldMap\Interfaces\sky.tga.tx";
+	worldMap.sky.maskTexture = "WorldMap\Interfaces\sky_mask.tga.tx";
+	worldMap.sky.leftPos = cx - 64.0 * fHtRatio;
+	worldMap.sky.topPos = cy - 64.0 * fHtRatio;
+	worldMap.sky.width = 128.0 * fHtRatio;
+	worldMap.sky.height = 128.0 * fHtRatio;
+	worldMap.sky.color = argb(128, 255, 255, 255);
+
+	worldMap.windPointer.texture = "WorldMap\Interfaces\wind_pointer.tga.tx";
+	worldMap.windPointer.leftPos = cx - 16.0 * fHtRatio;
+	worldMap.windPointer.topPos = cy - 64.0 * fHtRatio;
+	worldMap.windPointer.width = 32.0 * fHtRatio;
+	worldMap.windPointer.height = 128.0 * fHtRatio;
+	worldMap.windPointer.color = argb(255, 255, 255, 255);
+
+	worldMap.windBar.texture     = "WorldMap\Interfaces\bar.tga.tx";
+	worldMap.windBar.maskTexture = "WorldMap\Interfaces\bar_mask.tga.tx";
+	worldMap.windBar.leftPos = cx - 64.0 * fHtRatio;
+	worldMap.windBar.topPos = cy;
+	worldMap.windBar.width = 128.0 * fHtRatio;
+	worldMap.windBar.height = 128.0 * fHtRatio;
+	worldMap.windBar.color = argb(255, 255, 255, 255);
+
+	worldMap.frame.texture = "WorldMap\Interfaces\back.tga.tx";
+	worldMap.frame.leftPos = cx - 64.0 * fHtRatio;
+	worldMap.frame.topPos = cy - 128.0 * fHtRatio;
+	worldMap.frame.width = 128.0 * fHtRatio;
+	worldMap.frame.height = 256.0 * fHtRatio;
+	worldMap.frame.color = argb(255, 255, 255, 255);
+
+	worldMap.dateText.font = "normal";
+	worldMap.dateText.scale = fHtRatio;
+	worldMap.dateText.color = argb(255, 255, 255, 255);
+	worldMap.dateText.pos.x = cx;
+	worldMap.dateText.pos.y = cy + (98.0 - 16.0 * 0.5) * fHtRatio;
+*/
+	// Center
+	cy = cy + 128.0 * fHtRatio + 32.0;
+
+	worldMap.morale.texture     = "WorldMap\Interfaces\morale.tga.tx";
+	worldMap.morale.barTexture  = "WorldMap\Interfaces\morale_bar.tga.tx";
+	worldMap.morale.maskTexture = "WorldMap\Interfaces\morale_mask.tga.tx";
+	worldMap.morale.leftPos = cx - 64.0 * fHtRatio;
+	worldMap.morale.topPos = cy - 32.0 * fHtRatio;
+	worldMap.morale.width = 128.0 * fHtRatio;
+	worldMap.morale.height = 64.0 * fHtRatio;
+	worldMap.morale.color = argb(255, 255, 255, 255);
+
+	worldMap.foodText.font = "normal";
+	worldMap.foodText.scale = fHtRatio;
+	worldMap.foodText.color = argb(255, 255, 255, 255);
+	worldMap.foodText.pos.x = cx - 24.0 * fHtRatio;
+	worldMap.foodText.pos.y = cy + 30.0 * fHtRatio;
+
+	worldMap.rumText.font = "normal";
+	worldMap.rumText.scale = fHtRatio;
+	worldMap.rumText.color = argb(255, 255, 255, 255);
+	worldMap.rumText.pos.x = cx + 24.0 * fHtRatio;
+	worldMap.rumText.pos.y = cy + 30.0 * fHtRatio;
+
+/*	worldMap.coord.texture = "WorldMap\Interfaces\coord.tga.tx";
+	worldMap.coord.leftPos = cx - 64.0 * fHtRatio;
+	worldMap.coord.topPos = cy + 64.0 * fHtRatio;
+	worldMap.coord.width = 128.0 * fHtRatio;
+	worldMap.coord.height = 64.0 * fHtRatio;
+	worldMap.coord.color = argb(255, 255, 255, 255);
+
+	worldMap.stCoordText.font = "normal";
+	worldMap.stCoordText.scale = fHtRatio;
+	worldMap.stCoordText.color = argb(255, 255, 255, 255);
+	worldMap.stCoordText.pos.x = cx;
+	worldMap.stCoordText.pos.y = cy + (64.0 + 13.0) * fHtRatio;
+	worldMap.stCoordText.text = XI_ConvertString("Coordinates");
+
+	worldMap.coordText.font = "normal";
+	worldMap.coordText.scale = fHtRatio;
+	worldMap.coordText.color = argb(255, 255, 255, 255);
+	worldMap.coordText.pos.x = cx;
+	worldMap.coordText.pos.y = cy + (64.0 + 32.0) * fHtRatio;
+*/
+
+
+
+
+
 	worldMap.resizeRatio = fHtRatio;
 	//Удалим все устаревшие энкаунтеры
 	wdmRemoveOldEncounters();

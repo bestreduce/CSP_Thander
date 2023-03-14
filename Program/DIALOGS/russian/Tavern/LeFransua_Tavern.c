@@ -19,6 +19,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = "Дружище, я опять к тебе... Скажи, а куда подевался Эдвард Лоу? Мне он срочно нужен...";
 				link.l1.go = "PL_Q3_1";
 			}
+			if(pchar.questTemp.PKM_SvtvA_LeFrancuaTaverna_1 == "Taverna")		//Квест "Странные вещи творятся на архипелаге"
+			{
+				link.l1 = "Меня интересует, не заходил ли в бухту чёрный фрегат под именем 'Мефисто'?";
+				link.l1.go = "PKM_SvtvA_1";
+			}
 
 			//-->ОЗГ
 			if(CheckAttribute(pchar, "questTemp.Headhunter"))
@@ -83,6 +88,21 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
+		//Квест "Странные вещи творятся на архипелаге"
+		case "PKM_SvtvA_1":
+			dialog.text = "Эти сумасшедшие? Да, были они тут, но я бы тебе не советовал с ними связываться.\nОни тут поругались с каким-то молодчиком, так в одно мгновение нарисовали ему новую улыбку, я даже моргнуть не успел.";
+			link.l1 = "Спасибо за предупреждение, но мне нужно найти их.";
+			link.l1.go = "PKM_SvtvA_2";
+		break;
+		case "PKM_SvtvA_2":
+			dialog.text = "Тут я ничем не могу тебе помочь - эти парни куда-то уплыли.\nНо я слышал, что типами в красных балахонах заинтересовалась церковь из Форт де Франс. Тебе стоит отправиться туда и разузнать обо всём там.";
+			link.l1 = "Я так и сделаю. Спасибо тебе, дружище!";
+			link.l1.go = "exit";
+			AddQuestRecord("PKM_Animists", "7");
+			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_LeFrancuaTaverna_1");
+			pchar.questTemp.PKM_SvtvA_FortFranceChurch_1 = "Church1";
+		break;
+		
 		//пиратка, квест №2, чёрная метка для Лоу
 		case "PL_Q2_1":
 			dialog.text = NPCStringReactionRepeat("Как же не проживает? очень даже проживает.",
@@ -127,7 +147,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "Barmen_check":
 			if (IsEquipCharacterByItem(Pchar, "patent_eng") || IsEquipCharacterByItem(Pchar, "patent_fra") || IsEquipCharacterByItem(Pchar, "patent_spa") || IsEquipCharacterByItem(Pchar, "patent_hol"))
 			{
-				dialog.text = "Вы не принадлежите к Береговому братству - вы патентованный капер. Я не могу вам доверится, извините.";
+				dialog.text = "Вы не принадлежите к Береговому братству - вы патентованный капер. Я не могу вам довериться, извините.";
 				link.l1 = "Эх, жаль!";
 				link.l1.go = "exit";
 				CloseQuestHeader("Headhunt");
@@ -248,7 +268,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "Givetaskhunt_2":
 			if (IsEquipCharacterByItem(Pchar, "patent_eng") || IsEquipCharacterByItem(Pchar, "patent_fra") || IsEquipCharacterByItem(Pchar, "patent_spa") || IsEquipCharacterByItem(Pchar, "patent_hol"))
 			{
-				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам доверится, извините.";
+				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам довериться, извините.";
 				link.l1 = "Эх, жаль!";
 				link.l1.go = "exit";
 				CloseQuestHeader("Headhunt");
@@ -293,7 +313,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "Givetaskhunt_3_1":
 			if (IsEquipCharacterByItem(Pchar, "patent_eng") || IsEquipCharacterByItem(Pchar, "patent_fra") || IsEquipCharacterByItem(Pchar, "patent_spa") || IsEquipCharacterByItem(Pchar, "patent_hol"))
 			{
-				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам доверится, извините.";
+				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам довериться, извините.";
 				link.l1 = "Эх, жаль!";
 				link.l1.go = "exit";
 				CloseQuestHeader("Headhunt");
@@ -343,7 +363,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "Givetaskhunt_4":
 			if (IsEquipCharacterByItem(Pchar, "patent_eng") || IsEquipCharacterByItem(Pchar, "patent_fra") || IsEquipCharacterByItem(Pchar, "patent_spa") || IsEquipCharacterByItem(Pchar, "patent_hol"))
 			{
-				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам доверится, извините.";
+				dialog.text = "Вы более не принадлежите к Береговому братству - теперь вы патентованный капер. Я не могу вам довериться, извините.";
 				link.l1 = "Эх, жаль!";
 				link.l1.go = "exit";
 				CloseQuestHeader("Headhunt");

@@ -1551,7 +1551,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore33";
 	locations[n].id.label = "Shore33";
-	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
+	locations[n].image = "loading\jonny_load\shores\Shore12.tga";
 	locations[n].worldmap = "Shore33";
 	//Sound
 	locations[n].type = "seashore";

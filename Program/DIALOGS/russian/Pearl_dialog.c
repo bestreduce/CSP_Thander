@@ -160,7 +160,8 @@ void ProcessDialogEvent()
 
 			//zagolski. битва в бухте
 			pchar.quest.sharp_pre.win_condition.l1 = "location";
-			pchar.quest.sharp_pre.win_condition.l1.location = "Shore9";
+			if (pchar.curIslandId == "Beliz") pchar.quest.sharp_pre.win_condition.l1.location = "Shore9";
+			else pchar.quest.sharp_pre.win_condition.l1.location = "Shore55";			
 			pchar.quest.sharp_pre.function = "sharp_pre";
 
 		break;

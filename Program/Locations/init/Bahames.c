@@ -226,11 +226,11 @@ int LocationInitBahames(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Nassau_tavern";
 	locations[n].id.label = "Tavern";
-	locations[n].filespath.models = "locations\inside\tavern03\";
-	locations[n].image = "loading\jonny_load\inside\Tavern03.tga";
+	locations[n].filespath.models = "locations\inside\tavern05\";
+	locations[n].image = "loading\jonny_load\inside\Tavern05.tga";
 	locations[n].habitues = 1;
 	//Town sack
-	locations[n].townsack = "Bahames";
+	locations[n].townsack = "Nassau";
 	locations[n].lockWeather = "Inside";
 	//Sound
 	locations[n].type = "tavern";
@@ -238,18 +238,19 @@ int LocationInitBahames(int n)
 	locations[n].islandId = "Bahames";
 	//Models
 	//Always
-	locations[n].models.always.tavern = "tavern03";
+	locations[n].models.always.tavern = "tavern05";
 	locations[n].models.always.tavern.level = 65538;
-	locations[n].models.always.locators = "tavern03_locators";
-	locations[n].models.always.window = "tavern03_window";
+	locations[n].models.always.nobsp = "tavern05NB";
+	locations[n].models.always.locators = "tavern05_locators";
+	locations[n].models.always.window = "tavern05_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
-	locations[n].models.day.charactersPatch = "tavern03_patch";
+	locations[n].models.day.charactersPatch = "tavern05_patch";
 	//Night
-	locations[n].models.night.charactersPatch = "tavern03_patch";
+	locations[n].models.night.charactersPatch = "tavern05_patch";
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";

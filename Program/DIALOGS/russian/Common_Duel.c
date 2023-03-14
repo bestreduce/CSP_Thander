@@ -581,6 +581,14 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 	break;
 
 // Квест ПГГ Виспер
+
+	case "Whisper_Officer":
+		Dialog.Text = "Приветствую, капитан. Я бы хотела попросить вас об одной услуге.";
+		link.l1 = "Хм. Ты о чём?";
+		link.l1.go = "Quest_Whisper";
+		sld.PGGWhisperQuestStart = true;
+	break;
+	
 	case "Quest_Whisper":
 		npchar.QuestWhisper = true;
 
@@ -593,13 +601,13 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 
 	case "Quest_Whisper_Room":
 		chrDisableReloadToLocation = true;
-		DoReloadCharacterToLocation(npchar.PGGAi.location.town + "_tavern_upstairs","goto","goto1");
-		ChangeCharacterAddressGroup(npchar, npchar.PGGAi.location.town + "_tavern_upstairs", "goto", "goto1");
+		DoReloadCharacterToLocation(GetCurrentTown() + "_tavern_upstairs","goto","goto1");
+		ChangeCharacterAddressGroup(npchar, GetCurrentTown() + "_tavern_upstairs", "goto", "goto1");
 		pchar.InstantDialog = npchar.id;
 
 		npchar.Dialog.Filename = "Quest\WhisperLine\Whisper_PGG.c";
 		npchar.dialog.currentnode   = "Quest_Whisper_1";
-		DoQuestFunctionDelay("InstantDialog", 1.1);
+		DoQuestFunctionDelay("InstantDialog", 1);
 		DialogExit();
 	break;
 

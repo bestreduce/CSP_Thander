@@ -569,7 +569,8 @@ void GetTextureUVForShip(int nShipType, ref rLeft, ref rTop, ref rRight, ref rBo
 	if( nShipType> -1 && nShipType<SHIP_TYPES_QUANTITY_WITH_FORT ) // <-- ugeen fix, для тартаны nShipType = 0 !!!!
 	{
 		ref rBaseShip = &ShipsTypes[nShipType];
-		SetShipPictureDataByShipTypeName( rBaseShip.name );
+		//SetShipPictureDataByShipTypeName( rBaseShip.name );
+		SetShipPictureDataByShipTypeName( nShipType );
 		int nV = BI_intNRetValue[0] / 32;
 		int nH = BI_intNRetValue[0] - nV * 32;
 		fLeft = stf(nH) * 0.03125;

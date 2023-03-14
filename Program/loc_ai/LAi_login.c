@@ -236,7 +236,7 @@ void LAi_CharacterPostLogin(ref location)
 					Trace("Can't find good locator for follower character <" + chr.id + ">");
 				}
 			}
-			if (findsubstr(chr.model, "ghost" , 0) != -1 )
+			if (CheckAttribute(chr, "model") && findsubstr(chr.model, "ghost" , 0) != -1 )
 			{
 				object persRef = GetCharacterModel(chr);
 				SendMessage(persRef, "ls", MSG_MODEL_SET_TECHNIQUE, "DLightMark");
@@ -253,6 +253,7 @@ void LAi_CharacterPostLogin(ref location)
 		CreateMayak(location);
 		CreateBrothels(location);
 		CreatePearlVillage(location);
+		CreateIndianVillage(location);
 		CreateInsideHouseEncounters(location);
 		CreateInsideResidenceEncounters(location);
 		CreateSkladInsideEncounters(location);
@@ -308,6 +309,7 @@ void LAi_CharacterPostLogin(ref location)
 		CheckLootCollector();
 		CheckBSFinish();
 		CheckWoundedOfficers();
+		GovernorManInviting();
 	}
 }
 
@@ -452,21 +454,6 @@ void UniqueHeroEvents()
 		Log_info(" - Ожидайте - ");
 		DoQuestFunctionDelay("DHmessages",4.0);
 	}
-
-	if (CheckAttribute(pchar, "WhisperPGG"))
-	{
-		sld = CharacterFromID(pchar.WhisperPGG);
-		if (IsCompanion(sld) || IsOfficer(sld))
-		{
-			if (CheckNPCQuestDate(sld, "AmmoUpdate"))
-			{
-				SetNPCQuestDate(sld, "AmmoUpdate");
-				int maxShells = sti(sld.rank) + sti(pchar.rank);
-				if (sti(sld.Items.12_gauge) < maxShells)	sld.Items.12_gauge = sti(sld.Items.12_gauge) + maxShells/10;
-				if (sti(sld.Items.grapeshot) < maxShells)	sld.Items.grapeshot = sti(sld.Items.grapeshot) + maxShells/10;
-			}
-		}
-	}
 }
 
 void SecondChanceRefresh()
@@ -479,7 +466,7 @@ void SecondChanceRefresh()
 		{
 			DeleteAttribute(chr, "Adventurers_Luck");
 		}
-		if (findsubstr(chr.model, "ghost" , 0) != -1 )
+		if (CheckAttribute(chr, "model") && findsubstr(chr.model, "ghost" , 0) != -1 )
 		{
 			object persRef = GetCharacterModel(chr);
 			SendMessage(persRef, "ls", MSG_MODEL_SET_TECHNIQUE, "DLightMark");
@@ -497,8 +484,8 @@ void SimulatePGGLife()
 			sld = CharacterFromID("PsHero_"+i);
 			if (findsubstr(pchar.location, sld.PGGAi.location.town, 0) != -1 && !LAi_IsDead(sld) && sld.PGGAi.location != "Dead") //закрыл дополнительно.
 			{
-				if (IsCompanion(sld) || IsOfficer(sld) || CheckAttribute(sld, "PGGAi.Task.SetSail") || CheckAttribute(sld, "PGGAi.SeenToday") || sld.sex == "skeleton")
-				{
+				if (IsCompanion(sld) || IsOfficer(sld) || CheckAttribute(sld, "PGGAi.Task.SetSail") || CheckAttribute(sld, "PGGAi.SeenToday") || sld.sex == "skeleton" || sld.Dialog.CurrentNode == "TreasureHunterPGG")
+				{//фикс - если ПГГ уже выбран для спора за клад
 					continue;
 				}
 				else
@@ -519,7 +506,7 @@ void SimulatePGGLife()
 			}
 			else
 			{
-				Log_TestInfo("ПГГ бродит неподалеку");
+				Log_TestInfo("ПГГ бродит неподалёку");
 				sld = CharacterFromID(pchar.chosenHero);
 				LAi_SetActorTypeNoGroup(sld);
 				sld.PGGAi.SeenToday = true;
@@ -532,10 +519,6 @@ void SimulatePGGLife()
 				ref chr;
 				if (findsubstr(pchar.location, "_town", 0) != -1)
 				{
-					if (findsubstr(pchar.location, "LaVega", 0) != -1 || findsubstr(pchar.location, "LeFransua", 0) != -1 || findsubstr(pchar.location, "FortOrange", 0) != -1 || findsubstr(pchar.location, "PuertoPrincipe", 0) != -1)
-					{
-						LAi_ActorGoToLocation(sld, "reload", "reload5", sld.PGGAi.location.town.backup, "", "", "PGGLeft", -1);
-					}
 					LAi_ActorGoToLocation(sld, "reload", "reload4_back", sld.PGGAi.location.town.backup, "", "", "PGGLeft", -1);
 
 					sld.PGGOfficers = 2+sti(sld.rank)/15;
@@ -638,6 +621,7 @@ bool LAi_CharacterLogoff(aref chr)
 void LAi_AddLoginedCharacter(aref chr)
 {
 	int index = sti(chr.index);
+	SetArraySize(&LAi_loginedcharacters,MAX_CHARS_IN_LOC);
 	LAi_loginedcharacters[LAi_numloginedcharacters] = index;
 	LAi_numloginedcharacters = LAi_numloginedcharacters + 1;
 }
@@ -700,11 +684,11 @@ void GenerateSpySeeker(ref location)
 	bool bOK2 = !CheckAttribute(pchar, "GenQuest.questName");
 	if(!CheckAttribute(pchar, "SpySeeker.dayrandom")) pchar.SpySeeker.dayrandom = 0;
 	if(pchar.questTemp.CapBloodLine == true) return;
-	if(HasSubStr(location.id, "Common") && rand(1000) > 750 && pchar.dayrandom != pchar.SpySeeker.dayrandom && !HasSubStr(location.id, "Crypt") && GetCityNation(location.fastreload) != 4)
+	if(HasSubStr(location.id, "Common") && rand(1000) > 750 && pchar.dayrandom != pchar.SpySeeker.dayrandom && !HasSubStr(location.id, "Crypt") && GetCityNation(location.fastreload) != 4 && Characters[GetFortCommanderIDX(colonies[findcolony(location.fastreload)].id)].fort.mode != FORT_DEAD)
 	{
 		if(bOK || bOK2)
 		{
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref rChar = GetCharacter(NPC_GenerateCharacter("SpySeeker", "officer_"+ (1 + drand(63)), "man", "spy", pchar.rank, GetCityNation(location.fastreload), -1, false)); //LEO: Превозмогаторам страдание 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref rChar = GetCharacter(NPC_GenerateCharacter("SpySeeker", "officer_"+ (1 + drand(63)), "man", "man_fast", pchar.rank, GetCityNation(location.fastreload), -1, false)); //LEO: Превозмогаторам страдание 08.12.2021
 			else rChar = GetCharacter(NPC_GenerateCharacter("SpySeeker", "officer_"+ (1 + drand(63)), "man", "man", pchar.rank, GetCityNation(location.fastreload), -1, false));
 			rChar.Dialog.FileName = "Common_Seeker.c";
 			LAi_SetImmortal(rChar, true);
@@ -718,7 +702,7 @@ void GenerateSpySeeker(ref location)
 			if (CheckAttribute(location, "locators.goto")) {
 				aref tmpAref;
 				makearef(tmpAref, location.locators.goto);
-				ChangeCharacterAddressGroup(rChar, PChar.location, "goto", GetAttributeName(GetAttributeN(tmpAref, 0))); // берем первый доступный локатор на локации
+				Log_TestInfo(PlaceCharacter(rChar, "goto", "random"));
 			} else {
 				Trace("not found locators for location: "+location.name)
 				return;
@@ -733,3 +717,24 @@ void GenerateSpySeeker(ref location)
 	}
 }
 //Евент с искателем лазутчиков Lipsar//
+void GovernorManInviting()
+{
+	string sNationname;
+	if (CheckAttribute(pchar, "EquipedPatentId")) return;
+	for(int i = 0; i < 4; i++)
+	{
+		sNationname = GetNationNameByType(i));
+		if (CheckAttribute(pchar, sNationname+".quest.mayor") && sti(pchar.(sNationname).quest.mayor) >= 10 && findsubstr(pchar.location, "_town", 0) != -1 && sti(pchar.(sNationname).quest.mayor.done) == 0)
+		{
+			int iChar = NPC_GenerateCharacter(sNationname+"_Governor_Man", "off_"+NationShortName(i)+"_1", "man", "man", sti(pchar.rank), i, 1, 0);
+			ref rChar = GetCharacter(iChar);
+			rChar.nation = i;
+			rChar.dialog.filename = "Governor_Man.c";
+			LAi_Setimmortal(rChar, true);
+			ChangeCharacterAddressGroup(rChar, pchar.location, "reload", LAi_FindNearestFreeLocator2Pchar("reload"));
+			LAi_SetActorType(rChar);
+			chrDisableReloadToLocation = true;
+			LAi_ActorDialog(rChar, pchar, "", 15.0, 1.0);
+		}
+	}
+}

@@ -45,7 +45,7 @@ void InitInterface_R(string iniName, ref _chr) // _chr нужно для чит�
 	SetEventHandler("REMOVE_BUTTON", "REMOVE_BUTTON", 0);
 	SetEventHandler("REMOVE_ALL_BUTTON", "REMOVE_ALL_BUTTON", 0);
 	SetEventHandler("ExitPartitionWindow", "ExitPartitionWindow", 0);
-
+	SetEventHandler("OnTableClick", "OnTableClick", 0);
     XI_RegistryExitKey("IExit_F2");
     //////////////////
     EI_CreateFrame("SHIP_BIG_PICTURE_BORDER",156,78,366,313); // tak from SHIP_BIG_PICTURE
@@ -78,6 +78,13 @@ void InitInterface_R(string iniName, ref _chr) // _chr нужно для чит�
 	GameInterface.TABLE_LIST.hr.td5.str = "Вес пачки";
 	GameInterface.TABLE_LIST.hr.td5.scale = 0.9;
 	GameInterface.TABLE_LIST.select = 0;
+//--> mod tablesort
+	GameInterface.TABLE_LIST.hr.td1.sorttype = "string";
+	GameInterface.TABLE_LIST.hr.td2.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td3.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td4.sorttype = "";
+	GameInterface.TABLE_LIST.hr.td5.sorttype = "";
+//<-- mod tablesort
 	SetCurrentNode("SHIPS_SCROLL");
 	OnShipScrollChange();
 	sMessageMode = "";
@@ -142,7 +149,7 @@ void IDoExit(int exitCode)
 	DelEventHandler("REMOVE_BUTTON", "REMOVE_BUTTON");
 	DelEventHandler("REMOVE_ALL_BUTTON", "REMOVE_ALL_BUTTON");
 	DelEventHandler("ExitPartitionWindow", "ExitPartitionWindow");
-
+	DelEventHandler("OnTableClick", "OnTableClick");
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
 	{
@@ -262,7 +269,7 @@ void ProcessCommandExecute()
 		case "RESORT":
 			if(comName=="click")
 			{
-				ReSortCompanions();
+				SortCompanionsBy("speedrate");
 			}
 		break;
 
@@ -1296,6 +1303,7 @@ void CannonsMenuRefresh()
 		SetFormatedText("CANNONS_QTY_L", "0");
 	}
 	FillCannonsTable();
+	if (IsMainCharacter(xi_refCharacter)) BI_UpdateCannons();
 }
 void ExitCannonsMenu()
 {
@@ -1653,44 +1661,90 @@ int GetPartitionAmount(string _param)
     return sti(Pchar.(_param));
 }
 
-int cpos[7]={0,0,0,0,0,0,0};
-int cpostotal[7]={0,0,0,0,0,0,0};
-int cindex[7]={0,0,0,0,0,0,0};
-void ReSortCompanions()
+void SortCompanionsBy(string attrName) // сортируем по базовому атрибуту корабля
 {
-	int cn,iShipType;
-	int cq = GetCompanionQuantity(pchar);
-	if (cq > 1)
-	{
-		for(int i = 1; i <= cq-1; i++)
-		{
-			cn = GetCompanionIndex(pchar, i);
-			iShipType = sti(characters[cn].ship.type);
-			if(iShipType != SHIP_NOTUSED)
-			{
-				ref rBaseShip = GetRealShip(iShipType);
-				cpos[i-1] = makeint(stf(rBaseShip.speedrate)*100.0);
-				cindex[i-1] = GetCompanionIndex(pchar,i);
-			}
+    Log_Info("123");
+    int ids[7];
+    int ids_num = 0;
+
+    int cq = GetCompanionQuantity(pchar);
+    if (cq <= 1) return;
+
+    for(int i = 1; i < cq; i++) {
+        int cn = GetCompanionIndex(pchar, i);
+        if (cn == -1) {
+            continue;
+        }
+
+        if(sti(characters[cn].ship.type) == SHIP_NOTUSED) {
+            ids[ids_num] = cn;
+            ids_num++;
+            continue;
+        }
+
+        ref rBaseShip = GetRealShip(sti(characters[cn].ship.type));
+		if (!CheckAttribute(rBaseShip, attrName)) {
+			trace("ОШИБКА: не найден атрибут сортировки по '" + attrName + "' у корабля '" + rBaseShip.Name + "'");
+            return; // чтобы ничего не сломать
+		}
+
+        {
+			// insert
+            int j;
+            for(j = 0; j < ids_num; j++) {
+                bool insert = false;
+                int shipTypeLhs = sti(characters[ids[j]].ship.type);
+                if(shipTypeLhs == SHIP_NOTUSED) {
+                    // no ship
+                    insert = true;
+                } else {
+                    // check if greater or (equal+type is greater)
+                    ref rBaseShipLhs = GetRealShip(shipTypeLhs);
+
+                    int rhsVal = makeint(stf(rBaseShip.(attrName))*100.0);
+                    int lhsVal = makeint(stf(rBaseShipLhs.(attrName))*100.0);
+
+                    bool valueLess = lhsVal < rhsVal;
+                    bool typeLess = sti(characters[ids[j]].ship.type) < sti(characters[cn].ship.type);
+                    bool valueEqTypeLess = rhsVal == lhsVal && typeLess;
+
+                    insert = valueLess || valueEqTypeLess;
+                }
+                if(insert) {
+                    // shift
+                    for(int k=ids_num; k>j; k--) {
+                        ids[k] = ids[k-1];
+                    }
+                    break;
+                }
+            }
+            ids[j] = cn;
+            ids_num++;
 		}
 	}
-	else return;
-	for(i = 0; i < cq-1; i++)
+
+    for(i = 0; i < ids_num; i++)
 	{
-		int j = 0;
-		cpostotal[i] = cq-1;
-		while (j < cq-1)
-		{
-			if (j == i) {j++; continue;}
-			if (cpos[i] > cpos[j]) cpostotal[i] -= 1;
-			j++;
-		}
+        string id = "id"+(i+1);
+	    pchar.Fellows.Companions.(id) = ids[i];
 	}
-	for(i = 1; i <= cq-1; i++)
+
+    Event(EVENT_CHANGE_COMPANIONS,"");
+    IDoExit(RC_INTERFACE_TO_SHIP);
+}
+
+void OnTableClick()
+{
+	string sControl = GetEventData();
+	int iRow = GetEventData();
+	int iColumn = GetEventData();
+
+	//string sRow = "tr" + (iRow + 1);
+//--> mod tablesort
+	if (sControl == "TABLE_LIST")
 	{
-		string compName = "id"+cpostotal[i-1];
-		pchar.Fellows.Companions.(compName) = cindex[i-1];
-		Event(EVENT_CHANGE_COMPANIONS,"");
+		if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
+		Table_UpdateWindow(sControl);
 	}
-	IDoExit(RC_INTERFACE_TO_SHIP);
+//<-- mod tablesort
 }
