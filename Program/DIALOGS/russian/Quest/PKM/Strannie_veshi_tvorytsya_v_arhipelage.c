@@ -974,6 +974,22 @@ void ProcessDialogEvent()
 			dialog.text = "Нет! Этого не может быть!..";
 			link.l1 = "Что? Не ожидал, что кто-то разнесёт твоё мрачное убежище в клочья?";
 			link.l1.go = "Лорд_Хаоса_4";
+			
+			sld = CharacterFromID("Satanist_Oderjim_1");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_2");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_3");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_4");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_5");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
 		break;
 		
 		case "Лорд_Хаоса_4":
@@ -990,8 +1006,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("Chernoe_Solntse");
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);
-			LAi_SetImmortal(sld, true);
-			LAi_ActorRunToLocation(sld, "goto", "goto28", "none", "", "", "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2", -1);
+			LAi_ActorRunToLocation(sld, "goto", "goto28", "none", "", "", "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2", 4);
 		break;
 		
 		case "Verni_detey_11":
