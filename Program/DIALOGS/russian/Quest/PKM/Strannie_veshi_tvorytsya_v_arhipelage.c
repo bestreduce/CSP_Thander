@@ -818,6 +818,7 @@ void ProcessDialogEvent()
 		case "Обманываем Учителя_3":
 			DialogExit();
 			
+			if (GetDaysContinueNationLicence(SPAIN) < 2) GiveNationLicence(SPAIN, 2);
 			DoQuestReloadToLocation("SanJuan_tavern_upstairs", "goto", "goto2", "PKM_SvtvA_UchitelvTaverne");
 		break;
 		
