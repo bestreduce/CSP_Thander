@@ -11004,6 +11004,10 @@ void QuestComplete(string sQuestName, string qname)
 			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 0);
 			PChar.quest.PKM_SvtvA_IdemSledom.win_condition.l1.date.year = GetAddingDataYear(0, 0, 0);
 			PChar.quest.PKM_SvtvA_IdemSledom.win_condition = "PKM_SvtvA_IdemSledom2";
+			
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition.l1 = "item";
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition.l1.item = "PKM_SvtvA_pismo3";
+			PChar.quest.PKM_SvtvA_Chitaem.win_condition = "PKM_SvtvA_Chitaem";			
 		break;
 		
 		case "PKM_SvtvA_IdemSledom2":
@@ -11014,6 +11018,10 @@ void QuestComplete(string sQuestName, string qname)
 			DoQuestCheckDelay("PKM_SvtvA_TuremchikQuest2", 0.2);
 			
 			SetTimerCondition("PKM_SvtvA_TuremchikKonets", 0, 0, 1, false);
+		break;
+		
+		case "PKM_SvtvA_Chitaem":
+			ChangeItemDescribe("PKM_SvtvA_amulet", "itmdescr_PKM_SvtvA_amulet_Sila");
 		break;
 		
 		case "PKM_SvtvA_TuremchikQuest2":

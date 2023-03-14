@@ -1134,6 +1134,59 @@ int SetCharacterSkillBySculArtefact(ref _refCharacter, string _skillName)
     return 0;
 }
 
+int SetCharacterSkillByHaosArtefact(ref _refCharacter, string _skillName)
+{	
+    if (_skillName == SKILL_CANNONS || _skillName == SKILL_ACCURACY || _skillName == SKILL_F_HEAVY || _skillName == SKILL_FENCING || _skillName == SKILL_LEADERSHIP)
+	{
+       if (IsEquipCharacterByItem(_refCharacter, "PKM_SvtvA_amulet") && GetCharacterItem(_refCharacter, "PKM_SvtvA_pismo3")>0)
+       {
+           switch (_skillName)
+           {
+               case  SKILL_CANNONS:
+                   return 15;
+               break;
+
+               case  SKILL_ACCURACY:
+                   return 15;
+               break;
+
+               case  SKILL_F_HEAVY:
+                   return 15;
+               break;
+
+               case  SKILL_FENCING:
+                   return 15;
+               break;
+           }
+       }
+       else
+       {
+			if (IsEquipCharacterByItem(_refCharacter, "PKM_SvtvA_amulet"))
+			{
+				switch (_skillName)
+				{
+					case  SKILL_LEADERSHIP:
+						return -20;
+					break;
+				}
+				switch (_skillName)
+				{
+					case  SKILL_F_HEAVY:
+						return 15;
+					break;
+				}
+				switch (_skillName)
+				{
+					case  SKILL_FENCING:
+						return 15;
+					break;
+				}
+			}
+		}
+	}
+    return 0;
+}
+
 // Warship 25.10.08 Учет одежды
 int SetCharacterSkillBySuit(ref rChar, String sSkillName)
 {
@@ -1256,9 +1309,7 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		///////////// Иконки слева (Камни/бижутерия) <--
 
 		///////////// Иконки по центру (Комплексные бафы от идолов)  -->
-		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_F_HEAVY, "PKM_SvtvA_amulet", 15);		// {Амулет Хаоса} 						(+15 тяжёлое оружие, +15 среднее оружие, -20 к авторитету)
-		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FENCING, "PKM_SvtvA_amulet", 15);		// {Амулет Хаоса} 						(+15 тяжёлое оружие, +15 среднее оружие, -20 к авторитету)
-		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "PKM_SvtvA_amulet", -20);	// {Амулет Хаоса} 						(+15 тяжёлое оружие, +15 среднее оружие, -20 к авторитету)
+		skillN = skillN + SetCharacterSkillByHaosArtefact(_refCharacter, skillName);
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "DeSouzaCross", 30);			// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "DeSouzaCross", 20);		// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_COMMERCE, "DeSouzaCross", 10);		// {Крест Антонио де Соуза} 			(+30 к везению, +20 к авторитету, +10 к торговле)
