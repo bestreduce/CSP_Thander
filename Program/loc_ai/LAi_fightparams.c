@@ -364,7 +364,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 	switch(actionType)
 	{
 		case "fast":
-			energy = 10.0;
+			energy = 8.0;
 		break;
 		case "force":
 			energy = 7.0;
@@ -373,7 +373,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 			energy = 14.0;
 		break;
 		case "break":
-			energy = 30.0;
+			energy = 28.0;
 		break;
 		// case "feint":
 			// energy = 7.0;
@@ -405,7 +405,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 		{
 			energy = energy * fSkill * GetMushketEnergyDrain(character);
 		}
-		else energy = energy * fSkill * LAi_GetBladeEnergyType(character);  // энергоемкость от веса
+		else energy = energy * fSkill * (2*LAi_GetBladeEnergyType(character) + 1) / 3;  // энергоемкость от веса
 	}
 	return energy;
 }
@@ -418,7 +418,7 @@ float GetMushketEnergyDrain(ref character)
 
 float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 {
-	float fMultiplier = 1.30+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/10.0);//влияние силы на скорость восстановления энергии
+	float fMultiplier = 1.35+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/20.0);// 1.5 ... 1.85 - влияние силы на скорость восстановления энергии
 
 	if(CheckCharacterPerk(chr, "Energaiser")) // скрытый перк боссов и ГГ
 	{
