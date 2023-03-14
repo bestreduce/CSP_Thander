@@ -218,9 +218,9 @@ bool LoadLocation(ref loc)
 		if(loc.environment.sea == "true")
 		{
 			//Матросы на палубах
-			//Ship_Walk_Init();
-			//LayerFreeze(SEA_EXECUTE,false);
-			//LayerFreeze(SEA_REALIZE,false);
+			Ship_Walk_Init();
+			LayerFreeze(SEA_EXECUTE,false);
+			LayerFreeze(SEA_REALIZE,false);
 			CreateSea(EXECUTE, REALIZE);
 			if (!CheckAttribute(loc, "notCrateFoam"))
 			{
