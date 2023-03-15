@@ -11358,8 +11358,8 @@ void QuestComplete(string sQuestName, string qname)
 			//Чёрное Солнце
 			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 1000);
-			LAi_SetHP(sld,600,600);
-			LAi_SetDltHealth(sld, 130.0);
+			LAi_SetHP(sld,800,800);
+			LAi_SetDltHealth(sld, 110.0);
 			sld.name = "Лорд Чёрное Солнце";
 			sld.lastname = "";
 			sld.FaceId = 297;
@@ -11378,6 +11378,7 @@ void QuestComplete(string sQuestName, string qname)
 			EquipCharacterbyItem(sld, "cirass3");
 			sld.SuperShooter  = true;
 			if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
+			LAi_SetCheckMinHP(sld, 10, true, "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem");
 			
 			//Одержимый#1
 			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_1", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
@@ -11544,7 +11545,6 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetHP(sld,1200,1200);
 			LAi_SetCurHP(sld, 500.0);
 			LAi_SetDltHealth(sld, 4.0);
-			LAi_SetCheckMinHP(sld, 10, true, "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem");
 			
 			if (!CheckAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda"))
 			{
@@ -11575,10 +11575,11 @@ void QuestComplete(string sQuestName, string qname)
 			DoQuestCheckDelay("hide_weapon", 1.2);
 			sld = CharacterFromID("Chernoe_Solntse");
 			LAi_SetActorType(sld);
-			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Mefisto");
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Konets");
 			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Лорд_Хаоса_3";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
+			LAi_SetImmortal(sld, true);
 		break;
 		
 		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":		
@@ -11589,7 +11590,6 @@ void QuestComplete(string sQuestName, string qname)
 			{
 				sld = CharacterFromID("Plennik_u_satanistov_"+i);
 				ChangeCharacterAddressGroup(sld, "none", "", "");
-				LAi_SetImmortal(sld, false);
 			}
 			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda");
 			
@@ -11610,7 +11610,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lastname = "";
 			sld.FaceId = 297;
 			//sld = CharacterFromID("Chernoe_Solntse");
-			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS16, 100, 100, 100);
+			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 			//FantomMakeCoolSailor(sld, SHIP_BRIGANTINE, "Мэри Селест", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
 			sld.DontRansackCaptain = true;
 			sld.DontHitInStorm = true;

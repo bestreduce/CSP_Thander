@@ -1676,7 +1676,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "SCQ_ProverkaZnaniy_4":
-			if ("актум атке трактатум висэ" == GetStrSmallRegister(dialogEditStrings[1]) || "абеунт студиа ин морес фиат" == GetStrSmallRegister(dialogEditStrings[1]) || "кункта суперсилио мовентиса" == GetStrSmallRegister(dialogEditStrings[1]) || "десиэс репетитиа пласебитум" == GetStrSmallRegister(dialogEditStrings[1]) 
+			if ("актум атке трактатум висэма" == GetStrSmallRegister(dialogEditStrings[1]) || "абеунт студиа ин морес фиат" == GetStrSmallRegister(dialogEditStrings[1]) || "кункта суперсилио мовентиса" == GetStrSmallRegister(dialogEditStrings[1]) || "десиэс репетитиа пласебитум" == GetStrSmallRegister(dialogEditStrings[1]) 
 				|| "эт фабула партэм верис абет" == GetStrSmallRegister(dialogEditStrings[1]) || "омо омини лопус эст донграт" == GetStrSmallRegister(dialogEditStrings[1]) || "летум нон омниа финит денов" == GetStrSmallRegister(dialogEditStrings[1]) || "мементо куя пульвис эспунир" == GetStrSmallRegister(dialogEditStrings[1])
 				|| "нек сутор ультра крепидам ов" == GetStrSmallRegister(dialogEditStrings[1]) || "омнис арс имитатио эс натур" == GetStrSmallRegister(dialogEditStrings[1]) || "порта ди итинэри лонгиссима" == GetStrSmallRegister(dialogEditStrings[1]) || "репетитио эст матэр студиорум" == GetStrSmallRegister(dialogEditStrings[1])
 				|| "сиро до венинтибус осса сапит" == GetStrSmallRegister(dialogEditStrings[1]) || "силентиум эст аурум нихил кур" == GetStrSmallRegister(dialogEditStrings[1]) || "судорэ эт сангуине перикулум" == GetStrSmallRegister(dialogEditStrings[1]) || "тэмпус эдакс рерум веритас нэ" == GetStrSmallRegister(dialogEditStrings[1])
