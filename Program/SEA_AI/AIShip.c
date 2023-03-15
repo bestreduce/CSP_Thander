@@ -1,4 +1,4 @@
-object	Sail, Rope, Flag, Vant, Pennant, sFlag;
+object	Sail, Rope, Flag, Vant, VantL, VantZ, Pennant, sFlag;
 object PirateFlag, PirateCFlag, CommanderFlag, FortFlag, MerchantFlag, PersonalFlag, QuestFlag;
 
 #define MIN_ENEMY_DISTANCE_TO_DISABLE_MAP_ENTER				1000.0
@@ -61,6 +61,14 @@ void CreateRiggingEnvironment()
 	LayerAddObject(sCurrentSeaExecute, &Vant, iShipPriorityExecute + 4);
 	LayerAddObject(sCurrentSeaRealize, &Vant, iShipPriorityRealize + 4);
 
+	CreateEntity(&VantL, "VantL");
+	LayerAddObject(sCurrentSeaExecute, &VantL, iShipPriorityExecute + 4);
+	LayerAddObject(sCurrentSeaRealize, &VantL, iShipPriorityRealize + 4);
+	
+	CreateEntity(&VantZ, "VantZ");
+	LayerAddObject(sCurrentSeaExecute, &VantZ, iShipPriorityExecute + 4);
+	LayerAddObject(sCurrentSeaRealize, &VantZ, iShipPriorityRealize + 4);
+
 	iNumShips = 0;
 	//Boyer mod for new version #20170201
 	Pennant.ratioExceeds = 1;
@@ -95,6 +103,8 @@ void DeleteRiggingEnvironment()
 	DeleteClass(&PersonalFlag);
 	DeleteClass(&QuestFlag);
 	DeleteClass(&Vant);
+	DeleteClass(&VantL);
+	DeleteClass(&VantZ);
 }
 
 void DeleteShipEnvironment()
