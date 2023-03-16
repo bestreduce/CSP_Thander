@@ -10890,6 +10890,7 @@ void QuestComplete(string sQuestName, string qname)
 			
 			AddQuestRecord("PKM_Animists", "16");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ен","на"));
+			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("","а"));
 			CloseQuestHeader("PKM_Animists");
 		break;
 		
