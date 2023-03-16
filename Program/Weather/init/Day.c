@@ -186,7 +186,7 @@ int Whr_InitDay(int n)
 
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 1.5;
-	Weathers[n].Wind.Speed.Max = 20.0;
+	Weathers[n].Wind.Speed.Max = 17.0;
 
 	n++;
 
