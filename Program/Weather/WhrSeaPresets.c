@@ -427,7 +427,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 		break;
 
 		case "storm"://шторм
-			fAmp1 = fWind * 2 + 1;//64;
+			fAmp1 = fWind * 3 + 1;//64;
 			fAnimSpeed1 = 2.25;
 			fScale1 = 0.075;
 			sMoveSpeed1 = "12.0, 0.0, 0.0";

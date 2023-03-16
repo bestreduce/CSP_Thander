@@ -171,8 +171,8 @@ int Whr_InitDayStorm(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.7;//����� �� �������. �.�. ��� ��� ���� �������. �������� �� 0.0 �� 1.0
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 21.0;
-	Weathers[n].Wind.Speed.Max = 28.0;
+	Weathers[n].Wind.Speed.Min = 18.0;
+	Weathers[n].Wind.Speed.Max = 21.0;
 	
 	n++;
 
@@ -346,8 +346,8 @@ int Whr_InitDayStorm(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.7;//����� �� �������. �.�. ��� ��� ���� �������. �������� �� 0.0 �� 1.0
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 21.0;
-	Weathers[n].Wind.Speed.Max = 28.0;
+	Weathers[n].Wind.Speed.Min = 18.0;
+	Weathers[n].Wind.Speed.Max = 21.0;
 	
 	n++;
 
@@ -522,8 +522,8 @@ int Whr_InitDayStorm(int n)
 	
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 21.0;
-	Weathers[n].Wind.Speed.Max = 28.0;
+	Weathers[n].Wind.Speed.Min = 18.0;
+	Weathers[n].Wind.Speed.Max = 21.0;
 	
 	n++;
 
@@ -698,8 +698,8 @@ int Whr_InitDayStorm(int n)
 	
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 21.0;
-	Weathers[n].Wind.Speed.Max = 28.0;
+	Weathers[n].Wind.Speed.Min = 18.0;
+	Weathers[n].Wind.Speed.Max = 21.0;
 	
 	n++;
 
