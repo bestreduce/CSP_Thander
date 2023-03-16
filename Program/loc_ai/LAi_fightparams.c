@@ -420,7 +420,7 @@ float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 {
 	float fMultiplier = 1.35+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/20.0);// 1.5 ... 1.85 - влияние силы на скорость восстановления энергии
 
-	if(CheckCharacterPerk(chr, "Energaiser")) // скрытый перк боссов и ГГ
+	if((MOD_SKILL_ENEMY_RATE == 10) || (CheckCharacterPerk(chr, "Energaiser"))) // скрытый перк боссов и ГГ
 	{
 		fMultiplier = fMultiplier * 1.5;
 	}
@@ -1746,7 +1746,7 @@ float LAi_NPC_GetAttackWeightBreak()
 float LAi_NPC_GetAttackWeightFeint()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = Random()*20.0; //30 boal fix
+	npc_return_tmp = 30.0; //boal fix
 	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
@@ -1770,7 +1770,7 @@ float LAi_NPC_GetAttackDefence()
 			sAction = "break";
 		break;
 	}
-	npc_return_tmp = 5 + 10.0 * level + MOD_SKILL_ENEMY_RATE;
+	npc_return_tmp = 4 + 10.0 * level + MOD_SKILL_ENEMY_RATE;
 	if(Lai_CharacterGetEnergy(chr) < LAi_CalcUseEnergyForBlade(chr,sAction)) 
 	{
 		npc_return_tmp *= 2;
@@ -1808,7 +1808,7 @@ float LAi_NPC_GetDefenceWeightBlock()
 	{
 		npc_return_tmp = 6.0;
 	}
-	npc_return_tmp = npc_return_tmp * (0.5 + (0.05 * MOD_SKILL_ENEMY_RATE));
+	npc_return_tmp = npc_return_tmp;
 	return npc_return_tmp;
 }
 
@@ -1818,8 +1818,9 @@ float LAi_NPC_GetDefenceWeightBlock()
 float LAi_NPC_GetDefenceWeightParry()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 10.0; // 40 boal
-	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	float level = LAi_GetCharacterFightLevel(chr);
+	npc_return_tmp = 12.0; // 40 boal
+	npc_return_tmp = npc_return_tmp + 20 * level;
 	return npc_return_tmp;
 }
 
