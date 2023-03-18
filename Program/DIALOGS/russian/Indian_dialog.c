@@ -59,10 +59,10 @@ void ProcessDialogEvent()
 		
 		case "IndianWoman":
 			NextDiag.TempNode = "IndianWoman";
-			dialog.text = NPCStringReactionRepeat("Белая скво хочет говорить?", 
+			dialog.text = NPCStringReactionRepeat(""+ GetSexPhrase("Бледнолицый","Белая скво") +" хочет говорить?", 
 				"Снова ты, яланауи?", 
-				"Белая скво любит говорить.",
-                "Духи привели ко мне бледнолицую сестру...", "block", 1, npchar, Dialog.CurrentNode);
+				""+ GetSexPhrase("Бледнолицый","Белая скво") +" любит говорить.",
+                "Духи привели ко мне бледнолиц"+ GetSexPhrase("его брата","ую сестру") +".", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Да.", 
 				"Да, снова я.",
                 "Очень поэтично.", 
@@ -71,7 +71,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "IndianWoman_1":
-			dialog.text = LinkRandPhrase(""+npchar.name+" слушать тебя, дочь моря.","Что ты хотеть от "+npchar.name+", белая скво?","Мои уши открыты для твоих слов, чужеземка.");
+			dialog.text = LinkRandPhrase(""+npchar.name+" слушать тебя, "+ GetSexPhrase("сын моря","дочь моря") +".","Что ты хотеть от "+npchar.name+", "+ GetSexPhrase("бледнолицый","белая скво") +"?","Мои уши открыты для твоих слов, чужезем"+ GetSexPhrase("ец","ка") +".");
 			/*if (CheckIndianGift() && !CheckAttribute(npchar, "quest.gift"))
 			{
 				link.l1 = LinkRandPhrase("У меня есть кое-что для тебя. Хочешь посмотреть?","Хочешь, покажу тебе кое-что интересное? Тебе понравится...","У меня есть кое-что, что порадует тебя, дитя джунглей... Хочешь глянуть?");
