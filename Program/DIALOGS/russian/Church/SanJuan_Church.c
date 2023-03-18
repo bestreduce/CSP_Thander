@@ -216,6 +216,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Благодарю вас, а что за задание вы хотите мне поручить?";
 			link.l1.go = "PKM_SvtvA_Ch2_3";
 			AddMoneyToCharacter(pchar, 5000);
+			PChar.quest.PKM_SvtvA_TA_ploho.over = "yes";
 		break;
 
 		case "PKM_SvtvA_Ch2_3":
