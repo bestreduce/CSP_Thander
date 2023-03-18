@@ -727,7 +727,7 @@ void DozorLastDialog(string qName)
 	InterfaceStates.Buttons.Save.enable = false;
 
 	ref chr = GetCharacter(NPC_GenerateCharacter("Dozor NoName", "officer_6", "man", "man", 1, PIRATE, 0, false));
-	chr.name = "незнакомец";
+	chr.name = "Незнакомец";
 	chr.lastname = "";
 	chr.greeting = "cit_common1";
 	chr.Dialog.FileName = "DamnedDestiny\Dozor\Characters.c";
