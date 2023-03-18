@@ -579,7 +579,7 @@ int LocationInitPearl(int n)
 	//Reload map
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "SantaCatalina_PearlCave";
-	locations[n].reload.l1.emerge = "reload1";
+	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
