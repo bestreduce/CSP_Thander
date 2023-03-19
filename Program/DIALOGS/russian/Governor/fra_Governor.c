@@ -195,17 +195,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					AddMoneyToCharacter(pchar, 5000);
                 break;
                 case "Fr6Olone_OloneIsDead":
-                    dialog.text = "Что скажете, капитан? Все прошло удачно?";
+                    dialog.text = "Что скажете, капитан? Всё прошло удачно?";
                     link.l1 = "Письмо доставлено, только вот с Олоне проблема вышла...";
                     link.l1.go = "Step_6_3";
                 break;
                 case "Fr6Olone_OloneIsLive":
-                    dialog.text = "Что скажете, капитан? Все прошло удачно?";
+                    dialog.text = "Что скажете, капитан? Всё прошло удачно?";
                     link.l1 = "Да, всё в порядке, месье. Ко всему прочему, мы успели захватить Куману и взяли изрядный приз.";
                     link.l1.go = "Step_6_7";
                 break;
                 case "Fr6Olone_TakeMoney":
-                    dialog.text = "Что скажете, капитан? Все прошло удачно?";
+                    dialog.text = "Что скажете, капитан? Всё прошло удачно?";
                     link.l1 = "Да, месье, письмо доставлено адресату лично в руки. Всё в порядке.";
                     link.l1.go = "Step_6_9";
                 break;
