@@ -85,7 +85,7 @@ void LAi_type_warrior_Init(aref chr)
 	}
 	else
 	{
-		if (!CheckAttribute(chr, "model") Log_TestInfo("LAi_type_warrior_Init: нет model у " + chr.id);
+		if (!CheckAttribute(chr, "model")) Log_TestInfo("LAi_type_warrior_Init: нет model у " + chr.id);
 		LAi_SetDefaultStayAnimation(chr);
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
