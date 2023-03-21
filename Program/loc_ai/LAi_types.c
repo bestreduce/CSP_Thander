@@ -162,7 +162,9 @@ void LAi_SetWarriorType(aref chr)
 	chr.chr_ai.type = LAI_DEFAULT_TYPE;
 	LAi_type_warrior_Init(chr);
 	LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
-	if(chr.model == "monkey")
+
+	if (!CheckAttribute(chr, "model") {Log_TestInfo("LAi_SetWarriorType: нет model у " + chr.id); return;}
+	if (chr.model == "monkey")//TO DO - переделать это нормально
 	{
 		LAi_SetMonkeyTypeNoGroup(chr);
 	}
@@ -177,12 +179,13 @@ void LAi_SetWarriorTypeNoGroup(aref chr)
 {
 	chr.chr_ai.type = LAI_DEFAULT_TYPE;
 	LAi_type_warrior_Init(chr);
-	if(chr.model == "monkey")
+
+	if (!CheckAttribute(chr, "model") {Log_TestInfo("LAi_SetWarriorTypeNoGroup: нет model у " + chr.id); return;}
+	if (chr.model == "monkey")
 	{
 		LAi_SetMonkeyTypeNoGroup(chr);
 	}
 }
-
 
 //------------------------------------------------------------------------------------------
 //Merchant

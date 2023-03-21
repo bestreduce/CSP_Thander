@@ -1048,7 +1048,7 @@ void Dead_AddLoginedCharacter(aref chr)
 				count = GetCharacterItem(chref, itemID);
 				RemoveItems(chref, itemID, count);
 			}
-			if (CheckAttribute(chr, "DontChangeGun"))
+			if (CheckAttribute(chr, "DontChangeGun") && CheckAttribute(chr, "equip.gun"))
 			{
 				itemID = chr.equip.gun;
 				count = GetCharacterItem(chref, itemID);

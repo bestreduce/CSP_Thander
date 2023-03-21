@@ -1428,6 +1428,7 @@ string seadogs_saveFrom = "";
 
 void OnSave()
 {
+	savefile_info = GetVerNum();
 	seadogs_saveFrom = "";
 	if(IsEntity(&worldMap) != 0)
 	{
@@ -1505,7 +1506,6 @@ void OnLoad()
 
 	//Boyer add
 	//onLoadReInit();
-	SpecOfficersCirass();
 	//Boyer change #20170418-01
 	//restoreQuestItems(); не нужно в отсутствие реинитов - Gregg
 	//End Boyer add
@@ -2967,44 +2967,4 @@ int iCalculateSaveLoadCount(string _SaveLoad)
 	iCount++;
 	MChref.SystemInfo.(sAttrName) = iCount;
 	return iCount;
-}
-
-void SpecOfficersCirass()
-{
-    if(CheckAttribute(pchar, "fix20210121")) return;
-
-    pchar.fix20210121 = true;
-
-    if(GetCharacterIndex("Daniel") != -1)
-	{
-    	sld = characterFromID("Daniel");
-		// Прописка всех моделей для кирас. -->
-    	sld.HeroModel = "PGG_YokoDias_0,PGG_YokoDias_1,PGG_YokoDias_2,PGG_YokoDias_3,PGG_YokoDias_4,PGG_YokoDias_5,PGG_YokoDias_6,PGG_YokoDias_7,PGG_YokoDias_8";
-    	// Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OffMushketer") != -1)
-	{
-    	sld = characterFromID("OffMushketer");
-		// Прописка всех моделей для кирас. -->
-        sld.HeroModel = "MusketeerEnglish_2,MusketeerEnglish_2_1,MusketeerEnglish_2_2,MusketeerEnglish_2_3,MusketeerEnglish_2_4,MusketeerEnglish_2_5,MusketeerEnglish_2,MusketeerEnglish_2,MusketeerEnglish_2";
-	    // Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OfMush1") != -1)
-	{
-    	sld = characterFromID("OfMush1");
-        // Прописка всех моделей для кирас. -->
-	    sld.HeroModel = "quest_mush_2,quest_mush_2_1,quest_mush_2_2,quest_mush_2_3,quest_mush_2_4,quest_mush_2_5,quest_mush_2,quest_mush_2,quest_mush_2";
-	    // Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OfMush2") != -1)
-	{
-    	sld = characterFromID("OfMush2");
-	    // Прописка всех моделей для кирас. -->
-	    sld.HeroModel = "quest_mush_1,quest_mush_1_1,quest_mush_1_2,quest_mush_1_3,quest_mush_1_4,quest_mush_1_5,quest_mush_1,quest_mush_1,quest_mush_1";
-	    // Прописка всех моделей для кирас. <--
-    }
-	SetNewModelToChar(sld);
 }

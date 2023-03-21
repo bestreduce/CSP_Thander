@@ -490,7 +490,7 @@ void BSCourtlyPassions_spawn_podsos()
 	for (i = 1; i < maxPodsos; i++)
 	{
 
-		sld = GetCharacter(NPC_GenerateCharacter("BS_VeinPodsos"+i, "pirate_"+sti(rand(25)+1), "man", "man", 99, PIRATE, 3, true));
+		sld = GetCharacter(NPC_GenerateCharacter("BS_VeinPodsos"+i, "pirate_"+sti(rand(24)+1), "man", "man", 99, PIRATE, 3, true));
 		ChangeCharacterAddressGroup(sld, _location.id, "monsters", GetAttributeName(GetAttributeN(grp, i)));
 		LAi_group_MoveCharacter(sld, "EnemyFight");
 		LAi_SetWarriorTypeNoGroup(sld);
@@ -788,7 +788,7 @@ void BSChaseBegun_shore_fight()
 	Group_SetType("BSChaseBegun_shore_fight", "war");//тип группы
 	for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE * 2; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("BSChaseBegun_shore_fight"+i, "pirate_"+sti(rand(25)+1), "man", "man", 99, PIRATE, 3, true));
+		sld = GetCharacter(NPC_GenerateCharacter("BSChaseBegun_shore_fight"+i, "pirate_"+sti(rand(24)+1), "man", "man", 99, PIRATE, 3, true));
 		ChangeCharacterAddressGroup(sld, "Shore_ship1", "reload", "reload1_back"));
 		LAi_group_MoveCharacter(sld, "BSChaseBegun_shore_fight");
 		sld.Ship.Type = GenerateShip(SHIP_TARTANE, false);
@@ -927,7 +927,7 @@ void BS_spawn_dead_podsos()
 	string cnd;
 	for (i = 1; i < maxPodsos; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("BS_VeinPodsos"+i, "pirate_"+sti(rand(25)+1), "man", "man", 99, PIRATE, 3, true));
+		sld = GetCharacter(NPC_GenerateCharacter("BS_VeinPodsos"+i, "pirate_"+sti(rand(24)+1), "man", "man", 99, PIRATE, 3, true));
 		ChangeCharacterAddressGroup(sld, _location.id, "patrol", GetAttributeName(GetAttributeN(grp, i)));
 		LAi_group_MoveCharacter(sld, "EnemyFight");
 		LAi_SetWarriorTypeNoGroup(sld);

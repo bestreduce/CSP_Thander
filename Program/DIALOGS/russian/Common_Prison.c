@@ -368,7 +368,7 @@ void ProcessDialogEvent()
 		case "TakeGun_1":
 			iGunGoods = pchar.questTemp.PrisonGun.Goods;
 			amount = sti(pchar.questTemp.PrisonGun.Qty);
-			iTemp = makeint(sti(pchar.questTemp.PrisonGun.Sum)/15000 + 0.5);
+			iTemp = makeint((sti(pchar.questTemp.PrisonGun.Sum) + 7500)/15000);
 			dialog.Text = RandPhraseSimple("Мне привезли деньги на орудия в кредитных сундуках. Получите, пожалуйста, положенные вам "+ iTemp +" сундуков.","А как же иначе! Но мне привезли деньги в кредитных сундуках. Согласно нашего уговора вам положено "+ iTemp +" сундуков. Вот, извольте получить.");
 			Link.l1 = "Сундуки - значит, сундуки. Благодарствую. С вами приятно иметь дело.";
             Link.l1.go = "TakeGun_2";

@@ -1193,7 +1193,7 @@ void ProcessDialogEvent()
 
 		case "BurntShip20_exit":
 			//AddMoneyToCharacter(PChar, sti(NPChar.Quest.BurntShip.Money));
-			TakeNItems(pchar, "chest", makeint(sti(NPChar.Quest.BurntShip.Money)/15000 + 0.5));
+			TakeNItems(pchar, "chest", makeint((sti(NPChar.Quest.BurntShip.Money) + 7500)/15000));
 			Log_Info("Вы получили кредитные сундуки");
 			PlaySound("interface\important_item.wav");
 			sTitle = "BurntShipQuest" + NPChar.location;

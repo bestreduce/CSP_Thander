@@ -1137,7 +1137,7 @@ void ProcessDialogEvent()
 
 		//  карты -->
         case "Card_Game":
-            if (!CheckNPCQuestDate(npchar, "Card_date_Yet") || sti(PChar.rank) < 4 || isBadReputation(pchar, 40) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(5))
+            if (!CheckNPCQuestDate(npchar, "Card_date_Yet") || sti(PChar.rank) < 4 || isBadReputation(pchar, 60) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < (2 + rand(2)) )
             {
                 SetNPCQuestDate(npchar, "Card_date_Yet");
                 dialog.text = "Я не буду играть в азартные игры с разными проходимцами!";
@@ -1262,7 +1262,7 @@ void ProcessDialogEvent()
 
 	    //  Dice -->
         case "Dice_Game":
-            if (!CheckNPCQuestDate(npchar, "Dice_date_Yet") || sti(PChar.rank) < 4 || isBadReputation(pchar, 40) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(5))
+            if (!CheckNPCQuestDate(npchar, "Dice_date_Yet") || sti(PChar.rank) < 4 || isBadReputation(pchar, 60) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < (2+rand(2)) )
             {
                 SetNPCQuestDate(npchar, "Dice_date_Yet");
                 dialog.text = "Я не буду играть в азартные игры с разными проходимцами!";

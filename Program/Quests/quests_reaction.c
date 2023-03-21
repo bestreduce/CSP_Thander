@@ -9839,7 +9839,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "PDM_Callow_sadis_na_stul":
 			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
 			LAi_SetSitType(pchar);
-			LAi_SetSitType(npchar);
+			//LAi_SetSitType(npchar);
 			sld = CharacterFromID("James_Callow")
 			LAi_SetActorType(sld);
 			LAi_ActorSetSitMode(sld);

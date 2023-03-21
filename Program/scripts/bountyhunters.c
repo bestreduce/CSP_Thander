@@ -49,44 +49,17 @@ void SeaHunterCheck()
     }
 }
 
-void SetShipHunter(ref Hunter)
+void SetShipHunter(ref Hunter)	//эта функция распространяется на ДУ, ОЗГ, морской патруль, охрану торговцев по квесту?
 {
-    int ShipsHunter, hcrew;
-
-	int j, q; // LEO: --> ОЗГ используют нац. корабли
-	int iNation = sti(Hunter.nation);
-	object rShip;
-	bool bOk = false;
-	aref aNation;
-	string sAttr;
-
-	while(!bOk)
-	{
-		if(makeint(pchar.rank) >= 1 && makeint(pchar.rank) <=5) ShipsHunter = 3 + rand(11); // 6 класс
-		if(makeint(pchar.rank) >= 5 && makeint(pchar.rank) <=10) ShipsHunter = 15 + rand(12); // 5 класс
-		if(makeint(pchar.rank) >= 10 && makeint(pchar.rank) <=15) ShipsHunter = 28 + rand(23); // 4 класс
-		if(makeint(pchar.rank) >= 15 && makeint(pchar.rank) <=20) ShipsHunter = 52 + rand(31); // 3 класс
-		if(makeint(pchar.rank) >= 20 && makeint(pchar.rank) <=30) ShipsHunter = 84 + rand(20); // 2 класс
-		if(makeint(pchar.rank) > 30 ) ShipsHunter = 84 + rand(40); // 2 - 1 класс
-		// Здесь для других рангов
-
-		rShip = GetShipByType(ShipsHunter);
-		makearef(aNation, rShip.nation);
-		q = GetAttributesNum(aNation);
-		for(j = 0; j < q; j++)
-		{
-			sAttr = GetAttributeName(GetAttributeN(aNation, j));
-			if(GetNationTypeByName(sAttr) == iNation && rShip.nation.(sAttr) == true) bOk = true;
-		}
-	} // <-- ОЗГ используют нац. корабли
-
-    SetRandomNameToCharacter(Hunter);
-    SetRandomNameToShip(Hunter);
-    Hunter.Ship.Type = GenerateShipExt(ShipsHunter, 1, Hunter);
-    SetBaseShipData(Hunter);
-    hcrew = GetMaxCrewQuantity(Hunter);
-    SetCrewQuantity(Hunter, hcrew);
-    SetCrewQuantityFull(Hunter); // to_do
+	if(makeint(pchar.rank) >= 1 && makeint(pchar.rank) <=5) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(6, 6,"war", sti(Hunter.nation)), true, Hunter); // 6 класс
+	if(makeint(pchar.rank) >= 5 && makeint(pchar.rank) <=10) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(5, 5,"war", sti(Hunter.nation)), true, Hunter); // 5 класс
+	if(makeint(pchar.rank) >= 10 && makeint(pchar.rank) <=15) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(4, 4,"war", sti(Hunter.nation)), true, Hunter); // 4 класс
+	if(makeint(pchar.rank) >= 15 && makeint(pchar.rank) <=20) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(3, 3,"war", sti(Hunter.nation)), true, Hunter); // 3 класс
+	if(makeint(pchar.rank) >= 20 && makeint(pchar.rank) <=30) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(2, 2,"war", sti(Hunter.nation)), true, Hunter); // 2 класс
+	if(makeint(pchar.rank) > 30 ) Hunter.Ship.Type = GenerateShipExt(GetShipTypeExt(2, 1,"war", sti(Hunter.nation)), true, Hunter); // 2 - 1 класс
+	// <-- ОЗГ используют нац. корабли
+	SetBaseShipData(Hunter);
+    SetCrewQuantityFull(Hunter);
 	RealShips[sti(Hunter.ship.type)].ship.upgrades.sails = 24 + rand(13); // LEO: Спец. паруса ОЗГ
 	Hunter.OZG = true;
 
@@ -104,7 +77,6 @@ void SetShipHunter(ref Hunter)
     {
         Fantom_SetCannons(Hunter, "war");
         Fantom_SetBalls(Hunter, "war");
-		//Fantom_SetUpgrade(Hunter, "war");
 		Fantom_SetUpgrade(Hunter, "hunter");
     }
 }

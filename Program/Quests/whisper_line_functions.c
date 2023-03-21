@@ -219,7 +219,7 @@ void WhisperTeleport(string qName)
 
 	for (i = 1; i < 13; i++)
 	{
-			sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_"+sti(i), "pirate_"+sti(rand(25)+1), "man", "man", 3+MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+			sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", 3+MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 			ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto"+sti(i));
 			Group_AddCharacter("wl_Pirate", sld.id);
 			LAi_SetWarriorType(sld);
@@ -273,7 +273,7 @@ void WhisperBonusChallenge(string qName)
 		ChangeCharacterAddressGroup(sld, PChar.location, "reload", "reload1");
 		LAi_SetImmortal(sld, true);
 
-		sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_sword"+sti(i), "pirate_"+sti(rand(25)+1), "man", "man", 777, PIRATE, 0, true));
+		sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_sword"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", 777, PIRATE, 0, true));
 		ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto"+sti(i));
 		ChangeCharacterAddressGroup(sld, PChar.location, "reload", "reload1");
 		LAi_SetImmortal(sld, true);
@@ -915,7 +915,7 @@ void WhisperPirateTownGetHat_part_1(string qName)
 			LAi_SetHP(sld, 12.0 * MOD_SKILL_ENEMY_RATE, 12.0 *MOD_SKILL_ENEMY_RATE);
 			ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item8");
 		}
-			sld = GetCharacter(NPC_GenerateCharacter("PirateTownDefender_"+sti(i), "pirate_"+sti(rand(25)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
+			sld = GetCharacter(NPC_GenerateCharacter("PirateTownDefender_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 			sld.Dialog.Filename = "Quest\WhisperLine\Whisper.c";
@@ -1076,7 +1076,7 @@ void WhisperMeetCrew(string qName)
 
 	for(i=1; i < 5; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("Wh_Crew"+sti(i), "pirate_"+sti(rand(25)+1), "man", "man", 5, PIRATE, -1, false));
+		sld = GetCharacter(NPC_GenerateCharacter("Wh_Crew"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", 5, PIRATE, -1, false));
 		LAi_SetHP(sld, 250.0, 250.0);
 		//sld.greeting = "Gr_padre";
 		ChangeCharacterAddressGroup(sld, "PuertoPrincipe_Port", "enc03", "enc03_0"+sti(i));
@@ -1844,7 +1844,7 @@ void DarkHuman_Amatike(string qName)
 		TakeNItems(sld,"potion1", rand(2)+1);
 		LAi_warrior_DialogEnable(sld, false);
 
-		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_blade"+sti(i), "pirate_"+sti(rand(25)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_blade"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 
 		ChangeCharacterAddressGroup(sld, "Shore9", "smugglers", "smugglerload");
 		LAi_SetWarriorType(sld);
