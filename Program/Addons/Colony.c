@@ -3461,7 +3461,7 @@ void CreateSmallColonyCaiman()
 
 	RenamedColonyCaiman();
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что капитан " + GetNameLugger(PChar, "f") + " построил" + GetSexPhrase("","а") + " свою колонию на острове Кайман.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что капитан " + GetFullName(PChar) + " построил" + GetSexPhrase("","а") + " свою колонию на острове Кайман.", 5, 1);
 }
 
 void CreateModificyColonyCaiman()
@@ -3738,7 +3738,7 @@ void CreateModificyColonyCaiman()
 
 	Stores[Caiman_STORE].StoreSize = "large";
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что недавно капитан " + GetNameLugger(PChar, "f") + " расширил"+ GetSexPhrase("","а") +" свою колонию, которая называется ''"+PChar.ColonyBuilding.ColonyName+"''.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что недавно капитан " + GetFullName(PChar) + " расширил"+ GetSexPhrase("","а") +" свою колонию, которая называется ''"+PChar.ColonyBuilding.ColonyName+"''.", 5, 1);
 }
 
 void CreatePlantationInCaiman()
@@ -3809,7 +3809,7 @@ void CreatePlantationInCaiman()
 		rBase.reload.l1.label = "Jungle";
 	}
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что колония ''"+PChar.ColonyBuilding.ColonyName+"'', хозяином которой является некий капитан " + GetNameLugger(PChar, "f") + ", недавно обзавелась собственной плантацией!", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что колония ''"+PChar.ColonyBuilding.ColonyName+"'', хозяином которой является некий капитан " + GetFullName(PChar) + ", недавно обзавелась собственной плантацией!", 5, 1);
 }
 
 void CreateMinesInCaiman()
@@ -3850,7 +3850,7 @@ void CreateMinesInCaiman()
 		rExitMines.reload.l2.label = "Jungle";
 	}
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что колония ''"+PChar.ColonyBuilding.ColonyName+"'', хозяином которой является некий капитан " + GetNameLugger(PChar, "f") + ", недавно обзавелась собственными рудниками!", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что колония ''"+PChar.ColonyBuilding.ColonyName+"'', хозяином которой является некий капитан " + GetFullName(PChar) + ", недавно обзавелась собственными рудниками!", 5, 1);
 }
 
 void CreateFortInCaiman()
@@ -3899,7 +3899,7 @@ void CreateFortInCaiman()
 	worldMap.labels.Shore16.text = CheckingTranslate(idLngFile,"Land Guarding Port");
 	LanguageCloseFile(idLngFile);
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что известный в Карибах капитан " + GetNameLugger(PChar, "f") + " приказал архитектору, возводившему его колонию, соорудить защитную базу для отражения вражеских атак.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что известный в Карибах капитан " + GetFullName(PChar) + " приказал архитектору, возводившему его колонию, соорудить защитную базу для отражения вражеских атак.", 5, 1);
 }
 
 void CreateTownCaiman()

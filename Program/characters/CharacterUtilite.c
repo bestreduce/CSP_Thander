@@ -530,25 +530,23 @@ int SetCrewQuantity(ref _refCharacter,int num)
 	return true;
 }
 
-// --> Eddy, пусть будет пока, а то неудобно в тестах.
 void SetCrewQuantityFull(ref _refCharacter)
 {
-	SetCrewQuantity(_refCharacter, GetMaxCrewQuantity(_refCharacter)); // переделал в мах перегруз 01/08/06 boal
+	SetCrewQuantity(_refCharacter, GetMaxCrewQuantity(_refCharacter));
 }
-// <-- Eddy
 
-// boal
 int SetCrewQuantityOverMax(ref _refCharacter, int num)
 {
-    /*if (num < 0) num = 0; // boal fix
-    _refCharacter.Ship.Crew.Quantity = num;*/ //отключил овербафф команды
-	SetCrewQuantityFull(_refCharacter);
+	if (num < 0) num = 0; // boal fix
+	_refCharacter.Ship.Crew.Quantity = num;
 	return true;
 }
+
 int AddCharacterCrew(ref _refCharacter,int num)
 {
 	return SetCrewQuantity(_refCharacter,GetCrewQuantity(_refCharacter)+num);
 }
+
 int RemoveCharacterCrew(ref _refCharacter,int num)
 {
 	int curCrew = GetCrewQuantity(_refCharacter);
@@ -558,8 +556,7 @@ int RemoveCharacterCrew(ref _refCharacter,int num)
 		SetCrewQuantity(_refCharacter,0);
 		return false;
 	}
-	//SetCrewQuantityOverMax(_refCharacter,curCrew-num);//fix
-	SetCrewQuantity(_refCharacter,curCrew-num);//фикс фикса - Gregg
+	SetCrewQuantity(_refCharacter,curCrew-num);
 	return true;
 }
 float GetSailPercent(ref _refCharacter)

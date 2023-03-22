@@ -3160,7 +3160,7 @@ void MaryCelesteInit()
 	SetCharacterGoods(character, GOOD_RUM, 700);
 	Character_SetAbordageEnable(character, false); // Низя абордировать
 
-	SetCrewQuantityOverMax(character, 0); // Никого живого
+	SetCrewQuantity(character, 0); // Никого живого
 
 	realShip = GetRealShip(GetCharacterShipType(character));
 

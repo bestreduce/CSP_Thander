@@ -10,7 +10,7 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	string sName = GetNameLugger(PChar, "f");
+	string sName = GetFullName(PChar);
 
 	switch(Dialog.CurrentNode)
 	{

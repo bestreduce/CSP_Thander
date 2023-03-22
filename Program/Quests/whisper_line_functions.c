@@ -1447,7 +1447,8 @@ void WhisperWarDogSeaBattle()
 
 	SetCrewQuantityFull(sld);
 	int hcrew = GetMaxCrewQuantity(sld);
-	SetCrewQuantityOverMax(sld, hcrew + 12 * MOD_SKILL_ENEMY_RATE);// Усложним бой
+	//SetCrewQuantityOverMax(sld, hcrew + 12 * MOD_SKILL_ENEMY_RATE);// Усложним бой
+	SetCrewQuantity(sld, hcrew);
 
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 50 + 5 * MOD_SKILL_ENEMY_RATE);

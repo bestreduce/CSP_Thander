@@ -759,5 +759,5 @@ void DozorHappyEnd()
 	PChar.quest.DozorClear.win_condition.l1.location = PChar.location;
 	PChar.quest.DozorClear.function = "DozorClear";
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + " смог победить в сложнейшей игре ''DoZoR'', и получил заслуженный приз.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetFullName(PChar) + " смог победить в сложнейшей игре ''DoZoR'', и получил заслуженный приз.", 5, 1);
 }
