@@ -12,10 +12,55 @@ bool allowgerald = false;
 ref chref;
 bool sails = false;
 
+Object fake_ship;
+Object fake_sail;
+Object fake_rope;
+Object fake_flag;
+Object model;
+
+void VIEWER_Reload() {
+    SendMessage(&fake_rope, "li", MSG_ROPE_DEL_GROUP, &model);
+    SendMessage(&fake_sail, "li", MSG_SAIL_DEL_GROUP, &fake_ship);
+    SendMessage(&fake_flag, "li", MSG_FLAG_DEL_GROUP, &model);
+    DeleteClass(&model);
+
+    // change hull
+    if(!CheckAttribute(pchar, "lasthull")) {
+        pchar.lasthull = 0;
+    }
+
+    int hullid = sti(pchar.lasthull) % 10 + 1;
+    pchar.lasthull = hullid;
+	
+	ref pship = GetRealShip(sti(pchar.Ship.Type));
+	
+    SetTexturePath(0, "Ships\"+pship.name+"\Hull" + hullid + "\");
+    SetTexturePath(1, "Ships\"+pship.name+"\");
+
+    CreateEntity(&model, "modelr");
+
+    if(IsEntity(&model)) {
+        SendMessage(&model, "ls", MSG_MODEL_LOAD_GEO, "Ships/"+pship.name+"/"+pship.name);
+
+        //SendMessage(&model, "ls", MSG_MODEL_LOAD_GEO, "Characters\Sharp");
+        //SendMessage(&model, "ls", MSG_MODEL_LOAD_ANI, "man");
+        //SendMessage(&model, "ls", MSG_MODEL_SET_TECHNIQUE, "Animation");
+        //string s = getAnim(hullid);
+        //SendMessage(&model, "lls", MSG_MODEL_PLAY_ACTION, 0, s);
+
+        // выставляем MODELR
+        SendMessage(&GameInterface, "lsli", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 0, &model);
+
+        SendMessage(&fake_rope, "lii", MSG_ROPE_INIT, &fake_ship, &model);
+        SendMessage(&fake_sail, "liil", MSG_SAIL_INIT, &fake_ship, &model, 1);
+        SendMessage(&fake_flag, "lili", MSG_FLAG_INIT, &model, 4, &fake_ship);
+    }
+}
+
 void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 {
 	ref yard = _shipyarder;
-    StartAboveForm(true);
+    //StartAboveForm(true);
     // лочим квест и карту
     bQuestCheckProcessFreeze = true;
 	chref = chreff;
@@ -69,6 +114,29 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 		SetNewPicture("GERALD_NO_PIC", "interfaces\DeleteGerald.tga");
 		SetFormatedText("GERALD_NO", "На данный корабль невозможно установить герб");
 	}
+	
+	SetEventHandler("VIEWER_Reload", "VIEWER_Reload", 0);
+    CreateEntity(&fake_ship, "ship");
+    CreateEntity(&fake_sail, "sail");
+    CreateEntity(&fake_rope, "rope");
+	CreateEntity(&fake_flag, "flag");
+
+    ref rShip = GetRealShip(sti(pchar.ship.Type));
+    SendMessage(&fake_ship, "laa", MSG_SHIP_CREATE, &pchar, &rShip);
+
+    // параметры камеры:
+    SendMessage(&GameInterface, "lslfffffffffff", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 1, /*начальный aX камеры*/ 4*PI/3, /*базовый aY камеры*/ 11*PI/12, /* макс амплитуда камеры aY */ PI / 8,/* гориз. сенса */ 0.2, /* верт. сенса */ 0.2,
+    /*множитель инерции*/ 1.0, /*множитель макс. дистанции*/ 1.7, /*множитель шага зума*/ 0.15,  /*множитель начальной высоты объекта относительно половинной высоты бокса (1.0 - центр) */ 0.6,
+    /*множитель мин. высоты объекта относительно половинной высоты бокса*/ 0.4, /*множитель макс. высоты объекта относительно половинной высоты бокса*/1.1
+    );
+
+    // выставляем прицепы
+    SendMessage(&GameInterface, "lsli", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 3, &fake_rope);
+    SendMessage(&GameInterface, "lsli", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 3, &fake_sail);
+    SendMessage(&GameInterface, "lsli", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 3, &fake_flag);
+
+
+    VIEWER_Reload();
 }
 
 bool CheckSailsGerald(ref chr)
@@ -95,7 +163,7 @@ void ProcessCancelExit()
 
 void IDoExit(int exitCode)
 {
-    EndAboveForm(true);
+	Ship_Walk_Delete();
 
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
@@ -104,10 +172,17 @@ void IDoExit(int exitCode)
     DelEventHandler("GetInterfaceTexture", "ScrollGetTexture");
     DelEventHandler("ChangeSelectScrollImage", "ChangeSelectScrollImage");
 	DelEventHandler("CheckButtonChange","procCheckBoxChange");
+	
+	DeleteClass(&fake_ship);
+    DeleteClass(&model);
+    DeleteClass(&fake_sail);
+    DeleteClass(&fake_rope);
+    DeleteClass(&fake_flag);
+    DelEventHandler("VIEWER_Reload", "VIEWER_Reload");
 
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
-    PostEvent("StopQuestCheckProcessFreeze", 100);//заморозка проверки квестов
+    PostEvent("StopQuestCheckProcessFreeze", 100);//заморозка проверки квестовce();
 }
 
 void procCheckBoxChange()
