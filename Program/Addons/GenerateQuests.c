@@ -1106,7 +1106,7 @@ void ShipWreckLoginToWorldMap(string qName)
 
 	chr.mapEnc.type = "warrior";
 	chr.mapEnc.worldMapShip = "ranger";
-	chr.mapEnc.Name = "Вижу сильно потрёпанный неизвестный корабль прямо по курсу";
+	chr.mapEnc.Name = "сильно потрёпанный неизвестный корабль прямо по курсу";
 
 	//Map_CreateWarrior("", sGroup, 30);
 	Map_CreateSlowMerch("",sGroup, 30);

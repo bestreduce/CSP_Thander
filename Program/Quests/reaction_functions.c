@@ -5537,7 +5537,7 @@ void LSC_climeUsurer_Azzy(string qName)
 	GiveItem2Character(sld, "blade28");// сабля Моргана
 	sld.equip.blade = "blade28";
 	sld.rank 	= 100;
-	sld.reputation = "0";
+	sld.reputation = 0;
 	SetSelfSkill(sld, 100, 100, 100, 100, 100);
 	SetShipSkill(sld, 100, 100, 100, 100, 100, 100, 100, 100, 100);
 	LAi_SetImmortal(sld, true);

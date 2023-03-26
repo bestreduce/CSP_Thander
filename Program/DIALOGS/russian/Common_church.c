@@ -1595,7 +1595,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.different = "HostessChurch_return"; //флаг на возвращение
 		break;
 		case "HostessChurch_call":
-			if (isBadReputation(pchar, 10))
+			if (sti(pchar.reputation) < 10))
 			{
 				if (rand(100) < GetCharacterSkill(pchar, "Fortune")) //рендом вешаем на удачу
 				{

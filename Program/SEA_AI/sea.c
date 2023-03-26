@@ -921,7 +921,7 @@ void SeaLogin(ref Login)
 			rFantom.Nation = PIRATE;
 			rFantom.EncType  = "pirate";
             rFantom.RealEncounterType = iEncounterType;//boal
-			rFantom.reputation = 5 + rand(84);
+			rFantom.reputation = 10 + rand(80);
 			rFantom.EncGroupName = sGName;
 			rFantom.MainCaptanId = Characters[iFantomIndex].id;
 			rFantom.location = sIslandID;
@@ -1011,7 +1011,7 @@ void SeaLogin(ref Login)
 				rFantom.model.animation = "man";
 				rFantom.Nation = iNation; //Mett test sti(rEncounter.Nation);
 				// boal разговор в море -->
-                rFantom.reputation = 5+rand(84);
+                rFantom.reputation = 10 + rand(80);
                 rFantom.EncType      = rEncounter.Type; // тип  war, trade pirate
                 rFantom.RealEncounterType = iEncounterType;//boal
                 rFantom.EncGroupName = sGName;

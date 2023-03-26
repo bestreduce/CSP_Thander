@@ -31,7 +31,7 @@ void ProcessDialogEvent()
 			dialog.text = RandPhraseSimple("Кажется, здесь происходит что-то незаконное.",
                                      "Именем "+NationKingsName(npchar)+ ", прекратить творить беззаконие!!!");
 			Link.l1 = "Нет-нет, офицер. Мы с друзьями просто отдыхаем у моря.";
-			if (makeint(Pchar.reputation) >= 70 && GetSummonSkillFromNameToOld(Pchar, SKILL_LEADERSHIP) >= 5)
+			if (makeint(Pchar.reputation) > 70 && GetSummonSkillFromNameToOld(Pchar, SKILL_LEADERSHIP) >= 5)
 			{
 				Link.l1.go = "ThisTimeFree";
 			}
@@ -57,7 +57,7 @@ void ProcessDialogEvent()
                 bFencing = true;
             if(!bFencing && GetSummonSkillFromNameToOld(Pchar, SKILL_F_HEAVY) >= 8)
                 bFencing = true;
-			if(makeint(Pchar.reputation) <= 25 && bFencing)
+			if(makeint(Pchar.reputation) < 20 && bFencing)
 			{
 				Link.l3.go = "GettingLostFromHere";
 			}

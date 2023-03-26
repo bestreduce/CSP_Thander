@@ -31,9 +31,9 @@ void InitInterface(string iniName)
 		sTemp += " (" + (PsHeroQty - sti(pchar.PGG_killed) - sti(pchar.PGG_NotKilled))+ " / " + (PsHeroQty - sti(pchar.PGG_NotKilled)) + ")";
 		pchar.buyPGGinfo_Qty = sTemp;
 	}
-	if (pchar.buyPGGinfo == "2") sTemp = pchar.buyPGGinfo_Qty + " (Записано " + FindRussianDaysString(GetQuestPastDayParam("buy_PGG_info")) + " дней назад)"; 
+	if (MOD_BETTATESTMODE != "On" && pchar.buyPGGinfo == "2") sTemp = pchar.buyPGGinfo_Qty + " (Записано " + FindRussianDaysString(GetQuestPastDayParam("buy_PGG_info")) + " дней назад)"; 
 
-    SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero") + " (" + (PsHeroQty - sti(pchar.PGG_killed) - sti(pchar.PGG_NotKilled))+ " / " + (PsHeroQty - sti(pchar.PGG_NotKilled)) + ")");
+    SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero") + sTemp);
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("MouseRClickUp","HideInfoWindow",0);
 	SetEventHandler("TableSelectChange", "TableSelectChange", 0);
@@ -43,7 +43,7 @@ void InitInterface(string iniName)
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0); // выход из интерфейса
 	sMessageMode = "";
-	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") FillTable(); else RecallTable(); 
+	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") FillTable(); else RecallTable(); //проверить, что будет при первом открытии без сохранки
 }
 
 void ProcessBreakExit()
@@ -287,8 +287,10 @@ void OnTableClick()
 
 	//string sRow = "tr" + (iRow + 1);
 //--> mod tablesort
-	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 )) SortTable(sControl, iColumn);
-//TO DO - разобраться, как заблокировать активацию двойного клика на заголовке - подменять его на ординарные как-то
+	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 ))
+	{
+		if (pchar.buyPGGinfo == "1") SortTable(sControl, iColumn);
+	}
 //<-- mod tablesort
 	Table_UpdateWindow(sControl);
 }

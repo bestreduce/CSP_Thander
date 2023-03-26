@@ -2806,7 +2806,7 @@ void CreateCaimanCitizens(aref loc)
 
 			chr = GetCharacter(NPC_GenerateCharacter("GenChar_", sType, "man", "mushketer", sti(pchar.rank), PIRATE, 0, false));
 			chr.id = "GenChar_" + chr.index;
-			chr.reputation = (1 + rand(44) + rand(44));
+			chr.reputation = 10 + rand(80);
 			chr.City = "Caiman";
             chr.CityType = "soldier";
 			chr.greeting = "soldier_common";

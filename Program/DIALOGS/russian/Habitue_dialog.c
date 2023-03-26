@@ -859,14 +859,7 @@ void ProcessDialogEvent()
 				link.l2 = "Давай ещё по одной кружечке.";
 				link.l2.go = "sit_3";
 			}
-			// homo 01/08/06 to_del
-            // наводка на товар - перенёс в слухи
-			//if (sti(pchar.reputation) < 41)
-            //{
-            //    link.l3 = "Что интересного можешь сказать про 'честных' купцов в этих водах?";
-			//	link.l3.go = "Find_Merchant_1";
-            //}
-            //homo 15/06/06 слухи
+
             link.l4 = LinkRandPhrase("Кажется, что пров"+ GetSexPhrase("ёл","ела") +" в море целую вечность. Что новенького в ваших краях?",
                                     "Расскажи-ка мне, о чем теперь болтают? Не зря же я пою тебя ромом...",
                                     "Скажи мне, братец, какие байки ходят по тавернам?");
@@ -1140,7 +1133,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "exit_sit1":
-			ChangeCharacterReputationToNeutral(pchar, 2.0);
+			ChangeCharacterReputationToNeutral(pchar, 2);
 			//navy --> Alcohol
 			if (CheckAttribute(pchar, "questTemp.Rum"))
 			{
@@ -1155,7 +1148,6 @@ void ProcessDialogEvent()
 
 
 		case "tavern_keeper":
-			//ChangeCharacterReputationABS(pchar, 2.0);
 			//navy --> Alcohol
 			if (CheckAttribute(pchar, "questTemp.Rum"))
 			{

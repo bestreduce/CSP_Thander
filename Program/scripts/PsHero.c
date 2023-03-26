@@ -31,7 +31,7 @@ void InitPsHeros()
 			PsHeroQty++;
 			ch = GetCharacter(NPC_GenerateCharacter("PsHero_" + PsHeroQty, "off_hol_2", "man", "man", 5, PIRATE, -1, true));
 			ch.PGGAi.HeroNum = n; // номер в файле
-			ch.reputation = 2 + rand(86);
+			ch.reputation = 10 + rand(80);
 			ch.RebirthPhantom = true;  // не тереть фантома-многодневку (с -1), если умер
 			setNewMainCharacter(ch, n);
 			ch.Dialog.Filename = GetPGGDialog(ch);
@@ -45,7 +45,7 @@ void InitPsHeros()
 			ch.perks.list.ByWorker = "1";
 			ch.perks.list.ShipEscape = "1";
 			ch.loyality = 10 + rand(10); //лояльность
-			if (sti(ch.reputation) > 41)
+			if (sti(ch.reputation) >= 40)
 			{
 				ch.alignment = "good";
 			}
@@ -448,15 +448,15 @@ void PGG_CheckDead(ref chr)
 	{
 		if (!CheckAttribute(chr, "PGG_Hunter") && !CheckAttribute(chr, "AlwaysEnemy"))
 		{
-			if(MakeInt(chr.reputation) >= 70)
+			if(MakeInt(chr.reputation) > 70)
 			{
 				ChangeCharacterNationReputation(PChar, sti(chr.Nation), -15);
 			}
-			if(MakeInt(chr.reputation) <= 20)
+			if(MakeInt(chr.reputation) < 30)
 			{
 				ChangeCharacterNationReputation(PChar, sti(chr.Nation), -5);
 			}
-			if (MakeInt(chr.reputation) > 20 && MakeInt(chr.reputation) < 70)
+			if (MakeInt(chr.reputation) >= 30 && MakeInt(chr.reputation) <= 70)
 			{
 				ChangeCharacterNationReputation(PChar, sti(chr.Nation), -10);
 			}
@@ -768,7 +768,7 @@ void PGG_SetUpForTask(ref chr)
 			int iGoods;
 			int iSpace;
 
-			if (PGG_ChangeRelation2MainCharacter(chr, 0) < 51 && sti(chr.reputation) < 15 && rand(100) == 5 && sti(pchar.money) >= sti(chr.rank)*10000+100000 && GetCharacterShipClass(chr) <= GetCharacterShipClass(PChar))
+			if (PGG_ChangeRelation2MainCharacter(chr, 0) < 51 && sti(chr.reputation) < 20 && rand(100) == 5 && sti(pchar.money) >= sti(chr.rank)*20000+250000 && GetCharacterShipClass(chr) <= GetCharacterShipClass(PChar))	//крайне сомнительный код. со временем все ПГГ с низкой репой станут врагами. Нет обратного стирания враждебности, если ГГ пересядет на крутой корабль или лишится денег
 			{//Любой пгг с определенным шансом будет охотиться за нами
 				chr.AlwaysEnemy = true;
 				chr.PGG_Hunter = true;
@@ -2774,53 +2774,26 @@ void PGG_SpawnPGG()
 //Если отправить в поля пустые строки, выбор происходит без фильтрации
 string SelectRandomPGG(string sex, string animation)
 {
-	int heroSelected = 1;
-	int chosenHero = rand(PsHeroQty);
-	for (i = 0; i < 250; i++)
+	for (i = 1; i <= PsHeroQty; i++)
 	{
-		if (heroSelected == 0)
+		sld = CharacterFromID("PsHero_"+i);
+		if (sld.PGGAi.location == "Dead" || IsCompanion(sld) || IsOfficer(sld)) continue;
+		bool bSex = (sld.sex == sex) || (sex == "");
+		bool bAnim = (sld.model.animation == animation) || (animation == "");
+		if (bSex && bAnim)
 		{
-			Log_TestInfo("Пройдено итераций: "+ i);
-			break;
+			PGG_Disband_Fleet(sld);
+			Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
+			return sld.id;
 		}
-		if (chosenHero != 0)
-		{
-			sld = CharacterFromID("PsHero_"+chosenHero);
-			if (sld.PGGAi.location == "Dead" || IsCompanion(sld) || IsOfficer(sld))
-			{
-				chosenHero = rand(PsHeroQty);
-			}
-			else
-			{
-				if (sex == "" || sld.sex == sex)
-				{
-					if (animation == "" || sld.model.animation == animation)
-					{
-						heroSelected = 0;
-						PGG_Disband_Fleet(sld);
-						Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
-					}
-					else	chosenHero = rand(PsHeroQty);
-				}
-				else	chosenHero = rand(PsHeroQty);
-			}
-		}
-		else	chosenHero = rand(PsHeroQty);
 	}
-	if(heroSelected == 0)
-	{
-		return sld.id;
-	}
-	else
-	{
-		Log_TestInfo("ПГГ не выбран.")
-		return "";
-	}
+	Log_TestInfo("ПГГ не выбран.")
+	return "";
 }
 
 string SelectWhisperPGG()
 {
-	for (i = 1; i < PsHeroQty; i++)
+	for (i = 1; i <= PsHeroQty; i++)
 	{
 		sld = CharacterFromID("PsHero_"+i);
 		if (sld.name == "Виспер")

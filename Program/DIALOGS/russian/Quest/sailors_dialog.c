@@ -136,7 +136,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 			CloseQuestHeader("CaptainComission2");
 			ChangeOfficersLoyality("bad_all", 1);
-			ChangeCharacterReputationABS(pchar, 4);
+			ChangeCharacterReputationToNeutral(pchar, -4);//отдалить от нейтральной на 4 единицы
 			DeleteAttribute(pchar,"TownEscape");
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.canSpeakBoatswain");
 			DeleteAttribute(pchar, "GenQuest.CaptainComission");

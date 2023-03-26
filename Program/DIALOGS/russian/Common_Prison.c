@@ -415,7 +415,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.ReasonToFast.SpeakOther = true;
 			dialog.text = "Я внимательно слушаю Вас, капитан.";
 			link.l1 = "Я хочу доложить о преступном сговоре офицера Вашего гарнизона и пиратов (излагает обстоятельства дела).";
-			if(makeint(pchar.reputation) < 41)
+			if(makeint(pchar.reputation) < 40)
 			{
 				link.l1.go = "ReasonToFast_Prison_BadRep";
 			}
@@ -875,14 +875,14 @@ void ProcessDialogEvent()
 			link.l1.go = "Prisoner_5";
 			if (GetNationRelation2MainCharacter(sti(npchar.nation)) != RELATION_ENEMY)
 			{
-				link.l2 = "Пожалуй, стоит рискнуть... Предлагаю следующее: я могу перебить стражу в тюрьме и забрать тебя на свой корабль. Если все получится, я хочу, чтобы ты не отходил от меня до тех пор, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Dat") + ". Идёт?";
+				link.l2 = "Пожалуй, стоит рискнуть... Предлагаю следующее: я могу перебить стражу в тюрьме и забрать тебя на свой корабль. Если все получится, я хочу, чтобы ты не отходил от меня до тех пор, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Voc") + ". Идёт?";
 				link.l2.go = "Prisoner_agree"; //силовой способ вызволения
 				link.l3 = "Ну, хорошо, я постараюсь помочь тебе - поговорю с начальником тюрьмы. Возможно, удастся внести залог за твоё освобождение.";
 				link.l3.go = "ToPrisonHead_agree"; //мирный способ вызволения
 			}
 			else
 			{
-				link.l2 = "Ну, хорошо, поверю тебе и открою камеру. Я хочу, чтобы ты не отходил от меня до тех пор, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Dat") + ". Идёт?";
+				link.l2 = "Ну, хорошо, поверю тебе и открою камеру. Я хочу, чтобы ты не отходил от меня до тех пор, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Voc") + ". Идёт?";
 				link.l2.go = "Prisoner_agree_3"; //силовой способ вызволения, когда тюремщики убиты
 			}
 		break;
@@ -909,7 +909,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("GivePrisonFree", "1");
             AddQuestUserData("GivePrisonFree", "sCity", XI_ConvertString("Colony"+npchar.city+"Gen"));
             AddQuestUserData("GivePrisonFree", "sName", pchar.questTemp.jailCanMove.Name);
-            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Dat"));
+            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Voc"));
 			pchar.quest.GivePrisonFree_Death.win_condition.l1 = "NPC_Death";
 			pchar.quest.GivePrisonFree_Death.win_condition.l1.character = npchar.id;
 			pchar.quest.GivePrisonFree_Death.win_condition = "GivePrisonFree_Death";
@@ -941,7 +941,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("GivePrisonFree", "1");
             AddQuestUserData("GivePrisonFree", "sCity", XI_ConvertString("Colony"+npchar.city+"Gen"));
             AddQuestUserData("GivePrisonFree", "sName", pchar.questTemp.jailCanMove.Name);
-            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Dat"));
+            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Voc"));
 			pchar.quest.GivePrisonFree_Death.win_condition.l1 = "NPC_Death";
 			pchar.quest.GivePrisonFree_Death.win_condition.l1.character = npchar.id;
 			pchar.quest.GivePrisonFree_Death.win_condition = "GivePrisonFree_Death";
@@ -983,7 +983,7 @@ void ProcessDialogEvent()
 		break;
         case "ToPrisonHead_canMove_1":
             dialog.text = "Ну, так пойдём отсюда быстрее! Чёрт возьми, как я рад!";
-			link.l1 = "Подведём итоги. Я хочу, чтобы все время, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Dat") + ", ты не отходил от меня ни на шаг. На всякий случай, так сказать. Ты согласен?";
+			link.l1 = "Подведём итоги. Я хочу, чтобы все время, пока мы не доберёмся до грота на " + XI_ConvertString(pchar.questTemp.jailCanMove.islandId + "Voc") + ", ты не отходил от меня ни на шаг. На всякий случай, так сказать. Ты согласен?";
 			link.l1.go = "ToPrisonHead_canMove_2";
 		break;
         case "ToPrisonHead_canMove_2":
@@ -997,7 +997,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("GivePrisonFree", "1");
             AddQuestUserData("GivePrisonFree", "sCity", XI_ConvertString("Colony"+npchar.city+"Gen"));
             AddQuestUserData("GivePrisonFree", "sName", pchar.questTemp.jailCanMove.Name);
-            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Dat"));
+            AddQuestUserData("GivePrisonFree", "sIsland", XI_ConvertString(pchar.questTemp.jailCanMove.islandId+"Voc"));
 			pchar.quest.GivePrisonFree_Death.win_condition.l1 = "NPC_Death";
 			pchar.quest.GivePrisonFree_Death.win_condition.l1.character = npchar.id;
 			pchar.quest.GivePrisonFree_Death.win_condition = "GivePrisonFree_Death";

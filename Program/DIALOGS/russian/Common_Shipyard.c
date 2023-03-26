@@ -1122,7 +1122,7 @@ void ProcessDialogEvent()
 
 		case "ShipyardsMapOk_2":
 			TakeItemFromCharacter(pchar, "ShipyardsMap");
-			if (rand(9)<4)
+			if (rand(9)<3)
 			{
 				GiveItem2Character(pchar,"Ship_Print_5");
 				Log_info("Вы получили развёрнутый чертёж.");
@@ -1172,7 +1172,7 @@ void ProcessDialogEvent()
 						link.l1 = "Нет, конечно! Прекрасно!";
 						link.l1.go = "ShipyardsMapOk_5";
 						NPChar.reputation = sti(NPChar.reputation) + 5;
-						TakeNItems(pchar, "chest", 4);
+						TakeNItems(pchar, "chest", (GetCharacterSPECIALSimple(PChar, SPECIAL_L)+5)/3);//У3 - 2 сундука, У4-6 - 3, У7-9 - 4, У10 - 5
 					break;
 					case 6:
 						dialog.text = "Да, этот чертёж имеет определённую ценность. Правда, денег в наличии у меня сейчас нет, поэтому я могу отдать вам один из сундуков с ремесленными материалами.";
@@ -1183,6 +1183,7 @@ void ProcessDialogEvent()
 						Log_info("Вы получили сундук ремесленника.")
 					break;
 				}
+				if (sti(NPChar.reputation)>100) NPChar.reputation = 100;
 			}
 		break;
 

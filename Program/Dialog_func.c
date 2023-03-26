@@ -992,7 +992,7 @@ string PCharRepPhrase (string bad, string good)
 // boal для НПС
 string NPCharRepPhrase(ref _pchar, string bad, string good)
 {
-	if(makeint(_pchar.reputation) < 41)
+	if(makeint(_pchar.reputation) < 40)
 	{
 		return bad;
 	}

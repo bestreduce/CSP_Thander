@@ -486,7 +486,7 @@ void locDirSail(int evtID)
                 rFantom.sex = "man";
                 rFantom.model.animation = "man";
                 rFantom.Nation = rEncounter.Nation;
-                rFantom.reputation = 5+rand(84);
+                rFantom.reputation = 10 + rand(80);
                 rFantom.EncType = rEncounter.Type; // war, trade pirate
                 rFantom.RealEncounterType = iEncounterType;
                 rFantom.EncGroupName = sGName;

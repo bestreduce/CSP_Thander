@@ -189,8 +189,6 @@ void Duel_Kill_Enemy()
 	if (sGroup != PChar.questTemp.Duel.Enemy.GrpId) return;
 
     DelEventHandler("LAi_event_GroupKill", "Duel_Kill_Enemy");
-	//репутация в плюс
-	//ChangeCharacterReputationABS(pchar, 5.0);
 	//убираем из локации, чтобы не респаунился.
 	pchar.quest.Duel_Clear_Enemy.win_condition.l1 = "ExitFromLocation";
 	pchar.quest.Duel_Clear_Enemy.win_condition.l1.location = pchar.location;
@@ -259,7 +257,7 @@ void Duel_Move_OpponentBack(string qName)
 
 	if (!CheckAttribute(pchar, "questTemp.Duel.End") || CheckAttribute(pchar, "questTemp.Duel.Coward"))
 	{
-		ChangeCharacterReputationABS(pchar, -5.0);
+		ChangeCharacterReputationToNeutral(pchar, 5);//репу к нейтральной на 5 единиц
 		AddTemplRumour("DuelCoward", id_counter+1);
 	}
 	if (sti(npchar.PGGAi))

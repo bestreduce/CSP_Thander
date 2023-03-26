@@ -483,7 +483,7 @@ void SetEtapsInfo()
 	CreateString(true,"Etaps_HeroMoney_1", "Ваше золото: ", FONT_NORMAL, COLOR_NORMAL, 165,250,SCRIPT_ALIGN_LEFT,0.9);
 	CreateString(true,"Etaps_HeroMoney_2", sti(PChar.money), FONT_BOLD_NUMBERS, argb(255,255,255,128), 200,335,SCRIPT_ALIGN_CENTER,0.75);
 
-	CreateString(true,"Etaps_Win_Gold_1", "Предпологаемый выигрыш: ", FONT_NORMAL, COLOR_NORMAL, 265,355,SCRIPT_ALIGN_LEFT,0.9);
+	CreateString(true,"Etaps_Win_Gold_1", "Предполагаемый выигрыш: ", FONT_NORMAL, COLOR_NORMAL, 265,355,SCRIPT_ALIGN_LEFT,0.9);
 	CreateString(true,"Etaps_Win_Gold_2", sti(PChar.Arena.Etaps.Prize) + " пиастров", FONT_NORMAL, argb(255,255,255,128), 420,355,SCRIPT_ALIGN_LEFT,1.0);
 
 	for(int e=1; e<=5; e++)

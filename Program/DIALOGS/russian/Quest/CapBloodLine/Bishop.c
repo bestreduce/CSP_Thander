@@ -352,7 +352,7 @@ void ProcessDialogEvent()
 
     		if (npchar.id == "Quest_Smuggler")
     		{
-                if(Pchar.questTemp.CapBloodLine.stat == "PrepareToEscape" && sti(Pchar.reputation) >= 50  && !CheckAttribute(pchar, "LockBloodWeaponsOptions"))
+                if(Pchar.questTemp.CapBloodLine.stat == "PrepareToEscape" && sti(Pchar.reputation) > 55  && !CheckAttribute(pchar, "LockBloodWeaponsOptions"))
                 {
                 	dialog.text = "Слыхал о вас, доктор Блад. Вы стали, в какой-то мере, звёздной личностью среди местных рабов, что гниют на плантациях. Чем же я могу вам услужить?";
             		link.l1 = "С вашего позволения, мы будем говорить тише. Все дело в том, что мне нужно оружие...";

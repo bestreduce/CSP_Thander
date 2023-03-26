@@ -22,7 +22,6 @@ int CreateBermudesCharacters(int n)
 	ch.Dialog.Filename = "Mayor\Jackman.c";
 	ch.nation = PIRATE;
 	ch.quest.type = "hovernor";
-	ch.reputation = "35";
 	ch.HeroModel = "capitan,capitan_1,capitan_2,capitan_3,capitan_4,capitan_5";
     SetRandSPECIAL(ch);
     SetSelfSkill(ch, 90, 90, 90, 70, 90);
@@ -38,7 +37,7 @@ int CreateBermudesCharacters(int n)
     SetCrewQuantityFull(ch);
     Fantom_SetBalls(ch, "pirate");
 	ch.rank 	= 20;
-	ch.reputation = "25";
+	ch.reputation = 15;
 	ch.money = "25000";
 	ch.greeting = "Gr_HeadPirates";
 	SetCharacterPerk(ch, "FastReload");
