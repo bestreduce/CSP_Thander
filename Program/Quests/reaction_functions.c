@@ -8902,7 +8902,7 @@ void mOfficer_fc(string qName)
 		{
 			if (sti(sld.ship.type) != SHIP_NOTUSED)
 			{
-				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблем " + sld.ship.name + "");
+				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблём " + sld.ship.name + "");
 				Pchar.questTemp.MunityOfficerIDX.begin = "0";
 			}
 			else
@@ -8936,7 +8936,7 @@ void mOfficer_fc2(string qName)
 		{
 			if (sti(sld.ship.type) != SHIP_NOTUSED)
 			{
-				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблем " + sld.ship.name + "");
+				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблём " + sld.ship.name + "");
 				Pchar.questTemp.MunityOfficerIDX.begin = "0";
 			}
 			else
