@@ -258,7 +258,7 @@ void AzzyCheckSumControl()
 // репутация плохого парня с границами
 bool isBadReputation(ref _pchar, int _rep)
 {
-    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) > _rep)
+    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) >= _rep)
     {
         return false;// good guy
     }
