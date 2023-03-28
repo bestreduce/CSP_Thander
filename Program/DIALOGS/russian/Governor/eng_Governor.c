@@ -696,7 +696,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			
 			//******Чёрный Ёж Sinistra******
 			//Кристофер
-			sld = GetCharacter(NPC_GenerateCharacter("BlackYosh_Kristofer", "sold_eng_2", "man", "man", 10, ENGLAND, -1, false));
+			/*sld = GetCharacter(NPC_GenerateCharacter("BlackYosh_Kristofer", "sold_eng_2", "man", "man", 10, ENGLAND, -1, false));
 			FantomMakeCoolFighter(sld, sti(pchar.rank), 15, 15, "blade7", "", 0);
 			sld.name	= "Кристофер";
 			sld.lastname	= "Клейстон";
@@ -704,7 +704,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			LAi_SetSitType(sld);
 			LAi_SetImmortal(sld, true);
 			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
-			ChangeCharacterAddressGroup(sld,"PortRoyal_tavern","sit","sit3");
+			ChangeCharacterAddressGroup(sld,"PortRoyal_tavern","sit","sit3");*/
         break;
 
         case "Step_6_1":

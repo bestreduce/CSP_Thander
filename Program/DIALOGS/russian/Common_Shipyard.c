@@ -837,7 +837,7 @@ void ProcessDialogEvent()
 
 			AddMoneyToCharacter(PChar, -iSumm);
 
-			dialog.text = "Замечательно. Все сделаем в лучшем виде.";
+			dialog.text = "Замечательно. Всё сделаем в лучшем виде.";
 			Link.l1 = "Спасибо.";
 			Link.l1.go = "exit";
 
@@ -869,7 +869,7 @@ void ProcessDialogEvent()
 
 			AddMoneyToCharacter(PChar, -iSumm);
 
-			dialog.text = "Замечательно. Все сделаем в лучшем виде.";
+			dialog.text = "Замечательно. Всё сделаем в лучшем виде.";
 			Link.l1 = "Спасибо.";
 			Link.l1.go = "exit";
 
@@ -941,7 +941,7 @@ void ProcessDialogEvent()
 
 		case "SailsTypeChooseDone":
 			AddMoneyToCharacter(Pchar, -sti(NPChar.SailsTypeMoney));
-			dialog.text = "Замечательно! Все сделаем в лучшем виде.";
+			dialog.text = "Замечательно! Всё сделаем в лучшем виде.";
 			Link.l9 = "Спасибо.";
 			Link.l9.go = "exit";
 

@@ -83,6 +83,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,105,170);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
@@ -131,6 +132,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,100,160);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
@@ -179,6 +181,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,95,160);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
@@ -227,6 +230,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,90,150);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{
@@ -275,6 +279,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,85,140);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 20.0 && GetTime() < 22.0 )	{
@@ -323,6 +328,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,80,130);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 20.0 && GetTime() < 22.0 )	{
@@ -371,6 +377,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 				iWaterColor = argb(0,0,75,120);
 				if (CheckAttribute(&WeatherParams,"Rain") && sti(WeatherParams.Rain) == true){
 				iWaterColor = argb(0,0,55,80);
+				fFoamK = 0.1;
 				}
 			} else {
 			if( GetTime() >= 19.0 && GetTime() < 22.0 )	{

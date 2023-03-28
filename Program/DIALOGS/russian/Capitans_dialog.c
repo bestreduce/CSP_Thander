@@ -205,6 +205,8 @@ void ProcessDialogEvent()
 			pchar.questTemp.PKM_SvtvA_Znakomstvo_s_Malta2 = true;
 			pchar.questTemp.PKM_SvtvA_Dostavka_Malty = true;
 			SetCompanionIndex(pchar, -1, sti(NPChar.index));
+			SetShipRemovable(npchar, false);
+			SetCharacterRemovable(npchar, false);
 			AddQuestRecord("PKM_Animists", "18");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ся","ась"));
 		break;
@@ -456,7 +458,7 @@ void ProcessDialogEvent()
 		    }
 		    if (sti(npchar.Money) < 300)
 		    {
-                dialog.text = "Все! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
+                dialog.text = "Всё! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
                 link.l1 = "Жаль.";
 			    link.l1.go = "exit";
 			    break;

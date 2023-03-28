@@ -233,6 +233,31 @@ void WhrCreateSeaEnvironment()
 			Sea.Sea2.FoamK = 1.0;
 			Sea.Sea2.WaterColor = argb(0,0,50,70);	
 		}}}}}}}
+		} else {
+		if(loc.type == "cave"){
+		fMaxSeaHeight = 1.1;
+		WhrSetNewSea(fWeatherSpeed);
+		Sea.Sea2.FoamEnable = true;
+		Sea.Sea2.Reflection = 0.6;
+		Sea.Sea2.Transparency = 1.3;
+		if( GetTime() >= 23.0 || GetTime() < 7.0 ) {
+			Sea.Sea2.WaterColor = argb(0,0,15,20);
+		} else {
+		if( GetTime() >= 7.0 && GetTime() < 9.0 ) {
+			Sea.Sea2.WaterColor = argb(0,0,15,20);
+		} else {
+		if( GetTime() >= 9.0 && GetTime() < 10.0 ) {
+			Sea.Sea2.WaterColor = argb(0,0,15,20);
+		} else {
+		if( GetTime() >= 10.0 && GetTime() < 19.0 )	{
+			Sea.Sea2.WaterColor = argb(0,0,15,20);
+		} else {
+		if( GetTime() >= 19.0 && GetTime() < 21.0 )	{
+			Sea.Sea2.WaterColor = argb(0,0,15,20);	
+		} else {
+		if( GetTime() >= 21.0 && GetTime() < 23.0 ) {
+			Sea.Sea2.WaterColor = argb(0,0,15,20);
+		}}}}}}}
 	} else {
 		if(loc.type == "town"){
 		fMaxSeaHeight = 1.1;
