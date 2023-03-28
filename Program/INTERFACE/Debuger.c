@@ -1289,21 +1289,11 @@ void CalculateInfoDataF11()
 	idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 
 	totalInfo = descF11;
-	// -->
 
-    int i, cn;
-    ref mc;
-	mc = GetMainCharacter();
+    ref mc = GetMainCharacter();
+	mc.reputation = sti(mc.reputation) + 10;
+	if (sti(mc.reputation) > REPUTATION_MAX) mc.reputation = REPUTATION_MAX;
 
-    if ( sti(mc.reputation) < REPUTATION_MAX)
-	{
-	   mc.reputation = sti(mc.reputation) + 10;
-	   if (sti(mc.reputation) > REPUTATION_MAX)
-	   {
-	       mc.reputation = REPUTATION_MAX;
-	   }
-	}
-    // <
     totalInfo = totalInfo + LanguageConvertString(idLngFile,"new_string") + LanguageConvertString(idLngFile,"new_string") +
                 "Команда отработала успешно!";
     LanguageCloseFile(idLngFile);
@@ -1760,16 +1750,10 @@ string descF27 = "Репутация ГГ в минус";
 void CalculateInfoDataF27()
 {
     totalInfo = descF27;
-	// -->
-	if ( sti(pchar.reputation) > 1)
-	{
-	   pchar.reputation = sti(pchar.reputation) - 10;
-	   if (sti(pchar.reputation) < 1)
-	   {
-	       pchar.reputation = 1;
-	   }
-	}
-    // <--
+
+	pchar.reputation = sti(pchar.reputation) - 10;
+	if (sti(pchar.reputation) < REPUTATION_MIN) pchar.reputation = REPUTATION_MIN;
+
     totalInfo = totalInfo + NewStr() + NewStr() +
                 "Команда отработала успешно!";
     SetFormatedText("INFO_TEXT",totalInfo);

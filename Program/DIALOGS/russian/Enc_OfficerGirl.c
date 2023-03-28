@@ -38,7 +38,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Node_2":
-            if (NPChar.alignment == "good" && sti(pchar.reputation) < 70)
+            if (NPChar.alignment == "good" && sti(pchar.reputation) <= 70)
             {
                 dialog.text = "Я гожусь на многое, но с вами мы не сработаемся. Ваша репутация недостаточна хороша. Пожалуй, я не пойду к вам в команду.";
     			link.l1 = "С такими запросами ты долго будешь без работы!";
@@ -46,7 +46,7 @@ void ProcessDialogEvent()
     			break;
             }
 
-            if (NPChar.alignment == "bad" && sti(pchar.reputation) > 30)
+            if (NPChar.alignment == "bad" && sti(pchar.reputation) >= 30)
             {
                 dialog.text = "Я гожусь на многое, но не для таких святош как ты, "+ GetSexPhrase("красавчик","красавица") +". Пожалуй, я не пойду к тебе в команду.";
     			link.l1 = "С такими запросами ты долго будешь без работы!";
@@ -63,7 +63,7 @@ void ProcessDialogEvent()
 
         case "OnceAgain":
             NextDiag.TempNode = "OnceAgain";
-            if (NPChar.alignment == "good" && sti(pchar.reputation) < 70)
+            if (NPChar.alignment == "good" && sti(pchar.reputation) <= 70)
             {
                 dialog.text = "Я гожусь на многое, но с вами мы не сработаемся. Ваша репутация недостаточна хороша. Пожалуй, я не пойду к вам в команду.";
     			link.l1 = "С такими запросами ты долго будешь без работы!";
@@ -71,7 +71,7 @@ void ProcessDialogEvent()
     			break;
             }
 
-            if (NPChar.alignment == "bad" && sti(pchar.reputation) > 30)
+            if (NPChar.alignment == "bad" && sti(pchar.reputation) >= 30)
             {
                 dialog.text = "Я гожусь на многое, но не для таких святош как ты, "+ GetSexPhrase("красавчик","красавица") +". Пожалуй, я не пойду к тебе в команду.";
     			link.l1 = "С такими запросами ты долго будешь без работы!";
@@ -275,7 +275,7 @@ void ProcessDialogEvent()
 			SetCharacterPerk(NPChar, "HPPlus");
 			NPChar.OfficerWantToGo.DontGo = true;
 			NPChar.loyality = MAX_LOYALITY;
-			NPChar.Reputation = 50;
+			NPChar.Reputation = REPUTATION_NEUTRAL;
 			DeleteAttribute(NPChar, "alignment");
 			if (bHalfImmortalPGG)
 			{
@@ -331,12 +331,12 @@ void ProcessDialogEvent()
 			if (rand(sti(pchar.reputation)) >= 50)
 			{
 				NPchar.alignment  = "good";
-				NPchar.reputation = 51 + rand(48);
+				NPchar.reputation = 61 + rand(29);
 			}
 			else
 			{
 				NPchar.alignment = "bad";
-				NPchar.reputation = 49 - rand(48);
+				NPchar.reputation = 39 - rand(29);
 			}
 			Link.l1 = "Вот и хорошо.";
 			Link.l1.go = "Exit";
@@ -670,7 +670,7 @@ void ProcessDialogEvent()
 		break;
 		//Йока
 		case "Yoko_meet":
-			if (sti(pchar.reputation) >= 70)
+			if (sti(pchar.reputation) > 70)
 			{
 				dialog.Text = "Приветствую вас, капитан. Я - Йоко Диаз, вольный клинок.";
 				Link.l1 = "Выглядишь как-то потрёпанно. Ищешь работу?";
@@ -746,7 +746,7 @@ void ProcessDialogEvent()
 					break;
 				}
 			}
-			if (sti(pchar.reputation) >= 70)
+			if (sti(pchar.reputation) > 70)
 			{
 				if (CheckAttribute(npchar, "MetWhisper"))
 				{
@@ -876,7 +876,7 @@ void ProcessDialogEvent()
 					break;
 				}
 			}
-			if (NPChar.alignment == "bad" && sti(pchar.reputation) <= 30)
+			if (NPChar.alignment == "bad" && sti(pchar.reputation) < 30)
 			{
 				dialog.Text = "Эй, капитан! Тебе выпала честь нанять старпомом - дочь самого Николаса Шарпа! Если ты досто"+ GetSexPhrase("ин","йна") +", конечно!";
 				Link.l1 = "Какое самомнение! И ты уверена, что с подобными взглядами тебя кто-то возьмёт?";

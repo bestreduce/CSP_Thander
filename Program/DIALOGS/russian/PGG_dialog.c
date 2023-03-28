@@ -237,7 +237,7 @@ void ProcessDialogEvent()
 
 		if (GetQuestPastDayParam("PChar.questTemp.DuelCooldown") >= 3 || bBettaTestMode)
 		{
-			if (sti(PChar.reputation < 15) && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 51 && !isSetSail)
+			if (sti(PChar.reputation < 20) && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 51 && !isSetSail)
 			{
 				link.l8 = PCharRepPhrase(
 					"Эта таверна слишком тесна для нас двоих. Я хочу, что бы ты исчез" + NPCharSexPhrase(NPChar, "", "ла") + ".",
@@ -990,7 +990,7 @@ void ProcessDialogEvent()
 
 	case "Quest_1_Ship_Detail":
 		sTmp = "Караван, принадлежащий " + NationNameGenitive(sti(PChar.GenQuest.PGG_Quest.Nation)) + ", перевозящий ";
-		PChar.GenQuest.PGG_Quest.Goods.Text = GetStrSmallRegister(XI_ConvertString(Goods[sti(PChar.GenQuest.PGG_Quest.Goods)].Name + "Gen"));
+		PChar.GenQuest.PGG_Quest.Goods.Text = GetStrSmallRegister(XI_ConvertString(Goods[sti(PChar.GenQuest.PGG_Quest.Goods)].Name + "Acc"));
 		sTmp += PChar.GenQuest.PGG_Quest.Goods.Text;
 
 		if (PChar.GenQuest.PGG_Quest.Island.Town == "" || PChar.GenQuest.PGG_Quest.Island.Town == "Caiman" ||
@@ -1375,7 +1375,7 @@ void ProcessDialogEvent()
 		}
 		else
 		{
-			if (makeint(NPChar.reputation) < 41 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 70 && drand(200) > sti(GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)))
+			if (makeint(NPChar.reputation) < 40 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 70 && drand(200) > sti(GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)))
 			{
 				greedyPGG = 2;
 				greed = " И не советую тебе рыпаться.";
@@ -1445,7 +1445,7 @@ void ProcessDialogEvent()
 		else	NPChar.PGG_Hunter = true;
 		DeleteAttribute(NPChar, "Greed");
 
-		bOk = makeint(NPChar.reputation) < 41 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 75;
+		bOk = makeint(NPChar.reputation) < 40 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 75;
 		if (bOk || CheckAttribute(PChar, "GenQuest.PGG_Quest.Ok"))
 		{
 			PChar.GenQuest.PGG_Quest.Stage = 4;

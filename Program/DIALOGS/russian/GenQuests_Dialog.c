@@ -446,7 +446,7 @@ void ProcessDialogEvent()
 		case "ShipWreck_5":
 			dialog.text = RandPhraseSimple("Капитан, я очень надеюсь, что на вашем корабле найдётся несколько свободных рундуков. Ведь у каждого из нас остались семьи, которые наверняка уже оплакивают нашу гибель. Мы были бы очень Вам благодарны.",
 				"Капитан, мы в полном отчаянии, нам больше не на кого надеяться. Не откажите в услуге, вытащите нас из этого забытого Богом места.");
-			if(GetFreeCrewQuantity(pchar) >= sti(pchar.GenQuest.ShipWreck.Qty) && GetPassengersQuantity(pchar) < PASSENGERS_MAX)
+			if (GetFreeCrewQuantity(pchar) >= sti(pchar.GenQuest.ShipWreck.Qty) && GetPassengersQuantity(pchar) < PASSENGERS_MAX)
 			{
 				link.l1 = "Да уж... и куда прикажете вас доставить?";
 				link.l1.go = "ShipWreck_7";
@@ -456,7 +456,7 @@ void ProcessDialogEvent()
 				RandPhraseSimple("Очень жаль, но кубрики на корабле переполнены. Матросы живут в тесноте, и у меня нет никакой возможности брать ещё и пассажиров.",
 				"Вынужден"+ GetSexPhrase("","а") +" вас разочаровать, но на корабле команда с перегрузом. Я опасаюсь вспышки эпидемии."));
 			link.l2.go = "ShipWreck_8";
-			if(stf(pchar.reputation) <= REPUTATION_NEUTRAL)
+			if (stf(pchar.reputation) < 40)
 			{
 				link.l3 = "Вам ли, бывалому моряку, не знать, что присутствие на борту потерпевшего кораблекрушение - это дурная примета? Мои матросы просто выбросят всех вас за борт.";
 				link.l3.go = "ShipWreck_9";
@@ -1413,7 +1413,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Convict_11_5":
-			if(makeint(pchar.reputation) < 11 || makeint(pchar.reputation) > 79) //макс. репутатция 90
+			if(makeint(pchar.reputation) < 10 || makeint(pchar.reputation) > 90)
 			{
 				dialog.text = "Эх, капитан, а мы так надеялись...";
 				link.l1 = "Ничего. Если деньги есть, то извозчик найдётся. Прощайте.";
@@ -4192,15 +4192,15 @@ void ProcessDialogEvent()
 			bTemp = false;
 			if(drand(1) == 0)
 			{
-			    NPChar.reputation = 60 + rand(20);
+			    NPChar.reputation = 61 + rand(29);
 				NPChar.alignment = "good";
 			}
 			else
 			{
-			    NPChar.reputation = 10 + rand(20);
+			    NPChar.reputation = 10 + rand(29);
 				NPChar.alignment = "bad";
 			}
-			if (NPChar.alignment == "good" && sti(pchar.reputation) > 50) bTemp = true;
+			if (NPChar.alignment == "good" && sti(pchar.reputation) >= 50) bTemp = true;
 			if (NPChar.alignment == "bad" && sti(pchar.reputation) <= 50) bTemp = true;
 
 			addMoneyToCharacter(pchar, -sti(pchar.GenQuest.CaptainComission.GoodsPrice));
@@ -5023,7 +5023,7 @@ void ProcessDialogEvent()
 				RandPhraseSimple("Очень жаль, но кубрики на корабле переполнены. Матросы живут в тесноте, и у меня нет никакой возможности брать ещё и пассажиров...", "Вынужден"+ GetSexPhrase("","а") +" вас разочаровать, но на корабле команда с перегрузом. Я опасаюсь вспышки эпидемии..."));
 			link.l2.go = "PiratesOnUninhabited_21";
 
-			if(stf(PChar.reputation) <= REPUTATION_NEUTRAL)
+			if(stf(PChar.reputation) < 40)
 			{
 				link.l3 = "Вам ли, бывалому моряку, не знать, что присутствие на борту потерпевшего кораблекрушение - это дурная примета? Мои матросы просто выбросят всех вас за борт.";
 				link.l3.go = "PiratesOnUninhabited_7";
@@ -5051,7 +5051,7 @@ void ProcessDialogEvent()
 			link.l1 = "Вот теперь я вижу, кто вы есть на самом деле...";
 			link.l1.go = "PiratesOnUninhabited_2";
 			AddDialogExitQuest("MainHeroFightModeOn");
-			ChangeCharacterReputation(PChar, -3.0);
+			ChangeCharacterReputation(PChar, -3);
 		break;
 
 		// Берём их в команду
@@ -5111,7 +5111,7 @@ void ProcessDialogEvent()
 
 			Log_Info("Ваша команда пополнилась на " + PChar.GenQuest.PiratesOnUninhabited.PiratesCount + " человек.");
 
-			ChangeCharacterReputation(PChar, 3.0);
+			ChangeCharacterReputation(PChar, 3);
 
 			AddCharacterCrew(PChar, sti(PChar.GenQuest.PiratesOnUninhabited.PiratesCount) - 1);
 			OfficersReaction("good");
@@ -5235,7 +5235,7 @@ void ProcessDialogEvent()
 			link.l1 = "Что ж, попробуйте!";
 			link.l1.go = "PiratesOnUninhabited_16";
 			AddDialogExitQuest("MainHeroFightModeOn");
-			ChangeCharacterReputation(PChar, 2.0);
+			ChangeCharacterReputation(PChar, 2);
 		break;
 
 		case "PiratesOnUninhabited_16":
@@ -5307,7 +5307,7 @@ void ProcessDialogEvent()
 				rChar.LifeDay = 0;
 			}
 
-			ChangeCharacterReputation(PChar, 2.0);
+			ChangeCharacterReputation(PChar, 2);
 			OfficersReaction("good");
 
 			sTitle = "PiratesOnUninhabited" + PChar.GenQuest.PiratesOnUninhabited.StartShore;
@@ -5611,7 +5611,7 @@ void ProcessDialogEvent()
 
 			Log_Info("Ваша команда пополнилась на " + PChar.GenQuest.PiratesOnUninhabited.PiratesCount + " человек.");
 
-			ChangeCharacterReputation(PChar, 3.0);
+			ChangeCharacterReputation(PChar, 3);
 
 			AddCharacterCrew(PChar, sti(PChar.GenQuest.PiratesOnUninhabited.PiratesCount) - 1)
 			AddPassenger(PChar, NPChar, false); // Главного в пассажиры

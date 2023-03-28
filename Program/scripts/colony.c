@@ -147,21 +147,21 @@ ref GetFortCommander(string _city)
 void SetCrewBackAfterBattle()
 {
     float  fTemp, fTemp2;
-    int    i, iTemp;
+    int    iTemp2, iTemp;
 	// вернем живых на корабль -->
 	fTemp = stf(Pchar.GenQuestFort.PlayerCrew) * stf(Pchar.GenQuestFort.PlayerCrew_per_char); // живые
 	fTemp2 = 0.9 + MakeFloat(GetSummonSkillFromName(Pchar, SKILL_DEFENCE)) / SKILL_MAX;
-	i     = makeint((stf(Pchar.GenQuestFort.PlayerCrew_Start) - fTemp) /fTemp2 + 0.3); // трупы
+	iTemp2     = makeint((stf(Pchar.GenQuestFort.PlayerCrew_Start) - fTemp) /fTemp2 + 0.3); // трупы после лечения
 	iTemp = makeint((stf(Pchar.GenQuestFort.PlayerCrew_Start) - fTemp)); // трупы  без бонуса
 	// расчет медицины -->
-	iTemp = makeint((iTemp - i)*0.6);
+	iTemp = makeint((iTemp - iTemp2)*0.6);//60% тяжело раненых погибнут без лекарства		//странная логика. значит, если ушел на своих двоих, то и живой и лечение не требуется.
 	if (iTemp > 0)
 	{
 	    if (GetCargoGoods(Pchar, GOOD_MEDICAMENT) < iTemp)
 	    {
             iTemp = iTemp - GetCargoGoods(Pchar, GOOD_MEDICAMENT); // умерли от ран
 			RemoveCharacterGoodsSelf(Pchar, GOOD_MEDICAMENT, GetCargoGoods(Pchar, GOOD_MEDICAMENT)); // все нулим
-			i += iTemp; // трупов больше
+			iTemp2 += iTemp; // трупов больше
 			Log_Info("Из-за нехватки медикаментов от ран умерли " + iTemp + " матросов");
 	    }
 	    else
@@ -174,11 +174,11 @@ void SetCrewBackAfterBattle()
 	    }
 	}
 	// расчет медицины <--
-	Statistic_AddValue(Pchar, "DeadCrewTown", i);
-	AddCharacterExpToSkill(Pchar, "Defence", makeint(i / 3 + 0.5)); //качаем защиту
-	RemoveCharacterGoodsSelf(Pchar, GOOD_WEAPON, i*0.7);// тк сабли уже брали
-	i = sti(Pchar.GenQuestFort.PlayerCrew_Start) - i; // выжившие с бонусом
-	SetCrewQuantityOverMax(Pchar, i);
+	Statistic_AddValue(Pchar, "DeadCrewTown", iTemp2);
+	AddCharacterExpToSkill(Pchar, "Defence", makeint(iTemp2 / 3 + 0.5)); //качаем защиту		//опыт только за погибших, а за вылеченных - фига?
+	RemoveCharacterGoodsSelf(Pchar, GOOD_WEAPON, iTemp2*0.7);// тк сабли уже брали
+	iTemp2 = sti(Pchar.GenQuestFort.PlayerCrew_Start) - iTemp2; // выжившие с бонусом
+	SetCrewQuantityOverMax(Pchar, iTemp2);//так и должно быть, следующая функция лишних выгонит
 	AddTroopersCrewToOther(Pchar); // 09.07.05
 }
 
@@ -699,13 +699,12 @@ void TWN_FightInTown()
 				for (i = 0; i < MAX_TOWN_MUSHKETER; i++)
 				{
 					if (sti(Pchar.GenQuestFort.TownCrew) < 1) break;
-					if(natEsc == PIRATE)
+					if (natEsc == PIRATE)
 					{
 						sModel = GetPirateMushketerModel();
 					}
 					else
 					{
-
 						sModel = NationShortName(natEsc) + "_mush_" + i;
 					}
 					sld = GetCharacter(NPC_GenerateCharacter("GenChar_", sModel, "man", "mushketer", 5, natEsc, 0, false));
@@ -733,19 +732,20 @@ void TWN_FightInTown()
 	            }
 				if (pchar.questTemp.Ascold != "Ascold_ImMummy")
 				{
+					int iNation;
 					//наши мушкетеры
-					for (i = 0; i < MAX_TOWN_MUSHKETER; i++)
+					for (i = 0; i < MAX_TOWN_MUSHKETER; i++)//максимум - 3 в городе
 					{
 						if (sti(Pchar.GenQuestFort.PlayerCrew) < 1) break;
-						if(sti(pchar.nation) == PIRATE)
-						{
-							sModel = GetPirateMushketerModel();
-						}
-						else
-						{
-							//#20180930-02
-                            sModel = NationShortName(natEsc) + "_mush_" + (i + 1);
-						}
+
+						//убираю максировку под дефолтную нацию, это только путает игрока
+				        if (isMainCharacterPatented() && sti(Items[sti(pchar.EquipedPatentId)].TitulCur) > 1) //форма только со звания капитан	//беру код из LAi_GetBoardingMushketerModel
+						{ iNation = sti(Items[sti(pchar.EquipedPatentId)].Nation); }
+							else iNation = PIRATE;
+						if (iNation < 0) iNation = PIRATE;//нужно ли?
+						if (iNation == PIRATE) sModel = GetPirateMushketerModel();
+							else sModel = NationShortName(iNation) + "_mush_" + (rand(2)+1);
+
 						sld = GetCharacter(NPC_GenerateCharacter("GenChar_", sModel, "man", "mushketer", 5, sti(pchar.nation), 0, false));
 						sld.id = "GenChar_" + sld.index;
 						LAi_NoRebirthEnable(sld); //не показывать убитых при входе в локацию

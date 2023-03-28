@@ -1755,7 +1755,7 @@ int NPC_GeneratePhantomCharacter(string sType, int iNation, int iSex, int _LifeD
 	ch.nation = iNation;
 
 	SetRandomNameToCharacter(ch);
-    ch.reputation = (1 + rand(44) + rand(44)); // репа всем горожанам
+    ch.reputation = 10 + rand(80); // репа всем горожанам
 	ch.id = "GenChar_" + iChar;
 
     CreateModel(iChar, sType, iSex);

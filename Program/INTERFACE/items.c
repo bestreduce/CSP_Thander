@@ -1163,7 +1163,7 @@ bool ThisItemCanBeEquip(string sItemID)
 	ref rItem = ItemsFromID(sItemID);
 	if (CheckAttribute(xi_refCharacter,"nonremovable")) return false;
 	if (HasSubStr(loadedLocation.id,"FencingTown")) return false;
-	if (rItem.id == "suit_2" && pchar.questTemp.AnjelikaTichPrologue5 == "ATP5")	//Пролог Анжелика Тич, не даём снять юбку
+	if (rItem.id == "suit_2" && CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue5") && pchar.questTemp.AnjelikaTichPrologue5 == "ATP5") //Пролог Анжелика Тич, не даём снять юбку
     {
         SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Remove that"));
         return false;

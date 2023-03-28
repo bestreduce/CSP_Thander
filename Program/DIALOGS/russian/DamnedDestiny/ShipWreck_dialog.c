@@ -70,7 +70,7 @@ void ProcessDialogEvent()
 		case "5":
 			sCharacter = PChar.GenerateShipWreck.CharacterID;
 			SetCameraDialogMode(CharacterFromID(sCharacter));
-			dialog.text = GetFullName(CharacterFromID(sCharacter)) + ": " + GetNameLugger(NPChar, "n") + ", этот пакет ты вскроешь по прибытии на землю. Но не раньше. Там дополнительные инструкции.";
+			dialog.text = GetFullName(CharacterFromID(sCharacter)) + ": " + NPChar.name + ", этот пакет ты вскроешь по прибытии на землю. Но не раньше. Там дополнительные инструкции.";
 			link.l1 = GetFullName(NPChar) + ": Понял, капитан.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ShipWreckInSeaWaitEnd");
@@ -234,7 +234,7 @@ void ProcessDialogEvent()
 		case "28":
 			sCharacter = PChar.GenerateShipWreck.ValodyaID;
 			SetCameraDialogMode(CharacterFromID(sCharacter));
-			dialog.text = GetNameLugger(CharacterFromID(sCharacter), "n") + ", сбегай к капитану, одолжи у него кошелёк.";
+			dialog.text = "" + sCharacter.name + ", сбегай к капитану, одолжи у него кошелёк.";
 			link.l1 = "...";
 			link.l1.go = "29";
 			ShipWreckBandValodyaToMoney();
@@ -301,7 +301,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.GenerateShipWreck.ToSquadron) == 1)
 			{
 				SetCameraDialogMode(CharacterFromID(sCharacter));
-				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Остынь, " + GetNameLugger(NPChar, "n") + ". У него больше людей и целый корабль.";
+				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Остынь, " + NPChar.name + ". У него больше людей и целый корабль.";
 				link.l1.go = "38";
 			}
 			else
@@ -346,7 +346,7 @@ void ProcessDialogEvent()
 				sCharacter = PChar.GenerateShipWreck.ValodyaID;
 				PChar.GenerateShipWreck.ValodyaToMoney = true;
 				SetCameraDialogMode(CharacterFromID(sCharacter));
-				dialog.text = "Мы согласны. " + GetNameLugger(CharacterFromID(sCharacter), "n") + ", ты знаешь что делать.";
+				dialog.text = "Мы согласны. " + sCharacter.name + ", ты знаешь что делать.";
 				link.l1 = "Понял" + GetSexPhrase("","а") +".";
 				link.l1.go = "exit";
 				AddDialogExitQuestFunction("ShipWreckBandValodyaToMoney");
@@ -366,7 +366,7 @@ void ProcessDialogEvent()
 		case "43":
 			PChar.GenerateShipWreck.AddBandaShip = true;
 			sCharacter = PChar.GenerateShipWreck.ValodyaID;
-			dialog.text = "Мы согласны. " + GetNameLugger(CharacterFromID(sCharacter), "n") + ", ты знаешь что делать.";
+			dialog.text = "Мы согласны. " + sCharacter.name + ", ты знаешь что делать.";
 			link.l1 = "Вот и замечательно. А теперь за работу!";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ShipWreckBanditsOneTypeEnd");
@@ -400,7 +400,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.GenerateShipWreck.ToSquadronWithMoney) == 1)
 			{
 				SetCameraDialogMode(CharacterFromID(sCharacter));
-				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Вот деньги, " + GetNameLugger(NPChar, "n") + ", у нас нет выхода.";
+				link.l1 = GetFullName(CharacterFromID(sCharacter)) + ": Вот деньги, " + NPChar.name + ", у нас нет выхода.";
 				link.l1.go = "49";
 			}
 			else
@@ -460,7 +460,7 @@ void ProcessDialogEvent()
 
 		case "NewCap_4":
 			AddMoneyToCharacter(PChar, sti(PChar.GenerateShipWreck.Money));
-			dialog.text = GetNameLugger(PChar, "n") + ", я благодарю вас за спасение. Возьмите эти " + sti(PChar.GenerateShipWreck.Money) + " золотых, в знак большого уважения.";
+			dialog.text = PChar.name + ", я благодарю вас за спасение. Возьмите эти " + sti(PChar.GenerateShipWreck.Money) + " золотых, в знак большого уважения.";
 			link.l1 = "Я сделал" + GetSexPhrase("","а") +" это из благородных побуждений. Скажите, что вы собираетесь делать дальше?";
 			link.l1.go = "NewCap_5";
 		break;

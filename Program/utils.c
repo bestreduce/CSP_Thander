@@ -517,7 +517,6 @@ int GetCurrentModelrNumber()
 			n++;
 		}
 	}
-	trace("GetCurrentModelrNumber   n : " + n);
 	return n;
 }
 

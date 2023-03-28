@@ -758,7 +758,7 @@ void ProcessDialogEvent()
 			SetCharacterPerk(NPChar, "HPPlus");
 			NPChar.OfficerWantToGo.DontGo = true;
 			NPChar.loyality = MAX_LOYALITY;
-			NPChar.Reputation = 50;
+			NPChar.Reputation = REPUTATION_NEUTRAL;
 			DeleteAttribute(NPChar, "alignment");
 			if (bHalfImmortalPGG)
 			{
@@ -814,12 +814,12 @@ void ProcessDialogEvent()
 			if (rand(sti(pchar.reputation)) >= 50)
 			{
 				NPchar.alignment  = "good";
-				NPchar.reputation = 51 + rand(48);
+				NPchar.reputation = 61 + rand(29);
 			}
 			else
 			{
 				NPchar.alignment = "bad";
-				NPchar.reputation = 49 - rand(48);
+				NPchar.reputation = 39 - rand(29);
 			}
 			Link.l1 = "Вот и хорошо.";
 			Link.l1.go = "Exit";
@@ -1264,7 +1264,7 @@ void ProcessDialogEvent()
 				}
 			}
 			// проверка на море <--
-			if (makeint(PChar.reputation) >= 41 && makeint(NPChar.reputation) < 41) //герой против злодея
+			if (makeint(PChar.reputation) >= 40 && makeint(NPChar.reputation) < 40) //герой против злодея
 			{
 				dialog.text = RandPhraseSimple(LinkRandPhrase("Вот это новость!","С какой это радости?!","С чего это вдруг?!"), RandPhraseSimple("Капитан, вы в своём уме? Сообщать такие новости ни с того, ни с сего!","Ого! И чем это я вам не угодил?"));
 				Link.l1 = RandPhraseSimple(LinkRandPhrase("Я решил"+ GetSexPhrase("","а") +" навести порядок в эскадре. И, поскольку мне не нравятся твои взаимоотношения с коллегами,","Твои достоинства оказались не так хороши, как расписывалось при найме, поэтому","Головорезов и проходимцев в моей команде не будет! Поэтому"), LinkRandPhrase("Мне стало известно, что ты тайком таскаешь ром и спаиваешь команду, тем самым ослабляя её боевой дух. Поэтому","Мне чертовски надоели твои разбойничьи замашки, я не намерен"+ GetSexPhrase("","а") +" терпеть их бесконечно. Так что,","Ты постоянно проводишь время в кают-компании за игрой в карты или кости, отвлекая других офицеров от несения службы. Это не может продолжаться бесконечно, поэтому")) + " собирайся и покинь судно.";
@@ -1278,7 +1278,7 @@ void ProcessDialogEvent()
 				}
 				break;
 			}
-			if (makeint(PChar.reputation) >= 41 && makeint(NPChar.reputation) >= 41) // герой против героя
+			if (makeint(PChar.reputation) >= 40 && makeint(NPChar.reputation) >= 40) // герой против героя
 			{
 				dialog.text = RandPhraseSimple(RandPhraseSimple("Могу я узнать причины такого решения?","Наверняка такое решение имеет веские причины?"), RandPhraseSimple("Прошу объясниться, капитан.","Весьма неожиданно. Но хотелось бы знать основания."));
 				if (NPChar.id == "Andreas_Fickler")
@@ -1289,7 +1289,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "Get_out_A2";
 				break;
 			}
-			if (makeint(PChar.reputation) < 41 && makeint(NPChar.reputation) >= 41) // злодей против героя
+			if (makeint(PChar.reputation) < 40 && makeint(NPChar.reputation) >= 40) // злодей против героя
 			{
 				dialog.text = RandPhraseSimple(RandPhraseSimple("Хм. Могу я узнать причины?","Это серьёзное заявление. Могу я узнать, что конкретно вас не устраивает?"), RandPhraseSimple("Прошу объясниться, капитан.","Надеюсь, у такого заявления имеются веские основания?"));
 				Link.l1 = RandPhraseSimple(LinkRandPhrase("Меня совершенно не устраивает твоя квалификация, поэтому","К сожалению, из тебя не вышло толкового офицера. Так что,","Мне чертовски надоели твои благородные порывы. Я не намерен"+ GetSexPhrase("","а") +" терпеть их бесконечно, так что,"), LinkRandPhrase("До меня дошли слухи, что именно ты подбиваешь команду к неповиновению. Беспорядков на моём судне не будет! И не нужно благодарить, что я раньше не вышвырнул"+ GetSexPhrase("","а") +" тебя за борт... Так что,","Твои благородные принципы делают тебе честь, но они идут вразрез с разбойной жизнью вольного капера. Так что,","Меня категорически не устраивает твоё отношение к своим обязанностям. Поэтому")) + " собирайся и покинь судно.";
@@ -1304,7 +1304,7 @@ void ProcessDialogEvent()
 				break;
 
 			}
-			if (makeint(PChar.reputation) < 41 && makeint(NPChar.reputation) < 41) // злодей против злодея
+			if (makeint(PChar.reputation) < 40 && makeint(NPChar.reputation) < 40) // злодей против злодея
 			{
 				dialog.text = RandPhraseSimple(LinkRandPhrase("Капитан, я никак не ожидал такого поворота! Может объясните, что произошло?","Капитан, что за муха вас укусила?!","Как прикажете это понимать, капитан?!"), RandPhraseSimple("Как же так, капитан?! Ещё сутра всё было нормально, а тут - на тебе...","Ого! Думаю, вы найдёте пару слов для объяснения?"));
 				Link.l1 = RandPhraseSimple(LinkRandPhrase("Ты редкостный бездарь и неумёха - тебе бы юнгой в каботажное плавание. Я и так слишком долго терпел"+ GetSexPhrase("","а") +". Так что,","Ты давно меня не устраиваешь, но сейчас я наконец-то наш"+ GetSexPhrase("ел","ла") +" достойную замену. Так что,","Мне стало известно, что ты тайком таскаешь ром и спаиваешь команду, тем самым ослабляя её боевой дух. Поэтому"), LinkRandPhrase("При найме ты распинался, что лучшего офицера не найти на всём флоте, а на поверку оказался обыкновенным лоботрясом, так что","Я предупреждал"+ GetSexPhrase("","а") +", что твоё пьянство плохо кончится. Почему я долж"+ GetSexPhrase("ен","на") +" всё за тебя делать сам"+ GetSexPhrase("","а") +"? Так что,","Вместо несения службы, ты постоянно торчишь в кают-компании за игрой в карты или кости. Надеюсь, ты не думал, что так может продолжаться бесконечно? Так что,")) + " собирайся и проваливай.";

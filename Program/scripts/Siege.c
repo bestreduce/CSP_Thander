@@ -318,7 +318,7 @@ int MakeSiegeSquadron(int ination)
 		i++;
 	}
 
-	while (i < SHIP_TYPES_QUANTITY)
+	while (i < SHIP_TYPES_QUANTITY-1)//шлюпку не проверяем
 	{
 		if (CheckAttribute(ShipsTypes[i], "CanEncounter") && ShipsTypes[i].CanEncounter == true)
 		{
@@ -327,7 +327,7 @@ int MakeSiegeSquadron(int ination)
 				suitableShipTypes[usualShipTypesCount + bestShipTypesCount] = i;
 				bestShipTypesCount++;
 			}
-		}		
+		}
 		i++;
 	}
 

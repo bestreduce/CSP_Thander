@@ -613,6 +613,8 @@ void SetGeraldDetails(ref chr, int iHull, int iColor, string sType, string sGera
 	}
 }
 
+
+/*
 string GetNameLugger(ref chr, string sType)
 {
 	string sName = "";
@@ -624,6 +626,7 @@ string GetNameLugger(ref chr, string sType)
 	}
 	return sName;
 }
+*/
 
 void CreateCaimanShoreSlaves(ref loc)
 {

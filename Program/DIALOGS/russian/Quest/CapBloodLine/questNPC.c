@@ -213,7 +213,7 @@ void ProcessDialogEvent()
     		{
                 if(findsubstr(Pchar.questTemp.CapBloodLine.stat, "PrepareToEscape" , 0) != -1)
                 {
-                        if (CheckAttribute(npchar, "quest.bGoodMerch") && sti(Pchar.reputation) >= 55)
+                        if (CheckAttribute(npchar, "quest.bGoodMerch") && sti(Pchar.reputation) > 60)
                         {
                             dialog.text = "О, доктор Блад, здравствуйте! Я так и не поблагодарил"+NPCharSexPhrase(NPChar, " ", "а ")+" вас тогда за спасение моего маленького сына, о чем до сих пор часто вспоминаю и сожалею. Как славно, что я встретил вас сегодня!";
                             link.l1 = "Действительно, как славно, что люди стремятся отблагодарить в самый подходящий момент. Не подскажешь ли, "+NPCharSexPhrase(NPChar, "дорогой друг ", "моя дорогая ")+", где я могу в кратчайшие сроки разжиться несколькими абордажными саблями и парой-тройкой пистолетов без лишнего шума и возни?";

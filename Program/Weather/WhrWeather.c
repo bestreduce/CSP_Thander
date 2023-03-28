@@ -411,26 +411,6 @@ void CreateWeatherEnvironment()
 	bWeatherIsNight = Whr_GetLong(aCurWeather,"Night");
 	bWeatherIsLight = Whr_GetLong(aCurWeather,"Lights");
 	
-	if (CheckAttribute(loadedLocation, "type")) //Фикс освещения персонажей в тавернах.
-	{
-		if(loadedLocation.type == "tavern"
-					|| loadedLocation.type == "residence"
-					|| loadedLocation.type == "house"
-					|| loadedLocation.type == "shop"
-					|| loadedLocation.type == "shipyard"
-					|| loadedLocation.type == "church"
-					|| loadedLocation.type == "bank")
-		{
-			if (aCurWeather.Sun.Ambient != argb(0,50,50,50)) // Вдруг 24+ часа будете стоять в таверне, чтоб не перезаписался бэкап.
-				{
-					aCurWeather.Bak.Sun.Ambient	= aCurWeather.Sun.Ambient;
-					aCurWeather.Bak.Sun.Color = aCurWeather.Sun.Color;
-				}
-			aCurWeather.Sun.Ambient = argb(0,50,50,50);
-			aCurWeather.Sun.Color = argb(0,85,80,80); 
-		}
-	}
-
 	if(CheckAttribute(pchar, "wind.angle"))
 	{
 		Weather.Wind.Angle = pchar.wind.angle;
@@ -532,6 +512,14 @@ void CreateWeatherEnvironment()
 				{
 					//нет дождя
 					bRain = false;
+
+					if (aCurWeather.Sun.Ambient != argb(0,50,50,50)) // Вдруг 24+ часа будете стоять в таверне, чтоб не перезаписался бэкап.
+						{
+							aCurWeather.Bak.Sun.Ambient	= aCurWeather.Sun.Ambient;
+							aCurWeather.Bak.Sun.Color = aCurWeather.Sun.Color;
+						}
+					aCurWeather.Sun.Ambient = argb(0,50,50,50);
+					aCurWeather.Sun.Color = argb(0,85,80,80); 
 				}
 			}
 		}

@@ -1278,7 +1278,7 @@ trace("SortTable(sControl = " + sControl + ", iColumn = " +  iColumn + ") iLines
 		DeleteAttribute(&GameInterface, sControl + "." + sRow);//удаляем пузырёк, будет портить число строк в таблице
 	}
 	DrawSortDir(sControl, iColumn, bAsc);
-	ResetSelectedRow(sControl, sLast, iLinesCount)
+	ResetSelectedRow(sControl, sLast, iLinesCount);
 }
 
 void DrawSortDir(string sControl, int iColumn, bool bAsc)

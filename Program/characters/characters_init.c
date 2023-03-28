@@ -247,7 +247,7 @@ void CreateCharacters()
 		// boal -->
 		if (CheckAttribute(rCharacter, "City"))
         {
-			rCharacter.reputation = (1 + rand(44) + rand(44));// репа всем горожанам
+			rCharacter.reputation = 10 + rand(80);// репа всем горожанам
         }
         if (CheckAttribute(rCharacter, "Dialog.Filename") && rCharacter.Dialog.Filename == "Common_Shipyard.c")
 		{
