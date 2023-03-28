@@ -7,7 +7,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
 			link.l1 = RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить");
 		    link.l1.go = "exit";
-			if (pchar.questTemp.PDM_PK_UznatLichnost == "UznatLichnost")	// Квест "Потерянное кольцо"
+			//Gregg+SeaBoss-внес, см. строку-11 - Квест "Потерянное кольцо".
+			if (CheckAttribute(pchar,"questTemp.PDM_PK_UznatLichnost")) // Квест "Потерянное кольцо"
             {
                 link.l1 = "Расскажите мне о странной женщине, которая потеряла своё кольцо. Вы её знаете?";
                 link.l1.go = "PDM_PK_UznatLichnost";

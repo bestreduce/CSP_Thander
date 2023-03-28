@@ -520,7 +520,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		}
 		if (sti(npchar.Money) < 15000)
 		{
-			dialog.text = "Все! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
+			dialog.text = "Всё! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
 			link.l1 = "Жаль.";
 			link.l1.go = "exit";
 			break;

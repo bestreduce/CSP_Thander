@@ -442,7 +442,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				dialog.text = "Все бы было хорошо, но дело в том, что " + sld.name + " - девушка недешёвая, стоит " + FindRussianMoneyString(sti(sld.quest.price)) + ". А у тебя, насколько я вижу, таких денег нет. Приходи как разбогатеешь"+ GetSexPhrase(", родной","") +"...";
+				dialog.text = "Всё бы было хорошо, но дело в том, что " + sld.name + " - девушка недешёвая, стоит " + FindRussianMoneyString(sti(sld.quest.price)) + ". А у тебя, насколько я вижу, таких денег нет. Приходи как разбогатеешь"+ GetSexPhrase(", родной","") +"...";
 				Link.l1 = "Эх, вот так всегда...";
 				Link.l1.go = "exit";
 			}
@@ -529,7 +529,7 @@ void ProcessDialogEvent()
 		case "toChurch_2":
 			pchar.questTemp.different.HostessChurch.money = (rand(4)+1) * 300;
 			dialog.text = "Хорошо. Я даю тебе " + FindRussianMoneyString(sti(pchar.questTemp.different.HostessChurch.money)) +  ". Сделай пожертвование прямо сегодня!";
-			link.l1 = "Все сделаю прямо сейчас, можешь не переживать.";
+			link.l1 = "Всё сделаю прямо сейчас, можешь не переживать.";
 			link.l1.go = "toChurch_3";
 			link.l2 = "Ты знаешь, я сейчас несколько занят"+ GetSexPhrase("","а") +". Прямо сегодня не получится. Извини.";
 			link.l2.go = "toChurch_4";
@@ -883,7 +883,7 @@ void ProcessDialogEvent()
 				{
 					if (!CheckAttribute(npchar, "quest.HolLineTalk"))
 					{
-						dialog.text = "Все, что пожелает так"+ GetSexPhrase("ой красивый пират","ая бравая девушка") +", будет исполнено...";
+						dialog.text = "Всё, что пожелает так"+ GetSexPhrase("ой красивый пират","ая бравая девушка") +", будет исполнено...";
     					link.l4 = "Послушай, некоторое время назад у вас тут Джекмен с компанией развлекались...";
     					link.l4.go = "Step_Hol8_1";
 					}
@@ -953,7 +953,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				dialog.text = "Спасибо за комплимент. Если ты хочешь взять меня, то иди к хозяйке заведения. Все как всегда...";
+				dialog.text = "Спасибо за комплимент. Если ты хочешь взять меня, то иди к хозяйке заведения. Всё как всегда...";
 				Link.l1 = "Понятно.";
 				Link.l1.go = "exit";
 			}
@@ -1146,7 +1146,7 @@ void ProcessDialogEvent()
 						else
 						{
 							dialog.text = LinkRandPhrase("Ну что, я выполнила обещание?", "Ну, как"+ GetSexPhrase(" я тебе, понравилась",", тебе понравилось") +"?", "Я надеюсь, "+ GetSexPhrase("ты доволен, потому что я о-о-очень довольна","ты довольна. Я старалась") +"...");
-							Link.l1 = RandPhraseSimple("Да, мне все очень понравилось.", ""+ GetSexPhrase("Отлично покувыркались, ты была на высоте!","Все было просто замечательно!") +"");
+							Link.l1 = RandPhraseSimple("Да, мне всё очень понравилось.", ""+ GetSexPhrase("Отлично покувыркались, ты была на высоте!","Все было просто замечательно!") +"");
 							Link.l1.go = "exit";
 						}
 					break;
