@@ -90,7 +90,7 @@ void ProcessDialogEvent()
 
 		case "quests":
             		dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
-			link.l1 = RandPhraseSimple("Я передум"+ GetSexPhrase("ал","ала") + "...", "Сейчас мне не о чем говорить");
+			link.l1 = RandPhraseSimple("Я передум"+ GetSexPhrase("ал","ала") + "...", "Сейчас мне не о чем говорить.");
 		    	link.l1.go = "exit";
 		break;
 
