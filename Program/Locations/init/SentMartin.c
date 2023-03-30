@@ -1575,10 +1575,11 @@ int LocationInitSentMartin(int n)
 	// Выход из города
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Marigo_ExitTown";
+	locations[n].fastreload = "Marigo";
 	locations[n].id.label = "ExitTown";
 	locations[n].image = "loading\jonny_load\jungle\ExitJungle.tga";
 	//Town sack
-	locations[n].townsack = "PortPax";
+	locations[n].townsack = "Marigo";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "SentMartin";
