@@ -78,7 +78,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "BS_NU_9_exit";
 			PChar.quest.BSUrka_Negril.win_condition.l1 = "location";
-			PChar.quest.BSUrka_Negril.win_condition.l1.location = "Shore35";
+			PChar.quest.BSUrka_Negril.win_condition.l1.location = "FortOrange_port";
 			PChar.quest.BSUrka_Negril.function = "BSUrka_Negril";
 		break;
 

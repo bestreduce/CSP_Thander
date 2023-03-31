@@ -460,8 +460,8 @@ void InitMapTeleport()
 	oMapTeleport.map_jam.Jamaica_CaveEntrance.Pos0.Y = 240;
 	oMapTeleport.map_jam.Shore36.Pos0.X = 455;
 	oMapTeleport.map_jam.Shore36.Pos0.Y = 370;
-	oMapTeleport.map_jam.Shore35.Pos0.X = 185;
-	oMapTeleport.map_jam.Shore35.Pos0.Y = 275;
+	oMapTeleport.map_jam.FortOrange_port.Pos0.X = 185;
+	oMapTeleport.map_jam.FortOrange_port.Pos0.Y = 275;
 	oMapTeleport.map_jam.FortOrange_ExitTown.Pos0.X = 190;
 	oMapTeleport.map_jam.FortOrange_ExitTown.Pos0.Y = 230;
 	

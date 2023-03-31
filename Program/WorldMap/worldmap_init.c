@@ -599,10 +599,10 @@ void wdmInitWorldMap()
 	worldMap.labels.Shore34.locator = "Shore34";
 	worldMap.labels.Shore34.text = CheckingTranslate(idLngFile,"Shore34");
 
-	worldMap.labels.Shore35.type = "Shore";
-	worldMap.labels.Shore35.id = "Shore35";
-	worldMap.labels.Shore35.locator = "Shore35";
-	worldMap.labels.Shore35.text = CheckingTranslate(idLngFile,"Shore35");
+	/*worldMap.labels.FortOrange_port.type = "Shore";
+	worldMap.labels.FortOrange_port.id = "FortOrange_port";
+	worldMap.labels.FortOrange_port.locator = "FortOrange_port";
+	worldMap.labels.FortOrange_port.text = CheckingTranslate(idLngFile,"FortOrange_port");*/
 
 	worldMap.labels.Shore36.type = "Shore";
 	worldMap.labels.Shore36.id = "Shore36";
@@ -1037,8 +1037,8 @@ void wdmInitWorldMap()
 	worldMap.islands.Jamaica.position.z = -128.0;
 	worldMap.islands.Jamaica.PortRoyal_town.position.x = -250.157;
 	worldMap.islands.Jamaica.PortRoyal_town.position.z = -150.839;
-	worldMap.islands.Jamaica.Shore35.position.x = -446.951;
-	worldMap.islands.Jamaica.Shore35.position.z = -107.118;
+	worldMap.islands.Jamaica.FortOrange_port.position.x = -446.951;
+	worldMap.islands.Jamaica.FortOrange_port.position.z = -107.118;
 	worldMap.islands.Jamaica.Shore36.position.x = -281.543;
 	worldMap.islands.Jamaica.Shore36.position.z = -164.245;
 	worldMap.islands.Jamaica.Mayak3.position.x = -224.127;

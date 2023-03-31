@@ -721,7 +721,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             Pchar.quest.DefenceOrange_FightNearJamaica.win_condition.l1 = "location";
             Pchar.quest.DefenceOrange_FightNearJamaica.win_condition.l1.location = "Jamaica";
             Pchar.quest.DefenceOrange_FightNearJamaica.win_condition = "DefenceOrange_FightNearJamaica";
-			locations[FindLocation("Shore35")].DisableEncounters = true;
+			locations[FindLocation("FortOrange_port")].DisableEncounters = true;
         break;
         case "Step_4_2":
             dialog.text = "Чёрт возьми! Мы не смогли защитить граждан Республики Соединённых Провинций от кровожадных англичан. Это очень плохо, наше и без того скромное присутствие в Карибском регионе теперь совершенно ослаблено.";
@@ -736,7 +736,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(&locations[FindLocation("FortOrange_town")], "hidden_effects");
 			DeleteAttribute(&locations[FindLocation("FortOrange_ExitTown")], "hidden_effects");
 			//<-- огонь и пламень
-			DeleteAttribute(&locations[FindLocation("Shore35")], "DisableEncounters"); //энкаутеры вернём
+			DeleteAttribute(&locations[FindLocation("FortOrange_port")], "DisableEncounters"); //энкаутеры вернём
             CloseQuestHeader("Hol_Line_4_DefenceOrange");
             pchar.questTemp.State = "empty";
             SaveCurrentQuestDateParam("questTemp");
@@ -767,7 +767,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             QuestSetCurrentNode("FortOrange_waitress", "First time");
             QuestSetCurrentNode("FortOrange_tavernkeeper", "First time");
             QuestSetCurrentNode("FortOrange_trader", "First time");
-			DeleteAttribute(&locations[FindLocation("Shore35")], "DisableEncounters"); //энкаутеры вернём
+			DeleteAttribute(&locations[FindLocation("FortOrange_port")], "DisableEncounters"); //энкаутеры вернём
 			AddTitleNextRate(sti(NPChar.nation), 2);
 			ChangeCharacterReputation(pchar, 5);
 			ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 1);
@@ -792,7 +792,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(&locations[FindLocation("FortOrange_town")], "hidden_effects");
 			DeleteAttribute(&locations[FindLocation("FortOrange_ExitTown")], "hidden_effects");
 			//<-- огонь и пламень
-			DeleteAttribute(&locations[FindLocation("Shore35")], "DisableEncounters"); //энкаутеры вернём
+			DeleteAttribute(&locations[FindLocation("FortOrange_port")], "DisableEncounters"); //энкаутеры вернём
             CloseQuestHeader("Hol_Line_4_DefenceOrange");
             pchar.questTemp.State = "empty";
             SaveCurrentQuestDateParam("questTemp");

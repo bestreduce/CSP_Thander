@@ -4455,7 +4455,7 @@ void QuestComplete(string sQuestName, string qname)
             Island_SetReloadEnableGlobal("Jamaica", true);
             bQuestDisableMapEnter = false;
             Pchar.quest.DefenceOrange_FightInShore.win_condition.l1 = "location";
-            Pchar.quest.DefenceOrange_FightInShore.win_condition.l1.location = "Shore35";
+            Pchar.quest.DefenceOrange_FightInShore.win_condition.l1.location = "FortOrange_port";
             Pchar.quest.DefenceOrange_FightInShore.win_condition = "DefenceOrange_FightInShore";
         break;
 
@@ -4484,7 +4484,7 @@ void QuestComplete(string sQuestName, string qname)
 
             	LAi_SetWarriorType(sld);
                 LAi_group_MoveCharacter(sld, "EnemyFight");
-               	ChangeCharacterAddressGroup(sld, "Shore35", "goto", LAi_FindFarLocator("goto", locx, locy, locz));
+               	ChangeCharacterAddressGroup(sld, "FortOrange_port", "goto", LAi_FindFarLocator("goto", locx, locy, locz));
             }
             for (i=1; i<=8; i++)
             {
@@ -4494,7 +4494,7 @@ void QuestComplete(string sQuestName, string qname)
                 LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 				sTemp = LAi_FindNearestFreeLocator("goto", locx, locy, locz);
 				if (sTemp == "") sTemp = LAi_FindNearestLocator("goto", locx, locy, locz);
-                ChangeCharacterAddressGroup(sld, "Shore35", "goto", sTemp);
+                ChangeCharacterAddressGroup(sld, "FortOrange_port", "goto", sTemp);
             }
             LAi_group_SetLookRadius("EnemyFight", 100);
             LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
