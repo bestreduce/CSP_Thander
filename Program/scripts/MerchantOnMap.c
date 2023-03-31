@@ -167,11 +167,6 @@ bool MerchantPrepare(int Mnation)
         return true;
     }
     return false;
-
-
-
-
-
 }
 
 int SetShipTypeMerchant(ref Cap)
@@ -264,8 +259,9 @@ void SetMerchantShip(ref Cap, int igoods)
         Statistic_AddValue(GetMainCharacter(), "Rob"+NationShortName(sti(MerPrm.nation))+"MerchantOnMap", -( killM + 1));
 
         hcrew = GetMaxCrewQuantity(Cap);
+		//SetCrewQuantityOverMax(Cap, 2*hcrew);
+		SetCrewQuantity(Cap, hcrew);
         ChangeCrewExp(pchar, "Soldiers", 90);  // за счет солдат - засада для ГГ
-        SetCrewQuantityOverMax(Cap, 2*hcrew);
         trap = true;
     }
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

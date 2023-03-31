@@ -448,12 +448,12 @@ void ArenaDuelEnd(int iCount, bool bWin)
 	if(!bWin)
 	{
 		PChar.Statistic.Arena.LooserCount = sti(PChar.Statistic.Arena.LooserCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " потерп"+ GetSexPhrase("ел","ела") +" поражение в дуэли, что проходила в качестве соревнований на Арене!", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetFullName(PChar) + " потерп"+ GetSexPhrase("ел","ела") +" поражение в дуэли, что проходила в качестве соревнований на Арене!", 5, 1);
 	}
 	else
 	{
 		PChar.Statistic.Arena.WinnerCount = sti(PChar.Statistic.Arena.WinnerCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + " оказал"+ GetSexPhrase("ся","ась") +" сильнее в дуэли, что проходила в качестве соревнований на Арене!", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetFullName(PChar) + " оказал"+ GetSexPhrase("ся","ась") +" сильнее в дуэли, что проходила в качестве соревнований на Арене!", 5, 1);
 	}
 
 	PChar.quest.ArenaDuelLooserDetector.over = "yes";
@@ -853,12 +853,12 @@ void ArenaEtapsEnd(bool bWin)
 	if(!bWin)
 	{
 		PChar.Statistic.Arena.LooserCount = sti(PChar.Statistic.Arena.LooserCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + "  не справил"+ GetSexPhrase("ся","ась") +" со страшными монстрами на соревнованиях Арены!", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetFullName(PChar) + "  не справил"+ GetSexPhrase("ся","ась") +" со страшными монстрами на соревнованиях Арены!", 5, 1);
 	}
 	else
 	{
 		PChar.Statistic.Arena.WinnerCount = sti(PChar.Statistic.Arena.WinnerCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + " сум"+ GetSexPhrase("ел","ела") +" справиться со страшными монстрами на соревнованиях Арены!", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetFullName(PChar) + " сум"+ GetSexPhrase("ел","ела") +" справиться со страшными монстрами на соревнованиях Арены!", 5, 1);
 	}
 
 	LAi_UseAtidoteBottle(PChar);
@@ -1637,12 +1637,12 @@ void ArenaTournamentEnd()
 	if(!bWinner)
 	{
 		PChar.Statistic.Arena.LooserCount = sti(PChar.Statistic.Arena.LooserCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + ", участвов"+ GetSexPhrase("ший","шая") +" в последнем турнире на Арене, не смо"+ GetSexPhrase("г","гла") +" его выиграть.", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetFullName(PChar) + ", участвов"+ GetSexPhrase("ший","шая") +" в последнем турнире на Арене, не смо"+ GetSexPhrase("г","гла") +" его выиграть.", 5, 1);
 	}
 	else
 	{
 		PChar.Statistic.Arena.WinnerCount = sti(PChar.Statistic.Arena.WinnerCount) + 1;
-		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", в последнем турнире, проходящем на Арене, сильнее всех оказал"+ GetSexPhrase("ся","ась") +" капитан " + GetNameLugger(PChar, "f") + ".", 5, 1);
+		AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", в последнем турнире, проходящем на Арене, сильнее всех оказал"+ GetSexPhrase("ся","ась") +" капитан " + GetFullName(PChar) + ".", 5, 1);
 	}
 
 	locCameraFollow();
@@ -2479,12 +2479,12 @@ void ArenaOddsEnd()
 		if(!bWinner)
 		{
 			PChar.Statistic.Arena.LooserCount = sti(PChar.Statistic.Arena.LooserCount) + 1;
-			AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", даже капитан " + GetNameLugger(PChar, "f") + " не смо"+ GetSexPhrase("г","гла") +" правильно указать победителя одной из дуэлей, недавно проходившей на Арене и проигр"+ GetSexPhrase("ал","ала") +" свои деньги.", 5, 1);
+			AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", даже капитан " + GetFullName(PChar) + " не смо"+ GetSexPhrase("г","гла") +" правильно указать победителя одной из дуэлей, недавно проходившей на Арене и проигр"+ GetSexPhrase("ал","ала") +" свои деньги.", 5, 1);
 		}
 		else
 		{
 			PChar.Statistic.Arena.WinnerCount = sti(PChar.Statistic.Arena.WinnerCount) + 1;
-			AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetNameLugger(PChar, "f") + "  указ"+ GetSexPhrase("ал","ала") +" победителя одной из дуэлей, недавно проходившей на Арене и выигр"+ GetSexPhrase("ал","ала") +" деньги!", 5, 1);
+			AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", капитан " + GetFullName(PChar) + "  указ"+ GetSexPhrase("ал","ала") +" победителя одной из дуэлей, недавно проходившей на Арене и выигр"+ GetSexPhrase("ал","ала") +" деньги!", 5, 1);
 		}
 	}
 

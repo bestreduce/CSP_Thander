@@ -130,7 +130,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 
 		case "PKM_SvtvA_Ch1_7":
-			dialog.text = "Из Европы должно прибыть судно, на котором плывут мальтийские рыцари, важные для нашего дела. У меня есть все основания полагать, что этому судну угрожает опасность, и ваша задача встретить его у острова Сан Мартина и препроводить в наш порт.";
+			dialog.text = "Из Европы должно прибыть судно, на котором плывут мальтийские рыцари, важные для нашего дела. У меня есть все основания полагать, что этому судну угрожает опасность, и ваша задача встретить его у острова Сан Мартин и препроводить в наш порт.";
 			link.l1 = "Скажите мне название этого судна, и я сделаю всё, что в моих силах.";
 			link.l1.go = "PKM_SvtvA_Ch1_8";
 		break;
@@ -216,6 +216,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Благодарю вас, а что за задание вы хотите мне поручить?";
 			link.l1.go = "PKM_SvtvA_Ch2_3";
 			AddMoneyToCharacter(pchar, 5000);
+			PChar.quest.PKM_SvtvA_TA_ploho.over = "yes";
 		break;
 
 		case "PKM_SvtvA_Ch2_3":

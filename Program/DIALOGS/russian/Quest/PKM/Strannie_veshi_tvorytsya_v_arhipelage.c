@@ -579,7 +579,7 @@ void ProcessDialogEvent()
 		
 		case "Разговор с тюремщиком_2":
 			dialog.text = "Вообще-то, у нас запрещены разговоры с заключёнными...";
-			if (pchar.reputation <= 35)
+			if (sti(pchar.reputation) < 40)
 			{
 				link.l1 = "(доставая пистолет) Вы сейчас же проводите меня к пленнику, или, клянусь Богом, я убью вас!";
 				link.l1.go = "Угроза тюремщику_1";
@@ -593,7 +593,7 @@ void ProcessDialogEvent()
 		
 		case "Разговор с тюремщиком_3":
 			dialog.text = "Каким это ещё делом? О чём вы вообще говорите?!";
-			if (pchar.reputation >= 76)
+			if (sti(pchar.reputation) > 80)
 			{
 				link.l1 = "Вы, наверное, слышали о похищении детей, о том, что в последнее время в архипелаге творятся странные вещи? Так вот, ваш заключённый может помочь мне разобраться со всем этим!";
 				link.l1.go = "Уговариваем тюремщика_1";
@@ -818,6 +818,7 @@ void ProcessDialogEvent()
 		case "Обманываем Учителя_3":
 			DialogExit();
 			
+			if (GetDaysContinueNationLicence(SPAIN) < 2) GiveNationLicence(SPAIN, 2);
 			DoQuestReloadToLocation("SanJuan_tavern_upstairs", "goto", "goto2", "PKM_SvtvA_UchitelvTaverne");
 		break;
 		
@@ -974,6 +975,22 @@ void ProcessDialogEvent()
 			dialog.text = "Нет! Этого не может быть!..";
 			link.l1 = "Что? Не ожидал, что кто-то разнесёт твоё мрачное убежище в клочья?";
 			link.l1.go = "Лорд_Хаоса_4";
+			
+			sld = CharacterFromID("Satanist_Oderjim_1");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_2");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_3");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_4");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
+			sld = CharacterFromID("Satanist_Oderjim_5");
+			sld.lifeday = 0;
+			ChangeCharacterAddressGroup(sld, "none", "", "");
 		break;
 		
 		case "Лорд_Хаоса_4":
@@ -990,8 +1007,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("Chernoe_Solntse");
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);
-			LAi_SetImmortal(sld, true);
-			LAi_ActorRunToLocation(sld, "goto", "goto28", "none", "", "", "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2", -1);
+			LAi_ActorRunToLocation(sld, "goto", "goto28", "none", "", "", "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2", 4);
 		break;
 		
 		case "Verni_detey_11":

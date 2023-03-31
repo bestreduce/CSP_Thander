@@ -608,7 +608,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <50 && iRep >=40)
+			if (iRep <=60 && iRep >=40)
 			{
 				if (iDonation >= 5000)
 				{
@@ -617,7 +617,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <60 && iRep >=50)
+			if (iRep <=70 && iRep >60)
 			{
 				if (iDonation >= 6000)
 				{
@@ -626,7 +626,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <70 && iRep >=60)
+			if (iRep <=80 && iRep >=70)
 			{
 				if (iDonation >= 7000)
 				{
@@ -635,7 +635,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <80 && iRep >=70)
+			if (iRep <=90 && iRep >80)
 			{
 				if (iDonation >= 8000)
 				{
@@ -644,7 +644,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep < REPUTATION_MAX && iRep >=80)
+			if (iRep < REPUTATION_MAX && iRep >90)
 			{
 				if (iDonation >= 10000)
 				{
@@ -1578,7 +1578,7 @@ void QuestComplete(string sQuestName, string qname)
 			iTemp = sti(colonies[FindColony(pchar.quest.destination)].nation);
             sld = GetCharacter(NPC_GenerateCharacter("QuestTrader", "", "man", "man", makeint((sti(pchar.rank)+60)/4), iTemp, -1, true));
 			SetCaptanModelByEncType(sld, "trade");
-			sld.reputation = (1 + rand(44) + rand(44));
+			sld.reputation = 10 + rand(80);
 			sld.Dialog.Filename = "convoy_traider.c";
 			sld.dialog.currentnode = "prepare_convoy_quest";
 			sld.greeting = "Gr_ConvoyTrader";
@@ -1698,7 +1698,7 @@ void QuestComplete(string sQuestName, string qname)
             Rank = NPC_GenerateCharacter("QuestPassanger", "", "man", "man", makeint((sti(pchar.rank)+60)/4), iTemp, -1, true);
 			sld = &characters[Rank];
 			sld.id = sld.id + "_" + sld.index; //меняем ID на оригинальный
-			sld.reputation = (1 + rand(44) + rand(44));
+			sld.reputation = (10 + rand(80));
 			SetCaptanModelByEncType(sld, "trade");
 			SetRandomNameToCharacter(sld);
 			sld.Dialog.Filename = "convoy_passenger.c";
@@ -6920,7 +6920,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.Dialog.Filename = "Quest\Isabella\Atilla.c";
 			sld.greeting = "Gr_Smuggler Agent";
 			sld.rank 	= 25;
-			sld.reputation = "30";
+			sld.reputation = 25;
 			sld.talker = 5; //начать диалог
 			sld.TiedItems.itm1.model = "HandsItems\meet";
 			sld.TiedItems.itm1.locator = "Saber_hand";
@@ -9839,7 +9839,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "PDM_Callow_sadis_na_stul":
 			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
 			LAi_SetSitType(pchar);
-			LAi_SetSitType(npchar);
+			//LAi_SetSitType(npchar);
 			sld = CharacterFromID("James_Callow")
 			LAi_SetActorType(sld);
 			LAi_ActorSetSitMode(sld);
@@ -10890,6 +10890,7 @@ void QuestComplete(string sQuestName, string qname)
 			
 			AddQuestRecord("PKM_Animists", "16");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ен","на"));
+			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("","а"));
 			CloseQuestHeader("PKM_Animists");
 		break;
 		
@@ -11358,8 +11359,8 @@ void QuestComplete(string sQuestName, string qname)
 			//Чёрное Солнце
 			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 1000);
-			LAi_SetHP(sld,600,600);
-			LAi_SetDltHealth(sld, 130.0);
+			LAi_SetHP(sld,800,800);
+			LAi_SetDltHealth(sld, 110.0);
 			sld.name = "Лорд Чёрное Солнце";
 			sld.lastname = "";
 			sld.FaceId = 297;
@@ -11378,6 +11379,7 @@ void QuestComplete(string sQuestName, string qname)
 			EquipCharacterbyItem(sld, "cirass3");
 			sld.SuperShooter  = true;
 			if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
+			LAi_SetCheckMinHP(sld, 10, true, "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem");
 			
 			//Одержимый#1
 			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Oderjim_1", "Animists1", "man", "man_worship", sti(pchar.rank), PIRATE, -1, false));
@@ -11544,7 +11546,6 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetHP(sld,1200,1200);
 			LAi_SetCurHP(sld, 500.0);
 			LAi_SetDltHealth(sld, 4.0);
-			LAi_SetCheckMinHP(sld, 10, true, "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem");
 			
 			if (!CheckAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda"))
 			{
@@ -11575,10 +11576,11 @@ void QuestComplete(string sQuestName, string qname)
 			DoQuestCheckDelay("hide_weapon", 1.2);
 			sld = CharacterFromID("Chernoe_Solntse");
 			LAi_SetActorType(sld);
-			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Mefisto");
+			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Konets");
 			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Лорд_Хаоса_3";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
+			LAi_SetImmortal(sld, true);
 		break;
 		
 		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":		
@@ -11589,7 +11591,6 @@ void QuestComplete(string sQuestName, string qname)
 			{
 				sld = CharacterFromID("Plennik_u_satanistov_"+i);
 				ChangeCharacterAddressGroup(sld, "none", "", "");
-				LAi_SetImmortal(sld, false);
 			}
 			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_Satanist_Kuhnya_Pobeda");
 			
@@ -11610,7 +11611,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lastname = "";
 			sld.FaceId = 297;
 			//sld = CharacterFromID("Chernoe_Solntse");
-			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS16, 100, 100, 100);
+			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 			//FantomMakeCoolSailor(sld, SHIP_BRIGANTINE, "Мэри Селест", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
 			sld.DontRansackCaptain = true;
 			sld.DontHitInStorm = true;

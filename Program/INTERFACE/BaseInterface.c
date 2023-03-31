@@ -26,12 +26,14 @@ void InitBaseInterfaces()
 	InitTimerInterface();
 }
 
-string questTextFileName[3];
+string questTextFileName[5];
 ref GetQuestTextFileName()
 {
-	questTextFileName[0] = "PROGRAM\questbook\QuestBook_Part1.txt";
-	questTextFileName[1] = "PROGRAM\questbook\QuestBook_Part2.txt";
-	questTextFileName[2] = "PROGRAM\questbook\QuestBook_New.txt"; // Warship. ®то наш квестбук
+	questTextFileName[0] = "PROGRAM\questbook\QuestBook_Part0.txt";
+	questTextFileName[1] = "PROGRAM\questbook\QuestBook_Part1.txt";
+	questTextFileName[2] = "PROGRAM\questbook\QuestBook_Part2.txt";
+	questTextFileName[3] = "PROGRAM\questbook\QuestBook_Part3.txt";
+	questTextFileName[4] = "PROGRAM\questbook\QuestBook_New.txt"; // Warship. ®то наш квестбук
 	return &questTextFileName;
 }
 

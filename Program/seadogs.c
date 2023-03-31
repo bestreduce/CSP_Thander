@@ -173,7 +173,7 @@ void ProcessVersionCheck() // boal 271004
 	{}//{log_info("РЕИНИТ не требуется");}
 	else
 	{
-		if (!CheckAttribute(pchar, "fixsaveNG0") && HasSubStr(pchar.versionnumber, "21.02.2023"))//для версии от 21 февраля
+		if (!CheckAttribute(pchar, "fixsaveNG0") && HasSubStr(pchar.versionnumber, ".02.2023"))//для версии от февраля
 		{
 			if (sti(pchar.rank)>2) DozorPrepare_2();//фикс дозора без НИ
 
@@ -307,25 +307,27 @@ void ProcessVersionCheck() // boal 271004
 			int n = GetArraySize(&Items);//+5 предметов для странных дел
 			SetArraySize(&Items,ITEMS_QUANTITY);
 			SetArraySize(&itemModels,ITEMS_QUANTITY);//ХЗ, что это...
-ref itm;
-for(j=n; j<ITEMS_QUANTITY; j++)
-{
-	makeref(itm,Items[j]);
-	itm.id = "item"+(j+1);
-	itm.describe = "";
-	itm.index = j;
-	itm.model = "";
-	itm.shown = false;
-	itm.startLocation = "";
-	itm.startLocator = "";
-	itm.useLocation = "";
-	itm.useLocator = "";
-	itm.describe = "";
-    itm.Weight = 0.0; // boal
-    itm.uniq  = false;
-    itm.price = 1;
-    itm.ItemType = "VARIETY";
-}
+
+			ref itm;
+			for(j=n; j<ITEMS_QUANTITY; j++)
+			{
+				makeref(itm,Items[j]);
+				itm.id = "item"+(j+1);
+				itm.describe = "";
+				itm.index = j;
+				itm.model = "";
+				itm.shown = false;
+				itm.startLocation = "";
+				itm.startLocator = "";
+				itm.useLocation = "";
+				itm.useLocator = "";
+				itm.describe = "";
+			    itm.Weight = 0.0; // boal
+			    itm.uniq  = false;
+			    itm.price = 1;
+			    itm.ItemType = "VARIETY";
+			}
+
 			makeref(itm,Items[n]);	//Квест "Странные вещи творятся на архипелаге"
 			itm.id = "PKM_SvtvA_amulet";	//Амулет главного сатаниста
 			itm.name = "itmname_PKM_SvtvA_amulet";
@@ -403,101 +405,102 @@ for(j=n; j<ITEMS_QUANTITY; j++)
 
 			n = GetArraySize(&locations);	//nLocationsNum	//старое число локаций
 			SetArraySize(&locations, 900);	//MAX_LOCATIONS
-//базовый инит для новых локаций
-ref loc;
-for(int i = n; i < 881; i++)
-{
-	makeref(loc, Locations[i]);
-	DeleteAttribute(loc, "");
-	loc.id = "";
-	loc.index = i;
-	loc.image = "jonny_load\sea\sea_"+rand(3)+".tga";
-	loc.music = "enplav.ogg";
-	loc.locators_radius.reload = 1.0;
-	loc.locators_radius.rld = 1.0;
-	loc.locators_radius.camdetector = 1.0;
-	loc.locators_radius.camera = 0.3;
-	loc.locators_radius.characters = 0.5;
-	loc.locators_radius.goto = 0.5;
-	loc.locators_radius.sit = 0.5;
-	loc.locators_radius.item = 0.5;
-	loc.locators_radius.officers = 0.5;
-	loc.locators_radius.merchant = 1.0;
-	loc.locators_radius.box = 1.0;
-	loc.locators_radius.candles = 0.1;
-	loc.locators_radius.candles_medium = 0.2;
-	loc.locators_radius.chandeliers = 0.5;
-	loc.locators_radius.heaters = 1.0;
-	loc.locators_radius.torchlightes = 0.3;
-	loc.locators_radius.torchlightes_o = 0.3;
-	loc.locators_radius.fonar = 0.4;
-	loc.locators_radius.outside = 2.0;
-	loc.locators_radius.incas_light = 0.8;
-	loc.locators_radius.incas_sky = 1.0;
-	loc.locators_radius.randitem = 1.5;
-	loc.locators_radius.waitress = 1.0;
-	loc.locators_radius.tables = 0.5;
-	loc.locators_radius.barmen = 1.0;
-	loc.locators_radius.lamp = 0.2;
-	loc.locators_radius.blueteleport = 0.2;
-	loc.locators_radius.redteleport = 0.2;
-	loc.locators_radius.greenteleport = 0.2;
-	loc.locators_radius.magsteleport = 0.2;
-	loc.locators_radius.EncDetector = 8.0;
-	loc.locators_radius.Enc01 = 0.5;
-	loc.locators_radius.Enc02 = 0.5;
-	loc.locators_radius.Enc03 = 0.5;
-	loc.locators_radius.Enc04 = 0.5;
-	loc.locators_radius.teleport = 1.0;
-	loc.locators_radius.quest = 1.0;
+			//базовый инит для новых локаций
+			ref loc;
+			for(int i = n; i < 881; i++)
+			{
+				makeref(loc, Locations[i]);
+				DeleteAttribute(loc, "");
+				loc.id = "";
+				loc.index = i;
+				loc.image = "jonny_load\sea\sea_"+rand(3)+".tga";
+				loc.music = "enplav.ogg";
+				loc.locators_radius.reload = 1.0;
+				loc.locators_radius.rld = 1.0;
+				loc.locators_radius.camdetector = 1.0;
+				loc.locators_radius.camera = 0.3;
+				loc.locators_radius.characters = 0.5;
+				loc.locators_radius.goto = 0.5;
+				loc.locators_radius.sit = 0.5;
+				loc.locators_radius.item = 0.5;
+				loc.locators_radius.officers = 0.5;
+				loc.locators_radius.merchant = 1.0;
+				loc.locators_radius.box = 1.0;
+				loc.locators_radius.candles = 0.1;
+				loc.locators_radius.candles_medium = 0.2;
+				loc.locators_radius.chandeliers = 0.5;
+				loc.locators_radius.heaters = 1.0;
+				loc.locators_radius.torchlightes = 0.3;
+				loc.locators_radius.torchlightes_o = 0.3;
+				loc.locators_radius.fonar = 0.4;
+				loc.locators_radius.outside = 2.0;
+				loc.locators_radius.incas_light = 0.8;
+				loc.locators_radius.incas_sky = 1.0;
+				loc.locators_radius.randitem = 1.5;
+				loc.locators_radius.waitress = 1.0;
+				loc.locators_radius.tables = 0.5;
+				loc.locators_radius.barmen = 1.0;
+				loc.locators_radius.lamp = 0.2;
+				loc.locators_radius.blueteleport = 0.2;
+				loc.locators_radius.redteleport = 0.2;
+				loc.locators_radius.greenteleport = 0.2;
+				loc.locators_radius.magsteleport = 0.2;
+				loc.locators_radius.EncDetector = 8.0;
+				loc.locators_radius.Enc01 = 0.5;
+				loc.locators_radius.Enc02 = 0.5;
+				loc.locators_radius.Enc03 = 0.5;
+				loc.locators_radius.Enc04 = 0.5;
+				loc.locators_radius.teleport = 1.0;
+				loc.locators_radius.quest = 1.0;
+			
+				// видимость новых (и старых) локаторов
+				loc.locators_radius.Actor = 1.0;
+				loc.locators_radius.ships_other = 1.0;
+				loc.locators_radius.ships = 1.0;
+				loc.locators_radius.Genres = 1.0;
+			
+				if (MOD_BETTATESTMODE == "On")
+				{// чтоб было видно в отладке Boal 18.08.06
+					loc.locators_radius.soldiers = 0.5;
+					loc.locators_radius.patrol = 0.5;
+					loc.locators_radius.Smugglers = 0.5;
+					loc.locators_radius.monsters = 0.5;
+					loc.locators_radius.prison = 0.2;
+				}
+			
+				//Day dynamic light
+				loc.models.day.lights.candles = "candle";
+				loc.models.day.lights.candles_medium = "candelabrum";
+				loc.models.day.lights.chandeliers = "chandelier";
+				loc.models.day.lights.heaters = "heater";
+				loc.models.day.lights.torchlightes = "torchlight";
+				loc.models.day.lights.outside = "outside_day";
+				loc.models.day.lights.incas_light = "incas";
+				loc.models.day.lights.incas_sky = "incasskyday";
+				loc.models.day.lights.lamp = "lamp";
+				loc.models.day.lights.blueteleport = "blueteleport";
+				loc.models.day.lights.redteleport = "redteleport";
+				loc.models.day.lights.greenteleport = "greenteleport";
+				loc.models.day.lights.magsteleport = "magsteleport";
+			
+				//Night dynamic light
+				loc.models.night.lights.candles = "candle";
+				loc.models.night.lights.candles_medium = "candelabrum";
+				loc.models.night.lights.chandeliers = "chandelier";
+				loc.models.night.lights.heaters = "heater";
+				loc.models.night.lights.torchlightes = "torchlight";
+				loc.models.night.lights.torchlightes_o = "torchlight";
+				loc.models.night.lights.fonar = "lamp";
+				loc.models.night.lights.outside = "outside_night";
+				loc.models.night.lights.incas_light = "incas";
+				loc.models.night.lights.incas_sky = "incasskynight";
+				loc.models.night.lights.lamp = "lamp";
+				loc.models.night.lights.blueteleport = "blueteleport";
+				loc.models.night.lights.redteleport = "redteleport";
+				loc.models.night.lights.greenteleport = "greenteleport";
+				loc.models.night.lights.magsteleport = "magsteleport";
+			}
 
-	// видимость новых (и старых) локаторов
-	loc.locators_radius.Actor = 1.0;
-	loc.locators_radius.ships_other = 1.0;
-	loc.locators_radius.ships = 1.0;
-	loc.locators_radius.Genres = 1.0;
-
-	if (MOD_BETTATESTMODE == "On")
-	{// чтоб было видно в отладке Boal 18.08.06
-		loc.locators_radius.soldiers = 0.5;
-		loc.locators_radius.patrol = 0.5;
-		loc.locators_radius.Smugglers = 0.5;
-		loc.locators_radius.monsters = 0.5;
-		loc.locators_radius.prison = 0.2;
-	}
-
-	//Day dynamic light
-	loc.models.day.lights.candles = "candle";
-	loc.models.day.lights.candles_medium = "candelabrum";
-	loc.models.day.lights.chandeliers = "chandelier";
-	loc.models.day.lights.heaters = "heater";
-	loc.models.day.lights.torchlightes = "torchlight";
-	loc.models.day.lights.outside = "outside_day";
-	loc.models.day.lights.incas_light = "incas";
-	loc.models.day.lights.incas_sky = "incasskyday";
-	loc.models.day.lights.lamp = "lamp";
-	loc.models.day.lights.blueteleport = "blueteleport";
-	loc.models.day.lights.redteleport = "redteleport";
-	loc.models.day.lights.greenteleport = "greenteleport";
-	loc.models.day.lights.magsteleport = "magsteleport";
-
-	//Night dynamic light
-	loc.models.night.lights.candles = "candle";
-	loc.models.night.lights.candles_medium = "candelabrum";
-	loc.models.night.lights.chandeliers = "chandelier";
-	loc.models.night.lights.heaters = "heater";
-	loc.models.night.lights.torchlightes = "torchlight";
-	loc.models.night.lights.torchlightes_o = "torchlight";
-	loc.models.night.lights.fonar = "lamp";
-	loc.models.night.lights.outside = "outside_night";
-	loc.models.night.lights.incas_light = "incas";
-	loc.models.night.lights.incas_sky = "incasskynight";
-	loc.models.night.lights.lamp = "lamp";
-	loc.models.night.lights.blueteleport = "blueteleport";
-	loc.models.night.lights.redteleport = "redteleport";
-	loc.models.night.lights.greenteleport = "greenteleport";
-	loc.models.night.lights.magsteleport = "magsteleport";
-}
 			Locations[n].id = "New_Cabin3"; //НОВАЯ КАЮТА
 			Locations[n].id.label = "cabine";
 			Locations[n].filespath.models = "locations\decks\nc_cabin3";
@@ -898,7 +901,24 @@ for(int i = n; i < 881; i++)
 			if( LoadSegment(segmentName) )	{InitIndianNames(); UnloadSegment(segmentName);} 
 				else {Trace("Error! Can`t Load Segment: " + segmentName);}
 
-			pchar.fixsaveNG0 = GetVerNum();//08.03.2023
+			pchar.fixsaveNG0 = GetVerNum();//14.03.2023
+		}
+		if (!CheckAttribute(pchar, "fixsaveNG1") && HasSubStr(pchar.versionnumber, ".02.2023"))
+		{
+			//базовый инит для новых локаций
+			for(i = 0; i < 881; i++)
+			{
+				makeref(loc, Locations[i]);
+				loc.locators_radius.ports = 1.0;//фикс видимости новых локаторов
+			}
+
+			makeref(itm,Items[423]);	//Квест "Странные вещи творятся на архипелаге"
+			itm.id = "PKM_SvtvA_amulet";	//Амулет главного сатаниста
+			itm.groupID = INDIAN_CENTER_ITEM_TYPE;//три строчки не загрузилось
+			itm.weight = 0.2;
+			itm.ItemType = "QUESTITEMS";
+
+			pchar.fixsaveNG1 = GetVerNum();//14.03.2023
 		}
 	}
 }
@@ -1408,6 +1428,7 @@ string seadogs_saveFrom = "";
 
 void OnSave()
 {
+	savefile_info = GetVerNum();
 	seadogs_saveFrom = "";
 	if(IsEntity(&worldMap) != 0)
 	{
@@ -1485,7 +1506,6 @@ void OnLoad()
 
 	//Boyer add
 	//onLoadReInit();
-	SpecOfficersCirass();
 	//Boyer change #20170418-01
 	//restoreQuestItems(); не нужно в отсутствие реинитов - Gregg
 	//End Boyer add
@@ -2947,44 +2967,4 @@ int iCalculateSaveLoadCount(string _SaveLoad)
 	iCount++;
 	MChref.SystemInfo.(sAttrName) = iCount;
 	return iCount;
-}
-
-void SpecOfficersCirass()
-{
-    if(CheckAttribute(pchar, "fix20210121")) return;
-
-    pchar.fix20210121 = true;
-
-    if(GetCharacterIndex("Daniel") != -1)
-	{
-    	sld = characterFromID("Daniel");
-		// Прописка всех моделей для кирас. -->
-    	sld.HeroModel = "PGG_YokoDias_0,PGG_YokoDias_1,PGG_YokoDias_2,PGG_YokoDias_3,PGG_YokoDias_4,PGG_YokoDias_5,PGG_YokoDias_6,PGG_YokoDias_7,PGG_YokoDias_8";
-    	// Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OffMushketer") != -1)
-	{
-    	sld = characterFromID("OffMushketer");
-		// Прописка всех моделей для кирас. -->
-        sld.HeroModel = "MusketeerEnglish_2,MusketeerEnglish_2_1,MusketeerEnglish_2_2,MusketeerEnglish_2_3,MusketeerEnglish_2_4,MusketeerEnglish_2_5,MusketeerEnglish_2,MusketeerEnglish_2,MusketeerEnglish_2";
-	    // Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OfMush1") != -1)
-	{
-    	sld = characterFromID("OfMush1");
-        // Прописка всех моделей для кирас. -->
-	    sld.HeroModel = "quest_mush_2,quest_mush_2_1,quest_mush_2_2,quest_mush_2_3,quest_mush_2_4,quest_mush_2_5,quest_mush_2,quest_mush_2,quest_mush_2";
-	    // Прописка всех моделей для кирас. <--
-	}
-
-	if(GetCharacterIndex("OfMush2") != -1)
-	{
-    	sld = characterFromID("OfMush2");
-	    // Прописка всех моделей для кирас. -->
-	    sld.HeroModel = "quest_mush_1,quest_mush_1_1,quest_mush_1_2,quest_mush_1_3,quest_mush_1_4,quest_mush_1_5,quest_mush_1,quest_mush_1,quest_mush_1";
-	    // Прописка всех моделей для кирас. <--
-    }
-	SetNewModelToChar(sld);
 }

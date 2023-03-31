@@ -25,7 +25,7 @@ void ProcessDialogEvent()
 
 		//--> хорошист-саксонец
 		case "Saxon":
-			if (sti(PChar.reputation) >= 51)//при низкой репутации - в сад
+			if (sti(PChar.reputation) > 60)//при низкой репутации - в сад
 			{
 				dialog.text = "Приветствую вас, капитан! Я жду вас вот уже целый день...";
 				link.l1 = "Ждёте? Меня!? Я не припоминаю, чтобы мы были знакомы.";
@@ -88,7 +88,7 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "OnceAgain";
     			break;
             }
-			if (sti(PChar.reputation) < 51)//повторная проверка репутации, для второго и далее заходов
+			if (sti(PChar.reputation) <= 60)//повторная проверка репутации, для второго и далее заходов
 			{
 				dialog.text = "Хм... Знаете, кэп, люди не лучшим образом отзываются о вас. Я же говорил, что не желаю служить в разбойничьей шайке!";
 				link.l1 = "Какие мы нежные! Ступай, ветеран, своим курсом.";
@@ -112,7 +112,7 @@ void ProcessDialogEvent()
 
 		//--> плохиш-пират
 		case "Lostpirate":
-			if (sti(PChar.reputation) < 36)//при повышенной репутации - в сад
+			if (sti(PChar.reputation) < 40)//при повышенной репутации - в сад
 			{
 				dialog.text = "Приветствую, кэп! Какое счастье вновь видеть человеческие лица и слышать живые голоса, а не отвратительный гомон пернатой братии.";
 				link.l1 = "Что ты делаешь один в этом уединённом раю? Изучаешь повадки морских птиц?";
@@ -165,7 +165,7 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "OnceAgainLP";
     			break;
             }
-			if (sti(PChar.reputation) >= 36)//повторная проверка репутации, для второго и далее заходов
+			if (sti(PChar.reputation) >= 40)//повторная проверка репутации, для второго и далее заходов
 			{
 				if (!CheckAttribute(pchar,"RimalieDone"))
 				{
@@ -350,7 +350,7 @@ void ProcessDialogEvent()
 			if(CheckAttribute(pchar,"RimalieDone"))
 			{
 				AddMoneyToCharacter(pchar,-10000);
-				npchar.reputation = 51;
+				npchar.reputation = 65;
 				npchar.alignment = "good";
 				DeleteAttribute(pchar,"RimalieDone");
 			}

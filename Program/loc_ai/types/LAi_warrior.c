@@ -61,7 +61,7 @@ void LAi_type_warrior_Init(aref chr)
 		if(!CheckAttribute(chr, "chr_ai.type.dialog")) chr.chr_ai.type.dialog = "1";
 	}
 	//Установим анимацию персонажу
-	if (chr.model.animation == "mushketer" && !CheckAttribute(chr, "isMusketer.weapon") && chr.index != getmaincharacterindex() && !isOfficer(chr))
+	if (CheckAttribute(chr, "model") && chr.model.animation == "mushketer" && !CheckAttribute(chr, "isMusketer.weapon") && chr.index != getmaincharacterindex() && !isOfficer(chr))
 	{
         while (FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE) != "")
         {
@@ -85,6 +85,7 @@ void LAi_type_warrior_Init(aref chr)
 	}
 	else
 	{
+		if (!CheckAttribute(chr, "model")) Log_TestInfo("LAi_type_warrior_Init: нет model у " + chr.id);
 		LAi_SetDefaultStayAnimation(chr);
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);

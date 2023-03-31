@@ -530,25 +530,23 @@ int SetCrewQuantity(ref _refCharacter,int num)
 	return true;
 }
 
-// --> Eddy, пусть будет пока, а то неудобно в тестах.
 void SetCrewQuantityFull(ref _refCharacter)
 {
-	SetCrewQuantity(_refCharacter, GetMaxCrewQuantity(_refCharacter)); // переделал в мах перегруз 01/08/06 boal
+	SetCrewQuantity(_refCharacter, GetMaxCrewQuantity(_refCharacter));
 }
-// <-- Eddy
 
-// boal
 int SetCrewQuantityOverMax(ref _refCharacter, int num)
 {
-    /*if (num < 0) num = 0; // boal fix
-    _refCharacter.Ship.Crew.Quantity = num;*/ //отключил овербафф команды
-	SetCrewQuantityFull(_refCharacter);
+	if (num < 0) num = 0; // boal fix
+	_refCharacter.Ship.Crew.Quantity = num;
 	return true;
 }
+
 int AddCharacterCrew(ref _refCharacter,int num)
 {
 	return SetCrewQuantity(_refCharacter,GetCrewQuantity(_refCharacter)+num);
 }
+
 int RemoveCharacterCrew(ref _refCharacter,int num)
 {
 	int curCrew = GetCrewQuantity(_refCharacter);
@@ -558,8 +556,7 @@ int RemoveCharacterCrew(ref _refCharacter,int num)
 		SetCrewQuantity(_refCharacter,0);
 		return false;
 	}
-	//SetCrewQuantityOverMax(_refCharacter,curCrew-num);//fix
-	SetCrewQuantity(_refCharacter,curCrew-num);//фикс фикса - Gregg
+	SetCrewQuantity(_refCharacter,curCrew-num);
 	return true;
 }
 float GetSailPercent(ref _refCharacter)
@@ -3020,20 +3017,8 @@ float isEquippedArtefactUse(ref rChar, string sItem, float fOff, float fOn)
 	return fOff;
 }
 
-int ChangeCharacterReputationABS(ref chref, float incr)
+int ChangeCharacterReputationToNeutral(ref chref, float incr)//приближает к нейтралу
 {
-	if (chref.index != Pchar.index) return 0;
-	int curVal = REPUTATION_NEUTRAL;
-	if (CheckAttribute(chref,"reputation") ) curVal = stf(chref.reputation);
-
-	if (curVal < REPUTATION_NEUTRAL) incr = -incr;
-	return ChangeCharacterReputation(chref , incr);
-}
-
-// репутация стремится к нейтральной
-int ChangeCharacterReputationToNeutral(ref chref, float incr)
-{
-	if (chref.index != Pchar.index) return 0;
 	int curVal = REPUTATION_NEUTRAL;
 	if (CheckAttribute(chref,"reputation") ) curVal = stf(chref.reputation);
 
@@ -3043,46 +3028,41 @@ int ChangeCharacterReputationToNeutral(ref chref, float incr)
 
 int ChangeCharacterReputation(ref chref, float incr)
 {
-	if (chref.index != Pchar.index) return 0;
-	if (CheckAttribute(chref, "GenQuest.ReputationNotChange")) return sti(chref.reputation); //eddy. нужен флаг
+	if (CheckAttribute(chref, "GenQuest.ReputationNotChange")) return sti(chref.reputation);
 	float prevVal = REPUTATION_NEUTRAL;
-	if (CheckAttribute(chref,"reputation") )	prevVal = stf(chref.reputation);
+	if (CheckAttribute(chref,"reputation")) prevVal = stf(chref.reputation);
 
 	float newVal = prevVal + incr;
 	if (newVal<REPUTATION_MIN) newVal = REPUTATION_MIN;
 	if (newVal>REPUTATION_MAX) newVal = REPUTATION_MAX;
 	chref.reputation = newVal;
 
-	if( sti(chref.index) != GetMainCharacterIndex() ) return makeint(newVal);
-
+	if (sti(chref.index) != GetMainCharacterIndex()) return makeint(newVal);//информирование только про ГГ
 	string prevName = GetReputationName(makeint(prevVal));
 	string newName = GetReputationName(makeint(newVal));
-	if (prevName!=newName)
+	if (prevName != newName)
 	{
 		string outString = XI_ConvertString("Your reputation");
-		if (incr>0)	{outString+=XI_ConvertString("increase");}
-		else	{outString+=XI_ConvertString("decrease");}
-		outString += " "+XI_ConvertString("to")+" "+XI_ConvertString(newName);
+		if (incr > 0) {outString += XI_ConvertString("increase");}
+			else	{outString += XI_ConvertString("decrease");}
+		outString += " " + XI_ConvertString("to") + " " + XI_ConvertString(newName);
 		Log_SetStringToLog(outString);
 	}
 
 	return makeint(newVal);
 }
-//    ChangeCharacterNationReputation(chref, iType, incr);
 
-// метод вызывается ежедневно, уменьшает значение крайних репутаций - эффект забывания.
-void UpdateFame()
+void UpdateFame()	//метод вызывается ежедневно, уменьшает значение крайних репутаций - эффект забывания. Обычный моряк не меняется вообще
 {
-	if (sti(pchar.reputation) < (REPUTATION_NEUTRAL - 10))  // плохиш
+	if (sti(pchar.reputation) < (REPUTATION_NEUTRAL - 10))
 	{
-		ChangeCharacterReputation(pchar, (MOD_SKILL_ENEMY_RATE / 40.0)); // медленнее
+		ChangeCharacterReputation(pchar, (MOD_SKILL_ENEMY_RATE / 40.0));//плохое забывается медленнее
 	}
-	if (sti(pchar.reputation) > (REPUTATION_NEUTRAL + 10))  // кибальчиш
+	if (sti(pchar.reputation) > (REPUTATION_NEUTRAL + 10))
 	{
 		ChangeCharacterReputation(pchar, (-MOD_SKILL_ENEMY_RATE / 20.0));
 	}
 }
-///  репутация ГГ 06/06/06 boal new concept <--
 
 bool Character_IsAbordageEnable(ref rCharacter)
 {

@@ -39,13 +39,16 @@ void CreateSea(int iExecuteLayer, int iRealizeLayer)
 
 void MoveSeaToLayers(int iExecuteLayer, int iRealizeLayer)
 {
-	LayerDelObject(EXECUTE, &Sea);
-	LayerDelObject(REALIZE, &Sea);
-	LayerDelObject(SEA_EXECUTE, &Sea);
-	LayerDelObject(SEA_REALIZE, &Sea);
+    LayerDelObject(EXECUTE, &Sea);
+    LayerDelObject(REALIZE, &Sea);
+    LayerDelObject(REALIZE, &Sailors);
+    LayerDelObject(SEA_EXECUTE, &Sea);
+    LayerDelObject(SEA_REALIZE, &Sea);
+    LayerDelObject(SEA_REALIZE, &Sailors);
 
-	LayerAddObject(iExecuteLayer, &Sea, 4);
-	LayerAddObject(iRealizeLayer, &Sea, 65530);
+    LayerAddObject(iExecuteLayer, &Sea, 4);
+    LayerAddObject(iRealizeLayer, &Sea, 65530);
+    LayerAddObject(iRealizeLayer, &Sailors, 65530);
 }
 
 #define SAIL_TO_LOCATOR			0

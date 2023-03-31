@@ -1193,7 +1193,7 @@ void ProcessDialogEvent()
 
 		case "BurntShip20_exit":
 			//AddMoneyToCharacter(PChar, sti(NPChar.Quest.BurntShip.Money));
-			TakeNItems(pchar, "chest", makeint(sti(NPChar.Quest.BurntShip.Money)/15000 + 0.5));
+			TakeNItems(pchar, "chest", makeint((sti(NPChar.Quest.BurntShip.Money) + 7500)/15000));
 			Log_Info("Вы получили кредитные сундуки");
 			PlaySound("interface\important_item.wav");
 			sTitle = "BurntShipQuest" + NPChar.location;
@@ -1703,7 +1703,7 @@ void ProcessDialogEvent()
 			{
 			chref = GetCharacter(NPC_GenerateCharacter("ShipInStockMan", "PKM_rab_"+(rand(3)+1), "man", "man", rand(5)+1, NPChar.nation, -1, false));
 			chref.id = chref.id + "_" + chref.index; //меняем ID на оригинальный
-			chref.reputation = (1 + rand(44) + rand(44));
+			chref.reputation = 10 + rand(80);
 			chref.lastname = chref.name;//"сторож Иван" лучше чем "сторож Иванов"?
 			chref.name = "сторож";
 			DeleteAttribute(chref,"ship");

@@ -19,9 +19,9 @@
 string  MoraleTable[MORALE_TABLE_SIZE];
 string  LoyalityTable[MORALE_TABLE_SIZE];
 
-#define REPUTATION_MIN          1
-#define REPUTATION_NEUTRAL      45
-#define REPUTATION_MAX          90
+#define REPUTATION_MIN          0
+#define REPUTATION_NEUTRAL      50
+#define REPUTATION_MAX          100
 
 #define MAX_LOYALITY            35
 

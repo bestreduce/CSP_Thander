@@ -2814,7 +2814,7 @@ bool IsAztecSkullOfficer(ref sld)
     for (i=1; i<=MAX_NUM_FIGHTERS; i++)
     {
 		sTemp = "id" + i;
-		if (arOfficer.(sTemp) == sld.index)
+		if (CheckAttribute(arOfficer, sTemp) && arOfficer.(sTemp) == sld.index)
 		{
 			return true;
 		}
@@ -3160,7 +3160,7 @@ void MaryCelesteInit()
 	SetCharacterGoods(character, GOOD_RUM, 700);
 	Character_SetAbordageEnable(character, false); // Низя абордировать
 
-	SetCrewQuantityOverMax(character, 0); // Никого живого
+	SetCrewQuantity(character, 0); // Никого живого
 
 	realShip = GetRealShip(GetCharacterShipType(character));
 

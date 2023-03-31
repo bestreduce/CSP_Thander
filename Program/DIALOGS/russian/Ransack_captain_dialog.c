@@ -236,7 +236,7 @@ void ProcessDialogEvent()
             NPChar.Dialog.Filename = "Enc_Officer_dialog.c";
             NPChar.greeting = "Gr_Officer";
             NPChar.loyality = 5 + rand(10);
-		    if (sti(NPChar.reputation) > 41)
+		    if (sti(NPChar.reputation) >= 40)
 		    {
 		        NPChar.alignment = "good";
 		    }
@@ -578,7 +578,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "free_by_hoard4":
-			dialog.text = "Хе-хе, удачная шутка, хе-хе... А история следующая. Живёт в " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Dat") + " человек "+
+			dialog.text = "Хе-хе, удачная шутка, хе-хе... А история следующая. Живёт в " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Voc") + " человек "+
 				"по имени " + NPChar.Hold_GenQuest.Name + ", в молодости был отчаянным парнем, столько всего натворил, что и вспомнить страшно... " +
 				"Так вот, как-то за бутылкой рому рассказал мне этот приятель, что, промышляя в банде " + GetName( NAMETYPE_VIP, NPChar.Hold_GenQuest.PirateName, NAME_ACC) + ", довелось ему быть свидетелем того, как пираты клад хоронили." +
 				" Пятерых своих дружков " + GetName( NAMETYPE_VIP, NPChar.Hold_GenQuest.PirateName, NAME_NOM) + " поверх этого клада положил...\nПотом поползли слухи, что " + GetName( NAMETYPE_VIP, NPChar.Hold_GenQuest.PirateName, NAME_ACC) + " поймали и к одноногой тёще приставили, а " + NPChar.Hold_GenQuest.Name + " с тех пор от дел отошёл, " +
@@ -610,7 +610,7 @@ void ProcessDialogEvent()
 			ReOpenQuestHeader("HoldQuest");
 			AddQuestRecord("HoldQuest", "12");
 			AddQuestUserData("HoldQuest", "sName", GetFullName(NPChar));
-			AddQuestUserData("HoldQuest", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.City + "Dat"));
+			AddQuestUserData("HoldQuest", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.City + "Voc"));
 			AddQuestUserData("HoldQuest", "sNameChar", pchar.GenQuest.Hold_GenQuest.Name);
 			AddQuestUserData("HoldQuest", "sPirateName", GetName( NAMETYPE_VIP, pchar.GenQuest.Hold_GenQuest.PirateName, NAME_ACC));
 

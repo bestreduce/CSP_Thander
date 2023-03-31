@@ -821,7 +821,8 @@ int GetItemIndex(string _ItemID)
 
 ref ItemsFromID(string _Items)
 {
-	return &items[GetItemIndex(_Items)];
+	int iItem = GetItemIndex(_Items); 
+	if (iItem >= 0) return &items[iItem]; else trace("Invalid index for item: " + _Items);
 }
 
 void ChangeItemDescribe(string _Items, string _Describe)

@@ -727,7 +727,7 @@ void DozorLastDialog(string qName)
 	InterfaceStates.Buttons.Save.enable = false;
 
 	ref chr = GetCharacter(NPC_GenerateCharacter("Dozor NoName", "officer_6", "man", "man", 1, PIRATE, 0, false));
-	chr.name = "незнакомец";
+	chr.name = "Незнакомец";
 	chr.lastname = "";
 	chr.greeting = "cit_common1";
 	chr.Dialog.FileName = "DamnedDestiny\Dozor\Characters.c";
@@ -759,5 +759,5 @@ void DozorHappyEnd()
 	PChar.quest.DozorClear.win_condition.l1.location = PChar.location;
 	PChar.quest.DozorClear.function = "DozorClear";
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetNameLugger(PChar, "f") + " смог победить в сложнейшей игре ''DoZoR'', и получил заслуженный приз.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Слыхали", "Знаете ли вы", "Невероятно") + ", некий капитан " + GetFullName(PChar) + " смог победить в сложнейшей игре ''DoZoR'', и получил заслуженный приз.", 5, 1);
 }

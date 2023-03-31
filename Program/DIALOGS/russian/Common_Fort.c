@@ -249,7 +249,7 @@ void ProcessDialogEvent()
 		case "PegYou":
 			if (IsCharacterPerkOn(pchar, "Adventurer") || IsCharacterPerkOn(pchar, "Agent"))
 			{
-				dialog.text = RandPhraseSimple("Сдаётся мне, что это обман... Давай-ка пройдём в коменданту, "+ GetSexPhrase("голубчик","голубушка") +", там разберёмся...", "Хм, что-то подсказывает мне, что ты не "+ GetSexPhrase("тот","та") +", за кого себя выдаёшь... Немедленно сдайте оружие, " + GetAddress_Form(npchar) + ", и следуйте за мной для дальнейшего разбирательства!");
+				dialog.text = RandPhraseSimple("Сдаётся мне, что это обман... Давай-ка пройдём в коменданту, "+ GetSexPhrase("голубчик","голубушка") +", там разберёмся...", "Хм, что-то подсказывает мне, что ты не "+ GetSexPhrase("тот","та") +", за кого себя выдаёшь... \nНемедленно сдай оружие, " + GetAddress_Form(npchar) + ", и следуй за мной для дальнейшего разбирательства!");
 				link.l1 = RandPhraseSimple("Почему вы мне не верите?", "С чего такие выводы?");
 				switch (rand(1))
 				{
@@ -259,7 +259,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				dialog.text = RandPhraseSimple("Сдаётся мне, что это обман... Давай-ка пройдём в коменданту, "+ GetSexPhrase("голубчик","голубушка") +", там разберёмся...", "Хм, что-то подсказывает мне, что ты не "+ GetSexPhrase("тот","та") +", за кого себя выдаёшь... Немедленно сдайте оружие, " + GetAddress_Form(npchar) + ", и следуйте за мной для дальнейшего разбирательства!");
+				dialog.text = RandPhraseSimple("Сдаётся мне, что это обман... Давай-ка пройдём в коменданту, "+ GetSexPhrase("голубчик","голубушка") +", там разберёмся...", "Хм, что-то подсказывает мне, что ты не "+ GetSexPhrase("тот","та") +", за кого себя выдаёшь... \nНемедленно сдай оружие, " + GetAddress_Form(npchar) + ", и следуй за мной для дальнейшего разбирательства!");
 				link.l1 = RandPhraseSimple("Как бы не так!", "После дождичка, в четверг...");
 				link.l1.go = "fight";
 
@@ -284,7 +284,7 @@ void ProcessDialogEvent()
 			dialog.text = RandPhraseSimple("А-а-а, вижу... Всё в порядке, вы можете идти, " + GetAddress_Form(pchar) + ".", "Что-то я немного подустал в карауле... Всё в порядке, " + GetAddress_Form(pchar) + ", прошу прощения.");
 			link.l1 = "Так-то!";
 			link.l1.go = "exit";
-			if (sti(pchar.questTemp.stels.landFort) != GetDataDay())
+			if (!CheckAttribute(pchar, "questTemp.stels.landFort") || sti(pchar.questTemp.stels.landFort) != GetDataDay())
 			{
 				AddCharacterExpToSkill(pchar, SKILL_SNEAK, 80);
 				pchar.questTemp.stels.landFort = GetDataDay();

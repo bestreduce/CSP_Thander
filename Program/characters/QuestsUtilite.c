@@ -2443,7 +2443,7 @@ void IsabellaInit()
 	GiveItem2Character(ch, "blade34");
 	ch.equip.blade = "blade34";
 	ch.rank 	= 40;
-	ch.reputation = "35";
+	ch.reputation = 15;
     SetRandSPECIAL(ch);
     SetSelfSkill(ch, 90, 90, 90, 70, 90);
     SetShipSkill(ch, 20, 90, 10, 10, 10, 20, 10, 10, 50);
@@ -2705,7 +2705,7 @@ void OfficerGirlInit()
 	sld.lastname = "Диаз";
 	sld.loyality = 12;
 	sld.rank 	= 15;
-    sld.reputation = 70; // good девочка
+    sld.reputation = 85; // good девочка
 	sld.alignment = "good";
 	// Прописка всех моделей для кирас. -->
 	sld.HeroModel = "PGG_YokoDias_0,PGG_YokoDias_1,PGG_YokoDias_2,PGG_YokoDias_3,PGG_YokoDias_4,PGG_YokoDias_5,PGG_YokoDias_6,PGG_YokoDias_7,PGG_YokoDias_8";
@@ -2754,7 +2754,7 @@ void OfficerGirlInit()
 	sld.lastname = "МакАртур";
 	sld.loyality = 20;
 	sld.rank 	= 15;
-    sld.reputation = 50; // good девочка
+    sld.reputation = 50;
 	sld.alignment = "good";
 	sld.HeroModel = "PGG_Rumba_0,PGG_Rumba_1,PGG_Rumba_2,PGG_Rumba_3,PGG_Rumba_4,PGG_Rumba_5";
 	GiveItem2Character(sld, "blade36");
@@ -2801,7 +2801,7 @@ void OfficerGirlInit()
 	sld.lastname = "Шарп";
 	sld.loyality = 20;
 	sld.rank 	= 15;
-    sld.reputation = 10; // good девочка
+    sld.reputation = 15;
 	sld.alignment = "bad";
 	GiveItem2Character(sld, "blade34");
 	TakeNItems(sld,"potion2", Rand(4)+1);
@@ -2856,7 +2856,7 @@ void OfficerMushketerInit()
 	//Прописка всех моделей для кирас. -->
 	sld.HeroModel = "quest_mush_2,quest_mush_2_1,quest_mush_2_2,quest_mush_2_3,quest_mush_2_4,quest_mush_2_5";
 	//Прописка всех моделей для кирас. <--
-	sld.reputation = 20;
+	sld.reputation = 15;
 	sld.alignment = "bad";
 	LAi_SetHP(sld, 180, 180);
 	sld.Dialog.Filename = "Enc_OfficerMush.c";
@@ -2897,7 +2897,7 @@ void OfficerMushketerInit()
 	sld.greeting = "Gr_Officer";
 	sld.loyality = 13;
 	sld.rank = 15;
-	sld.reputation = 75;
+	sld.reputation = 85;
 	//Прописка всех моделей для кирас. -->
 	sld.HeroModel = "quest_mush_1,quest_mush_1_1,quest_mush_1_2,quest_mush_1_3,quest_mush_1_4,quest_mush_1_5";
 	//Прописка всех моделей для кирас. <--

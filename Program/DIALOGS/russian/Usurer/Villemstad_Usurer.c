@@ -216,7 +216,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "Step_P5_3":
 			pchar.questTemp.piratesLine.Q5.city_1 = GetQuestNationsCity(ENGLAND);
-			dialog.text = "Сказал, что теперь к англичанам собиратеся. Вроде о " + XI_ConvertString("Colony" + pchar.questTemp.piratesLine.Q5.city_1 + "Voc") + " шла речь, но точно не скажу.";
+			dialog.text = "Сказал, что теперь к англичанам собирается. Вроде о " + XI_ConvertString("Colony" + pchar.questTemp.piratesLine.Q5.city_1 + "Voc") + " шла речь, но точно не скажу.";
 			link.l1 = "А говорил, что понятия не имеешь. Ну спасибо тебе!";
 			link.l1.go = "exit";
 			AddQuestRecord("Pir_Line_5_Hunter", "2");

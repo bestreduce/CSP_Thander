@@ -800,7 +800,6 @@ void confirmChangeQTY_EDIT()
 
 void ChangeQTY_EDIT()
 {
-	trace("ChangeQTY_EDIT");
 	float iWeight;
 	SetCharWeight();
 	GameInterface.qty_edit.str = sti(GameInterface.qty_edit.str);

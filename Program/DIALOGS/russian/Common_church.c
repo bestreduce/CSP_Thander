@@ -226,7 +226,7 @@ void ProcessDialogEvent()
 			dialog.text = "Да благословит Господь вас и дела ваши... Вы пришли ко мне с какой-то целью?";
 			if (startherotype == 2 && !IsEquipCharacterByItem(pchar, "glasses"))
 			{
-				dialog.text = "Я к вашим услугам. Все, что угодно.";
+				dialog.text = "Я к вашим услугам. Всё, что угодно.";
 			}
 			//зачарованный город -->
   			if (pchar.questTemp.MC == "toCaracasPadre" && npchar.city == "Caracas")
@@ -1016,7 +1016,7 @@ void ProcessDialogEvent()
 			//караулить церковь ночью
 			if (!CheckAttribute(npchar, "quest.add") && rand(4)==1 && pchar.questTemp.different == "free" && !CheckAttribute(npchar, "quest.GuardNightChurch") && !CheckAttribute(pchar, "questTemp.different.Church_NightGuard") && GetNpcQuestPastDayWOInit(npchar, "NightChurch") > 60 && GetHour() < 23)
 			{
-                dialog.text = ""+ GetSexPhrase("Сын мой","Дочь моя") +", у меня есть для тебя несложное поручение. Нам нужен ночной сторож, но не старик с колотушкой и не беззащитная прихожанка. Все дело в том, что в последнее время 'братья' немного нервничают. Какие-то странные типы стали заходить в церковь, но не молятся, а только глазеют по сторонам...";
+                dialog.text = ""+ GetSexPhrase("Сын мой","Дочь моя") +", у меня есть для тебя несложное поручение. Нам нужен ночной сторож, но не старик с колотушкой и не беззащитная прихожанка. Всё дело в том, что в последнее время 'братья' немного нервничают. Какие-то странные типы стали заходить в церковь, но не молятся, а только глазеют по сторонам...";
         		link.l1 = "И это вас беспокоит, святой отец?";
 				link.l1.go = "NightChurch_1";
 				SaveCurrentNpcQuestDateParam(npchar, "NightChurch");
@@ -1269,7 +1269,7 @@ void ProcessDialogEvent()
 				case "подземелье": sTemp = "Дело в том, что подземелье, находящееся возле нашего города, стало прибежищем нечисти!"; break;
 				case "Подземелье": sTemp = "Дело в том, что подземелье, находящееся возле нашего города, стало прибежищем нечисти!"; break;
 			}
-			dialog.text = "Все больше и больше людей рассказывают о страшных происшествиях. " + sTemp + " Оттуда на свет Божий лезут такие твари, что и в страшном сне не приснятся. Люди напуганы, страх проникает в их сердца...";
+			dialog.text = "Всё больше и больше людей рассказывают о страшных происшествиях. " + sTemp + " Оттуда на свет Божий лезут такие твари, что и в страшном сне не приснятся. Люди напуганы, страх проникает в их сердца...";
 			link.l1 = "Чем я могу вам помочь, святой отец?";
 			link.l1.go = "DestroyGhost_2";
 		break;
@@ -1289,7 +1289,7 @@ void ProcessDialogEvent()
 		break;
 		case "DestroyGhost_3":
 			dialog.text = "Очень хорошо, "+ GetSexPhrase("сын мой","дочь моя") +". Отправляйся туда, и да пребудет с тобой сила!";
-			link.l1 = "Все будет в порядке, святой отец.";
+			link.l1 = "Всё будет в порядке, святой отец.";
 			link.l1.go = "exit";
 			pchar.questTemp.different = "DestroyGhost";
 			SetTimerFunction("SmallQuests_free", 0, 0, 1); //освобождаем разрешалку на миниквесты
@@ -1595,7 +1595,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.different = "HostessChurch_return"; //флаг на возвращение
 		break;
 		case "HostessChurch_call":
-			if (isBadReputation(pchar, 10))
+			if (sti(pchar.reputation) < 10))
 			{
 				if (rand(100) < GetCharacterSkill(pchar, "Fortune")) //рендом вешаем на удачу
 				{

@@ -956,7 +956,7 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 		//DoCharacterKilledStatistics(sti(attack.index), sti(enemy.index));
 		/*if(!isSetBlade)
 		{
-			//LAi_ChangeReputation(attack, -3);
+			//ChangeCharacterReputation(attack, -3);
 		}*/
 		// boal  check skill -->
 		float ra = 1.0;
@@ -1373,7 +1373,7 @@ void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBlade)
 		{
 			if (!isSetBlade)
 			{
-				LAi_ChangeReputation(attack, -1);   // to_do
+				ChangeCharacterReputation(attack, -1);   // to_do
 				if (rand(1) && CheckAttribute(enemy, "City"))
 				{
 					ChangeCharacterHunterScore(attack, NationShortName(sti(enemy.nation)) + "hunter", 1);
@@ -1594,7 +1594,7 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 		//noExp = false;
 		//if(!isSetBlade)
 		//{
-			//LAi_ChangeReputation(attack, -3);
+			//ChangeCharacterReputation(attack, -3);
 		//	exp = 0.0;
 		//}
 		//DoCharacterKilledStatistics(sti(attack.index), sti(enemy.index));
@@ -1629,7 +1629,7 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 		exp *= 2;
 	if(!isSetBlade)
 	{
-		//LAi_ChangeReputation(attack, -1);
+		//ChangeCharacterReputation(attack, -1);
 		exp = 0.0;
 	}
 

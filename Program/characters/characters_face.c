@@ -40,13 +40,16 @@ void SetRandomFaceToCharacter(ref rCharacter)
 void FaceMaker(aref rCharacter)
 {
 	// Warship 07.07.09 Пасхалка с кораблем "Мэри Селест" - за место лица кэпа - море с облаками
+	string checkedmodel = rCharacter.model;
 	if(rCharacter.ID == "MaryCelesteCapitan")
 	{
 		rCharacter.FaceId = 333;
 		return;
 	}
 
-	switch (rCharacter.model)
+	if (CheckAttribute(rCharacter,"heromodel") && rCharacter.model != GetSubStringByNum(rCharacter.HeroModel,0)) checkedmodel = GetSubStringByNum(rCharacter.HeroModel,0);
+	
+	switch (checkedmodel)
 	{
 		case "beatrice":		rCharacter.FaceId = 0; break;
 		case "beatriceA":		rCharacter.FaceId = 0; break;

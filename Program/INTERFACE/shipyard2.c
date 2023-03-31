@@ -832,6 +832,7 @@ void FillPrice()
 				iTemp = Tun_Mater3[k];
 				iTemp += GetStoreGoodsPrice(refStore, FindGood(g_ShipBermudeTuningGoods[k]), PRICE_TYPE_BUY, pchar, Tun_Mater1[k]);
 				iTemp += Tun_Mater2[k] * GetTradeItemPrice(g_ShipBermudeTuningItems[k], PRICE_TYPE_BUY);
+				iTemp += sundukSum * GetTradeItemPrice("Chest", PRICE_TYPE_BUY);
 				stextPRICE += sAdd[k] + MakeMoneyShow(iTemp, MONEY_SIGN, MONEY_DELIVER);
 				iPriceOrder += iTemp;
 				}

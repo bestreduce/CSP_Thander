@@ -971,21 +971,21 @@ float GetCharacterExpRate(ref _chref, string _skill)
 // table service
 string GetReputationName(int reputation)
 {
-    if(reputation<11)
+    if(reputation<10)
         return "REPUTATIONT_BAD_4";
-    if(reputation<21)
+    if(reputation<20)
         return "REPUTATIONT_BAD_3";
-    if(reputation<31)
+    if(reputation<30)
         return "REPUTATIONT_BAD_2";
-    if(reputation<41)
+    if(reputation<40)
         return "REPUTATIONT_BAD_1";
-    if(reputation<61)
-        return "REPUTATIONT_NEUTRAL";
-    if(reputation<71)
+    if(reputation<=60)
+        return "REPUTATIONT_NEUTRAL";//40-60 включительно
+    if(reputation<=70)
         return "REPUTATIONT_GOOD_1";
-    if(reputation<81)
+    if(reputation<=80)
         return "REPUTATIONT_GOOD_2";
-    if(reputation<91)
+    if(reputation<=90)
         return "REPUTATIONT_GOOD_3";
 	return "REPUTATIONT_GOOD_4";
 }

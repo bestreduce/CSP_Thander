@@ -5537,7 +5537,7 @@ void LSC_climeUsurer_Azzy(string qName)
 	GiveItem2Character(sld, "blade28");// сабля Моргана
 	sld.equip.blade = "blade28";
 	sld.rank 	= 100;
-	sld.reputation = "0";
+	sld.reputation = 0;
 	SetSelfSkill(sld, 100, 100, 100, 100, 100);
 	SetShipSkill(sld, 100, 100, 100, 100, 100, 100, 100, 100, 100);
 	LAi_SetImmortal(sld, true);
@@ -7665,8 +7665,9 @@ void SpaCrewAtack()
 
 
         SetBaseShipData(chref);
-        hcrew = GetMaxCrewQuantity(chref);
-        SetCrewQuantityOverMax(chref, 150);
+		//hcrew = GetMaxCrewQuantity(chref);
+		//SetCrewQuantityOverMax(chref, 150);
+		SetCrewQuantity(chref, 150);//но не больше максимума
 
         DeleteAttribute(chref,"ship.sails");
         DeleteAttribute(chref,"ship.masts");
@@ -8085,7 +8086,9 @@ void Slavetrader_CreateShoreShips(string qName)//создание пинаса �
 		SetCharacterPerk(sld, "HardHitter");
 		SetCharacterPerk(sld, "MusketsShoot");
 		hcrew = GetMaxCrewQuantity(sld);
-		SetCrewQuantityOverMax(sld, 1.5*hcrew);
+		//SetCrewQuantityOverMax(sld, 1.5*hcrew);
+		SetCrewQuantity(sld, hcrew);
+
 		sld.ship.Crew.Morale = 100;
 		ChangeCrewExp(sld, "Sailors", 70);
 		ChangeCrewExp(sld, "Cannoners", 70);
@@ -8902,7 +8905,7 @@ void mOfficer_fc(string qName)
 		{
 			if (sti(sld.ship.type) != SHIP_NOTUSED)
 			{
-				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблем " + sld.ship.name + "");
+				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблём " + sld.ship.name + "");
 				Pchar.questTemp.MunityOfficerIDX.begin = "0";
 			}
 			else
@@ -8936,7 +8939,7 @@ void mOfficer_fc2(string qName)
 		{
 			if (sti(sld.ship.type) != SHIP_NOTUSED)
 			{
-				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблем " + sld.ship.name + "");
+				Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с кораблём " + sld.ship.name + "");
 				Pchar.questTemp.MunityOfficerIDX.begin = "0";
 			}
 			else
@@ -9619,7 +9622,9 @@ void Headhunter_CreateRatTruepinasse(string qName)//создание пинас�
 	SetCharacterPerk(sld, "GunProfessional");
 	SetCharacterPerk(sld, "MusketsShoot");
 	hcrew = GetMaxCrewQuantity(sld);
-	SetCrewQuantityOverMax(sld, 250+hcrew);
+	//SetCrewQuantityOverMax(sld, 250+hcrew);
+	SetCrewQuantity(sld, hcrew);
+
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 100);
 	ChangeCrewExp(sld, "Cannoners", 100);
@@ -9991,7 +9996,9 @@ void Create_Ja(string qName)//cоздаем Фрегат "Ахерон" с Дж�
 	GiveItem2Character(sld, "spyglass4");
 	EquipCharacterbyItem(sld, "spyglass4");
 	hcrew = GetMaxCrewQuantity(sld);
-	SetCrewQuantityOverMax(sld, hcrew+100);
+	//SetCrewQuantityOverMax(sld, hcrew+100);
+	SetCrewQuantity(sld, hcrew);
+
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 100);
 	ChangeCrewExp(sld, "Cannoners", 100);
@@ -11080,7 +11087,8 @@ void UnexpectedInheritanceSeaBattle()
 
 	SetCrewQuantityFull(sld);
 	int hcrew = GetMaxCrewQuantity(sld);
-	SetCrewQuantityOverMax(sld, hcrew + 12 * MOD_SKILL_ENEMY_RATE);// Усложним бой
+	//SetCrewQuantityOverMax(sld, hcrew + 12 * MOD_SKILL_ENEMY_RATE);// Усложним бой
+	SetCrewQuantity(sld, hcrew);//Full
 
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 5 + 5 * MOD_SKILL_ENEMY_RATE);

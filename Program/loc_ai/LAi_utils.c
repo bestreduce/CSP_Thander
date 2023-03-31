@@ -616,7 +616,7 @@ ref LAi_CreateFantomCharacterEx(string model, string ani, string group, string l
  	CalculateAppropriateSkills(chr);
     SetFantomHP(chr);
 	chr.money = 100 + rand(500);
-	chr.reputation = 10 + rand(70);
+	chr.reputation = 10 + rand(80);
 	chr.skill.freeskill = 0;
 	chr.experience = 0;
 	chr.spyglass.itemID = COMMON_SPYGLASS;
@@ -801,21 +801,6 @@ void LAi_QuestDelayProcess(float dltTime)
 			num = GetAttributesNum(&lai_questdelays);
 		}
 	}
-}
-
-void LAi_ChangeReputation(aref chr, int repPoints)
-{
-	if(chr.reputation != "None")
-	{
-		if(chr.reputation != "")
-		{
-			int reput = sti(chr.reputation) + repPoints;
-			if(reput < REPUTATION_MIN) reput = REPUTATION_MIN;
-			if(reput > REPUTATION_MAX) reput = REPUTATION_MAX;
-			chr.reputation = reput;
-		}
-	}
-
 }
 
 void LAi_CheckCharacterID(aref chr)
@@ -1048,7 +1033,7 @@ void Dead_AddLoginedCharacter(aref chr)
 				count = GetCharacterItem(chref, itemID);
 				RemoveItems(chref, itemID, count);
 			}
-			if (CheckAttribute(chr, "DontChangeGun"))
+			if (CheckAttribute(chr, "DontChangeGun") && CheckAttribute(chr, "equip.gun"))
 			{
 				itemID = chr.equip.gun;
 				count = GetCharacterItem(chref, itemID);

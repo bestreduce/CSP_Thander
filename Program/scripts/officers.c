@@ -363,10 +363,10 @@ void SetOfficerParam(ref Npchar, int _type)
 		break;
 	}
 	CalculateTypeSkillsForRank(npchar, sti(pchar.rank) + rand(2), npchar.quest.officertype, 0.1);
-    Npchar.reputation = rand(84) + 5;
+    Npchar.reputation = 10 + rand(80);
     // пристрастие офицера -->
     Npchar.loyality = 5 + rand(10);
-    if (sti(Npchar.reputation) > 41)
+    if (sti(Npchar.reputation) >= 40)//почему нейтрал считается хорошим?
     {
         Npchar.alignment = "good";
     }
