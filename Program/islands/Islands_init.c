@@ -165,7 +165,7 @@ void InitIslands()
 		Islands[n].reload.l3.pic = 1;
 		Islands[n].reload.l3.tex = "t1";
 
-		Islands[n].reload.l4.label = "FortOrange_port";
+		Islands[n].reload.l4.label = "FortOrange Port";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "FortOrange_port";
 		Islands[n].reload.l4.emerge = "sea";

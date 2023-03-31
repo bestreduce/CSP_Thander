@@ -1488,7 +1488,7 @@ int LocationInitJamaica(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// мыс Негрил
+	// Порт Форт Оранжа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FortOrange_port";
 	locations[n].id.label = "FortOrange_port";
@@ -1496,8 +1496,8 @@ int LocationInitJamaica(int n)
 	locations[n].worldmap = "FortOrange_port";
 	//Sound
 	locations[n].townsack = "FortOrange";
-	locations[n].fastreload = "FortOrange";
 	locations[n].type = "Town";
+	locations[n].fastreload = "FortOrange";
 	locations[n].islandId = "Jamaica";
 	//Models
 	//Always
@@ -1641,6 +1641,7 @@ int LocationInitJamaica(int n)
     Locations[n].id = "FortOrange_town";
 	locations[n].id.label = "Street";
 	Locations[n].image = "loading\jonny_load\city\Town_FortOrange.tga";
+	locations[n].worldmap = "FortOrange_town";
     //Town sack
 	locations[n].citizens = true;
 	locations[n].soldiers = true;

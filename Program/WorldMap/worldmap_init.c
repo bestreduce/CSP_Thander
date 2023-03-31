@@ -283,6 +283,12 @@ void wdmInitWorldMap()
 	worldMap.labels.PuertoPrincipe_town.locator = "PuertoPrincipe_town";
 	worldMap.labels.PuertoPrincipe_town.text = CheckingTranslate(idLngFile,"PuertoPrincipe_town");
 	worldMap.labels.PuertoPrincipe_town.icon = PIRATE;
+	
+	worldMap.labels.FortOrange_town.type = "Town";
+	worldMap.labels.FortOrange_town.id = "FortOrange_town";
+	worldMap.labels.FortOrange_town.locator = "FortOrange_town";
+	worldMap.labels.FortOrange_town.text = CheckingTranslate(idLngFile,"FortOrange_town");
+	worldMap.labels.FortOrange_town.icon = HOLLAND;
 
 	worldMap.labels.Havana_town.type = "Town";
 	worldMap.labels.Havana_town.id = "Havana_town";
@@ -598,11 +604,6 @@ void wdmInitWorldMap()
 	worldMap.labels.Shore34.id = "Shore34";
 	worldMap.labels.Shore34.locator = "Shore34";
 	worldMap.labels.Shore34.text = CheckingTranslate(idLngFile,"Shore34");
-
-	/*worldMap.labels.FortOrange_port.type = "Shore";
-	worldMap.labels.FortOrange_port.id = "FortOrange_port";
-	worldMap.labels.FortOrange_port.locator = "FortOrange_port";
-	worldMap.labels.FortOrange_port.text = CheckingTranslate(idLngFile,"FortOrange_port");*/
 
 	worldMap.labels.Shore36.type = "Shore";
 	worldMap.labels.Shore36.id = "Shore36";
