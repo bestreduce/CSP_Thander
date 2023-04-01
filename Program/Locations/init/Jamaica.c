@@ -1645,6 +1645,7 @@ int LocationInitJamaica(int n)
     //Town sack
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
+	locations[n].carrier = true;
 	LAi_LocationFantomsGen(&locations[n], true);
 	//==> флаг генерации квестодателя по розыску кэпов, int значение - шанс что сам заговорит(1-10)
 	locations[n].questSeekCap = 8;
@@ -1745,8 +1746,69 @@ int LocationInitJamaica(int n)
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
 
-	// --> Комоны, загрушки. Номера с начинаются с 20.
+	// --> Псевдоквестовые локи
+	locations[n].reload.l11.name = "reload_H6";
+	locations[n].reload.l11.go = "FortOrange_Hut1";
+	locations[n].reload.l11.emerge = "reload1";
+	locations[n].reload.l11.label = "House";
 
+	locations[n].reload.l12.name = "reload_H7";
+	locations[n].reload.l12.go = "FortOrange_HutK2";
+	locations[n].reload.l12.emerge = "reload1";
+	locations[n].reload.l12.label = "House";
+
+	locations[n].reload.l13.name = "reload_H8";
+	locations[n].reload.l13.go = "FortOrange_HutK3";
+	locations[n].reload.l13.emerge = "reload1";
+	locations[n].reload.l13.label = "House";
+
+	locations[n].reload.l14.name = "reload_H10";
+	locations[n].reload.l14.go = "FortOrange_HutK3";
+	locations[n].reload.l14.emerge = "reload1";
+	locations[n].reload.l14.label = "House";
+	locations[n].reload.l14.disable = 1; // Закроем на совсем
+
+	// --> Комоны, загрушки. Номера с начинаются с 20.
+	locations[n].reload.l20.name = "reload_CH1";
+	locations[n].reload.l20.go = "CommonCobHouse";
+	locations[n].reload.l20.emerge = "reload1";
+	locations[n].reload.l20.label = "House";
+
+	locations[n].reload.l21.name = "reload_CH2";
+	locations[n].reload.l21.go = "FortOrange_HutK2";
+	locations[n].reload.l21.emerge = "reload1";
+	locations[n].reload.l21.label = "House";
+	locations[n].reload.l21.disable = 1; // Закроем на совсем
+
+	locations[n].reload.l22.name = "reload_H1";
+	locations[n].reload.l22.go = "CommonHut";
+	locations[n].reload.l22.emerge = "reload1";
+	locations[n].reload.l22.label = "House";
+
+	locations[n].reload.l23.name = "reload_H2";
+	locations[n].reload.l23.go = "CommonRoom_MH7";
+	locations[n].reload.l23.emerge = "reload1";
+	locations[n].reload.l23.label = "House";
+
+	locations[n].reload.l24.name = "reload_H3";
+	locations[n].reload.l24.go = "CommonRoom_MH9";
+	locations[n].reload.l24.emerge = "reload1";
+	locations[n].reload.l24.label = "House";
+
+	locations[n].reload.l25.name = "reload_H4";
+	locations[n].reload.l25.go = "CommonRoom_MH4";
+	locations[n].reload.l25.emerge = "reload1";
+	locations[n].reload.l25.label = "House";
+
+	locations[n].reload.l26.name = "reload_H5";
+	locations[n].reload.l26.go = "CommonDoubleflourHouse_1";
+	locations[n].reload.l26.emerge = "reload1";
+	locations[n].reload.l26.label = "House";
+
+	locations[n].reload.l27.name = "reload_H9";
+	locations[n].reload.l27.go = "CommonRoom_MH";
+	locations[n].reload.l27.emerge = "reload1";
+	locations[n].reload.l27.label = "House";
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1886,7 +1948,7 @@ int LocationInitJamaica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FortOrange_townhall";
 	locations[n].id.label = "Townhall";
-	locations[n].image = "loading\jonny_load\inside\smallresidence.tga";
+	locations[n].image = "loading\jonny_load\inside\residence08.tga";
 	//Town sack
 	locations[n].townsack = "FortOrange";
 	locations[n].lockWeather = "Inside";
@@ -2012,19 +2074,19 @@ int LocationInitJamaica(int n)
 	//Reload map
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "FortOrange_town";
-	locations[n].reload.l1.emerge = "reload14";
+	locations[n].reload.l1.emerge = "reload10";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// РОСТОВЩИК
+	// Пиратский дом (ростовщик)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FortOrange_bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\Bank01\";
-	locations[n].image = "loading\jonny_load\inside\Bank01.tga";
+	locations[n].image = "loading\jonny_load\inside\bank03.tga";
 	//Town sack
 	locations[n].townsack = "FortOrange";
 	locations[n].lockWeather = "Inside";
@@ -2033,35 +2095,33 @@ int LocationInitJamaica(int n)
 	locations[n].fastreload = "FortOrange";
 	locations[n].islandId = "Jamaica";
 	//Always
-	locations[n].models.always.locators = "Bank01_locators";
-	locations[n].models.always.store = "Bank01";
-	locations[n].models.always.store.level = 65538;
-	locations[n].models.always.window = "Bank01_windows";
+	locations[n].filespath.models = "locations\inside\Pirate_House";
+	locations[n].models.always.locators = "PirH_l";
+	locations[n].models.always.tavern = "PirH";
+	locations[n].models.always.tavern.level = 65538;
+	locations[n].models.always.window = "PirH_w";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
-	locations[n].models.day.charactersPatch = "Bank01_patch";
+	locations[n].models.day.charactersPatch = "PirH_p";
 	//Night
-	locations[n].models.night.charactersPatch = "Bank01_patch";
+	locations[n].models.night.charactersPatch = "PirH_p";
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "false";
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
 	//Reload map
-	locations[n].reload.l1.name = "reload1_back";
+	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "FortOrange_town";
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
     LAi_LocationFightDisable(&locations[n], true);
-
-	locations[n].reload.l2.name = "reload2";
-	locations[n].reload.l2.go = "CommonResidence_5";
-	locations[n].reload.l2.emerge = "reload1";
-	locations[n].reload.l2.autoreload = "0";
-	locations[n].reload.l2.label = "Room";
-	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2101,6 +2161,130 @@ int LocationInitJamaica(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
+	n = n + 1;
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Изба рыбака
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	locations[n].id = "FortOrange_Hut1";
+	locations[n].id.label = "House";
+	locations[n].image = "loading\jonny_load\inside\Hut1_KNS.tga";
+	locations[n].MustSetReloadBack = true;
+	//Town sack
+	locations[n].townsack = "FortOrange";
+	locations[n].lockWeather = "Inside";
+	//Sound
+	locations[n].type = "House";
+	locations[n].fastreload = "FortOrange";
+	locations[n].islandId = "Jamaica";
+	//Models
+	//Always
+	locations[n].filespath.models = "locations\inside\Hut1_KNS";
+	locations[n].models.always.locators = "Hut1_locators";
+	locations[n].models.always.tavern = "Hut1";
+	locations[n].models.always.tavern.level = 65538;
+	locations[n].models.always.window = "Hut1_window";
+	locations[n].models.always.window.tech = "LocationWindows";
+	locations[n].models.always.window.level = 65539;
+
+	locations[n].models.always.back = "..\inside_back";
+	locations[n].models.always.back.level = 65529;
+	//Day
+	locations[n].models.day.charactersPatch = "Hut1_patch";
+	//Night
+	locations[n].models.night.charactersPatch = "Hut1_patch";
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "false";
+	Locations[n].QuestlockWeather = "23 Hour";
+	//Reload map
+	locations[n].reload.l1.name = "reload1";
+	locations[n].reload.l1.go = "FortOrange_town";
+	locations[n].reload.l1.emerge = "reload_H6";
+	locations[n].reload.l1.autoreload = "0";
+	locations[n].reload.l1.label = "Street";
+	n = n + 1;
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Хижина ПКМ
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	locations[n].id = "FortOrange_HutK2";
+	locations[n].id.label = "House";
+	locations[n].image = "loading\jonny_load\inside\Smallhome_k2.tga";
+	locations[n].MustSetReloadBack = true;
+	//Town sack
+	locations[n].townsack = "FortOrange";
+	locations[n].lockWeather = "Inside";
+	//Sound
+	locations[n].type = "House";
+	locations[n].fastreload = "FortOrange";
+	locations[n].islandId = "Jamaica";
+	//Models
+	//Always
+	locations[n].filespath.models = "locations\inside\Smallhome";
+	locations[n].models.always.locators = "SH_l";
+	locations[n].models.always.tavern = "SH";
+	locations[n].models.always.tavern.level = 65538;
+	locations[n].models.always.window = "SH_w";
+	locations[n].models.always.window.tech = "LocationWindows";
+	locations[n].models.always.window.level = 65539;
+
+	locations[n].models.always.back = "..\inside_back";
+	locations[n].models.always.back.level = 65529;
+	//Day
+	locations[n].models.day.charactersPatch = "SH_p";
+	//Night
+	locations[n].models.night.charactersPatch = "SH_p";
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "false";
+	//Reload map
+	locations[n].reload.l1.name = "reload1";
+	locations[n].reload.l1.go = "FortOrange_town";
+	locations[n].reload.l1.emerge = "reload_H7";
+	locations[n].reload.l1.autoreload = "0";
+	locations[n].reload.l1.label = "Street";
+	n = n + 1;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Хижина с камином
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	locations[n].id = "FortOrange_HutK3";
+	locations[n].filespath.models = "locations\inside\Hut3";
+	locations[n].id.label = "House";
+	locations[n].image = "loading\jonny_load\inside\Hut3_Kns.tga";
+	locations[n].MustSetReloadBack = true;
+	//Town sack
+	locations[n].townsack = "FortOrange";
+	locations[n].lockWeather = "Inside";
+	//Sound
+	locations[n].type = "House";
+	locations[n].fastreload = "FortOrange";
+	locations[n].islandId = "Jamaica";
+	//Models
+	//Always
+	locations[n].models.always.locators = "Hut3_locators";
+	locations[n].models.always.tavern = "Hut3";
+	locations[n].models.always.tavern.level = 65538;
+	locations[n].models.always.window = "Hut3_window";
+	locations[n].models.always.window.tech = "LocationWindows";
+	locations[n].models.always.window.level = 65539;
+
+	locations[n].models.always.back = "..\inside_back";
+	locations[n].models.always.back.level = 65529;
+	//Day
+	locations[n].models.day.charactersPatch = "Hut3_patch";
+	//Night
+	locations[n].models.night.charactersPatch = "Hut3_patch";
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "false";
+	//Reload map
+	locations[n].reload.l1.name = "reload1";
+	locations[n].reload.l1.go = "FortOrange_town";
+	locations[n].reload.l1.emerge = "reload_H8";
+	locations[n].reload.l1.autoreload = "0";
+	locations[n].reload.l1.label = "Street";
 	n = n + 1;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
