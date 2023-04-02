@@ -81,7 +81,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,20,40,60);
+	Weathers[n].Sun.Color = argb(0,30,30,40);
 	Weathers[n].Sun.Ambient = argb(0,28,28,35);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
 	Weathers[n].Sun.HeightAngle = 0.30;
@@ -194,7 +194,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
@@ -275,7 +275,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Color = argb(0,30,30,40);
 	Weathers[n].Sun.Ambient = argb(0,30,30,40);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
 	Weathers[n].Sun.HeightAngle = 0.30;
@@ -382,7 +382,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
@@ -463,7 +463,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Color = argb(0,30,30,40);
 	Weathers[n].Sun.Ambient = argb(0,30,30,38);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(190.0);
 	Weathers[n].Sun.HeightAngle = 0.20;
@@ -570,7 +570,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
@@ -651,7 +651,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,10,30,50);
+	Weathers[n].Sun.Color = argb(0,30,30,30);
 	Weathers[n].Sun.Ambient = argb(0,30,30,30);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(130.0);
 	Weathers[n].Sun.HeightAngle = 0.50;
@@ -758,7 +758,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
@@ -839,8 +839,8 @@ int Whr_InitNight(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,10,30,50);
-	Weathers[n].Sun.Ambient = argb(0,38,38,33);
+	Weathers[n].Sun.Color = argb(0,30,30,30);
+	Weathers[n].Sun.Ambient = argb(0,28,28,30);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(320.0);
 	Weathers[n].Sun.HeightAngle = 0.28;
 	
@@ -946,7 +946,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
@@ -1134,7 +1134,7 @@ int Whr_InitNight(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.0;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 2.0;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 14.0;
 
 	n++;
