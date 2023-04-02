@@ -4457,10 +4457,11 @@ void QuestComplete(string sQuestName, string qname)
             Pchar.quest.DefenceOrange_FightInShore.win_condition.l1 = "location";
             Pchar.quest.DefenceOrange_FightInShore.win_condition.l1.location = "FortOrange_port";
             Pchar.quest.DefenceOrange_FightInShore.win_condition = "DefenceOrange_FightInShore";
+			SetLocationCapturedState("FortOrange_town", true);
         break;
 
         case "DefenceOrange_FightInShore":
-            Log_QuestInfo("Схватка с английским десантом на берегу.");
+            Log_QuestInfo("Схватка с английским десантом в порту.");
             chrDisableReloadToLocation = true; // закрыть выход из локации.
             GetCharacterPos(pchar, &locx, &locy, &locz);
             for (i=1; i<=15; i++)
@@ -4481,6 +4482,7 @@ void QuestComplete(string sQuestName, string qname)
                 }
                 sld = GetCharacter(NPC_GenerateCharacter("Solder"+i, Model, "man", "man", 25, ENGLAND, 0, true));
                 FantomMakeCoolFighter(sld, Rank, 70, 60, Blade, Gun, 70);
+				LAi_LoginInCaptureTown(sld, true);
 
             	LAi_SetWarriorType(sld);
                 LAi_group_MoveCharacter(sld, "EnemyFight");
@@ -4490,6 +4492,7 @@ void QuestComplete(string sQuestName, string qname)
             {
                 sld = GetCharacter(NPC_GenerateCharacter("pirate_"+i, "sold_hol_"+(rand(7)+1), "man", "man", 25, HOLLAND, 0, true));
                 FantomMakeCoolFighter(sld, Rank, 60, 50, Blade, Gun, 40);
+				LAi_LoginInCaptureTown(sld, true);
             	LAi_SetWarriorType(sld);
                 LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 				sTemp = LAi_FindNearestFreeLocator("goto", locx, locy, locz);
@@ -4499,14 +4502,20 @@ void QuestComplete(string sQuestName, string qname)
             LAi_group_SetLookRadius("EnemyFight", 100);
             LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
             LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-            LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
+            LAi_group_SetCheck("EnemyFight", "DefenceOrange_WeWon_half");
             Pchar.quest.DefenceOrange_FightInExitTown.win_condition.l1 = "location";
             Pchar.quest.DefenceOrange_FightInExitTown.win_condition.l1.location = "FortOrange_ExitTown";
             Pchar.quest.DefenceOrange_FightInExitTown.win_condition = "DefenceOrange_FightInExitTown";
         break;
+		
+		case "DefenceOrange_WeWon_half":
+            chrDisableReloadToLocation = false; // открыть выход из локации.
+			Log_QuestInfo("Английский десант уничтожен.");
+            AddQuestRecord("Hol_Line_4_DefenceOrange", "4.1");
+        break;
 
         case "DefenceOrange_FightInExitTown":
-            Log_QuestInfo("Схватка с английским десантом у Форт Оранжа.");
+            Log_QuestInfo("Схватка с английским десантом у стен Форт Оранжа.");
             chrDisableReloadToLocation = true; // закрыть выход из локации.
             GetCharacterPos(pchar, &locx, &locy, &locz);
             for (i=1; i<=18; i++)
@@ -4527,6 +4536,7 @@ void QuestComplete(string sQuestName, string qname)
                 }
                 sld = GetCharacter(NPC_GenerateCharacter("Solder"+i, Model, "man", "man", 25, ENGLAND, 0, true));
                 FantomMakeCoolFighter(sld, Rank, 100, 70, Blade, Gun, 70);
+				LAi_LoginInCaptureTown(sld, true);
 
             	LAi_SetWarriorType(sld);
                 LAi_group_MoveCharacter(sld, "EnemyFight");
@@ -4536,6 +4546,7 @@ void QuestComplete(string sQuestName, string qname)
             {
                 sld = GetCharacter(NPC_GenerateCharacter("pirate_"+i, "sold_hol_"+(rand(7)+1), "man", "man", 25, HOLLAND, 0, true));
                 FantomMakeCoolFighter(sld, Rank, 60, 50, Blade, Gun, 40);
+				LAi_LoginInCaptureTown(sld, true);
             	LAi_SetWarriorType(sld);
                 LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
                 ChangeCharacterAddressGroup(sld, "FortOrange_ExitTown", "rld",  LAi_FindNearestLocator("rld", locx, locy, locz));
@@ -4549,7 +4560,8 @@ void QuestComplete(string sQuestName, string qname)
         case "DefenceOrange_WeWon":
             chrDisableReloadToLocation = false; // открыть выход из локации.
 			Log_QuestInfo("Английский десант уничтожен.");
-            AddQuestRecord("Hol_Line_4_DefenceOrange", "4");
+            AddQuestRecord("Hol_Line_4_DefenceOrange", "4.2");
+			SetLocationCapturedState("FortOrange_town", false);
             pchar.questTemp.State = "DefenceOrange_LandingDestroyed";
             pchar.quest.DefenceOrange_DieHard.over = "yes";
             //==> чтобы все были просто счастливы и сразу.
