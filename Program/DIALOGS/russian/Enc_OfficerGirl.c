@@ -743,6 +743,7 @@ void ProcessDialogEvent()
 					link.l1 = "Прости, Элен...";
 					link.l1.go = "exit";
 					NextDiag.TempNode = "Helen_meet";
+					npchar.lifeday = 0;
 					break;
 				}
 			}
@@ -811,6 +812,9 @@ void ProcessDialogEvent()
 			LAi_SetImmortal(sld,true);
 			DeleteAttribute(sld,"lifeDay");
 			LAi_group_MoveCharacter(sld, "player");
+			sld.quest.questflag.model = "questionmarkB";
+			LAi_LoginInCaptureTown(sld, true);
+			SetLocationCapturedState("PuertoPrincipe_port", true);
 		break;
 		case "Helen_wait":
 			if (!CheckAttribute(pchar,"HelenMet"))
@@ -836,6 +840,7 @@ void ProcessDialogEvent()
 			dialog.Text = "А ты ещё кто? Очередн"+ GetSexPhrase("ой придурок","ая дура") +", котор"+ GetSexPhrase("ый","ая") +" хочет нанять Элен в офицеры? Я тебе такого о ней расскажу, что у тебя волосы дыбом встанут.";
 			Link.l1 = "Не интересует. Предлагаю сделку. Ты за час убираешься из Пуэрто-Принсипе или будешь мёртв прямо здесь и сейчас. Что скажешь?";
 			Link.l1.go = "Helen_Bastard_2";
+			UnmarkCharacter(npchar);
 		break;
 
 		case "Helen_Bastard_2":
@@ -854,6 +859,7 @@ void ProcessDialogEvent()
 			pchar.quest.HelenBastard.win_condition.l1 = "NPC_Death";
 			pchar.quest.HelenBastard.win_condition.l1.character = "HelenBastard";
 			pchar.quest.HelenBastard.win_condition = "OpenTheDoors";
+			SetLocationCapturedState("PuertoPrincipe_port", false);
 		break;
 		case "Helen_nowait":
 			dialog.Text = "Благодарю вас, капитан! Теперь о моих подъёмных...";

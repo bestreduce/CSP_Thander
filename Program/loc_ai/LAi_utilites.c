@@ -13,7 +13,7 @@ void CreateCitizens(aref loc)
 		DeleteAttribute(pchar, "Arrive.EnemyPort");
 	}
 
-	if (loc.type != "town" && loc.type != "church" && loc.type != "residence") return; //городской генератор не должен отрабатывать везде
+	if (loc.type != "town" && loc.type != "church" && loc.type != "residence" && loc.type != "port") return; //городской генератор не должен отрабатывать везде
 	if(LAi_IsCapturedLocation) // fix нефиг грузить, когда город трупов или боевка
 	{
 		return;
