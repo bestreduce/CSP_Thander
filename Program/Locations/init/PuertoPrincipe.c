@@ -8,6 +8,7 @@ int LocationInitPuertoPrincipe(int n)
 	locations[n].id.label = "PuertoPrincipe Port";
 	locations[n].image = "loading\jonny_load\shores\PortPuertoPrincipe.tga";
 	locations[n].worldmap = "PuertoPrincipe_port";
+	//locations[n].soldiers = true;
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
 	//Sound

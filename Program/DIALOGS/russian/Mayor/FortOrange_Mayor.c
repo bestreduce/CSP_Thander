@@ -12,7 +12,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			// ==> Проверяем поле состояния квестов.
 			switch(pchar.questTemp.State)
             {
-                case "TakeFoodCuracao_toOrangeMayor": //Голландская линейка, квест №2, доставка продовольствия из форта Оранж.
+                case "TakeFoodCuracao_toOrangeMayor": //Голландская линейка, квест №2, доставка продовольствия из Форт Оранжа.
                     link.l2 = "Я прибыл"+ GetSexPhrase("","а") +" сюда по распоряжению Питера Стэвезанта. У вас для Кюрасао приготовлена партия товара, я долж"+ GetSexPhrase("ен","на") +" купить и доставить её. Прошу вас ознакомиться с документами на предоставление специальных цен.";
                     link.l2.go = "Step_H2_1";
                 break;
@@ -34,7 +34,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         	pchar.GenQuest.StoreGoods.HL2_DiscountPrices = true;
 		break;
 
-        case "DefenceOrange": //Голландская линейка, квест №4, защита форта Оранж.
+        case "DefenceOrange": //Голландская линейка, квест №4, защита Форт Оранжа.
             dialog.text = "Как же я рад вас видеть, как же рад!...";
             link.l2 = "Я здесь по поручению Стэвезанта. Кажется, мы успели...";
             link.l2.go = "Step_H4_1";

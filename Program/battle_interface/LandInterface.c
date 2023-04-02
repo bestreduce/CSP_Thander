@@ -1418,6 +1418,7 @@ bool SetReloadIcons()
                     objLandInterface.UserIcons.port.locator = "reload1";
                     objLandInterface.UserIcons.port.note = GetNodeForIcon(1, 10);
                     bUse = true;
+					if(townsack == "FortOrange") objLandInterface.UserIcons.port.locator = "sea";//В Форт Оранже быстрый переход на локатор SEA вместо reload1
 			for(i=0; i<nq; i++)
 			{
 				curloc = GetAttributeN(locList,i);

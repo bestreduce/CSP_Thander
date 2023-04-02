@@ -1491,12 +1491,15 @@ int LocationInitJamaica(int n)
 	// Порт Форт Оранжа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FortOrange_port";
-	locations[n].id.label = "FortOrange_port";
+	locations[n].id.label = "FortOrange Port";
 	locations[n].image = "loading\jonny_load\shores\PortFortOrange.tga";
 	locations[n].worldmap = "FortOrange_port";
+	//Town sack
+	locations[n].citizens = true;
+	locations[n].soldiers = true;
 	//Sound
 	locations[n].townsack = "FortOrange";
-	locations[n].type = "Town";
+	locations[n].type = "town";
 	locations[n].fastreload = "FortOrange";
 	locations[n].islandId = "Jamaica";
 	//Models

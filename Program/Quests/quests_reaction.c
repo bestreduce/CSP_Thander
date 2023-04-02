@@ -4383,7 +4383,7 @@ void QuestComplete(string sQuestName, string qname)
 		    LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", -1);
         break;
 
-//==========================   Квест N4, защита форта Оранж   ========================
+//==========================   Квест N4, защита Форт Оранжа   ========================
         case "DefenceOrange_FightNearJamaica":
             if (GetQuestPastDayParam("questTemp") < 12)
             {
@@ -4506,7 +4506,7 @@ void QuestComplete(string sQuestName, string qname)
         break;
 
         case "DefenceOrange_FightInExitTown":
-            Log_QuestInfo("Схватка с английским десантом у форта Оранж.");
+            Log_QuestInfo("Схватка с английским десантом у Форт Оранжа.");
             chrDisableReloadToLocation = true; // закрыть выход из локации.
             GetCharacterPos(pchar, &locx, &locy, &locz);
             for (i=1; i<=18; i++)
