@@ -706,7 +706,7 @@ void ProcessDialogEvent()
 			{
 				sld = &colonies[iTemp];
 				attr = sld.ID;
-				if(sld.nation == "none" || sld.nation == PIRATE || attr == "Panama" || attr == "FortOrange") continue;
+				if(sld.nation == "none" || sld.nation == PIRATE || attr == "Panama") continue;
 				attrLoc = "l" + iTemp;
 				NPChar.Temp.(attr) = attr;
 				Link.(attrLoc) = "В " + XI_ConvertString("Colony" + attr + "Dat");
@@ -730,8 +730,6 @@ void ProcessDialogEvent()
 				Link.l3.go = "TravelToLaVega";
 				Link.l4 = "Пуэро-Принсипе";
 				Link.l4.go = "TravelToPuertoPrincipe";
-				Link.l5 = "Форт Оранж";
-				Link.l5.go = "TravelToFortOrange";
 				Link.l6 = "Знаешь, пока останься, я передумал"+ GetSexPhrase("","а")+".";
 				Link.l6.go = "exit";
 		break;
