@@ -128,7 +128,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 case "":           // Квест №1 - сопровождение Альбермаля
                     dialog.text = "У меня есть для вас очень важное поручение. Вы здесь человек новый, я не уверен, стоит ли мне доверять вам, но у меня, похоже, нет выбора.";
                     link.l1 = "Буду "+ GetSexPhrase("рад","рада") +" выполнить ваше поручение.";
-                    link.l1.go = "Step_5_1";
+                    link.l1.go = "Step_1_1";
                     link.l2 = "Извините, но я в данный момент решаю другую задачу.";
                     link.l2.go = "exit";
                 break;
@@ -649,18 +649,20 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             pchar.GenQuestBox.FortOrange_townhall.box1.items.jewelry14 = Rand(5)+1;
             pchar.GenQuestBox.FortOrange_townhall.box1.items.jewelry17 = Rand(5)+1;
             pchar.GenQuestBox.FortOrange_townhall.box1.items.cirass3 = 1;
-			locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_BoxPatch";
+			//locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_BoxPatch";
 			pchar.questTemp.State = "AttackFortOrange_GoToFort";
             SetQuestHeader("Eng_Line_5_AttackFortOrange");
             AddQuestRecord("Eng_Line_5_AttackFortOrange", "1");
             LAi_LocationFightDisable(&Locations[FindLocation("FortOrange_townhall")], false);
-            Pchar.quest.AttackFortOrange_GoToFort1.win_condition.l1 = "location";
-            Pchar.quest.AttackFortOrange_GoToFort1.win_condition.l1.location = "FortOrange_ExitTown";
-            Pchar.quest.AttackFortOrange_GoToFort1.win_condition = "AttackFortOrange_GoToFort";
-			Pchar.quest.AttackFortOrange_GoToFort2.win_condition.l1 = "location";
-            Pchar.quest.AttackFortOrange_GoToFort2.win_condition.l1.location = "FortOrange_port";
-            Pchar.quest.AttackFortOrange_GoToFort2.win_condition = "AttackFortOrange_GoToFort";
-			//SetLocationCapturedState("FortOrange_town", true);
+			
+            Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1 = "location";
+            Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1.location = "FortOrange_ExitTown";
+            Pchar.quest.AttackFortOrange_GoToFort.win_condition = "AttackFortOrange_GoToFort";
+			
+			Pchar.quest.AttackFortOrange_GoToPort.win_condition.l1 = "location";
+            Pchar.quest.AttackFortOrange_GoToPort.win_condition.l1.location = "FortOrange_port";
+            Pchar.quest.AttackFortOrange_GoToPort.win_condition = "AttackFortOrange_GoToPort";
+			SetLocationCapturedState("FortOrange_town", true);
         break;
 
         case "Step_5_2":
