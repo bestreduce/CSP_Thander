@@ -2236,7 +2236,7 @@ string WhereLSCCitizen(ref rCharacter)
 			case "FleuronTavern": sShip = "в каравелле 'Флерон', в таверне"; break;
 			case "FurieShipInside2": sShip = "в пинасе 'Фурия'"; break;
 			case "GloriaChurch": sShip = "в галеоне 'Глория', в церкви"; break;
-			case "PlutoStoreSmall": sShip = "во флете 'Плуто'"; break;
+			case "PlutoStoreSmall": sShip = "во флейте 'Плуто'"; break;
 			case "ProtectorFisher": sShip = "в корвете 'Протектор'"; break;
 			case "SanAugustineResidence": sShip = "в варшипе 'Сан Августин', в резиденции адмирала"; break;
 			case "SanGabrielMechanic": sShip = "в барке 'Сан Габриель'"; break;
