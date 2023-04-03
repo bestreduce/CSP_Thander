@@ -128,7 +128,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 case "":           // Квест №1 - сопровождение Альбермаля
                     dialog.text = "У меня есть для вас очень важное поручение. Вы здесь человек новый, я не уверен, стоит ли мне доверять вам, но у меня, похоже, нет выбора.";
                     link.l1 = "Буду "+ GetSexPhrase("рад","рада") +" выполнить ваше поручение.";
-                    link.l1.go = "Step_1_1";
+                    link.l1.go = "Step_5_1";
                     link.l2 = "Извините, но я в данный момент решаю другую задачу.";
                     link.l2.go = "exit";
                 break;
@@ -654,9 +654,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             SetQuestHeader("Eng_Line_5_AttackFortOrange");
             AddQuestRecord("Eng_Line_5_AttackFortOrange", "1");
             LAi_LocationFightDisable(&Locations[FindLocation("FortOrange_townhall")], false);
-            Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1 = "location";
-            Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1.location = "FortOrange_ExitTown";
-            Pchar.quest.AttackFortOrange_GoToFort.win_condition = "AttackFortOrange_GoToFort";
+            Pchar.quest.AttackFortOrange_GoToFort1.win_condition.l1 = "location";
+            Pchar.quest.AttackFortOrange_GoToFort1.win_condition.l1.location = "FortOrange_ExitTown";
+            Pchar.quest.AttackFortOrange_GoToFort1.win_condition = "AttackFortOrange_GoToFort";
+			Pchar.quest.AttackFortOrange_GoToFort2.win_condition.l1 = "location";
+            Pchar.quest.AttackFortOrange_GoToFort2.win_condition.l1.location = "FortOrange_port";
+            Pchar.quest.AttackFortOrange_GoToFort2.win_condition = "AttackFortOrange_GoToFort";
+			//SetLocationCapturedState("FortOrange_town", true);
         break;
 
         case "Step_5_2":
@@ -685,7 +689,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(&locations[FindLocation("FortOrange_town")], "hidden_effects");
 			DeleteAttribute(&locations[FindLocation("FortOrange_ExitTown")], "hidden_effects");
 			//<-- огонь и пламень
-			locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_patch";
+			//locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_patch";
 			AddCharacterExpToSkill(pchar, "Pistol", 250);
 			AddCharacterExpToSkill(pchar, "Leadership", 250);
 			AddCharacterExpToSkill(pchar, "Repair", 350);
