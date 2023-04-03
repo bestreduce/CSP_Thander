@@ -17,6 +17,8 @@ Object fake_sail;
 Object fake_rope;
 Object fake_flag;
 Object model;
+int basehull = 0;
+int hullid = 0;
 
 void VIEWER_Reload() {
     SendMessage(&fake_rope, "li", MSG_ROPE_DEL_GROUP, &model);
@@ -24,16 +26,7 @@ void VIEWER_Reload() {
     SendMessage(&fake_flag, "li", MSG_FLAG_DEL_GROUP, &model);
     DeleteClass(&model);
 
-    // change hull
-    if(!CheckAttribute(pchar, "lasthull")) {
-        pchar.lasthull = 0;
-    }
-
-    int hullid = sti(pchar.lasthull) % 10 + 1;
-    pchar.lasthull = hullid;
-	
-	ref pship = GetRealShip(sti(pchar.Ship.Type));
-	
+	ref pship = GetRealShip(sti(chref.Ship.Type));
     SetTexturePath(0, "Ships\"+pship.name+"\Hull" + hullid + "\");
     SetTexturePath(1, "Ships\"+pship.name+"\");
 
@@ -121,8 +114,10 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
     CreateEntity(&fake_rope, "rope");
 	CreateEntity(&fake_flag, "flag");
 
-    ref rShip = GetRealShip(sti(pchar.ship.Type));
-    SendMessage(&fake_ship, "laa", MSG_SHIP_CREATE, &pchar, &rShip);
+    ref rShip = GetRealShip(sti(chref.ship.Type));
+	basehull = sti(rShip.Ship.Upgrades.Hull);
+	hullid = basehull;
+    SendMessage(&fake_ship, "laa", MSG_SHIP_CREATE, &chref, &rShip);
 
     // параметры камеры:
     SendMessage(&GameInterface, "lslfffffffffff", MSG_INTERFACE_MSG_TO_NODE, "VIEWER", 1, /*начальный aX камеры*/ 4*PI/3, /*базовый aY камеры*/ 11*PI/12, /* макс амплитуда камеры aY */ PI / 8,/* гориз. сенса */ 0.2, /* верт. сенса */ 0.2,
@@ -183,6 +178,7 @@ void IDoExit(int exitCode)
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
     PostEvent("StopQuestCheckProcessFreeze", 100);//заморозка проверки квестовce();
+	DoQuestReloadToLocation(pchar.location, "reload", "reload1","");
 }
 
 void procCheckBoxChange()
@@ -232,7 +228,48 @@ void ProcCommand()
                 ColorSwap(1);
     		}
     	break;
+		
+		case "HULL_LEFT_BUTTON":
+    		if(comName=="activate" || comName=="click")
+    		{
+                HullSwap(-1);
+				CheckChangeSailStatus();
+    		}
+    	break;
+		
+		case "HULL_RIGHT_BUTTON":
+    		if(comName=="activate" || comName=="click")
+    		{
+                HullSwap(1);
+				CheckChangeSailStatus();
+    		}
+    	break;
+		
+		case "SETHULL_CHECKBOX":
+    		if(comName=="activate" || comName=="click")
+    		{
+				CheckChangeSailStatus();
+    		}
+    	break;
+		
+		case "SETSAIL_CHECKBOX":
+    		if(comName=="activate" || comName=="click")
+    		{
+				CheckChangeSailStatus();
+    		}
+    	break;
 	}
+}
+
+void HullSwap(int swap)
+{
+	ref rShip = GetRealShip(sti(chref.ship.Type));
+	int iMax = 3;
+	if (CheckAttribute(rShip,"hullNums")) iMax = sti(rShip.hullNums);
+	hullid = hullid + swap;
+	if (swap == 1 && hullid > iMax) hullid = 1;
+	if (swap == -1 && hullid < 1) hullid = iMax;
+	VIEWER_Reload();
 }
 
 void ColorSwap(int swap)
@@ -297,6 +334,12 @@ void CheckChangeSailStatus()
 
 	price = 0;
 	bNewValue = false;
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETHULL_CHECKBOX", 3, 1) && hullid != basehull)
+	{
+		bNewValue = true;
+		price = CalculateHullChangePrice(sti(shref.Class));
+	}
+		
 	if (allowgerald)
 	{
 		if(CheckSailsGerald(chref) && CanSetSailsGerald(chref))
@@ -306,8 +349,10 @@ void CheckChangeSailStatus()
 		}
 	}
 
-	if (GetChosenType("sails") != defsails) {bNewValue = true; price = price + makeint(CalculateSailsChangePrice(sti(shref.Class))/2); SetFormatedText("SAILS_CURRENT", "");}
-	else SetFormatedText("SAILS_CURRENT", "Текущий");
+	if (SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETSAIL_CHECKBOX", 3, 1) && GetChosenType("sails") != defsails) 
+	{bNewValue = true; price = price + makeint(CalculateSailsChangePrice(sti(shref.Class))/2); SetFormatedText("SAILS_CURRENT", "");}
+	if (SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETSAIL_CHECKBOX", 3, 1) && GetChosenType("sails") == defsails) SetFormatedText("SAILS_CURRENT", "Текущий");
+	
 	if (GetChosenType("color") != defcolor) {bNewValue = true; price = price + makeint(CalculateSailsChangePrice(sti(shref.Class))/3);}
 	else SetFormatedText("SAILS_COLOR_TEXT", ""+SailsColors[curcolor].name+" (текущий)");
 	SetFormatedText("TOTAL_PRICE", "Цена: "+FindRussianMoneyString(price));
@@ -339,6 +384,27 @@ int CalculateSailsChangePrice(int value)
 		case 2: return 50000+drand(25000);
 		break;
 		case 1: return 100000+drand(50000);
+		break;
+	}
+}
+
+int CalculateHullChangePrice(int value)
+{
+	switch (value)
+	{
+		case 7: return 1000+drand2(500);
+		break;
+		case 6: return 5000+drand2(2500);
+		break;
+		case 5: return 10000+drand2(5000);
+		break;
+		case 4: return 20000+drand2(10000);
+		break;
+		case 3: return 35000+drand2(17500);
+		break;
+		case 2: return 50000+drand2(25000);
+		break;
+		case 1: return 100000+drand2(50000);
 		break;
 	}
 }
@@ -484,102 +550,106 @@ void SetNewSailsGerald()
 	}
 
 	string sailname = GameInterface.SCROLL_SAILS.(sattr2).FileName;
-	switch (sailname)
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETSAIL_CHECKBOX", 3, 1))
 	{
-		case "parus_common.tga.tx":shref.ship.upgrades.sails = 1;break;
-		case "parus_pat.tga.tx":shref.ship.upgrades.sails = 2;break;
-		case "parus_silk.tga.tx":shref.ship.upgrades.sails = 3;break;
-		case "parus_silkblack.tga.tx":shref.ship.upgrades.sails = 4;break;
-		case "parus_usual_1.tga.tx":shref.ship.upgrades.sails = 5;break;
-		case "parus_usual_2.tga.tx":shref.ship.upgrades.sails = 6;break;
-		case "parus_usual_3.tga.tx":shref.ship.upgrades.sails = 7;break;
-		case "parus_usual_4.tga.tx":shref.ship.upgrades.sails = 8;break;
-		case "parus_usual_5.tga.tx":shref.ship.upgrades.sails = 9;break;
-		case "parus_usual_6.tga.tx":shref.ship.upgrades.sails = 10;break;
-		case "parus_usual_7.tga.tx":shref.ship.upgrades.sails = 11;break;
-		case "parus_usual_8.tga.tx":shref.ship.upgrades.sails = 12;break;
-		case "parus_usual_9.tga.tx":shref.ship.upgrades.sails = 13;break;
-		case "parus_usual_10.tga.tx":shref.ship.upgrades.sails = 14;break;
-		case "parus_usual_11.tga.tx":shref.ship.upgrades.sails = 15;break;
-		case "parus_usual_12.tga.tx":shref.ship.upgrades.sails = 16;break;
-		case "parus_usual_13.tga.tx":shref.ship.upgrades.sails = 17;break;
-		case "parus_usual_14.tga.tx":shref.ship.upgrades.sails = 18;break;
-		case "parus_usual_15.tga.tx":shref.ship.upgrades.sails = 19;break;
-		case "parus_usual_16.tga.tx":shref.ship.upgrades.sails = 20;break;
-		case "parus_usual_17.tga.tx":shref.ship.upgrades.sails = 21;break;
-		case "parus_usual_18.tga.tx":shref.ship.upgrades.sails = 22;break;
-		case "parus_usual_19.tga.tx":shref.ship.upgrades.sails = 23;break;
-		case "parus_usual_20.tga.tx":shref.ship.upgrades.sails = 24;break;
-		case "parus_usual_21.tga.tx":shref.ship.upgrades.sails = 25;break;
-		case "parus_usual_22.tga.tx":shref.ship.upgrades.sails = 26;break;
-		case "parus_usual_23.tga.tx":shref.ship.upgrades.sails = 27;break;
-		case "parus_usual_24.tga.tx":shref.ship.upgrades.sails = 28;break;
-		case "parus_usual_25.tga.tx":shref.ship.upgrades.sails = 29;break;
-		case "parus_usual_26.tga.tx":shref.ship.upgrades.sails = 30;break;
-		case "parus_usual_27.tga.tx":shref.ship.upgrades.sails = 31;break;
-		case "parus_usual_28.tga.tx":shref.ship.upgrades.sails = 32;break;
-		case "parus_usual_29.tga.tx":shref.ship.upgrades.sails = 33;break;
-		case "parus_usual_30.tga.tx":shref.ship.upgrades.sails = 34;break;
-		case "parus_usual_31.tga.tx":shref.ship.upgrades.sails = 35;break;
-		case "parus_usual_32.tga.tx":shref.ship.upgrades.sails = 36;break;
-		case "parus_usual_33.tga.tx":shref.ship.upgrades.sails = 37;break;
-		case "parus_sail_torn_black_pirate_1.tga.tx":shref.ship.upgrades.sails = 38;break;
-		case "parus_sail_torn_black_pirate_2.tga.tx":shref.ship.upgrades.sails = 39;break;
-		case "parus_sail_torn_black_pirate_3.tga.tx":shref.ship.upgrades.sails = 40;break;
-		case "parus_sail_torn_black_pirate_4.tga.tx":shref.ship.upgrades.sails = 41;break;
-		case "parus_sail_torn_black_pirate_5.tga.tx":shref.ship.upgrades.sails = 42;break;
-		case "parus_sail_torn_black_pirate_6.tga.tx":shref.ship.upgrades.sails = 43;break;
-		case "parus_sail_torn_black_pirate_7.tga.tx":shref.ship.upgrades.sails = 44;break;
-		case "parus_sail_torn_black_pirate_8.tga.tx":shref.ship.upgrades.sails = 45;break;
-		case "parus_sail_torn_black_pirate_9.tga.tx":shref.ship.upgrades.sails = 46;break;
-		case "parus_sail_torn_black_pirate_10.tga.tx":shref.ship.upgrades.sails = 47;break;
-		case "parus_sail_torn_black_pirate_11.tga.tx":shref.ship.upgrades.sails = 48;break;
-		case "parus_sail_torn_black_pirate_12.tga.tx":shref.ship.upgrades.sails = 49;break;
-		case "parus_sail_torn_black_pirate_13.tga.tx":shref.ship.upgrades.sails = 50;break;
-		case "parus_sail_torn_black_pirate_14.tga.tx":shref.ship.upgrades.sails = 51;break;
-		case "parus_sail_whole_black_pirate_1.tga.tx":shref.ship.upgrades.sails = 52;break;
-		case "parus_sail_whole_black_pirate_2.tga.tx":shref.ship.upgrades.sails = 53;break;
-		case "parus_sail_whole_black_pirate_3.tga.tx":shref.ship.upgrades.sails = 54;break;
-		case "parus_sail_whole_black_pirate_4.tga.tx":shref.ship.upgrades.sails = 55;break;
-		case "parus_sail_whole_black_pirate_5.tga.tx":shref.ship.upgrades.sails = 56;break;
-		case "parus_sail_whole_black_pirate_6.tga.tx":shref.ship.upgrades.sails = 57;break;
-		case "parus_sail_whole_black_pirate_7.tga.tx":shref.ship.upgrades.sails = 58;break;
-		case "parus_sail_whole_black_pirate_8.tga.tx":shref.ship.upgrades.sails = 59;break;
-		case "parus_sail_whole_black_pirate_9.tga.tx":shref.ship.upgrades.sails = 60;break;
-		case "parus_sail_whole_black_pirate_10.tga.tx":shref.ship.upgrades.sails = 61;break;
-		case "parus_sail_whole_black_pirate_11.tga.tx":shref.ship.upgrades.sails = 62;break;
-		case "parus_sail_whole_black_pirate_12.tga.tx":shref.ship.upgrades.sails = 63;break;
-		case "parus_sail_whole_black_pirate_13.tga.tx":shref.ship.upgrades.sails = 64;break;
-		case "parus_sail_whole_black_pirate_14.tga.tx":shref.ship.upgrades.sails = 65;break;
-		case "parus_sail_whole_black_pirate_15.tga.tx":shref.ship.upgrades.sails = 66;break;
-		case "parus_sail_whole_black_pirate_16.tga.tx":shref.ship.upgrades.sails = 67;break;
-		case "parus_sail_whole_black_pirate_17.tga.tx":shref.ship.upgrades.sails = 68;break;
-		case "parus_sail_whole_white_pirate_1.tga.tx":shref.ship.upgrades.sails = 69;break;
-		case "parus_sail_whole_white_pirate_2.tga.tx":shref.ship.upgrades.sails = 70;break;
-		case "parus_sail_whole_white_pirate_3.tga.tx":shref.ship.upgrades.sails = 71;break;
-		case "parus_sail_whole_white_pirate_4.tga.tx":shref.ship.upgrades.sails = 72;break;
-		case "parus_sail_whole_white_pirate_5.tga.tx":shref.ship.upgrades.sails = 73;break;
-		case "parus_sail_whole_white_pirate_6.tga.tx":shref.ship.upgrades.sails = 74;break;
-		case "parus_sail_whole_white_pirate_7.tga.tx":shref.ship.upgrades.sails = 75;break;
-		case "parus_sail_whole_white_pirate_8.tga.tx":shref.ship.upgrades.sails = 76;break;
-		case "parus_sail_whole_white_pirate_9.tga.tx":shref.ship.upgrades.sails = 77;break;
-		case "parus_sail_whole_white_pirate_10.tga.tx":shref.ship.upgrades.sails = 78;break;
-		case "parus_sail_whole_white_pirate_11.tga.tx":shref.ship.upgrades.sails = 79;break;
-		case "parus_sail_whole_white_pirate_12.tga.tx":shref.ship.upgrades.sails = 80;break;
-		case "parus_sail_whole_white_pirate_13.tga.tx":shref.ship.upgrades.sails = 81;break;
-		case "parus_sail_whole_white_pirate_14.tga.tx":shref.ship.upgrades.sails = 82;break;
-		case "parus_sail_whole_white_pirate_15.tga.tx":shref.ship.upgrades.sails = 83;break;
-		case "parus_sail_whole_white_pirate_16.tga.tx":shref.ship.upgrades.sails = 84;break;
-		case "parus_sail_whole_white_pirate_17.tga.tx":shref.ship.upgrades.sails = 85;break;
-		case "parus_sail_whole_white_pirate_18.tga.tx":shref.ship.upgrades.sails = 86;break;
-		case "parus_sail_whole_white_pirate_19.tga.tx":shref.ship.upgrades.sails = 87;break;
-		case "parus_sail_whole_white_pirate_20.tga.tx":shref.ship.upgrades.sails = 88;break;
-		case "parus_common_torn.tga.tx":shref.ship.upgrades.sails = 89;break;
-		case "parus_common_torn1.tga.tx":shref.ship.upgrades.sails = 90;break;
-		case "parus_common_torn2.tga.tx":shref.ship.upgrades.sails = 91;break;
+		switch (sailname)
+		{
+			case "parus_common.tga.tx":shref.ship.upgrades.sails = 1;break;
+			case "parus_pat.tga.tx":shref.ship.upgrades.sails = 2;break;
+			case "parus_silk.tga.tx":shref.ship.upgrades.sails = 3;break;
+			case "parus_silkblack.tga.tx":shref.ship.upgrades.sails = 4;break;
+			case "parus_usual_1.tga.tx":shref.ship.upgrades.sails = 5;break;
+			case "parus_usual_2.tga.tx":shref.ship.upgrades.sails = 6;break;
+			case "parus_usual_3.tga.tx":shref.ship.upgrades.sails = 7;break;
+			case "parus_usual_4.tga.tx":shref.ship.upgrades.sails = 8;break;
+			case "parus_usual_5.tga.tx":shref.ship.upgrades.sails = 9;break;
+			case "parus_usual_6.tga.tx":shref.ship.upgrades.sails = 10;break;
+			case "parus_usual_7.tga.tx":shref.ship.upgrades.sails = 11;break;
+			case "parus_usual_8.tga.tx":shref.ship.upgrades.sails = 12;break;
+			case "parus_usual_9.tga.tx":shref.ship.upgrades.sails = 13;break;
+			case "parus_usual_10.tga.tx":shref.ship.upgrades.sails = 14;break;
+			case "parus_usual_11.tga.tx":shref.ship.upgrades.sails = 15;break;
+			case "parus_usual_12.tga.tx":shref.ship.upgrades.sails = 16;break;
+			case "parus_usual_13.tga.tx":shref.ship.upgrades.sails = 17;break;
+			case "parus_usual_14.tga.tx":shref.ship.upgrades.sails = 18;break;
+			case "parus_usual_15.tga.tx":shref.ship.upgrades.sails = 19;break;
+			case "parus_usual_16.tga.tx":shref.ship.upgrades.sails = 20;break;
+			case "parus_usual_17.tga.tx":shref.ship.upgrades.sails = 21;break;
+			case "parus_usual_18.tga.tx":shref.ship.upgrades.sails = 22;break;
+			case "parus_usual_19.tga.tx":shref.ship.upgrades.sails = 23;break;
+			case "parus_usual_20.tga.tx":shref.ship.upgrades.sails = 24;break;
+			case "parus_usual_21.tga.tx":shref.ship.upgrades.sails = 25;break;
+			case "parus_usual_22.tga.tx":shref.ship.upgrades.sails = 26;break;
+			case "parus_usual_23.tga.tx":shref.ship.upgrades.sails = 27;break;
+			case "parus_usual_24.tga.tx":shref.ship.upgrades.sails = 28;break;
+			case "parus_usual_25.tga.tx":shref.ship.upgrades.sails = 29;break;
+			case "parus_usual_26.tga.tx":shref.ship.upgrades.sails = 30;break;
+			case "parus_usual_27.tga.tx":shref.ship.upgrades.sails = 31;break;
+			case "parus_usual_28.tga.tx":shref.ship.upgrades.sails = 32;break;
+			case "parus_usual_29.tga.tx":shref.ship.upgrades.sails = 33;break;
+			case "parus_usual_30.tga.tx":shref.ship.upgrades.sails = 34;break;
+			case "parus_usual_31.tga.tx":shref.ship.upgrades.sails = 35;break;
+			case "parus_usual_32.tga.tx":shref.ship.upgrades.sails = 36;break;
+			case "parus_usual_33.tga.tx":shref.ship.upgrades.sails = 37;break;
+			case "parus_sail_torn_black_pirate_1.tga.tx":shref.ship.upgrades.sails = 38;break;
+			case "parus_sail_torn_black_pirate_2.tga.tx":shref.ship.upgrades.sails = 39;break;
+			case "parus_sail_torn_black_pirate_3.tga.tx":shref.ship.upgrades.sails = 40;break;
+			case "parus_sail_torn_black_pirate_4.tga.tx":shref.ship.upgrades.sails = 41;break;
+			case "parus_sail_torn_black_pirate_5.tga.tx":shref.ship.upgrades.sails = 42;break;
+			case "parus_sail_torn_black_pirate_6.tga.tx":shref.ship.upgrades.sails = 43;break;
+			case "parus_sail_torn_black_pirate_7.tga.tx":shref.ship.upgrades.sails = 44;break;
+			case "parus_sail_torn_black_pirate_8.tga.tx":shref.ship.upgrades.sails = 45;break;
+			case "parus_sail_torn_black_pirate_9.tga.tx":shref.ship.upgrades.sails = 46;break;
+			case "parus_sail_torn_black_pirate_10.tga.tx":shref.ship.upgrades.sails = 47;break;
+			case "parus_sail_torn_black_pirate_11.tga.tx":shref.ship.upgrades.sails = 48;break;
+			case "parus_sail_torn_black_pirate_12.tga.tx":shref.ship.upgrades.sails = 49;break;
+			case "parus_sail_torn_black_pirate_13.tga.tx":shref.ship.upgrades.sails = 50;break;
+			case "parus_sail_torn_black_pirate_14.tga.tx":shref.ship.upgrades.sails = 51;break;
+			case "parus_sail_whole_black_pirate_1.tga.tx":shref.ship.upgrades.sails = 52;break;
+			case "parus_sail_whole_black_pirate_2.tga.tx":shref.ship.upgrades.sails = 53;break;
+			case "parus_sail_whole_black_pirate_3.tga.tx":shref.ship.upgrades.sails = 54;break;
+			case "parus_sail_whole_black_pirate_4.tga.tx":shref.ship.upgrades.sails = 55;break;
+			case "parus_sail_whole_black_pirate_5.tga.tx":shref.ship.upgrades.sails = 56;break;
+			case "parus_sail_whole_black_pirate_6.tga.tx":shref.ship.upgrades.sails = 57;break;
+			case "parus_sail_whole_black_pirate_7.tga.tx":shref.ship.upgrades.sails = 58;break;
+			case "parus_sail_whole_black_pirate_8.tga.tx":shref.ship.upgrades.sails = 59;break;
+			case "parus_sail_whole_black_pirate_9.tga.tx":shref.ship.upgrades.sails = 60;break;
+			case "parus_sail_whole_black_pirate_10.tga.tx":shref.ship.upgrades.sails = 61;break;
+			case "parus_sail_whole_black_pirate_11.tga.tx":shref.ship.upgrades.sails = 62;break;
+			case "parus_sail_whole_black_pirate_12.tga.tx":shref.ship.upgrades.sails = 63;break;
+			case "parus_sail_whole_black_pirate_13.tga.tx":shref.ship.upgrades.sails = 64;break;
+			case "parus_sail_whole_black_pirate_14.tga.tx":shref.ship.upgrades.sails = 65;break;
+			case "parus_sail_whole_black_pirate_15.tga.tx":shref.ship.upgrades.sails = 66;break;
+			case "parus_sail_whole_black_pirate_16.tga.tx":shref.ship.upgrades.sails = 67;break;
+			case "parus_sail_whole_black_pirate_17.tga.tx":shref.ship.upgrades.sails = 68;break;
+			case "parus_sail_whole_white_pirate_1.tga.tx":shref.ship.upgrades.sails = 69;break;
+			case "parus_sail_whole_white_pirate_2.tga.tx":shref.ship.upgrades.sails = 70;break;
+			case "parus_sail_whole_white_pirate_3.tga.tx":shref.ship.upgrades.sails = 71;break;
+			case "parus_sail_whole_white_pirate_4.tga.tx":shref.ship.upgrades.sails = 72;break;
+			case "parus_sail_whole_white_pirate_5.tga.tx":shref.ship.upgrades.sails = 73;break;
+			case "parus_sail_whole_white_pirate_6.tga.tx":shref.ship.upgrades.sails = 74;break;
+			case "parus_sail_whole_white_pirate_7.tga.tx":shref.ship.upgrades.sails = 75;break;
+			case "parus_sail_whole_white_pirate_8.tga.tx":shref.ship.upgrades.sails = 76;break;
+			case "parus_sail_whole_white_pirate_9.tga.tx":shref.ship.upgrades.sails = 77;break;
+			case "parus_sail_whole_white_pirate_10.tga.tx":shref.ship.upgrades.sails = 78;break;
+			case "parus_sail_whole_white_pirate_11.tga.tx":shref.ship.upgrades.sails = 79;break;
+			case "parus_sail_whole_white_pirate_12.tga.tx":shref.ship.upgrades.sails = 80;break;
+			case "parus_sail_whole_white_pirate_13.tga.tx":shref.ship.upgrades.sails = 81;break;
+			case "parus_sail_whole_white_pirate_14.tga.tx":shref.ship.upgrades.sails = 82;break;
+			case "parus_sail_whole_white_pirate_15.tga.tx":shref.ship.upgrades.sails = 83;break;
+			case "parus_sail_whole_white_pirate_16.tga.tx":shref.ship.upgrades.sails = 84;break;
+			case "parus_sail_whole_white_pirate_17.tga.tx":shref.ship.upgrades.sails = 85;break;
+			case "parus_sail_whole_white_pirate_18.tga.tx":shref.ship.upgrades.sails = 86;break;
+			case "parus_sail_whole_white_pirate_19.tga.tx":shref.ship.upgrades.sails = 87;break;
+			case "parus_sail_whole_white_pirate_20.tga.tx":shref.ship.upgrades.sails = 88;break;
+			case "parus_common_torn.tga.tx":shref.ship.upgrades.sails = 89;break;
+			case "parus_common_torn1.tga.tx":shref.ship.upgrades.sails = 90;break;
+			case "parus_common_torn2.tga.tx":shref.ship.upgrades.sails = 91;break;
+		}
 	}
 	Log_testInfo(shref.ship.upgrades.sails);
 	if (CheckAttribute(shref,"EmblemedSails")) DeleteAttribute(shref,"EmblemedSails");
+	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETHULL_CHECKBOX", 3, 1) && hullid != basehull) shref.ship.upgrades.hull = hullid;
 	AddMoneyToCharacter(Pchar, -price);
 	WaitDate("",0,0,0, 1, 30);
 	ProcessCancelExit();
