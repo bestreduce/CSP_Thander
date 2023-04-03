@@ -743,7 +743,6 @@ void ProcessDialogEvent()
 					link.l1 = "Прости, Элен...";
 					link.l1.go = "exit";
 					NextDiag.TempNode = "Helen_meet";
-					npchar.lifeday = 0;
 					break;
 				}
 			}
