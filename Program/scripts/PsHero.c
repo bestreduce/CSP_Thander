@@ -913,7 +913,7 @@ void PGG_SetUpForTask(ref chr)
 				DeleteAttribute(chr, "PGG_warrior");
 				Map_CreateTrader(chr.PGGAi.location.town, sColony, chr.id, daysQty);
 				//Log_TestInfo(GetHeroName(sti(chr.PGGAi.HeroNum))+" отправляется в " +
-				//chr.PGGAi.Task.Target + " из "+chr.PGGAi.location.town+", доплывет за " + sti(chr.PGGAi.Task.Target.days) + " дней");
+				//chr.PGGAi.Task.Target + " из "+chr.PGGAi.location.town+", доплывёт за " + sti(chr.PGGAi.Task.Target.days) + " дней");
 			}
 			Fantom_SetBalls(chr, "pirate");
 			chr.PGGAi.Task.SetSail =  true;
