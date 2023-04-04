@@ -331,7 +331,7 @@ void ProcessDialogEvent()
 			LAi_SetActorType(sld);
 			
 			PChar.quest.AT_pr_Draka_s_Kotesom.win_condition.l1 = "location";
-			PChar.quest.AT_pr_Draka_s_Kotesom.win_condition.l1.location = "Hispaniola_Jungle_03";
+			PChar.quest.AT_pr_Draka_s_Kotesom.win_condition.l1.location = "LaVega_ExitTown";
 			PChar.quest.AT_pr_Draka_s_Kotesom.function = "AT_pr_Draka_s_Kotesom";
 			
 			DoQuestFunctionDelay("AT_pr_Torgovets_10_1", 1.0);

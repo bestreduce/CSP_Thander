@@ -195,7 +195,6 @@ int LocationInitReefs(int n)
 	locations[n].image = "loading\jonny_load\inside\Maltains.tga";
 	//Town sack
 	locations[n].type = "Reefs_Chapter";
-	// locations[n].townsack = "FortFrance";
 	locations[n].islandId = "Reefs";
 	//Sound
 	// locations[n].fastreload = "FortFrance";

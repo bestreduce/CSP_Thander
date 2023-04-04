@@ -185,6 +185,23 @@ void SetSchemeForLocation (ref loc)
 					SetMusicAlarm("music_gorod");
 				}
 			break;
+			
+			case "port":
+				SetWeatherScheme("town");
+				if (CheckAttribute(loc,"fastreload"))
+				{
+					iColony = FindColony(loc.fastreload);
+				}
+				if (iColony != -1)
+				{
+					if (Whr_IsDay()) SetMusicAlarm(NationShortName(sti(Colonies[iColony].nation)) + "_music_day");
+					else SetMusicAlarm(NationShortName(sti(Colonies[iColony].nation)) + "_music_night");
+				}
+				else
+				{
+					SetMusicAlarm("music_gorod");
+				}
+			break;
 
 			case "land": // дуэльное поле, лэндфорт и так далее
 				SetWeatherScheme("land");

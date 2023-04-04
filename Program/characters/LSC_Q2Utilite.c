@@ -1197,11 +1197,11 @@ void QuestionsInit()
 	NullCharacter.questions.a6 = "бикгед";
 	NullCharacter.questions.q7 = "Как называются поперечные связи судна, служащие для поддержания палуб, соединяющие противоположные бортовые ветви шпангоутов и придающие судну поперечную прочность?";
 	NullCharacter.questions.a7 = "бимсы";
-	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами весел?";
+	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами вёсел?";
 	NullCharacter.questions.a8 = "бирема";
 	NullCharacter.questions.q9 = "Как называется деревянная тумба на палубе корабля для крепления тросов?";
 	NullCharacter.questions.a9 = "битенг";
-	NullCharacter.questions.q10 = "Как назыавется небольшая мачта на бушприте, несущая рей с прямым парусом?";
+	NullCharacter.questions.q10 = "Как называется небольшая мачта на бушприте, несущая рей с прямым парусом?";
 	NullCharacter.questions.a10 = "блинда-стеньга";
 	NullCharacter.questions.q11 = "Назовите парус, который ставят под бушпритом.";
 	NullCharacter.questions.a11 = "блинд";
@@ -1809,7 +1809,7 @@ string Sharp_choiceAction()
 {
 	string sBack;
 	ref sld;
-	//удалим Шарпа с карты, если он плывет ещё где-то
+	//удалим Шарпа с карты, если он плывёт ещё где-то
 	Map_ReleaseQuestEncounter("Sharp");
 	group_DeleteGroup("Sharp_Group");
 	if (rand(3) != 2 && sti(pchar.questTemp.Sharp.count) < 5)
@@ -1837,7 +1837,7 @@ string Sharp_choiceAction()
 		sld.mapEnc.type = "trade";
 		sld.mapEnc.worldMapShip = "quest_ship";
 		sld.mapEnc.Name = "бриг 'Шарпоносец'";
-		string sColony= SelectAnyColony(sCity); //колония, откуда плывет Шарп
+		string sColony= SelectAnyColony(sCity); //колония, откуда плывёт Шарп
 		int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даем с запасом
 		Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 	}
@@ -2091,8 +2091,8 @@ string SelectNotEnemyColony(ref NPChar)
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 
-		/* if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров */
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
+		/* if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "Caiman" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров */
+		if (colonies[n].id != "Panama" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
 		{
 			nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
 			if (nation != RELATION_ENEMY)
@@ -2116,7 +2116,7 @@ string SelectAnyColony(string _City)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City) != colonies[n].islandLable) //не на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City) != colonies[n].islandLable) //не на свой остров
 		{
 			storeArray[howStore] = n;
 			howStore++;
@@ -2135,7 +2135,7 @@ string SelectAnyColony2(string _City1, string _City2)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City1) != colonies[n].islandLable && GetIslandByCityName(_City2) != colonies[n].islandLable) //не на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City1) != colonies[n].islandLable && GetIslandByCityName(_City2) != colonies[n].islandLable) //не на свой остров
 		{
 			storeArray[howStore] = n;
 			howStore++;
@@ -2236,7 +2236,7 @@ string WhereLSCCitizen(ref rCharacter)
 			case "FleuronTavern": sShip = "в каравелле 'Флерон', в таверне"; break;
 			case "FurieShipInside2": sShip = "в пинасе 'Фурия'"; break;
 			case "GloriaChurch": sShip = "в галеоне 'Глория', в церкви"; break;
-			case "PlutoStoreSmall": sShip = "во флете 'Плуто'"; break;
+			case "PlutoStoreSmall": sShip = "в трюме флейта 'Плуто'"; break;
 			case "ProtectorFisher": sShip = "в корвете 'Протектор'"; break;
 			case "SanAugustineResidence": sShip = "в варшипе 'Сан Августин', в резиденции адмирала"; break;
 			case "SanGabrielMechanic": sShip = "в барке 'Сан Габриель'"; break;

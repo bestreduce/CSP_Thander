@@ -145,7 +145,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.BuildingColony.Blocks) == 0 && sti(PChar.BuildingColony.Planks) == 0 && sti(PChar.BuildingColony.Mahogany) == 0 && sti(PChar.BuildingColony.Ebony) == 0 && sti(PChar.BuildingColony.Slaves) == 0 && sti(PChar.BuildingColony.Food) == 0)
 			{
 				dialog.text = "С радостью сообщаю вам, "+ GetSexPhrase("герр капитан","фройлен") +", что все необходимые товары доставлены. Мы начинаем строительство! По моим подсчётам строительство будет идти чуть более месяца.";
-				link.l1 = "Это не может ни радовать! Буду с нетерпением ждать окончания строительства.";
+				link.l1 = "Это не может не радовать! Буду с нетерпением ждать окончания строительства.";
 				link.l1.go = "exit";
 				AddDialogExitQuest("ColonyBuilding_1");
 				NextDiag.TempNode = "ColonyBuilding_6";

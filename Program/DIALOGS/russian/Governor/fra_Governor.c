@@ -6,7 +6,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
-			link.l1 = RandPhraseSimple("Я передумал...", "Сейчас мне не о чем говорить");
+			link.l1 = RandPhraseSimple("Я передумал...", "Сейчас мне не о чем говорить.");
 		    link.l1.go = "exit";
 
             //******************** голландская линейка ***************************
@@ -1284,7 +1284,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 		case "Step_11_6":
             dialog.text = "Ещё вопросы?";
-			link.l1 = "Я хотел"+ GetSexPhrase("","а") +" бы обсудить вопрос о моем участии в разработке жемчужного промысла, месье...";
+			link.l1 = "Я хотел"+ GetSexPhrase("","а") +" бы обсудить вопрос о моём участии в разработке жемчужного промысла, месье...";
             link.l1.go = "Step_11_7";
         break;
 		case "Step_11_7":

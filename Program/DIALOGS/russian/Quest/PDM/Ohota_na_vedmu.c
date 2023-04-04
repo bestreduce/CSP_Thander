@@ -394,7 +394,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("AntonioDeSouza");
 			ChangeCharacterAddressGroup(sld, "Santiago_town", "none", "");
 
-			sld = GetCharacter(NPC_GenerateCharacter("PDM_ONV_Inkvizitor", "priest", "man", "man", 10, SPAIN, -1, false));
+			sld = GetCharacter(NPC_GenerateCharacter("PDM_ONV_Inkvizitor", "priest", "man", "man1", 10, SPAIN, -1, false));
 			LAi_SetHuberType(sld);
 			LAi_SetImmortal(sld, true);
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");

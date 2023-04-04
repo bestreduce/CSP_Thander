@@ -1020,12 +1020,11 @@ int LocationInitPearl(int n)
 	locations[n].image = "loading\jonny_load\inside\Hut1_KNS.tga";
 	locations[n].MustSetReloadBack = true;
 	//Town sack
-	locations[n].townsack = "LaVega";
+	locations[n].townsack = "Pearl_town_2";
 	locations[n].lockWeather = "Inside";
 	locations[n].islandId = "Hispaniola";
 	//Sound
 	locations[n].type = "house";
-	locations[n].fastreload = "LaVega";
 	//Models
 	//Always
 	locations[n].filespath.models = "locations\inside\Hut1_KNS";

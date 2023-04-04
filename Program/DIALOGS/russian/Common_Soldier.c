@@ -84,7 +84,7 @@ void ProcessDialogEvent()
 						link.l1.go = "LicenceOk";
 						if (findsubstr(pchar.location.from_sea, "_town" , 0) != -1) //если причалил в городе
 						{
-							link.l2 = "Ты что, не видишь, как на моем корабле развевается флаг " + NationNameGenitive(sti(pchar.nation)) + "?!";
+							link.l2 = "Ты что, не видишь, как на моём корабле развевается флаг " + NationNameGenitive(sti(pchar.nation)) + "?!";
 						}
 						else //если причалил не в городе
 						{

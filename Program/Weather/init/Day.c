@@ -185,7 +185,7 @@ int Whr_InitDay(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.7;	//сдвиг по нормали. х.з. что это надо поюзать. значение от 0.0 до 1.0
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 1.5;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 17.0;
 
 	n++;
@@ -370,7 +370,7 @@ int Whr_InitDay(int n)
 	Weathers[n].Sea2.FoamTexDisturb = 0.7;
 
 	Weathers[n].Wind.Angle = 2.0;
-	Weathers[n].Wind.Speed.Min = 1.5;
+	Weathers[n].Wind.Speed.Min = 4.0;
 	Weathers[n].Wind.Speed.Max = 18.0;
 
 	n++;

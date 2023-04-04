@@ -182,7 +182,7 @@ void ProcessVersionCheck() // boal 271004
 			rLoc = LocFromID("FortOrange_church");
 			rLoc.reload.l1.emerge = "reload17";
 
-			rLoc = LocFromID("Shore35");//фикс локаторов перехода ФортОранжа для квестов без НИ
+			rLoc = LocFromID("FortOrange_port");//фикс локаторов перехода ФортОранжа для квестов без НИ
 			rLoc.reload.l1.name = "gate_back";
 			rLoc = LocFromID("FortOrange_ExitTown");
 			rLoc.reload.l2.name = "reload3";
@@ -728,11 +728,10 @@ void ProcessVersionCheck() // boal 271004
 			locations[n].id.label = "House";
 			locations[n].image = "loading\jonny_load\inside\Hut1_KNS.tga";
 			locations[n].MustSetReloadBack = true;
-			locations[n].townsack = "LaVega";
+			locations[n].townsack = "Pearl_town_2";
 			locations[n].lockWeather = "Inside";
 			locations[n].islandId = "Hispaniola";
 			locations[n].type = "house";
-			locations[n].fastreload = "LaVega";
 			locations[n].filespath.models = "locations\inside\Hut1_KNS";
 			locations[n].models.always.locators = "Hut1_locators";
 			locations[n].models.always.tavern = "Hut1";

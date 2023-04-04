@@ -70,7 +70,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "BS_NU_9":
-            dialog.text = "Обломки 'Рейнджера' выловили рыбаки у мыса Негрил. Про самого Чарльза я ничего не слышала.";
+            dialog.text = "Обломки 'Рейнджера' выловили рыбаки рядом с Форт Оранжем. Про самого Чарльза я ничего не слышала.";
             link.l1 = "Хоть что-то. Нужно будет проверить. В путь.";
 			AddQuestRecord("BSUrka", "1");
 			SetQuestHeader("BSUrka");
@@ -78,7 +78,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "BS_NU_9_exit";
 			PChar.quest.BSUrka_Negril.win_condition.l1 = "location";
-			PChar.quest.BSUrka_Negril.win_condition.l1.location = "Shore35";
+			PChar.quest.BSUrka_Negril.win_condition.l1.location = "FortOrange_port";
 			PChar.quest.BSUrka_Negril.function = "BSUrka_Negril";
 		break;
 
@@ -90,7 +90,7 @@ void ProcessDialogEvent()
 		break;
 		//Запись в СЖ: «Таинственные английские военные, пропавший Вейн и новый компаньон в нашем дельце на сто пятьдесят миллионов. Нужно проверить информацию о разбившемся 'Рейнджере' и выдвигаться на Бермуды. Как бы не упустить денежный галеон».
 
-		//Пиздуем на Негрил, в бухте запись в СЖ: «Сломанные мачты, куски обшивки, рваный такелаж и прочий мусор. Нужно расспросить местных о случившемся»
+		//Пиздуем на Форт Оранж, в бухте запись в СЖ: «Сломанные мачты, куски обшивки, рваный такелаж и прочий мусор. Нужно расспросить местных о случившемся»
 
 		//В форт Оранж в таверне у бармена ничего. Выпиваем с алкашом – бинго
 

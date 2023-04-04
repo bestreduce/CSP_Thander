@@ -1448,7 +1448,7 @@ void Ship_CheckSituation()
 			        }
 			        else
 			        {
-						// если плывет мимо и нет rCharacter.Ship.LastBallCharacter (никто по нему не стрелял)
+						// если плывёт мимо и нет rCharacter.Ship.LastBallCharacter (никто по нему не стрелял)
                         if (!CheckAttribute(rCharacter, "ShipTaskLock"))
 						{
 				            if (!CheckAttribute(rCharacter, "SeaAI.Task.Target") || sti(rCharacter.SeaAI.Task.Target) == -1)

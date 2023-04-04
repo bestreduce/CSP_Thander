@@ -53,6 +53,7 @@ SantoDomingo_town	{Санто-Доминго}
 LaVega_town			{Ла Вега}
 PortPax_town		{Порт-о-Принс}
 PortRoyal_town		{Порт Рояль}
+FortOrange_town		{Форт Оранж}
 Maracaibo_town		{Маракайбо}
 FortFrance_town		{Форт де Франс}
 LeFransua_town		{Ле Франсуа}
@@ -65,7 +66,6 @@ SantaCatalina_town	{Санта-Каталина}
 Tortuga_town		{Тортуга}
 PortSpein_town		{Порт-оф-Спейн}
 Tenotchitlan_town	{Теночтитлан}
-FortOrange_town		{форт Оранж}
 
 Estate				{Имение Оглторпа, Англия}
 DesMoines			{Дес-Мойнес}
@@ -106,7 +106,6 @@ Shore31		{мыс Недоступный}
 Shore32		{мыс Исабела}
 Shore33		{бухта Самана}
 Shore34		{бухта Гонаив}
-Shore35		{мыс Негрил}
 Shore36		{бухта Портленд}
 Shore37		{бухта Гуахира}
 Shore38		{пляж Ламантен}
@@ -189,6 +188,8 @@ PortRoyal Fort		{форт Порт Рояля}
 PortRoyal Port		{порт Порт Рояля}
 FortOrange			{Форт Оранж}
 FortOrange Town		{Форт Оранж}
+FortOrange Fort		{форт Форт Оранжа}
+FortOrange Port		{порт Форт Оранжа}
 Villemstad			{Виллемстад}
 Villemstad Town		{Виллемстад}
 Villemstad Fort		{форт Виллемстада}
