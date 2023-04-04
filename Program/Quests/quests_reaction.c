@@ -13008,6 +13008,13 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetLoginTime(sld, 21.99, 6.0);
 			ChangeCharacterAddressGroup(sld, "Guadeloupe_deadlock", "monsters", "monster6");
 		break;
+		//Мини квест. Помощь Элен --->
+		case "Raznoe_Pomosh_Elen":
+			SetLocationCapturedState("PuertoPrincipe_town", true);
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+		break;
+		// <--- Помощь Элен
 	}
 }
 
