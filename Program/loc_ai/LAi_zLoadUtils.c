@@ -576,7 +576,7 @@ void CreatPlantation(aref loc)
 		}
 		chr = GetCharacter(NPC_GenerateCharacter("GenChar_", sType, "man", "mushketer", sti(pchar.rank), iNation, 2, false));
 		chr.id = "GenChar_" + chr.index;
-		chr.reputation = (1 + rand(44) + rand(44));// репа всем горожанам
+		chr.reputation = 10 + rand(80);// репа всем горожанам
 		chr.City = Colonies[iColony].id;
         chr.CityType = "soldier";
 		chr.greeting = "soldier_common";

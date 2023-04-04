@@ -5,7 +5,7 @@
 #define MAX_PGG_MEET_REP 		8
 
 string PGG_Stories[MAX_PGG_STORIES] = {
-	"... только я и дьявол знаем это место, и последний, кто останется в живых, заберёт себе все!..\n",
+	"... только я и дьявол знаем это место, и последний, кто останется в живых, заберёт себе всё!..\n",
 	"... а Мейнард ответил: 'Я не жду от тебя пощады, и ты тоже не дождёшься её от меня'.\n",
 	"... Кошки впились в борт нам! По местам стоять! И морскому дьяволу тут не устоять!..\n",
 	"... В правой руке сабля! В левой - пистолет! Вместе мы отправим сотни на тот свет!..\n",
@@ -237,7 +237,7 @@ void ProcessDialogEvent()
 
 		if (GetQuestPastDayParam("PChar.questTemp.DuelCooldown") >= 3 || bBettaTestMode)
 		{
-			if (sti(PChar.reputation < 15) && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 51 && !isSetSail)
+			if (sti(PChar.reputation < 20) && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 51 && !isSetSail)
 			{
 				link.l8 = PCharRepPhrase(
 					"Эта таверна слишком тесна для нас двоих. Я хочу, что бы ты исчез" + NPCharSexPhrase(NPChar, "", "ла") + ".",
@@ -990,7 +990,7 @@ void ProcessDialogEvent()
 
 	case "Quest_1_Ship_Detail":
 		sTmp = "Караван, принадлежащий " + NationNameGenitive(sti(PChar.GenQuest.PGG_Quest.Nation)) + ", перевозящий ";
-		PChar.GenQuest.PGG_Quest.Goods.Text = GetStrSmallRegister(XI_ConvertString(Goods[sti(PChar.GenQuest.PGG_Quest.Goods)].Name + "Gen"));
+		PChar.GenQuest.PGG_Quest.Goods.Text = GetStrSmallRegister(XI_ConvertString(Goods[sti(PChar.GenQuest.PGG_Quest.Goods)].Name + "Acc"));
 		sTmp += PChar.GenQuest.PGG_Quest.Goods.Text;
 
 		if (PChar.GenQuest.PGG_Quest.Island.Town == "" || PChar.GenQuest.PGG_Quest.Island.Town == "Caiman" ||
@@ -1009,7 +1009,7 @@ void ProcessDialogEvent()
 		}
 		else
 		{
-			sTmp += ", попал в шторм недалеко от " + sLoc + " и пошёл на дно. Но они успели спасти часть груза и высадились в бухте " + 
+			sTmp += ", попал в шторм недалеко от " + sLoc + " и пошёл на дно. Но они успели спасти часть груза и высадились в " + 
 				GetConvertStr(PChar.GenQuest.PGG_Quest.Island.Shore, "LocLables.txt") + " Сейчас они ждут прихода своей эскадры.";
 		}
 
@@ -1257,7 +1257,7 @@ void ProcessDialogEvent()
 
 		Dialog.Text = PCharRepPhrase(
 			RandPhraseSimple(
-				"Гром и молния! Мы опоздали! А все из-за вас, ленивые олухи! Нечего нам с тобой теперь делить, " + GetFullName(PChar) + ". Поднять стаксель! Травить марс помалу! ",
+				"Гром и молния! Мы опоздали! А всё из-за вас, ленивые олухи! Нечего нам с тобой теперь делить, " + GetFullName(PChar) + ". Поднять стаксель! Травить марс помалу! ",
 				"Так, " + GetFullName(PChar) + ", что-то зря я с тобой связал" + NPCharSexPhrase(NPChar, "ся", "ась") + ", добыча утекла сквозь пальцы как вода. Прощай!"
 			),
 			RandPhraseSimple(
@@ -1319,12 +1319,12 @@ void ProcessDialogEvent()
 		PChar.GenQuest.PGG_Quest.FailedPaySum = sti(PChar.GenQuest.PGG_Quest.Days)*10000;
 		Dialog.Text = PCharRepPhrase(
 			RandPhraseSimple(
-				"Кровожадн"+ GetSexPhrase("ый ублюдок","ая дрянь") +"! Все ушло на дно к морскому дьяволу! " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров на бочку, и я видеть тебя больше не желаю!",
+				"Кровожадн"+ GetSexPhrase("ый ублюдок","ая дрянь") +"! Всё ушло на дно к морскому дьяволу! " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров на бочку, и я видеть тебя больше не желаю!",
 				"Ты себя адмиралом Нельсоном вообразил"+ GetSexPhrase("","а") +"? Потопил"+ GetSexPhrase("","а") +" всю добычу, "+ GetSexPhrase("идиот","дура") +"! Отсыпь мне " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров и проваливай!"
 			),
 			RandPhraseSimple(
-				"Вы здесь войну решили устроить! Это совершенно никуда не годится! Полагаю, мы все забудем, если вы уплатите нам " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров ",
-				"Ваши методы недопустимы в такого рода делах! Вы провалили все дело! Немедленно уплатите нашу долю в размере " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров и отправляйтесь на все четыре стороны! "
+				"Вы здесь войну решили устроить! Это совершенно никуда не годится! Полагаю, мы всё забудем, если вы уплатите нам " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров ",
+				"Ваши методы недопустимы в такого рода делах! Вы провалили всё дело! Немедленно уплатите нашу долю в размере " + FindRussianMoneyString(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)) + " пиастров и отправляйтесь на все четыре стороны! "
 			)
 		);
 		link.l1 = PCharRepPhrase(
@@ -1375,7 +1375,7 @@ void ProcessDialogEvent()
 		}
 		else
 		{
-			if (makeint(NPChar.reputation) < 41 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 70 && drand(200) > sti(GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)))
+			if (makeint(NPChar.reputation) < 40 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 70 && drand(200) > sti(GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)))
 			{
 				greedyPGG = 2;
 				greed = " И не советую тебе рыпаться.";
@@ -1390,7 +1390,7 @@ void ProcessDialogEvent()
 		link.l1 = PCharRepPhrase(
 			RandPhraseSimple(
 				"Справедливо! Уже грузят шлюпки!", 
-				"Да, все точно... Уговор дороже денег."
+				"Да, всё точно... Уговор дороже денег."
 			),
 			RandPhraseSimple(
 				"Ваши расчёты правильны. Я соглас"+ GetSexPhrase("ен","на") +".", 
@@ -1445,7 +1445,7 @@ void ProcessDialogEvent()
 		else	NPChar.PGG_Hunter = true;
 		DeleteAttribute(NPChar, "Greed");
 
-		bOk = makeint(NPChar.reputation) < 41 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 75;
+		bOk = makeint(NPChar.reputation) < 40 && PGG_ChangeRelation2MainCharacter(NPChar, 0) < 75;
 		if (bOk || CheckAttribute(PChar, "GenQuest.PGG_Quest.Ok"))
 		{
 			PChar.GenQuest.PGG_Quest.Stage = 4;
@@ -1609,7 +1609,7 @@ void ProcessDialogEvent()
 		link.l1 = PCharRepPhrase(
 			RandPhraseSimple(
 				"Справедливо, разрази меня гром!", 
-				"Да, все точно, разрази меня гром!"
+				"Да, всё точно, разрази меня гром!"
 			),
 			RandPhraseSimple(
 				"Ваши расчёты правильны. Я соглас"+ GetSexPhrase("ен","на") +".", 

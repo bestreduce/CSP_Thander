@@ -250,7 +250,7 @@ void ProcessDialogEvent()
 
 		case "Reason_To_Fast_15":
 			TakeNItems(pchar, pchar.questTemp.ReasonToFast.item, -30);
-			dialog.text = "Все согласно уговору. Вот, держи. Эту карту отняли у того повешенного пирата, о котором спрашивал "  + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_NOM) + ".";
+			dialog.text = "Всё согласно уговору. Вот, держи. Эту карту отняли у того повешенного пирата, о котором спрашивал "  + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_NOM) + ".";
 			link.l1 = "Дело сделано!";
 			link.l1.go = "Reason_To_Fast_15_1";
 		break;
@@ -290,7 +290,7 @@ void ProcessDialogEvent()
 					iShipType = ReasonToFast_GetVictimShipType();
 					iShipGoods = ReasonToFast_GetVictimShipGoods();
 					dialog.text = "Отлично! Теперь о деле. Мы перехватили тот " + GetStrSmallRegister(pchar.questTemp.ReasonToFast.ShipTypeName) +" '" + sTemp1 + "' с грузом " + GetGoodsNameAlt(iShipGoods) + ", весь экипаж уже в казематах, а 'товар' пока на борту. Транспортная команда набрана из портовых забулдыг, и до завтра в порт попадёт вряд ли. Поступай с ними, как сочтёшь нужным.";
-					link.l1 = "Хорошо. Все так и передам " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_DAT) + ".";
+					link.l1 = "Хорошо. Всё так и передам " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_DAT) + ".";
 					link.l1.go = "Reason_To_Fast_GoodBye_0";
 					pchar.questTemp.ReasonToFast.chain = "A0";
 					pchar.questTemp.ReasonToFast.ShipName = sTemp1;
@@ -336,7 +336,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.ReasonToFast.password = sTemp2;
 					sTemp2 = generateRandomNameToShip(sti(pchar.questTemp.ReasonToFast.GuardNation));
 					dialog.text = "Отлично! " + sTemp1 + " губернатор хранит у себя в будуаре. Курьерское судно для транспортировки будет со дня на день, но ты успеешь. Лакей 'наш' человек. Пароль: '"+ pchar.questTemp.ReasonToFast.password +"', отзыв: '"+ sTemp2 +"'.";
-					link.l1 = "Хорошо. Все так и передам " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_DAT) + ".";
+					link.l1 = "Хорошо. Всё так и передам " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_DAT) + ".";
 					link.l1.go = "Reason_To_Fast_GoodBye_0";
 					pchar.questTemp.ReasonToFast.chain = "A1";
 					AddQuestRecord("ReasonToFast", "12");

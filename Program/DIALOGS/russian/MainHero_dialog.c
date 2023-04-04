@@ -1255,7 +1255,7 @@ void ProcessDialogEvent()
 			GiveItem2Character(chr, "blade28");// сабля Моргана
 			chr.equip.blade = "blade28";
 			chr.rank 	= 100;
-			chr.reputation = "0";
+			chr.reputation = 0;
 			SetSelfSkill(chr, 100, 100, 100, 100, 100);
 			SetShipSkill(chr, 100, 100, 100, 100, 100, 100, 100, 100, 100);
 			LAi_SetImmortal(chr, true);

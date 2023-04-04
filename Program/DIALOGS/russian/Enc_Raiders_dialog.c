@@ -211,7 +211,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Node_3":
-			bOk = makeint(pchar.reputation) < 11 || makeint(pchar.reputation) > 90;
+			bOk = makeint(pchar.reputation) < 10 || makeint(pchar.reputation) > 90;
 			if(bOk || GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) == 100 || CheckCharacterPerk(pchar, "Trustworthy") || CheckOfficersPerk(pchar, "SeaDogProfessional"))
 			{
 				dialog.text = RandPhraseSimple("Вот чёрт! Ладно, бывай. И не вздумай шум поднимать.",
@@ -221,7 +221,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				bOk1 = makeint(pchar.reputation) < 51 && makeint(pchar.reputation) > 41;
+				bOk1 = makeint(pchar.reputation) < 61 && makeint(pchar.reputation) > 39;
 				if(!bOk || GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 35)
 				{
 					dialog.text = RandPhraseSimple("А мы тебя тихонько прирежем, даже пикнуть не успеешь.",
@@ -245,7 +245,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "CheckSkills":
-			bool z_ok = (GetCharacterSkillToOld(Pchar, "Fencing") >= 7) && (makeint(Pchar.Rank) >= 8) && (Makeint(PChar.reputation) <= 30);
+			bool z_ok = (GetCharacterSkillToOld(Pchar, "Fencing") >= 7) && (makeint(Pchar.Rank) >= 8) && (Makeint(PChar.reputation) < 30);
 			if (z_ok || CheckOfficersPerk(pchar, "SeaDogProfessional"))
 			{
 				Diag.TempNode = "GetLost";

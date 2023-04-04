@@ -46,7 +46,7 @@ void ProcessDialogEvent()
 					link.l1.go = "exit_hl";
 					link.l2 = "Да, мне это интересно. А что делать нужно?";
 					link.l2.go = "PiratesMan1_1";
-					if (pchar.questTemp.AnjelikaTichPrologue8_Gudli == "ATP8")	//Sinistra Пролог Анжелика тич
+					if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue8_Gudli"))	//Sinistra Пролог Анжелика тич
 					{
 						dialog.text = "Здорова деваха... Ты владелица корабля, того что бросил якорь в нашей уютной бухте?";
 						link.l1 = "Я его капитан.";
@@ -170,7 +170,7 @@ void ProcessDialogEvent()
 		break;
 		case "Tavern_5":
 			dialog.text = "Вот и отлично! Ну, счастливо тебе, "+ GetSexPhrase("приятель","подруга") +". Будь здоров"+ GetSexPhrase("","а") +"!";
-			if (pchar.questTemp.AnjelikaTichPrologue8_Gudli == "ATP8")	//Sinistra Пролог Анжелика тич
+			if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue8_Gudli"))	//Sinistra Пролог Анжелика тич
 			{
 				dialog.text = "Вот и отлично! Ну, счастливо тебе, дочурка Чёрной Бороды. Будь здорова!";
 				DeleteAttribute(pchar, "questTemp.AnjelikaTichPrologue8_Gudli");

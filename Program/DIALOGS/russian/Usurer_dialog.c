@@ -1314,7 +1314,6 @@ void ProcessDialogEvent()
 			Link.l2.go = "Loan";
 			Link.l3 = "Думаю, мне лучше не влезать в долги. До свидания.";
 			Link.l3.go = "ExitDelLoan1";
-			//Pchar.Quest.Loans.(NPC_Area).Interest = 22 - makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10);
 			Pchar.Quest.Loans.(NPC_Area).Interest = PcharReputation();
 		break;
 
@@ -1345,7 +1344,6 @@ void ProcessDialogEvent()
 		break;
 
 		case "Interest_1":
-			//Pchar.Quest.Loans.(NPC_Area).Interest = 16 - makeint(Pchar.skill.commerce);
 			Dialog.snd = "voice\USDI\USDI020";
 			dialog.text = Pchar.Quest.Loans.(NPC_Area).Interest + " процентов в месяц. Основываясь на том, что я о вас знаю, я не могу предложить вам сейчас лучших условий.";
 			Link.l1 = "Меня это вполне устраивает. Осталось обговорить срок.";
@@ -1355,7 +1353,6 @@ void ProcessDialogEvent()
 		break;
 
 		case "Interest_2":
-			//Pchar.Quest.Loans.(NPC_Area).Interest = 16 - makeint(Pchar.skill.commerce);
 			Dialog.snd = "voice\USDI\USDI020";
 			dialog.text = Pchar.Quest.Loans.(NPC_Area).Interest + " процентов в месяц. Основываясь на том, что я о вас знаю, я не могу предложить вам сейчас лучших условий.";
 			Link.l1 = "Меня это вполне устраивает. Осталось обговорить срок.";
@@ -1365,7 +1362,6 @@ void ProcessDialogEvent()
 		break;
 
 		case "Interest_3":
-			//Pchar.Quest.Loans.(NPC_Area).Interest = 16 - makeint(Pchar.skill.commerce);
 			Dialog.snd = "voice\USDI\USDI020";
 			dialog.text = Pchar.Quest.Loans.(NPC_Area).Interest + " процентов в месяц. Основываясь на том, что я о вас знаю, я не могу предложить вам сейчас лучших условий.";
 			Link.l1 = "Меня это вполне устраивает. Осталось обговорить срок.";
@@ -3216,7 +3212,8 @@ void SlavetraderGalleonInWorld()
 
 int PcharReputation()
 {
-	return makeint((100-makeint(pchar.reputation))*0.5)+1;
+	//Pchar.Quest.Loans.(NPC_Area).Interest = 22 - makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10);
+	return makeint(42 - sti(pchar.reputation)*0.33);
 }
 
 void CheckForAchievement()

@@ -608,7 +608,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <50 && iRep >=40)
+			if (iRep <=60 && iRep >=40)
 			{
 				if (iDonation >= 5000)
 				{
@@ -617,7 +617,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <60 && iRep >=50)
+			if (iRep <=70 && iRep >60)
 			{
 				if (iDonation >= 6000)
 				{
@@ -626,7 +626,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <70 && iRep >=60)
+			if (iRep <=80 && iRep >=70)
 			{
 				if (iDonation >= 7000)
 				{
@@ -635,7 +635,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep <80 && iRep >=70)
+			if (iRep <=90 && iRep >80)
 			{
 				if (iDonation >= 8000)
 				{
@@ -644,7 +644,7 @@ void QuestComplete(string sQuestName, string qname)
 					pchar.questTemp.donate = 0;
 				}
 			}
-			if (iRep < REPUTATION_MAX && iRep >=80)
+			if (iRep < REPUTATION_MAX && iRep >90)
 			{
 				if (iDonation >= 10000)
 				{
@@ -1578,7 +1578,7 @@ void QuestComplete(string sQuestName, string qname)
 			iTemp = sti(colonies[FindColony(pchar.quest.destination)].nation);
             sld = GetCharacter(NPC_GenerateCharacter("QuestTrader", "", "man", "man", makeint((sti(pchar.rank)+60)/4), iTemp, -1, true));
 			SetCaptanModelByEncType(sld, "trade");
-			sld.reputation = (1 + rand(44) + rand(44));
+			sld.reputation = 10 + rand(80);
 			sld.Dialog.Filename = "convoy_traider.c";
 			sld.dialog.currentnode = "prepare_convoy_quest";
 			sld.greeting = "Gr_ConvoyTrader";
@@ -1698,7 +1698,7 @@ void QuestComplete(string sQuestName, string qname)
             Rank = NPC_GenerateCharacter("QuestPassanger", "", "man", "man", makeint((sti(pchar.rank)+60)/4), iTemp, -1, true);
 			sld = &characters[Rank];
 			sld.id = sld.id + "_" + sld.index; //меняем ID на оригинальный
-			sld.reputation = (1 + rand(44) + rand(44));
+			sld.reputation = (10 + rand(80));
 			SetCaptanModelByEncType(sld, "trade");
 			SetRandomNameToCharacter(sld);
 			sld.Dialog.Filename = "convoy_passenger.c";
@@ -6920,7 +6920,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.Dialog.Filename = "Quest\Isabella\Atilla.c";
 			sld.greeting = "Gr_Smuggler Agent";
 			sld.rank 	= 25;
-			sld.reputation = "30";
+			sld.reputation = 25;
 			sld.talker = 5; //начать диалог
 			sld.TiedItems.itm1.model = "HandsItems\meet";
 			sld.TiedItems.itm1.locator = "Saber_hand";
@@ -9839,7 +9839,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "PDM_Callow_sadis_na_stul":
 			ChangeCharacterAddressGroup(pchar, "LaVega_tavern", "sit", "sit_front3");
 			LAi_SetSitType(pchar);
-			LAi_SetSitType(npchar);
+			//LAi_SetSitType(npchar);
 			sld = CharacterFromID("James_Callow")
 			LAi_SetActorType(sld);
 			LAi_ActorSetSitMode(sld);

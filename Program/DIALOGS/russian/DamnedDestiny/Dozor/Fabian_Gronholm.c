@@ -10,7 +10,7 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	string sName = GetNameLugger(PChar, "f");
+	string sName = GetFullName(PChar);
 
 	switch(Dialog.CurrentNode)
 	{
@@ -76,7 +76,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "7":
-			dialog.text = "А вот это ты обожди, не путай расторопность с суетливостью. Расторопность - успех. Суетливость - провал. Запомнил?";
+			dialog.text = "А вот это ты обожди, не путай расторопность с суетливостью. Расторопность - успех. Суетливость - провал. Запомнил"+ GetSexPhrase("","а") +"?";
 			link.l1 = "Запомнил"+ GetSexPhrase("","а") +". Так что там с приключением-то?";
 			link.l1.go = "8";
 		break;

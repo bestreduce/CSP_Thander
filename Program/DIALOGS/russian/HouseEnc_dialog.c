@@ -132,7 +132,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit_setOwner";
 		break;
 		case "Man_FackYou":
-			if(!CheckCharacterPerk(pchar, "Grunt") && pchar.reputation > 30)
+			if(!CheckCharacterPerk(pchar, "Grunt") && pchar.reputation >= 30)
 			{
 				dialog.text = LinkRandPhrase("Да ты "+ GetSexPhrase("вор, милейший! Стража, держи его","воровка! Стража, держи её") +"!!!", "Вот это да! Чуть я загляделся, а ты сразу в сундук с головой! Держи "+ GetSexPhrase("вора","воровку") +"!!!", "Стража! Грабят!!! Держи "+ GetSexPhrase("вора","воровку") +"!!!");
 				link.l1 = "А-ать, дьявол!!!";
@@ -142,7 +142,7 @@ void ProcessDialogEvent()
 					DoQuestFunctionDelay("LooserGenerator_FailedByEnc", 0.1);
 				}
 			}
-			if(CheckCharacterPerk(pchar, "Grunt") || pchar.reputation <= 30)
+			if(CheckCharacterPerk(pchar, "Grunt") || pchar.reputation < 30)
 			{
 				dialog.text = LinkRandPhrase("Да ты "+ GetSexPhrase("вор, милейший! Стража, держи его","воровка! Стража, держи её") +"!!!", "Вот это да! Чуть я загляделся, а ты сразу в сундук с головой! Держи "+ GetSexPhrase("вора","воровку") +"!!!", "Стража! Грабят!!! Держи "+ GetSexPhrase("вора","воровку") +"!!!");
 				link.l1 = "А ну молчать! Пасть порву, моргала выколю! Всю жизнь... на лекарства работать будешь!";
@@ -211,7 +211,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit_setOwner";
 		break;
 		case "Woman_FackYou":
-			if(!CheckCharacterPerk(pchar, "Grunt") && pchar.reputation > 30)
+			if(!CheckCharacterPerk(pchar, "Grunt") && pchar.reputation >= 30)
 			{
 				dialog.text = "Ах, вот, значит, как?! Я вас пустила в дом как гост"+ GetSexPhrase("я","ью") +", а вы по сундуками шарить вздумали?! Стража-а-а!!!";
 				link.l1 = "Заткнись, дура...";
@@ -219,7 +219,7 @@ void ProcessDialogEvent()
 				LAi_group_Attack(NPChar, Pchar);
 				if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			}
-			if(CheckCharacterPerk(pchar, "Grunt") || pchar.reputation <= 30)
+			if(CheckCharacterPerk(pchar, "Grunt") || pchar.reputation < 30)
 			{
 				dialog.text = "Ах, вот, значит, как?! Я вас пустила в дом как гост"+ GetSexPhrase("я","ью") +", а вы по сундуками шарить вздумали?! Стража-а-а!!!";
 				link.l1 = "А ну молчать! Пасть порву, моргала выколю! Всю жизнь... на лекарства работать будешь!";

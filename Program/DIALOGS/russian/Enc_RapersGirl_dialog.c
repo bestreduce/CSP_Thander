@@ -421,7 +421,7 @@ void ProcessDialogEvent()
 
 		case "Node_132_10":
 			EncGirl_GenQuest_GetChestPlaceName();
-			dialog.text = "Клад спрятан в пещере на " + XI_ConvertString(pchar.GenQuest.EncGirl.islandId + "Acc") + ", нам нужно высадиться у " + XI_ConvertString(pchar.GenQuest.EncGirl.shoreId + "Gen") + ", а место покажу сама... Только, чур, делить пополам будем!";
+			dialog.text = "Клад спрятан в пещере на " + XI_ConvertString(pchar.GenQuest.EncGirl.islandId + "Voc") + ", нам нужно высадиться у " + XI_ConvertString(pchar.GenQuest.EncGirl.shoreId + "Gen") + ", а место покажу сама... Только, чур, делить пополам будем!";
 			link.l1 = "Хорошо-хорошо, не обижу. Иди за мной и не отставай.";
 			link.l1.go = "Node_132_11";
 		break;
@@ -1276,7 +1276,7 @@ void ProcessDialogEvent()
 
 		case "ThanksForHelp_1":
 			Diag.TempNode = "ThanksAgain";
-			if(makeint(Pchar.reputation) >= 80)
+			if(makeint(Pchar.reputation) > 80)
 			{
 				dialog.text = "У меня есть немного денег. Возьмите их в знак моей благодарности!";
 				Link.l1 = "Спасибо. Будьте осторожнее в следующий раз.";

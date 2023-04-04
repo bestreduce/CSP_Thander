@@ -9,7 +9,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить"), "Хм, что-то с памятью моей стало...",
                       "Да уж, действительно в третий раз...", "Да нет, какие вопросы...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
-			if (pchar.questTemp.PDM_PK_UznatLichnost == "UznatLichnost")	// Квест "Потерянное кольцо"
+			if (checkattribute(pchar, "questTemp.PDM_PK_UznatLichnost"))	// Квест "Потерянное кольцо"
             {
                 link.l1 = "Расскажите мне о странной женщине, которая потеряла своё кольцо. Вы её знаете?";
                 link.l1.go = "PDM_PK_UznatLichnost";

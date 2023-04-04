@@ -1166,7 +1166,7 @@ void ShipChange()
 		}
 		if (!GetRemovable(xi_refCharacter))
 		{
-			SetFormatedText("REMOVE_WINDOW_TEXT", "Обмен с кораблем этого компаньона невозможен.");
+			SetFormatedText("REMOVE_WINDOW_TEXT", "Обмен с кораблём этого компаньона невозможен.");
 			SetSelectable("REMOVE_ACCEPT_OFFICER", false);
 		}
 		if (sti(pchar.ship.type) == SHIP_NOTUSED)

@@ -205,6 +205,8 @@ void ProcessDialogEvent()
 			pchar.questTemp.PKM_SvtvA_Znakomstvo_s_Malta2 = true;
 			pchar.questTemp.PKM_SvtvA_Dostavka_Malty = true;
 			SetCompanionIndex(pchar, -1, sti(NPChar.index));
+			SetShipRemovable(npchar, false);
+			SetCharacterRemovable(npchar, false);
 			AddQuestRecord("PKM_Animists", "18");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ся","ась"));
 		break;
@@ -305,7 +307,7 @@ void ProcessDialogEvent()
 		break;
         // карты -->
         case "Card_Game":
-            if (!CheckNPCQuestDate(npchar, "Card_date_Yet") || isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(3))
+            if (!CheckNPCQuestDate(npchar, "Card_date_Yet") || isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < 1+rand(2))
             {
                 SetNPCQuestDate(npchar, "Card_date_Yet");
                 dialog.text = "Я не буду играть в азартные игры с разными проходимцами!";
@@ -394,7 +396,7 @@ void ProcessDialogEvent()
 	    // карты <--
 	    //  Dice -->
         case "Dice_Game":
-            if (!CheckNPCQuestDate(npchar, "Dice_date_Yet") || isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(3))
+            if (!CheckNPCQuestDate(npchar, "Dice_date_Yet") || isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < 1+rand(2))
             {
                 SetNPCQuestDate(npchar, "Dice_date_Yet");
                 dialog.text = "Я не буду играть в азартные игры с разными проходимцами!";
@@ -456,7 +458,7 @@ void ProcessDialogEvent()
 		    }
 		    if (sti(npchar.Money) < 300)
 		    {
-                dialog.text = "Все! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
+                dialog.text = "Всё! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
                 link.l1 = "Жаль.";
 			    link.l1.go = "exit";
 			    break;

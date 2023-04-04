@@ -219,7 +219,7 @@ void DefeatGoldFleet(string temp)
 		Group_LockTask(sGroup);
 		for (int i = 0; i < 8; i++)
 		{
-			sld = GetCharacter(NPC_GenerateCharacter("Devs"+i, "pirate_"+sti(rand(25)+1), "man", "man", 55, PIRATE, 8, true));
+			sld = GetCharacter(NPC_GenerateCharacter("Devs"+i, "pirate_"+sti(rand(24)+1), "man", "man", 55, PIRATE, 8, true));
 
 			//Модель корабля на глобалке менять здесь
 			sld.mapEnc.worldMapShip = "pirates_manowar";

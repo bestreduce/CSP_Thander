@@ -24,7 +24,7 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Nevis.Shore.t0			= "shore43";
 	NullCharacter.TravelMap.Islands.Nevis.Shore.t1			= "Mayak5";
 	NullCharacter.TravelMap.Islands.Antigua.Shore.t0		= "shore1";
-//	NullCharacter.TravelMap.Islands.Antigua.Shore.t1		= "shore2";
+//NullCharacter.TravelMap.Islands.Antigua.Shore.t1		= "shore2";		//ПОЧЕМУ убран Залив Уиллоуби из генерации?
 	NullCharacter.TravelMap.Islands.Barbados.Shore.t0		= "Shore5";
 	NullCharacter.TravelMap.Islands.Barbados.Shore.t1		= "Mayak2";
 	NullCharacter.TravelMap.Islands.Curacao.Shore.t0		= "shore23";
@@ -35,7 +35,7 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Hispaniola1.Shore.t0		= "shore33";
 	NullCharacter.TravelMap.Islands.Hispaniola1.Shore.t1		= "Mayak8";
 	NullCharacter.TravelMap.Islands.Hispaniola2.Shore.t0		= "shore34";
-	//NullCharacter.TravelMap.Islands.Hispaniola2.Shore.t1		= "Mayak7";
+//NullCharacter.TravelMap.Islands.Hispaniola2.Shore.t1		= "Mayak7";	//ПОЧЕМУ убран маяк?
 	NullCharacter.TravelMap.Islands.Tortuga.Shore.t0		= "shore58";
 	NullCharacter.TravelMap.Islands.Tortuga.Shore.t1		= "Mayak6";
 
@@ -46,7 +46,7 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Terks.Shore.t0			= "shore56";
 	NullCharacter.TravelMap.Islands.Terks.Shore.t1			= "shore57";
 	NullCharacter.TravelMap.Islands.Bahames.Shore.t0		= "shore68";
-	NullCharacter.TravelMap.Islands.Bahames.Shore.t1		= "shore69";
+	//NullCharacter.TravelMap.Islands.Bahames.Shore.t1		= "shore69"; //тупиковая бухта - убираю, чтобы после кораблекрушения не выкидывало
 
 
 ///////////////// клады //////////////////////////////////////////

@@ -292,7 +292,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		//dialog.text = "Постой-ка, "+ GetSexPhrase("приятель","подруга") +"... Сдаётся, у тебя есть кое-что интересное. Нужно делиться с близкими найдеными сокровищами.";
 		dialog.text = RandPhraseSimple("Я так и подозревал" + npcharSexPhrase(npchar,"","а") + ", что этот жулик продал больше одной карты. Не зря я его убил" + npcharSexPhrase(npchar,"","а")+".","Постой-ка, "+ GetSexPhrase("приятель","подруга") +". Эта карта - моя. Не знаю, как именно она у тебя оказалась, но у меня её стащил по пьяни один жулик. Так что эти сокровища тебе не принадлежат. ");
 	    //if (PGG_ChangeRelation2MainCharacter(npchar, 0) < 41)
-		if (sti(npchar.reputation) < 41)
+		if (sti(npchar.reputation) < 40)
 		{
 			dialog.text = "Ты был"+GetSexPhrase("","а")+" настолько слеп"+GetSexPhrase("","а")+", что не замечал"+GetSexPhrase("","а")+" слежки вплоть до самого сокровища";
 			Link.l1 = "Ну что же, пришло время отделиться твоей голове от тела.";
@@ -379,7 +379,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 	break;
 	// карты -->
 	case "Card_Game":
-		if (isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(3))
+		if (isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < 1+rand(2))
 		{
 			dialog.text = "Кыш отсюда, я не в настроении.";
 			link.l1 = "Как хочешь.";
@@ -468,7 +468,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 	// карты <--
 	//  Dice -->
 	case "Dice_Game":
-		if (isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < rand(3))
+		if (isBadReputation(pchar, 30) || GetCharacterSkillToOld(pchar, SKILL_LEADERSHIP) < 1+rand(2))
 		{
 			dialog.text = "Брысь отсюда, я не в настроении.";
 			link.l1 = "Как вам будет угодно.";
@@ -520,7 +520,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		}
 		if (sti(npchar.Money) < 15000)
 		{
-			dialog.text = "Все! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
+			dialog.text = "Всё! Нужно завязывать с играми, а то запишут в растратчики и спишут на берег...";
 			link.l1 = "Жаль.";
 			link.l1.go = "exit";
 			break;

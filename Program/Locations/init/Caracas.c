@@ -543,7 +543,7 @@ int LocationInitCaracas(int n)
 	locations[n].islandId = "Mein";
 	//Models
 	//Always
-	locations[n].filespath.models = "locations\inside\PortOffice";
+	locations[n].filespath.models = "locations\inside\PortOffice1";
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";

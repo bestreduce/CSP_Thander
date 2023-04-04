@@ -345,17 +345,17 @@ void LAi_type_guardian_Attacked(aref chr, aref by)
 void LAi_type_guardian_CmdAttack(aref chr)
 {
 	chr.chr_ai.type.wait = "attack";
-	PostEvent("Event_type_guardian_Attacked", rand(5)*100, "i", chr);
-	if (rand(100) > 80 && !LAi_IsDead(chr) && !LAi_IsDead(pchar))	LAi_CharacterPlaySound(chr, "warrior");
+	PostEvent("Event_type_guardian_Attacked", 50*(1+rand(9)), "i", chr);
+	if (rand(100) > 80 && !LAi_IsDead(chr) && !LAi_IsDead(pchar)) LAi_CharacterPlaySound(chr, "warrior");
 }
 
 #event_handler("Event_type_guardian_Attacked", "LAi_type_guardian_CmdAttack_Event");
 void LAi_type_guardian_CmdAttack_Event()
 {
 	aref chr = GetEventData();
-	if(!TestRef(chr)) return;
+	if (!TestRef(chr)) return;
 	chr.chr_ai.type.wait = "";
-	if(chr.chr_ai.type.enemy == "") return;
+	if (!CheckAttribute(chr, "chr_ai.type.enemy") || chr.chr_ai.type.enemy == "") return;
 	int trg = sti(chr.chr_ai.type.enemy);
 	LAi_type_guardian_CmdAttack_Now(chr, trg);
 }
