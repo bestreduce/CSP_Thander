@@ -1567,7 +1567,7 @@ void ProcessDialogEvent()
 
 		case "Prison_Cell_Talk":
 			dialog.text = "Я слушаю тебя, "+ GetSexPhrase("сын мой","дочь моя") +".";
-			link.l2 = "Я греш"+ GetSexPhrase("ен","на") +", падре, многие злодеяния на моем счету, я грабил"+ GetSexPhrase("","а") +" и убивал"+ GetSexPhrase("","а") +" невинных, но действовал"+ GetSexPhrase("","а") +" я не од"+ GetSexPhrase("ин","на") +". Мне помогали верные соратники. Вы можете передать им от меня весточку?";
+			link.l2 = "Я греш"+ GetSexPhrase("ен","на") +", падре, многие злодеяния на моём счету, я грабил"+ GetSexPhrase("","а") +" и убивал"+ GetSexPhrase("","а") +" невинных, но действовал"+ GetSexPhrase("","а") +" я не од"+ GetSexPhrase("ин","на") +". Мне помогали верные соратники. Вы можете передать им от меня весточку?";
 			link.l2.go = "Prison_Cell_Talk_2";
 			link.l3 = "Я передумал"+ GetSexPhrase("","а") +". Оставьте меня.";
 			link.l3.go = "Prison_Cell_None";

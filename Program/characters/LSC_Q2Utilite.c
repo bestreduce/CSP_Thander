@@ -1197,11 +1197,11 @@ void QuestionsInit()
 	NullCharacter.questions.a6 = "бикгед";
 	NullCharacter.questions.q7 = "Как называются поперечные связи судна, служащие для поддержания палуб, соединяющие противоположные бортовые ветви шпангоутов и придающие судну поперечную прочность?";
 	NullCharacter.questions.a7 = "бимсы";
-	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами весел?";
+	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами вёсел?";
 	NullCharacter.questions.a8 = "бирема";
 	NullCharacter.questions.q9 = "Как называется деревянная тумба на палубе корабля для крепления тросов?";
 	NullCharacter.questions.a9 = "битенг";
-	NullCharacter.questions.q10 = "Как назыавется небольшая мачта на бушприте, несущая рей с прямым парусом?";
+	NullCharacter.questions.q10 = "Как называется небольшая мачта на бушприте, несущая рей с прямым парусом?";
 	NullCharacter.questions.a10 = "блинда-стеньга";
 	NullCharacter.questions.q11 = "Назовите парус, который ставят под бушпритом.";
 	NullCharacter.questions.a11 = "блинд";
@@ -1809,7 +1809,7 @@ string Sharp_choiceAction()
 {
 	string sBack;
 	ref sld;
-	//удалим Шарпа с карты, если он плывет ещё где-то
+	//удалим Шарпа с карты, если он плывёт ещё где-то
 	Map_ReleaseQuestEncounter("Sharp");
 	group_DeleteGroup("Sharp_Group");
 	if (rand(3) != 2 && sti(pchar.questTemp.Sharp.count) < 5)
@@ -1837,7 +1837,7 @@ string Sharp_choiceAction()
 		sld.mapEnc.type = "trade";
 		sld.mapEnc.worldMapShip = "quest_ship";
 		sld.mapEnc.Name = "бриг 'Шарпоносец'";
-		string sColony= SelectAnyColony(sCity); //колония, откуда плывет Шарп
+		string sColony= SelectAnyColony(sCity); //колония, откуда плывёт Шарп
 		int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даем с запасом
 		Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 	}
@@ -2236,7 +2236,7 @@ string WhereLSCCitizen(ref rCharacter)
 			case "FleuronTavern": sShip = "в каравелле 'Флерон', в таверне"; break;
 			case "FurieShipInside2": sShip = "в пинасе 'Фурия'"; break;
 			case "GloriaChurch": sShip = "в галеоне 'Глория', в церкви"; break;
-			case "PlutoStoreSmall": sShip = "во флете 'Плуто'"; break;
+			case "PlutoStoreSmall": sShip = "в трюме флейта 'Плуто'"; break;
 			case "ProtectorFisher": sShip = "в корвете 'Протектор'"; break;
 			case "SanAugustineResidence": sShip = "в варшипе 'Сан Августин', в резиденции адмирала"; break;
 			case "SanGabrielMechanic": sShip = "в барке 'Сан Габриель'"; break;

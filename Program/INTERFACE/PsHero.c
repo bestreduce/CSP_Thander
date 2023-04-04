@@ -183,7 +183,7 @@ void FillTable()
 					}
 					else
 					{
-						GameInterface.TABLE_HERO.(row).td6.str = "Плывет в "+ XI_ConvertString("Colony" + chr.PGGAi.Task.Target + "Acc");
+						GameInterface.TABLE_HERO.(row).td6.str = "Плывёт в "+ XI_ConvertString("Colony" + chr.PGGAi.Task.Target + "Acc");
 					}
 					if (CheckAttribute(chr, "PGG_trader"))
 					{

@@ -8,7 +8,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
-			link.l1 = RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Сейчас мне не о чем говорить");
+			link.l1 = RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Сейчас мне не о чем говорить.");
 		    link.l1.go = "exit";
 			if (pchar.questTemp.State == "Fr2Letter_toCuracao")
 			{
@@ -725,7 +725,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
         case "Step_4_2":
             dialog.text = "Чёрт возьми! Мы не смогли защитить граждан Республики Соединённых Провинций от кровожадных англичан. Это очень плохо, наше и без того скромное присутствие в Карибском регионе теперь совершенно ослаблено.";
-            link.l1 = "Мне очень жаль, я сделал"+ GetSexPhrase("","а") +" все, что мог"+ GetSexPhrase("","ла") +"...";
+            link.l1 = "Мне очень жаль, я сделал"+ GetSexPhrase("","а") +" всё, что мог"+ GetSexPhrase("","ла") +"...";
             link.l1.go = "Step_4_3";
         break;
         case "Step_4_3":
