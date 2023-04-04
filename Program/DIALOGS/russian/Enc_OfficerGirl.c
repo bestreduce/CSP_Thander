@@ -811,7 +811,10 @@ void ProcessDialogEvent()
 			LAi_SetImmortal(sld,true);
 			DeleteAttribute(sld,"lifeDay");
 			LAi_group_MoveCharacter(sld, "player");
-			sld.quest.questflag.model = "questionmarkB";
+			if(InterfaceStates.EnabledQuestsMarks)
+			{
+				sld.quest.questflag.model = "questionmarkB";
+			}
 			LAi_LoginInCaptureTown(sld, true);
 			SetLocationCapturedState("PuertoPrincipe_port", true);
 		break;
