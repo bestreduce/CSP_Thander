@@ -712,21 +712,23 @@ void SetFantomParamEncout(ref _pchar)  // выдача сабель и НР от
 
 void SetSeaFantomParam(ref _pchar, string type)
 {
-	ref MChar;
-
+//похоже, это уже неактуально
+/*	ref MChar;
 	MChar = GetMainCharacter();
 	if (CheckAttribute(MChar, "EnemyRank"))
 	{
 		Log_TestInfo("If you see this, feel free to kick Gray: " + MChar.EnemyRank);
 		DeleteAttribute(MChar, "EnemyRank");
 	}
-
+*/
 	Fantom_SetRandomSkills(_pchar, type); // там вызов CalculateAppropriateSkills(_pchar); + бонус от класса корабля
 	Fantom_SetRandomMoney(_pchar, type);
 	Fantom_SetRandomCrewExp(_pchar, type);
 	DeleteAttribute(_pchar, "items");
 
 	SetFantomHP(_pchar);
+
+	SetSpeciality(NPchar, PerksChars()); //выдаём характер кэпам случайных энкаунтеров, убрал его из экипировки
 	LAi_NPC_Equip(_pchar, sti(_pchar.rank), true, true);
 	//AntiCheat(_pchar);
 }

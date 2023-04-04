@@ -870,10 +870,10 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType)
 
 	rCharacter.Ship.Sounds = "";
 
-	if(sti(rCharacter.Ship.Cannons.Type) == CANNON_TYPE_NONECANNON)
-	{
-		rCharacter.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
-	}
+//	if(sti(rCharacter.Ship.Cannons.Type) == CANNON_TYPE_NONECANNON)	//подозрительный код - возможно, из-за этого на кораблях со снятыми пушками внезапно снова пушки появлялись
+//	{
+//		rCharacter.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
+//	}
 
 	if (bFromCoast == false) { rCharacter.Ship.Speed.z = 1.0; }
 
