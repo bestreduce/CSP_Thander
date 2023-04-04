@@ -1778,7 +1778,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             {
 				if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 				{
-					link.l3 = "Я тут добыл"+ GetSexPhrase("","а") +" что-то необычное и оно весьма похоже на чертёж, не взгляните?";
+					link.l3 = "Я тут добыл"+ GetSexPhrase("","а") +" что-то необычное, и оно весьма похоже на чертёж, не взглянете?";
 					link.l3.go = "blueprint";
 				}
 

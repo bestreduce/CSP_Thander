@@ -1995,7 +1995,7 @@ void ProcessDialogEvent()
 				if(sld.nation == "none" || sld.nation == PIRATE || attr == "Panama") continue;
 				attrLoc = "l" + iTemp;
 				NPChar.Temp.(attr) = attr;
-				Link.(attrLoc) = "В " + XI_ConvertString("Colony" + attr + "Dat");
+				Link.(attrLoc) = "В " + XI_ConvertString("Colony" + attr + "Voc");
 				if (IsColonyEnemyToMainCharacter(attr)) {
 					Link.(attrLoc).go = "CompanionTravel_EnemyColony";
 					continue;

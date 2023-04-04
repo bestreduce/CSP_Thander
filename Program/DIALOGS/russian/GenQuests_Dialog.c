@@ -5594,7 +5594,7 @@ void ProcessDialogEvent()
 			sTitle = GenerateRandomNameToShip(PIRATE);
 			PChar.GenQuest.PiratesOnUninhabited.StartShipName = sTitle;
 
-			dialog.text = "А это можно легко устроить. Он ходит на " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(PChar.GenQuest.PiratesOnUninhabited.StartShipType)].Name + "Dat")) + " '" + sTitle + "' и промышляет работорговлей... Давай так: если его найдём - трюм тебе, а корабль мне. Заодно и порасспросишь, знает ли он " + ChangeNameCase(NAMETYPE_NICK, PChar.GenQuest.PiratesOnUninhabited.MainPirateName, NAME_ACC) + ". Только гляди, чтоб он в штаны не наложил, когда это имя услышит, ведь он ходит на моём корабле...";
+			dialog.text = "А это можно легко устроить. Он ходит на " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(PChar.GenQuest.PiratesOnUninhabited.StartShipType)].Name + "Voc")) + " '" + sTitle + "' и промышляет работорговлей... Давай так: если его найдём - трюм тебе, а корабль мне. Заодно и порасспросишь, знает ли он " + ChangeNameCase(NAMETYPE_NICK, PChar.GenQuest.PiratesOnUninhabited.MainPirateName, NAME_ACC) + ". Только гляди, чтоб он в штаны не наложил, когда это имя услышит, ведь он ходит на моём корабле...";
 			link.l1 = "Ну хорошо, считайте, что мы договорились.";
 			link.l1.go = "PiratesOnUninhabited_45";
 		break;
@@ -5628,7 +5628,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "shoreName", sTemp);
 			AddQuestUserData(sTitle, "count", PChar.GenQuest.PiratesOnUninhabited.PiratesCount);
 			AddQuestUserData(sTitle, "badCapName", ChangeNameCase(NAMETYPE_ORIG, PChar.GenQuest.PiratesOnUninhabited.BadPirateName, NAME_ABL));
-			AddQuestUserData(sTitle, "ship", GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(PChar.GenQuest.PiratesOnUninhabited.StartShipType)].name + "Dat")) + " '" + PChar.GenQuest.PiratesOnUninhabited.StartShipName + "'");
+			AddQuestUserData(sTitle, "ship", GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(PChar.GenQuest.PiratesOnUninhabited.StartShipType)].name + "Voc")) + " '" + PChar.GenQuest.PiratesOnUninhabited.StartShipName + "'");
 
 			PChar.GenQuest.PiratesOnUninhabited.StartShore = PChar.location;
 

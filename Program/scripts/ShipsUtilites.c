@@ -2066,7 +2066,7 @@ int GenerateShipTop(int iBaseType, bool isStolen, ref chr)
     }
     else {rRealShip.ship.upgrades.hull = 1 + rand(2);}
 	rRealShip.ship.upgrades.sails = 1 + rand(2);  // только визуальная разница
-	rRealShip.MastMultiplier = 1.3;
+	rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - 0.3;//фикс нестандартных мачт
 
 	int hullarmor;//реворк брони корпуса
 	switch (sti(rRealShip.Class))

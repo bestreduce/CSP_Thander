@@ -194,6 +194,7 @@ void CreateCitizens(aref loc)
 			{
 				chr.dialog.filename    = "Enc_Walker.c";
 				chr.nonTable = true;
+				chr.standUp = true;
 			}
 			else
 			{
