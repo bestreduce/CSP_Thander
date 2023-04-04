@@ -468,7 +468,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "FightInArena_6":
-			dialog.text = RandSwear() + " " + LinkRandPhrase("В схватке со мной тебя ждёт только неудача!",+ GetFullName(pchar) + "?! Я порву тебя на куски, если ты будешь у меня на пути!", "Эй, ты! Сейчас ты пожалеешь, что приш"+ GetSexPhrase("ёл","ла") +" сюда!");
+			dialog.text = RandSwear() + " " + LinkRandPhrase("В схватке со мной тебя ждёт только неудача!",+ GetFullName(pchar) + "?! Я порву тебя на куски, если будешь стоять у меня на пути!", "Эй, ты! Сейчас ты пожалеешь, что приш"+ GetSexPhrase("ёл","ла") +" сюда!");
 			link.l1 = LinkRandPhrase("Сейчас ты уйдёшь отсюда ни с чем!", "Ха-ха, жалкий недоносок будет со мной спорить?", "Сейчас я тебя...");
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ArenaTournamentGo");
