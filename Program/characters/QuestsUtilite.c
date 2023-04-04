@@ -2694,6 +2694,9 @@ void VSEnpcInit()
 	PChar.quest.MG_ObezyanaKill.win_condition.l1 = "NPC_Death";
 	PChar.quest.MG_ObezyanaKill.win_condition.l1.character = "MG_Obezyana";
 	PChar.quest.MG_ObezyanaKill.win_condition = "MG_ObezyanaKill";
+	
+	//Куали
+	
 }
 void OfficerGirlInit()
 {
