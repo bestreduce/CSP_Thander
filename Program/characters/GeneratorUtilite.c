@@ -728,7 +728,7 @@ void SetSeaFantomParam(ref _pchar, string type)
 
 	SetFantomHP(_pchar);
 
-	SetSpeciality(NPchar, PerksChars()); //выдаём характер кэпам случайных энкаунтеров, убрал его из экипировки
+	SetSpeciality(_pchar, PerksChars()); //выдаём характер кэпам случайных энкаунтеров, убрал его из экипировки
 	LAi_NPC_Equip(_pchar, sti(_pchar.rank), true, true);
 	//AntiCheat(_pchar);
 }
