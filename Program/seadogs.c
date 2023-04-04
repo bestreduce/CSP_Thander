@@ -182,7 +182,7 @@ void ProcessVersionCheck() // boal 271004
 			rLoc = LocFromID("FortOrange_church");
 			rLoc.reload.l1.emerge = "reload17";
 
-			rLoc = LocFromID("Shore35");//фикс локаторов перехода ФортОранжа для квестов без НИ
+			rLoc = LocFromID("FortOrange_port");//фикс локаторов перехода ФортОранжа для квестов без НИ
 			rLoc.reload.l1.name = "gate_back";
 			rLoc = LocFromID("FortOrange_ExitTown");
 			rLoc.reload.l2.name = "reload3";

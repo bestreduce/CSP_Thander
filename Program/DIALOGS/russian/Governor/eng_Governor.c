@@ -167,7 +167,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 break;
                 case "Intelligence_Curacao_Boarding":  // Миссия выполнена, голландский флейт взят на абордаж
                     dialog.text = "Докладывайте, что вы узнали.";
-                    link.l1 = "Вот документ, который был найден на захваченном голландском бриге. Это приказ коменданту форта Оранж срочно укрепить город.";
+                    link.l1 = "Вот документ, который был найден на захваченном голландском бриге. Это приказ губернатору Форт Оранж срочно укрепить город.";
                     link.l1.go = "Step_4_2";
                 break;
                 case "Intelligence_Curacao_BoardingNotFoundLetter":  // Миссия провалена, голландский флейт взят на абордаж, но письмо не найдено
@@ -636,7 +636,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         case "Step_5_1":
             dialog.text = "Что ж, теперь мы имеем информацию о том, что голландцы спешно пытаются укрепить своё поселение на Ямайке - Форт Оранж. В принципе, то, что они поселились на другом конце острова - для меня проблемы не составляло, но только пока не началась торговая война.\n"+
                           "Теперь мой долг разорить голландское поселение на английской территории. Я поручаю это вам.\n"+
-                          "Весь захваченный приз в Форте Оранж - ваш. Действуйте.";
+                          "Весь захваченный приз в Форт Оранже - ваш. Действуйте.";
             link.l1 = "Очень хорошо, сэр.";
             link.l1.go = "exit";
          	pchar.GenQuestBox.Trinidad_Cave = true;
@@ -649,14 +649,20 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             pchar.GenQuestBox.FortOrange_townhall.box1.items.jewelry14 = Rand(5)+1;
             pchar.GenQuestBox.FortOrange_townhall.box1.items.jewelry17 = Rand(5)+1;
             pchar.GenQuestBox.FortOrange_townhall.box1.items.cirass3 = 1;
-			locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_BoxPatch";
+			//locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_BoxPatch";
 			pchar.questTemp.State = "AttackFortOrange_GoToFort";
             SetQuestHeader("Eng_Line_5_AttackFortOrange");
             AddQuestRecord("Eng_Line_5_AttackFortOrange", "1");
             LAi_LocationFightDisable(&Locations[FindLocation("FortOrange_townhall")], false);
+			
             Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1 = "location";
             Pchar.quest.AttackFortOrange_GoToFort.win_condition.l1.location = "FortOrange_ExitTown";
             Pchar.quest.AttackFortOrange_GoToFort.win_condition = "AttackFortOrange_GoToFort";
+			
+			Pchar.quest.AttackFortOrange_GoToPort.win_condition.l1 = "location";
+            Pchar.quest.AttackFortOrange_GoToPort.win_condition.l1.location = "FortOrange_port";
+            Pchar.quest.AttackFortOrange_GoToPort.win_condition = "AttackFortOrange_GoToPort";
+			SetLocationCapturedState("FortOrange_town", true);
         break;
 
         case "Step_5_2":
@@ -678,21 +684,21 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             CloseQuestHeader("Eng_Line_5_AttackFortOrange");
             pchar.questTemp.CurQuestNumber = "6";
             pchar.questTemp.Waiting_time = "30"; // По идее геймер должен испытывать угрызения совести после этого задания. Пусть поболтается просто так с месяц.
-            // ==> вертаем разграбленному форту Оранж нормальную жизнь.
+            // ==> вертаем разграбленному Форт Оранжу нормальную жизнь.
             SetLocationCapturedState("FortOrange_town", false);
             LAi_LocationFightDisable(&Locations[FindLocation("FortOrange_townhall")], true);
 			//--> огонь и пламень убираем
 			DeleteAttribute(&locations[FindLocation("FortOrange_town")], "hidden_effects");
 			DeleteAttribute(&locations[FindLocation("FortOrange_ExitTown")], "hidden_effects");
 			//<-- огонь и пламень
-			locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_patch";
+			//locations[FindLocation("FortOrange_townhall")].models.day.charactersPatch = "SmallResidence_patch";
 			AddCharacterExpToSkill(pchar, "Pistol", 250);
 			AddCharacterExpToSkill(pchar, "Leadership", 250);
 			AddCharacterExpToSkill(pchar, "Repair", 350);
 			AddTitleNextRate(sti(NPChar.nation), 2);
 			ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 1);
 			//слухи
-			AddSimpleRumour("То, что вы устроили в Форте Оранж - это, знаете ли, впечатляет... Несчастные голландцы...", ENGLAND, 5, 1);
+			AddSimpleRumour("То, что вы устроили в Форт Оранже - это, знаете ли, впечатляет... Несчастные голландцы...", ENGLAND, 5, 1);
 			
 			//******Чёрный Ёж Sinistra******
 			//Кристофер

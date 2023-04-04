@@ -2091,8 +2091,8 @@ string SelectNotEnemyColony(ref NPChar)
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 
-		/* if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров */
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
+		/* if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "Caiman" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров */
+		if (colonies[n].id != "Panama" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
 		{
 			nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
 			if (nation != RELATION_ENEMY)
@@ -2116,7 +2116,7 @@ string SelectAnyColony(string _City)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City) != colonies[n].islandLable) //не на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City) != colonies[n].islandLable) //не на свой остров
 		{
 			storeArray[howStore] = n;
 			howStore++;
@@ -2135,7 +2135,7 @@ string SelectAnyColony2(string _City1, string _City2)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City1) != colonies[n].islandLable && GetIslandByCityName(_City2) != colonies[n].islandLable) //не на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(_City1) != colonies[n].islandLable && GetIslandByCityName(_City2) != colonies[n].islandLable) //не на свой остров
 		{
 			storeArray[howStore] = n;
 			howStore++;

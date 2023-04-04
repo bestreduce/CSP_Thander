@@ -1413,11 +1413,12 @@ bool SetReloadIcons()
                     objLandInterface.UserIcons.port.tex = 1;
                     objLandInterface.UserIcons.port.name = "reloadtoport";
                     string townsack = Locations[idxloc].townsack;
-                    if(townsack != "LeFransua" && townsack != "PuertoPrincipe") objLandInterface.UserIcons.port.location = townsack+"_town";
+                    if(townsack != "LeFransua" && townsack != "PuertoPrincipe" && townsack != "FortOrange") objLandInterface.UserIcons.port.location = townsack+"_town";
 					else objLandInterface.UserIcons.port.location = townsack+"_port";
                     objLandInterface.UserIcons.port.locator = "reload1";
                     objLandInterface.UserIcons.port.note = GetNodeForIcon(1, 10);
                     bUse = true;
+					if(townsack == "FortOrange") objLandInterface.UserIcons.port.locator = "sea";//В Форт Оранже быстрый переход на локатор SEA вместо reload1
 			for(i=0; i<nq; i++)
 			{
 				curloc = GetAttributeN(locList,i);

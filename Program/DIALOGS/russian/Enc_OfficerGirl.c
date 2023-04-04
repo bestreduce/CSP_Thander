@@ -789,7 +789,7 @@ void ProcessDialogEvent()
 			sld.name 	= "Джулиус";
 			sld.lastname = "Брин";
 			SetSPECIAL(sld, 9,8,7,6,7,8,9);
-			FantomMakeCoolFighter(sld, 30, 90, 50, "blade42", "pistol4", 350);
+			FantomMakeCoolFighter(sld, 30, 90, 50, "blade42", "pistol4", 300);
 			SelAllPerksToNotPchar(sld);
 			sld.location	= "PuertoPrincipe_port";
 			sld.location.group = "goto";
@@ -811,6 +811,23 @@ void ProcessDialogEvent()
 			LAi_SetImmortal(sld,true);
 			DeleteAttribute(sld,"lifeDay");
 			LAi_group_MoveCharacter(sld, "player");
+			if(InterfaceStates.EnabledQuestsMarks)
+			{
+				sld.quest.questflag.model = "questionmarkB";
+			}
+			LAi_LoginInCaptureTown(sld, true);
+			bDisableFastReload = true;
+			LocatorReloadEnterDisable("PuertoPrincipe_ExitTown", "reload1_back", true);
+			
+			PChar.quest.Raznoe_Pomosh_Elen.win_condition.l1 = "locator";
+			PChar.quest.Raznoe_Pomosh_Elen.win_condition.l1.location = "PuertoPrincipe_ExitTown";
+			PChar.quest.Raznoe_Pomosh_Elen.win_condition.l1.locator_group = "reload";
+			PChar.quest.Raznoe_Pomosh_Elen.win_condition.l1.locator = "reload2_back";
+			PChar.quest.Raznoe_Pomosh_Elen.win_condition = "Raznoe_Pomosh_Elen";
+			
+			SetQuestHeader("PomoshElen");
+			AddQuestRecord("PomoshElen", "1");
+			AddQuestUserData("PomoshElen", "sSex", GetSexPhrase("","а"));
 		break;
 		case "Helen_wait":
 			if (!CheckAttribute(pchar,"HelenMet"))
@@ -836,6 +853,7 @@ void ProcessDialogEvent()
 			dialog.Text = "А ты ещё кто? Очередн"+ GetSexPhrase("ой придурок","ая дура") +", котор"+ GetSexPhrase("ый","ая") +" хочет нанять Элен в офицеры? Я тебе такого о ней расскажу, что у тебя волосы дыбом встанут.";
 			Link.l1 = "Не интересует. Предлагаю сделку. Ты за час убираешься из Пуэрто-Принсипе или будешь мёртв прямо здесь и сейчас. Что скажешь?";
 			Link.l1.go = "Helen_Bastard_2";
+			UnmarkCharacter(npchar);
 		break;
 
 		case "Helen_Bastard_2":
@@ -854,6 +872,8 @@ void ProcessDialogEvent()
 			pchar.quest.HelenBastard.win_condition.l1 = "NPC_Death";
 			pchar.quest.HelenBastard.win_condition.l1.character = "HelenBastard";
 			pchar.quest.HelenBastard.win_condition = "OpenTheDoors";
+			SetLocationCapturedState("PuertoPrincipe_town", false);
+			LocatorReloadEnterDisable("PuertoPrincipe_ExitTown", "reload1_back", false);
 		break;
 		case "Helen_nowait":
 			dialog.Text = "Благодарю вас, капитан! Теперь о моих подъёмных...";
@@ -863,6 +883,8 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar,"HelenQuest");
 			DeleteAttribute(NPChar,"Dialog.CurrentNode");
 			NextDiag.TempNode = "OnceAgain";
+			AddQuestRecord("PomoshElen", "2");
+			CloseQuestHeader("PomoshElen");
 		break;
 		//Анджелика
 		case "Angellica_meet":

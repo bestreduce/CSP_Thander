@@ -1357,6 +1357,10 @@ void ShipWreckInTown(string qName)
 	{
 		sLocator = "reload1";
 	}
+	if(PChar.location == "FortOrange_port")
+	{
+		sLocator = "sea";
+	}
 
 	ChangeCharacterAddressGroup(chr, PChar.location, "reload", sLocator);
 	SetDialogCharacter2Character(PChar, chr, 2.0, true);
@@ -1375,6 +1379,10 @@ void ShipWreckInTownSuccess()
 	if(PChar.location == "Pirates_town" || PChar.location == "PuertoPrincipe_town" || PChar.location == "LaVega_town" || PChar.location == "LeFransua_town")
 	{
 		sLocator = "reload5";
+	}
+	if(PChar.location == "FortOrange_port")
+	{
+		sLocator = "gate_back";
 	}
 
 	LAi_SetActorType(chr);
