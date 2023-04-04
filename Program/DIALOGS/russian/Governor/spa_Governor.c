@@ -441,7 +441,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     		pchar.questTemp.State = "Inquisition_toDeSouza";
             AddQuestRecord("Spa_Line_2_Inquisition", "1");
             SaveCurrentQuestDateParam("questTemp");
-            sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "priest", "man", "man", 10, SPAIN, -1, false));
+            sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "priest", "man", "man1", 10, SPAIN, -1, false));
         	sld.name 	= "Антониу";
         	sld.lastname = "де Соуза";
 			sld.model.animation = "man";
