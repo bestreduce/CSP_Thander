@@ -1197,11 +1197,11 @@ void QuestionsInit()
 	NullCharacter.questions.a6 = "бикгед";
 	NullCharacter.questions.q7 = "Как называются поперечные связи судна, служащие для поддержания палуб, соединяющие противоположные бортовые ветви шпангоутов и придающие судну поперечную прочность?";
 	NullCharacter.questions.a7 = "бимсы";
-	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами весел?";
+	NullCharacter.questions.q8 = "Как назывался античный гребной военный корабль с двумя рядами вёсел?";
 	NullCharacter.questions.a8 = "бирема";
 	NullCharacter.questions.q9 = "Как называется деревянная тумба на палубе корабля для крепления тросов?";
 	NullCharacter.questions.a9 = "битенг";
-	NullCharacter.questions.q10 = "Как назыавется небольшая мачта на бушприте, несущая рей с прямым парусом?";
+	NullCharacter.questions.q10 = "Как называется небольшая мачта на бушприте, несущая рей с прямым парусом?";
 	NullCharacter.questions.a10 = "блинда-стеньга";
 	NullCharacter.questions.q11 = "Назовите парус, который ставят под бушпритом.";
 	NullCharacter.questions.a11 = "блинд";
