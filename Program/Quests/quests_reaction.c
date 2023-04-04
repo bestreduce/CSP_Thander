@@ -11648,6 +11648,8 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("SanJuan_Priest");
 			sld.name		= "падре Домингес";
 			sld.lastname = "";
+			sld.dialog.filename = "Common_church.c";
+			sld.dialog.currentnode = "First time";			
 			
 			pchar.questTemp.PKM_SvtvA_Clermon_Final = true;
 			pchar.questTemp.PKM_SvtvA_Gubernator_Final = true;
