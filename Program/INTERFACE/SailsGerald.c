@@ -9,6 +9,7 @@ string curgerald = "";
 string defgerald = "";
 ref yard;
 bool allowgerald = false;
+bool setcolor = false;
 ref chref;
 bool sails = false;
 
@@ -59,7 +60,7 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	chref = chreff;
     int st = GetCharacterShipType(chref);
     shref = GetRealShip(st);
-	//if (CheckAttribute(shref,"SailsColorIdx")) curcolor = sti(shref.SailsColorIdx);
+	if (!CheckAttribute(shref,"SailsColorIdx")) shref.SailsColorIdx = defcolor;
 	//else curcolor = 0;
 	defcolor = sti(shref.SailsColorIdx);
 	cursails = sti(shref.ship.upgrades.sails);
@@ -158,6 +159,13 @@ void ProcessCancelExit()
 
 void IDoExit(int exitCode)
 {
+	if (!setcolor)
+	{
+		shref.SailsColorIdx = defcolor;
+		shref.ShipSails.SailsColor = SailsColors[defcolor].color;
+		shref.ship.upgrades.sails = defsails;
+		if(CheckSailsGerald(chref) && CanSetSailsGerald(chref)) shref.ShipSails.Gerald_Name = defgerald;
+	}
 	Ship_Walk_Delete();
 
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
@@ -285,6 +293,7 @@ void ColorSwap(int swap)
 	if (curcolor == -1 && swap == -1) curcolor = 8;
 	if (curcolor == 9 && swap == 1) curcolor = 0;
 	CheckChangeSailStatus();
+	VIEWER_Reload();
 }
 
 void DoPostExit()
@@ -314,11 +323,13 @@ void ChangeSelectScrollImage()
 	{
 		GameInterface.SCROLL_GERALD.current = nIdx;
 		CheckChangeSailStatus();
+		VIEWER_Reload();
 	}
 	if (sNod == "SCROLL_SAILS")
 	{
 		GameInterface.SCROLL_SAILS.current = nIdx;
 		CheckChangeSailStatus();
+		VIEWER_Reload();
 	}
 }
 
@@ -331,6 +342,10 @@ void CheckChangeSailStatus()
 	// SetNewPicture("COLOR_PIC1", "resource\textures\ships\PlayerSails\parus_pat.tga");
 	bool bNewValue = true;
 	bool CanRemove = true;
+	
+	shref.SailsColorIdx   = curcolor;
+	shref.ShipSails.SailsColor = SailsColors[curcolor].color;
+	shref.ship.upgrades.sails = GetChosenType("sails");
 
 	price = 0;
 	bNewValue = false;
@@ -652,6 +667,7 @@ void SetNewSailsGerald()
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETHULL_CHECKBOX", 3, 1) && hullid != basehull) shref.ship.upgrades.hull = hullid;
 	AddMoneyToCharacter(Pchar, -price);
 	WaitDate("",0,0,0, 1, 30);
+	setcolor = true;
 	ProcessCancelExit();
 }
 
