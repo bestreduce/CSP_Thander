@@ -2719,8 +2719,8 @@ void Ship_HullHitEvent()
 	if (CheckAttribute(RealShips[sti(rOurCharacter.Ship.Type)],"Tuning.HighBort") && iBallType == GOOD_GRAPES) fCrewDamage = 0.75 * fCrewDamage;
 //Log_Info("fCrewDamage "+fCrewDamage);
 // fHP = fDistanceDamageMultiply * fCannonDamageMultiply * stf(rBall.DamageHull) * (8.0 + frnd() * 4.0); // LEO: Забекапил
-	fHP = fCannonDamageMultiply * stf(rBall.DamageHull) / 1.4;	//без НИ делим: 	было 	х1.5 	от ядер, х2.5 	от бомб
-	if (iBallType == GOOD_BOMBS) fHP *= 1.1;					//					стало 	х1,07	от ядер, х1.96	от бомб
+	fHP = fCannonDamageMultiply * stf(rBall.DamageHull) / 1.4 / 1.19;	//без НИ делим: 	было 	х1.5 	от ядер, х2.5 	от бомб		//1.19-временная компенсация за ускорение пушек. Но вообще-то там 1.25
+	if (iBallType == GOOD_BOMBS) fHP *= 1.1;					//							стало 	х0,9	от ядер, х1.65	от бомб
 	if (bSeriousBoom)
 	{
 		fCrewDamage = fCrewDamage * 8.0;

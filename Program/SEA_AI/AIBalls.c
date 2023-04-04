@@ -186,17 +186,20 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 void Ball_WaterHitEvent()
 {
 	int		iCharacterIndex;
-	float	x, y, z, vx, vy, vz;
+	float	x, y, z;
 
 	iCharacterIndex = GetEventData();
 	x = GetEventData();
 	y = GetEventData();
 	z = GetEventData();
+	CreateParticleSystem("splash", X, Y, Z, 0.0, 0.0, 0.0, 5);
+	Play3DSound("ball_splash", x, y, z);
 
+/*	//Missing splash_big.xps		-нет такого файла, нет смысла и эффекты сортировать по размеру снарядов
 	int nBallType = sti(AIBalls.CurrentBallCannonType);
 	if (nBallType >= 0)
 	{
-		//Missing splash_big.xps
+		
 		ref rCannon = GetCannonByType(nBallType);
 		if (CheckAttribute(rCannon, "BigBall") && sti(rCannon.BigBall))
             CreateParticleSystem("splash_big", X, Y, Z, 0.0, 0.0, 0.0, 5);
@@ -207,8 +210,7 @@ void Ball_WaterHitEvent()
 	{
 		CreateParticleSystem("splash", X, Y, Z, 0.0, 0.0, 0.0, 5);
 	}
-
-	Play3DSound("ball_splash", x, y, z);
+*/
 }
 
 void Ball_FortHit()
