@@ -728,11 +728,10 @@ void ProcessVersionCheck() // boal 271004
 			locations[n].id.label = "House";
 			locations[n].image = "loading\jonny_load\inside\Hut1_KNS.tga";
 			locations[n].MustSetReloadBack = true;
-			locations[n].townsack = "LaVega";
+			locations[n].townsack = "Pearl_town_2";
 			locations[n].lockWeather = "Inside";
 			locations[n].islandId = "Hispaniola";
 			locations[n].type = "house";
-			locations[n].fastreload = "LaVega";
 			locations[n].filespath.models = "locations\inside\Hut1_KNS";
 			locations[n].models.always.locators = "Hut1_locators";
 			locations[n].models.always.tavern = "Hut1";
