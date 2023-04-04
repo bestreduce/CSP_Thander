@@ -1659,10 +1659,10 @@ float LAi_NPC_GetAttackActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 0.54 + level*0.11 + MOD_SKILL_ENEMY_RATE*0.01;
-	if (LAi_GetBladeEnergyType(chr) == "FencingHeavy")
+	npc_return_tmp = 0.45 + MOD_SKILL_ENEMY_RATE*0.01;
+	if(LAi_GetBladeEnergyType(chr) == "FencingHeavy")
 	{
-		npc_return_tmp *= 0.81;//чаще пробивные
+		npc_return_tmp *= 0.95;//чаще пробивные
 	}
 	return npc_return_tmp;
 }
@@ -1752,29 +1752,14 @@ float LAi_NPC_GetAttackWeightFeint()
 }
 
 //Прараметры защиты
-//Вероятность желания защитится - кубик с такой вероятностью кидается 2 раза в секунду, т.е. средняя скорость реакции ии
+//Вероятность желания защитится - кубик с такой вероятностью кидается 2 раза в секунду, 1 = 100%
+//больше 1 может выдать несколько защит по очереди
 #event_handler("NPC_Event_GetDefenceActive", "LAi_NPC_GetAttackDefence");
 float LAi_NPC_GetAttackDefence()
 {
 	aref chr = GetEventData();
-	string fencing_type = LAi_GetBladeFencingType(chr);
-	string sAction;
-	float level = LAi_GetCharacterFightLevel(chr);
-	switch (fencing_type)
 
-	{
-		case "fencing":
-			sAction = "fast";
-		break;
-		case "fencing_heavy":
-			sAction = "break";
-		break;
-	}
-	npc_return_tmp = 4 + 10.0 * level + MOD_SKILL_ENEMY_RATE;
-	if(Lai_CharacterGetEnergy(chr) < LAi_CalcUseEnergyForBlade(chr,sAction)) 
-	{
-		npc_return_tmp *= 2;
-	}
+	npc_return_tmp = 0.8 + MOD_SKILL_ENEMY_RATE*0.02;
 
 	return npc_return_tmp;
 
@@ -1803,12 +1788,11 @@ float LAi_NPC_GetAttackDefence()
 float LAi_NPC_GetDefenceWeightBlock()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 10.0;
+	npc_return_tmp = 20.0 - MOD_SKILL_ENEMY_RATE;// влияние exe - 0 навык увеличивает время блока в ~3 раза сравнительно с 100
 	if (LAi_GetBladeFencingType(pchar) == "FencingHeavy")
 	{
-		npc_return_tmp = 6.0;
+		npc_return_tmp /= 2;
 	}
-	npc_return_tmp = npc_return_tmp;
 	return npc_return_tmp;
 }
 
@@ -1819,8 +1803,7 @@ float LAi_NPC_GetDefenceWeightParry()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 12.0; // 40 boal
-	npc_return_tmp = npc_return_tmp + 20 * level;
+	npc_return_tmp = 20.0 + MOD_SKILL_ENEMY_RATE; // 40 boal
 	return npc_return_tmp;
 }
 
