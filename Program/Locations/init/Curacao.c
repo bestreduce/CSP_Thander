@@ -653,7 +653,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice2.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -663,7 +663,7 @@ int LocationInitCuracao(int n)
  	locations[n].islandId = "Curacao";
 	//Models
 	//Always
-	locations[n].filespath.models = "locations\inside\PortOffice";
+	locations[n].filespath.models = "locations\inside\PortOffice2";
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";

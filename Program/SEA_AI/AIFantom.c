@@ -417,35 +417,35 @@ void Fantom_SetCannons(ref rFantom, string sFantomType)
 	{
         case "trade":
             // boal 20.01.2004 -->
-		    if (rand(1000) < 700)
+		    if (rand(1000) < 800)
 		    {
-			   sCannonType = "cannon";
+			   sCannonType = "culverine";
 			}
 			else
 			{
-			   sCannonType = "culverine";
+			   sCannonType = "cannon";
 			}
 		break;
 
 		case "war":
 			if (rand(1000) < 200)
 		    {
-			   sCannonType = "cannon";
+			   sCannonType = "culverine";
 			}
 			else
 			{
-			   sCannonType = "culverine";
+			   sCannonType = "cannon";
 			}
 		    break;
 
 		case "pirate":
 			if (rand(1000) < 400)
 		    {
-			   sCannonType = "cannon";
+			   sCannonType = "culverine";
 			}
 			else
 			{
-			   sCannonType = "culverine";
+			   sCannonType = "cannon";
 			}
 		    break;
 		    // boal 20.01.2004 <--

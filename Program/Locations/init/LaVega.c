@@ -64,7 +64,7 @@ int LocationInitLaVega(int n)
 	locations[n].locators_radius.reload.reload1_back = 2.9;
 
 	locations[n].reload.l2.name = "reload2_back";
-	locations[n].reload.l2.go =  "Hispaniola_Jungle_03";
+	locations[n].reload.l2.go =  "LaVega_ExitTown";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";

@@ -422,7 +422,7 @@ void AT_pr_Draka_s_Kotesom(string qName)
 	LAi_SetWarriorType(sld);
 	LAi_SetImmortal(sld, false);
 	LAi_SetCheckMinHP(sld, 1, true, "Draka_s_Kotesom_Pobeda");
-	ChangeCharacterAddressGroup(sld, "Hispaniola_Jungle_03", "enc04", "enc04_04");
+	ChangeCharacterAddressGroup(sld, "LaVega_ExitTown", "enc04", "enc04_04");
 	LAi_group_MoveCharacter(sld, "EnemyFight");
 	
 	LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);

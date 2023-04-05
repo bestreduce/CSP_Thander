@@ -204,13 +204,8 @@ void initFastReloadTable()
 	curTable.l12.tex = FRT_GRAVEYARD;
 	curTable.l12.location = "PortRoyal_Graveyard";
 
-	makearef(curTable,objFastReloadTable.table.FortOrange);
+	makearef(curTable,objFastReloadTable.table.FortOrange);	
 	// store
-
-	curTable.l1.pic = FRP_PORT;
-	curTable.l1.tex = FRT_PORT;
-	curTable.l1.location = "Shore35";
-
 	curTable.l1.pic = FRP_STORE;
 	curTable.l1.tex = FRT_STORE;
 	curTable.l1.location = "FortOrange_store";

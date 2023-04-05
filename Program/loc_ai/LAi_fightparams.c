@@ -364,7 +364,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 	switch(actionType)
 	{
 		case "fast":
-			energy = 10.0;
+			energy = 8.0;
 		break;
 		case "force":
 			energy = 7.0;
@@ -373,7 +373,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 			energy = 14.0;
 		break;
 		case "break":
-			energy = 30.0;
+			energy = 28.0;
 		break;
 		// case "feint":
 			// energy = 7.0;
@@ -405,7 +405,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 		{
 			energy = energy * fSkill * GetMushketEnergyDrain(character);
 		}
-		else energy = energy * fSkill * LAi_GetBladeEnergyType(character);  // энергоемкость от веса
+		else energy = energy * fSkill * (2*LAi_GetBladeEnergyType(character) + 1) / 3;  // энергоемкость от веса
 	}
 	return energy;
 }
@@ -418,9 +418,9 @@ float GetMushketEnergyDrain(ref character)
 
 float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 {
-	float fMultiplier = 1.30+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/10.0);//влияние силы на скорость восстановления энергии
+	float fMultiplier = 1.35+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/20.0);// 1.5 ... 1.85 - влияние силы на скорость восстановления энергии
 
-	if(CheckCharacterPerk(chr, "Energaiser")) // скрытый перк боссов и ГГ
+	if((MOD_SKILL_ENEMY_RATE == 10) || (CheckCharacterPerk(chr, "Energaiser"))) // скрытый перк боссов и ГГ
 	{
 		fMultiplier = fMultiplier * 1.5;
 	}
@@ -1652,14 +1652,18 @@ float npc_return_tmp;
 bool npc_return_tmpb;
 
 //Атаки
-//Скорость нарастания вероятности атаки в секунду  p > 0
+//Скорость нарастания вероятности атаки в секунду  p > 0, или средняя скорость ударов в секунду
+//нужно выставлять соответсвенно скорости анимок ИИ, оставляя минимум 10-20% на защиты/пробивные
 #event_handler("NPC_Event_GetAttackActive","LAi_NPC_GetAttackActive");
 float LAi_NPC_GetAttackActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 0.3 + level*0.7;
-	npc_return_tmp = npc_return_tmp + 0.1;
+	npc_return_tmp = 0.45 + MOD_SKILL_ENEMY_RATE*0.01;
+	if(LAi_GetBladeEnergyType(chr) == "FencingHeavy")
+	{
+		npc_return_tmp *= 0.95;//чаще пробивные
+	}
 	return npc_return_tmp;
 }
 
@@ -1673,11 +1677,11 @@ float LAi_NPC_GetAttackWeightFast()
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "Fencing")
 	{
-		npc_return_tmp = npc_return_tmp * 10 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * 0.5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 2 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
 	}
 	return npc_return_tmp;
 }
@@ -1687,16 +1691,16 @@ float LAi_NPC_GetAttackWeightFast()
 float LAi_NPC_GetAttackWeightForce()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 50.0;
+	npc_return_tmp = 20.0;
 	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "FencingLight")
 	{
-		npc_return_tmp = npc_return_tmp * 10 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * 0.5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
 	}
 	return npc_return_tmp;
 }
@@ -1706,7 +1710,7 @@ float LAi_NPC_GetAttackWeightForce()
 float LAi_NPC_GetAttackWeightRound()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 20.0;
+	npc_return_tmp = 30.0;
 	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "FencingLight")
@@ -1728,11 +1732,11 @@ float LAi_NPC_GetAttackWeightBreak()
 	npc_return_tmp = 20.0;
 	if (LAi_GetBladeEnergyType(chr) == "FencingHeavy")
 	{
-		npc_return_tmp = npc_return_tmp * 6 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+		npc_return_tmp = npc_return_tmp * 3 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * 0.5 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+		npc_return_tmp = npc_return_tmp	* 0.5 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	}
 	return npc_return_tmp;
 }
@@ -1742,32 +1746,20 @@ float LAi_NPC_GetAttackWeightBreak()
 float LAi_NPC_GetAttackWeightFeint()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 10.0; //30 boal fix
+	npc_return_tmp = 30.0; //boal fix
 	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
 
 //Прараметры защиты
-//Вероятность желания защитится - кубик с такой вероятностью кидается 2 раза в секунду
+//Вероятность желания защитится - кубик с такой вероятностью кидается 2 раза в секунду, 1 = 100%
+//больше 1 может выдать несколько защит по очереди
 #event_handler("NPC_Event_GetDefenceActive", "LAi_NPC_GetAttackDefence");
 float LAi_NPC_GetAttackDefence()
 {
 	aref chr = GetEventData();
-	string fencing_type = LAi_GetBladeFencingType(chr);
-	string sAction;
-	float level = LAi_GetCharacterFightLevel(chr);
-	switch (fencing_type)
 
-	{
-		case "fencing":
-			sAction = "fast";
-		break;
-		case "fencing_heavy":
-			sAction = "break";
-		break;
-	}
-	if(Lai_CharacterGetEnergy(chr) < LAi_CalcUseEnergyForBlade(chr,sAction)) npc_return_tmp = 40.0;
-	else  npc_return_tmp = 20.0;
+	npc_return_tmp = 0.8 + MOD_SKILL_ENEMY_RATE*0.02;
 
 	return npc_return_tmp;
 
@@ -1796,12 +1788,11 @@ float LAi_NPC_GetAttackDefence()
 float LAi_NPC_GetDefenceWeightBlock()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 80.0;
+	npc_return_tmp = 20.0 - MOD_SKILL_ENEMY_RATE;// влияние exe - 0 навык увеличивает время блока в ~3 раза сравнительно с 100
 	if (LAi_GetBladeFencingType(pchar) == "FencingHeavy")
 	{
-		npc_return_tmp = 8.0;
+		npc_return_tmp /= 2;
 	}
-	npc_return_tmp = npc_return_tmp * (0.5 + (0.05 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
 
@@ -1811,8 +1802,8 @@ float LAi_NPC_GetDefenceWeightBlock()
 float LAi_NPC_GetDefenceWeightParry()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 20.0; // 40 boal
-	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	float level = LAi_GetCharacterFightLevel(chr);
+	npc_return_tmp = 20.0 + MOD_SKILL_ENEMY_RATE; // 40 boal
 	return npc_return_tmp;
 }
 

@@ -468,7 +468,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "FightInArena_6":
-			dialog.text = RandSwear() + " " + LinkRandPhrase("В схватке со мной тебя ждёт только неудача!",+ GetFullName(pchar) + "?! Я порву тебя на куски, если ты будешь у меня на пути!", "Эй, ты! Сейчас ты пожалеешь, что приш"+ GetSexPhrase("ёл","ла") +" сюда!");
+			dialog.text = RandSwear() + " " + LinkRandPhrase("В схватке со мной тебя ждёт только неудача!",+ GetFullName(pchar) + "?! Я порву тебя на куски, если будешь стоять у меня на пути!", "Эй, ты! Сейчас ты пожалеешь, что приш"+ GetSexPhrase("ёл","ла") +" сюда!");
 			link.l1 = LinkRandPhrase("Сейчас ты уйдёшь отсюда ни с чем!", "Ха-ха, жалкий недоносок будет со мной спорить?", "Сейчас я тебя...");
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("ArenaTournamentGo");
@@ -497,7 +497,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = "Что тебе надо в моем доме, негодяй?! Даю тебе десять секунд, чтобы ты убрался отсюда!";
+					dialog.text = "Что тебе надо в моём доме, негодяй?! Даю тебе десять секунд, чтобы ты убрался отсюда!";
 					link.l1 = LinkRandPhrase("Хех, и здесь меня знают!", "Слава моя идёт впереди меня...", "Хм, понятно.");
 					link.l1.go = "exit_GoOut";
 				}
@@ -506,7 +506,7 @@ void ProcessDialogEvent()
 			{
 				if (IsDay())
 				{
-					dialog.text = NPCStringReactionRepeat("Рад приветствовать вас в моем доме. Вы по делу ко мне?",
+					dialog.text = NPCStringReactionRepeat("Рад приветствовать вас в моём доме. Вы по делу ко мне?",
 						"Чем я могу вам помочь?",
 						"Хм, что я могу сделать для вас?",
 						"Простите, если я вам не нужен, я попрошу вас меня не беспокоить...", "block", 1, npchar, Dialog.CurrentNode);

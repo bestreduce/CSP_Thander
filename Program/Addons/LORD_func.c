@@ -1,4 +1,4 @@
-object lpitems;
+//object lpitems;
 bool iOther;
 
 //LORD - выбор диалога ПГГ в зависимости от пола

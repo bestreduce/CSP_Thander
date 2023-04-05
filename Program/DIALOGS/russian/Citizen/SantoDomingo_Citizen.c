@@ -5,7 +5,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
-			link.l1 = RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить");
+			link.l1 = RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить.");
 		    link.l1.go = "exit";
 			if (pchar.questTemp.PDM_PK_IshemKoltso == "IshemKoltso")	// Квест "Потерянное кольцо"
             {

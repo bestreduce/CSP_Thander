@@ -258,7 +258,7 @@ void AzzyCheckSumControl()
 // репутация плохого парня с границами
 bool isBadReputation(ref _pchar, int _rep)
 {
-    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) > _rep)
+    if (GetCharacterPerkUsing(_pchar, "Trustworthy") || sti(_pchar.reputation) >= _rep)
     {
         return false;// good guy
     }
@@ -1666,7 +1666,7 @@ void SetQuestGoodsToStore(ref refStore)
 		    // цена из обратного вычисления 20 в модификатор
 			refStore.Goods.(goodName).RndPriceModify = GetStoreGoodsRndPriceModify(refStore, GOOD_RUM, PRICE_TYPE_BUY, pchar, 20);
 		}  */
-		if (CheckAttribute(pchar, "GenQuest.StoreGoods.HL2_DiscountPrices")) //Голл.линейка, квест №2, дискаунт в форте Оранж.
+		if (CheckAttribute(pchar, "GenQuest.StoreGoods.HL2_DiscountPrices")) //Голл.линейка, квест №2, дискаунт в Форт Оранже.
 		{
 		    DeleteAttribute(pchar, "GenQuest.StoreGoods"); // одноразовая операция, трем обе ветки
 			goodName = Goods[GOOD_EBONY].Name;
@@ -2633,6 +2633,8 @@ void KSMQuestsInit()
 //Все остальные НПС
 void VSEnpcInit()
 {
+	int iChar, i, iSex;
+	string sTemp, sType;;
 	ref sld;
 	//Стражники в адмиралтействе
 	sld = GetCharacter(NPC_GenerateCharacter("VSE_Admir_1", "sold_spa_2", "man", "man", 10, SPAIN, -1, true));
@@ -2696,7 +2698,6 @@ void VSEnpcInit()
 	PChar.quest.MG_ObezyanaKill.win_condition = "MG_ObezyanaKill";
 	
 	//Куали
-	
 }
 void OfficerGirlInit()
 {

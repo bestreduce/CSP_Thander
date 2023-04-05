@@ -319,7 +319,7 @@ void ProcessDialogEvent()
 		case "GoodTalk_3_4":
 			pchar.questTemp.LSC.qtyTalk.headPoormanId = GetPoorHeadManId(npchar);
 			sld = characterFromId(pchar.questTemp.LSC.qtyTalk.headPoormanId);
-			dialog.text = "Его зовут " + GetFullName(sld) + ", он бродяжничает в " + XI_ConvertString("Colony" + sld.city + "Dat") + ".";
+			dialog.text = "Его зовут " + GetFullName(sld) + ", он бродяжничает в " + XI_ConvertString("Colony" + sld.city + "Voc") + ".";
 			link.l1 = "Понятно. Ну что же, пожалуй, навещу его при случае.";
 			link.l1.go = "exit";
 			AddQuestRecord("ISS_PoorsMurder", "3");
