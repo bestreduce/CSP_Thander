@@ -424,7 +424,7 @@ void ProcessDialogEvent()
 
 		case "BS_F1_28": //Сильвер
 			dialog.text = "Ну что? Я в бордель, буду дальше изображать отчаявшегося пропойцу, а вы затаитесь тут и корабли в бухту Риггед Поинт перегоните. И, это... Эм... Деньжат на бордель не подкинете? Поиздержался я тут.";
-			link.l1 = "Держи. Тут остатки тех пятидесяти тысяч, что нам Флинт на всех оставил.";	//- 32000
+			link.l1 = "Держи. Тут остатки тех пятидесяти тысяч, что нам Флинт на всех оставил.";	//- 12000
 			link.l1.go = "BS_F1_28exit";
 		break;
 
@@ -432,7 +432,7 @@ void ProcessDialogEvent()
 			LAi_SetActorTypeNoGroup(npchar);
 			LAi_ActorGoToLocation(npchar, "reload", "reload1_back", "none", "", "", "", -1);
 			npchar.location = "none";
-			AddMoneyToCharacter(PChar, -32000 - rand(500));
+			AddMoneyToCharacter(PChar, -12000 - rand(500));
 			StartInstantDialogNoType("BS_Vein", "BS_F1_27_1", "Quest\BlackSails\BS_Final_1.c");
 		break;
 
@@ -653,9 +653,9 @@ void ProcessDialogEvent()
 
 			LAi_KillCharacter(npchar);
 			DeleteCharacter(npchar);
-			SetLaunchFrameFormParam("Ваши люди уводят Флинта. Вы, тем временем, обыскиваете его каюту. В одном из сундуков вы находите два с половиной миллиона песо. Также ваше внимание привлекает книга - Марк Аврелий 'Размышления'. Вы забираете её, вместе с судовым журналом Флинта.", "", 0.1, 15.0);
+			SetLaunchFrameFormParam("Ваши люди уводят Флинта. Вы, тем временем, обыскиваете его каюту. В одном из сундуков вы находите пять миллионов песо. Также ваше внимание привлекает книга - Марк Аврелий 'Размышления'. Вы забираете её, вместе с судовым журналом Флинта.", "", 0.1, 15.0);
 			LaunchFrameForm();
-			AddMoneyToCharacter(PChar, 2500000);
+			AddMoneyToCharacter(PChar, 5000000);
 			AddQuestRecord("BSHangover", "9");
 			sld = CharacterFromID("PortRoyal_hostess");
 			SaveOldDialog(sld);
@@ -767,7 +767,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "BS_F1_47": //Вейн
-			dialog.text = "Какого черта ты несёшь? Аааа... Я понял. Шифры!";
+			dialog.text = "Какого чёрта ты несёшь? Аааа... Я понял. Шифры!";
 			link.l1 = "Точно. Идём к остальным, в резиденцию.";
 			link.l1.go = "BS_F1_47exit";
 		break;
@@ -896,13 +896,13 @@ void ProcessDialogEvent()
 		case "BS_F1_57": //Вейн
 			dialog.text = "Ты просто так сдаёшься? Я был о тебе лучшего мнения!";
 			link.l1 = "Вот, деньги, что были в каюте Флинта. Уверен"+ GetSexPhrase("","а") +", что это часть золота Урки. По пятьсот тысяч на каждого. Если будут подвижки с координатами, дайте знать. Я умываю руки!";
-			if(sti(pchar.money) < 2000000)	link.l1 = "Вот, деньги, что были в каюте Флинта. Уверен"+ GetSexPhrase("","а") +", что это часть золота Урки. По пятьсот тысяч на каждого. Ох, простите, я уже потратил"+ GetSexPhrase("","а") +" их. Возьмите сколько есть, остальное буду "+ GetSexPhrase("должен","должна") +". Если будут подвижки с координатами, дайте знать. Я умываю руки!";
+			if(sti(pchar.money) < 5000000)	link.l1 = "Вот, деньги, что были в каюте Флинта. Уверен"+ GetSexPhrase("","а") +", что это часть золота Урки. По пятьсот тысяч на каждого. Ох, простите, я уже потратил"+ GetSexPhrase("","а") +" их. Возьмите сколько есть, остальное буду "+ GetSexPhrase("должен","должна") +". Если будут подвижки с координатами, дайте знать. Я умываю руки!";
 			link.l1.go = "BS_F1_57exit";	//минус 2кк.
 		break;
 
 		case "BS_F1_57exit": //Вейн
 			Lai_SetActorTypeNoGroup(npchar);
-			AddMoneyToCharacter(pchar, -2000000);
+			AddMoneyToCharacter(pchar, -4000000);
 			AddQuestRecord("BSHangover", "13");
 			CloseQuestHeader("BSHangover");
 			DialogExit();

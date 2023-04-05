@@ -1203,7 +1203,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 						sld.DeckDialogNode = "BS_CPNG_15";
 						FaceMaker(sld);
 						sld.SaveItemsForDead = true;
-						sld.money = 100000;
+						sld.money = 300000;
 						sld.items.jewelry1 = 10+rand(5);
 						sld.items.jewelry2 = 10+rand(5);
 						sld.items.jewelry3 = 10+rand(5);
@@ -1224,7 +1224,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 						sld.name = "Френсис";
 						sld.lastname = "Ньюм";
 						sld.SaveItemsForDead = true;
-						sld.money = 300000;
+						sld.money = 1250000;
 						sld.items.jewelry1 = 20+rand(5);
 						sld.items.jewelry2 = 20+rand(5);
 						sld.items.jewelry3 = 20+rand(5);
