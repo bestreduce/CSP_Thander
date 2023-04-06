@@ -23,7 +23,7 @@ string WhrGetSeaPresetFromWind(float fWind)
 	if(FindLocation(sLocation) != -1){
 	if (fWind > 1.0) sPreset = "light_breeze_land";
 	if (fWind > 10.0) sPreset = "strong_breeze_land";
-	if (fWind > 20.0) sPreset = "storm_land";
+	if (fWind > 18.0) sPreset = "storm_land";
 	}
 	if(CheckAttribute(&WeatherParams, "Storm") && sti(WeatherParams.Storm) == 1) sPreset = "storm";
 	return sPreset;
@@ -535,6 +535,7 @@ void WhrSetSeaPreset(int iCurWeatherNum, string sPreset, float fWind)
 			fFoamTexDisturb = 0.7;
 			fFrenel = 0.6;
 			fAttenuation = 0.3;
+			fReflection = 0.3;
 		break;	
 	}
 

@@ -33,7 +33,7 @@ void ProcessDialogEvent()
     			link.l1 = "Издеваешься?";
     			link.l1.go = "Step_E4_1";
             }
-            // ==> Комендант форта Оранж,  квест №5
+            // ==> Губернатор Форт Оранжа,  квест №5
             if (npchar.id == "Orange_Comendant")
             {
     			dialog.text = "Аргх... Проклятые английские псы! Хоть "+ GetSexPhrase("одному","одной") +" успею вспороть живот...";
@@ -242,7 +242,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddress(npchar, "None", "");
 			DialogExit();
 		break;
-//*************************************** Диалог коменданта форта Оранж *********************************
+//*************************************** Диалог губернатора Форт Оранжа *********************************
         case "Step_E5_1":
             LAi_SetPlayerType(pchar);
             LAi_group_MoveCharacter(npchar, "EnemyFight");

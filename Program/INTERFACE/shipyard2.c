@@ -221,6 +221,8 @@ void FillShipParam()
 		ref rBaseShip = GetShipByType(sti(rRealShip.BaseType));
 		DeleteAttribute(rRealShip, "Tuning");//просто затираем записи об апгрейдах
 		DeleteAttribute(rRealShip, "Untuned");
+		//снимаем чекбокс тюнинга на 42фт	//получается рекурсия какая-то - после снятия чекбокса заного вызывается эта же функция
+		if (Tune_Sheme[9] && sti(rBaseShip.MaxCaliber) == 42) SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, "TunSheme", 2, 9, 0);
 
 		rRealShip.HP = stf(rBaseShip.HP) * (1 + Ship_Sheme[1]/10.0*SHIP_STAT_RANGE_DRAFT);
 		rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - (Ship_Sheme[3] * 0.03);
@@ -237,23 +239,8 @@ void FillShipParam()
 		rRealShip.Price	= GetShipPriceByTTH(iShip, refNPCShipyard)*4;//цена без пушек
 		CalcTuningPrice();//стоимость апгрейда до применения апгрейдов считаем
 
-		SetBermudeTuningStates2Ship(refNPCShipyard, false, Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3], Tune_Sheme[6]);//калибр тюнингуем отдельно, иначе несколько раз до 36 можно поднимать
+		SetBermudeTuningStates2Ship(refNPCShipyard, Tune_Sheme[9], Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3], Tune_Sheme[6]);
 		//void SetBermudeTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti, bool WAS)
-
-		int BaseCaliber = sti(rBaseShip.MaxCaliber);
-		if (Tune_Sheme[9])//тюнинг калибра
-		{
-			switch (BaseCaliber)
-			{
-				case 8: rRealShip.MaxCaliber = 12; rRealShip.Tuning.Cannon = true; break;
-				case 12: rRealShip.MaxCaliber = 16; rRealShip.Tuning.Cannon = true; break;
-				case 16: rRealShip.MaxCaliber = 20; rRealShip.Tuning.Cannon = true; break;
-				case 20: rRealShip.MaxCaliber = 24; rRealShip.Tuning.Cannon = true; break;
-				case 24: rRealShip.MaxCaliber = 32; rRealShip.Tuning.Cannon = true; break;
-				case 32: rRealShip.MaxCaliber = 36; rRealShip.Tuning.Cannon = true; break;
-				case 42: SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, "TunSheme", 2, 9, 0);break;//снимаем чекбокс тюнинга
-			}
-		}
 
 		int iQMAXTemp = 5;
 		int curMaxCaliber = sti(rRealShip.MaxCaliber);
@@ -607,7 +594,7 @@ void DoBuyShip()
 		int maxQty;
 		string sBort, sBort_real, attr;
 
-		chref.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS8;
+		chref.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS8;//внимание - вот тут надо ставить макс калибр!!! и на обычной верфи тоже
 
 		sBort = "rcannon";
 		sBort_real = "cannonr";

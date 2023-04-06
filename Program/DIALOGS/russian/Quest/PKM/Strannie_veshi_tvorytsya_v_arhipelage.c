@@ -446,6 +446,8 @@ void ProcessDialogEvent()
 			sld.OfficerWantToGo.DontGo = true;
 			sld.loyality = MAX_LOYALITY;
 			AddPassenger(pchar, sld, false);
+			SetShipRemovable(sld, true);
+			SetCharacterRemovable(sld, true);
 			sld.location = "None";
 			sld.Dialog.CurrentNode = "hired";
 			sld.Payment = true;

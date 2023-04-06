@@ -45,7 +45,7 @@ void CreateColonyCommanders()
             {   // мэрам пропишем кол-во солдат
 				characters[iChar].Default.Crew.Quantity    = 1900;
 				characters[iChar].Default.Crew.MinQuantity = 1200;
-				characters[iChar].Default.nation = characters[iChar].nation; // запоминаем нацию, тех кто бы изначально (кто отбивать приплывет)
+				characters[iChar].Default.nation = characters[iChar].nation; // запоминаем нацию, тех кто бы изначально (кто отбивать приплывёт)
 			}
 			continue;
 		}
@@ -94,7 +94,7 @@ void CreateColonyCommanders()
 		// boal -->
 		characters[iChar].Default.Crew.Quantity    = ShipsTypes[SHIP_FORT].MaxCrew;  // для всех одинаково, для генератора сухопутных боевок
 		characters[iChar].Default.Crew.MinQuantity = ShipsTypes[SHIP_FORT].MinCrew;
-		characters[iChar].Default.nation        = characters[iChar].nation; // запоминаем нацию, тех кто бы изначально (кто отбивать приплывет)
+		characters[iChar].Default.nation        = characters[iChar].nation; // запоминаем нацию, тех кто бы изначально (кто отбивать приплывёт)
 		characters[iChar].Default               = colonies[i].from_sea;
         characters[iChar].Default.BoardLocation = colonies[i].Default.BoardLocation;
         characters[iChar].Default.Island        = colonies[i].island; // остров для осад

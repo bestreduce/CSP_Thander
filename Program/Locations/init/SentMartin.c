@@ -1015,7 +1015,7 @@ int LocationInitSentMartin(int n)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Marigo_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice2.tga";
 	//Town sack
 	locations[n].townsack = "Marigo";
 	locations[n].lockWeather = "Inside";
@@ -1025,7 +1025,7 @@ int LocationInitSentMartin(int n)
  	locations[n].islandId = "SentMartin";
 	//Models
 	//Always
-	locations[n].filespath.models = "locations\inside\PortOffice";
+	locations[n].filespath.models = "locations\inside\PortOffice2";
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
@@ -1575,10 +1575,11 @@ int LocationInitSentMartin(int n)
 	// Выход из города
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Marigo_ExitTown";
+	locations[n].fastreload = "Marigo";
 	locations[n].id.label = "ExitTown";
 	locations[n].image = "loading\jonny_load\jungle\ExitJungle.tga";
 	//Town sack
-	locations[n].townsack = "PortPax";
+	locations[n].townsack = "Marigo";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "SentMartin";

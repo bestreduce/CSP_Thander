@@ -1132,22 +1132,26 @@ string	Whr_GetCurrentFog() { return sCurrentFog; }
 string	Whr_GetInsideBack() { return sInsideBack; }
 string	GetLightingPath()
 {
+/*
 //navy -->
 	if (CheckAttribute(&WeatherParams, "Rain") && sti(WeatherParams.Rain))
 	{
 		return Whr_GetRainyLightningPath();
 	}
 //navy <--
+*/
 	return sLightingPath;
 }
 string	GetLmLightingPath()
 {
+/*
 //navy -->
 	if (CheckAttribute(&WeatherParams, "Rain") && sti(WeatherParams.Rain))
 	{
 		return "storm";
 	}
-//navy <--
+//navy <--	
+*/
 	return sLmLightingPath;
 }
 

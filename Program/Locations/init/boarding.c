@@ -1069,7 +1069,7 @@ int LocationInitBoarding(int n)
 	locations[n].environment.sea = "true";
     //Reload map
 	locations[n].reload.l1.name = "reload1_back";
-	locations[n].reload.l1.go = "SantoDomingo_ExitJungle";
+	locations[n].reload.l1.go = "Hispaniola_Jungle_03";
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].locators_radius.reload.reload1_back = 2.0;

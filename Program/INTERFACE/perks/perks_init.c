@@ -283,7 +283,7 @@ void extrnInitPerks()
 	ChrPerksList.list.InstantRepair.descr = "perkInstantRepair";    // плотник
 	ChrPerksList.list.InstantRepair.condition.LightRepair = true;
 	ChrPerksList.list.InstantRepair.condition.Carpenter = true;
-	ChrPerksList.list.InstantRepair.TimeDelay = 600;// boal 13.02.2004
+	ChrPerksList.list.InstantRepair.TimeDelay = 300;// boal 13.02.2004
 	ChrPerksList.list.InstantRepair.TimeDuration = 30;
 	ChrPerksList.list.InstantRepair.BaseType = "ship";
 	ChrPerksList.list.InstantRepair.OfficerType = "carpenter";

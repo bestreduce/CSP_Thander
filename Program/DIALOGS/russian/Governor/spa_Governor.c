@@ -7,7 +7,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
-			link.l1 = RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Сейчас мне не о чем говорить");
+			link.l1 = RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Сейчас мне не о чем говорить.");
 		    link.l1.go = "exit";
 			if (CheckAttribute(pchar, "questTemp.PDM_Novaya_Rodina.Guber") && pchar.questTemp.PDM_Novaya_Rodina.Guber == "HugoLesopilka")	//Квест "Новая Родина". Спрашиваем про Лесопилку.
 			{
@@ -441,7 +441,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     		pchar.questTemp.State = "Inquisition_toDeSouza";
             AddQuestRecord("Spa_Line_2_Inquisition", "1");
             SaveCurrentQuestDateParam("questTemp");
-            sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "priest", "man", "man", 10, SPAIN, -1, false));
+            sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "priest", "man", "man1", 10, SPAIN, -1, false));
         	sld.name 	= "Антониу";
         	sld.lastname = "де Соуза";
 			sld.model.animation = "man";

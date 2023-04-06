@@ -220,13 +220,13 @@ void ProcessDialogEvent()
                     if (Gorod == 2)
                     {
                         spawn_max = "FortOrange_tavern";
-                        dialog.text = "Пожалуйста, доставь письмо от меня для моего друга в Форт-Оранж. Не смотри так, тебе заплатят по прибытии! Наверняка, ты найдёшь его в таверне. Друга зовут Максимилиан Вебер, скажи, что ты от Люка Артиста.";
+                        dialog.text = "Пожалуйста, доставь письмо от меня для моего друга в Форт Оранж. Не смотри так, тебе заплатят по прибытии! Наверняка, ты найдёшь его в таверне. Друга зовут Максимилиан Вебер, скажи, что ты от Люка Артиста.";
                         link.l1 = "Ха! Твоя старая кличка! Давай письмо!";
                         link.l1.go = "StartQuest_8";
                         SetQuestHeader("Silence_Price");
                         AddQuestRecord("Silence_Price", "1");
                         AddQuestUserData("Silence_Price", "sSex", GetSexPhrase("", "а"));
-                        AddQuestUserData("Silence_Price", "sCity2", " Форт-Оранж");
+                        AddQuestUserData("Silence_Price", "sCity2", " Форт Оранж");
                         AddQuestUserData("Silence_Price", "FriendName", NPChar.name + "a " + NPChar.lastname + "а");
                         AddDialogExitQuest("AfterDialog");
                         TakeItemFromCharacter(NPChar, "Lukes_letter");

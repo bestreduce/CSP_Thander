@@ -341,7 +341,6 @@ void WhisperLine_Cage(string qName)
 
 	bDisableLandEncounters = true;
 
-	//sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "priest", "man", "man", 10, SPAIN, -1, false));
 	sld = GetCharacter(NPC_GenerateCharacter("AntonioDeSouza", "PGG_Vincento_0", "man", "man", 10, SPAIN, -1, false));
    	sld.name 	= "Антониу";
     sld.lastname = "де Соуза";

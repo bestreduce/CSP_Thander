@@ -1219,7 +1219,7 @@ int LocationInitSantoDomingo(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Пригород
+	// Выход из города
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SantoDomingo_ExitTown";
 	locations[n].fastreload = "SantoDomingo";
@@ -1262,7 +1262,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].reload.l1.label = "SantoDomingo";
 
 	locations[n].reload.l2.name = "reload2_back";
-	locations[n].reload.l2.go = "SantoDomingo_ExitJungle";
+	locations[n].reload.l2.go = "Hispaniola_Jungle_03";
 	locations[n].reload.l2.emerge = "reload5";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
@@ -1271,9 +1271,10 @@ int LocationInitSantoDomingo(int n)
 	n = n + 1;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Выход из города
+	// Джунгли
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    locations[n].id = "SantoDomingo_ExitJungle";
+    locations[n].id = "Hispaniola_Jungle_03";
+	locations[n].fastreload = "SantoDomingo";
 	locations[n].id.label = "ExitTown";
 	locations[n].image = "loading\jonny_load\jungle\ExitJungle.tga";
 	//Town sack
@@ -1369,7 +1370,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].environment.sea = "false";
 	//Reload map
 	locations[n].reload.l1.name = "reload1_back";
-	locations[n].reload.l1.go = "SantoDomingo_ExitJungle";
+	locations[n].reload.l1.go = "Hispaniola_Jungle_03";
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
@@ -1532,7 +1533,7 @@ int LocationInitSantoDomingo(int n)
     locations[n].locators_radius.reload.reload2_back = 2;
 
 	locations[n].reload.l3.name = "reload3_back";
-	locations[n].reload.l3.go = "Hispaniola_Jungle_03";
+	locations[n].reload.l3.go = "LaVega_ExitTown";
 	locations[n].reload.l3.emerge = "reload2";
 	locations[n].reload.l3.autoreload = "1";
 	locations[n].reload.l3.label = "Jungle";
@@ -1601,9 +1602,10 @@ int LocationInitSantoDomingo(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Джунгли
+	// Выход из Ла Веги
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    locations[n].id = "Hispaniola_Jungle_03";
+    locations[n].id = "LaVega_ExitTown";
+	locations[n].fastreload = "LaVega";
 	locations[n].id.label = "Jungle";
 	locations[n].image = "loading\jonny_load\jungle\Jungle5.tga";
 	//Sound
@@ -1698,7 +1700,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].locators_radius.reload.reload1_back = 2;
 
 	locations[n].reload.l2.name = "reload2_back";
-	locations[n].reload.l2.go = "Hispaniola_Jungle_03";
+	locations[n].reload.l2.go = "LaVega_ExitTown";
 	locations[n].reload.l2.emerge = "reload3";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
