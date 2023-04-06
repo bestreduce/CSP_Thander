@@ -583,6 +583,14 @@ void Whr_UpdateWeather()
 	MoveWeatherToLayers(iNewExecuteLayer, iNewRealizeLayer);
 }
 
+void Whr_SetViewerWeather(int set_type)
+{
+	iCurWeatherNum = set_type;
+	iNextWeatherNum = set_type;
+	CreateWeatherEnvironment();
+	MoveWeatherToLayers(iNewExecuteLayer, iNewRealizeLayer);
+}
+
 void Whr_LoadNextWeather(int nPlus)
 {
 	if (!isEntity(&Weather)) { return; }

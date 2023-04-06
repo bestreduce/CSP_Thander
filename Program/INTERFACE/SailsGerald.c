@@ -12,6 +12,7 @@ bool allowgerald = false;
 bool setcolor = false;
 ref chref;
 bool sails = false;
+bool geraldsails = false;
 
 Object fake_ship;
 Object fake_sail;
@@ -53,6 +54,7 @@ void VIEWER_Reload() {
 
 void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 {
+	Whr_SetViewerWeather(14);
 	ref yard = _shipyarder;
     //StartAboveForm(true);
     // лочим квест и карту
@@ -69,6 +71,10 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	{
 		curgerald = shref.ShipSails.Gerald_Name;
 		defgerald = curgerald;
+	}
+	if (CheckAttribute(chref,"Features.GeraldSails") && chref.Features.GeraldSails == true)
+	{
+		geraldsails = true;
 	}
 
     price = GetSailsTuningPrice(chref, _shipyarder, SAILSGERALD_PRICE_RATE);
@@ -165,6 +171,7 @@ void IDoExit(int exitCode)
 		shref.ShipSails.SailsColor = SailsColors[defcolor].color;
 		shref.ship.upgrades.sails = defsails;
 		if(CheckSailsGerald(chref) && CanSetSailsGerald(chref)) shref.ShipSails.Gerald_Name = defgerald;
+		if (!geraldsails) DeleteAttribute(chref,"Features.GeraldSails");
 	}
 	Ship_Walk_Delete();
 
@@ -237,6 +244,14 @@ void ProcCommand()
     		}
     	break;
 		
+		case "GERALD_CHECKBOX":
+    		if(comName=="activate" || comName=="click")
+    		{
+				CheckChangeSailStatus();
+                VIEWER_Reload();
+    		}
+    	break;
+		
 		case "HULL_LEFT_BUTTON":
     		if(comName=="activate" || comName=="click")
     		{
@@ -293,7 +308,6 @@ void ColorSwap(int swap)
 	if (curcolor == -1 && swap == -1) curcolor = 8;
 	if (curcolor == 9 && swap == 1) curcolor = 0;
 	CheckChangeSailStatus();
-	VIEWER_Reload();
 }
 
 void DoPostExit()
@@ -318,6 +332,7 @@ void ChangeSelectScrollImage()
 	if (sNod == "SAILS_COLOR_LEFT_BUTTON" || sNod == "SAILS_COLOR_RIGHT_BUTTON")
 	{
 		CheckChangeSailStatus();
+		VIEWER_Reload();
 	}
 	if (sNod == "SCROLL_GERALD")
 	{
@@ -354,6 +369,7 @@ void CheckChangeSailStatus()
 		bNewValue = true;
 		price = CalculateHullChangePrice(sti(shref.Class));
 	}
+	Event("GetSailTextureData","l",sti(chref.index));
 		
 	if (allowgerald)
 	{
@@ -361,8 +377,12 @@ void CheckChangeSailStatus()
 		{
 			if (GetChosenType("gerald") != defgerald) {bNewValue = true; price = price + CalculateSailsChangePrice(sti(shref.Class)); SetFormatedText("GERALD_CURRENT", "");}
 			else SetFormatedText("GERALD_CURRENT", "Текущий");
+			shref.ShipSails.Gerald_Name = GetChosenType("gerald");
+			chref.Features.GeraldSails = true;
 		}
 	}
+	else DeleteAttribute(shref,"ShipSails.Gerald_Name");
+	Event("GetSailTextureData","l",sti(chref.index));
 
 	if (SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETSAIL_CHECKBOX", 3, 1) && GetChosenType("sails") != defsails) 
 	{bNewValue = true; price = price + makeint(CalculateSailsChangePrice(sti(shref.Class))/2); SetFormatedText("SAILS_CURRENT", "");}
