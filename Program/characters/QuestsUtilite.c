@@ -2698,6 +2698,16 @@ void VSEnpcInit()
 	PChar.quest.MG_ObezyanaKill.win_condition = "MG_ObezyanaKill";
 	
 	//Куали
+	sld = GetCharacter(NPC_GenerateCharacter("Kuali", "Miskito_3", "man", "man", 1, PIRATE, -1, false));
+	ChangeCharacterAddressGroup(sld, "IndianVillage", "goto", "goto10");
+	LAi_SetCitizenType(sld);
+	sld.name = "Куали";
+	sld.lastname = "";
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_group_MoveCharacter(sld, "ItzaIndian");
+	sld.city = "SantaCatalina";
+	sld.dialog.filename = "Quest\Kuali.c";
+	sld.dialog.currentnode = "First time";
 }
 void OfficerGirlInit()
 {
