@@ -179,17 +179,6 @@ void ProcessDialogEvent()
 			}
 			//<--работорговец
 
-			//-->> дача квеста найти потерянный драгоценный камень
-			if (rand(1) && pchar.questTemp.different == "free" && !CheckAttribute(npchar, "quest.usurersJewel") && GetNpcQuestPastDayWOInit(npchar, "usurersJewel") > 7 && !CheckAttribute(pchar, "questTemp.different.SeekUsurersJewel") && npchar.city != "Charles" && !CheckAttribute(npchar, "quest.slave"))
-			{
-				dialog.text = "Здравствуйте, вы как нельзя вовремя! Хочу поручить вам одно дело.";
-				link.l1 = "Внимательно слушаю. Что за дело?";
-				link.l1.go = "usurersJewel_1";
-				npchar.quest.usurersJewel = "inSeek"; //личный флаг ростовщика на взятый квест
-				SaveCurrentNpcQuestDateParam(npchar, "usurersJewel");
-				break;
-			}
-			//<<-- дача квеста найти потерянный драгоценный камень
 			dialog.text = NPCStringReactionRepeat("Здравствуйте, " + GetAddress_Form(npchar) + ". Чем я могу вам помочь?",
 				"О, это опять вы? Добро пожаловать, " + GetAddress_Form(npchar) + " Что вы хотите на этот раз?",
 				"Хм, снова вы, " + GetAddress_Form(npchar) + "... Ну что же, рад вас видеть который уже раз за день. Что вы желаете?",
@@ -991,7 +980,7 @@ void ProcessDialogEvent()
 			if (npchar.quest.trade_date != lastspeak_date || bBettaTestMode)
 			{
                 npchar.quest.trade_date = lastspeak_date;
-                iNum = rand(1);
+                iNum = rand(2);
                 if (sti(Pchar.Ship.Type) == SHIP_NOTUSED)
                 {
                     iNum = 0; // всегда первый
@@ -1055,7 +1044,19 @@ void ProcessDialogEvent()
                             link.l1 = "Я готов"+ GetSexPhrase("","а") +"!";
                 			link.l1.go = "LoanUsurer_ChestWork_1";
             			}
-                     break;
+                    break;
+					 
+					case 2: //-->> дача квеста найти потерянный драгоценный камень
+						if (pchar.questTemp.different == "free" && !CheckAttribute(npchar, "quest.usurersJewel") && GetNpcQuestPastDayWOInit(npchar, "usurersJewel") > 7 && !CheckAttribute(pchar, "questTemp.different.SeekUsurersJewel") && npchar.city != "Charles" && !CheckAttribute(npchar, "quest.slave"))
+						{
+							dialog.text = "Вы как нельзя вовремя! Хочу поручить вам одно дело.";
+							link.l1 = "Внимательно слушаю. Что за дело?";
+							link.l1.go = "usurersJewel_1";
+							npchar.quest.usurersJewel = "inSeek"; //личный флаг ростовщика на взятый квест
+							SaveCurrentNpcQuestDateParam(npchar, "usurersJewel");
+						}
+					break;
+			//<<-- дача квеста найти потерянный драгоценный камень
     			}
     		}
             else
