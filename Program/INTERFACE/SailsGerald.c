@@ -13,6 +13,7 @@ bool setcolor = false;
 ref chref;
 bool sails = false;
 bool geraldsails = false;
+bool sailfound = false;
 
 Object fake_ship;
 Object fake_sail;
@@ -65,6 +66,7 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	if (!CheckAttribute(shref,"SailsColorIdx")) shref.SailsColorIdx = defcolor;
 	//else curcolor = 0;
 	defcolor = sti(shref.SailsColorIdx);
+	curcolor = defcolor;
 	cursails = sti(shref.ship.upgrades.sails);
 	defsails = cursails;
 	if (CheckAttribute(shref,"ShipSails.Gerald_Name"))
@@ -85,6 +87,18 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	if (bNewSails && _shipyarder.name == "Мастер") EnumerateIcons("resource\textures\ships", "parus_sail_*", "SCROLL_SAILS", 0);
 	else EnumerateIcons("resource\textures\ships\PlayerSails", "*.tga.tx", "SCROLL_SAILS", 0);
 	if(CheckSailsGerald(chref) && CanSetSailsGerald(chref)) EnumerateIcons("resource\textures\ships\gerald", "*.tga.tx", "SCROLL_GERALD", 0);
+	if(!CheckAttribute(&GameInterface,"SCROLL_COLORS.current"))
+	{
+		GameInterface.SCROLL_COLORS.current = defcolor;
+	}
+	if(!CheckAttribute(&GameInterface,"SCROLL_GERALD.current"))
+	{
+		GameInterface.SCROLL_GERALD.current = GetChosenTypeIndex("gerald")-1;
+	}
+	if(!CheckAttribute(&GameInterface,"SCROLL_SAILS.current"))
+	{
+		GameInterface.SCROLL_SAILS.current = GetChosenTypeIndex("sails")-1;
+	}
 
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
 
@@ -95,14 +109,6 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	SetEventHandler("ChangeSelectScrollImage", "ChangeSelectScrollImage", 0);
 	SetEventHandler("CheckButtonChange","procCheckBoxChange",0);
 
-	if(!CheckAttribute(&GameInterface,"SCROLL_GERALD.current"))
-	{
-		GameInterface.SCROLL_GERALD.current = 0;
-	}
-	if(!CheckAttribute(&GameInterface,"SCROLL_SAILS.current"))
-	{
-		GameInterface.SCROLL_SAILS.current = 0;
-	}
 	CheckChangeSailStatus();
 	if(!CheckSailsGerald(chref) || !CanSetSailsGerald(chref))
 	{
@@ -114,6 +120,9 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 		SetNewPicture("GERALD_NO_PIC", "interfaces\DeleteGerald.tga");
 		SetFormatedText("GERALD_NO", "На данный корабль невозможно установить герб");
 	}
+	else {if (defgerald != "") CheckButton_SetState("GERALD_CHECKBOX", 1, true);}
+	if (sailfound == true) CheckButton_SetState("SETSAIL_CHECKBOX", 1, true);
+	CheckChangeSailStatus();
 	
 	SetEventHandler("VIEWER_Reload", "VIEWER_Reload", 0);
     CreateEntity(&fake_ship, "ship");
@@ -693,6 +702,128 @@ void SetNewSailsGerald()
 	ProcessCancelExit();
 }
 
+int GetChosenTypeIndex(string total)
+{
+	int i;
+	string varname;
+	if (total == "gerald")
+	{
+		for (i = 1; i <= sti(GameInterface.SCROLL_GERALD.ListSize); i++)
+		{
+			varname = "pic"+i;
+			if (GameInterface.SCROLL_GERALD.(varname).FileName == shref.ShipSails.Gerald_Name+".tga.tx") return i;
+		}
+	}
+	if (total == "sails")
+	{
+		string sUpgrade = "";
+		switch(sti(shref.ship.upgrades.sails))
+		{
+			case 1:	sUpgrade = "common";	break; // LEO: --> Все корабли используют
+			case 2: sUpgrade = "pat";		break;
+			case 3:	sUpgrade = "silk";		break;
+			case 4: sUpgrade = "silkblack";	break; // Sea Boss
+			case 5:	sUpgrade = "usual_1";	break;
+			case 6:	sUpgrade = "usual_2";	break;
+			case 7:	sUpgrade = "usual_3";	break;
+			case 8:	sUpgrade = "usual_4";	break;
+			case 9:	sUpgrade = "usual_5";	break;
+			case 10:sUpgrade = "usual_6";	break;
+			case 11:sUpgrade = "usual_7";	break;
+			case 12:sUpgrade = "usual_8";	break;
+			case 13:sUpgrade = "usual_9";	break;
+			case 14:sUpgrade = "usual_10";	break;
+			case 15:sUpgrade = "usual_11";	break;
+			case 16:sUpgrade = "usual_12";	break;
+			case 17:sUpgrade = "usual_13";	break;
+			case 18:sUpgrade = "usual_14";	break;
+			case 19:sUpgrade = "usual_15";	break;
+			case 20:sUpgrade = "usual_16";	break;
+			case 21:sUpgrade = "usual_17";	break;
+			case 22:sUpgrade = "usual_18";	break;
+			case 23:sUpgrade = "usual_19";	break;
+			case 24:sUpgrade = "usual_20";	break;
+			case 25:sUpgrade = "usual_21";	break;
+			case 26:sUpgrade = "usual_22";	break;
+			case 27:sUpgrade = "usual_23";	break;
+			case 28:sUpgrade = "usual_24";	break;
+			case 29:sUpgrade = "usual_25";	break;
+			case 30:sUpgrade = "usual_26";	break;
+			case 31:sUpgrade = "usual_27";	break;
+			case 32:sUpgrade = "usual_28";	break;
+			case 33:sUpgrade = "usual_29";	break;
+			case 34:sUpgrade = "usual_30";	break;
+			case 35:sUpgrade = "usual_31";	break;
+			case 36:sUpgrade = "usual_32";	break;
+			case 37:sUpgrade = "usual_33";	break; // LEO: <-- Все корабли используют
+			case 38:sUpgrade = "sail_torn_black_pirate_1";		break; // LEO: --> Только пираты
+			case 39:sUpgrade = "sail_torn_black_pirate_2";		break;
+			case 40:sUpgrade = "sail_torn_black_pirate_3";		break;
+			case 41:sUpgrade = "sail_torn_black_pirate_4";		break;
+			case 42:sUpgrade = "sail_torn_black_pirate_5";		break;
+			case 43:sUpgrade = "sail_torn_black_pirate_6";		break;
+			case 44:sUpgrade = "sail_torn_black_pirate_7";		break;
+			case 45:sUpgrade = "sail_torn_black_pirate_8";		break;
+			case 46:sUpgrade = "sail_torn_black_pirate_9";		break;
+			case 47:sUpgrade = "sail_torn_black_pirate_10";		break;
+			case 48:sUpgrade = "sail_torn_black_pirate_11";		break;
+			case 49:sUpgrade = "sail_torn_black_pirate_12";		break;
+			case 50:sUpgrade = "sail_torn_black_pirate_13";		break;
+			case 51:sUpgrade = "sail_torn_black_pirate_14";		break;
+			case 52:sUpgrade = "sail_whole_black_pirate_1";		break;
+			case 53:sUpgrade = "sail_whole_black_pirate_2";		break;
+			case 54:sUpgrade = "sail_whole_black_pirate_3";		break;
+			case 55:sUpgrade = "sail_whole_black_pirate_4";		break;
+			case 56:sUpgrade = "sail_whole_black_pirate_5";		break;
+			case 57:sUpgrade = "sail_whole_black_pirate_6";		break;
+			case 58:sUpgrade = "sail_whole_black_pirate_7";		break;
+			case 59:sUpgrade = "sail_whole_black_pirate_8";		break;
+			case 60:sUpgrade = "sail_whole_black_pirate_9";		break;
+			case 61:sUpgrade = "sail_whole_black_pirate_10";	break;
+			case 62:sUpgrade = "sail_whole_black_pirate_11";	break;
+			case 63:sUpgrade = "sail_whole_black_pirate_12";	break;
+			case 64:sUpgrade = "sail_whole_black_pirate_13";	break;
+			case 65:sUpgrade = "sail_whole_black_pirate_14";	break;
+			case 66:sUpgrade = "sail_whole_black_pirate_15";	break;
+			case 67:sUpgrade = "sail_whole_black_pirate_16";	break;
+			case 68:sUpgrade = "sail_whole_black_pirate_17";	break;
+			case 69:sUpgrade = "sail_whole_white_pirate_1";		break;
+			case 70:sUpgrade = "sail_whole_white_pirate_2";		break;
+			case 71:sUpgrade = "sail_whole_white_pirate_3";		break;
+			case 72:sUpgrade = "sail_whole_white_pirate_4";		break;
+			case 73:sUpgrade = "sail_whole_white_pirate_5";		break;
+			case 74:sUpgrade = "sail_whole_white_pirate_6";		break;
+			case 75:sUpgrade = "sail_whole_white_pirate_7";		break;
+			case 76:sUpgrade = "sail_whole_white_pirate_8";		break;
+			case 77:sUpgrade = "sail_whole_white_pirate_9";		break;
+			case 78:sUpgrade = "sail_whole_white_pirate_10";	break;
+			case 79:sUpgrade = "sail_whole_white_pirate_11";	break;
+			case 80:sUpgrade = "sail_whole_white_pirate_12";	break;
+			case 81:sUpgrade = "sail_whole_white_pirate_13";	break;
+			case 82:sUpgrade = "sail_whole_white_pirate_14";	break;
+			case 83:sUpgrade = "sail_whole_white_pirate_15";	break;
+			case 84:sUpgrade = "sail_whole_white_pirate_16";	break;
+			case 85:sUpgrade = "sail_whole_white_pirate_17";	break;
+			case 86:sUpgrade = "sail_whole_white_pirate_18";	break;
+			case 87:sUpgrade = "sail_whole_white_pirate_19";	break;
+			case 88:sUpgrade = "sail_whole_white_pirate_20";	break; // LEO: <-- Только пираты
+			case 89:sUpgrade = "common_torn";					break;
+			case 90:sUpgrade = "common_torn1";					break;
+			case 91:sUpgrade = "common_torn2";					break;
+		}
+		for (i = 1; i <= sti(GameInterface.SCROLL_SAILS.ListSize); i++)
+		{
+			varname = "pic"+i;
+			if (GameInterface.SCROLL_SAILS.(varname).FileName == "parus_"+sUpgrade+".tga.tx") 
+			{
+				sailfound = true;
+				return i;
+			}
+		}
+	}
+	return 1;
+}
+
 void ClearSailsGerald()
 {
     //AddMoneyToCharacter(Pchar, -price);
@@ -701,4 +832,5 @@ void ClearSailsGerald()
 	defgerald = "";
 	CheckChangeSailStatus();
 	WaitDate("",0,0,0, 1, 30);
+	CheckButton_SetState("GERALD_CHECKBOX", 1, false);
 }
