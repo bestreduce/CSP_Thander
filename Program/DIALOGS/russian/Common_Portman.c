@@ -206,7 +206,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-						link.l1 = "Позвольте изложить вам суть вопроса. Я разминул"+ GetSexPhrase("ся","ась") +" со своим старым другом, капитаном " + PChar.GenQuest.ChurchQuest_1.CapFullName + ", всего на несколько часов, а у меня к нему срочное дело. Теперь придётся его догонять, но я, к сожалению, не осведомлён"+ GetSexPhrase("","а") +", в каком направлении он отбыл.";
+						link.l1 = "Позвольте изложить вам суть вопроса. Я разминул"+ GetSexPhrase("ся","ась") +" со своим старым другом всего на несколько часов, а у меня к нему срочное дело. Теперь придётся его догонять, но я, к сожалению, не осведомлён"+ GetSexPhrase("","а") +", в каком направлении он отбыл.";
 						link.l1.go = "Church_GenQuest1_Node_FillFullInfo";
 					}
 				}
@@ -400,7 +400,7 @@ void ProcessDialogEvent()
 
 		case "Church_GenQuest1_Node_FillFullInfo":
 			dialog.text = "Ваша проблема легко разрешима. Вы можете обратиться к любому чиновнику службы навигации, и получить всю имеющуюся информацию о маршруте судна вашего друга.";
-			link.l1 = "К сожалению, не всё так просто. Именно в вашем порту мой друг сменил название судна... из религиозных побуждений.";
+			link.l1 = "К сожалению, не всё так просто. Именно в вашем порту мой друг, капитан " + PChar.GenQuest.ChurchQuest_1.CapFullName + " сменил название судна... из религиозных побуждений.";
 			link.l1.go = "Church_GenQuest1_Node_FillFullInfo_2";
 		break;
 
@@ -424,11 +424,11 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_1.CapGoToColony = sColony;
 			if(CheckAttribute(pchar, "GenQuest.ChurchQuest_1.NoMoneyToPortMan"))
 			{
-				dialog.text = "Отлично! Сейчас посмотрим, что там у нас... минуту... так... вот, пожалуйста. В судовом реестре отмечено переименование, и судно, называемое отныне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "' под управлением капитана " + PChar.GenQuest.ChurchQuest_1.CapFullName + " отправилось сегодня в сторону " + XI_ConvertString("Colony" + sColony + "Gen") + ".";
+				dialog.text = "Отлично! Сейчас посмотрим, что там у нас... минуту... так... вот, пожалуйста. В судовом реестре отмечено переименование, и судно, называемое отныне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "' отправилось сегодня в сторону " + XI_ConvertString("Colony" + sColony + "Gen") + ".";
 				DeleteAttribute(pchar, "GenQuest.ChurchQuest_1.NoMoneyToPortMan");
 			}
 			else
-				dialog.text = "О-о-о!... То есть, да, вы оценили по достоинству, так как я очень, очень занятой человек. Минуту... так... вот, пожалуйста. В судовом реестре отмечено переименование. Судно, называемое отныне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "' под управлением капитана " + PChar.GenQuest.ChurchQuest_1.CapFullName + " отбыло сегодня в сторону " + XI_ConvertString("Colony" + sColony + "Gen") + ".";
+				dialog.text = "О-о-о!... То есть, да, вы оценили по достоинству, так как я очень, очень занятой человек. Минуту... так... вот, пожалуйста. В судовом реестре отмечено переименование. Судно, называемое отныне '" + PChar.GenQuest.ChurchQuest_1.CapShipName + "' отбыло сегодня в сторону " + XI_ConvertString("Colony" + sColony + "Gen") + ".";
 				link.l1 = "Благодарю вас, сударь, вы оказали мне действительно большую услугу.";
 				link.l1.go = "Church_GenQuest1_Node_FillFullInfo_4";
 				AddMoneyToCharacter(pchar, -1000);
