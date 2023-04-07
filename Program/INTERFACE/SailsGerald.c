@@ -165,6 +165,7 @@ void ProcessCancelExit()
 
 void IDoExit(int exitCode)
 {
+	DeleteSeaEnvironment();
 	if (!setcolor)
 	{
 		shref.SailsColorIdx = defcolor;
@@ -308,6 +309,7 @@ void ColorSwap(int swap)
 	if (curcolor == -1 && swap == -1) curcolor = 8;
 	if (curcolor == 9 && swap == 1) curcolor = 0;
 	CheckChangeSailStatus();
+	VIEWER_Reload();
 }
 
 void DoPostExit()
