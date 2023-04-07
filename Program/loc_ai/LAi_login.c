@@ -299,8 +299,8 @@ void LAi_CharacterPostLogin(ref location)
 		}
 		SecondChanceRefresh();
 		GenerateSpySeeker(location);
-		if(CheckAttribute(pchar,"catorga.on")) DeleteAttribute(pchar,"catorga");
-		if(CheckAttribute(pchar, "catorga")) pchar.catorga.on = "1";
+		//if(CheckAttribute(pchar,"catorga.on")) DeleteAttribute(pchar,"catorga");
+		//if(CheckAttribute(pchar, "catorga")) pchar.catorga.on = "1";	//это какой-то бред, отсрочивает появление каторжников на несколько локаций, но не на какой-то конкретный таймер
 		if(HasSubStr(location.id,"Crypt") && !HasSubStr(location.id, "Big")) location.id.label = "Crypt";
 
 		PGG_GraveyardCheckIsPGGHere(location);

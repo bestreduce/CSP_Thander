@@ -206,7 +206,7 @@ bool LAi_CreateEncounters(ref location)
 	{
 		//------------------ Банда рейдеров типа дежурит на грабежах ----------------------
 		case 0:
-			if(!bbettatestmode){if (rand(10) > 6) return false;}
+			if (rand(9) > 4) return false;//50%
 			if(CheckAttribute(location, "onUninhabitedIsland") || location.type == "seashore" || location.type == "mayak") return false; // На необитаемых нельзя
 			num = LAi_CalculateRaidersQuantity(GetAttributesNum(grp)); // LEO
 			if (num <= 0 ) num = 1; //если локаторов меньше четырех
@@ -269,7 +269,10 @@ bool LAi_CreateEncounters(ref location)
 		break;
 		//------------------ Спасаем девку в пампасах ----------------------
 		case 1:
-			if(rand(12) > 6) return false;
+			if (isDay()) 
+			{if (rand(9) > 5) return false;}//60% днём, что появится
+			else {if (rand(9) > 2) return false;}//30% ночью
+
 			if(CheckAttribute(location, "onUninhabitedIsland") || location.type == "seashore" || location.type == "mayak") return false; // На необитаемых  островах, маяках и бухтах нельзя
 			num = GetAttributesNum(grp); //кол-во локаторов
 
@@ -468,8 +471,11 @@ bool LAi_CreateEncounters(ref location)
 		break;
         //------------------ Праздношатающиеся перцы ----------------------
 		case 2: // доработка маленького и скучного энкаунтера.
+			if (isDay()) 
+			{if (rand(9) > 6) return false;}//70% днём, что появится
+			else {if (rand(9) > 2) return false;}//30% ночью
+
 			LAi_group_Delete("LandEncGroup");
-			if (rand(10) > 7) return false;
 			if(CheckAttribute(location, "onUninhabitedIsland")) return false; // На необитаемых нельзя
 			locator = GetAttributeName(GetAttributeN(grp, 0));
 			//Начинаем перебирать локаторы и логинить фантомов
@@ -554,7 +560,7 @@ bool LAi_CreateEncounters(ref location)
 		break;
 		//------------------ Военный патруль ----------------------
 		case 3:
-			if (rand(10) > 3) return false;
+			if (rand(9) > 3) return false;//40% шанс появления
 			if(CheckAttribute(location, "onUninhabitedIsland")) return false; // На необитаемых нельзя
 			//--> генерим ранг. военному патрулю палец в рот не клади и на начальных уровнях.
 			num = makeint(5+rand(15)); //кол-во человек в патруле // LEO
@@ -623,16 +629,13 @@ bool LAi_CreateEncounters(ref location)
 
 		// --------------------------------- Беглые каторжники -------------------------------------
 		case 4:
-		if(CheckAttribute(pchar, "catorga"))
-		{
-			DeleteAttribute(pchar, "catorga");
-			return false;
-		}
-			if(CheckAttribute(pchar, "GenQuest.Convict") || location.type == "seashore" || location.type == "mayak" ) return false; // LEO
-			if(CheckAttribute(location, "onUninhabitedIsland")) return false; // На необитаемых нельзя
-			if (sAreal == "Panama") return false;
+			if (CheckAttribute(pchar, "catorga") && GetNpcQuestPastMinutesParam(pchar, "catorga") < 600) return false;//минимум 10 часов между встречами с каторжниками
+			if (sAreal == "Panama") return false; 
+			if (sAreal != "Barbados" && sAreal != "Caiman" && rand(9) > 2) return false;//30% шанс появления, если рядом нет плантации
+			if (CheckAttribute(pchar, "GenQuest.Convict") || location.type == "seashore" || location.type == "mayak" ) return false; // LEO
+			if (CheckAttribute(location, "onUninhabitedIsland")) return false; // На необитаемых нельзя
 			num = LAi_CalculateRaidersQuantity(GetAttributesNum(grp)); //кол-во человек в группе // LEO
-			if(num <= 1) return false;
+			if (num <= 1) return false;
 			if (num <= 2) num = 2;
 			iRank = 2 + rand(3); //ранг каторжан
 
@@ -662,7 +665,6 @@ bool LAi_CreateEncounters(ref location)
 			RandomShuffle(&models);
 
 			pchar.GenQuest.Convict.ConvictQty = num;
-			pchar.GenQuest.Convict.city = sCity;
 
 			chrDisableReloadToLocation = true;
 
@@ -706,12 +708,14 @@ bool LAi_CreateEncounters(ref location)
 			if(iRnd >= 8) pchar.GenQuest.Convict.variant = 3;
 			pchar.GenQuest.Convict.var = rand(2);
 			Log_TestInfo("Каторжане: сгенерился квест");
-			pchar.catorga = "1";
+			SaveCurrentNpcQuestDateParam(pchar, "catorga"); //запомниаем встречу с каторжниками
+
 		break
 
 					// Dolphin (Корсары: История Пирата)
 		//------------------ Индейцы в джунглях (С небольшими апгрейдами от Korsar Maxim, Zik' и LEO) ----------------------
 		case 5:
+			//шанс появления не ставим, выше есть уже рандом 1/5 или 1/7, что в локе будут именно индейцы
 			if(isDay() || location.type == "seashore" || location.type == "mayak") return false;
 			num = LAi_CalculateRaidersQuantity(GetAttributesNum(grp));
 			if (num <= 0 ) num = 2; //если локаторов меньше четырех
@@ -740,8 +744,7 @@ bool LAi_CreateEncounters(ref location)
 
 				DeleteAttribute(chr, "equip");
 				DeleteAttribute(chr, "items");
-				DeleteAllPerksExceptChar(chr);
-				//DeleteAttribute(chr, "perks.list");
+				DeleteAllPerksExceptChar(chr);				
 
 				if(chr.model == "Canib_boss") // Глава каннибалов круче своих по экипировке
 				{
@@ -792,7 +795,6 @@ bool LAi_CreateEncounters(ref location)
 					TakeNItems(chr, "potion2", 7);
 					FantomMakeCoolFighter(chr, iScl*0.80, iScl*2.55, iScl*0.35, _Blade, "", 300);
 					DeleteAllPerksExceptChar(chr);
-					//DeleteAttribute(chr, "perks.list");
 					AddBonusEnergyToCharacter(chr, 200);
 					SetCharacterPerk(chr, "BasicDefense");
                     SetCharacterPerk(chr, "Tireless");
@@ -809,7 +811,6 @@ bool LAi_CreateEncounters(ref location)
 					FantomMakeCoolFighter(chr, iScl*0.55, iScl*1.90, iScl*0.25, _Blade, "", 150);
 					AddBonusEnergyToCharacter(chr, 30);
 					DeleteAllPerksExceptChar(chr);
-					//DeleteAttribute(chr, "perks.list");
 					SetCharacterPerk(chr, "BasicDefense");
 					SetCharacterPerk(chr, "AdvancedDefense");
                     SetCharacterPerk(chr, "Tireless");

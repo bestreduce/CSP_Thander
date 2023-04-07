@@ -424,7 +424,7 @@ string GenerateMerchant()
 			AddQuestUserData("MerchantOnMap", "sSex", GetSexPhrase("","а"));
 
             string sQuest = "ClearMerchant";
-            SetTimerCondition(sQuest, 0, 0, 6, false);
+            SetTimerCondition(sQuest, 0, 0, 3, false);
             pchar.quest.(sQuest).win_condition = "ClearMerchant";
             pchar.quest.(sQuest).function= "ClearMerchant";
             MerPrm.active = true;

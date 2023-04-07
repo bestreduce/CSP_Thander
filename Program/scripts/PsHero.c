@@ -2774,6 +2774,9 @@ void PGG_SpawnPGG()
 //Если отправить в поля пустые строки, выбор происходит без фильтрации
 string SelectRandomPGG(string sex, string animation)
 {
+	int selectPGG[PsHeroQty];
+	int numPGG = 0;
+
 	for (i = 1; i <= PsHeroQty; i++)
 	{
 		sld = CharacterFromID("PsHero_"+i);
@@ -2782,10 +2785,18 @@ string SelectRandomPGG(string sex, string animation)
 		bool bAnim = (sld.model.animation == animation) || (animation == "");
 		if (bSex && bAnim)
 		{
-			PGG_Disband_Fleet(sld);
-			Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
-			return sld.id;
+			selectPGG[numPGG] = i;
+			numPGG++;
 		}
+	}
+
+	if (numPGG > 0)
+	{
+		i = rand(numPGG-1);//возвращаю рандомность, чтоб не первый подходящий
+		sld = CharacterFromID("PsHero_" + selectPGG[i]);
+		PGG_Disband_Fleet(sld);
+		Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
+		return sld.id;
 	}
 	Log_TestInfo("ПГГ не выбран.")
 	return "";
