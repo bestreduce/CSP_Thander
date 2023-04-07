@@ -866,7 +866,7 @@ void PGG_SetUpForTask(ref chr)
 				int pgg_hunters_total = pgg_hunters+pgg_hunters_bonus;
 				if (!CheckAttribute(pchar, "PGG_grudge") && CheckAttribute(pchar, "PGG_killed") && sti(pchar.PGG_killed) > 4)
 				{
-					pgg_hunters_total = rand(pgg_hunters_total/2);
+					pgg_hunters_total = 1 + rand(pgg_hunters_total/2);
 				}
 				for (int i = 1; i <= pgg_hunters_total; i++)
 				{
