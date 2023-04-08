@@ -9293,6 +9293,18 @@ int InitItems()
 	itm.price = 5000;
 	itm.weight = 0.7;
 	n++;
+	
+	makeref(itm,Items[n]);
+	itm.id = "Peres_Kluch";
+	itm.name = "itmname_Peres_Kluch";
+	itm.describe = "itmdescr_Peres_Kluch";
+	itm.model = "keysimple";
+	itm.picIndex = 13;
+	itm.picTexture = "ITEMS_12";
+	itm.Weight = 0.0;
+	itm.price = 0;
+	itm.ItemType = "QUESTITEMS";
+	n++;
 
 	//InitGunExt(id,	sAttr,  sBullet,  sGunPowder, DmgMin_NC, DmgMax_NC, DmgMin_C, DmgMax_C, EnergyP_NC, EnergyP_C, Stun_NC, Stun_C, MultiDamage, MisFire, SelfDamage, Explosion,Accuracy,ChargeSpeed,isDefault);
 	InitGunExt(		 "pistol1", "t1",  	     "cartridge",               "",  20.0, 100.0,  20.0, 100.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 30,  8, 0);

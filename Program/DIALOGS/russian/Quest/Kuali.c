@@ -74,6 +74,19 @@ void ProcessDialogEvent()
 			SetQuestHeader("Kuali");
 			AddQuestRecord("Kuali", "1");
 			AddQuestUserData("Kuali", "sSex", GetSexPhrase("","ла"));
+			
+			sld = CharacterFromID("Kuali");
+			sld.dialog.filename = "Quest\Kuali.c";
+			sld.dialog.currentnode = "ЕщёРаз_1";
+			
+			pchar.questTemp.Kuali_1 = true;
+		break;
+		
+		case "ЕщёРаз_1":
+			dialog.text = "Ишик найти мой макуаутль?";
+			link.l1 = "Ещё не наш"+GetSexPhrase("ёл","ла")+".";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "ЕщёРаз_1";
 		break;
 		
 		

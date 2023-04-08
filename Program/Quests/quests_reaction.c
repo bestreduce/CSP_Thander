@@ -13017,6 +13017,14 @@ void QuestComplete(string sQuestName, string qname)
 			chrDisableReloadToLocation = true;
 		break;
 		// <--- Помощь Элен
+		
+		//Квест. Макуауитль Куали --->
+		case "Peres_Kluch":
+			AddQuestRecord("Kuali", "3");
+			locations[FindLocation("Pearl_Jungle_09")].models.always.bones = "jungle9_bones";
+		break;
+		
+		// <--- Макуауитль Куали
 	}
 }
 
