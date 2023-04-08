@@ -6996,7 +6996,7 @@ void InitShips()
 
 	refShip.Height.Bombs.Y				= 2.8;	refShip.Height.Bombs.DY		= 2.2;
 	refShip.Height.Grapes.Y				= 3.5;	refShip.Height.Grapes.DY	= 2.0;
-	refShip.Height.Knippels.Y			= 17.5;	refShip.Height.Knippels.DY	= 18	.0;
+	refShip.Height.Knippels.Y			= 17.5;	refShip.Height.Knippels.DY	= 18.0;
 	refShip.Height.Balls.Y				= 2.8;	refShip.Height.Balls.DY		= 2.2;
 
 	refship.InertiaAccelerationX	= 5.0;	refship.InertiaBrakingX		= 5.0;

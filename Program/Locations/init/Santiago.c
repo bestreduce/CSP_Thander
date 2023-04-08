@@ -548,7 +548,7 @@ int LocationInitSantiago(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Santiago_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice3.tga";
 	//Town sack
 	locations[n].townsack = "Santiago";
 	locations[n].lockWeather = "Inside";

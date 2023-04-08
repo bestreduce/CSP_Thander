@@ -604,7 +604,7 @@ int LocationInitCumana(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Cumana_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice3.tga";
 	//Town sack
 	locations[n].townsack = "Cumana";
 	locations[n].lockWeather = "Inside";
