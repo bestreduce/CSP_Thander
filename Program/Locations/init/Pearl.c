@@ -802,9 +802,12 @@ int LocationInitPearl(int n)
 	
 	locations[n].private1.key = "Peres_Kluch";
 	locations[n].private1.key.delItem = true;
-	locations[n].private1.items.Map_Best = 1;
-	locations[n].private1.items.icollection = 1;
-	locations[n].private1.items.jewelry9 = 500;
+	locations[n].private1.items.toporAZ = 1;
+	locations[n].private1.items.blackbeard_sword_baron = 1;
+	locations[n].private1.items.food2 = 10;
+	locations[n].private1.items.food3 = 10;
+	locations[n].private1.items.CompCraft_PowderMixture = 10;
+	locations[n].private1.items.CompCraft_Sulfur = 10;
 	n = n + 1;
 
 

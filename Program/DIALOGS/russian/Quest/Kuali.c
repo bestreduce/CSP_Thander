@@ -63,6 +63,8 @@ void ProcessDialogEvent()
 		
 		case "Отказ":
 			DialogExit();
+			DeleteAttribute(npchar, "talker");
+			UnmarkCharacter(npchar);
 			
 			LAi_CharacterDisableDialog(npchar);
 			npchar.lifeday = 0;
@@ -70,6 +72,8 @@ void ProcessDialogEvent()
 		
 		case "Согласие":
 			DialogExit();
+			DeleteAttribute(npchar, "talker");
+			UnmarkCharacter(npchar);
 			
 			SetQuestHeader("Kuali");
 			AddQuestRecord("Kuali", "1");
@@ -87,6 +91,43 @@ void ProcessDialogEvent()
 			link.l1 = "Ещё не наш"+GetSexPhrase("ёл","ла")+".";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "ЕщёРаз_1";
+		break;
+		
+		case "ВозвращаемПалку_1":
+			if (CheckCharacterItem(pchar, "blackbeard_sword_baron"))
+			{
+				dialog.text = "Нит ола ишик. Вернул, обратно вернул!";
+				link.l2 = "Да, забирай, и давай сюда то, что ты мне обещал взамен.";
+				link.l2.go = "ВозвращаемПалку_2";
+				//TakeItemFromCharacter(pchar, "CompCraft_PowderMixture");
+				TakeNItems(PChar,"blackbeard_sword_baron", -1);
+				TakeNItems(PChar,"toporAZ", -1);
+			}
+			else
+			{
+				dialog.text = "Ишик найти мой макуаутль?";
+				link.l1 = "Ещё не наш"+GetSexPhrase("ёл","ла")+".";
+				link.l1.go = "exit";
+				NextDiag.TempNode = "ВозвращаемПалку_1";
+			}
+		break;
+		case "ВозвращаемПалку_2":
+			dialog.text = "Куали честен. Даст жизнь. Тыт учтили.";
+			link.l1 = "Вот оно что, ты имел ввиду 'здоровье'. Сойдёт. Пожалуй это честная сделка. Удачи тебе, Куали.";
+			link.l1.go = "ВозвращаемПалку_3";
+			
+			AddItems(pchar, "StrangeElixir", 1);
+			AddItems(pchar, "StrengthTube", 1);
+			AddItems(pchar, "potion", 2);
+		break;
+		case "ВозвращаемПалку_3":
+			DialogExit();
+			
+			PChar.quest.Kuali_EtoNashaPalka.over = "yes";
+			AddQuestRecord("Kuali", "6");
+			CloseQuestHeader("Kuali");
+			LAi_CharacterDisableDialog(npchar);
+			npchar.lifeday = 0;
 		break;
 		
 		
