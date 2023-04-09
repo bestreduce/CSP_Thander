@@ -407,9 +407,9 @@ void ProcessDialogEvent()
 			pchar.GenQuest.ShipWreck.ShipTypeName = GenerateRandomNameToShip(sti(pchar.GenQuest.ShipWreck.Nation));
 			if(rand(1) == 0)
 			{
-				dialog.text = RandPhraseSimple("Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "', моё судно разбилось о рифы недалеко от берега. " +
+				dialog.text = RandPhraseSimple("Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "', моё судно разбилось о рифы недалеко от берега. " +
 					"Из всей команды удалось спастись лишь немногим. Нас вынесло приливом на этот безлюдный пляж. Мы голодаем и страдаем от жажды вот уже " + (5 + dRand(7)) + " недель",
-					"Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Наше судно потерпело крушение недалеко отсюда. " +
+					"Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Наше судно потерпело крушение недалеко отсюда. " +
 					"На его обломках нам удалось добраться до этого берега, но он оказался необитаем. Мы вынуждены были питаться моллюсками и пальмовыми плодами на протяжении " + (5 + dRand(7)) + " недель.");
 				link.l1 = RandPhraseSimple("И сколько же вас осталось?", "И скольким из вас посчастливилось выжить?");
 				link.l1.go = "ShipWreck_3";
@@ -419,8 +419,8 @@ void ProcessDialogEvent()
 				pchar.GenQuest.ShipWreck.Mutiny = true;
 				pchar.GenQuest.ShipWreck.BadName = GenerateRandomName_Generator(sti(pchar.GenQuest.ShipWreck.Nation), "man");
 				pchar.GenQuest.ShipWreck.City = GetQuestNationsCity(sti(pchar.GenQuest.ShipWreck.Nation));
-				dialog.text = "Ох, капитан, такие серьёзные, что и  врагу не пожелаешь... Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан и владелец " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Вернее бывший капитан и владелец. " +
-					"Этот негодяй " + pchar.GenQuest.ShipWreck.BadName + ", которого я нанял " + LinkRandPhrase(RandPhraseSimple("старшим помощником","судовым врачом"), RandPhraseSimple("штурманом","боцманом"), RandPhraseSimple("коком","старшим плотником")) + " в " + XI_ConvertString("Colony" + pchar.GenQuest.ShipWreck.City + "Dat") + ", подбил команду на бунт. В итоге нас высадили в этом безлюдном месте. Это случилось " + (5 + dRand(7)) + " недель назад.";
+				dialog.text = "Ох, капитан, такие серьёзные, что и  врагу не пожелаешь... Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан и владелец " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Вернее бывший капитан и владелец. " +
+					"Этот негодяй " + pchar.GenQuest.ShipWreck.BadName + ", которого я нанял " + LinkRandPhrase(RandPhraseSimple("старшим помощником","судовым врачом"), RandPhraseSimple("штурманом","боцманом"), RandPhraseSimple("коком","старшим плотником")) + " в " + XI_ConvertString("Colony" + pchar.GenQuest.ShipWreck.City + "Voc") + ", подбил команду на бунт. В итоге нас высадили в этом безлюдном месте. Это случилось " + (5 + dRand(7)) + " недель назад.";
 				link.l1 = "И что, вся команда примкнула к бунтовщикам?";
 				link.l1.go = "ShipWreck_4";
 			}
