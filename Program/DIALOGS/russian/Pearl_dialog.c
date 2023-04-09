@@ -296,7 +296,6 @@ void ProcessDialogEvent()
 			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.GunPowder = 8;
 			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.indian2 = 1;
 			
-			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.indian2 = 1;
 			pchar.GenQuestRandItem.PearlTown2_Hut1.randitem1 = "Peres_Kluch";
 			
 			PChar.quest.Peres_Kluch.win_condition.l1 = "item";

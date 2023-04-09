@@ -812,7 +812,6 @@ int LocationInitPearl(int n)
 	locations[n].private1.items.jewelry17 = 3;
 	locations[n].private1.items.CompCraft_PowderMixture = 10;
 	locations[n].private1.items.CompCraft_Sulfur = 10;
-	locations[n].private1.items.toporAZ = 1;
 	n = n + 1;
 
 

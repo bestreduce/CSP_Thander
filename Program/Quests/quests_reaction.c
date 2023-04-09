@@ -13041,8 +13041,6 @@ void QuestComplete(string sQuestName, string qname)
 			PChar.quest.Kuali_Palka.win_condition.l1.locator_group = "box";
 			PChar.quest.Kuali_Palka.win_condition.l1.locator = "private1";
 			PChar.quest.Kuali_Palka.win_condition = "Kuali_Palka";
-			
-			pchar.GenQuestBox.Pearl_Jungle_09.private1.items.topor_01 = 1;
 			for (i=2; i<=4; i++)
 			{
 				sTemp = "Canib_"+(rand(5)+1);					
@@ -13053,6 +13051,7 @@ void QuestComplete(string sQuestName, string qname)
 			}
 		break;
 		case "Kuali_Palka":
+			Log_info("Вы подобрали Макуауитль!");
 			AddQuestRecord("Kuali", "4");
 			
 			PChar.quest.Kuali_EtoNashaPalka.win_condition.l1 = "MapEnter";
@@ -13061,6 +13060,8 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("Kuali");
 			sld.dialog.filename = "Quest\Kuali.c";
 			sld.dialog.currentnode = "ВозвращаемПалку_1";
+			
+			GiveItem2Character(PChar, "toporAZ");
 		break;
 		case "Kuali_EtoMoyaPalka":
 			AddQuestRecord("Kuali", "5");

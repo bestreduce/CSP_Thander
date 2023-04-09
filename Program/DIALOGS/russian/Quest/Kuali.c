@@ -94,14 +94,13 @@ void ProcessDialogEvent()
 		break;
 		
 		case "ВозвращаемПалку_1":
-			if (CheckCharacterItem(pchar, "blackbeard_sword_baron"))
+			if (CheckCharacterItem(pchar, "toporAZ"))
 			{
 				dialog.text = "Нит ола ишик. Вернул, обратно вернул!";
 				link.l2 = "Да, забирай, и давай сюда то, что ты мне обещал взамен.";
 				link.l2.go = "ВозвращаемПалку_2";
-				//TakeItemFromCharacter(pchar, "CompCraft_PowderMixture");
-				TakeNItems(PChar,"blackbeard_sword_baron", -1);
-				TakeNItems(PChar,"toporAZ", -1);
+				TakeItemFromCharacter(pchar, "toporAZ");
+				Log_info("Вы отдали Макуауитль");
 			}
 			else
 			{
