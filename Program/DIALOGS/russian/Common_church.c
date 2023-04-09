@@ -1300,10 +1300,19 @@ void ProcessDialogEvent()
 			sTitle = sld.id + "Church_DestroyGhost";
 			ReOpenQuestHeader(sTitle);
 			AddQuestRecordEx(sTitle, "Church_DestroyGhost", "1");
-			AddQuestUserDataForTitle(sTitle, "sLocation", GetStrSmallRegister(npchar.quest.DestroyGhost.label));
+			switch (npchar.quest.DestroyGhost.label)
+			{
+				case "Пещера": sTemp = "пещеру"; break;
+				case "пещера": sTemp = "пещеру"; break;
+				case "Грот": sTemp = "грот"; break;
+				case "грот": sTemp = "грот"; break;
+				case "Подземелье": sTemp = "подземелье"; break;
+				case "подземелье": sTemp = "подземелье"; break;
+			}
+			AddQuestUserDataForTitle(sTitle, "sLocation", sTemp);
 			AddQuestUserDataForTitle(sTitle, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(sTitle, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
-			AddQuestUserData(sTitle, "sLocation", npchar.quest.DestroyGhost.label);
+			AddQuestUserData(sTitle, "sLocation", sTemp);
 		break;
 
 		case "GhostShip_S1":
