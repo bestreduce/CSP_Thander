@@ -195,16 +195,13 @@ void WorldSituationsUpdate()
             UpdateFame();   // это теперь известность репутации
 			GenerateRumour() //homo 05/07/06
 		break;
-
-		case 10:
-			//
-		break;
+		//добавляю до 36, но можно любое число, если ещё сократить время милисекунд в ивенте
 	}
 
 	iStep++;
 	InterfaceStates.WorldSituationUpdateStep = iStep;
 
-	if(iStep <= 10)
+	if(iStep <= 36)
 	{
 		PostEvent("EvSituationsUpdate", 1000, "l", iStep);
 	}
