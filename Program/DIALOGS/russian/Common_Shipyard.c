@@ -201,7 +201,7 @@ void ProcessDialogEvent()
 					link.l11 = "Мне нужны орудия на корабль.";
 					link.l11.go = "Cannons";
 				}
-				link.l12 = "Хочу изменить внешний вид парусов.";
+				link.l12 = "Хочу изменить внешний вид корабля.";
 				link.l12.go = "SailsGerald";
 				//Jason --> генератор Призонер
 				if (CheckAttribute(pchar, "GenQuest.Findship.Shipyarder") && NPChar.location == pchar.GenQuest.Findship.Shipyarder.City + "_shipyard")
@@ -350,7 +350,7 @@ void ProcessDialogEvent()
 					link.l13 = "Мне нужны орудия на корабль.";
 					link.l13.go = "Cannons";
 				}
-				link.l12 = "Хочу изменить внешний вид парусов.";
+				link.l12 = "Хочу изменить внешний вид корабля.";
 				link.l12.go = "SailsGerald";
 				Link.l2 = "Я только хочу поговорить.";
 				link.l2.go = "quests";

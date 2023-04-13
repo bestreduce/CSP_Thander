@@ -267,7 +267,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			link.l3 = "Мне нужны орудия на корабль.";
 			link.l3.go = "Cannons";
-			link.l4 = "Хочу изменить внешний вид парусов.";
+			link.l4 = "Хочу изменить внешний вид корабля.";
 			link.l4.go = "SailsGerald";
 			Link.l9 = "Не могу с вами согласиться. В здешних водах иногда попадаются очень неплохие корабли. До свидания.";
 			Link.l9.go = "ship_tunning_not_now";
@@ -360,7 +360,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			link.l3 = "Мне нужны орудия на корабль.";
 			link.l3.go = "Cannons";
-			link.l31 = "Хочу изменить внешний вид парусов.";
+			link.l31 = "Хочу изменить внешний вид корабля.";
 			link.l31.go = "SailsGerald";
             Link.l4 = "У меня вопрос.";
 			Link.l4.go = "quests"; //(пересылка в файл города)
