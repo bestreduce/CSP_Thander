@@ -246,8 +246,6 @@ void SharleMary_MeetCap(string qName)
 			sld.SaveItemsForDead = true;
 			sld.talker = 10;
 			LAi_SetStayType(sld);
-			sld.name = "Мимо";
-			sld.lastname = "Крокодил";
 		}
 		ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto1");
 
