@@ -247,7 +247,63 @@ void ProcessDialogEvent()
 					"У меня к тебе вопрос, дружище. Кто тут у вас замечен в связях с пиратами?");
 				link.l2.go = "PearlMan_Sharp_1";
 			}
+			if (CheckAttribute(pchar, "questTemp.Kuali_1"))
+			{
+				link.l2 = "Приятель, я тут ищу человека, который общался с местными аборигенами из их деревни.");
+				link.l2.go = "Kuali_Poiski_1";
+			}
 		break;
+		case "Kuali_Poiski_1":
+			dialog.text = "Да мы все с ними общаемся, они на нас работают, те у кого хватило ума не строить из себя великих воинов.";
+			link.l1 = "Точно, один из этих воинов попросил меня вернуть его дубинку, наверное она для него очень ценна. Не как оружие, палку то он себе мог и новую смастерить.";
+			link.l1.go = "Kuali_Poiski_2";
+		break;
+		case "Kuali_Poiski_2":
+			dialog.text = "А-а, это тебе к Пересу нужно, только ты опоздал"+GetSexPhrase("","а")+", выгнали мы его.";
+			link.l1 = "Уплыл значит из этих мест?";
+			link.l1.go = "Kuali_Poiski_3";
+		break;
+		case "Kuali_Poiski_3":
+			dialog.text = "Вот это сильно вряд-ли, его не то что на корабль никто бы не взял, приближаться к нему поостерёгся. Натравил он дел с этими индейцами. У одного вот великую ценность отнял. Ты это правильно подметил"+GetSexPhrase("","а")+" - для местных она не просто дубина. А потом ещё хвастал, что соблазнил жену племени, представляешь?";
+			link.l1 = "Что ещё за жена племени?";
+			link.l1.go = "Kuali_Poiski_4";
+		break;
+		case "Kuali_Poiski_4":
+			dialog.text = "Так баба их, наверняка ты видел"+GetSexPhrase("","а")+" её, раз был"+GetSexPhrase("","а")+" там. В перьях вся, в побрякушках. Жена всем молодым мужчинам, пока те не находят достойную себя ровесницу. Такие вот чудные традиции, ничего не поделать.";
+			link.l1 = "Проститутка что-ли?";
+			link.l1.go = "Kuali_Poiski_5";
+		break;
+		case "Kuali_Poiski_5":
+			dialog.text = "Не, не. Жена, ни дать ни взять. К ней на хромой козе не подъедешь. Так вот мы и думали, Перес врал, что её того-этого, а после стал струпьями покрываться как чумной и гнить заживо. Мужья её порчу наслали, не иначе. Мы его и выгнали. Чёрт знает, вдруг зараза на всех перекинется, и к холупе его больше не подходили.";
+			link.l1 = "У него здесь дом остался?";
+			link.l1.go = "Kuali_Poiski_6";
+		break;
+		case "Kuali_Poiski_6":
+			dialog.text = "Я б туда соваться не советовал. Сжечь бы его, да комендант боится, что огонь на его крышу перекинется.";
+			link.l1 = "Я попробую. Индеец мне какую-то жизнь обещал, вдруг это и есть оберег от подобного рода неприятностей.";
+			link.l1.go = "Kuali_Poiski_7";
+		break;
+		case "Kuali_Poiski_7":
+			dialog.text = "Хе-х. Только ко мне больше не приближайся, как побываешь там.";
+			link.l1 = "Ладно, не буду.";
+			link.l1.go = "exit";
+			
+			DeleteAttribute(pchar, "questTemp.Kuali_1");
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.mineral6 = 15;
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.jewelry11 = 1;
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.jewelry12 = 10;
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.bullet = 8;
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.GunPowder = 8;
+			pchar.GenQuestBox.PearlTown2_Hut1.box1.items.indian2 = 1;
+			
+			pchar.GenQuestRandItem.PearlTown2_Hut1.randitem1 = "Peres_Kluch";
+			
+			PChar.quest.Peres_Kluch.win_condition.l1 = "item";
+			PChar.quest.Peres_Kluch.win_condition.l1.item = "Peres_Kluch";
+			PChar.quest.Peres_Kluch.win_condition = "Peres_Kluch";
+			AddQuestRecord("Kuali", "2");
+		break;
+		
 		case "PearlMan_1":
 			dialog.text = "Мы тут жемчуг добываем, служим " + NationNameGenitive(sti(npchar.nation)) + ", такое вот дело...";
 			link.l1 = "Да, я в курсе...";

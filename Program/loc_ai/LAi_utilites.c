@@ -1256,7 +1256,7 @@ void CreateIndianVillage(aref loc) // Sinistra: деревня индейцев
 			int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+5;
 			int num = rand(2)+6; //кол-во 
 			ref chr;
-			string model[10];		
+			string model[8];		
 			model[0] = "Itza_1";
 			model[1] = "Itza_2";
 			model[2] = "Itza_3";
@@ -1265,13 +1265,11 @@ void CreateIndianVillage(aref loc) // Sinistra: деревня индейцев
 			model[5] = "Itza_6";
 			model[6] = "Itza_7";
 			model[7] = "Itza_8";
-			model[8] = "Miskito_1";
-			model[9] = "Miskito_2";
 			i = 0;
 			
 			while(i < num)
 			{
-				iMassive = rand(9);
+				iMassive = rand(7);
 				if (model[iMassive] != "")
 				{
 					chr = GetCharacter(NPC_GenerateCharacter("Itza"+"_"+i, model[iMassive], "man", "man", iRank, PIRATE, 1, false));

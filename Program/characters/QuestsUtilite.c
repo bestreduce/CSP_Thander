@@ -2697,33 +2697,12 @@ void VSEnpcInit()
 	PChar.quest.MG_ObezyanaKill.win_condition.l1.character = "MG_Obezyana";
 	PChar.quest.MG_ObezyanaKill.win_condition = "MG_ObezyanaKill";
 	
-	//Пираты на пристани в Пуэрто-Принсипе
-	/*for (i=1; i<=4; i++)									//Количество
-	{
-		sTemp = "pirate_"+(rand(24)+1);					
-		sld = GetCharacter(NPC_GenerateCharacter("Pirates_PP_Port_"+i, sTemp, "man", "man", 5, PIRATE, 2, true));
-		sld.City = "PuertoPrincipe";
-		sld.CityType = "soldier";
-		sld.RebirthPhantom = true;
-		//sld.CanChangeModel = true;
-		//LAi_CharacterReincarnation(sld, true, true);
-		LAi_SetReincarnationRankStep(sld, MOD_SKILL_ENEMY_RATE+2);
-		LAi_SetWarriorType(sld);
-		SetFantomParamFromRank(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
-		LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
-		LAi_SetLoginTime(sld, 6.0, 23.0);
-		sld.dialog.filename = "Common_Soldier.c";
-		sld.dialog.currentnode = "first time";
-		ChangeCharacterAddressGroup(sld, "PuertoPrincipe_port", "goto", "character1");
-	}*/
-	/*sld = CharacterFromID("Pirates_PP_Port_1");
-	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_port", "goto", "character1");
-	sld = CharacterFromID("Pirates_PP_Port_2");
-	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_port", "goto", "character2");
-	sld = CharacterFromID("Pirates_PP_Port_3");
-	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_port", "goto", "character10");
-	sld = CharacterFromID("Pirates_PP_Port_4");
-	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_port", "goto", "character10");*/
+	//******Макуауитль Куали******
+	//Куали
+	pchar.quest.Kuali_Spawn.win_condition.l1 = "Rank";
+	pchar.quest.Kuali_Spawn.win_condition.l1.value = 4;
+	pchar.quest.Kuali_Spawn.win_condition.l1.operation = ">=";
+	PChar.quest.Kuali_Spawn.win_condition = "Kuali_Spawn";
 }
 void OfficerGirlInit()
 {

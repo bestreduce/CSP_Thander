@@ -13017,6 +13017,60 @@ void QuestComplete(string sQuestName, string qname)
 			chrDisableReloadToLocation = true;
 		break;
 		// <--- Помощь Элен
+		
+		//Квест. Макуауитль Куали --->
+		case "Kuali_Spawn":
+			//Куали
+			sld = GetCharacter(NPC_GenerateCharacter("Kuali", "Miskito_3", "man", "man", 1, PIRATE, -1, false));
+			ChangeCharacterAddressGroup(sld, "IndianVillage", "goto", "goto10");
+			LAi_SetCitizenType(sld);
+			sld.name = "Куали";
+			sld.lastname = "";
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			LAi_group_MoveCharacter(sld, "ItzaIndian");
+			sld.city = "SantaCatalina";
+			sld.dialog.filename = "Quest\Kuali.c";
+			sld.dialog.currentnode = "First time";
+			sld.talker = 5;
+		break;
+		case "Peres_Kluch":
+			AddQuestRecord("Kuali", "3");
+			locations[FindLocation("Pearl_Jungle_09")].models.always.bones = "jungle9_bones";
+			PChar.quest.Kuali_Palka.win_condition.l1 = "locator";
+			PChar.quest.Kuali_Palka.win_condition.l1.location = "Pearl_Jungle_09";
+			PChar.quest.Kuali_Palka.win_condition.l1.locator_group = "box";
+			PChar.quest.Kuali_Palka.win_condition.l1.locator = "private1";
+			PChar.quest.Kuali_Palka.win_condition = "Kuali_Palka";
+			for (i=2; i<=4; i++)
+			{
+				sTemp = "Canib_"+(rand(5)+1);					
+				sld = GetCharacter(NPC_GenerateCharacter("Kuali_Canib_"+i, sTemp, "man", "man", sti(pchar.rank), PIRATE, -1, true));
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+				ChangeCharacterAddressGroup(sld, "Pearl_Jungle_09", "monsters",  "monster"+i);
+			}
+		break;
+		case "Kuali_Palka":
+			Log_info("Вы подобрали Макуауитль!");
+			AddQuestRecord("Kuali", "4");
+			
+			PChar.quest.Kuali_EtoNashaPalka.win_condition.l1 = "MapEnter";
+			PChar.quest.Kuali_EtoNashaPalka.win_condition = "Kuali_EtoMoyaPalka";
+			
+			sld = CharacterFromID("Kuali");
+			sld.dialog.filename = "Quest\Kuali.c";
+			sld.dialog.currentnode = "ВозвращаемПалку_1";
+			
+			GiveItem2Character(PChar, "toporAZ");
+		break;
+		case "Kuali_EtoMoyaPalka":
+			AddQuestRecord("Kuali", "5");
+			CloseQuestHeader("Kuali");
+			
+			sld = CharacterFromID("Kuali");
+			sld.lifeday = 0;
+		break;		
+		// <--- Макуауитль Куали
 	}
 }
 

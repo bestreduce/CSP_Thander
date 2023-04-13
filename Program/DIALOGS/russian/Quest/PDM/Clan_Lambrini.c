@@ -792,8 +792,8 @@ void ProcessDialogEvent()
 			GiveItem2Character(sld, sld.LambiniAsoleda);
 			EquipCharacterByItem(sld, sld.LambiniAsoleda);
 
-			GiveItem2Character(sld, "pistol4");
-			EquipCharacterByItem(sld, "pistol4");
+			GiveItem2Character(sld, "pistol1");
+			EquipCharacterByItem(sld, "pistol1");
 
 			sld.BackupHP = LAi_GetCharacterMaxHP(sld);
 			LAi_SetHP(sld, sti(sld.BackupHP) + 1000, sti(sld.BackupHP) + 1000);

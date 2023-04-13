@@ -36,7 +36,7 @@
 #define IDOLS_RIGHT_ITEM_TYPE 				"idols_right"
 
 
-#define ITEMS_QUANTITY			  428  // не забываем менять номер
+#define ITEMS_QUANTITY			  429  // не забываем менять номер
 
 #define MAX_BUTTONS               64
 #define RANDITEMS_QUANTITY    	  61
