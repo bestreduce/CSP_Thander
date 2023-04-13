@@ -1148,7 +1148,7 @@ void ProcessDialogEvent()
 			}
 			else // Сцена 2б-б
 			{
-				dialog.text = "Ах, "+ GetSexPhrase("сын мой","дочь моя") +"! Вы опоздали буквально на несколько часов! Я уже отправил книги Отца " + PChar.GenQuest.ChurchQuest_1.PriestName + " с капитаном " + PChar.GenQuest.ChurchQuest_1.CapFullName + ". Утром этот богобоязненный человек пришёл на исповедь и обмолвился, что сегодня его судно отправляется в " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.CapColony) + ". И хотя господин капитан не ручался за сроки, однако согласился помочь, уверив меня, что в порт " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.QuestTown + "Gen") + " он непременно зайдёт.";
+				dialog.text = "Ах, "+ GetSexPhrase("сын мой","дочь моя") +"! Вы опоздали буквально на несколько часов! Я уже отправил книги Отца " + PChar.GenQuest.ChurchQuest_1.PriestName + ". Утром капитан " + PChar.GenQuest.ChurchQuest_1.CapFullName + " приходил на исповедь и обмолвился, что сегодня его судно отправляется в " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.CapColony) + ". И хотя господин капитан не ручался за сроки, однако согласился помочь, уверив меня, что в порт " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.QuestTown + "Gen") + " он непременно зайдёт.";
 					link.l1 = LinkRandPhrase("Падре", "Святой отец", "Отец мой") + "... а вы уверены, что этому капитану можно доверять?.. И ещё я хотел"+ GetSexPhrase("","а") +" бы узнать, как называется его судно.";
 					link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_1";
 			}
@@ -1300,10 +1300,19 @@ void ProcessDialogEvent()
 			sTitle = sld.id + "Church_DestroyGhost";
 			ReOpenQuestHeader(sTitle);
 			AddQuestRecordEx(sTitle, "Church_DestroyGhost", "1");
-			AddQuestUserDataForTitle(sTitle, "sLocation", GetStrSmallRegister(npchar.quest.DestroyGhost.label));
+			switch (npchar.quest.DestroyGhost.label)
+			{
+				case "Пещера": sTemp = "пещеру"; break;
+				case "пещера": sTemp = "пещеру"; break;
+				case "Грот": sTemp = "грот"; break;
+				case "грот": sTemp = "грот"; break;
+				case "Подземелье": sTemp = "подземелье"; break;
+				case "подземелье": sTemp = "подземелье"; break;
+			}
+			AddQuestUserDataForTitle(sTitle, "sLocation", sTemp);
 			AddQuestUserDataForTitle(sTitle, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData(sTitle, "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
-			AddQuestUserData(sTitle, "sLocation", npchar.quest.DestroyGhost.label);
+			AddQuestUserData(sTitle, "sLocation", sTemp);
 		break;
 
 		case "GhostShip_S1":

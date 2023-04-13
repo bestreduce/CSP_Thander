@@ -407,9 +407,9 @@ void ProcessDialogEvent()
 			pchar.GenQuest.ShipWreck.ShipTypeName = GenerateRandomNameToShip(sti(pchar.GenQuest.ShipWreck.Nation));
 			if(rand(1) == 0)
 			{
-				dialog.text = RandPhraseSimple("Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "', моё судно разбилось о рифы недалеко от берега. " +
+				dialog.text = RandPhraseSimple("Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "', моё судно разбилось о рифы недалеко от берега. " +
 					"Из всей команды удалось спастись лишь немногим. Нас вынесло приливом на этот безлюдный пляж. Мы голодаем и страдаем от жажды вот уже " + (5 + dRand(7)) + " недель",
-					"Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Наше судно потерпело крушение недалеко отсюда. " +
+					"Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Наше судно потерпело крушение недалеко отсюда. " +
 					"На его обломках нам удалось добраться до этого берега, но он оказался необитаем. Мы вынуждены были питаться моллюсками и пальмовыми плодами на протяжении " + (5 + dRand(7)) + " недель.");
 				link.l1 = RandPhraseSimple("И сколько же вас осталось?", "И скольким из вас посчастливилось выжить?");
 				link.l1.go = "ShipWreck_3";
@@ -419,8 +419,8 @@ void ProcessDialogEvent()
 				pchar.GenQuest.ShipWreck.Mutiny = true;
 				pchar.GenQuest.ShipWreck.BadName = GenerateRandomName_Generator(sti(pchar.GenQuest.ShipWreck.Nation), "man");
 				pchar.GenQuest.ShipWreck.City = GetQuestNationsCity(sti(pchar.GenQuest.ShipWreck.Nation));
-				dialog.text = "Ох, капитан, такие серьёзные, что и  врагу не пожелаешь... Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан и владелец " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Вернее бывший капитан и владелец. " +
-					"Этот негодяй " + pchar.GenQuest.ShipWreck.BadName + ", которого я нанял " + LinkRandPhrase(RandPhraseSimple("старшим помощником","судовым врачом"), RandPhraseSimple("штурманом","боцманом"), RandPhraseSimple("коком","старшим плотником")) + " в " + XI_ConvertString("Colony" + pchar.GenQuest.ShipWreck.City + "Dat") + ", подбил команду на бунт. В итоге нас высадили в этом безлюдном месте. Это случилось " + (5 + dRand(7)) + " недель назад.";
+				dialog.text = "Ох, капитан, такие серьёзные, что и  врагу не пожелаешь... Здравствуйте, я " + pchar.GenQuest.ShipWreck.Name + ", капитан и владелец " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")) + " '" + pchar.GenQuest.ShipWreck.ShipTypeName + "'. Вернее бывший капитан и владелец. " +
+					"Этот негодяй " + pchar.GenQuest.ShipWreck.BadName + ", которого я нанял " + LinkRandPhrase(RandPhraseSimple("старшим помощником","судовым врачом"), RandPhraseSimple("штурманом","боцманом"), RandPhraseSimple("коком","старшим плотником")) + " в " + XI_ConvertString("Colony" + pchar.GenQuest.ShipWreck.City + "Voc") + ", подбил команду на бунт. В итоге нас высадили в этом безлюдном месте. Это случилось " + (5 + dRand(7)) + " недель назад.";
 				link.l1 = "И что, вся команда примкнула к бунтовщикам?";
 				link.l1.go = "ShipWreck_4";
 			}
@@ -700,7 +700,7 @@ void ProcessDialogEvent()
 				AddQuestRecord("ShipWrecked", "1");
 				AddQuestUserData("ShipWrecked", "ShoreName", UpperFirst(XI_ConvertString(pchar.location + "Dat")));
 				AddQuestUserData("ShipWrecked", "count", pchar.GenQuest.ShipWreck.Qty);
-				AddQuestUserData("ShipWrecked", "ShipType", GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")));
+				AddQuestUserData("ShipWrecked", "ShipType", GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Gen")));
 				AddQuestUserData("ShipWrecked", "ShipName", pchar.GenQuest.ShipWreck.ShipTypeName);
 				AddQuestUserData("ShipWrecked", "sNation", NationNameGenitive(sti(pchar.GenQuest.ShipWreck.Nation)));
 			}
@@ -1229,7 +1229,10 @@ void ProcessDialogEvent()
 			addMoneyToCharacter(pchar, -3000);
 			AddCharacterExpToSkill(pchar, "Leadership", 30);
 			AddCharacterExpToSkill(pchar, "Commerce", 60);
-			iTmp = drand(3);
+
+		    makeref(MerPrm, MerchantParam);
+			iTmp = drand(2);
+			iTmp += !MerPrm.active;//добавляем вариант с генерацией легкой добычи только если она сейчас неактивна
 			if(iTmp <= 1)
 			{
 				dialog.text = "Конечно поможет! Сегодня и отчалим, если ветер позволит и рыбаки не подведут. Благодарствуем, капитан, да хранит вас Господь...";
@@ -1252,9 +1255,8 @@ void ProcessDialogEvent()
 			}
 			if(iTmp == 3)
 			{
-				pchar.GenQuest.Find_Merchant.lastspeak_date = LastSpeakDate();
+				pchar.GenQuest.Find_Merchant.lastspeak_date = LastSpeakDate();//не используется сейчас, так как в слухи переведено
 				GenerateMerchant();
-				makeref(MerPrm, MerchantParam);
 				dialog.text = "Вот сразу видно щедрого человека, который не боится расставаться с деньгами, потому что знает, как их нужно добывать!\nПрошлой ночью мы видели, как контрабандисты грузили в лодки груз " + MerPrm.QuestGoodsIdx + ". Было темно, но на борту одной из лодок удалось прочесть название судна - '" + MerPrm.ShipName + "'... Корабль идёт под флагом " + MerPrm.nation + ". Думается, это может вам пригодиться, хе-хе.";
 				link.l1 = "Н-да? Может и пригодится... Ну, прощайте, следопыты.";
 				link.l1.go = "exit";
@@ -1318,7 +1320,9 @@ void ProcessDialogEvent()
 			addMoneyToCharacter(pchar, -3000);
 			AddCharacterExpToSkill(pchar, "Leadership", 30);
 			AddCharacterExpToSkill(pchar, "Commerce", 60);
-			if(drand(1) == 0)
+
+			makeref(MerPrm, MerchantParam);
+			if(drand(1) == 0 || MerPrm.active != true)//если уже сгенерирована легкая добыча, новую не делаем
 			{
 				dialog.text = "Вот так удача! мы и не чаяли так быстро денег раздобыть. Разрешите, капитан, от чистого сердца презентовать вам вещицу, что мы у хозяина бывшего стащили. Возможно она и вам принесёт удачу.";
 				link.l1 = "Спасибо, хорошая вещица. Удачи вам.";
@@ -1331,9 +1335,8 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				pchar.GenQuest.Find_Merchant.lastspeak_date = LastSpeakDate();
+				pchar.GenQuest.Find_Merchant.lastspeak_date = LastSpeakDate();//не используется сейчас, так как в слухи переведено
 				GenerateMerchant();
-				makeref(MerPrm, MerchantParam);
 				dialog.text = "Вот сразу видно щедрого человека, который не боится расставаться с деньгами, потому что знает, как их нужно добывать!\nПрошлой ночью мы видели, как контрабандисты грузили в лодки груз " + MerPrm.QuestGoodsIdx + ". Было темно, но на борту одной из лодок удалось прочесть название судна - '" + MerPrm.ShipName + "'... Корабль идёт под флагом " + MerPrm.nation + ". Думается, это может вам пригодиться, хе-хе.";
 				link.l1 = "Н-да? Может и пригодится... Ну, прощайте, следопыты.";
 				link.l1.go = "exit";

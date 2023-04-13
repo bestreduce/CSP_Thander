@@ -303,7 +303,7 @@ void GetRandomSpecialUpgrade(ref rRealShip)
 
 void SetCabinTypeEx(ref rRealShip, int shipclass) //Выдача случайной каюты по классу не квестовым - Gregg
 {
-	if (shipclass == 7)rRealShip.CabinType = "New_Cabin3"; return;
+	if (shipclass == 7) {rRealShip.CabinType = "New_Cabin3"; return;}
 
 	if (shipclass == 6 || shipclass == 5)
 	{

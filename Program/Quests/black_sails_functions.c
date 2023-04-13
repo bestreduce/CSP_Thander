@@ -1694,6 +1694,9 @@ void BSUrka_Poison()
 	sld = CharacterFromID("Flint");
 	LAi_SetActorTypeNoGroup(sld);
 	LAi_ActorTurnToCharacter(sld, pchar);
+	Group_DeleteGroup("Flint_Group");//фикс - удаляем корабль флинта из бухты Корыта
+	//sld.LifeDay = 0;//или лучше убивать самого флинта? работает и то, и то
+	
 }
 void BSUrka_PoisonSelf(string q)
 {

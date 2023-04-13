@@ -866,7 +866,7 @@ void PGG_SetUpForTask(ref chr)
 				int pgg_hunters_total = pgg_hunters+pgg_hunters_bonus;
 				if (!CheckAttribute(pchar, "PGG_grudge") && CheckAttribute(pchar, "PGG_killed") && sti(pchar.PGG_killed) > 4)
 				{
-					pgg_hunters_total = rand(pgg_hunters_total/2);
+					pgg_hunters_total = 1 + rand(pgg_hunters_total/2);
 				}
 				for (int i = 1; i <= pgg_hunters_total; i++)
 				{
@@ -2774,6 +2774,9 @@ void PGG_SpawnPGG()
 //Если отправить в поля пустые строки, выбор происходит без фильтрации
 string SelectRandomPGG(string sex, string animation)
 {
+	int selectPGG[PsHeroQty];
+	int numPGG = 0;
+
 	for (i = 1; i <= PsHeroQty; i++)
 	{
 		sld = CharacterFromID("PsHero_"+i);
@@ -2782,10 +2785,18 @@ string SelectRandomPGG(string sex, string animation)
 		bool bAnim = (sld.model.animation == animation) || (animation == "");
 		if (bSex && bAnim)
 		{
-			PGG_Disband_Fleet(sld);
-			Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
-			return sld.id;
+			selectPGG[numPGG] = i;
+			numPGG++;
 		}
+	}
+
+	if (numPGG > 0)
+	{
+		i = rand(numPGG-1);//возвращаю рандомность, чтоб не первый подходящий
+		sld = CharacterFromID("PsHero_" + selectPGG[i]);
+		PGG_Disband_Fleet(sld);
+		Log_TestInfo("Выбран ПГГ "+ GetFullName(sld));
+		return sld.id;
 	}
 	Log_TestInfo("ПГГ не выбран.")
 	return "";

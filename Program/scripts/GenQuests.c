@@ -5074,24 +5074,24 @@ string ShipWreck_GetStringQty(int Qty)
 	string strQty;
 	switch(Qty)
 	{
-		case 3:    	strQty = "трем"; 				break;
-		case 4:    	strQty = "четверым"; 			break;
-		case 5: 	strQty = "пятерым"; 			break;
-		case 6: 	strQty = "шестерым";			break;
-		case 7: 	strQty = "семерым";				break;
-		case 8: 	strQty = "восьмерым";			break;
-		case 9: 	strQty = "девятерым";			break;
-		case 10:	strQty = "десятерым";			break;
-		case 11:	strQty = "одиннадцатерым";		break;
-		case 12:	strQty = "двенадцатерым";		break;
-		case 13:	strQty = "тренадцатерым";		break;
-		case 14:	strQty = "четырнадцатерым";		break;
-		case 15:	strQty = "пятнадцатерым";		break;
-		case 16:	strQty = "шестнадцатерым";		break;
-		case 17:	strQty = "семнадцатерым";		break;
-		case 18:	strQty = "восемнадцатерым";		break;
-		case 19:	strQty = "девятнадцатерым";		break;
-		case 20:	strQty = "двадцатерым";			break;
+		case 3:    	strQty = "троим"; 			break;
+		case 4:    	strQty = "четверым"; 		break;
+		case 5: 	strQty = "пятерым"; 		break;
+		case 6: 	strQty = "шестерым";		break;
+		case 7: 	strQty = "семерым";			break;
+		case 8: 	strQty = "восьмерым";		break;
+		case 9: 	strQty = "девятерым";		break;
+		case 10:	strQty = "десятерым";		break;
+		case 11:	strQty = "одиннадцати";		break;
+		case 12:	strQty = "двенадцати";		break;
+		case 13:	strQty = "тринадцати";		break;
+		case 14:	strQty = "четырнадцати";	break;
+		case 15:	strQty = "пятнадцати";		break;
+		case 16:	strQty = "шестнадцати";		break;
+		case 17:	strQty = "семнадцати";		break;
+		case 18:	strQty = "восемнадцати";	break;
+		case 19:	strQty = "девятнадцати";	break;
+		case 20:	strQty = "двадцати";		break;
 	}
 	return strQty;
 }

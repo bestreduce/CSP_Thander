@@ -1625,7 +1625,7 @@ void OnLoad()
     BattleInterface.ShifInfoVisible = InterfaceStates.enabledshipmarks;
     BattleInterface.battleborder.used = InterfaceStates.ShowBattleMode;
 	if( CheckAttribute(&InterfaceStates,"WorldSituationUpdateStep") &&
-		sti(InterfaceStates.WorldSituationUpdateStep) < 10 )
+		sti(InterfaceStates.WorldSituationUpdateStep) < 36 )
 	{
 		Event("EvSituationsUpdate", "l", sti(InterfaceStates.WorldSituationUpdateStep));
 	}

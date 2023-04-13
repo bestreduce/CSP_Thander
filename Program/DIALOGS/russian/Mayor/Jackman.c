@@ -569,6 +569,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			SetQuestHeader("Pir_Line_6_Jackman");
 			AddQuestRecord("Pir_Line_6_Jackman", "5");
+			pchar.questTemp.piratesLine = "PL_Q6_AfterBattle_2";//фикс повторных диалогов на ту же тему
 			QuestSetCurrentNode("Henry Morgan", "PL_Q7_begin");
 			sld = characterFromId("Henry Morgan");
 			LAi_SetHuberTypeNoGroup(sld);
