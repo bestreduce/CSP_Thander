@@ -826,7 +826,7 @@ void ShowColonyInfo(int iColony)
 	int iGoods_x, iGoods_x1, iGoods_x2, iGoods_x3, iGoods_x4, iGoods_y, iGoods_y1, iGoods_y2, iGoods_y3, iGoods_y4;
 	string sGoodNum, sType;
 	iGoods_x1 = 410; iGoods_x2 = 410; iGoods_x3 = 410; iGoods_x4 = 410;
-	iGoods_y1 = 245; iGoods_y2 = 330; iGoods_y3 = 415; iGoods_y4 = 470;
+	iGoods_y1 = 195; iGoods_y2 = 285; iGoods_y3 = 370; iGoods_y4 = 460;
 
 
 	bool bFound = true;
