@@ -730,7 +730,7 @@ int LocationInitBarbados(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Bridgetown_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\PortOffice.tga";
+	locations[n].image = "loading\jonny_load\inside\PortOffice4.tga";
 	//Town sack
 	locations[n].townsack = "Bridgetown";
 	locations[n].lockWeather = "Inside";
@@ -740,7 +740,7 @@ int LocationInitBarbados(int n)
 	locations[n].islandId = "Barbados";
 	//Models
 	//Always
-	locations[n].filespath.models = "locations\inside\PortOffice";
+	locations[n].filespath.models = "locations\inside\PortOffice4";
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";

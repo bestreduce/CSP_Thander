@@ -561,7 +561,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice3.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -571,7 +571,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].islandId = "PuertoRico";
 	//Models
 	//Always
-	locations[n].filespath.models = "locations\inside\PortOffice1";
+	locations[n].filespath.models = "locations\inside\PortOffice3";
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";

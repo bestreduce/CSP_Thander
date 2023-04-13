@@ -6424,10 +6424,10 @@ void InitShips()
 	refShip.Capacity        			= 2800;
 	refShip.MaxCannonDiff						= 4;
 	refShip.CannonsQuantity						= 50;
-	refShip.rcannon 							= 22;
-	refShip.lcannon 							= 22;
-	refShip.fcannon 							= 2;
-	refShip.bcannon 							= 4;
+	refShip.rcannon 							= 20;
+	refShip.lcannon 							= 20;
+	refShip.fcannon 							= 4;
+	refShip.bcannon 							= 6;
 	refShip.MaxCrew         				= 350;
 	refShip.MinCrew         				= 70;
 	refShip.SpeedRate       		= 11.8;
@@ -6996,7 +6996,7 @@ void InitShips()
 
 	refShip.Height.Bombs.Y				= 2.8;	refShip.Height.Bombs.DY		= 2.2;
 	refShip.Height.Grapes.Y				= 3.5;	refShip.Height.Grapes.DY	= 2.0;
-	refShip.Height.Knippels.Y			= 17.5;	refShip.Height.Knippels.DY	= 18	.0;
+	refShip.Height.Knippels.Y			= 17.5;	refShip.Height.Knippels.DY	= 18.0;
 	refShip.Height.Balls.Y				= 2.8;	refShip.Height.Balls.DY		= 2.2;
 
 	refship.InertiaAccelerationX	= 5.0;	refship.InertiaBrakingX		= 5.0;
