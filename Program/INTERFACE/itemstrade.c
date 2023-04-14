@@ -1664,7 +1664,7 @@ void BuyConsume(ref chr)
 	string sItem;
 	ref rItem;
 
-	makearef(arInventory, chr.TransferItems);
+	makearef(arInventory, chr.TransferItems.I);
 	for (i = 0; i < GetAttributesNum(arInventory); i++)
 	{
 		arItem = GetAttributeN(arInventory, i);
@@ -1687,7 +1687,7 @@ void BuyConsume(ref chr)
 
 //if (curTraderQty == 0) continue;//у торговца ничего нет, давай следующий предмет//TO DO - пока что без возможности покупать из воздуха
 //row = "tr" + n;
-		qty = sti(chr.TransferItems.(sItem));
+		qty = sti(arInventory.(sItem));
 		//if (qty == 0) continue; //вообще не требуется закупать
 		curqty = GetCharacterItem(chr, sItem);
 		if (qty > curqty) {qty = qty - curqty;}
@@ -1754,7 +1754,7 @@ void SellExcessConsume(ref chr)
 	string sItem;
 	ref rItem;
 
-	makearef(arInventory, chr.TransferItems);
+	makearef(arInventory, chr.TransferItems.I);
 	for (i = 0; i < GetAttributesNum(arInventory); i++)
 	{
 		arItem = GetAttributeN(arInventory, i);
@@ -1773,7 +1773,7 @@ void SellExcessConsume(ref chr)
 
 		if (sItem == "Lockpick") continue;//отмычки пропускаем
 		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
-		qty = sti(chr.TransferItems.(sItem));
+		qty = sti(arInventory.(sItem));
 		curqty = GetCharacterItem(chr, sItem);
 		if (curqty > qty) qty = curqty - qty; else continue;
 		iCost = GetTradeItemPrice(sItem, PRICE_TYPE_SELL);

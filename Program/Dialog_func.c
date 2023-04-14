@@ -1184,8 +1184,8 @@ String ChangeNameCase(String _nameType, String _name, String _toCase)
 	{
 		nameId = "l" + i;
 
-		if(GetName(_nameType, nameId, NAME_NOM) == _name || GetName(_nameType, nameId, NAME_GEN) || GetName(_nameType, nameId, NAME_DAT) ||
-			GetName(_nameType, nameId, NAME_ACC) == _name || GetName(_nameType, nameId, NAME_ABL) || GetName(_nameType, nameId, NAME_VOC))
+		if(GetName(_nameType, nameId, NAME_NOM) == _name || GetName(_nameType, nameId, NAME_GEN) == _name || GetName(_nameType, nameId, NAME_DAT) == _name ||
+			GetName(_nameType, nameId, NAME_ACC) == _name || GetName(_nameType, nameId, NAME_ABL) == _name || GetName(_nameType, nameId, NAME_VOC) == _name)
 		{
 			return GetName(_nameType, nameId, _toCase);
 		}

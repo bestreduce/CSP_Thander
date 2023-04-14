@@ -1071,13 +1071,13 @@ void Autotrade_Goods(ref rChar)
 		rGood = &Goods[i];
 		sGood = rGood.name;
 
-		if(!CheckAttribute(rChar, "TransferGoods." + sGood))
+		if(!CheckAttribute(rChar, "TransferGoods.G." + sGood))
 		{
-			rChar.TransferGoods.(sGood) = 0;
+			rChar.TransferGoods.G.(sGood) = 0;
 		}
 
 		iCurGoodQty = GetCargoGoods(rChar, i); // Сколько этого товара есть сейчас
-		iNeedGoodsQty = sti(rChar.TransferGoods.(sGood)); // Сколько нужно ВСЕГО данного товара (не докупить!)
+		iNeedGoodsQty = sti(rChar.TransferGoods.G.(sGood)); // Сколько нужно ВСЕГО данного товара (не докупить!)
 //нужно ли чекать атрибут, если не заполнен - проверить логи
 
 		if(iCurGoodQty == iNeedGoodsQty) continue; // ничего не нужно

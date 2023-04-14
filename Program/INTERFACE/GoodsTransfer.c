@@ -206,7 +206,7 @@ void ShowTransferGoods()
 		describeStr = GetAssembledString(GetConvertStr(sGood + "_descr", "GoodsDescribe.txt"), &Goods[iCurGoodIndex]);
 
 		String companionId = Characters[iCurCompanion].Id;
-		if (CheckAttribute(Characters[iCurCompanion], "TransferGoods." + sGood)) buyCount = sti(Characters[iCurCompanion].TransferGoods.(sGood)); else buyCount = 0;
+		if (CheckAttribute(Characters[iCurCompanion], "TransferGoods.G." + sGood)) buyCount = sti(Characters[iCurCompanion].TransferGoods.G.(sGood)); else buyCount = 0;
 	}
 	else
 	{	//показ предмета правой таблицы
@@ -219,7 +219,7 @@ void ShowTransferGoods()
 		LanguageCloseFile(lngFileID);
 		describeStr = GetItemDescribe(sCurItemId);
 		sItem = sCurItemId;
-		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
+		if (CheckAttribute(Characters[iCurFighter], "TransferItems.I." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.I.(sItem)); else buyCount = 0;
 	}
 
 	SetFormatedText("TG_GOODS_CAPTION", sHeader);//заголовок
@@ -324,25 +324,25 @@ void ProcCommand()
 				{
 					rGood = &Goods[iCurGoodIndex];
 					sGood = rGood.name;
-					if (!checkattribute(Characters[iCurCompanion],"TransferGoods." + sGood)) Characters[iCurCompanion].TransferGoods.(sGood) = 0;
+					if (!checkattribute(Characters[iCurCompanion],"TransferGoods.G." + sGood)) Characters[iCurCompanion].TransferGoods.G.(sGood) = 0;
 					iNum =  sti(GameInterface.TG_EDIT.str);
 					if (iNum >999999) iNum = 999999;
-					curBuyGoodsWeight = curBuyGoodsWeight + (iNum - sti(Characters[iCurCompanion].TransferGoods.(sGood)))*stf(rGood.weight)/sti(rGood.Units);//тут нужен чекатрибут - срёт в лог
+					curBuyGoodsWeight = curBuyGoodsWeight + (iNum - sti(Characters[iCurCompanion].TransferGoods.G.(sGood)))*stf(rGood.weight)/sti(rGood.Units);//тут нужен чекатрибут - срёт в лог
 //НАДО ЛИ это затирание? Может, наоборот при закрытии все строчки заполнять, чтоб чекатрибут не делать?
-					if (iNum == 0) DeleteAttribute(&Characters[iCurCompanion],"TransferGoods." + sGood); else Characters[iCurCompanion].TransferGoods.(sGood) = iNum; // Прибавим в список закупок
+					if (iNum == 0) DeleteAttribute(&Characters[iCurCompanion],"TransferGoods.G." + sGood); else Characters[iCurCompanion].TransferGoods.G.(sGood) = iNum; // Прибавим в список закупок
 					GameInterface.GOODS_TABLE_LIST.(sCurGoodRow).td2.str = iNum;
 					Table_UpdateWindow("GOODS_TABLE_LIST");
 					SetFormatedText("GOODS_SET_SUM", "Вес выбранного комплекта: " + curBuyGoodsWeight + " ц.");
 				}
 				else
 				{
-					if (!checkattribute(Characters[iCurFighter],"TransferItems." + sCurItemId)) Characters[iCurFighter].TransferItems.(sCurItemId) = 0;
+					if (!checkattribute(Characters[iCurFighter],"TransferItems.I." + sCurItemId)) Characters[iCurFighter].TransferItems.I.(sCurItemId) = 0;
 					iNum = sti(GameInterface.TG_EDIT.str);
 					if (iNum > 9999) iNum = 9999;
-					curBuyItemsWeight = curBuyItemsWeight + (iNum - sti(Characters[iCurFighter].TransferItems.(sCurItemId))) * GetItemWeight(sCurItemId);
+					curBuyItemsWeight = curBuyItemsWeight + (iNum - sti(Characters[iCurFighter].TransferItems.I.(sCurItemId))) * GetItemWeight(sCurItemId);
 //НАДО ЛИ это затирание? Может, наоборот при закрытии все строчки заполнять, чтоб чекатрибут не делать?
-					if (iNum == 0) DeleteAttribute(&Characters[iCurFighter],"TransferItems." + sCurItemId);
-					else Characters[iCurFighter].TransferItems.(sCurItemId) = iNum; // Прибавим в список закупок
+					if (iNum == 0) DeleteAttribute(&Characters[iCurFighter],"TransferItems.I." + sCurItemId);
+					else Characters[iCurFighter].TransferItems.I.(sCurItemId) = iNum; // Прибавим в список закупок
 					GameInterface.CONSUME_TABLE_LIST.(sCurItemRow).td2.str = iNum;
 					Table_UpdateWindow("CONSUME_TABLE_LIST");
 					SetFormatedText("ITEMS_SET_SUM", "Вес выбранного комплекта: " + FloatToString(curBuyItemsWeight,1));
@@ -556,7 +556,7 @@ void FillGoodsTable()
 		GameInterface.GOODS_TABLE_LIST.(row).td1.textoffset = "39,0";
 		GameInterface.GOODS_TABLE_LIST.(row).td1.str = XI_ConvertString(sGood);
 		GameInterface.GOODS_TABLE_LIST.(row).td1.align = "left";
-		if (CheckAttribute(Characters[iCurCompanion], "TransferGoods." + sGood)) buyCount = sti(Characters[iCurCompanion].TransferGoods.(sGood)); else buyCount = 0;
+		if (CheckAttribute(Characters[iCurCompanion], "TransferGoods.G." + sGood)) buyCount = sti(Characters[iCurCompanion].TransferGoods.G.(sGood)); else buyCount = 0;
 		GameInterface.GOODS_TABLE_LIST.(row).td2.str = buyCount;
 		buyCount2 = GetConsumeLimit(Characters[iCurCompanion], sGood);
 		GameInterface.GOODS_TABLE_LIST.(row).td3.str = buyCount2;
@@ -607,7 +607,7 @@ void FillItemsTable()
 		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
 		row = "tr" + n;
 
-		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
+		if (CheckAttribute(Characters[iCurFighter], "TransferItems.I." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.I.(sItem)); else buyCount = 0;
 
 		GameInterface.CONSUME_TABLE_LIST.(row).id = sItem;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.group = Items[i].picTexture;

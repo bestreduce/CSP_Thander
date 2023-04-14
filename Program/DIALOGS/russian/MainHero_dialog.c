@@ -1297,7 +1297,7 @@ void ProcessDialogEvent()
 
 		case "ColonyBuilding_Hovernor_3":
 			dialog.Text = "Хм... О каких именно делах я хочу осведомиться?";
-			Link.l1 = "Состояния колонии и её финансовые возможности.";
+			Link.l1 = "Состояние колонии и её финансовые возможности.";
 			Link.l1.go = "ColonyBuilding_Hovernor_3_1";
 			Link.l2 = "Боевая готовность гарнизона и здоровье жителей.";
 			Link.l2.go = "ColonyBuilding_Hovernor_3_2";

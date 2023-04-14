@@ -100,8 +100,6 @@ void WorldSituationsUpdate()
 			PChar.DayRandom3 = dayRandom3;
 			Log_TestInfo("dayRandom3 == " + dayRandom3);
 
-			ChangeImport();
-			UpdateSmugglers();
 			CheckOfficersHPMinus(); // ежедневное обновление дней для выздоровления офов
 			CheckBook(); //Книги - Gregg
 			CheckTrauma();//Тяжёлая травма
@@ -196,6 +194,13 @@ void WorldSituationsUpdate()
 			GenerateRumour() //homo 05/07/06
 		break;
 		//добавляю до 36, но можно любое число, если ещё сократить время милисекунд в ивенте
+		case 10:
+			ChangeImport();
+		break;
+
+		case 11:
+			UpdateSmugglers();
+		break;
 	}
 
 	iStep++;

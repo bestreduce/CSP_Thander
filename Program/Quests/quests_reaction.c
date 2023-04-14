@@ -9199,7 +9199,7 @@ void QuestComplete(string sQuestName, string qname)
 				Characters[GetCharacterIndex(PChar.ColonyBuilding.Hovernor)].Dialog.CurrentNode = "ColonyBuilding_Mines_End";
 			}
 
-			Log_SetStringToLog("Серебрянный рудник построен.");
+			Log_SetStringToLog("Серебряный рудник построен.");
 			PChar.Mines.SilverMine = true;
 			PChar.Mines.SilverMine.BuildingTime = false;
 			PChar.ColonyBuilding.SilverMine.BuildingTime = false;
@@ -9253,7 +9253,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "SilverMine_resize_1":
-			Log_SetStringToLog("Серебрянный рудник расширен.");
+			Log_SetStringToLog("Серебряный рудник расширен.");
 			PChar.ColonyBuilding.SilverMine.Resize.BuildingTime = false;
 			PChar.ColonyBuilding.SilverMine.Resize = true;
 			PChar.Mines.FoodQuantity.Max = sti(PChar.Mines.FoodQuantity.Max) + 1000;

@@ -408,7 +408,9 @@ void ProcessDialogEvent()
 						int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 						aref item1;
 						Items_FindItem(reward, &item1);
-						dialog.text = dialog.text + "\nПомимо денежного приза, мы также решили сделать вам особый подарок за победу. Это "+LanguageConvertString(idLngFile, item1.name)+".";
+						string sTemp = LanguageConvertString(idLngFile, item1.name); 
+						if (HasSubStr(reward, "book")) sTemp = "книга " + sTemp;
+						dialog.text = dialog.text + "\nПомимо денежного приза, мы также решили сделать вам особый подарок за победу. Это " + sTemp + ".";
 						LanguageCloseFile(idLngFile);
 						link.l1 = LinkRandPhrase("Неужели ты во мне сомневался!", "Я ещё не раз покажу, кто здесь главный. А сейчас - отдыхать.", "Ха-ха-ха, жалкие насекомые! Таких соперников я на абордаже щёлкаю как орехи. Кстати, орехи полезны для здоровья.");
 						link.l1.go = "exit";

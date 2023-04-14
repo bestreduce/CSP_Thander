@@ -18,8 +18,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			if (pchar.questTemp.PDM_PK_UvestiNaVerh == "UvestiNaVerh")
 			{
-				link.l1 = "Послушай, " + npchar.name + ", я хочу провести время с одной из твоих девушек, кажется, её зовут Франческа.";
-				link.l1.go = "PDM_PK_UvestiNaVerh";
+				link.l2 = "Послушай, " + npchar.name + ", я хочу провести время с одной из твоих девушек, кажется, её зовут Франческа.";
+				link.l2.go = "PDM_PK_UvestiNaVerh";
 			}
 		break;
 		// капитан Шарп, грабёж жемчужных промыслов
@@ -39,7 +39,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					pchar.questTemp.Sharp.price.evil = rand(1); //добрый или злой, для скидки
 					ReOpenQuestHeader("SharpPearl");
 					AddQuestRecord("SharpPearl", "1");
-					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Dat"));
+					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Voc"));
 					AddQuestUserData("SharpPearl", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc"));
 					if (GetIslandByCityName(pchar.questTemp.Sharp.City) != pchar.questTemp.Sharp.City)
 					{

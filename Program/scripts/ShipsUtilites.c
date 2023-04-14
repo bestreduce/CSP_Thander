@@ -533,10 +533,11 @@ float ShipSpeedBonusFromWeight(ref _refCharacter)
 {	// от загрузки трюма
     if(!CheckAttribute(_refCharacter, "Cargo")) RecalculateCargoLoad(_refCharacter);
 	ref rShip = GetRealShip(sti(_refCharacter.ship.type));
-	float fLoad = stf(_refCharacter.Ship.Cargo.Load);
-//	float	fLoad = Clampf(stf(refCharacter.Ship.Cargo.Load) / stf(rShip.Capacity));//старая механика, внесли правку, чтобы после увеличения трюма скорость пустого не увеличивалась.
-	float fCapacity = stf(ShipsTypes[sti(rShip.basetype)].Capacity);
-	float fSRFromWeight = Clampf(1.03 - stf(rShip.SpeedDependWeight) * fLoad / fCapacity);
+
+	float fLoad = Clampf(GetCargoLoad(rCharacter) / stf(rShip.Capacity));
+	if (CheckAttribute(rRealShip, "Tuning.BotPack") && rRealShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
+
+	float fSRFromWeight = Clampf(1.03 - stf(rShip.SpeedDependWeight) * fLoad);
 	return fSRFromWeight;
 }
 float ShipSpeedBonusFromHP(ref _refCharacter)
@@ -644,9 +645,11 @@ float ShipTurnRateBonusFromWeight(ref _refCharacter)
 {	// от загрузки трюма
     if(!CheckAttribute(_refCharacter, "Cargo")) RecalculateCargoLoad(_refCharacter);
 	ref rShip = GetRealShip(sti(_refCharacter.ship.type));
-	float fLoad = stf(_refCharacter.Ship.Cargo.Load);
-	float fCapacity = stf(ShipsTypes[sti(rShip.basetype)].Capacity);
-	float fTRFromWeight = Clampf(1.03 - (2 - iArcadeSails) * stf(rShip.TurnDependWeight) * fLoad / fCapacity);
+
+	float fLoad = Clampf(GetCargoLoad(rCharacter) / stf(rShip.Capacity));
+	if (CheckAttribute(rRealShip, "Tuning.BotPack") && rRealShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
+
+	float fTRFromWeight = Clampf(1.03 - (2 - iArcadeSails) * stf(rShip.TurnDependWeight) * fLoad);
 	return fTRFromWeight;
 }
 float ShipTurnRateBonusFromHP(ref _refCharacter)

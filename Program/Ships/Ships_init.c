@@ -10442,7 +10442,7 @@ void InitShips()
 	refShip.Price           			= 1800000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
-	refShip.MastMultiplier					= 1.6;
+	refShip.MastMultiplier					= 1.3;
 	refship.EmblemedSails.normalTex 	= "ships\parus_mefisto.tga";
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;

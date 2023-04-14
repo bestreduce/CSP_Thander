@@ -481,7 +481,7 @@ void ProcessDialogEvent()
 					sTmp = "Я как-то подумывал его выпотрошить, но не подвернулось удобного случая.";
 				break;
 			}
-			dialog.text = "Хорошо. Этого достаточно. Теперь к делу - в " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Dat") + " живёт богатый купец " + NPChar.Hold_GenQuest.Name + ". " +
+			dialog.text = "Хорошо. Этого достаточно. Теперь к делу - в " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Voc") + " живёт богатый купец " + NPChar.Hold_GenQuest.Name + ". " +
 				"Он сколотил своё немалое состояние тем, что на судне '" + NPChar.Hold_GenQuest.ShipName + "' возит " + GetStrSmallRegister(XI_ConvertString(Goods[sti(NPChar.Hold_GenQuest.Goods)].Name + "Acc")) + " маршрутом " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.FromCity) + " - " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.ToCity) +". " +
 				"Когда партия товара слишком велика для его трюма, он нанимает эскорт. " + sTmp + " Уверен, что эти сведения стоят для вас куда больше, чем свобода одного пленного.";
 			link.l1 = "Не думаю, что они могут быть для меня полезны. Я не стану охотиться на мирных торговцев.";
@@ -528,7 +528,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "free_buyout":
-			dialog.text = "Верно, предложение имеется. В " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Dat") + " живёт мой хороший товарищ, " + NPChar.Hold_GenQuest.Name + " зовут, мы дело вместе начинали. " +
+			dialog.text = "Верно, предложение имеется. В " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Voc") + " живёт мой хороший товарищ, " + NPChar.Hold_GenQuest.Name + " зовут, мы дело вместе начинали. " +
 				"Если будем в тех местах - разыщите его. Я уверен, он не поскупится, хороший выкуп даст. А я уж с ним рассчитаюсь по-свойски... да и должок за ним.";
 			link.l1 = "Товарищ, говорите? Что ж, наведаемся к вашему товарищу...";
 			link.l1.go = "free_buyout1";
@@ -550,7 +550,7 @@ void ProcessDialogEvent()
 			ReOpenQuestHeader("HoldQuest");
 			AddQuestRecord("HoldQuest", "6");
 			AddQuestUserData("HoldQuest", "sName", GetFullName(NPChar));
-			AddQuestUserData("HoldQuest", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.City + "Dat"));
+			AddQuestUserData("HoldQuest", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.City + "Voc"));
 			AddQuestUserData("HoldQuest", "sNameChar", NPChar.Hold_GenQuest.Name);
 			DialogExit();
 		break;

@@ -323,7 +323,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					pchar.questTemp.Sharp.price.evil = rand(1); //добрый или злой, для скидки
 					ReOpenQuestHeader("SharpPearl");
 					AddQuestRecord("SharpPearl", "1");
-					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Dat"));
+					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Voc"));
 					AddQuestUserData("SharpPearl", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc"));
 					if (GetIslandByCityName(pchar.questTemp.Sharp.City) != pchar.questTemp.Sharp.City)
 					{
