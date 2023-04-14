@@ -2774,7 +2774,7 @@ void PGG_SpawnPGG()
 //Если отправить в поля пустые строки, выбор происходит без фильтрации
 string SelectRandomPGG(string sex, string animation)
 {
-	int selectPGG[PsHeroQty];
+	int selectPGG[100];
 	int numPGG = 0;
 
 	for (i = 1; i <= PsHeroQty; i++)
