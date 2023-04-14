@@ -1828,7 +1828,7 @@ void FastSaleCharacter(ref rChar, ref rSaleProps)
 			bool isRubbish =
 				(sItem == "mineral2") ||	// Лютня
 				(sItem == "mineral3") ||    // Свечи
-				(sItem == "mineral4") ||    // Баклан
+				//(sItem == "mineral4") ||    // Баклан		//они не мусор
 				(sItem == "mineral5") ||    // Старое ведро
 				(sItem == "mineral6") ||    // Коралл
 				(sItem == "mineral7") ||    // Трубка
@@ -1840,7 +1840,7 @@ void FastSaleCharacter(ref rChar, ref rSaleProps)
 				(sItem == "jewelry6") ||    // Серебряное кольцо с сапфиром
 				(sItem == "jewelry7") ||    // Золотое кольцо с изумрудом
 				(sItem == "jewelry10") ||   // Золотое кольцо с сапфиром
-				(sItem == "jewelry11") ||   // Большая жемчужина
+				//(sItem == "jewelry11") ||   // Большая жемчужина	//теперь нужны
 				(sItem == "jewelry12") ||   // Маленькая жемчужина
 				(sItem == "jewelry13") ||   // Камея
 				(sItem == "jewelry16") ||   // Ожерелье

@@ -590,7 +590,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 	break;
 	
 	case "Quest_Whisper":
-		npchar.QuestWhisper = true;
+		npchar.PGGWhisperQuestStart = true;//предложит только один раз? если отказать, то повтора не будет. 
 
 		Dialog.Text = "Дело серьёзное, я не стану обсуждать его при всех. Продолжим у меня в комнате?";
 		link.l1 = "Ну пойдём.";

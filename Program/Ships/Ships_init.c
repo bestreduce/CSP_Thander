@@ -3385,7 +3385,7 @@ void InitShips()
 	refShip.SpeedRate      			= 14.0;
 	refShip.TurnRate       			= 55.0;
 	refShip.Price          				= 82735;
-	refShip.HP             					= 3800;
+	refShip.HP             					= 2800;
 	refShip.SP             					= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CabinType          			= "New_Cabin2";
