@@ -118,6 +118,9 @@ void ProcessDialogEvent()
 			AddItems(pchar, "StrangeElixir", 1);
 			AddItems(pchar, "StrengthTube", 1);
 			AddItems(pchar, "potion", 2);
+			Log_info("Вы получили индейские элексиры");
+			PlaySound("Interface\important_item.wav");
+			AddCharacterExpToSkill(pchar, "Leadership", 100);
 		break;
 		case "ВозвращаемПалку_3":
 			DialogExit();
