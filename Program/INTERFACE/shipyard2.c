@@ -236,7 +236,7 @@ void FillShipParam()
 		rRealShip.MaxCaliber = rBaseShip.MaxCaliber;
 
 		refNPCShipyard.Ship.Cannons.Type = CANNON_TYPE_NONECANNON;
-		rRealShip.Price	= GetShipPriceByTTH(iShip, refNPCShipyard)*4;//цена без пушек
+		rRealShip.Price	= GetShipPriceByTTH(iShip, refNPCShipyard)*2;//цена без пушек
 		CalcTuningPrice();//стоимость апгрейда до применения апгрейдов считаем
 
 		SetBermudeTuningStates2Ship(refNPCShipyard, Tune_Sheme[9], Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3], Tune_Sheme[6]);

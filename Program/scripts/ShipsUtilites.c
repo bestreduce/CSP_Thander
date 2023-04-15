@@ -237,7 +237,7 @@ int GenerateShipExt(int iBaseType, bool isStolen, ref chr)
 		SetCabinTypeEx(rRealShip, sti(rRealShip.Class)); //Выдача случайной каюты по классу не квестовым - Gregg
 
 	rRealShip.Price	= GetShipPriceByTTH(iShip, chr); 
-	if (CheckAttribute(rRealShip, "QuestShip")) rRealShip.Price	= sti(rRealShip.Price) * 4;
+	if (CheckAttribute(rRealShip, "QuestShip")) rRealShip.Price	= sti(rRealShip.Price) * 2;
 	if (sti(rRealShip.Price) <= 0) rRealShip.Price = 100;
 
 	rRealShip.Stolen = isStolen;  // ворованность
@@ -534,6 +534,7 @@ float ShipSpeedBonusFromWeight(ref _refCharacter)
     if(!CheckAttribute(_refCharacter, "Cargo")) RecalculateCargoLoad(_refCharacter);
 	ref rShip = GetRealShip(sti(_refCharacter.ship.type));
 	float fLoad = stf(_refCharacter.Ship.Cargo.Load);
+//	float	fLoad = Clampf(stf(refCharacter.Ship.Cargo.Load) / stf(rShip.Capacity));//старая механика, внесли правку, чтобы после увеличения трюма скорость пустого не увеличивалась.
 	float fCapacity = stf(ShipsTypes[sti(rShip.basetype)].Capacity);
 	float fSRFromWeight = Clampf(1.03 - stf(rShip.SpeedDependWeight) * fLoad / fCapacity);
 	return fSRFromWeight;
@@ -2066,7 +2067,6 @@ int GenerateShipTop(int iBaseType, bool isStolen, ref chr)
     }
     else {rRealShip.ship.upgrades.hull = 1 + rand(2);}
 	rRealShip.ship.upgrades.sails = 1 + rand(2);  // только визуальная разница
-	rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - 0.3;//фикс нестандартных мачт
 
 	int hullarmor;//реворк брони корпуса
 	switch (sti(rRealShip.Class))
@@ -2158,25 +2158,31 @@ int GenerateShipTop(int iBaseType, bool isStolen, ref chr)
 
 		refShip.Cannons = sti(rRealShip.Cannons);
 
-		rRealShip.Capacity		= makeint(sti(rRealShip.Capacity)*(1.0 + SHIP_STAT_RANGE_DRAFT));
-		rRealShip.HP			= makeint(sti(rRealShip.HP)*(1.0 + SHIP_STAT_RANGE_DRAFT));
-		rRealShip.SpeedRate		= stf(rRealShip.SpeedRate)*(1.0 + SHIP_STAT_RANGE_DRAFT);
-		rRealShip.TurnRate		= stf(rRealShip.TurnRate)*(1.0 + SHIP_STAT_RANGE_DRAFT);
-
-		rRealShip.WindAgainstSpeed 	= stf(rRealShip.WindAgainstSpeed)*(1.0 + SHIP_STAT_RANGE_DRAFT);
+		if (!CheckAttribute(rRealShip, "QuestShip"))
+		{
+			rRealShip.Capacity		= makeint(sti(rRealShip.Capacity)*(1.0 + SHIP_STAT_RANGE_DRAFT));
+			rRealShip.HP			= makeint(sti(rRealShip.HP)*(1.0 + SHIP_STAT_RANGE_DRAFT));
+			rRealShip.SpeedRate		= stf(rRealShip.SpeedRate)*(1.0 + SHIP_STAT_RANGE_DRAFT);
+			rRealShip.TurnRate		= stf(rRealShip.TurnRate)*(1.0 + SHIP_STAT_RANGE_DRAFT);
+			rRealShip.WindAgainstSpeed 	= stf(rRealShip.WindAgainstSpeed)*(1.0 + SHIP_STAT_RANGE_DRAFT);
+			rRealShip.MastMultiplier = stf(rBaseShip.MastMultiplier) - 0.3;//фикс нестандартных мачт
+		}
 	}
 
+	if (!CheckAttribute(rRealShip, "QuestShip"))
+	{
+		rRealShip.OptCrew       = makeint(sti(rRealShip.OptCrew)*(1.0 + SHIP_STAT_RANGE_DRAFT));
+		rRealShip.MaxCrew       = makeint(sti(rRealShip.OptCrew)*1.25);
+	}
 	// to_do del -->
 	rRealShip.BoardingCrew  = 0;
 	rRealShip.GunnerCrew    = 0;
 	rRealShip.CannonerCrew  = 0;
-	rRealShip.OptCrew       = makeint(sti(rRealShip.OptCrew)*(1.0 + SHIP_STAT_RANGE_DRAFT));
-	rRealShip.MaxCrew       = makeint(sti(rRealShip.OptCrew)*1.25);
 	// to_do del <--
 
 	SetCabinTypeEx(rRealShip, sti(rRealShip.Class)); //Выдача случайной каюты по классу не квестовым - Gregg
 
-	rRealShip.Price	= GetShipPriceByTTH(iShip, chr)*4;//фикс - такая же цена как при заказе на верфи
+	rRealShip.Price	= GetShipPriceByTTH(iShip, chr)*2;//фикс - такая же цена как при заказе на верфи
 
 	if (sti(rRealShip.Price) <= 0) rRealShip.Price = 100;
 

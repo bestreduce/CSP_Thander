@@ -9917,19 +9917,19 @@ void InitShips()
 	refShip.Cannon  			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber  		= 20;
 	refShip.Weight				= Tonnes2CWT(400);
-	refShip.Capacity   			= 2100;
+	refShip.Capacity   			= 2400;
 	refShip.MaxCannonDiff				= 0;
 	refShip.CannonsQuantity				= 24;
 	refShip.rcannon 					= 10;
 	refShip.lcannon 					= 10;
 	refShip.fcannon 					= 2;
 	refShip.bcannon 					= 2;
-	refShip.MaxCrew        			= 210;
-	refShip.MinCrew        			= 42;
-	refShip.SpeedRate      	= 18.0;
+	refShip.MaxCrew        			= 180;
+	refShip.MinCrew        			= 36;
+	refShip.SpeedRate      	= 18.5;
 	refShip.TurnRate       	= 60.0;
 	refShip.Price          		= 170500;
-	refShip.HP             			= 4000;
+	refShip.HP             			= 3600;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
 	refship.CabinType          	= "Cabin_Small"; // boal 28.03.05
@@ -9941,7 +9941,7 @@ void InitShips()
 	refShip.lowpolycrew			= 12;
 	refShip.buildtime			= 60;
 
-	refship.WindAgainstSpeed   = 5.5;//boal
+	refship.WindAgainstSpeed   = 6.0;//boal
 
 	refShip.Flags.Mast2.Flag1 = FLAG_SPECIAL;
 	refShip.Flags.Mast3.Flag1 = FLAG_ENSIGN;
@@ -9997,8 +9997,8 @@ void InitShips()
 	refShip.lcannon 					= 10;
 	refShip.fcannon 					= 2;
 	refShip.bcannon 					= 2;
-	refShip.MaxCrew        			= 210;
-	refShip.MinCrew        			= 42;
+	refShip.MaxCrew        			= 220;
+	refShip.MinCrew        			= 44;
 	refShip.SpeedRate      	= 18.0;
 	refShip.TurnRate       	= 60.0;
 	refShip.Price          		= 170500;
@@ -10014,7 +10014,7 @@ void InitShips()
 	refShip.lowpolycrew			= 12;
 	refShip.buildtime			= 60;
 
-	refship.WindAgainstSpeed   = 5.5;//boal
+	refship.WindAgainstSpeed   = 5.0;//boal
 
 	refShip.Flags.Mast2.Flag1 = FLAG_SPECIAL;
 	refShip.Flags.Mast3.Flag1 = FLAG_ENSIGN;
@@ -10075,7 +10075,7 @@ void InitShips()
 	refShip.SpeedRate      	= 18.0;
 	refShip.TurnRate       	= 55.0;
 	refShip.Price          		= 167500;
-	refShip.HP             			= 3700;
+	refShip.HP             			= 3800;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
 	refship.CabinType          = "Cabin_Small"; // boal 28.03.05
@@ -10148,7 +10148,7 @@ void InitShips()
 	refShip.SpeedRate      	= 17.0;
 	refShip.TurnRate       	= 65.0;
 	refShip.Price          		= 150500;
-	refShip.HP             			= 4500;
+	refShip.HP             			= 3500;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
 	refship.CabinType          	= "Cabin_Small"; // boal 28.03.05
