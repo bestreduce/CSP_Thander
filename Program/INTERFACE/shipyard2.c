@@ -8,7 +8,7 @@ int iTimeMake, iShipPoints, iQBorders, iPriceOrder;
 int iQMAX, iQMIN, iFreeSP, iFreeTP;
 bool Tune_Sheme[10] = {0,0,0,0,0,0,0,0,0,0};//элементы 0(заголовок таблицы) и 2(паруса) пропускаем. просто для удобства
 float Ship_Sheme[11] = {10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0};//тип флоат, чтоб не преобразовывать лишний раз при умножении на коэффициент, по факту - целые
-int CannonTypes[16] = {1000,7,0,8,1,9,2,10,3,11,4,12,5,13,6,14};// #define CANNON_TYPE_CULVERINE_LBS8	0, #define CANNON_TYPE_CANNON_LBS8		7
+int CannonTypes[20] = {1000,9,0,10,1,11,2,12,3,13,4,14,5,15,6,16,7,17,8,18};// #define CANNON_TYPE_CULVERINE_LBS8	0, #define CANNON_TYPE_CANNON_LBS8		7
 
 string CurTable, CurRow, sNation;
 int iSelected; // курсор в таблице
@@ -242,17 +242,19 @@ void FillShipParam()
 		SetBermudeTuningStates2Ship(refNPCShipyard, Tune_Sheme[9], Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3], Tune_Sheme[6]);
 		//void SetBermudeTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti, bool WAS)
 
-		int iQMAXTemp = 5;
+		int iQMAXTemp = 9;
 		int curMaxCaliber = sti(rRealShip.MaxCaliber);
 		switch (curMaxCaliber)
 		{
 		case 8: iQMAXTemp = -8; break;
-		case 12: iQMAXTemp = -6; break;
-		case 16: iQMAXTemp = -4; break;
-		case 20: iQMAXTemp = -2; break;
-		case 24: iQMAXTemp = 0; break;
-		case 32: iQMAXTemp = 2; break;
-		case 36: iQMAXTemp = 4; break;
+		case 10: iQMAXTemp = -6; break;
+		case 12: iQMAXTemp = -4; break;
+		case 16: iQMAXTemp = -2; break;
+		case 20: iQMAXTemp = 0; break;
+		case 24: iQMAXTemp = 2; break;
+		case 28: iQMAXTemp = 4; break;
+		case 32: iQMAXTemp = 6; break;
+		case 36: iQMAXTemp = 8; break;
 		}
 		if (Ship_Sheme[10] > iQMAXTemp) Ship_Sheme[10] = iQMAXTemp;//сбрасываем установленный тип орудий до максимально возможного для корабля (после смены корабля или снятия тюнинга калибра)
 		refNPCShipyard.Ship.Cannons.Type = CannonTypes[makeint(Ship_Sheme[10])+10];

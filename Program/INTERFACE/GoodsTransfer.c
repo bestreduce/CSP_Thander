@@ -537,12 +537,8 @@ void FillGoodsTable()
 	GameInterface.GOODS_TABLE_LIST.hr.td5.scale = 0.8;
 	curBuyGoodsWeight = 0;
 
-	for (i = 0, n = 1, bool isDone = 0; i< GOODS_QUANTITY; i++)
+	for (i = 0, n = 1; i< GOODS_QUANTITY; i++)
 	{
-//ром после парусины вставляем в таблицу //костыль, чтоб не разбираться: будут ли проблемы, если в инишках поменять порядок товаров
-		if (i==6) i = 16;
-		if (i==16 && isDone) continue;
-		if (i==17 && !isDone) {i=6; isDone = 1;}
 		row = "tr" + n;
 		sGood = Goods[i].name;
 		if (checkattribute(Goods[i],"CannonIdx")) continue;//без пушек???

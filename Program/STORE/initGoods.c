@@ -375,6 +375,20 @@ void InitGoods()
 	Goods[GOOD_CANNON_8].NotSale		= 0;
 	Goods[GOOD_CANNON_8].Norm           = 60;
 
+	Goods[GOOD_CANNON_10].Name			= "Cannon_10";
+	Goods[GOOD_CANNON_10].CannonIdx		= CANNON_TYPE_CANNON_LBS10;
+	Goods[GOOD_CANNON_10].Cost			= Cannon[CANNON_TYPE_CANNON_LBS10].Cost;
+	Goods[GOOD_CANNON_10].Weight		= Cannon[CANNON_TYPE_CANNON_LBS10].Weight;
+	Goods[GOOD_CANNON_10].FireRange		    = Cannon[CANNON_TYPE_CANNON_LBS10].FireRange;
+	Goods[GOOD_CANNON_10].DamageMultiply	= Cannon[CANNON_TYPE_CANNON_LBS10].DamageMultiply;
+	Goods[GOOD_CANNON_10].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CANNON_LBS10]));
+	Goods[GOOD_CANNON_10].Units			= 1;
+	Goods[GOOD_CANNON_10].AfraidWater	= 0;
+	Goods[GOOD_CANNON_10].type				= TRADE_TYPE_CANNONS;
+	Goods[GOOD_CANNON_10].canbecontraband	= 0;
+	Goods[GOOD_CANNON_10].NotSale		= 0;
+	Goods[GOOD_CANNON_10].Norm          = 55;
+
 	Goods[GOOD_CANNON_12].Name			= "Cannon_12";
 	Goods[GOOD_CANNON_12].CannonIdx		= CANNON_TYPE_CANNON_LBS12;
 	Goods[GOOD_CANNON_12].Cost			= Cannon[CANNON_TYPE_CANNON_LBS12].Cost;
@@ -430,6 +444,20 @@ void InitGoods()
 	Goods[GOOD_CANNON_24].DamageMultiply	= Cannon[CANNON_TYPE_CANNON_LBS24].DamageMultiply;
 	Goods[GOOD_CANNON_24].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CANNON_LBS24]));
 	Goods[GOOD_CANNON_24].Norm          = 30;
+
+	Goods[GOOD_CANNON_28].Name			= "Cannon_28";
+	Goods[GOOD_CANNON_28].CannonIdx		= CANNON_TYPE_CANNON_LBS28;
+	Goods[GOOD_CANNON_28].Cost			= Cannon[CANNON_TYPE_CANNON_LBS28].Cost;
+	Goods[GOOD_CANNON_28].Weight		= Cannon[CANNON_TYPE_CANNON_LBS28].Weight;
+	Goods[GOOD_CANNON_28].Units			= 1;
+	Goods[GOOD_CANNON_28].AfraidWater	= 0;
+	Goods[GOOD_CANNON_28].type				= TRADE_TYPE_CANNONS;
+	Goods[GOOD_CANNON_28].canbecontraband	= 0;
+	Goods[GOOD_CANNON_28].NotSale   	= 0;
+	Goods[GOOD_CANNON_28].FireRange		    = Cannon[CANNON_TYPE_CANNON_LBS28].FireRange;
+	Goods[GOOD_CANNON_28].DamageMultiply	= Cannon[CANNON_TYPE_CANNON_LBS28].DamageMultiply;
+	Goods[GOOD_CANNON_28].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CANNON_LBS28]));
+	Goods[GOOD_CANNON_28].Norm          = 25;
 
 	Goods[GOOD_CANNON_32].Name			= "Cannon_32";
 	Goods[GOOD_CANNON_32].CannonIdx		= CANNON_TYPE_CANNON_LBS32;
@@ -487,6 +515,20 @@ void InitGoods()
 	Goods[GOOD_CULVERINE_8].ReloadTime		 = sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CULVERINE_LBS8]));
 	Goods[GOOD_CULVERINE_8].Norm          	 = 60;
 
+	Goods[GOOD_CULVERINE_10].Name			 = "Culverine_10";
+	Goods[GOOD_CULVERINE_10].CannonIdx	 	 = CANNON_TYPE_CULVERINE_LBS10;
+	Goods[GOOD_CULVERINE_10].Cost			 = Cannon[CANNON_TYPE_CULVERINE_LBS10].Cost;
+	Goods[GOOD_CULVERINE_10].Weight			 = Cannon[CANNON_TYPE_CULVERINE_LBS10].Weight;
+	Goods[GOOD_CULVERINE_10].Units			 = 1;
+	Goods[GOOD_CULVERINE_10].AfraidWater	 = 0;
+	Goods[GOOD_CULVERINE_10].type			 = TRADE_TYPE_CANNONS;
+	Goods[GOOD_CULVERINE_10].canbecontraband = 0;
+	Goods[GOOD_CULVERINE_10].NotSale 		 = 0;
+	Goods[GOOD_CULVERINE_10].FireRange		    = Cannon[CANNON_TYPE_CULVERINE_LBS10].FireRange;
+	Goods[GOOD_CULVERINE_10].DamageMultiply	= Cannon[CANNON_TYPE_CULVERINE_LBS10].DamageMultiply;
+	Goods[GOOD_CULVERINE_10].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CULVERINE_LBS10]));
+	Goods[GOOD_CULVERINE_10].Norm          	= 55;
+
 	Goods[GOOD_CULVERINE_12].Name			 = "Culverine_12";
 	Goods[GOOD_CULVERINE_12].CannonIdx	 	 = CANNON_TYPE_CULVERINE_LBS12;
 	Goods[GOOD_CULVERINE_12].Cost			 = Cannon[CANNON_TYPE_CULVERINE_LBS12].Cost;
@@ -542,6 +584,20 @@ void InitGoods()
 	Goods[GOOD_CULVERINE_24].DamageMultiply	= Cannon[CANNON_TYPE_CULVERINE_LBS24].DamageMultiply;
 	Goods[GOOD_CULVERINE_24].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CULVERINE_LBS24]));
 	Goods[GOOD_CULVERINE_24].Norm          	= 30;
+
+	Goods[GOOD_CULVERINE_28].Name			 = "Culverine_28";
+	Goods[GOOD_CULVERINE_28].CannonIdx	 	 = CANNON_TYPE_CULVERINE_LBS28;
+	Goods[GOOD_CULVERINE_28].Cost			 = Cannon[CANNON_TYPE_CULVERINE_LBS28].Cost;
+	Goods[GOOD_CULVERINE_28].Weight			 = Cannon[CANNON_TYPE_CULVERINE_LBS28].Weight;
+	Goods[GOOD_CULVERINE_28].Units			 = 1;
+	Goods[GOOD_CULVERINE_28].AfraidWater	 = 0;
+	Goods[GOOD_CULVERINE_28].type			 = TRADE_TYPE_CANNONS;
+	Goods[GOOD_CULVERINE_28].canbecontraband = 0;
+	Goods[GOOD_CULVERINE_28].NotSale 		 = 0;
+	Goods[GOOD_CULVERINE_28].FireRange		    = Cannon[CANNON_TYPE_CULVERINE_LBS28].FireRange;
+	Goods[GOOD_CULVERINE_28].DamageMultiply	= Cannon[CANNON_TYPE_CULVERINE_LBS28].DamageMultiply;
+	Goods[GOOD_CULVERINE_28].ReloadTime		= sti(GetCannonReloadTime(&Cannon[CANNON_TYPE_CULVERINE_LBS28]));
+	Goods[GOOD_CULVERINE_28].Norm          	= 25;
 
 	Goods[GOOD_CULVERINE_32].Name			 = "Culverine_32";
 	Goods[GOOD_CULVERINE_32].CannonIdx	 	 = CANNON_TYPE_CULVERINE_LBS32;
