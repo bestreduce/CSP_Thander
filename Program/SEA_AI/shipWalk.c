@@ -2,11 +2,14 @@ object Sailors;
 
 void Ship_Walk_Init()
 {
-	CreateEntity(&Sailors, "Sailors");
+	if (CheckAttribute(InterfaceStates,"EnableSailors") && InterfaceStates.EnableSailors == 1)
+	{
+		CreateEntity(&Sailors, "Sailors");
 
-	SetEventHandler(SHIP_BORT_FIRE, "Ship_Walk_Bort_Fire", 0);
-	SetEventHandler(SHIP_CREATE, "Ship_Walk_Create", 0);
-	SetEventHandler(SHIP_HULL_HIT, "Ship_Walk_Hull_Damage", 0);
+		SetEventHandler(SHIP_BORT_FIRE, "Ship_Walk_Bort_Fire", 0);
+		SetEventHandler(SHIP_CREATE, "Ship_Walk_Create", 0);
+		SetEventHandler(SHIP_HULL_HIT, "Ship_Walk_Hull_Damage", 0);
+	}
 }
 
 void Ship_Walk_Delete()
