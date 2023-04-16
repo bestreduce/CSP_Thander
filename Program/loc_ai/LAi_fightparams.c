@@ -1785,11 +1785,11 @@ float LAi_NPC_GetDefenceWeightBlock()
 {
 	aref chr = GetEventData();	
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 0.5 + 0.5 * level;// влияние exe - 0 навык увеличивает время блока в ~3 раза сравнительно с 100
-	if (LAi_GetBladeFencingType(pchar) == "FencingHeavy")
+	npc_return_tmp = 0.4 + 0.5 * (level - 0.2);// влияние exe - 0 навык увеличивает время блока в ~3 раза сравнительно с 100
+	/*if (LAi_GetBladeFencingType(pchar) == "FencingHeavy")
 	{
 		npc_return_tmp /= 2;
-	}
+	}*/
 	return npc_return_tmp;
 }
 
