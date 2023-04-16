@@ -544,7 +544,6 @@ int LocationInitSentMartin(int n)
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "packhouse";
 	LAi_LocationFightDisable(&locations[n], true);
-	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
 
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

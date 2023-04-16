@@ -335,6 +335,23 @@ int Fantom_CalcSkill(ref rMainCharacter, string sSkill, int iShipClass, int iSki
 	return iSkill;
 }
 
+void FixOverMaxCannons(ref _chr)
+{
+	ref rShip = GetRealShip(GetCharacterShipType(_chr));
+ 	int iCannonsType = sti(rShip.Cannon);
+	ref rCannon = GetCannonByType(iCannonsType);
+	int nCaliber = sti(rCannon.caliber);
+	if (nCaliber == 48) return;//не трогаем 48фт, это явно что-то квестовое, что и должно нарушить ограничения
+
+	if (nCaliber > sti(rShip.MaxCaliber))
+	{
+		string sCannonType;
+		if (nCaliber == 42 && rand(1)) sCannonType = "Culverine";//42 пушки рандомом 50/50 на пушки или кулеврины нужного калибра
+		else sCannonType = GetCannonType(iCannonsType);//кулеврины меняем на кулеврины, пушки на пушки
+		_chr.Ship.Cannons.Type = GetCannonByTypeAndCaliber(sCannonType, sti(rShip.MaxCaliber));
+	}
+}
+
 void Fantom_SetCannons(ref rFantom, string sFantomType)
 {
 	int iSClass = GetCharacterShipClass(rFantom);
