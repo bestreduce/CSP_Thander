@@ -1,4 +1,4 @@
-#define GOODS_QUANTITY  53
+#define GOODS_QUANTITY  57
 
 #define GOOD_BALLS	    0
 #define GOOD_GRAPES	    1
