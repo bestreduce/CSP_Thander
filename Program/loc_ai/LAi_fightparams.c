@@ -1659,7 +1659,7 @@ float LAi_NPC_GetAttackActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 0.12 + MOD_SKILL_ENEMY_RATE*0.03;//0.16...0.43;
+	npc_return_tmp = 0.32 + MOD_SKILL_ENEMY_RATE*0.03 - level*0.02;//0.16...0.43;
 	return npc_return_tmp;
 }
 
