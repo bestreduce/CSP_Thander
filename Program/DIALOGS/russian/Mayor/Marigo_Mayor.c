@@ -64,7 +64,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 		
 		case "PKM_Animists_4":
-			dialog.text = "Вы берётесь за это дело?! Превосходно! Капитана, полагаю, вы сможете найти в таверне. Его судно все ещё стоит в порту.";
+			dialog.text = "Вы берётесь за это дело?! Превосходно! Капитана, полагаю, вы сможете найти в таверне. Его судно всё ещё стоит в порту.";
 			link.l1 = "Не смею занимать более ваше время, минхер.";
 			link.l1.go = "PKM_Animists_5";
         break;
