@@ -1663,7 +1663,6 @@ float LAi_NPC_GetAttackActive()
 	if(random()*3 <= 1)
 	{
 		npc_return_tmp *= 1.2;
-		Log_Info("ы "+npc_return_tmp);
 	}
 	return npc_return_tmp;
 }
