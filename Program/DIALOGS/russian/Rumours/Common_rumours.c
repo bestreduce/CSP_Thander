@@ -341,7 +341,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 			//выбор типа кораблика на карте
 			sld.mapEnc.worldMapShip = "Tich_MKA"; // LEO: Сюда надо заюзать модельку МКА на глобалку, персональную.
 			sld.mapEnc.Name = "Фрегат 'Месть Королевы Анны'";
-			int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даём с запасом
+			int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 			Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 			//заносим Id кэпа в базу нпс-кэпов
 			sTemp = sld.id;
@@ -349,7 +349,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 			NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 			NullCharacter.capitainBase.(sTemp).Tilte1 = "BlackBeard"; //заголовок квестбука
 			NullCharacter.capitainBase.(sTemp).Tilte2 = "BlackBeard"; //имя квеста в квестбуке
-			NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 3;
+			NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
 			NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 			NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 			NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

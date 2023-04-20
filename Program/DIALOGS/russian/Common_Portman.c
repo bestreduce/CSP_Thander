@@ -2013,7 +2013,7 @@ void SetJornalCapParam(ref npchar)
 	sld.mapEnc.type = "trade";
 	sld.mapEnc.worldMapShip = "Galleon_red"; //стояла модель кораблекрушенца
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.PortmansJornal.shipTapeName) + " '" + npchar.quest.PortmansJornal.shipName + "'";
-	int daysQty = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity))+5; //дней доехать даём с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity)) + 1; //дней доехать даём с запасом
 	Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, daysQty);
 	//заносим Id кэпа в базу нпс-кэпов
 	sTemp = sld.id;
@@ -2021,7 +2021,7 @@ void SetJornalCapParam(ref npchar)
 	NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 	NullCharacter.capitainBase.(sTemp).Tilte1 = npchar.id + "PortmansBook_Delivery"; //заголовок квестбука
 	NullCharacter.capitainBase.(sTemp).Tilte2 = "PortmansBook_Delivery"; //имя квеста в квестбуке
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
 	NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 	NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 	NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2119,7 +2119,7 @@ void SetSeekShipCapParam(ref npchar)
 	sld.mapEnc.type = "trade";
 	sld.mapEnc.worldMapShip = "Galleon_red";
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.PortmansSeekShip.shipTapeName) + " '" + npchar.quest.PortmansSeekShip.shipName + "'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даём с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 	Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, daysQty);
 	//прерывание на абордаж
 	string sTemp = "SeekShip_checkAbordage" + npchar.index;
@@ -2139,7 +2139,7 @@ void SetSeekShipCapParam(ref npchar)
 	NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 	NullCharacter.capitainBase.(sTemp).Tilte1 = npchar.id + "Portmans_SeekShip"; //заголовок квестбука
 	NullCharacter.capitainBase.(sTemp).Tilte2 = "Portmans_SeekShip"; //имя квеста в квестбуке
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
 	NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 	NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 	NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

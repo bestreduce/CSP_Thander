@@ -342,7 +342,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					sld.mapEnc.worldMapShip = "quest_ship";
 					sld.mapEnc.Name = "бриг 'Шарпоносец'";
 					string sColony= SelectAnyColony(npchar.city); //колония, откуда плывёт Шарп
-					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даём с запасом
+					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City)) + 1; //дней доехать даём с запасом
 					Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 					Log_TestInfo("Шарпоносец установлен из " + sColony + "  в " + pchar.questTemp.Sharp.City);
 				}

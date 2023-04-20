@@ -1740,7 +1740,7 @@ void GeneratePGGQuestLocation(ref NPChar) {
 	
 	PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 
-	if (isSetSail) PChar.GenQuest.PGG_Quest.Days = rand (4) + 5;
+	if (isSetSail) PChar.GenQuest.PGG_Quest.Days = rand(4) + 5;
 	else PChar.GenQuest.PGG_Quest.Days = GetMaxDaysFromIsland2Island(GetCharacterCurrentIslandId(PChar), PChar.GenQuest.PGG_Quest.Island) + 1;
 	
 	if(CheckAttribute(PChar, "BSStart") && !CheckAttribute(PChar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;

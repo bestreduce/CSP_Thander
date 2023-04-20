@@ -764,7 +764,7 @@ void PGG_SetUpForTask(ref chr)
 			}
 			chr.mapEnc.Name = GetHeroName(sti(chr.PGGAi.HeroNum));
 			string sColony = chr.PGGAi.Task.Target;
-			int daysQty = ((GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(chr.PGGAi.location.town)))/3)+1;
+			int daysQty = 1 + GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(chr.PGGAi.location.town))/3;
 			int iGoods;
 			int iSpace;
 
