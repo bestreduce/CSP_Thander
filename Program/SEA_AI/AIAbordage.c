@@ -59,7 +59,7 @@ void Go2LocationAfterAbordage()
 	Sea.AbordageMode = false;
 
     SendMessage(&Particles,"l", PS_CLEAR_CAPTURED); // boal
-	PauseParticles(false);
+	//PauseParticles(false);
 	LayerFreeze(SEA_REFLECTION2, false);
 
 	Sea.MaxSeaHeight = fOldMaxSeaHeight;		// restore old MaxSeaHeight
@@ -90,7 +90,7 @@ void Return2SeaAfterAbordage()
 	SetSchemeForSea();
 
     SendMessage(&Particles,"l", PS_CLEAR_CAPTURED); // boal
-	PauseParticles(false);
+	//PauseParticles(false);
 
 	bSeaReloadStarted = false;
     //#20190117-03
@@ -112,7 +112,7 @@ void Abordage_ReloadEndFade()
 		SendMessage(AISea, "laff", AI_MESSAGE_SAIL_2_CHARACTER, &Characters[iAbordageCharacter], 40.0 + frnd() * 60.0, frnd() * PIm2);
 	}
 
-	PauseParticles(true);
+	//PauseParticles(true);
     //DeleteParticles(); // boal fix костры нах
 
 	// start abordage location

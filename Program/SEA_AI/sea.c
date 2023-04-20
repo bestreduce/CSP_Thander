@@ -75,7 +75,7 @@ int	iSeaSectionLang = -1;
 
 void DeleteSeaEnvironment()
 {
-    PauseParticles(true); //fix
+	//PauseParticles(true); //fix
 	Ship_Walk_Delete();
 
 	StopMusic();

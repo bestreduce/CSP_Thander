@@ -469,7 +469,7 @@ void SaveGame()
 
 void LoadGame()
 {
-    PauseParticles(true); //fix вылета у форта
+	//PauseParticles(true); //fix вылета у форта
     // не помогло DeleteFortEnvironment();  //fix
 
 	PauseAllSounds(); // boal fix
@@ -1968,7 +1968,7 @@ void GameOverE()
 	// вылетам у форта НЕТ -->
     if (bSeaActive && !bAbordageStarted)
     {
-		PauseParticles(true); //fix вылета у форта
+		//PauseParticles(true); //fix вылета у форта
 		SendMessage(&AIBalls, "l", MSG_MODEL_RELEASE);
 	}
 	// вылетам у форта НЕТ <--
