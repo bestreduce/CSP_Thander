@@ -1044,6 +1044,16 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(sld);
 			sld.lifeday = 0;
 			LAi_SetCitizenType(sld);
+			
+			AddQuestRecord("PKM_Animists", "37");
+			pchar.questTemp.PKM_Animists_MamaDeti = true;
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			{
+				CloseQuestHeader("PKM_Animists");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+			}
 		break;
 		
 	}
