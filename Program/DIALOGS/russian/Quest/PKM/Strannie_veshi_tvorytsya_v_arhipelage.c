@@ -151,13 +151,13 @@ void ProcessDialogEvent()
 		
 		case "Shturman_v_taverne_3":
 			dialog.text = "Всё, до пенса. Ну что, поставишь кружечку?";
-			link.l1 = "Потом. Ты видел чёрный фрегат во время плавания?";
+			link.l1 = "Погоди, меня интересует, не видел ли ты чёрный фрегат во время плавания?";
 			link.l1.go = "Shturman_v_taverne_4";
 		break;
 		
 		case "Shturman_v_taverne_4":
 			dialog.text = "Угости меня ромом, и я тебе всё расскажу!";
-			link.l1 = "Вот твой ром.";
+			link.l1 = "Хорошо, вот твой ром.";
 			link.l1.go = "Shturman_v_taverne_5";
 			link.l2 = "А, может приложить тебя пару раз о столешницу?";
 			link.l2.go = "Shturman_v_taverne_9";
@@ -165,27 +165,27 @@ void ProcessDialogEvent()
 		
 		case "Shturman_v_taverne_5":
 			dialog.text = "Гульп-гульп. Хор-р-роший ром!";
-			link.l1 = "Итак, ты видел фрегат?";
+			link.l1 = "Итак, ты видел чёрный фрегат?";
 			link.l1.go = "Shturman_v_taverne_6";
 			AddMoneyToCharacter(pchar, -10);
 		break;
 		
 		case "Shturman_v_taverne_9":
 			dialog.text = "Хм... Обойдёмся без этого.";
-			link.l1 = "Итак, ты видел фрегат?";
+			link.l1 = "Итак, ты видел чёрный фрегат?";
 			link.l1.go = "Shturman_v_taverne_6";
 			ChangeCharacterReputation(pchar, -2);
 		break;
 		
 		case "Shturman_v_taverne_6":
 			dialog.text = "Фрегат-то? Чёрный?! Видел я его, как тебя вижу. Если бы шли не порожняком, то сейчас не разговаривал бы с тобой - у них то трюмы явно под завязку были\nИмечко ещё у него странное было, не христианское какое-то - 'Мефисто'.";
-			link.l1 = "Каким курсом плыл фрегат?";
+			link.l1 = "Он вас преследовал? А куда направился после того, как понял, что ему вас не догнать?";
 			link.l1.go = "Shturman_v_taverne_7";
 		break;
 		
 		case "Shturman_v_taverne_7":
-			dialog.text = "На юг. Может на Гваделупу, а может и на Мартинику... к пиратам. Дьявол его знает.";
-			link.l1 = "Мда...";
+			dialog.text = "А дьявол его знает. Куда-то на юг, а там, почитай только Ле Франсуа и лежит.";
+			link.l1 = "Хорошо, можешь пить дальше.";
 			link.l1.go = "Shturman_v_taverne_8";
 			npchar.lifeday = 0;
 			LAi_CharacterDisableDialog(npchar);
