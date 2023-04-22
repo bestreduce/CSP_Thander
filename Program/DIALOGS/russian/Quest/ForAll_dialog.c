@@ -2061,6 +2061,8 @@ void ProcessDialogEvent()
 			else
 			{
 				PlaceCharacter(sld, "reload", "random_must_be");
+				//if (locator == "boat") locator = "reload1";
+				//ChangeCharacterAddressGroup(sld, _location.id, "quest", locator);
 			}
 			DeleteAttribute(sld, "talker");
 			LAi_SetStayType(sld);

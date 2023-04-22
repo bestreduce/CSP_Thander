@@ -11289,6 +11289,7 @@ void QuestComplete(string sQuestName, string qname)
 		
 		case "LogovoSatanistov":
 			chrDisableReloadToLocation = true;
+			scareOfficers(70);
 			
 			//КУХНЯ
 			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));

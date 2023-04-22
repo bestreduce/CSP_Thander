@@ -454,6 +454,7 @@ void ProcessDialogEvent()
 			sld.FaceId = 296;
 			sld.rank = 15;
 			LAi_SetHP(sld, 400.0, 400.0);
+			sld.HasNoFear = true;
 		
 			sld = CharacterFromID("FortFrance_Priest");
 			LAi_SetPriestType(sld);

@@ -33,7 +33,7 @@ void ProcessDialogEvent()
 			scareOfficers(70);
 			InterfaceStates.Buttons.Save.enable = false;
 			LAi_SetImmortal(npchar, false);
-			dialog.Text = "Ты приш"+GetSexPhrase("ел","ла")+" смешать свои кости  с нашими?";
+			dialog.Text = "Ты приш"+GetSexPhrase("ёл","ла")+" смешать свои кости с нашими?";
 			Link.l1 = "Кто ты?";
 			Link.l1.go = "GrottoSkeleton_1";
 		break;
