@@ -11786,8 +11786,8 @@ void QuestComplete(string sQuestName, string qname)
 			sld.AnalizeShips = true;
 			sld.GenQuest.CrewSatanistMode = true;
 			
-			GiveItem2Character(sld, "cirass3");
-			EquipCharacterbyItem(sld, "cirass3");
+			GiveItem2Character(sld, "cirass2");
+			EquipCharacterbyItem(sld, "cirass2");
 			
 			Group_FindOrCreateGroup("Enemy_Attack");
 			Group_SetType("Enemy_Attack", "war");
