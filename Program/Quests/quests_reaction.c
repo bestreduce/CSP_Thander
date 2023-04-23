@@ -11788,7 +11788,6 @@ void QuestComplete(string sQuestName, string qname)
 			
 			GiveItem2Character(sld, "cirass3");
 			EquipCharacterbyItem(sld, "cirass3");
-			SetCharacterGoods(sld, GOOD_SLAVES, 300);
 			
 			Group_FindOrCreateGroup("Enemy_Attack");
 			Group_SetType("Enemy_Attack", "war");
