@@ -4138,6 +4138,7 @@ void QuestComplete(string sQuestName, string qname)
         	LAi_LoginInCaptureTown(sld, true);
             ChangeCharacterAddressGroup(sld, "LaVega_tavern", "goto", "goto2");
             LAi_SetStayTypeNoGroup(sld);
+			chrDisableReloadToLocation = true;//блок перехода, чтобы нельзя было уйти из локи до активации диалога
 			DoQuestCheckDelay("TalkSelf_Quest", 2.0); //диалог сам-на-сам
         break;
 

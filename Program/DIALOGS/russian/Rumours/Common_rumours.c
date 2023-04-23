@@ -1332,7 +1332,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги мужика
 		case "MechanicIsPrison_man":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клипере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_man_1":
@@ -1342,7 +1342,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		break;
 		case "MechanicIsPrison_man_2":
 			dialog.text = "А без Механика нам не обойтись?";
-			link.l1 = "Ведекер нам нужен. На клиппер мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
+			link.l1 = "Ведекер нам нужен. На клипер мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
 			link.l1.go = "MechanicIsPrison_man_3";
 		break;
 		case "MechanicIsPrison_man_3":
@@ -1367,7 +1367,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги бабы
 		case "MechanicIsPrison_woman":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клипере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_woman_1":

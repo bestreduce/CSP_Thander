@@ -137,6 +137,7 @@ void ProcessDialogEvent()
     		    dialog.text = "Дьявол!!! Что здесь произошло? Нужно попытаться найти хоть кого-нибудь живого...";
     			link.l1 = "...";
     			link.l1.go = "exit";
+				chrDisableReloadToLocation = false;//снимаем блок перехода
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1 = "location";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1.location = "LaVega_town";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition = "ToMansfield_OutFromFort";

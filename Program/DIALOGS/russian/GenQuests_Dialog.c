@@ -5548,7 +5548,7 @@ void ProcessDialogEvent()
 
 			PChar.GenQuest.PiratesOnUninhabited.PiratesCount = iBanditsCount;
 
-			dialog.text = "А Вы проницательный человек. Но уверяю Вас, что наш конфликт с капитаном " + ChangeNameCase(NAMETYPE_ORIG, PChar.GenQuest.PiratesOnUninhabited.BadPirateName, NAME_ABL) + " возник исключительно на почве идейных разногласий. Я предупреждал, что его скверные делишки не останутся безнаказанными, а теперь мне и " + iBanditsCount + "-м моим единомышленникам приходится страдать за нашу любовь к Богу и справедливости...";
+			dialog.text = "А Вы проницательный человек. Но уверяю Вас, что наш конфликт с капитаном " + ChangeNameCase(NAMETYPE_ORIG, PChar.GenQuest.PiratesOnUninhabited.BadPirateName, NAME_ABL) + " возник исключительно на почве идейных разногласий. Я предупреждал, что его скверные делишки не останутся безнаказанными, а теперь мне и " + ShipWreck_GetStringQty(iBanditsCount) + " моим единомышленникам приходится страдать за нашу любовь к Богу и справедливости...";
 			link.l1 = "Как же... Небось бунт на корабле подняли или проворовались. Вот и досталось вам поделом.";
 			link.l1.go = "PiratesOnUninhabited_42";
 

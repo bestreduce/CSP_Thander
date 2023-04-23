@@ -4727,7 +4727,7 @@ void LSC_scriptInterception(string qName)
 		pchar.questTemp.LSC = "InterceptionLate";
 		AddQuestRecord("ISS_MainLine", "19");
 		AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","ла"));
-		AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","а"));
+		AddQuestUserData("ISS_MainLine", "sSex1", GetSexPhrase("","а"));
 	}
 }
 

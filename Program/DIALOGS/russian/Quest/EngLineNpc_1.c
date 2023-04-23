@@ -481,7 +481,7 @@ void ProcessDialogEvent()
         break;
 
         case "MorrisWillams_GoAway":
-			chrDisableReloadToLocation = true;
+			chrDisableReloadToLocation = true;//если провалить квест, то блочится переход чтоб показать как Моррис уходит
             LAi_SetActorType(npchar);
             ChangeCharacterAddressGroup(npchar, "PortRoyal_tavern", "tables", "stay8");
             LAi_ActorGoToLocation(npchar, "reload", "reload1_back", "none", "", "", "OpenTheDoors", -1);

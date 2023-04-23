@@ -789,6 +789,8 @@ void QuestActions()
 		{
 			pchar.questTemp.LSC = "InterceptionLate";
 			AddQuestRecord("ISS_MainLine", "19");
+			AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","ла"));
+			AddQuestUserData("ISS_MainLine", "sSex1", GetSexPhrase("","а"));
 		}
 	}
 	//************** линейка ГПК, завал первого каспера с помощь Армо *******************
