@@ -2383,7 +2383,7 @@ void ProcessDialogEvent()
 				break;
 			}
 
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". Чем могу служить?";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". Чем могу служить?";
 			Link.l1 = "Я хочу знать текущие дела колонии.";
 			Link.l1.go = "ColonyBuilding_Hovernor_3";
 			Link.l2 = "Я хочу снять тебя с занимаемой должности, " + NPChar.name + ".";
@@ -2449,7 +2449,7 @@ void ProcessDialogEvent()
 
 		case "ColonyBuilding_Expidition_End":
 			Diag.CurrentNode = "ColonyBuilding_Hovernor";
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". У меня для вас новость. Недавно закончилась проводимая нами экспедиция. На острове были найдены очень плодотворные земли, а главное - залежи руды.";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". У меня для вас новость. Недавно закончилась проводимая нами экспедиция. На острове были найдены очень плодотворные земли, а главное - залежи руды.";
 			Link.l1 = "Хм, что ж, хорошо. До встречи.";
 			Link.l1.go = "exit";
 		break;
@@ -2457,21 +2457,21 @@ void ProcessDialogEvent()
 		case "ColonyBuilding_Mines_End":
 			PChar.ColonyBuilding.MineMessage = true;
 			Diag.CurrentNode = "ColonyBuilding_Hovernor";
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". У меня для вас новость. Закончилось строительство рудников. Теперь вам необходимо назначить начальника рудников. С ним вы будете решать все дела, связанные с этим ремеслом.";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". У меня для вас новость. Закончилось строительство рудников. Теперь вам необходимо назначить начальника рудников. С ним вы будете решать все дела, связанные с этим ремеслом.";
 			Link.l1 = "Хм, что ж, хорошо. До встречи.";
 			Link.l1.go = "exit";
 		break;
 
 		case "ColonyBuilding_Plantation_End":
 			Diag.CurrentNode = "ColonyBuilding_Hovernor";
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". У меня для вас новость. Закончилось строительство плантации. Теперь вам необходимо назначить начальника плантации. С ним вы будете решать все дела, связанные с этим ремеслом.";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". У меня для вас новость. Закончилось строительство плантации. Теперь вам необходимо назначить начальника плантации. С ним вы будете решать все дела, связанные с этим ремеслом.";
 			Link.l1 = "Хм, что ж, хорошо. До встречи.";
 			Link.l1.go = "exit";
 		break;
 
         	// Начальник рудников
 		case "MinesCommander_1":
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". Чем могу служить?";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". Чем могу служить?";
 			Link.l1 = "Я хочу знать текущие дела рудников.";
 			Link.l1.go = "MinesCommander_2";
 			Link.l2 = "Я хочу снять тебя с занимаемой должности, " + NPChar.name + ".";
@@ -2534,7 +2534,7 @@ void ProcessDialogEvent()
 
         	// Начальник плантации
 		case "PlantationCommander_1":
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". Чем могу служить?";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". Чем могу служить?";
 			Link.l1 = "Я хочу знать текущие дела плантации.";
 			Link.l1.go = "PlantationCommander_2";
 			Link.l2 = "Я хочу снять тебя с занимаемой должности, " + NPChar.name + ".";
@@ -2619,7 +2619,7 @@ void ProcessDialogEvent()
 	        break;
 
 		case "ColonyGuarding_Hovernor":
-			dialog.Text = "Здравствуйте, капитан " + PChar.name + " " + PChar.lastname + ". Чем могу служить?";
+			dialog.Text = "Здравствуйте, капитан " + GetFullName(pchar) + ". Чем могу служить?";
 			Link.l1 = "Я хочу знать текущие состояние защиты.";
 			Link.l1.go = "ColonyGuarding_Hovernor_3";
 			Link.l2 = "Я хочу снять тебя с занимаемой должности, " + NPChar.name + ".";

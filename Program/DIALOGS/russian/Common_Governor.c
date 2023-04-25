@@ -157,7 +157,7 @@ void ProcessDialogEvent()
 			}
 			if(CheckAttribute(npchar,"patent.othertime") && !CheckAttribute(pchar, "EquipedPatentId"))
 			{
-				link.l16 = "Приветствую вас, " + npchar.name + " " + npchar.lastname + ". Я бы хотел вернутся к вопросу о патенте.";
+				link.l16 = "Приветствую вас, " + GetFullName(npchar) + ". Я бы хотел вернутся к вопросу о патенте.";
 				link.l16.go = "Other time patent";
 			}
 		break;
@@ -521,7 +521,7 @@ void ProcessDialogEvent()
 		break;
 		case "GivePatent":
 			dialog.text = "О, да это же сам" + GetSexPhrase(" ","а ") + GetFullName(pchar) + ". Я уже заждался вас!";
-			link.l1 = "Приветствую, уважаемый " + npchar.name + " " + npchar.lastname + ". Спасибо за столь радушный приём. Чем вам обязан" + GetSexPhrase("?","а?");
+			link.l1 = "Приветствую, уважаемый " + GetFullName(npchar) + ". Спасибо за столь радушный приём. Чем вам обязан" + GetSexPhrase("?","а?");
 			link.l1.go = "Give Money";
 			npchar.quest.meeting = "1";//флаг знакомства с губером
 		break;

@@ -19,7 +19,7 @@ void ProcessDialogEvent()
 				{
 					if(sti(PChar.Arena.Duel.BiletCount) == 1)
 					{
-						dialog.text = "А-а, это вы, капитан " + PChar.name + " " + PChar.lastname + "? Проходите!";
+						dialog.text = "А-а, это вы, капитан " + GetFullName(pchar) + "? Проходите!";
 						link.l1 = "...";
 						link.l1.go = "exit";
 						AddDialogExitQuestFunction("PrepareArenaDuelEnd");
@@ -32,7 +32,7 @@ void ProcessDialogEvent()
 				{
 					if(sti(PChar.Arena.Etaps.BiletCount) == 1)
 					{
-						dialog.text = "А-а, это вы, капитан " + PChar.name + " " + PChar.lastname + "? Решили сразиться со нечистию всякою?";
+						dialog.text = "А-а, это вы, капитан " + GetFullName(pchar) + "? Решили сразиться со нечистию всякою?";
 						link.l1 = "Угу... Давай, пропускай.";
 						link.l1.go = "exit";
 						AddDialogExitQuestFunction("PrepareArenaEtapsEnd");
@@ -45,7 +45,7 @@ void ProcessDialogEvent()
 				{
 					if(sti(PChar.Arena.Tournament.BiletCount) == 1)
 					{
-						dialog.text = "А-а, это вы, капитан " + PChar.name + " " + PChar.lastname + "? Все участники турнира уже в сборе! Схватки ожидаются очень жестокими. Удачи вам, капитан...";
+						dialog.text = "А-а, это вы, капитан " + GetFullName(pchar) + "? Все участники турнира уже в сборе! Схватки ожидаются очень жестокими. Удачи вам, капитан...";
 						link.l1 = "Спасибо...";
 						link.l1.go = "exit";
 						AddDialogExitQuestFunction("PrepareArenaTournamentEnd");
@@ -58,7 +58,7 @@ void ProcessDialogEvent()
 				{
 					if(sti(PChar.Arena.Odds.BiletCount) == 1)
 					{
-						dialog.text = "А-а, это вы, капитан " + PChar.name + " " + PChar.lastname + "? Слыхал, вы заключили пари и решили попытать счастья, поставив на одного из дуэлянтов? Желаю вам удачи!";
+						dialog.text = "А-а, это вы, капитан " + GetFullName(pchar) + "? Слыхал, вы заключили пари и решили попытать счастья, поставив на одного из дуэлянтов? Желаю вам удачи!";
 						link.l1 = "Спасибо...";
 						link.l1.go = "exit";
 						AddDialogExitQuestFunction("PrepareArenaOddsEnd");

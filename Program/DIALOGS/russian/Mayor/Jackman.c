@@ -738,7 +738,7 @@ void ProcessDialogEvent()
         break;
 
 	 	case "Step_8":
-			dialog.text = "Ха-ха... Ты - хороший корсар, " + pchar.name + " " + pchar.lastname + ". Я желаю тебе удачи, "+ GetSexPhrase("друг","подруга") +".\n"+
+			dialog.text = "Ха-ха... Ты - хороший корсар, " + GetFullName(pchar) + ". Я желаю тебе удачи, "+ GetSexPhrase("друг","подруга") +".\n"+
                           "Мои головорезы рвутся домой после хорошей работы. Знай, что на Бермудах всегда рады тебя видеть.";
 			link.l1 = "Ещё увидимся!";
 			link.l1.go = "Step_9";

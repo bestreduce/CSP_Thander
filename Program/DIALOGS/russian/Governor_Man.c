@@ -23,7 +23,7 @@ void ProcessDialogEvent()
 			LAi_ActorGoToLocation(npchar, "reload", "reload1", "none", "", "", "", -1);
 		break;
 		case "First Time":
-			dialog.text = "Приветствую, вы " + pchar.name + " " + pchar.lastname + ", верно?";
+			dialog.text = "Приветствую, вы " + GetFullName(pchar) + ", верно?";
 			link.l1 = "Да, вы правы. Что собственно случилось?";
 			link.l1.go = "Invite";
 		break;

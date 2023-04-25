@@ -844,7 +844,7 @@ void ApplayNewSkill(ref _chref, string _skill, int _addValue)
             }
             else
             {
-                Log_Info(""+ _chref.name + " "+_chref.lastname + " получает новый уровень!");
+                Log_Info("" + GetFullName(_chref) + " получает новый уровень!");
             }
         }
     }

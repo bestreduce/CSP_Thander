@@ -1475,7 +1475,7 @@ ref CheckHorsesName(string City, int num)
 		makeref(rCharacter, Characters[n]);
 		if (rCharacter.location == City+"_Brothel" && CheckAttribute(rCharacter, "CityType") && rCharacter.CityType == "horse")
 		{
-			sTemp = GetStrSmallRegister(rCharacter.lastname + " " + rCharacter.name);
+			sTemp = GetStrSmallRegister(GetFullName(rCharacter));
 			if (findsubstr(sSeeked, sTemp , 0) != -1)
 				return rCharacter;
 			sTemp = GetStrSmallRegister(rCharacter.lastname);
