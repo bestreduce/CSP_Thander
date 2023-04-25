@@ -519,10 +519,11 @@ void ProcessDialogEvent()
 			AddQuestRecord("Andre_Abel_Quest", "16");
 			AddQuestUserData("Andre_Abel_Quest", "sText", "К счастью, меня в очередной раз выручили деньги");
 		break;
-		case "Give Patent":
-			dialog.text = "О, да это же сам" + GetSexPhrase(" ","а ") + pchar.name + " " + pchar.lastname + ". Я уже заждался вас!";
+		case "GivePatent":
+			dialog.text = "О, да это же сам" + GetSexPhrase(" ","а ") + GetFullName(pchar) + ". Я уже заждался вас!";
 			link.l1 = "Приветствую, уважаемый " + npchar.name + " " + npchar.lastname + ". Спасибо за столь радушный приём. Чем вам обязан" + GetSexPhrase("?","а?");
 			link.l1.go = "Give Money";
+			npchar.quest.meeting = "1";//флаг знакомства с губером
 		break;
 		case "Give Money":
 			dialog.text = "Вы отличились, помогая нам в делах, и за это примите мои поздравления и моё предложение стать капером на службе у нашей нации!";
@@ -547,7 +548,7 @@ void ProcessDialogEvent()
 			npchar.patent.othertime = true;
 		break;
 		case "Other time patent":
-			dialog.text = "О, вы вернулись. Решили, что всё таки хотите получить патент?";
+			dialog.text = "О, вы вернулись. Решили, что всё-таки хотите получить патент?";
 			link.l1 = "Да, я решил принять ваше предложение";
 			link.l2 = "Я всё таки ещё подумаю, досвидания";
 			link.l1.go = "Accept";

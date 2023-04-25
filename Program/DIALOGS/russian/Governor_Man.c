@@ -34,7 +34,7 @@ void ProcessDialogEvent()
 			link.l1 = "Это невероятно! Обязательно посещу его при возможности! Спасибо и прощайте.";
 			link.l1.go = "exit";
 			sld = CharacterFromID(NationShortName(sti(npchar.nation))+"_guber");
-			sld.dialog.CurrentNode = "Give Patent";
+			sld.dialog.CurrentNode = "GivePatent";
 			chrDisableReloadToLocation = false;
 			pchar.(sNationName).quest.mayor.done = true;
 		break;
