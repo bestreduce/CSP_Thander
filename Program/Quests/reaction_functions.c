@@ -653,6 +653,17 @@ void SharpSeekSpy_loginSpy(string qName)
 		Group_LockTask(sGroup);
 		Map_CreateWarrior("", sld.id, 8);
 	}
+	else
+	{
+		SetTimerFunction("SharpSeekSpy_again", 0, 0, 3);
+	}
+}
+
+void SharpSeekSpy_again(string qName)
+{
+	pchar.quest.SharpSeekSpy_loginSpy.win_condition.l1 = "location";
+	pchar.quest.SharpSeekSpy_loginSpy.win_condition.l1.location = "Shore55";
+	pchar.quest.SharpSeekSpy_loginSpy.function = "SharpSeekSpy_loginSpy";
 }
 
 void SharpSeekSpy_script(string qName)
