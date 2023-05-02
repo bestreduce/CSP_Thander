@@ -11908,7 +11908,7 @@ void QuestComplete(string sQuestName, string qname)
 				ChangeCharacterAddressGroup(sld, pchar.location, "rld",  "aloc15");
 			}
 			//Наши
-			for (i=4; i<=14; i++)
+			for (i=4; i<=13; i++)
 			{
 				if (pchar.sex != "skeleton")
 				{
