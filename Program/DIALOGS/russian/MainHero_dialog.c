@@ -238,7 +238,7 @@ void ProcessDialogEvent()
 			//Линейка Виспер
 			if (CheckAttribute(pchar, "questTemp.Whisper.Entered_Dungeon"))
 			{
-				dialog.Text = "Координаты совпадают. Кажется, я на месте. Похоже на подземные коммуникации. Надо быть осторожнее.";
+				dialog.Text = "Координаты совпадают. Кажется, я на месте. Похоже это какие-то подземные коммуникации. Хорошее место, если не хочешь сверкать лицом перед камерами.";
 				bMonstersGen = true;
 				DeleteAttribute(pchar, "questTemp.Whisper.Entered_Dungeon");
 				if (bBettaTestMode)
