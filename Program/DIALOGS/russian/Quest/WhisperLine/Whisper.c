@@ -28,12 +28,15 @@ void ProcessDialogEvent()
 			}
 			if (npchar.id == "FinalBot")
 			{
-				dialog.text = "(Вы слишком поздно замечаете бота. Уже после того, как услышали звук выстрела.)";
+				dialog.text = "(вы слишком поздно замечаете бота. Уже после того, как услышали звук выстрела.)";
 				LAi_LocationFightDisable(locLoad, false);
 				DeleteAttribute(locLoad, "box1");
 				DeleteAttribute(locLoad, "box2");
 				DeleteAttribute(locLoad, "box3");
 				DeleteAttribute(locLoad, "box4");
+				DeleteAttribute(locLoad, "box5");
+				DeleteAttribute(locLoad, "box6");
+				DeleteAttribute(locLoad, "box7");
 				LAi_SetActorTypeNoGroup(npchar);
 				LAi_ActorAnimation(npchar, "Shot", "pchar_back_to_player", 1.0);
 				link.l1 = "Чёрт!";
@@ -1186,14 +1189,14 @@ void ProcessDialogEvent()
 		case "FB":
 			//CharacterPlayAction(npchar, "Shot");
 			NextDiag.CurrentNode = NextDiag.TempNode;
-			dialog.text = "(Вы сами не пострадали, однако этого нельзя сказать об устройстве в ваших руках. Пуля попадает в квантовый выпрямитель частиц, после чего устройство включается и начинает работать произвольным образом, издавая серии тресков и щелчков)";
+			dialog.text = "(вы сами не пострадали, однако этого нельзя сказать об устройстве в ваших руках. Пуля попадает в квантовый выпрямитель частиц, после чего устройство включается и начинает работать произвольным образом, издавая серии тресков и щелчков)";
 			PlayVoice("interface\beeping.wav");
 			link.l1 = "Дьявол!";
 			link.l1.go = "FB_exit";
 		break;
 		case "FB_exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
-			dialog.text = "(Вы сами не пострадали, однако этого нельзя сказать об устройстве в ваших руках.Пуля попадает в квантовый выпрямитель частиц, после чего устройство включается и начинает работать произвольным образом, издавая серии тресков и щелчков)";
+			dialog.text = "(вы сами не пострадали, однако этого нельзя сказать об устройстве в ваших руках.Пуля попадает в квантовый выпрямитель частиц, после чего устройство включается и начинает работать произвольным образом, издавая серии тресков и щелчков)";
 			link.l1 = "Дьявол!";
 			link.l1.go = "exit";
 			DoReloadCharacterToLocation("Ship_Deck_Big","goto","goto5");
