@@ -284,7 +284,7 @@ void BSOnTheHorizon_SeaBattle()
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_FWZP, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
@@ -1203,7 +1203,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 						sld.DeckDialogNode = "BS_CPNG_15";
 						FaceMaker(sld);
 						sld.SaveItemsForDead = true;
-						sld.money = 300000;
+						sld.money = 100000;
 						sld.items.jewelry1 = 10+rand(5);
 						sld.items.jewelry2 = 10+rand(5);
 						sld.items.jewelry3 = 10+rand(5);
@@ -1224,7 +1224,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 						sld.name = "Френсис";
 						sld.lastname = "Ньюм";
 						sld.SaveItemsForDead = true;
-						sld.money = 1250000;
+						sld.money = 300000;
 						sld.items.jewelry1 = 20+rand(5);
 						sld.items.jewelry2 = 20+rand(5);
 						sld.items.jewelry3 = 20+rand(5);
@@ -1322,7 +1322,7 @@ void BSUrka_Curacao_SeaBattle()
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA_H, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_LINK2, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
@@ -1694,9 +1694,6 @@ void BSUrka_Poison()
 	sld = CharacterFromID("Flint");
 	LAi_SetActorTypeNoGroup(sld);
 	LAi_ActorTurnToCharacter(sld, pchar);
-	Group_DeleteGroup("Flint_Group");//фикс - удаляем корабль флинта из бухты Корыта
-	//sld.LifeDay = 0;//или лучше убивать самого флинта? работает и то, и то
-	
 }
 void BSUrka_PoisonSelf(string q)
 {
