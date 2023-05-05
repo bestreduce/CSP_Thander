@@ -1490,12 +1490,14 @@ int GetShipPriceByTTH(int iType, ref rChar)
 	switch(sti(rRealShip.MaxCaliber))
 	{
 		case 8: caliber_price = 1250; break;
-		case 12: caliber_price = 2500; break;
-		case 16: caliber_price = 7500; break;
-		case 20: caliber_price = 11250; break;
-		case 24: caliber_price = 15000; break;
+		case 10: caliber_price = 2000; break;
+		case 12: caliber_price = 3150; break;
+		case 16: caliber_price = 5000; break;
+		case 20: caliber_price = 7800; break;
+		case 24: caliber_price = 12250; break;
+		case 28: caliber_price = 19250; break;
 		case 32: caliber_price = 30000; break;
-		case 36: caliber_price = 40000; break;
+		case 36: caliber_price = 47500; break;
 		case 42: caliber_price = 75000; break;
 		case 48: caliber_price = 150000; break;
 	}

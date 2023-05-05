@@ -111,24 +111,14 @@ void SetShipBermudeTuningMaxCaliber(ref chr)
 	int iCaliber = sti(rShip.MaxCaliber);
 	switch(iCaliber)
 	{
-		case 8:
-			iCaliber = 12;
-		break;
-		case 12:
-			iCaliber = 16;
-		break;
-		case 16:
-			iCaliber = 20;
-		break;
-		case 20:
-			iCaliber = 24;
-		break;
-		case 24:
-			iCaliber = 32;
-		break;
-		case 32:
-			iCaliber = 36;
-		break;
+		case 8: iCaliber = 10; break;
+		case 10: iCaliber = 12; break;
+		case 12: iCaliber = 16; break;
+		case 16: iCaliber = 20; break;
+		case 20: iCaliber = 24; break;
+		case 24: iCaliber = 28; break;
+		case 28: iCaliber = 32; break;
+		case 32: iCaliber = 36; break;
 	}
 	rShip.MaxCaliber = iCaliber;
 	rShip.Tuning.Cannon = true;

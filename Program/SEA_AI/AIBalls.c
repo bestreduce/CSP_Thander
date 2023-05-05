@@ -127,7 +127,7 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 
 	if (fCannons > 0.0 && RealShips[sti(aCharacter.ship.type)].BaseName != "fort") // fix
 	{
-		if (fCannons > rand(200) && !IsEquipCharacterByArtefact(aCharacter, "talisman3"))//урон в 2 раза реже
+		if (fCannons > rand(100) && !IsEquipCharacterByArtefact(aCharacter, "talisman3"))
 		{
             fCannons = (frnd() + 3.0*(1.65 - stf(aCharacter.TmpSkill.Cannons))) * 5;//уменьшаю рандомный разброс урона, и сам урон примерно в 2 раза
 			SendMessage(&AISea, "laffff", AI_MESSAGE_CANNONS_BOOM_CHECK, aCharacter, fCannons, fx, fy, fz);  // fDamage2Cannons  там много делителей, потому много

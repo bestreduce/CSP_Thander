@@ -2680,13 +2680,6 @@ void Ship_HullHitEvent()
 	if (fMinusArmor > fCannonDamageMultiply*0.75) fMinusArmor = fCannonDamageMultiply*0.75;//больше 75% урона броня не поглощает
 	fCannonDamageMultiply = (fCannonDamageMultiply - fMinusArmor);
 
-//Так броня урезает и криты. Увеличил их немного, но вообще-то там итак много было
-
-//Кулеврины получаются всё равно что пушки на пару калибров меньше, но с более быстрой перезарядкой			
-//с этим надо что-то делать			Вообще-то кулеврины должны дольше перезаряжаться. Не урезать урон, но уменьшить перезарядку??? - будет меньше дпс, но логично и одинаково эффективно против брони
-//для начала нужно убрать резкий скачок урона с 24 до 32			И ещё раз обсудить выпиливание возможности бермудить калибр. 
-//Если не выпиливаем, то урон пушек должен расти плавно на множитель, например х1.2 каждый следующий, если выпиливаем, то можно сохранить прибавки +4
-
 	//float fDistanceDamageMultiply = Bring2Range(1.2, 0.25, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
 
     if (sti(rBallCharacter.TmpPerks.CriticalShoot) && rand(19)==10) { bSeriousBoom = true; }		// +5 процентов
@@ -2918,7 +2911,7 @@ void CharacterUpdateShipFromBaseShip(int iCharacterIndex)
 	//Trace("Init cindex = " + iCharacterIndex + ", ship HP = " + rCharacter.Ship.HP + ", id = " + rCharacter.id + ", idx = " + rCharacter.index);
 	if (!CheckAttribute(rCharacter,"Ship.Cannons.Type"))
 	{
-		rCharacter.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS12;
+		rCharacter.Ship.Cannons.Type = CANNON_TYPE_CULVERINE_LBS8;
 	}
 
 	rCharacter.Ship.Cannons.Borts = "";

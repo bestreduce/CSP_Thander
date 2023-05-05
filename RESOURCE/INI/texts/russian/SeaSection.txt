@@ -44,18 +44,22 @@ seg_Brick		{Кирпичей}
 seg_Medicament	{Лекарства}
 
 seg_Cannon_8	{Пушек 8ф.}
+seg_Cannon_10	{Пушек 10ф.}
 seg_Cannon_12	{Пушек 12ф.}
 seg_Cannon_16	{Пушек 16ф.}
 seg_Cannon_20	{Пушек 20ф.}
 seg_Cannon_24	{Пушек 24ф.}
+seg_Cannon_28	{Пушек 28ф.}
 seg_Cannon_32	{Пушек 32ф.}
 seg_Cannon_36	{Пушек 36ф.}
 seg_Cannon_42	{Пушек 42ф.}
 seg_Culverine_8	{Кулеврин 8ф.}
+seg_Culverine_10	{Кулеврин 10ф.}
 seg_Culverine_12	{Кулеврин 12ф.}
 seg_Culverine_16	{Кулеврин 16ф.}
 seg_Culverine_20	{Кулеврин 20ф.}
 seg_Culverine_24	{Кулеврин 24ф.}
+seg_Culverine_28	{Кулеврин 28ф.}
 seg_Culverine_32	{Кулеврин 32ф.}
 seg_Culverine_36	{Кулеврин 36ф.}
 
