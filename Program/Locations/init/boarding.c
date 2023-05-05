@@ -3607,6 +3607,39 @@ int LocationInitBoarding(int n)
 
 	n = n + 1;
 
+	//ID
+	Locations[n].id = "BOARDING_CRVT_FRGT_DECK";
+	locations[n].id.label = "Boarding deck";
+	//Info
+	Locations[n].type = "deck_fight";
+	Locations[n].filespath.models = "locations\decks\deckCorvetteVSFrigate";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(2) + ".tga";
+
+	Locations[n].lockCamAngle = 0.4;
+	Locations[n].camshuttle = 1;
+	Locations[n].CheckBoardMode = true;
+	//Models
+	//Always
+	Locations[n].models.always.deckCorvetteVSFrigate = "deckCorvetteVSFrigate";
+	Locations[n].models.always.locators = "deckCorvetteVSFrigate_locators";
+	//Day
+	locations[n].models.day.charactersPatch = "deckCorvetteVSFrigate_patch";
+	Locations[n].models.day.deckFonarsDay = "deckCorvetteVSFrigate_fd";
+	//Night
+	locations[n].models.night.charactersPatch = "deckCorvetteVSFrigate_patch";
+	Locations[n].models.night.deckFonarsNigh = "deckCorvetteVSFrigate_fn";
+	//Environment
+	locations[n].environment.weather = "true";
+	locations[n].environment.sea = "true";
+
+	Locations[n].boarding = "true";
+	Locations[n].boarding.locatorNum = 13;
+	//Locations[n].boarding.nextdeck = "Boarding_InsideDeck";
+	Locations[n].boarding.nextdeck = "Boarding_Cargohold";
+	Locations[n].UpDeckType = true;
+
+	n = n + 1;
+
 	//Boyer change #20170501-01 New Orazio decks
 	//ID
 	Locations[n].id = "BOARDING_LNSHP_FRGT_DECK";

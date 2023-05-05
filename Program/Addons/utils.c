@@ -510,6 +510,17 @@ void GetBoardModeToLocation(ref loc)
 			}
 		break;
 
+		case "BOARDING_CRVT_FRGT_DECK":
+			if(sti(InterfaceStates.ShowBoardMode) == 1)
+			{
+				sFile = "deckCorvetteVSFrigate_locators_lugger";
+			}
+			else
+			{
+				sFile = "deckCorvetteVSFrigate_locators";
+			}
+		break;
+
 		case "BOARDING_LNSHP_FRGT_DECK":
 			if(sti(InterfaceStates.ShowBoardMode) == 1)
 			{

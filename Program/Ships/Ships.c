@@ -114,7 +114,7 @@ string GetShipLocationID(ref chref)
 			return "BOARDING_LNSHP_FRGT_DECK"; // Big VS Big
 		} else {
 			if (bMed2) {
-				return "BOARDING_BIG_DECK"; // Big VS Medium
+				return "BOARDING_CRVT_FRGT_DECK"; // Big VS Medium
 			} else {
 				return "BOARDING_MEDIUM_DECK"; // Big VS Small
 			}
