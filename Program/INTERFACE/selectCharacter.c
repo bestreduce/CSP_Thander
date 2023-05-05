@@ -1596,7 +1596,7 @@ void TmpI_ShowDamageAmount()
 }
 void TmpI_ShowDefendersAmount()
 {
-    SetFormatedText("DEFENDERS_COUNT", "" + makeint(5 - 5.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value))));
+    SetFormatedText("DEFENDERS_COUNT", "" + makeint(3 - 3.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value))));
 }
 
 void StopBlind_Hint()
