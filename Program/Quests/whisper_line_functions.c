@@ -69,6 +69,9 @@ void Whisper_StartGame(string qName)
 	_location.box2.QuestClosed = true;
 	_location.box3.QuestClosed = true;
 	_location.box4.QuestClosed = true;
+	_location.box5.QuestClosed = true;
+	_location.box6.QuestClosed = true;
+	_location.box7.QuestClosed = true;
 
 	//Спавним роботов
 	for (int i = 0; i < 10; i++)
@@ -119,7 +122,7 @@ void Whisper_StartGame(string qName)
 	ChangeCharacterAddressGroup(sld, PChar.location, "monsters", "monster24");
 
 	PChar.quest.WhisperScientist.win_condition.l1 = "locator";
-	PChar.quest.WhisperScientist.win_condition.l1.location = "Bermudes_Dungeon";
+	PChar.quest.WhisperScientist.win_condition.l1.location = "Cyberpunk2077";
 	PChar.quest.WhisperScientist.win_condition.l1.locator_group = "box";
 	PChar.quest.WhisperScientist.win_condition.l1.locator = "box1";
 	PChar.quest.WhisperScientist.function = "WhisperScientist";
@@ -170,26 +173,9 @@ void WhisperScientist(string qName)
     LAi_SetStayTypeNoGroup(sld);
    	LAi_SetImmortal(sld, true);
 	sld.talker = 10;
-	ChangeCharacterAddressGroup(sld, "Bermudes_Dungeon", "item", "duhi1");
-	DoQuestFunctionDelay("TeleportBot", 0.5);
+	ChangeCharacterAddressGroup(sld, "Cyberpunk2077", "monsters", "monster17");
 }
 
-void TeleportBot(string qName)
-{
-	sld = CharacterFromID("FinalBot");
-	switch (rand(2))
-	{
-		case 0:
-		TeleportCharacterToPos(sld, -36.0, -0.11696, -18.0);
-		break;
-		case 1:
-		TeleportCharacterToPos(sld, -3.8456, -0.11696, -15.0);
-		break;
-		case 2:
-		TeleportCharacterToPos(sld, 16.0, -0.11696, 20.0);
-		break;
-	}
-}
 void WhisperTeleport(string qName)
 {
 	Locations[FindLocation("Pirates_Shipyard")].id.label = "Shipyard";

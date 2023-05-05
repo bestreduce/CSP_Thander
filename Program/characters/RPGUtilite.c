@@ -2981,7 +2981,7 @@ void initNewMainCharacter()
     if (startHeroType == 2)
     {
     	pchar.quest.Tut_start.win_condition.l1          = "location";
-    	pchar.quest.Tut_start.win_condition.l1.location = "Bermudes_Dungeon";
+    	pchar.quest.Tut_start.win_condition.l1.location = "Cyberpunk2077";
     	pchar.quest.Tut_start.function                  = "Whisper_StartGame";
         Pchar.questTemp.CapBloodLine = false;
     }

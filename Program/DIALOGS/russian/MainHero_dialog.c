@@ -239,20 +239,20 @@ void ProcessDialogEvent()
 			//Линейка Виспер
 			if (CheckAttribute(pchar, "questTemp.Whisper.Entered_Dungeon"))
 			{
-				dialog.Text = "Координаты совпадают. Кажется, я на месте. Похоже на древние катакомбы. Им лет 300, а то и больше. Надеюсь, ничего не обвалится мне на голову.";
+				dialog.Text = "Координаты совпадают. Кажется, я на месте\nПохоже это какие-то подземные коммуникации. Хорошее место, если не хочешь сверкать лицом перед камерами.";
 				bMonstersGen = true;
 				DeleteAttribute(pchar, "questTemp.Whisper.Entered_Dungeon");
 				if (bBettaTestMode)
                 {
 			        link.l1 = "BetaTest - пропустить и начать игру.";
 			        link.l1.go = "Whisper_Finish";
-					Link.l2 = "(Перечитать сообщение от заказчика)";
+					Link.l2 = "(перечитать сообщение от заказчика)";
 					Link.l2.go = "Whisper_mission_1";
 
                 }
 				else
 				{
-					Link.l1 = "(Перечитать сообщение от заказчика)";
+					Link.l1 = "(перечитать сообщение от заказчика)";
 					Link.l1.go = "Whisper_mission_1";
 				}
 			}
