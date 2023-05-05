@@ -534,8 +534,8 @@ float ShipSpeedBonusFromWeight(ref _refCharacter)
     if(!CheckAttribute(_refCharacter, "Cargo")) RecalculateCargoLoad(_refCharacter);
 	ref rShip = GetRealShip(sti(_refCharacter.ship.type));
 
-	float fLoad = Clampf(GetCargoLoad(rCharacter) / stf(rShip.Capacity));
-	if (CheckAttribute(rRealShip, "Tuning.BotPack") && rRealShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
+	float fLoad = Clampf(GetCargoLoad(_refCharacter) / stf(rShip.Capacity));
+	if (CheckAttribute(rShip, "Tuning.BotPack") && rShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
 
 	float fSRFromWeight = Clampf(1.03 - stf(rShip.SpeedDependWeight) * fLoad);
 	return fSRFromWeight;
@@ -646,8 +646,8 @@ float ShipTurnRateBonusFromWeight(ref _refCharacter)
     if(!CheckAttribute(_refCharacter, "Cargo")) RecalculateCargoLoad(_refCharacter);
 	ref rShip = GetRealShip(sti(_refCharacter.ship.type));
 
-	float fLoad = Clampf(GetCargoLoad(rCharacter) / stf(rShip.Capacity));
-	if (CheckAttribute(rRealShip, "Tuning.BotPack") && rRealShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
+	float fLoad = Clampf(GetCargoLoad(_refCharacter) / stf(rShip.Capacity));
+	if (CheckAttribute(rShip, "Tuning.BotPack") && rShip.Tuning.BotPack == "1") fLoad = fLoad * 1.5;//есть апгрейд, загрузка в 1,5 раз больше. То есть больше 1 может быть с этим множителем. 
 
 	float fTRFromWeight = Clampf(1.03 - (2 - iArcadeSails) * stf(rShip.TurnDependWeight) * fLoad);
 	return fTRFromWeight;

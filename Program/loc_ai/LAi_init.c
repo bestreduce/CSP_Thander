@@ -90,7 +90,7 @@ void LocAi_Init(ref loc)
 					LAi_UseAtidoteBottle(&Characters[idx]);
 				}
 
-				if (Characters[idx].location == pchar.location)) {locIndex++; continue;} //fix	
+				if (Characters[idx].location == pchar.location) {locIndex++; continue;} //fix	
 				//fix2 - считаем уже стоящих в локе абордагов, чтобы при загрузке сейва не добавлялось новых
 
 				DeleteAttribute(&Characters[idx], "location");

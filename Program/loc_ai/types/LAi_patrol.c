@@ -104,7 +104,7 @@ void LAi_type_patrol_CharacterUpdate(aref chr, float dltTime)
 	// Lugger: Ебьба -->
 	string food = "";
 	float dfood;
-	if(LAi_GetCharacterEnergy(chr) < 0.5*LAi_GetCharacterMaxEnergy(chr))
+	if(LAi_GetCharacterEnergy(chr) < LAi_GetCharacterMaxEnergy(chr) / 2)
 	{
 		dfood = LAi_GetCharacterMaxEnergy(chr) - LAi_GetCharacterEnergy(chr);
 		food = FindFoodForCharacter(chr, dfood);
@@ -375,69 +375,132 @@ void LAi_type_patrol_TestControl(aref chr)
 	chr.chr_ai.type.player = 5 + rand(10);
 	int iRand;
 	bool bFightMode = LAi_CheckFightMode(pchar);
-	if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY || GetNationRelation(sti(chr.nation), GetBaseHeroNation()) == RELATION_ENEMY) iRand = 3;
-	else iRand = GetRelation2BaseNation(sti(chr.nation)); // 1-друг 2-нейтрал 3-враг
-
-	if (iRand == RELATION_ENEMY)//враг или отношение своей нации < -10
-	{	
-		if (bFightMode) iRand = 500; 
-		else {if (isDay()) iRand = 120; else iRand = 360;} //eddy. ночью к врагу очень внимательны, шансов скрыться почти нет
-	}
-
-	if (iRand < RELATION_ENEMY) //диалог - уберите оружие
+	if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY || GetNationRelation(sti(chr.nation), GetBaseHeroNation()) == RELATION_ENEMY) iRand = 2;
+	else iRand = GetRelation2BaseNation(sti(chr.nation)); // 0- друг 1- нейтрал 2- враг
+	if (isDay())
 	{
-		if (iRand == RELATION_NEUTRAL) 
+		// в друж. городе не цепляемся
+		if (rand(iRand) < 2)
 		{
-			if (isDay()) {chr.chr_ai.type.player = 150; iRand = 45;}//Тут нужно как-то добавить общий таймер патрульным, чтобы не подходили несколько подряд
-			else {chr.chr_ai.type.player = 90; iRand = 60;} }
-		}
-		if (bFightMode)
-		{
-			LAi_SetFightMode(pchar, false);
-			if (LAi_Character_CanDialog(chr, pchar))
-			{
-				chr.chr_ai.type.state = "dialog";
-				chr.Dialog.CurrentNode = "SoldierNotBlade";
-				LAi_tmpl_SetDialog(chr, pchar, -1.0);
+			//проверяем, нет ли обнаженки оружия
+			if (bFightMode)
+			{	//Пытаемся начать диалог
+				LAi_SetFightMode(pchar, false);
+				if(LAi_Character_CanDialog(chr, pchar))
+				{
+					chr.greeting = "";
+					LAi_CharacterPlaySound(chr, "sold_weapon_off");
+					chr.chr_ai.type.state = "dialog";
+					chr.Dialog.CurrentNode = "SoldierNotBlade";
+					LAi_tmpl_SetDialog(chr, pchar, -1.0);
+				}
 			}
 			return;
 		}
-		if (iRand < RELATION_NEUTRAL) return;//союзников не трогаем, если оружие в ножнах
+		if (CheckNationLicence(sti(chr.nation))) iRand = 10;
+		else
+		{
+			if (iRand == RELATION_NEUTRAL)
+			{
+				//проверяем, нет ли обнаженки оружия
+				if (bFightMode)
+				{	//Пытаемся начать диалог
+					LAi_SetFightMode(pchar, false);
+					if(LAi_Character_CanDialog(chr, pchar))
+					{
+						chr.chr_ai.type.state = "dialog";
+						chr.Dialog.CurrentNode = "SoldierNotBlade";
+						LAi_tmpl_SetDialog(chr, pchar, -1.0);
+					}
+					chr.chr_ai.type.player = 100;
+					return;
+				}
+				chr.chr_ai.type.player = 100;
+				iRand = 60;
+			}
+			else
+			{	//враждебный
+				if (bFightMode)	iRand = 500;
+				else iRand = 120;
+			}
+		}
 	}
-
-	if (CheckNationLicence(sti(chr.nation))) iRand = 10;//с торговой лицензией достаточно 10 скрытности, чтоб избежать проверки стражи
-
+	else
+	{
+		if (iRand == RELATION_FRIEND || iRand == RELATION_NEUTRAL)
+		{
+			//проверяем, нет ли обнаженки оружия
+			if (bFightMode)
+			{	//Пытаемся начать диалог
+				LAi_SetFightMode(pchar, false);
+				if(LAi_Character_CanDialog(chr, pchar))
+				{
+					chr.chr_ai.type.state = "dialog";
+					chr.Dialog.CurrentNode = "SoldierNotBlade";
+					LAi_tmpl_SetDialog(chr, pchar, -1.0);
+				}
+			}
+			return; // в друж. городе не цепляемся
+		}
+		//eddy. ночной враг цепляется только так и шансов скрыться мало даже при супер прокачке скрытности.
+		if (iRand == RELATION_ENEMY)
+		{
+			if (bFightMode)	iRand = 500;
+			else iRand = 360;
+		}
+		else
+		{
+			//проверяем, нет ли обнаженки оружия
+			if (bFightMode)
+			{	//Пытаемся начать диалог
+				LAi_SetFightMode(pchar, false);
+				if(LAi_Character_CanDialog(chr, pchar))
+				{
+					chr.chr_ai.type.state = "dialog";
+					chr.Dialog.CurrentNode = "SoldierNotBlade";
+					LAi_tmpl_SetDialog(chr, pchar, -1.0);
+				}
+				chr.chr_ai.type.player = 80;
+				return;
+			}
+			chr.chr_ai.type.player = 60;
+			iRand = 80; //ночью нейтрал
+		}
+	}
+	//Проверим на начало диалога
 	float luck = 0.0;
-	luck = GetCharacterSkill(pchar, "Sneak");//шанс от навыка скрытности
+
+	luck = GetCharacterSkill(pchar, "Sneak");
 	if (rand(iRand) <= luck)
 	{
-		if (!dialogRun && !bFightMode)	//кач в диалоге - фигвам. кто с обнаженкой бегает - тоже.
+		if (!dialogRun && !bFightMode) // кач в диалоге - фигвам. кто с обнаженкой бегает - тоже.
 		{
 			if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY && sti(chr.nation) != PIRATE)
-			{
-				AddCharacterExpToSkill(pchar, SKILL_SNEAK, 15);//враг, которго не узнали - скрылся - молодец!
+			{  // враг, которго не узнали - скрылся - молодец!
+				AddCharacterExpToSkill(pchar, SKILL_SNEAK, 15);
 			}
 			if (GetBaseHeroNation() == sti(chr.nation) && GetRelation2BaseNation(sti(chr.nation)) == RELATION_ENEMY)
 			{
-			    AddCharacterExpToSkill(pchar, SKILL_SNEAK, 10);//если враг собственной нации (отношение < -10), опыта меньше
+			    AddCharacterExpToSkill(pchar, SKILL_SNEAK, 10);
 			}
 		}
 		return;
 	}
-
-	LAi_SetFightMode(pchar, false);//Скрытность не помогла, пытаемся начать диалог
-	if (LAi_Character_CanDialog(chr, pchar) && sti(chr.nation) != PIRATE)
+	//Пытаемся начать диалог
+	LAi_SetFightMode(pchar, false);
+	if(LAi_Character_CanDialog(chr, pchar) && chr.nation != "4")
 	{
 		chr.chr_ai.type.state = "dialog";
 		LAi_tmpl_SetDialog(chr, pchar, -1.0);
-		chr.chr_ai.type.player = 50;//пауза до след разговора
+		//Следующий раз будет нескоро
+		chr.chr_ai.type.player = "50";
 		if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY && sti(chr.nation) != PIRATE && !bFightMode)
-		{
-			AddCharacterExpToSkill(pchar, SKILL_SNEAK, 80);//враг, которого узнали - потом будет умнее - бонус в скрытность
+		{  // враг, которого узнали - потом будет умнее - бонус в скрытность
+			AddCharacterExpToSkill(pchar, SKILL_SNEAK, 80);
 		}
 		if (GetBaseHeroNation() == sti(chr.nation) && GetRelation2BaseNation(sti(chr.nation)) == RELATION_ENEMY && !bFightMode)
 		{
-		    AddCharacterExpToSkill(pchar, SKILL_SNEAK, 60);//если враг собственной нации (отношение < -10), опыта меньше
+		    AddCharacterExpToSkill(pchar, SKILL_SNEAK, 60);
 		}
 	}
 }
