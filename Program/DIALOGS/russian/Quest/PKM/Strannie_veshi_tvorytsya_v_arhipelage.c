@@ -17,9 +17,9 @@ void ProcessDialogEvent()
 			DialogExit();																	// Оригинальная идея квеста				    			 - Акелла
 		break;																				// Написанный с нуля код и переосмысление квеста 	 	 - Sinistra
 		case "First time":																	// Улучшенная и обновлённая локация "Логово Сатанистов"  - Nikk
-			dialog.text = "Что? Тоже решил посмеяться над бедными женщинами!?";				// Улучшенный и обновлённый корабль "Мефисто"		     - Noctus
+			dialog.text = "Что? Тоже решил"+GetSexPhrase("","а")+" посмеяться над бедными женщинами!?";	// Улучшенный и обновлённый корабль "Мефисто"- Noctus
 			link.l1 = "А что, собственно, происходит?";										// Новая анимация "Поклонения"							 - Antix
-			link.l1.go = "Verni_detey_1";													// Улучшенная и обновлённая иконка "Амулет Сатанистов"	 - LEOPARD
+			link.l1.go = "Verni_detey_1";													// Улучшенная и обновлённая иконка "Амулет Хаоса"		 - LEOPARD
 			PlayVoice("Kopcapkz\Voices\Quest\Dut_f_a_002.wav");								// Новые текстуры моделей для "Мальтийца" и "Сатанистов" - Ерилейн
 		break;
 		
@@ -90,7 +90,7 @@ void ProcessDialogEvent()
 		
 		case "Capitan_v_taverne_1_5":
 			dialog.text = "Тогда задавай их поскорее и отваливай.";
-			link.l1 = "Говорят, что ты видел какой-го чёрный фрегат, когда ты подходил к острову.";
+			link.l1 = "Говорят, что ты видел какой-то чёрный фрегат, когда ты подходил к острову.";
 			link.l1.go = "Capitan_v_taverne_2";
 		break;
 		
@@ -151,13 +151,13 @@ void ProcessDialogEvent()
 		
 		case "Shturman_v_taverne_3":
 			dialog.text = "Всё, до пенса. Ну что, поставишь кружечку?";
-			link.l1 = "Потом. Ты видел чёрный фрегат во время плавания?";
+			link.l1 = "Погоди, меня интересует, не видел ли ты чёрный фрегат во время плавания?";
 			link.l1.go = "Shturman_v_taverne_4";
 		break;
 		
 		case "Shturman_v_taverne_4":
 			dialog.text = "Угости меня ромом, и я тебе всё расскажу!";
-			link.l1 = "Вот твой ром.";
+			link.l1 = "Хорошо, вот твой ром.";
 			link.l1.go = "Shturman_v_taverne_5";
 			link.l2 = "А, может приложить тебя пару раз о столешницу?";
 			link.l2.go = "Shturman_v_taverne_9";
@@ -165,27 +165,27 @@ void ProcessDialogEvent()
 		
 		case "Shturman_v_taverne_5":
 			dialog.text = "Гульп-гульп. Хор-р-роший ром!";
-			link.l1 = "Итак, ты видел фрегат?";
+			link.l1 = "Итак, ты видел чёрный фрегат?";
 			link.l1.go = "Shturman_v_taverne_6";
 			AddMoneyToCharacter(pchar, -10);
 		break;
 		
 		case "Shturman_v_taverne_9":
 			dialog.text = "Хм... Обойдёмся без этого.";
-			link.l1 = "Итак, ты видел фрегат?";
+			link.l1 = "Итак, ты видел чёрный фрегат?";
 			link.l1.go = "Shturman_v_taverne_6";
 			ChangeCharacterReputation(pchar, -2);
 		break;
 		
 		case "Shturman_v_taverne_6":
 			dialog.text = "Фрегат-то? Чёрный?! Видел я его, как тебя вижу. Если бы шли не порожняком, то сейчас не разговаривал бы с тобой - у них то трюмы явно под завязку были\nИмечко ещё у него странное было, не христианское какое-то - 'Мефисто'.";
-			link.l1 = "Каким курсом плыл фрегат?";
+			link.l1 = "Он вас преследовал? А куда направился после того, как понял, что ему вас не догнать?";
 			link.l1.go = "Shturman_v_taverne_7";
 		break;
 		
 		case "Shturman_v_taverne_7":
-			dialog.text = "На юг. Может на Гваделупу, а может и на Мартинику... к пиратам. Дьявол его знает.";
-			link.l1 = "Мда...";
+			dialog.text = "А дьявол его знает. Куда-то на юг, а там, почитай только Ле Франсуа и лежит.";
+			link.l1 = "Хорошо, можешь пить дальше.";
 			link.l1.go = "Shturman_v_taverne_8";
 			npchar.lifeday = 0;
 			LAi_CharacterDisableDialog(npchar);
@@ -454,6 +454,7 @@ void ProcessDialogEvent()
 			sld.FaceId = 296;
 			sld.rank = 15;
 			LAi_SetHP(sld, 400.0, 400.0);
+			sld.HasNoFear = true;
 		
 			sld = CharacterFromID("FortFrance_Priest");
 			LAi_SetPriestType(sld);
@@ -1043,6 +1044,16 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(sld);
 			sld.lifeday = 0;
 			LAi_SetCitizenType(sld);
+			
+			AddQuestRecord("PKM_Animists", "37");
+			pchar.questTemp.PKM_Animists_MamaDeti = true;
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			{
+				CloseQuestHeader("PKM_Animists");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+			}
 		break;
 		
 	}

@@ -11289,6 +11289,7 @@ void QuestComplete(string sQuestName, string qname)
 		
 		case "LogovoSatanistov":
 			chrDisableReloadToLocation = true;
+			scareOfficers(70);
 			
 			//КУХНЯ
 			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Kuhnya_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
@@ -11771,15 +11772,12 @@ void QuestComplete(string sQuestName, string qname)
 			bQuestDisableMapEnter = true;
 		
 			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse2", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 400);
+			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 300);
 			AddCharacterHealth(sld, 30);
-			//LAi_SetHP(sld,600,600);
 			sld.name = "Лорд Чёрное Солнце";
 			sld.lastname = "";
 			sld.FaceId = 297;
-			//sld = CharacterFromID("Chernoe_Solntse");
 			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
-			//FantomMakeCoolSailor(sld, SHIP_BRIGANTINE, "Мэри Селест", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
 			sld.DontRansackCaptain = true;
 			sld.DontHitInStorm = true;
 			sld.SinkTenPercent = false;
@@ -11790,7 +11788,6 @@ void QuestComplete(string sQuestName, string qname)
 			
 			GiveItem2Character(sld, "cirass3");
 			EquipCharacterbyItem(sld, "cirass3");
-			SetCharacterGoods(sld, GOOD_SLAVES, 300);
 			
 			Group_FindOrCreateGroup("Enemy_Attack");
 			Group_SetType("Enemy_Attack", "war");
@@ -11808,7 +11805,6 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 		
 		case "PKM_SvtvA_Bitva_s_Mefisto_Pobeda":		
-			CloseQuestHeader("PKM_Animists");
 			Island_SetReloadEnableGlobal("Guadeloupe", true);
 			bQuestDisableMapEnter = false;
 			
@@ -11832,6 +11828,9 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("PKM_SvtvA_Devushka_3")
 			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_11";
+			
+			AddQuestRecord("PKM_Animists", "36");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
 		break;
 		
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11909,7 +11908,7 @@ void QuestComplete(string sQuestName, string qname)
 				ChangeCharacterAddressGroup(sld, pchar.location, "rld",  "aloc15");
 			}
 			//Наши
-			for (i=4; i<=14; i++)
+			for (i=4; i<=13; i++)
 			{
 				if (pchar.sex != "skeleton")
 				{
