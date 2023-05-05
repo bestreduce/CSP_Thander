@@ -788,11 +788,15 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType)
 		SetBaseShipData(rCharacter);
 		Ship_SetFantomData(rCharacter);
 
+		Fantom_SetUpgrade(rCharacter, sFantomType);//бермудку до выдачи пушек.
         Fantom_SetCannons(rCharacter, sFantomType);
 		Fantom_SetBalls(rCharacter, sFantomType);
 		Fantom_SetGoods(rCharacter, sFantomType);
-		Fantom_SetUpgrade(rCharacter, sFantomType);
 		SaveCurrentNpcQuestDateParam(rCharacter, "Add2SeaTime"); //фантомы помнят время входа в море
+	}
+	else 
+	{
+		FixOverMaxCannons(rCharacter);//уменьшаем орудия до максимального калибра
 	}
     AcceptWindCatcherPerk(rCharacter); // применение перка ловец ветра, тут работает, а не где был в к3 boal 02/08/06
 	//rCharacter.TmpPerks.Turn = false;

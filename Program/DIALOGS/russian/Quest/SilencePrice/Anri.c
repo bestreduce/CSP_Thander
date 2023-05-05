@@ -17,7 +17,7 @@ void ProcessDialogEvent()
         DialogExit();
     break;
     case "First Time":
-        dialog.text = "Тише, "+GetSexPhrase("приятель.","подруга.") + " Ты ищешь Люка, так? Можешь не отвечать. Жду сегодня в полночь на пляже мыса Изабелла. Одн" + GetSexPhrase("ого.","у.");
+        dialog.text = "Тише, "+GetSexPhrase("приятель.","подруга.") + " Ты ищешь Люка, так? Можешь не отвечать. Жду сегодня в полночь на пляже мыса Исабела. Одн" + GetSexPhrase("ого.","у.");
         link.l1 = "Кхм... Хорошо, я приду.";
         link.l1.go = "exit";
 		AddDialogExitQuest("PirateGoOut");

@@ -238,7 +238,7 @@ void QuitClick()
 
 void ConfirmExitClick()
 {
-    PauseParticles(true); //fix вылета у форта
+	//PauseParticles(true); //fix вылета у форта	//видимо, очень старый комментарий, уже не актуально? в движке было идентично удалению партиклов, сейчас пофиксили, чтобы именно на паузу ставило. 
 	EngineLayersOffOn(false);
 	QuitProcess();
 	//IDoExit(-1, false); // fix

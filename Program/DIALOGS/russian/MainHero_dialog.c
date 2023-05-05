@@ -137,6 +137,7 @@ void ProcessDialogEvent()
     		    dialog.text = "Дьявол!!! Что здесь произошло? Нужно попытаться найти хоть кого-нибудь живого...";
     			link.l1 = "...";
     			link.l1.go = "exit";
+				chrDisableReloadToLocation = false;//снимаем блок перехода
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1 = "location";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1.location = "LaVega_town";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition = "ToMansfield_OutFromFort";
@@ -1297,7 +1298,7 @@ void ProcessDialogEvent()
 
 		case "ColonyBuilding_Hovernor_3":
 			dialog.Text = "Хм... О каких именно делах я хочу осведомиться?";
-			Link.l1 = "Состояния колонии и её финансовые возможности.";
+			Link.l1 = "Состояние колонии и её финансовые возможности.";
 			Link.l1.go = "ColonyBuilding_Hovernor_3_1";
 			Link.l2 = "Боевая готовность гарнизона и здоровье жителей.";
 			Link.l2.go = "ColonyBuilding_Hovernor_3_2";

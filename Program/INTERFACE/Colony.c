@@ -1448,7 +1448,7 @@ void SelectBuildsMenu(string sMenu)
 
 			CreateImage("SilverMineBorder", "BORDER1", "border", 495,385,630,485);
 			CreateImage("SilverMinePicture", GetCurrentTexture(), "SilverMine", 495,385,630,485);
-			CreateString(true,"SilverMineHeader", "Серебрянный", FONT_CAPTION, COLOR_NORMAL, 560,360,SCRIPT_ALIGN_CENTER,1.0);
+			CreateString(true,"SilverMineHeader", "Серебряный", FONT_CAPTION, COLOR_NORMAL, 560,360,SCRIPT_ALIGN_CENTER,1.0);
 
 			string sSilverMineStatus = "";
 

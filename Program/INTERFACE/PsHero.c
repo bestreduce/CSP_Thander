@@ -26,14 +26,14 @@ void InitInterface(string iniName)
 
 	string sTemp = "";
 	if (!checkattribute(pchar, "buypgginfo")) {pchar.buyPGGinfo = 0; pchar.buyPGGinfo_Qty = " ";}//открыли первый раз до покупки, таблица должна быть пустой
-	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") 
+	if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1")
 	{
 		sTemp += " (" + (PsHeroQty - sti(pchar.PGG_killed) - sti(pchar.PGG_NotKilled))+ " / " + (PsHeroQty - sti(pchar.PGG_NotKilled)) + ")";
 		pchar.buyPGGinfo_Qty = sTemp;
 	}
 	if (MOD_BETTATESTMODE != "On" && pchar.buyPGGinfo == "2") sTemp = pchar.buyPGGinfo_Qty + " (Записано " + FindRussianDaysString(GetQuestPastDayParam("buy_PGG_info")) + " дней назад)"; 
-
-    SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero") + sTemp);
+	if (MOD_BETTATESTMODE == "On") sTemp += "(бетарежим)";
+	SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero") + sTemp);
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("MouseRClickUp","HideInfoWindow",0);
 	SetEventHandler("TableSelectChange", "TableSelectChange", 0);
@@ -289,7 +289,7 @@ void OnTableClick()
 //--> mod tablesort
 	if (!SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE, sControl, 1 ))
 	{
-		if (pchar.buyPGGinfo == "1") SortTable(sControl, iColumn);
+		if (MOD_BETTATESTMODE == "On" || pchar.buyPGGinfo == "1") SortTable(sControl, iColumn);//сортировка запомненной таблицы отключена - крашит - когда-нибудь позже разобраться надо будет
 	}
 //<-- mod tablesort
 	Table_UpdateWindow(sControl);

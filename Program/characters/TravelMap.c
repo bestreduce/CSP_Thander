@@ -231,7 +231,7 @@ int GetMaxDaysFromIsland2Island(string _isl1, string _isl2)
 	string _town1 = FindTownOnIsland(_isl1);
 	string _town2 = FindTownOnIsland(_isl2);
 	int _dist = CalculateColonyDistance(_town1, _town2);
-	return _dist + 2;
+	return makeint((_dist+1)*1.1); //было просто +2 дня, переделываю на частично пропорциональное
 }
 
 string GetRandomUninhabitatIsland()

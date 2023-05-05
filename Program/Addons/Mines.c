@@ -266,7 +266,7 @@ void MinesOreUptade()
 		switch(i)
 		{
 			case 0: sType = "Gold"; c = ORE_GOLD; sText = "золотой"; break;
-			case 1: sType = "Silver"; c = ORE_SILVER; sText = "серебрянной"; break;
+			case 1: sType = "Silver"; c = ORE_SILVER; sText = "серебряной"; break;
 			case 2: sType = "Iron"; c = ORE_IRON; sText = "железной"; break;
 		}
 

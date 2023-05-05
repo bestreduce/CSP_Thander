@@ -122,7 +122,7 @@ void LAi_type_warrior_CharacterUpdate(aref chr, float dltTime)
 	// Lugger: Ебьба -->
 	string food = "";
 	float dfood;
-	if(LAi_GetCharacterEnergy(chr) < LAi_GetCharacterMaxEnergy(chr) / 2)
+	if(LAi_GetCharacterEnergy(chr) < 0.5*LAi_GetCharacterMaxEnergy(chr))
 	{
 		dfood = LAi_GetCharacterMaxEnergy(chr) - LAi_GetCharacterEnergy(chr);
 		food = FindFoodForCharacter(chr, dfood);

@@ -18,8 +18,8 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			if (pchar.questTemp.PDM_PK_UvestiNaVerh == "UvestiNaVerh")
 			{
-				link.l1 = "Послушай, " + npchar.name + ", я хочу провести время с одной из твоих девушек, кажется, её зовут Франческа.";
-				link.l1.go = "PDM_PK_UvestiNaVerh";
+				link.l2 = "Послушай, " + npchar.name + ", я хочу провести время с одной из твоих девушек, кажется, её зовут Франческа.";
+				link.l2.go = "PDM_PK_UvestiNaVerh";
 			}
 		break;
 		// капитан Шарп, грабёж жемчужных промыслов
@@ -39,7 +39,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					pchar.questTemp.Sharp.price.evil = rand(1); //добрый или злой, для скидки
 					ReOpenQuestHeader("SharpPearl");
 					AddQuestRecord("SharpPearl", "1");
-					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Dat"));
+					AddQuestUserData("SharpPearl", "sCity", XI_ConvertString("Colony" + npchar.city + "Voc"));
 					AddQuestUserData("SharpPearl", "sTarget", XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc"));
 					if (GetIslandByCityName(pchar.questTemp.Sharp.City) != pchar.questTemp.Sharp.City)
 					{
@@ -58,7 +58,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					sld.mapEnc.worldMapShip = "quest_ship";
 					sld.mapEnc.Name = "бриг 'Шарпоносец'";
 					string sColony= SelectAnyColony(npchar.city); //колония, откуда плывёт Шарп
-					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даём с запасом
+					int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City)) + 1; //дней доехать даём с запасом
 					Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 					Log_TestInfo("Шарпоносец установлен из " + sColony + "  в " + pchar.questTemp.Sharp.City);
 				}

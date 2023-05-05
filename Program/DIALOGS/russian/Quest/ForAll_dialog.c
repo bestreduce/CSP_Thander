@@ -3347,7 +3347,7 @@ void SetSeekCapCitizenParam(ref npchar, int iNation)
 		case "womanPirates": sld.mapEnc.worldMapShip = "Galleon_red"; break;
 	}
 	sld.mapEnc.Name = XI_ConvertString(npchar.quest.SeekCap.shipTapeName) + " '" + npchar.quest.SeekCap.shipName + "'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даём с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 	Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, daysQty);
 	//прерывание на смерть кэпа
 	string sTemp = "SCQ_" + sld.index;
@@ -3368,7 +3368,7 @@ void SetSeekCapCitizenParam(ref npchar, int iNation)
 	NullCharacter.capitainBase.(sTemp).questGiver = npchar.id; //запомним Id квестодателя для затирки в случае чего
 	NullCharacter.capitainBase.(sTemp).Tilte1 = sld.quest.cribCity + "SCQ_" + npchar.quest.SeekCap; //заголовок квестбука
 	NullCharacter.capitainBase.(sTemp).Tilte2 = "SCQ_" + npchar.quest.SeekCap; //имя квеста в квестбуке
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

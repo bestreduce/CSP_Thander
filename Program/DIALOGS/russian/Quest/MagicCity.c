@@ -795,7 +795,7 @@ void SetDanielleInWorld()
 	//выбор типа кораблика на карте
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Галеон 'Королева'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даём с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//заносим Id кэпа в базу нпс-кэпов
 	sTemp = sld.id;
@@ -803,7 +803,7 @@ void SetDanielleInWorld()
 	NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 	NullCharacter.capitainBase.(sTemp).Tilte1 = "MagicCity"; //заголовок квестбука
 	NullCharacter.capitainBase.(sTemp).Tilte2 = "MagicCity"; //имя квеста в квестбуке
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

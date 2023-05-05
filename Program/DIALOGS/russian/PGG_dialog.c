@@ -185,7 +185,15 @@ void ProcessDialogEvent()
 		link.l1 = "Как на счёт дельца?";
 		link.l1.go = "quest";
 
-		if (NPChar.name == "Виспер" && !CheckAttribute(NPChar, "PGGWhisperQuestStart")) link.l1.go = "Quest_1_Work";
+		// && !CheckAttribute(NPChar, "PGGWhisperQuestEnd") && !CheckAttribute(PChar, "PGGWhisperComplete")	//выглядит избыточно - достаточно 1го должно быть
+		if (NPChar.name == "Виспер" && !CheckAttribute(NPChar, "PGGWhisperQuestStart") && GetCharacterShipClass(PChar) < 4 && PChar.rank >= 15)
+		{			
+			Dialog.Text = "Знаешь, ты как нельзя вовремя, есть одно дело.";
+			link.l1 = "Ты о чём?";
+			link.l1.go = "Quest_Whisper";
+			//DeleteAttribute(PChar, "GenQuest.PGG_Quest");//Зачем это здесь? Какая связь с ПП и квестом Виспер? 
+			//разобраться, сможет ли ВИспер после квеста выдавать ПП нормально?
+		}
 
 		link.lgame = "Не хочешь развеяться?";
 		link.lgame.go = "Play_Game";
@@ -396,7 +404,7 @@ void ProcessDialogEvent()
 		// если разница в кораблях больше 1 класса, отказываем
 		if (GetCharacterShipClass(PChar) - 1 > GetCharacterShipClass(NPChar))
 		{
-			Dialog.Text = RandPhraseSimple("Плавать с тобой!?? Подрасти сначала!", "Не думаю, что мне это интересно!");
+			Dialog.Text = RandPhraseSimple("Плавать с тобой!?? Корабль побольше найди!", "Не думаю, что мне это интересно!");
 			link.l1 = RandPhraseSimple("Ну, как хочешь...", "Что ж, счастливо оставаться.");
 			link.l1.go = "exit";
 
@@ -777,33 +785,6 @@ void ProcessDialogEvent()
 			)
 		);
 		link.l1.go = "Quest_1_Work_1";
-
-		if(NPChar.name == "Виспер" && !CheckAttribute(NPChar, "PGGWhisperQuestEnd") && !CheckAttribute(PChar, "PGGWhisperComplete"))
-		{			
-			if (GetCharacterShipClass(PChar) >= 4)
-			{
-				PCharShipClassIsLowDialog(link, NPChar);
-				break;
-			}
-
-			if (sti(NPChar.Ship.Type) == SHIP_NOTUSED) {
-				PCharNoShipDialog(link, NPChar);
-				break;
-			}
-
-			if (PChar.rank < 15) {
-				PCharShipClassIsLowDialog(link, NPChar);
-				break;
-			}
-
-			Dialog.Text = "Знаешь? Ты как нельзя вовремя, есть одно дело.";
-			link.l1 = "Ты о чём?";
-			link.l1.go = "Quest_Whisper";
-
-			NPChar.PGGWhisperQuestStart = true;
-			DeleteAttribute(PChar, "GenQuest.PGG_Quest");
-			break;
-		}
 
 		link.l2 = PCharRepPhrase(
 			RandPhraseSimple(
@@ -1694,7 +1675,13 @@ void PCharNoShipDialog(aref link, ref NPChar) {
 }
 
 void PCharShipClassIsLowDialog(aref link, ref NPChar) {
-	Dialog.Text = "Дело с тобой!?? Подрасти сначала!";
+	Dialog.Text = "Дело с тобой!?? Достойный корабль сначала найди! Ну твоей скорлупке только почту возить...";
+	link.l1 = RandSwear() + "Ну и не нужно!";
+	link.l1.go = "exit";
+}
+
+void PCharRankLowDialog(aref link, ref NPChar) {
+	Dialog.Text = "Дело с тобой!?? Опыта наберись сначала!";
 	link.l1 = RandSwear() + "Ну и не нужно!";
 	link.l1.go = "exit";
 }
@@ -1753,7 +1740,7 @@ void GeneratePGGQuestLocation(ref NPChar) {
 	
 	PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 
-	if (isSetSail) PChar.GenQuest.PGG_Quest.Days = rand (4) + 5;
+	if (isSetSail) PChar.GenQuest.PGG_Quest.Days = rand(4) + 5;
 	else PChar.GenQuest.PGG_Quest.Days = GetMaxDaysFromIsland2Island(GetCharacterCurrentIslandId(PChar), PChar.GenQuest.PGG_Quest.Island) + 1;
 	
 	if(CheckAttribute(PChar, "BSStart") && !CheckAttribute(PChar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;

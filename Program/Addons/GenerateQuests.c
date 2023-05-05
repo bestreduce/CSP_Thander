@@ -1005,8 +1005,8 @@ void GenerateShipWreck(aref loc)
 			chr.ship.masts.(sMast) = true;
 		}
 	}
-
 	sMast = "mast" + rand(2)+2;
+	chr.ship.masts.(sMast) = true;//ломаем одну из средних мачт принудительно на случай, если всем повезло остаться целыми
 	if(CheckAttribute(chr, "ship.masts." + iMastQty))
 	{
 		DeleteAttribute(chr, "ship.masts." + iMastQty);

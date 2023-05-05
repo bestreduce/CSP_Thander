@@ -35,7 +35,7 @@ void ProcessDialogEvent()
 				link.l3 = "Вы случайно не знаете что-нибудь об этом ''фанате'' чемпиона?";
 				link.l3.go = "legend";
 			}
-			link.l99 = "Хотелось только повидать вас, " + NPChar.name + " " + NPChar.lastname + ". До встречи.";
+			link.l99 = "Хотелось только повидать вас, " + GetFullName(NPChar) + ". До встречи.";
 			link.l99.go = "exit";
 			if (bBettaTestMode && !CheckAttribute(pchar,"ScamFanActive"))
 			{
@@ -203,7 +203,7 @@ void ProcessDialogEvent()
 		///////////////////////////////// ПЕРВАЯ ВСТРЕЧА ////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////
 		case "talk_1":
-			dialog.text = "Рад знакомству, капитан. Зовут меня " + NPChar.name + " " + NPChar.lastname + ". Хм.. Честно говоря, не слыхал о вас. Как же вас сюда занесло, капитан?";
+			dialog.text = "Рад знакомству, капитан. Зовут меня " + GetFullName(NPChar) + ". Хм.. Честно говоря, не слыхал о вас. Как же вас сюда занесло, капитан?";
 			link.l1 = "Ну, как сказать. Мне свойственно обследовать ранее невиданные территории. Именно поэтому я наш"+ GetSexPhrase("ёл","ла") +" ваше поселение здесь. Но, что это за поселение?";
 			link.l1.go = "talk_2";
 		break;
@@ -408,7 +408,9 @@ void ProcessDialogEvent()
 						int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 						aref item1;
 						Items_FindItem(reward, &item1);
-						dialog.text = dialog.text + "\nПомимо денежного приза, мы также решили сделать вам особый подарок за победу. Это "+LanguageConvertString(idLngFile, item1.name)+".";
+						string sTemp = LanguageConvertString(idLngFile, item1.name); 
+						if (HasSubStr(reward, "book")) sTemp = "книга " + sTemp;
+						dialog.text = dialog.text + "\nПомимо денежного приза, мы также решили сделать вам особый подарок за победу. Это " + sTemp + ".";
 						LanguageCloseFile(idLngFile);
 						link.l1 = LinkRandPhrase("Неужели ты во мне сомневался!", "Я ещё не раз покажу, кто здесь главный. А сейчас - отдыхать.", "Ха-ха-ха, жалкие насекомые! Таких соперников я на абордаже щёлкаю как орехи. Кстати, орехи полезны для здоровья.");
 						link.l1.go = "exit";

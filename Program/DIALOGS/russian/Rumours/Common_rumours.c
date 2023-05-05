@@ -341,7 +341,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 			//выбор типа кораблика на карте
 			sld.mapEnc.worldMapShip = "Tich_MKA"; // LEO: Сюда надо заюзать модельку МКА на глобалку, персональную.
 			sld.mapEnc.Name = "Фрегат 'Месть Королевы Анны'";
-			int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даём с запасом
+			int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 			Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 			//заносим Id кэпа в базу нпс-кэпов
 			sTemp = sld.id;
@@ -349,7 +349,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 			NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 			NullCharacter.capitainBase.(sTemp).Tilte1 = "BlackBeard"; //заголовок квестбука
 			NullCharacter.capitainBase.(sTemp).Tilte2 = "BlackBeard"; //имя квеста в квестбуке
-			NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 3;
+			NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
 			NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 			NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 			NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -360,7 +360,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		if (CheckAttribute(pchar, "PGG_killed") && sti(pchar.PGG_killed) > 4 && pchar.PGG_killed != pchar.PGG_killed_known)
 		{
 			pchar.PGG_killed_known = pchar.PGG_killed;
-			dialog.text = "Говорят, что в наших водах "+GetSexPhrase("завёлся охотник на честных корсаров, ","завелась охотница на честных корсаров, ") + GetFullName(pchar)+GetSexPhrase(" его "," её") + " звать. Число душ, отправленных на тот свет этой личностью уже достигло " + pchar.PGG_killed + ". Все уважаемые в этих местах люди. Брр... Что-то меня мутить начинает. То ли из-за рома, то ли всей этой истории...";
+			dialog.text = "Говорят, что в наших водах "+GetSexPhrase("завёлся охотник на честных корсаров, ","завелась охотница на честных корсаров, ") + GetFullName(pchar)+GetSexPhrase(" его"," её") + " звать. Число душ, отправленных на тот свет этой личностью уже достигло " + pchar.PGG_killed + ". Все уважаемые в этих местах люди. Брр... Что-то меня мутить начинает. То ли из-за рома, то ли всей этой истории...";
 			break;
 		}
 		//Титаник
@@ -1332,7 +1332,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги мужика
 		case "MechanicIsPrison_man":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клипере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_man_1":
@@ -1342,7 +1342,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		break;
 		case "MechanicIsPrison_man_2":
 			dialog.text = "А без Механика нам не обойтись?";
-			link.l1 = "Ведекер нам нужен. На клиппер мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
+			link.l1 = "Ведекер нам нужен. На клипер мы попасть сможем, а вот освободить его без Хенрика не выйдет.";
 			link.l1.go = "MechanicIsPrison_man_3";
 		break;
 		case "MechanicIsPrison_man_3":
@@ -1367,7 +1367,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		//механика арестовали, диалоги бабы
 		case "MechanicIsPrison_woman":
 			dialog.text = "А-а, ну вот и вы, наконец...";
-			link.l1 = "В чем дело? Почему вы ещё не на клиппере?... А где Механик?";
+			link.l1 = "В чем дело? Почему вы ещё не на клипере?... А где Механик?";
 			link.l1.go = "MechanicIsPrison_man_1";
 		break;
 		case "MechanicIsPrison_woman_1":

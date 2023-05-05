@@ -220,7 +220,7 @@ string FindHealthForCharacter(ref chref,float fHealth)
 	return sret;
 }
 
-string FindFoodForCharacter(ref chref,float fHealth)
+string FindFoodForCharacter(ref chref, float fHealth)
 {
 	string sret = "";
 	float fdelta = fHealth + 100.0;

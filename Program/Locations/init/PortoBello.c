@@ -93,7 +93,7 @@ int LocationInitPortoBello(int n)
 
 	locations[n].reload.l41.name = "reload41_back";
 	locations[n].reload.l41.go = "PortoBello_tavern";
-	locations[n].reload.l41.emerge = "reload1";
+	locations[n].reload.l41.emerge = "reload3";
 	locations[n].reload.l41.autoreload = "0";
 	locations[n].reload.l41.label = "Tavern";
 
@@ -278,12 +278,12 @@ int LocationInitPortoBello(int n)
 	locations[n].reload.l2.label = "Tavern upstairs";
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 
-    ////////////////////////==> подсобка таверны
-	locations[n].reload.l3.name = "reload3";
-	locations[n].reload.l3.go = "CommonRoom_MH3";
-	locations[n].reload.l3.emerge = "reload1";
-	locations[n].reload.l3.autoreload = "0";
-	locations[n].reload.l3.label = "Room";
+    ////////////////////////==> второй выход
+    locations[n].reload.l3.name = "reload3_back";
+    locations[n].reload.l3.go = "PortoBello_town";
+    locations[n].reload.l3.emerge = "reload41_back";
+    locations[n].reload.l3.autoreload = "0";
+    locations[n].reload.l3.label = "Street";
 
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "PortoBello_town";
@@ -370,6 +370,12 @@ int LocationInitPortoBello(int n)
 	locations[n].reload.l1.emerge = "reload6";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+    ////////////////////////==> комната в магазине
+	locations[n].reload.l2.name = "reload2";
+	locations[n].reload.l2.go = "CommonPackhouse_1";
+	locations[n].reload.l2.emerge = "reload1";
+	locations[n].reload.l2.autoreload = "0";
+	locations[n].reload.l2.label = "packhouse";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
 
@@ -458,7 +464,7 @@ int LocationInitPortoBello(int n)
 	locations[n].reload.l1.label = "Street";
 
 	locations[n].reload.l2.name = "reload2";
-	locations[n].reload.l2.go = "CommonPackhouse_1";
+	locations[n].reload.l2.go = "CommonPackhouse_2";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "packhouse";
