@@ -221,6 +221,12 @@ void GetRealOptions(ref optref)
 	} else {
 		optref.cameramode.CharVoice = true;
 	}
+	
+	if( CheckAttribute(&InterfaceStates,"EnableSailors") ) {
+		optref.cameramode.EnableSailors = sti(InterfaceStates.EnableSailors);
+	} else {
+		optref.cameramode.EnableSailors = true;
+	}
 
 	GetControlsOptions(optref);
 
@@ -410,6 +416,12 @@ void SetCurentOptions(ref optref)
 		InterfaceStates.CharVoice = optref.cameramode.CharVoice;
 	} else {
 		InterfaceStates.CharVoice = false;
+	}
+	
+	if( CheckAttribute(optref,"cameramode.EnableSailors") ) {
+		InterfaceStates.EnableSailors = optref.cameramode.EnableSailors;
+	} else {
+		InterfaceStates.EnableSailors = false;
 	}
 
 
