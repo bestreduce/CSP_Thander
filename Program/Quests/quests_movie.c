@@ -49,6 +49,7 @@ bool StartQuestMovie(bool noReload, bool noSave, bool lockPlayerCtrl)
 		if(lockPlayerCtrl != false) QuestMovieLockPlayer();
 	}
 	questMovieProcess = questMovieProcess + 1;
+	BI_ShowInterface(false);
 	return true;
 }
 
@@ -75,6 +76,7 @@ bool EndQuestMovie()
 	{
 		QuestMovieUnLockPlayer();
 	}
+	BI_ShowInterface(true);
 	return true;
 }
 
