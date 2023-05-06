@@ -124,6 +124,7 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	timeSoil = 0;
 
 	ProcessFilter();
+	SetNodeUsing("BUTTON_PAINT",false);//отключаем кнопку Покраски, не трогая весь код
 }
 
 void ProcessExitCancel()
