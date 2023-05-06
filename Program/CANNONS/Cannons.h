@@ -54,8 +54,8 @@ int GetCannonCaliber(int nCannon)
 	case CANNON_TYPE_CANNON_LBS20:		return 20;	break;
 	case CANNON_TYPE_CULVERINE_LBS24:	return 24;	break;
 	case CANNON_TYPE_CANNON_LBS24:		return 24;	break;
-	case CANNON_TYPE_CULVERINE_LBS28:	return 24;	break;
-	case CANNON_TYPE_CANNON_LBS28:		return 24;	break;
+	case CANNON_TYPE_CULVERINE_LBS28:	return 28;	break;
+	case CANNON_TYPE_CANNON_LBS28:		return 28;	break;
 	case CANNON_TYPE_CULVERINE_LBS32:	return 32;	break;
 	case CANNON_TYPE_CANNON_LBS32:		return 32;	break;
 	case CANNON_TYPE_CULVERINE_LBS36:	return 36;	break;
