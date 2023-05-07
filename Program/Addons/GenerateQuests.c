@@ -307,7 +307,7 @@ void QuestDuelAgree()
 	PChar.quest.QuestDuelMeeting.win_condition.l1.location = sExitTown;
 	PChar.quest.QuestDuelMeeting.function = "QuestDuelMeeting";
 
-	SetTimerFunction("QuestDuelMeetingNotLogin", 0, 0, 5);
+	SetTimerFunction("QuestDuelMeetingNotLogin", 0, 0, 1);
 }
 
 void QuestDuelMeetingNotLogin(string qName)
@@ -391,7 +391,7 @@ void QuestDuelWoman2Agree()
 	PChar.quest.QuestDuelMeeting.win_condition.l1.location = sExitTown;
 	PChar.quest.QuestDuelMeeting.function = "QuestDuelMeeting";
 
-	SetTimerFunction("QuestDuelMeetingNotLogin", 0, 0, 5);
+	SetTimerFunction("QuestDuelMeetingNotLogin", 0, 0, 1);
 }
 
 void QuestDuelMeeting(string qName)
