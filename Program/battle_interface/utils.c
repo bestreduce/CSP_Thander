@@ -631,7 +631,6 @@ void BI_ShowInterface(bool bShow)
 		{
 			SendMessage(&objLandInterface,"ll",MSG_BATTLE_LAND_SET_SHOW,true);
 		}
-		SendMessage(&ILogAndActions,"ll",LI_SET_VISIBLE,true);
 	}
 	else
 	{
@@ -643,6 +642,5 @@ void BI_ShowInterface(bool bShow)
 		{
 			SendMessage(&objLandInterface,"ll",MSG_BATTLE_LAND_SET_SHOW,false);
 		}
-		SendMessage(&ILogAndActions,"ll",LI_SET_VISIBLE,false);
 	}
 }
