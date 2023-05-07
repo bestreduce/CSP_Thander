@@ -730,16 +730,18 @@ void IncShipQ(int _add)
 	{
 		iFreeSPTemp = 10;//выбор типа орудий не тратит очки апгрейда
 		int curCaliber = sti(RealShips[sti(refNPCShipyard.ship.type)].MaxCaliber);
-		iQMAXTemp = 5;//42 фт
+		iQMAXTemp = 9;//42 фт
 		switch (curCaliber)
 		{
 		case 8: iQMAXTemp = -8; break;
-		case 12: iQMAXTemp = -6; break;
-		case 16: iQMAXTemp = -4; break;
-		case 20: iQMAXTemp = -2; break;
-		case 24: iQMAXTemp = 0; break;
-		case 32: iQMAXTemp = 2; break;
-		case 36: iQMAXTemp = 4; break;
+		case 10: iQMAXTemp = -6; break;
+		case 12: iQMAXTemp = -4; break;
+		case 16: iQMAXTemp = -2; break;
+		case 20: iQMAXTemp = 0; break;
+		case 24: iQMAXTemp = 2; break;
+		case 28: iQMAXTemp = 4; break;
+		case 32: iQMAXTemp = 6; break;
+		case 36: iQMAXTemp = 8; break;
 		}
 	}
 
@@ -801,16 +803,18 @@ void SetSkillArrows()
 			iQMINTemp = -10;//минимум - без пушек
 
 			int curCaliber = sti(RealShips[sti(refNPCShipyard.ship.type)].MaxCaliber);
-			iQMAXTemp = 5;//42 фт
+			iQMAXTemp = 9;//42 фт
 			switch (curCaliber)
 			{
 			case 8: iQMAXTemp = -8; break;
-			case 12: iQMAXTemp = -6; break;
-			case 16: iQMAXTemp = -4; break;
-			case 20: iQMAXTemp = -2; break;
-			case 24: iQMAXTemp = 0; break;
-			case 32: iQMAXTemp = 2; break;
-			case 36: iQMAXTemp = 4; break;
+			case 10: iQMAXTemp = -6; break;
+			case 12: iQMAXTemp = -4; break;
+			case 16: iQMAXTemp = -2; break;
+			case 20: iQMAXTemp = 0; break;
+			case 24: iQMAXTemp = 2; break;
+			case 28: iQMAXTemp = 4; break;
+			case 32: iQMAXTemp = 6; break;
+			case 36: iQMAXTemp = 8; break;
 			}
 		}
 
