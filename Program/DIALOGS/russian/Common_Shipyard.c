@@ -551,7 +551,7 @@ void ProcessDialogEvent()
 			RemoveCharacterCompanion(PChar, sld);
 			AddPassenger(pchar, sld, false);
 			dialog.text = "Вот ваши деньги, " + GetAddress_Form(npchar) + ". Ваш гонорар составляет " + FindRussianMoneyString(sti(pchar.GenQuest.Findship.Shipyarder.Money)) + ". Искренне благодарю вас за проделанную работу. Не забывайте заглядывать ко мне. До свидания!";
-			link.l1 = "Всего доброго, " + GetAddress_Form(npchar) + " " + npchar.lastname + ".";
+			link.l1 = "Всего доброго, " + GetAddress_FormToNPC(npchar) + " " + npchar.lastname + ".";
 			link.l1.go = "exit";
 			AddMoneyToCharacter(pchar, sti(pchar.GenQuest.Findship.Shipyarder.Money));
 			AddQuestRecord("Findship", "3");
