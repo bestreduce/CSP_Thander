@@ -987,7 +987,43 @@ void ProcessDialogEvent()
                 }
                 switch (iNum)
                 {
-                    case 0 : // найти должника
+					case 0: //-->> дача квеста найти потерянный драгоценный камень
+						if (pchar.questTemp.different == "free" && !CheckAttribute(npchar, "quest.usurersJewel") && GetNpcQuestPastDayWOInit(npchar, "usurersJewel") > 7 && !CheckAttribute(pchar, "questTemp.different.SeekUsurersJewel") && npchar.city != "Charles" && !CheckAttribute(npchar, "quest.slave"))
+						{
+							dialog.text = "Вы как нельзя вовремя! Хочу поручить вам одно дело.";
+							link.l1 = "Внимательно слушаю. Что за дело?";
+							link.l1.go = "usurersJewel_1";
+							npchar.quest.usurersJewel = "inSeek"; //личный флаг ростовщика на взятый квест
+							SaveCurrentNpcQuestDateParam(npchar, "usurersJewel");
+						}
+					break;
+
+                    case 1: // доставить сундуки
+                        if (CheckAttribute(pchar, "GenQuest.LoanChest.TakeChest")) break;
+
+                        iNum = findChestMan(Npchar);
+                        if (iNum > 0)
+                        {
+                            chr = &Characters[iNum];
+                            pchar.GenQuest.LoanChest.Chest      = 2 + drand(2);
+                            pchar.GenQuest.LoanChest.Money      = (3 + cRand(sti(pchar.GenQuest.LoanChest.Chest)))*400 * GetCharacterSPECIALSimple(PChar, SPECIAL_L) + cRand(20)*250;
+                            pchar.GenQuest.LoanChest.TargetIdx  =  iNum;
+                            pchar.GenQuest.LoanChest.Time       = 20 + rand(15);
+							sTemp = "";
+							if (npchar.city != chr.city)
+							{
+								sTemp = ", что на " + XI_ConvertString(GetIslandByCityName(chr.city)+"Voc");
+							}
+                            dialog.text = "Мне нужен проверенный человек для важной миссии. Нужно доставить кредит - " + pchar.GenQuest.LoanChest.Chest +
+									" сундука с золотом в "+ XI_ConvertString("Colony"+chr.city+"Acc") + sTemp + " для человека по имени " +
+									GetFullName(chr) + ". Он местный " + GetWorkTypeOfMan(chr, "") +
+									". За работу получите " + FindRussianMoneyString(sti(pchar.GenQuest.LoanChest.Money)) + ". Это нужно сделать за " + FindRussianDaysString(sti(pchar.GenQuest.LoanChest.Time)) + ".";
+                            link.l1 = "Я готов"+ GetSexPhrase("","а") +"!";
+                			link.l1.go = "LoanUsurer_ChestWork_1";
+            			}
+                    break;
+					
+					case 2 : // найти должника
                         if (CheckAttribute(pchar, "GenQuest.Loan.FindCitizen")) break;
 
                         if (sti(Pchar.Ship.Type) == SHIP_NOTUSED && sti(npchar.quest.FindCitizenNoShip) < 2)
@@ -1020,42 +1056,6 @@ void ProcessDialogEvent()
                 			link.l1.go = "LoanUsurer_GiveWork_1";
             			}
                     break;
-
-                    case 1: // доставить сундуки
-                        if (CheckAttribute(pchar, "GenQuest.LoanChest.TakeChest")) break;
-
-                        iNum = findChestMan(Npchar);
-                        if (iNum > 0)
-                        {
-                            chr = &Characters[iNum];
-                            pchar.GenQuest.LoanChest.Chest      = 2 + drand(2);
-                            pchar.GenQuest.LoanChest.Money      = (3 + cRand(sti(pchar.GenQuest.LoanChest.Chest)))*400 * GetCharacterSPECIALSimple(PChar, SPECIAL_L) + cRand(20)*250;
-                            pchar.GenQuest.LoanChest.TargetIdx  =  iNum;
-                            pchar.GenQuest.LoanChest.Time       = 20 + rand(15);
-							sTemp = "";
-							if (npchar.city != chr.city)
-							{
-								sTemp = ", что на " + XI_ConvertString(GetIslandByCityName(chr.city)+"Voc");
-							}
-                            dialog.text = "Мне нужен проверенный человек для важной миссии. Нужно доставить кредит - " + pchar.GenQuest.LoanChest.Chest +
-									" сундука с золотом в "+ XI_ConvertString("Colony"+chr.city+"Acc") + sTemp + " для человека по имени " +
-									GetFullName(chr) + ". Он местный " + GetWorkTypeOfMan(chr, "") +
-									". За работу получите " + FindRussianMoneyString(sti(pchar.GenQuest.LoanChest.Money)) + ". Это нужно сделать за " + FindRussianDaysString(sti(pchar.GenQuest.LoanChest.Time)) + ".";
-                            link.l1 = "Я готов"+ GetSexPhrase("","а") +"!";
-                			link.l1.go = "LoanUsurer_ChestWork_1";
-            			}
-                    break;
-					 
-					case 2: //-->> дача квеста найти потерянный драгоценный камень
-						if (pchar.questTemp.different == "free" && !CheckAttribute(npchar, "quest.usurersJewel") && GetNpcQuestPastDayWOInit(npchar, "usurersJewel") > 7 && !CheckAttribute(pchar, "questTemp.different.SeekUsurersJewel") && npchar.city != "Charles" && !CheckAttribute(npchar, "quest.slave"))
-						{
-							dialog.text = "Вы как нельзя вовремя! Хочу поручить вам одно дело.";
-							link.l1 = "Внимательно слушаю. Что за дело?";
-							link.l1.go = "usurersJewel_1";
-							npchar.quest.usurersJewel = "inSeek"; //личный флаг ростовщика на взятый квест
-							SaveCurrentNpcQuestDateParam(npchar, "usurersJewel");
-						}
-					break;
 			//<<-- дача квеста найти потерянный драгоценный камень
     			}
     		}
