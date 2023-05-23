@@ -1722,7 +1722,9 @@ void GeneratePGGQuestLocation(ref NPChar) {
 	PChar.GenQuest.PGG_Quest.Island.Shore = "";
 	while(PChar.GenQuest.PGG_Quest.Island.Shore == "" || 
 		PChar.GenQuest.PGG_Quest.Island == "Pearl" || 
-		PChar.GenQuest.PGG_Quest.Island == "Panama")
+        PChar.GenQuest.PGG_Quest.Island == "Panama" ||		
+		PChar.GenQuest.PGG_Quest.Island == "KhaelRoa" ||
+		PChar.GenQuest.PGG_Quest.Island == "Reefs")
 	{
 		if (sti(PChar.GenQuest.PGG_Quest.Template)) {
 			PChar.GenQuest.PGG_Quest.Island = GetRandomUninhabitatIsland();

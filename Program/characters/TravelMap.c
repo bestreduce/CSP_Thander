@@ -45,6 +45,8 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.Dominica.Shore.t1		= "shore27";
 	NullCharacter.TravelMap.Islands.Terks.Shore.t0			= "shore56";
 	NullCharacter.TravelMap.Islands.Terks.Shore.t1			= "shore57";
+	NullCharacter.TravelMap.Islands.StLucia.Shore.t0        = "Shore65";
+    NullCharacter.TravelMap.Islands.StLucia.Shore.t1        = "Shore66";
 	NullCharacter.TravelMap.Islands.Bahames.Shore.t0		= "shore68";
 	//NullCharacter.TravelMap.Islands.Bahames.Shore.t1		= "shore69"; //тупиковая бухта - убираю, чтобы после кораблекрушения не выкидывало
 
@@ -105,6 +107,7 @@ void InitTravelMap()
 	NullCharacter.TravelMap.Islands.SantaCatalina.Treasure.SantaCatalina_PearlCave.t0="box1";
 	NullCharacter.TravelMap.Islands.SantaCatalina.Treasure.SantaCatalina_PearlCave.t1="box2";
 	NullCharacter.TravelMap.Islands.SantaCatalina.Treasure.SantaCatalina_PearlCave.t2="box3";
+	NullCharacter.TravelMap.Islands.StLucia.Treasure.StLucia_Grot.t0="box1";
 	//NullCharacter.TravelMap.Islands.Tenotchitlan.Treasure.Tenotchitlan_Cave.t0="box1";
 	//NullCharacter.TravelMap.Islands.Tenotchitlan.Treasure.Tenotchitlan_Cave.t1="box2";
 	//NullCharacter.TravelMap.Islands.Tenotchitlan.Treasure.Tenotchitlan_Cave.t2="box3";
