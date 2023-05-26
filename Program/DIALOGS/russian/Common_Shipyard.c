@@ -549,11 +549,11 @@ void ProcessDialogEvent()
 			pchar.quest.Findship_Over.over = "yes";//снять прерывание
 			sld = GetCharacter(sti(pchar.GenQuest.Findship.Shipyarder.CompanionIndex));
 
-			SetCrewQuantityOverMax(Pchar, GetCrewQuantity(sld));//так и должно быть, следующая функция лишних выгонит
-			AddTroopersCrewToOther(Pchar);//делим лишних матросов по эскадре. К сожалению, мораль не пересчитывается... :( 
+			SetCrewQuantityOverMax(Pchar, GetCrewQuantity(Pchar) + GetCrewQuantity(sld));//добавляем число матросов с отдаваемого корабя на корабль ГГ сверх лимита
 
-			RemoveCharacterCompanion(PChar, sld);
+			RemoveCharacterCompanion(PChar, sld);//удаляем корабль вместе с матросами
 			AddPassenger(pchar, sld, false);
+			AddTroopersCrewToOther(Pchar);//делим сверхлимитных матросов с корабля ГГ по эскадре
 			dialog.text = "Вот ваши деньги, " + GetAddress_Form(npchar) + ". Ваш гонорар составляет " + FindRussianMoneyString(sti(pchar.GenQuest.Findship.Shipyarder.Money)) + ". Искренне благодарю вас за проделанную работу. Не забывайте заглядывать ко мне. До свидания!";
 			link.l1 = "Всего доброго, " + GetAddress_FormToNPC(npchar) + " " + npchar.lastname + ".";
 			link.l1.go = "exit";
