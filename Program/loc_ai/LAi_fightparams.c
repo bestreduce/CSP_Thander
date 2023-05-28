@@ -1660,9 +1660,19 @@ float LAi_NPC_GetAttackActive()
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
 	npc_return_tmp = 0.30 + MOD_SKILL_ENEMY_RATE*0.03 - level*0.15;//0.16...0.43;
-	if(random()*3 <= 1)
+	if(CheckAttribute(chr, "SaveItemsForDead"))
 	{
-		npc_return_tmp *= 1.2;
+		if(chr.SaveItemsForDead == true)
+		{
+			npc_return_tmp *= 1.18;
+		}
+	}
+	else
+	{
+		if(random()*4 <= 1)
+		{
+			npc_return_tmp *= 1.15;
+		}
 	}
 	return npc_return_tmp;
 }
