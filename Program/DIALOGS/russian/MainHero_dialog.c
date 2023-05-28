@@ -76,7 +76,7 @@ void ProcessDialogEvent()
 			mc.Ship.Type = GenerateShipExt(SHIP_VEINARD, true, mc);
 			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
-			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
+			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS10;
 			SetCrewQuantityFull(mc);
 
             SetCharacterGoods(mc,GOOD_FOOD,200);
@@ -137,6 +137,7 @@ void ProcessDialogEvent()
     		    dialog.text = "Дьявол!!! Что здесь произошло? Нужно попытаться найти хоть кого-нибудь живого...";
     			link.l1 = "...";
     			link.l1.go = "exit";
+				chrDisableReloadToLocation = false;//снимаем блок перехода
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1 = "location";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition.l1.location = "LaVega_town";
 				Pchar.quest.ToMansfield_OutFromFort.win_condition = "ToMansfield_OutFromFort";
@@ -238,20 +239,20 @@ void ProcessDialogEvent()
 			//Линейка Виспер
 			if (CheckAttribute(pchar, "questTemp.Whisper.Entered_Dungeon"))
 			{
-				dialog.Text = "Координаты совпадают. Кажется, я на месте. Похоже на древние катакомбы. Им лет 300, а то и больше. Надеюсь, ничего не обвалится мне на голову.";
+				dialog.Text = "Координаты совпадают. Кажется, я на месте\nПохоже это какие-то подземные коммуникации. Хорошее место, если не хочешь сверкать лицом перед камерами.";
 				bMonstersGen = true;
 				DeleteAttribute(pchar, "questTemp.Whisper.Entered_Dungeon");
 				if (bBettaTestMode)
                 {
 			        link.l1 = "BetaTest - пропустить и начать игру.";
 			        link.l1.go = "Whisper_Finish";
-					Link.l2 = "(Перечитать сообщение от заказчика)";
+					Link.l2 = "(перечитать сообщение от заказчика)";
 					Link.l2.go = "Whisper_mission_1";
 
                 }
 				else
 				{
-					Link.l1 = "(Перечитать сообщение от заказчика)";
+					Link.l1 = "(перечитать сообщение от заказчика)";
 					Link.l1.go = "Whisper_mission_1";
 				}
 			}
@@ -1297,7 +1298,7 @@ void ProcessDialogEvent()
 
 		case "ColonyBuilding_Hovernor_3":
 			dialog.Text = "Хм... О каких именно делах я хочу осведомиться?";
-			Link.l1 = "Состояния колонии и её финансовые возможности.";
+			Link.l1 = "Состояние колонии и её финансовые возможности.";
 			Link.l1.go = "ColonyBuilding_Hovernor_3_1";
 			Link.l2 = "Боевая готовность гарнизона и здоровье жителей.";
 			Link.l2.go = "ColonyBuilding_Hovernor_3_2";
@@ -1391,7 +1392,7 @@ void ProcessDialogEvent()
 			mc.Ship.Type = GenerateShipExt(SHIP_VEINARD, true, mc);
 			mc.Ship.name="Чёрная Вдова";
 			SetBaseShipData(mc);
-			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS12;
+			mc.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS10;
 			SetCrewQuantityFull(mc);
 
             SetCharacterGoods(mc,GOOD_FOOD,200);

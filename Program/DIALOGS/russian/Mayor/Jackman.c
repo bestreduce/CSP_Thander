@@ -738,7 +738,7 @@ void ProcessDialogEvent()
         break;
 
 	 	case "Step_8":
-			dialog.text = "Ха-ха... Ты - хороший корсар, " + pchar.name + " " + pchar.lastname + ". Я желаю тебе удачи, "+ GetSexPhrase("друг","подруга") +".\n"+
+			dialog.text = "Ха-ха... Ты - хороший корсар, " + GetFullName(pchar) + ". Я желаю тебе удачи, "+ GetSexPhrase("друг","подруга") +".\n"+
                           "Мои головорезы рвутся домой после хорошей работы. Знай, что на Бермудах всегда рады тебя видеть.";
 			link.l1 = "Ещё увидимся!";
 			link.l1.go = "Step_9";
@@ -1296,7 +1296,7 @@ void SetMushketCapitainInWorld()
 	//выбор типа кораблика на карте
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Бриг 'Стрела'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даём с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даём с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//заносим Id кэпа в базу нпс-кэпов
 	sTemp = sld.id;
@@ -1304,7 +1304,7 @@ void SetMushketCapitainInWorld()
 	NullCharacter.capitainBase.(sTemp).questGiver = "none"; //запомним Id квестодателя для затирки в случае чего
 	NullCharacter.capitainBase.(sTemp).Tilte1 = "SeekDoubleMushket"; //заголовок квестбука
 	NullCharacter.capitainBase.(sTemp).Tilte2 = "SeekDoubleMushket"; //имя квеста в квестбуке
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

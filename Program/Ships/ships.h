@@ -85,7 +85,7 @@
 #define SHIP_UNICORN				70
 #define SHIP_REVENGE				71
 #define SHIP_HERMIONE   			72
-#define SHIP_LIGHTFRIGATE			73
+#define SHIP_CHERUB                 73
 #define SHIP_BOUSSOLE				74
 #define SHIP_BELLE  				75
 #define SHIP_ESSEX  				76
@@ -114,11 +114,11 @@
 #define SHIP_DUTCHSHIP				97
 #define SHIP_CONVOISHIP	    		98
 #define SHIP_COURONNE				99
-#define SHIP_ALEXIS					100
-#define SHIP_LINESHIPHEAVY			101
+#define SHIP_CROWN					100
+#define SHIP_AGAMEMNON              101
 #define SHIP_INGERMANLAND			102
 #define SHIP_RETVISAN   			103
-#define SHIP_HEAVYLINESHIP			104
+#define SHIP_WAPEN_VON_HAMBURG      104
 //====================================================================================================================================================================================================================
 //1 пушки(42)
 #define SHIP_POSEIDON				105

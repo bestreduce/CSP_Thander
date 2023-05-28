@@ -1316,7 +1316,7 @@ void ArenaTournamentGoStart(int iStage, int iStageTemp)
 	}
 	else pchar.SkipBattle = false;
 
-	Log_Info(attack.name + " " + attack.lastname + " VS " + enemy.name + " " + enemy.lastname);
+	Log_Info("" + GetFullName(attack) + " VS " + GetFullName(enemy));
 }
 
 void ArenaTournamentStartNewBattle()
@@ -1453,7 +1453,7 @@ void ArenaTournamentSetLooser(ref chr)
 		Log_SetStringToLog("В этом раунде победитель " + Characters[iAttack].name + " " + Characters[iAttack].lastname);
 	}
 
-	Log_SetStringToLog("На этот момент счёт в поединке - " + Characters[iAttack].name + " " + Characters[iAttack].lastname + " - " + PChar.Arena.Tournament.Temp.WinnerCount + ":" + sti(PChar.Arena.Tournament.Temp.LooserCount) + " - " + Characters[iEnemy].name + " " + Characters[iEnemy].lastname);
+	Log_SetStringToLog("На этот момент счёт в поединке - " + GetFullName(Characters[iAttack]) + " - " + PChar.Arena.Tournament.Temp.WinnerCount + ":" + sti(PChar.Arena.Tournament.Temp.LooserCount) + " - " + Characters[iEnemy].name + " " + Characters[iEnemy].lastname);
 
 	DoQuestFunctionDelay("ArenaTournamentCheckNewRound", 3.0);
 }
@@ -2252,7 +2252,7 @@ void ArenaOddsGoStart(int iStage)
 	ArenaOddsSetDetailsForChar(attack, iStage);
 	ArenaOddsSetDetailsForChar(enemy, iStage);
 
-	Log_Info(attack.name + " " + attack.lastname + " VS " + enemy.name + " " + enemy.lastname);
+	Log_Info("" + GetFullName(attack) + " VS " + GetFullName(enemy));
 
 	if(PChar.Arena.Mode.NotOdd == false)
 	{
@@ -2261,7 +2261,7 @@ void ArenaOddsGoStart(int iStage)
 
 		if(iActionStage == iStage)
 		{
-			Log_Info("Вы сделали ставку на этот поединок. На дуэлянта по имени " + Characters[iActionCharacter].name + " " + Characters[iActionCharacter].lastname + ".");
+			Log_Info("Вы сделали ставку на этот поединок. На дуэлянта по имени " + GetFullName(Characters[iActionCharacter]) + ".");
 		}
 	}
 }
@@ -2340,7 +2340,7 @@ void ArenaOddsSetLooser(ref chr)
 		Log_SetStringToLog("В этом раунде победу одержал " + Characters[iAttack].name + " " + Characters[iAttack].lastname);
 	}
 
-	Log_SetStringToLog("На этот момент счёт в поединке - " + Characters[iAttack].name + " " + Characters[iAttack].lastname + " - " + PChar.Arena.Odds.Temp.WinnerCount + ":" + sti(PChar.Arena.Odds.Temp.LooserCount) + " - " + Characters[iEnemy].name + " " + Characters[iEnemy].lastname);
+	Log_SetStringToLog("На этот момент счёт в поединке - " + GetFullName(Characters[iAttack]) + " - " + PChar.Arena.Odds.Temp.WinnerCount + ":" + sti(PChar.Arena.Odds.Temp.LooserCount) + " - " + Characters[iEnemy].name + " " + Characters[iEnemy].lastname);
 
 	DoQuestFunctionDelay("ArenaOddsCheckNewRound", 3.0);
 }
@@ -2426,13 +2426,13 @@ void ArenaOddsDuelEnd(bool bWin)
 			if(PChar.Arena.Odds.Temp.Winner == Characters[iActionCharacter].id)
 			{
 				PChar.Arena.Odds.Win = true;
-				Log_InfoS("Вы сделали ставку на дуэлянта по имени " + Characters[iActionCharacter].name + " " + Characters[iActionCharacter].lastname + " и не прогадали! Ваш выигрыш составил " + sti(PChar.Arena.Odds.Prize) + " золотых.");
+				Log_InfoS("Вы сделали ставку на дуэлянта по имени " + GetFullName(Characters[iActionCharacter]) + " и не прогадали! Ваш выигрыш составил " + sti(PChar.Arena.Odds.Prize) + " золотых.");
 				Log_Info("Вы сможете получить выигрыш после соревнований.");
 			}
 			else
 			{
 				PChar.Arena.Odds.Win = false;
-				Log_InfoS("Вы сделали ставку на дуэлянта по имени " + Characters[iActionCharacter].name + " " + Characters[iActionCharacter].lastname + " и проиграли.");
+				Log_InfoS("Вы сделали ставку на дуэлянта по имени " + GetFullName(Characters[iActionCharacter]) + " и проиграли.");
 			}
 		}
 	}

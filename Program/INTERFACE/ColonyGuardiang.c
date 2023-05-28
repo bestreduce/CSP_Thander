@@ -1537,19 +1537,23 @@ string GetCannonShip(int iCannonsType)
 	switch(iCannonsType)
 	{
 		case CANNON_TYPE_CANNON_LBS8: sCannon = "Пушки"; break;
+		case CANNON_TYPE_CANNON_LBS10: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS12: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS16: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS20: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS24: sCannon = "Пушки"; break;
+		case CANNON_TYPE_CANNON_LBS28: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS32: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS36: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS42: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CANNON_LBS48: sCannon = "Пушки"; break;
 		case CANNON_TYPE_CULVERINE_LBS8: sCannon = "Кулеврины"; break;
+		case CANNON_TYPE_CULVERINE_LBS10: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS12: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS16: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS20: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS24: sCannon = "Кулеврины"; break;
+		case CANNON_TYPE_CULVERINE_LBS28: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS32: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_CULVERINE_LBS36: sCannon = "Кулеврины"; break;
 		case CANNON_TYPE_NONECANNON: sCannon = "Нет орудий"; break;
@@ -1563,19 +1567,23 @@ string GetCannonTypeCaliber(int iCannonsType)
 	switch(iCannonsType)
 	{
 		case CANNON_TYPE_CANNON_LBS8: sCaliber = "8."; break;
+		case CANNON_TYPE_CANNON_LBS10: sCaliber = "10."; break;
 		case CANNON_TYPE_CANNON_LBS12: sCaliber = "12."; break;
 		case CANNON_TYPE_CANNON_LBS16: sCaliber = "16."; break;
 		case CANNON_TYPE_CANNON_LBS20: sCaliber = "20."; break;
 		case CANNON_TYPE_CANNON_LBS24: sCaliber = "24."; break;
+		case CANNON_TYPE_CANNON_LBS28: sCaliber = "28."; break;
 		case CANNON_TYPE_CANNON_LBS32: sCaliber = "32."; break;
 		case CANNON_TYPE_CANNON_LBS36: sCaliber = "36."; break;
 		case CANNON_TYPE_CANNON_LBS42: sCaliber = "42."; break;
 		case CANNON_TYPE_CANNON_LBS48: sCaliber = "48."; break;
 		case CANNON_TYPE_CULVERINE_LBS8: sCaliber = "8."; break;
+		case CANNON_TYPE_CULVERINE_LBS10: sCaliber = "10."; break;
 		case CANNON_TYPE_CULVERINE_LBS12: sCaliber = "12."; break;
 		case CANNON_TYPE_CULVERINE_LBS16: sCaliber = "16."; break;
 		case CANNON_TYPE_CULVERINE_LBS20: sCaliber = "20."; break;
 		case CANNON_TYPE_CULVERINE_LBS24: sCaliber = "24."; break;
+		case CANNON_TYPE_CULVERINE_LBS28: sCaliber = "28."; break;
 		case CANNON_TYPE_CULVERINE_LBS32: sCaliber = "32."; break;
 		case CANNON_TYPE_CULVERINE_LBS36: sCaliber = "36."; break;
 		case CANNON_TYPE_NONECANNON: sCaliber = "0."; break;

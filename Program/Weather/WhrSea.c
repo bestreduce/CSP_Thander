@@ -234,7 +234,8 @@ void WhrCreateSeaEnvironment()
 			Sea.Sea2.WaterColor = argb(0,0,50,70);	
 		}}}}}}}
 		} else {
-		if(loc.type == "cave"){
+		if(loc.type == "cave"
+			|| loc.type == "Dungeon"){
 		fMaxSeaHeight = 1.1;
 		WhrSetNewSea(fWeatherSpeed);
 		Sea.Sea2.FoamEnable = true;

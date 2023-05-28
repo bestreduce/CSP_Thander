@@ -395,14 +395,15 @@ bool GenerateMapEncounter_War(string sIslandID, ref iEncounter, int iCharacterIn
 	{
 		rEncounter.Task = AITASK_MOVE;
 		DeleteAttribute(rEncounter, "Task.Target");
-		rEncounter.Type = "trade";
+		//rEncounter.Type = "trade";
 	}
 	else
 	{
 		rEncounter.Task = AITASK_ATTACK;
 		rEncounter.Task.Target = PLAYER_GROUP;
-		rEncounter.Type = "war";
+		//rEncounter.Type = "war";
 	}
+	rEncounter.Type = "war";//военная энка должна быть военной!
 	iEncounter = iEncounterSlot;
 
 	if (sti(rEncounter.Nation) == PIRATE)

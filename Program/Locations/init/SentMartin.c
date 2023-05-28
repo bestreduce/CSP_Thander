@@ -544,7 +544,6 @@ int LocationInitSentMartin(int n)
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "packhouse";
 	LAi_LocationFightDisable(&locations[n], true);
-	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
 
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -634,7 +633,7 @@ int LocationInitSentMartin(int n)
 	locations[n].reload.l2.go = "CommonPackhouse_2";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
-	locations[n].reload.l2.label = "Room";
+	locations[n].reload.l2.label = "packhouse";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
 

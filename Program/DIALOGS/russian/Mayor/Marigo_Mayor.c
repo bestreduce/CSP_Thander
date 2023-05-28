@@ -64,7 +64,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 		
 		case "PKM_Animists_4":
-			dialog.text = "Вы берётесь за это дело?! Превосходно! Капитана, полагаю, вы сможете найти в таверне. Его судно все ещё стоит в порту.";
+			dialog.text = "Вы берётесь за это дело?! Превосходно! Капитана, полагаю, вы сможете найти в таверне. Его судно всё ещё стоит в порту.";
 			link.l1 = "Не смею занимать более ваше время, минхер.";
 			link.l1.go = "PKM_Animists_5";
         break;
@@ -92,6 +92,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_Gubernator_Final");
 			AddMoneyToCharacter(pchar, 30000);
             AddCharacterExpToSkill(pchar, "Leadership", 200);
+			AddQuestRecord("PKM_Animists", "38");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			pchar.questTemp.PKM_Animists_GuberMarigo = true;
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			{
+				CloseQuestHeader("PKM_Animists");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+			}
         break;
 		
         //==> Одиннадцатый квест исп.линейки: разорение Виллемстада и Мариго.

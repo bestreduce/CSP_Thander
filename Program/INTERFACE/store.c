@@ -1218,9 +1218,9 @@ void Autotrade_Goods(ref rChar)
 		rGood = &Goods[i];
 		sGood = rGood.name;
 
-		if(!CheckAttribute(rChar, "TransferGoods." + sGood))
+		if(!CheckAttribute(rChar, "TransferGoods.G." + sGood))
 		{
-			rChar.TransferGoods.(sGood) = 0;
+			rChar.TransferGoods.G.(sGood) = 0;
 		}
 		bFraht = false; 
 		if (CheckQuestAttribute("generate_trade_quest_progress", "begin") || CheckQuestAttribute("generate_trade_quest_progress",  "failed"))//сейчас везём фрахт
@@ -1235,7 +1235,7 @@ void Autotrade_Goods(ref rChar)
 		}
 
 		iCurGoodQty = GetCargoGoods(rChar, i); // Сколько этого товара есть сейчас
-		iNeedGoodsQty = sti(rChar.TransferGoods.(sGood)); // Сколько нужно ВСЕГО данного товара (не докупить!)
+		iNeedGoodsQty = sti(rChar.TransferGoods.G.(sGood)); // Сколько нужно ВСЕГО данного товара (не докупить!)
 
 		if(iCurGoodQty == iNeedGoodsQty) continue; // ничего не нужно
 

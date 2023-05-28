@@ -353,7 +353,7 @@ void ProcessDialogEvent()
 			if(sti(PChar.BuildingColony.Blocks) == 0 && sti(PChar.BuildingColony.Planks) == 0 && sti(PChar.BuildingColony.Mahogany) == 0 && sti(PChar.BuildingColony.Ebony) == 0 && sti(PChar.BuildingColony.Slaves) == 0 && sti(PChar.BuildingColony.Food) == 0)
 			{
 				dialog.text = "С радостью сообщаю вам, господин капитан, что все необходимые товары доставлены. Мы начинаем возведение базы! Если ничего сверхъестественного не произойдёт, то месяца через полтора на этом месте вы увидите совсем иную картину, йа.";
-				link.l1 = "Хорошо, господин " + NPChar.name + " " + NPChar.lastname + ".";
+				link.l1 = "Хорошо, господин " + GetFullName(NPChar) + ".";
 				link.l1.go = "exit";
 				AddDialogExitQuest("ColonyFortBuilding_5");
 				NextDiag.TempNode = "ColonyFortBuilding_5";

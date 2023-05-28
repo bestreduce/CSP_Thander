@@ -413,7 +413,7 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 	{
         DeleteAttribute(_location, "box1");
         _location.box1.money = 140000;
-        _location.box1.items.map_venesuela = 1;
+        _location.box1.items.map_cumana = 1;
         _location.box1.items.spyglass3 = 1;
         _location.box1.items.potion4 = 10;
         _location.box1.items.indian7 = 1;

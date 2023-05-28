@@ -304,6 +304,12 @@ void IReadVariableAfterInit()
 		nCharVoice = sti(InterfaceStates.CharVoice);
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CHAR_VOICE_CHECKBOX", 2, 1, nCharVoice );
+	
+	int nEnableSailors = 0;
+	if( CheckAttribute(&InterfaceStates,"EnableSailors") ) {
+		nEnableSailors = sti(InterfaceStates.EnableSailors);
+	}
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"SAILORS_CHECKBOX", 2, 1, nEnableSailors );
 
 	int nDeadBoxText = 0;
 	if( CheckAttribute(&InterfaceStates,"DeadBoxText") ) {
@@ -615,6 +621,13 @@ void procCheckBoxChange()
 	{
 		{
 			InterfaceStates.CharVoice = bBtnState;
+		}
+	}
+	
+	if( sNodName == "SAILORS_CHECKBOX")
+	{
+		{
+			InterfaceStates.EnableSailors = bBtnState;
 		}
 	}
 
@@ -1558,6 +1571,11 @@ void ShowInfo()
 			sHeader = XI_ConvertString("CHAR_VOICE_CHECKBOX_header");
 			sText1 = XI_ConvertString("CHAR_VOICE_CHECKBOX_desc");
             PlayVoice("Kopcapkz\Voices\Traders\Trader_man_0"+rand(9)+".ogg");
+		break;
+		
+		case "SAILORS_CHECKBOX":
+			sHeader = XI_ConvertString("SAILORS_CHECKBOX_header");
+			sText1 = XI_ConvertString("SAILORS_CHECKBOX_desc");
 		break;
 
 		//#20171223-01 Camera perspective option

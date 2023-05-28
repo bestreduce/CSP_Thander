@@ -284,7 +284,7 @@ void BSOnTheHorizon_SeaBattle()
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_FWZP, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
@@ -1322,7 +1322,7 @@ void BSUrka_Curacao_SeaBattle()
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_ALEXIS, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA_H, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_LINK2, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
@@ -1694,9 +1694,6 @@ void BSUrka_Poison()
 	sld = CharacterFromID("Flint");
 	LAi_SetActorTypeNoGroup(sld);
 	LAi_ActorTurnToCharacter(sld, pchar);
-	Group_DeleteGroup("Flint_Group");//фикс - удаляем корабль флинта из бухты Корыта
-	//sld.LifeDay = 0;//или лучше убивать самого флинта? работает и то, и то
-	
 }
 void BSUrka_PoisonSelf(string q)
 {

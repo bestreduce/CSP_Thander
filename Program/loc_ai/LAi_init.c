@@ -90,7 +90,9 @@ void LocAi_Init(ref loc)
 					LAi_UseAtidoteBottle(&Characters[idx]);
 				}
 
-				if (Characters[idx].location == pchar.location)) continue; // fix
+				if (Characters[idx].location == pchar.location) {locIndex++; continue;} //fix	
+				//fix2 - считаем уже стоящих в локе абордагов, чтобы при загрузке сейва не добавлялось новых
+
 				DeleteAttribute(&Characters[idx], "location");
 				int k = locIndex % 3 + 1;
 				if (loc.id.label == "Tavern") bTavern = true; else bTavern = false;
@@ -120,7 +122,7 @@ void LocAi_Init(ref loc)
                         }
                     }
                     Characters[idx].location.locator = sOfficerLoc;
-                    locIndex = locIndex + 1;
+                    locIndex++;
 				}else{
 					Characters[idx].location = "none";
 					Characters[idx].location.group = "";

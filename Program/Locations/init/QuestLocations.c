@@ -432,7 +432,9 @@ int LocationInitQuestLocations(int n)
 
 	n = n + 1;
 
-	//Лока создания перса
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Лока создания персонажа
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	Locations[n].id = "SelectMainCharacter_Cabine";   // Lugger: Выбор ГГ
     	locations[n].id.label = "cabine2";
 	locations[n].filespath.models = "locations\inside\cabin02\";
@@ -477,6 +479,63 @@ int LocationInitQuestLocations(int n)
 	Locations[n].items.randitem1 = "";
 
 	locations[n].environment.weather.rain = false;
+	n = n + 1;
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Киберпанк 2077
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	locations[n].id = "Cyberpunk2077";
+	//locations[n].id.label = "Dungeon";
+	locations[n].image = "loading\jonny_load\inside\Collector.tga";
+	//Town sack
+	//locations[n].townsack = "Pirates";
+	//Sound
+	locations[n].type = "Dungeon";
+	//locations[n].islandId = "Bermudes";
+	//Models
+	//Always
+	locations[n].filespath.models = "locations\inside\Collector";
+	locations[n].models.always.DungeonVault1 = "Collector";
+	locations[n].models.always.InquisitionDungeonVault1Fonars = "Collector_fonars";
+	locations[n].models.always.locators = "Collector_locators";
+
+	//Fontain
+	locations[n].models.always.Waterfall1 = "fontain1";
+	locations[n].models.always.Waterfall1.uvslide.v0 = 0.5;
+	locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
+	locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
+	locations[n].models.always.Waterfall1.level = 90;
+
+	//WindMill Fan
+	locations[n].models.always.MillFan = "MillFan";
+	Locations[n].models.always.MillFan.locator.group = "WindMill";
+	Locations[n].models.always.MillFan.locator.name ="Fan";
+	Locations[n].models.always.MillFan.rotate.x = 0.0;
+	Locations[n].models.always.MillFan.rotate.y = 0.0;
+	Locations[n].models.always.MillFan.rotate.z = 1.2;
+
+	//Day
+	locations[n].models.day.charactersPatch = "Collector_patch";
+	//Night
+	locations[n].models.night.charactersPatch = "Collector_patch";
+	//Environment
+	locations[n].environment.weather = "true";
+	Locations[n].lockWeather = "Inside";
+	Locations[n].QuestlockWeather = "23 Hour";
+	locations[n].environment.sea = "true";
+	locations[n].environment.weather.rain = false;
+	//Reload map
+	locations[n].reload.l1.name = "reload1";
+	locations[n].reload.l1.go = "Pirates_Shipyard";
+	locations[n].reload.l1.emerge = "reload2";
+	locations[n].reload.l1.autoreload = "0";
+
+	locations[n].reload.l2.name = "reload2_back";
+	locations[n].reload.l2.go = "Shore3";
+	locations[n].reload.l2.emerge = "reload2";
+	locations[n].reload.l2.autoreload = "1";
+	locations[n].reload.l2.label = "Shore3";
+	locations[n].locators_radius.reload.reload2_back = 1.5;
 	n = n + 1;
 
 	return n;

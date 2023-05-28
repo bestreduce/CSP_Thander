@@ -186,7 +186,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "MasterKeys_2";
 		break;
 		case "MasterKeys_2":
-			dialog.text = "Ага. Вон он сидит, в углу у входа в таверну. В красной рубахе он.";
+			dialog.text = "Ага. Вон он сидит, за круглым столиком у лестницы. В красной рубахе он.";
 			link.l1 = "Понял"+ GetSexPhrase("","а") +", спасибо.";
 			link.l1.go = "exit";
 			pchar.questTemp.LSC = "toMasterKeys";

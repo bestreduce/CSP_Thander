@@ -358,11 +358,11 @@ void WayBeginning(string _tmp)
     if (startHeroType == 2)
     {
     	pchar.quest.Tut_start.win_condition.l1          = "location";
-    	pchar.quest.Tut_start.win_condition.l1.location = "Bermudes_Dungeon";
+    	pchar.quest.Tut_start.win_condition.l1.location = "Cyberpunk2077";
     	pchar.quest.Tut_start.function                  = "Whisper_StartGame";
         Pchar.questTemp.CapBloodLine = false;
 		pchar.Cirgnore = true; //атрибут, блокирующий смену модели кирасной логикой
-		DoQuestReloadToLocation("Bermudes_Dungeon", "reload", "reload2_back", "");
+		DoQuestReloadToLocation("Cyberpunk2077", "reload", "reload2_back", "");
 		return;
     }
 	if (startHeroType == 3)		//Анжелика Тич
@@ -507,6 +507,17 @@ void GetBoardModeToLocation(ref loc)
 			else
 			{
 				sFile = "deckMediumVSBig_locators";
+			}
+		break;
+
+		case "BOARDING_CRVT_FRGT_DECK":
+			if(sti(InterfaceStates.ShowBoardMode) == 1)
+			{
+				sFile = "deckCorvetteVSFrigate_locators_lugger";
+			}
+			else
+			{
+				sFile = "deckCorvetteVSFrigate_locators";
 			}
 		break;
 

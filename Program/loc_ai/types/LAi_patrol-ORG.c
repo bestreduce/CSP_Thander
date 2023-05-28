@@ -318,19 +318,22 @@ void LAi_type_patrol_Goto(aref chr)
 	}
 }
 
+//Проверить персонажа с заданной вероятностью
 void LAi_type_patrol_TestControl(aref chr)
 {
 	chr.chr_ai.type.player = 5 + rand(10);
 	int iRand;
 	bool bFightMode = LAi_CheckFightMode(pchar);
-	if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY) iRand = 2;
-	else iRand = GetRelation2BaseNation(sti(chr.nation)); // 0-  1-  2-
+	if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY || GetNationRelation(sti(chr.nation), GetBaseHeroNation()) == RELATION_ENEMY) iRand = 2;
+	else iRand = GetRelation2BaseNation(sti(chr.nation)); // 0- друг 1- нейтрал 2- враг
 	if (isDay())
 	{
+		// в друж. городе не цепляемся
 		if (rand(iRand) < 2)
 		{
+			//проверяем, нет ли обнаженки оружия
 			if (bFightMode)
-			{
+			{	//Пытаемся начать диалог
 				LAi_SetFightMode(pchar, false);
 				if(LAi_Character_CanDialog(chr, pchar))
 				{
@@ -348,8 +351,9 @@ void LAi_type_patrol_TestControl(aref chr)
 		{
 			if (iRand == RELATION_NEUTRAL)
 			{
+				//проверяем, нет ли обнаженки оружия
 				if (bFightMode)
-				{
+				{	//Пытаемся начать диалог
 					LAi_SetFightMode(pchar, false);
 					if(LAi_Character_CanDialog(chr, pchar))
 					{
@@ -364,7 +368,7 @@ void LAi_type_patrol_TestControl(aref chr)
 				iRand = 60;
 			}
 			else
-			{
+			{	//враждебный
 				if (bFightMode)	iRand = 500;
 				else iRand = 120;
 			}
@@ -372,10 +376,11 @@ void LAi_type_patrol_TestControl(aref chr)
 	}
 	else
 	{
-		if (iRand == RELATION_FRIEND)
+		if (iRand == RELATION_FRIEND || iRand == RELATION_NEUTRAL)
 		{
+			//проверяем, нет ли обнаженки оружия
 			if (bFightMode)
-			{
+			{	//Пытаемся начать диалог
 				LAi_SetFightMode(pchar, false);
 				if(LAi_Character_CanDialog(chr, pchar))
 				{
@@ -384,8 +389,9 @@ void LAi_type_patrol_TestControl(aref chr)
 					LAi_tmpl_SetDialog(chr, pchar, -1.0);
 				}
 			}
-			return;
+			return; // в друж. городе не цепляемся
 		}
+		//eddy. ночной враг цепляется только так и шансов скрыться мало даже при супер прокачке скрытности.
 		if (iRand == RELATION_ENEMY)
 		{
 			if (bFightMode)	iRand = 500;
@@ -393,8 +399,9 @@ void LAi_type_patrol_TestControl(aref chr)
 		}
 		else
 		{
+			//проверяем, нет ли обнаженки оружия
 			if (bFightMode)
-			{
+			{	//Пытаемся начать диалог
 				LAi_SetFightMode(pchar, false);
 				if(LAi_Character_CanDialog(chr, pchar))
 				{
@@ -406,18 +413,19 @@ void LAi_type_patrol_TestControl(aref chr)
 				return;
 			}
 			chr.chr_ai.type.player = 60;
-			iRand = 80;
+			iRand = 80; //ночью нейтрал
 		}
 	}
+	//Проверим на начало диалога
 	float luck = 0.0;
 
 	luck = GetCharacterSkill(pchar, "Sneak");
 	if (rand(iRand) <= luck)
 	{
-		if (!dialogRun && !bFightMode)
+		if (!dialogRun && !bFightMode) // кач в диалоге - фигвам. кто с обнаженкой бегает - тоже.
 		{
 			if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY && sti(chr.nation) != PIRATE)
-			{
+			{  // враг, которго не узнали - скрылся - молодец!
 				AddCharacterExpToSkill(pchar, SKILL_SNEAK, 15);
 			}
 			if (GetBaseHeroNation() == sti(chr.nation) && GetRelation2BaseNation(sti(chr.nation)) == RELATION_ENEMY)
@@ -427,14 +435,16 @@ void LAi_type_patrol_TestControl(aref chr)
 		}
 		return;
 	}
+	//Пытаемся начать диалог
 	LAi_SetFightMode(pchar, false);
-	if(LAi_Character_CanDialog(chr, pchar))
+	if(LAi_Character_CanDialog(chr, pchar) && chr.nation != "4")
 	{
 		chr.chr_ai.type.state = "dialog";
 		LAi_tmpl_SetDialog(chr, pchar, -1.0);
+		//Следующий раз будет нескоро
 		chr.chr_ai.type.player = "50";
 		if (GetNationRelation2MainCharacter(sti(chr.nation)) == RELATION_ENEMY && sti(chr.nation) != PIRATE && !bFightMode)
-		{
+		{  // враг, которого узнали - потом будет умнее - бонус в скрытность
 			AddCharacterExpToSkill(pchar, SKILL_SNEAK, 80);
 		}
 		if (GetBaseHeroNation() == sti(chr.nation) && GetRelation2BaseNation(sti(chr.nation)) == RELATION_ENEMY && !bFightMode)

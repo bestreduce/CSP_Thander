@@ -31,7 +31,7 @@ void Cabin_ReloadEndFade()
 	// Delete current cannonballs
 	AIBalls.Clear = "";
 
- 	PauseParticles(true);
+	//PauseParticles(true);
     //DeleteParticles(); // boal fix костры нах
 
 	// start Cabin location
@@ -282,7 +282,7 @@ void Cabin_ReloadEndFadeAfter()
 
 	SetSchemeForSea();
 
-	PauseParticles(false);
+	//PauseParticles(false);
 
 	bSeaReloadStarted = false;
 
@@ -402,7 +402,7 @@ void DeckBoat_ReloadEndFade()
 {
 	// Delete current cannonballs
 	AIBalls.Clear = "";
- 	PauseParticles(true);
+	//PauseParticles(true);
     //DeleteParticles(); // boal fix костры нах
 
 	// start DeckBoat location

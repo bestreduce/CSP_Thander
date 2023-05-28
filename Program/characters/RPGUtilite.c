@@ -844,7 +844,7 @@ void ApplayNewSkill(ref _chref, string _skill, int _addValue)
             }
             else
             {
-                Log_Info(""+ _chref.name + " "+_chref.lastname + " получает новый уровень!");
+                Log_Info("" + GetFullName(_chref) + " получает новый уровень!");
             }
         }
     }
@@ -2981,7 +2981,7 @@ void initNewMainCharacter()
     if (startHeroType == 2)
     {
     	pchar.quest.Tut_start.win_condition.l1          = "location";
-    	pchar.quest.Tut_start.win_condition.l1.location = "Bermudes_Dungeon";
+    	pchar.quest.Tut_start.win_condition.l1.location = "Cyberpunk2077";
     	pchar.quest.Tut_start.function                  = "Whisper_StartGame";
         Pchar.questTemp.CapBloodLine = false;
     }

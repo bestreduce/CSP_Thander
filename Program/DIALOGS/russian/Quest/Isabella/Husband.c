@@ -58,8 +58,7 @@ void ProcessDialogEvent()
 			else
 			{
 				dialog.text = "Приветствую вас, незнакомец! Могу я узнать, кто вы и чему обязан чести видеть вас у себя дома?";
-				link.l1 = "Моё имя - " + PChar.Name + " " + PChar.LastName +
-						", я капитан.";
+				link.l1 = "Моё имя - " + GetFullName(pchar) + ", я капитан.";
 				link.l1.go = "Next_1";
 				link.l2 = "Прошу меня простить. Я ошибся адресом.";
 				link.l2.go = "Good_exit";
@@ -144,7 +143,7 @@ void ProcessDialogEvent()
 		case "Romantic_Battle_in_Bedroom":
 		    if (CheckAttribute(NPChar, "quest.NiceMeet"))
 		    {
-			    dialog.text = PChar.Name + " " + PChar.LastName +", вы уже успели познакомиться с моей супругой? " + Characters[GetCharacterIndex("Isabella")].Name + ", если нет возражений, я вернусь к своим делам. Жду вас внизу...";
+			    dialog.text = "" + GetFullName(pchar) +", вы уже успели познакомиться с моей супругой? " + Characters[GetCharacterIndex("Isabella")].Name + ", если нет возражений, я вернусь к своим делам. Жду вас внизу...";
 			    link.l1 = "О, да. Теперь я по-другому смотрю на ваш совет.";
 			    link.l1.go = "Romantic_Battle_in_Bedroom_3";
 			}

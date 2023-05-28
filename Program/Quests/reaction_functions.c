@@ -653,6 +653,17 @@ void SharpSeekSpy_loginSpy(string qName)
 		Group_LockTask(sGroup);
 		Map_CreateWarrior("", sld.id, 8);
 	}
+	else
+	{
+		SetTimerFunction("SharpSeekSpy_again", 0, 0, 3);
+	}
+}
+
+void SharpSeekSpy_again(string qName)
+{
+	pchar.quest.SharpSeekSpy_loginSpy.win_condition.l1 = "location";
+	pchar.quest.SharpSeekSpy_loginSpy.win_condition.l1.location = "Shore55";
+	pchar.quest.SharpSeekSpy_loginSpy.function = "SharpSeekSpy_loginSpy";
 }
 
 void SharpSeekSpy_script(string qName)
@@ -1290,7 +1301,7 @@ void PQ7_LoginLeon()
 	sld.mapEnc.type = "warrior";
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Фрегат 'Леон'";
-	Map_CreateWarrior("shore33", "LeonCapitain", 30);
+	Map_CreateWarrior("shore33", "LeonCapitain", 30);//указание стартового локатора не работает. для военных сейчас нет указания стартовой точки в коде
 	Log_TestInfo("Фрегат Леон установлен.");
 }
 
@@ -2674,7 +2685,7 @@ void SetCapitainFromCityToSea(string qName) //помещаем в море кэ�
 		sTemp = GetArealByCityName(sld.city);
 		sld.quest.baseShore = GetIslandRandomShoreId(sTemp);
 		//на карту
-		iTemp = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity))+5; //дней доехать даем с запасом
+		iTemp = GetMaxDaysFromIsland2Island(sTemp, GetArealByCityName(sld.quest.targetCity)) + 1; //дней доехать даем с запасом
 		Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, iTemp);
 		//даем общий слух, что кэп ушёл в другой город
 		AddSimpleRumourEx(LinkRandPhrase("Капитан " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Acc")) + " '" + sld.Ship.name + "', которого зовут " + GetFullName(sld) + ", опять ушёл в море. По слухам, он двинулся в " + XI_ConvertString("Colony"+sld.quest.targetCity+"Acc") + ".",
@@ -2690,10 +2701,10 @@ void SetCapitainFromCityToSea(string qName) //помещаем в море кэ�
 		//в список портмана заносим тайтл, заголовок и номер строки из quest_text.txt
 		rCharacter.quest.capitainsList.(sTemp).QBString1 = characters[GetCharacterIndex(sld.quest.firstCity + "_PortMan")].id + "PortmansBook_Delivery";
 		rCharacter.quest.capitainsList.(sTemp).QBString2 = "PortmansBook_Delivery";
-		rCharacter.quest.capitainsList.(sTemp).QBQty = 5;
+		rCharacter.quest.capitainsList.(sTemp).QBQty = 5;	//номер квестовой записи об инфе от портмана
 		//перезаносим время в базу кэпов
 		sTemp = sld.id;
-		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 5;
+		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 2;
 		NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2722,7 +2733,7 @@ void SetRobberFromSeaToMap(string qName) //помещаем в море кэпа
 		sld.quest.targetCity = SelectAnyColony2(sld.city, sld.quest.cribCity); //определим колонию, куда отправится кэп
 		Log_TestInfo("Кэп-вор " + sld.id + " вышел из: " + sld.city + " и направился в: " + sld.quest.targetCity);
 		//на карту
-		iTemp = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даем с запасом
+		iTemp = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даем с запасом
 		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, iTemp);
 		//даем общий слух, что кэп ушёл в другой город
 		AddSimpleRumourEx(LinkRandPhrase("Капитан " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Acc")) + " '" + sld.Ship.name + "', которого зовут " + GetFullName(sld) + ", опять ушёл в море. По слухам, он двинулся в " + XI_ConvertString("Colony"+sld.quest.targetCity+"Acc") + ".",
@@ -2734,14 +2745,12 @@ void SetRobberFromSeaToMap(string qName) //помещаем в море кэпа
 		rCharacter = &characters[GetCharacterIndex(sld.City + "_PortMan")];
 		rCharacter.quest.capitainsList.(sTemp) = sld.quest.targetCity; //куда отправился
 		rCharacter.quest.capitainsList.(sTemp).date = GetDateString(); //запишем дату, когда отправился
-		//ВНИМАНИЕ. в квестбук должна заносится типовая строка по примеру   PortmansBook_Delivery    #TEXT   5
-		//в список портмана заносим тайтл, заголовок и номер строки из quest_text.txt
 		rCharacter.quest.capitainsList.(sTemp).QBString1 = characters[GetCharacterIndex(sld.quest.cribCity + "_PortMan")].id + "Portmans_SeekShip";
 		rCharacter.quest.capitainsList.(sTemp).QBString2 = "Portmans_SeekShip";
-		rCharacter.quest.capitainsList.(sTemp).QBQty = 2;
+		rCharacter.quest.capitainsList.(sTemp).QBQty = 2;	//номер квестовой записи об инфе от портмана
 		//перезаносим время в базу кэпов
 		sTemp = sld.id;
-		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 5;
+		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 2;
 		NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2980,7 +2989,7 @@ void CitizCapFromSeaToMap(string qName) //помещаем на карту кэ�
 		sld.quest.targetCity = SelectAnyColony2(sld.city, sld.quest.cribCity); //определим колонию, куда отправится кэп
 		Log_TestInfo("Искомый кэп " + sld.id + " вышел из: " + sld.city + " и направился в: " + sld.quest.targetCity);
 		//на карту
-		iTemp = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даем с запасом
+		iTemp = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даем с запасом
 		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, iTemp);
 		//даем общий слух, что кэп ушёл в другой город
 		AddSimpleRumourEx(LinkRandPhrase("Капитан " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Acc")) + " '" + sld.Ship.name + "', которого зовут " + GetFullName(sld) + ", опять ушёл в море. По слухам, он двинулся в " + XI_ConvertString("Colony"+sld.quest.targetCity+"Acc") + ".",
@@ -2992,14 +3001,12 @@ void CitizCapFromSeaToMap(string qName) //помещаем на карту кэ�
 		rCharacter = &characters[GetCharacterIndex(sld.City + "_PortMan")];
 		rCharacter.quest.capitainsList.(sTemp) = sld.quest.targetCity; //куда отправился
 		rCharacter.quest.capitainsList.(sTemp).date = GetDateString(); //запишем дату, когда отправился
-		//ВНИМАНИЕ. в квестбук должна заносится типовая строка по примеру   PortmansBook_Delivery    #TEXT   5
-		//в список портмана заносим тайтл, заголовок и номер строки из quest_text.txt
 		rCharacter.quest.capitainsList.(sTemp).QBString1 = sld.quest.cribCity + "SCQ_" + characters[GetCharacterIndex("QuestCitiz_"+sld.quest.cribCity)].quest.SeekCap;
 		rCharacter.quest.capitainsList.(sTemp).QBString2 = "SCQ_" + characters[GetCharacterIndex("QuestCitiz_"+sld.quest.cribCity)].quest.SeekCap;
 		rCharacter.quest.capitainsList.(sTemp).QBQty = 2;
 		//меняем сроки проверки по Id кэпа в базе нпс-кэпов
 		sTemp = sld.id;
-		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 5;
+		NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 2;
 		NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
 		NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -3049,11 +3056,11 @@ void SetMushketFromSeaToMap(string qName)
 	//выбор типа кораблика на карте
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Бриг 'Стрела'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даем с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//меняем сроки проверки по Id кэпа в базе нпс-кэпов
 	sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -3081,11 +3088,11 @@ void SetDanielleFromSeaToMap(string qName)
 	//выбор типа кораблика на карте
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "Галеон 'Королева'";
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+5; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даем с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//меняем сроки проверки по Id кэпа в базе нпс-кэпов
 	sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -3113,11 +3120,11 @@ void SetBlackBeardFromSeaToMap(string qName)
 	sld.mapEnc.worldMapShip = "Tich_MKA";
 	sld.mapEnc.Name = "Фрегат 'Месть Королевы Анны'";
 
-	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city))+3; //дней доехать даем с запасом
+	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sld.quest.targetCity), GetArealByCityName(sld.city)) + 1; //дней доехать даем с запасом
 	Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, daysQty);
 	//меняем сроки проверки по Id кэпа в базе нпс-кэпов
 	sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 3;
+	NullCharacter.capitainBase.(sTemp).checkTime = daysQty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -4731,7 +4738,7 @@ void LSC_scriptInterception(string qName)
 		pchar.questTemp.LSC = "InterceptionLate";
 		AddQuestRecord("ISS_MainLine", "19");
 		AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","ла"));
-		AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","а"));
+		AddQuestUserData("ISS_MainLine", "sSex1", GetSexPhrase("","а"));
 	}
 }
 

@@ -789,6 +789,8 @@ void QuestActions()
 		{
 			pchar.questTemp.LSC = "InterceptionLate";
 			AddQuestRecord("ISS_MainLine", "19");
+			AddQuestUserData("ISS_MainLine", "sSex", GetSexPhrase("","ла"));
+			AddQuestUserData("ISS_MainLine", "sSex1", GetSexPhrase("","а"));
 		}
 	}
 	//************** линейка ГПК, завал первого каспера с помощь Армо *******************
@@ -957,35 +959,35 @@ void Cap_SetMapAgain(ref sld, aref arCapBase)
 		{
 			sld.quest.targetShore = SelectAnyColony(sld.cityShore);
 		}
-		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	case "citizen":
 		if (sld.city == sld.quest.targetCity)
 		{
 			sld.quest.targetCity = SelectAnyColony(sld.city);
 		}
-		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	case "robber":
 		if (sld.city == sld.quest.targetCity)
 		{
 			sld.quest.targetCity = SelectAnyColony(sld.city);
 		}
-		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.city, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	case "jornal":
 		if (sld.quest.baseShore == sld.quest.targetCity)
 		{
 			sld.quest.targetCity = SelectAnyColony(sld.quest.baseShore);
 		}
-		Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.quest.baseShore, sld.quest.targetCity, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	case "Danielle":
 		if (sld.cityShore == sld.quest.targetCity)
 		{
 			sld.quest.targetCity = SelectAnyColony(sld.cityShore);
 		}
-		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	case "BlackBeard":
 		if (sld.cityShore == sld.quest.targetCity)
@@ -993,12 +995,12 @@ void Cap_SetMapAgain(ref sld, aref arCapBase)
 			sld.quest.targetCity = GetRandomPirateCity();
 			sld.quest.targetShore = GetIslandRandomShoreId(GetArealByCityName(sld.quest.targetCity));
 		}
-		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-5);
+		Map_CreateTrader(sld.cityShore, sld.quest.targetShore, sld.id, sti(arCapBase.checkTime)-2);
 		break
 	}
 	//меняем сроки проверки по Id кэпа в базе нпс-кэпов
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = iTemp + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = 2;//тут была неопознанная переменная +iTemp... потенциальный баг, если в ней мусор?
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -1838,7 +1840,7 @@ string Sharp_choiceAction()
 		sld.mapEnc.worldMapShip = "quest_ship";
 		sld.mapEnc.Name = "бриг 'Шарпоносец'";
 		string sColony= SelectAnyColony(sCity); //колония, откуда плывёт Шарп
-		int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City))+3; //дней доехать даем с запасом
+		int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(sColony), GetArealByCityName(pchar.questTemp.Sharp.City)) + 1; //дней доехать даем с запасом
 		Map_CreateTrader(sColony, pchar.questTemp.Sharp.City, sld.id, daysQty);
 	}
 	else
@@ -2268,7 +2270,7 @@ void SetCapitainFromSeaToCity(string sChar)
 	Group_SetTaskNone(sGroup);*/
 
 	//таймер через сколько опять выйти в море
-	int Qty = rand(4)+3;
+	int Qty = rand(2)+2;
 	string name = "Timer_" + sld.id;
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2278,7 +2280,7 @@ void SetCapitainFromSeaToCity(string sChar)
 	pchar.quest.(name).CapId = sld.id; //в прерывании запомним Id кэпа
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2324,7 +2326,7 @@ void SetRobberFromMapToSea(string sChar)
 	Group_SetTaskNone(sGroup);
 
 	//таймер через сколько опять выйти на карту
-	int Qty = rand(5)+4;
+	int Qty = rand(2)+2;
 	string name = "SecondTimer_" + sld.id;
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2334,7 +2336,7 @@ void SetRobberFromMapToSea(string sChar)
 	pchar.quest.(name).CapId = sld.id; //в прерывании запомним Id кэпа
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2402,7 +2404,7 @@ void CitizCapFromMapToCity(string sChar)
 			"Если вы хотите пообщаться с капитаном " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(sld.Ship.Type)].BaseName + "Acc")) + " '" + sld.Ship.name + "', то поищите его корабль в нашем порту. " + GetFullName(sld) + " вроде бы его зовут..."), sld.City, Qty, 1, "none");
 	}
 	//таймер через сколько опять выйти на карту
-	int Qty = rand(7)+5; //через сколько дней выйдем на карту
+	int Qty = rand(2)+2; //через сколько дней выйдем на карту
 	string name = "SecondTimer_" + sld.id;
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2412,7 +2414,7 @@ void CitizCapFromMapToCity(string sChar)
 	pchar.quest.(name).CapId = sld.id; //в прерывании запомним Id кэпа
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2454,7 +2456,7 @@ void SetMushketFromMapToSea()
 	Group_SetAddress(sGroup, colonies[iColony].island, "quest_ships", "Quest_ship_"+(rand(2)+5));
 	Group_SetTaskNone(sGroup);
 	//таймер через сколько опять выйти на карту
-	int Qty = rand(2)+3;
+	int Qty = rand(2)+2;
 	string name = "MushketTimer";
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2463,7 +2465,7 @@ void SetMushketFromMapToSea()
     PChar.quest.(name).function					= "SetMushketFromSeaToMap";
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2484,7 +2486,7 @@ void SetDanielleFromMapToSea()
 	Group_SetAddress(sGroup, colonies[iColony].island, "quest_ships", "Quest_ship_"+(rand(2)+3));
 	Group_SetTaskNone(sGroup);
 	//таймер через сколько опять выйти на карту
-	int Qty = rand(5)+7;
+	int Qty = rand(2)+2;
 	string name = "DanielleTimer";
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2493,7 +2495,7 @@ void SetDanielleFromMapToSea()
     PChar.quest.(name).function					= "SetDanielleFromSeaToMap";
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 5;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
@@ -2513,7 +2515,7 @@ void SetBlackBeardFromMapToSea()
 	Group_SetAddress(sGroup, colonies[iColony].island, "quest_ships", "Quest_ship_"+(rand(2)+3));
 	Group_SetTaskNone(sGroup);
 	//таймер через сколько опять выйти на карту
-	int Qty = rand(5)+5;
+	int Qty = rand(2)+2;
 	string name = "BlackBeardTimer";
 	PChar.quest.(name).win_condition.l1            = "Timer";
     PChar.quest.(name).win_condition.l1.date.day   = GetAddingDataDay(0, 0, Qty);
@@ -2522,7 +2524,7 @@ void SetBlackBeardFromMapToSea()
     PChar.quest.(name).function					= "SetBlackBeardFromSeaToMap";
 	//обновим дату в базе для контроля кэпов на суше
 	string sTemp = sld.id;
-	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 3;
+	NullCharacter.capitainBase.(sTemp).checkTime = Qty + 2;
     NullCharacter.capitainBase.(sTemp).checkTime.control_day = GetDataDay();
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();

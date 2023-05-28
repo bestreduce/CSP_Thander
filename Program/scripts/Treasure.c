@@ -1169,6 +1169,7 @@ void Survive_In_Sea_Go2Land()
 	if (sti(PChar.GenQuest.GhostShip.KillMe) <= 1)
 	{
 		AddQuestRecord("GhostShipQuest", "Survive_1");
+		AddQuestUserData("GhostShipQuest", "sSex", GetSexPhrase("","а"));
 	}
 	else
 	{

@@ -53,7 +53,7 @@ void InitInterface(string iniName)
 	GameInterface.nodes.DAMAGE_SLIDE.value = makefloat(FloatToString(((bModDamage-3.0+2.67)/2.67),2));
     SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"DAMAGE_SLIDE", 0, stf(GameInterface.nodes.DAMAGE_SLIDE.value));
 
-	GameInterface.nodes.DEFENDERS_SLIDE.value = makefloat(MOD_DEFENDERS_RATE)/5.0;
+	GameInterface.nodes.DEFENDERS_SLIDE.value = makefloat(MOD_DEFENDERS_RATE)/3.0;
     SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"DEFENDERS_SLIDE", 0, stf(GameInterface.nodes.DEFENDERS_SLIDE.value));
 
 	startHeroType = sti(pchar.starttype);
@@ -1090,7 +1090,7 @@ void IDoExit(int exitCode, bool bCode)
 		bModDamage = makefloat(3.0 - 2.67 * (1.0 - stf(GameInterface.nodes.DAMAGE_SLIDE.value)));  // 0т 0 до 5
 		trace("bModDamage = " + bModDamage);
 		
-		MOD_DEFENDERS_RATE = makeint(5 - 5.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value)))
+		MOD_DEFENDERS_RATE = makeint(3 - 3.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value)))
 		trace("MOD_DEFENDERS_RATE = " + MOD_DEFENDERS_RATE);
 		
 		if (bAltBalance == false)
@@ -1596,7 +1596,7 @@ void TmpI_ShowDamageAmount()
 }
 void TmpI_ShowDefendersAmount()
 {
-    SetFormatedText("DEFENDERS_COUNT", "" + makeint(5 - 5.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value))));
+    SetFormatedText("DEFENDERS_COUNT", "" + makeint(3 - 3.0 * (1.0 - stf(GameInterface.nodes.DEFENDERS_SLIDE.value))));
 }
 
 void StopBlind_Hint()

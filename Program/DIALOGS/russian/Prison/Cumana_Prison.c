@@ -86,7 +86,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			pchar.questTemp.zpq = "begin";
-			pchar.questTemp.zpq.time = 20;
+			//pchar.questTemp.zpq.time = 20;//не вижу использования этого
 			AddQuestRecord("zpq", "1");
 			AddQuestUserData("zpq", "sSex", GetSexPhrase("","а"));
 			SaveCurrentQuestDateParam("pchar.questTemp.zpq");

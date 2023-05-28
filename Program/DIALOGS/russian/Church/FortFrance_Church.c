@@ -112,6 +112,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "А теперь, если простите меня, мне нужно идти.";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_Clermon_Final");
+			AddQuestRecord("PKM_Animists", "39");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			pchar.questTemp.PKM_Animists_OtetsKlermon = true;
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			{
+				CloseQuestHeader("PKM_Animists");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+			}
 		break;
 		
 		

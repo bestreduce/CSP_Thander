@@ -151,7 +151,7 @@ void OfficersReactionResult()
 			sld = GetCharacter(iPassenger);
 			if (sld.name == "Виспер" && !CheckAttribute(sld, "PGGWhisperQuestStart") && !CheckAttribute(pchar,"GiantEvilSkeleton"))
 			{
-				if (GetCharacterShipClass(PChar) <= 4 && pchar.rank >= 15)
+				if (GetCharacterShipClass(PChar) <= 4 && pchar.rank >= 20 && !CheckCharacterItem(PChar, "patent_spa"))
 				{
 					if (PlaceCharacter(sld, "goto", "random_must_be_near") != "")
 					{

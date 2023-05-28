@@ -335,45 +335,49 @@ int Fantom_CalcSkill(ref rMainCharacter, string sSkill, int iShipClass, int iSki
 	return iSkill;
 }
 
+void FixOverMaxCannons(ref _chr)
+{
+	ref rShip = GetRealShip(GetCharacterShipType(_chr));
+ 	int iCannonsType = sti(rShip.Cannon);
+	ref rCannon = GetCannonByType(iCannonsType);
+	int nCaliber = sti(rCannon.caliber);
+	if (nCaliber == 48) return;//не трогаем 48фт, это явно что-то квестовое, что и должно нарушить ограничения
+
+	if (nCaliber > sti(rShip.MaxCaliber))
+	{
+		string sCannonType;
+		if (nCaliber == 42 && rand(1)) sCannonType = "Culverine";//42 пушки рандомом 50/50 на пушки или кулеврины нужного калибра
+		else sCannonType = GetCannonType(iCannonsType);//кулеврины меняем на кулеврины, пушки на пушки
+		_chr.Ship.Cannons.Type = GetCannonByTypeAndCaliber(sCannonType, sti(rShip.MaxCaliber));
+	}
+}
+
 void Fantom_SetCannons(ref rFantom, string sFantomType)
 {
-	int iSClass = GetCharacterShipClass(rFantom);
 	ref rShip = GetRealShip(GetCharacterShipType(rFantom));
+	if (sti(rShip.Cannon) == CANNON_TYPE_NONECANNON)
+	{
+		rFantom.Ship.Cannons.Type = CANNON_TYPE_NONECANNON;
+		return;
+	}
 
- 	int iCannonsType = sti(rShip.Cannon);
-	string sCannonType = "cannon";
 	int iCaliber = sti(rShip.MaxCaliber);
-    // boal 03.02.2004 -->
     switch(iCaliber)
 	{
-        case 8:
-			iCaliber = 0;
-		break;
-		case 12:
-			iCaliber = 1;
-		break;
-		case 16:
-			iCaliber = 2;
-		break;
-		case 20:
-			iCaliber = 3;
-		break;
-		case 24:
-			iCaliber = 4;
-		break;
-		case 32:
-			iCaliber = 5;
-		break;
-		case 36:
-			iCaliber = 6;
-		break;
-		case 42:
-			iCaliber = 7;
-		break;
+		case 8: iCaliber = 0; break;
+		case 10: iCaliber = 1; break;
+		case 12: iCaliber = 2; break;
+		case 16: iCaliber = 3; break;
+		case 20: iCaliber = 4; break;
+		case 24: iCaliber = 5; break;
+		case 28: iCaliber = 6; break;
+		case 32: iCaliber = 7; break;
+		case 36: iCaliber = 8; break;
+		case 42: iCaliber = 9; break;
 	}
 	if (iCaliber > 0)
 	{
-		if (sFantomType == "trade" && iCaliber > 3) iCaliber = iCaliber - 1 - rand(1); // LEO: запомнить Lipsar поправил
+		if (sFantomType == "trade" && iCaliber > 3) iCaliber -= 1 + rand(iCaliber/4); //понижение калибра торговым
 	}
 	else
 	{
@@ -381,85 +385,37 @@ void Fantom_SetCannons(ref rFantom, string sFantomType)
 	}
 	switch(iCaliber)
 	{
-        case 0:
-			iCaliber = 8;
-		break;
-		case 1:
-			iCaliber = 12;
-		break;
-		case 2:
-			iCaliber = 16;
-		break;
-		case 3:
-			iCaliber = 20;
-		break;
-		case 4:
-			iCaliber = 24;
-		break;
-		case 5:
-			iCaliber = 32;
-		break;
-		case 6:
-			iCaliber = 36;
-		break;
-		case 7:
-			iCaliber = 42;
-		break;
+		case 0: iCaliber = 8; break;
+		case 1: iCaliber = 10; break;
+		case 2: iCaliber = 12; break;
+		case 3: iCaliber = 16; break;
+		case 4: iCaliber = 20; break;
+		case 5: iCaliber = 24; break;
+		case 6: iCaliber = 28; break;
+		case 7: iCaliber = 32; break;
+		case 8: iCaliber = 36; break;
+		case 9: iCaliber = 42; break;
 	}
-	if (iCaliber < 8)
-	{
-	   iCaliber = 8;
-	}
-    // boal 03.02.2004 <--
+	if (iCaliber < 8) iCaliber = 8;
 	if (iCaliber > sti(rShip.MaxCaliber)) { iCaliber=sti(rShip.MaxCaliber); }
 
+	string sCannonType = "cannon";
 	switch (sFantomType)
 	{
         case "trade":
-            // boal 20.01.2004 -->
-		    if (rand(1000) < 800)
-		    {
-			   sCannonType = "culverine";
-			}
-			else
-			{
-			   sCannonType = "cannon";
-			}
+		    if (rand(1000) < 800) {sCannonType = "culverine";} else {sCannonType = "cannon";}
 		break;
 
 		case "war":
-			if (rand(1000) < 200)
-		    {
-			   sCannonType = "culverine";
-			}
-			else
-			{
-			   sCannonType = "cannon";
-			}
-		    break;
+		    if (rand(1000) < 200) {sCannonType = "culverine";} else {sCannonType = "cannon";}
+	    break;
 
 		case "pirate":
-			if (rand(1000) < 400)
-		    {
-			   sCannonType = "culverine";
-			}
-			else
-			{
-			   sCannonType = "cannon";
-			}
-		    break;
-		    // boal 20.01.2004 <--
+		    if (rand(1000) < 400) {sCannonType = "culverine";} else {sCannonType = "cannon";}
+	    break;
 	}
+	if (iCaliber == 42) sCannonType = "cannon";
 
-	if (sti(rShip.Cannon) == CANNON_TYPE_NONECANNON)
-	{
-		rFantom.Ship.Cannons.Type = CANNON_TYPE_NONECANNON;
-		return;
-	}
-	if (iCaliber == 42)
-	{
-	    sCannonType = "cannon";
-	}
 	rFantom.Ship.Cannons.Type = GetCannonByTypeAndCaliber(sCannonType, iCaliber);
 }
 
