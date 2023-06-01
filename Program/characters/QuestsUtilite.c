@@ -823,9 +823,9 @@ int SetQuestCharacterRank()
 void FantomMakeCoolSailor(ref _Character, int _ShipType, string _ShipName, int _CannonsType, int _Sailing, int _Accuracy, int _Cannons)
 {
     _Character.Ship.Cannons.Type = _CannonsType;
-	_Character.skill.Sailing  = GetCoffDiff(_Sailing, SKILL_MAX);
-	_Character.skill.Accuracy = GetCoffDiff(_Accuracy, SKILL_MAX);
-	_Character.skill.Cannons  = GetCoffDiff(_Cannons, SKILL_MAX);
+	_Character.skill.Sailing  = GetCoffDiffSkill(_Sailing, SKILL_MAX);
+	_Character.skill.Accuracy = GetCoffDiffSkill(_Accuracy, SKILL_MAX);
+	_Character.skill.Cannons  = GetCoffDiffSkill(_Cannons, SKILL_MAX);
 	//_Character.skill.Grappling  = GetCoffDiff((_Cannons+_Accuracy)/2, SKILL_MAX); //zagolski. расчет абордажа и защиты
 	//_Character.skill.Defence  = GetCoffDiff((_Sailing+_Accuracy)/2, SKILL_MAX);
 
@@ -866,9 +866,9 @@ void FantomMakeCoolSailor(ref _Character, int _ShipType, string _ShipName, int _
 void FantomMakeCoolestSailor(ref _Character, int _ShipType, string _ShipName, int _CannonsType, int _Sailing, int _Accuracy, int _Cannons)
 {
     _Character.Ship.Cannons.Type = _CannonsType;
-	_Character.skill.Sailing  = GetCoffDiff(_Sailing, SKILL_MAX);
-	_Character.skill.Accuracy = GetCoffDiff(_Accuracy, SKILL_MAX);
-	_Character.skill.Cannons  = GetCoffDiff(_Cannons, SKILL_MAX);
+	_Character.skill.Sailing  = GetCoffDiffSkill(_Sailing, SKILL_MAX);
+	_Character.skill.Accuracy = GetCoffDiffSkill(_Accuracy, SKILL_MAX);
+	_Character.skill.Cannons  = GetCoffDiffSkill(_Cannons, SKILL_MAX);
 	//_Character.skill.Grappling  = GetCoffDiff((_Cannons+_Accuracy)/2, SKILL_MAX); //zagolski. расчет абордажа и защиты
 	//_Character.skill.Defence  = GetCoffDiff((_Sailing+_Accuracy)/2, SKILL_MAX);
 
@@ -909,11 +909,11 @@ void FantomMakeCoolestSailor(ref _Character, int _ShipType, string _ShipName, in
 void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol, string _Blade, string _Gun, float _AddHP)
 {
     _Character.rank = GetCoffDiff(_Rank, 1000);
-    _Character.skill.Fencing = GetCoffDiff(_Fencing, SKILL_MAX);
-    _Character.Skill.FencingLight  = GetCoffDiff(sti(_Character.skill.Fencing), SKILL_MAX);
-    _Character.Skill.FencingHeavy  = GetCoffDiff(sti(_Character.skill.Fencing), SKILL_MAX);
-    _Character.skill.Pistol = GetCoffDiff(_Pistol, SKILL_MAX);
-    _Character.skill.Fortune = GetCoffDiff(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
+    _Character.skill.Fencing = GetCoffDiffSkill(_Fencing, SKILL_MAX);
+    _Character.Skill.FencingLight  = GetCoffDiffSkill(sti(_Character.skill.Fencing), SKILL_MAX);
+    _Character.Skill.FencingHeavy  = GetCoffDiffSkill(sti(_Character.skill.Fencing), SKILL_MAX);
+    _Character.skill.Pistol = GetCoffDiffSkill(_Pistol, SKILL_MAX);
+    _Character.skill.Fortune = GetCoffDiffSkill(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
 	_Character.chr_ai.hp = stf(_Character.chr_ai.hp) + GetCoffDiff(_AddHP, 5000);
 	_Character.chr_ai.hp_max = stf(_Character.chr_ai.hp_max) + GetCoffDiff(_AddHP, 5000);
 	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
@@ -945,11 +945,11 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
 void FantomMakeCoolFighterWRankDepend(ref _Character, int _Rank, int _Fencing, int _Pistol, float _AddHP)
 {
     _Character.rank = GetCoffDiff(_Rank, 1000);
-    _Character.skill.Fencing = GetCoffDiff(_Fencing, SKILL_MAX);
-    _Character.Skill.FencingLight  = GetCoffDiff(sti(_Character.skill.Fencing), SKILL_MAX);
-    _Character.Skill.FencingHeavy  = GetCoffDiff(sti(_Character.skill.Fencing), SKILL_MAX);
-    _Character.skill.Pistol = GetCoffDiff(_Pistol, SKILL_MAX);
-    _Character.skill.Fortune = GetCoffDiff(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
+    _Character.skill.Fencing = GetCoffDiffSkill(_Fencing, SKILL_MAX);
+    _Character.Skill.FencingLight  = GetCoffDiffSkill(sti(_Character.skill.Fencing), SKILL_MAX);
+    _Character.Skill.FencingHeavy  = GetCoffDiffSkill(sti(_Character.skill.Fencing), SKILL_MAX);
+    _Character.skill.Pistol = GetCoffDiffSkill(_Pistol, SKILL_MAX);
+    _Character.skill.Fortune = GetCoffDiffSkill(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
 	_Character.chr_ai.hp = stf(_Character.chr_ai.hp) + GetCoffDiff(_AddHP, 5000);
 	_Character.chr_ai.hp_max = stf(_Character.chr_ai.hp_max) + GetCoffDiff(_AddHP, 5000);
 	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
@@ -1065,6 +1065,25 @@ int GetCoffDiff(float _num, int _maxRange)
 		case  8: _num *= 1.2;  break;
 		case  9: _num *= 1.3;  break;
 		case 10: _num *= 1.5;  break;
+	}
+	_num += 0.5;
+	if (_num > _maxRange) return _maxRange;
+	else return sti(_num);
+}
+int GetCoffDiffSkill(float _num, int _maxRange)
+{
+	switch (MOD_SKILL_ENEMY_RATE)
+	{
+		case  1: _num *= 0.8;  break;
+		case  2: _num *= 0.85; break;
+		case  3: _num *= 0.9; break;
+		case  4: _num *= 0.95;  break;
+		case  5: _num *= 1; break;
+		case  6: _num *= 1.05;    break;
+		case  7: _num *= 1.1;  break;
+		case  8: _num *= 1.15;  break;
+		case  9: _num *= 1.2;  break;
+		case 10: _num *= 1.25;  break;
 	}
 	_num += 0.5;
 	if (_num > _maxRange) return _maxRange;
