@@ -927,8 +927,8 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
 	_Blade = GetGeneratedItem(_Blade);
     GiveItem2Character(_Character, _Blade);
     EquipCharacterbyItem(_Character, _Blade);
-    TakeNItems(_Character,"potion1", rand(MOD_SKILL_ENEMY_RATE)+1);
-    TakeNItems(_Character,"potion2", rand(2)+1);
+    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
+    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
     TakeNItems(_Character,"Food1", rand(2)+2);
     if (_Gun != "")
 	{
@@ -964,8 +964,8 @@ void FantomMakeCoolFighterWRankDepend(ref _Character, int _Rank, int _Fencing, i
 	sword = GetGeneratedItem(sword);
     GiveItem2Character(_Character, sword);
     EquipCharacterbyItem(_Character, sword);
-    TakeNItems(_Character,"potion1", rand(MOD_SKILL_ENEMY_RATE)+1);
-    TakeNItems(_Character,"potion2", rand(2)+1);
+    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
+    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
     TakeNItems(_Character,"Food1", rand(2)+2);
 	string Gun = GiveRankGun(_Character);
     if (Gun != "")

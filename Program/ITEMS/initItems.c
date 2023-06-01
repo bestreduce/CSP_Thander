@@ -5300,6 +5300,7 @@ int InitItems()
 	itm.potion.pic = 21;
 	itm.potion.tex = 0;
 	itm.potion.health = 40.0;
+	itm.potion.health.speed = 3;
 	itm.minlevel = 0;
 	itm.rare = 0.3;
 	itm.SortIndex = 2;
@@ -5330,7 +5331,7 @@ int InitItems()
 	itm.potion.pic = 22;
 	itm.potion.tex = 0;
 	itm.potion.health = 150.0;
-	itm.potion.health.speed = 8;
+	itm.potion.health.speed = 5;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
 	itm.SortIndex = 2;
@@ -5397,7 +5398,7 @@ int InitItems()
 	itm.potion.pic = 24;
 	itm.potion.tex = 0;
 	itm.potion.health = 130.0;
-	itm.potion.health.speed = 8;
+	itm.potion.health.speed = 5;
 	itm.potion.antidote = true;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
@@ -5439,6 +5440,7 @@ int InitItems()
 	itm.potion.pic = 25;
 	itm.potion.tex = 0;
 	itm.potion.health = 50.0;
+	itm.potion.health.speed = 4;
 	itm.potion.antidote = true;
 	itm.potion.drunk = 51;
 	itm.potion.drunk.time = 5600;
@@ -5469,7 +5471,7 @@ int InitItems()
 	itm.potion.pic = 26;
 	itm.potion.tex = 0;
 	itm.potion.health = 175.0;
-	itm.potion.health.speed = 7;
+	itm.potion.health.speed = 4;
 	itm.potion.drunk = 15;
 	itm.potion.drunk.time = 8000;
 	itm.minlevel = 1;
@@ -5507,6 +5509,7 @@ int InitItems()
 	itm.potion.pic = 27;
 	itm.potion.tex = 0;
 	itm.potion.health = 25.0;
+	itm.potion.health.speed = 3;
 	itm.minlevel = 1;
 	itm.rare = 0.2;
 	itm.SortIndex = 2;
