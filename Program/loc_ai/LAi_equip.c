@@ -64,12 +64,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 
 		GiveItem2Character(chr, blade);
 		EquipCharacterByItem(chr, blade);
-		// boal -->
-		if(rand(1500) < MOD_SKILL_ENEMY_RATE*100)
-        {
-		   TakeNItems(chr, "potion1", rand(makeint(rank/(11-MOD_SKILL_ENEMY_RATE) +0.5))); // даю меньше
-		}
-		// boal <--
 	}
     else
     {

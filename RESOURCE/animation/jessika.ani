@@ -11,134 +11,103 @@ data = "Turn speed", "6.3"
 ;SLASH-FORCE
 	[attack_force_1]
 	type = normal
-	start_time = 36
-	end_time = 65
-	
-	speed = 1.8
-	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2.3"	; m
-	data = "Ang", "40"	; grd
-	
-	event = "Attack", 49, normal			;slash
-	event = "SndAlliace_W_attack_slash1", 36, normal
-	event = "Resact", 51, normal
-		
-	[attack_force_2]
-	type = normal
-	start_time = 36
-	end_time = 65
-	
-	speed = 1.8
-	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2.3"	; m
-	data = "Ang", "40"	; grd
-		
-	event = "Attack", 49, normal			;slash
-	event = "SndAlliace_W_attack_slash1", 36, normal
-	event = "Resact", 51, normal
-
-	[attack_force_3]
-	type = normal
-	start_time = 66
-	end_time = 96
-	
-	speed = 1.8
-	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2.3"	; m
-	data = "Ang", "40"	; grd
-	
-	event = "Attack", 78, normal			;slash
-	event = "SndAlliace_W_attack_slash2", 66, normal
-	event = "Resact", 81, normal
-
-	[attack_force_4]
-	type = normal
-	start_time = 66
-	end_time = 96
-	
-	speed = 1.8
-	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2.3"	; m
-	data = "Ang", "40"	; grd
-		
-	event = "Attack", 78, normal			;slash
-	event = "SndAlliace_W_attack_slash2", 66, normal
-	event = "Resact", 81, normal
-
-;THRUSTS-FAST
-	[attack_fast_1] 
-	type = normal
 	start_time = 2
 	end_time = 18
 	
-	speed = 1.5
+	speed = 1.17
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2"	; m
+	data = "Dist", "2.3"	; m
 	data = "Ang", "20"	; grd
 		
 	event = "Attack", 10, normal			;slash
 	event = "SndAlliace_W_attack_thrust1", 2, normal
-	event = "Resact", 10, normal
+	event = "Resact", 17, normal
+		
+	[attack_force_2]
+	type = normal
+	start_time = 17
+	end_time = 35
+	speed = 1.022
+	loop = false
+	data = "Blend time", "0.2"		; sec
+	data = "Dist", "2.3"	; m
+	data = "Ang", "20"	; grd
+	event = "Attack", 24, normal			;slash
+	event = "SndAlliace_W_attack_slash2", 19, normal
+	event = "Resact", 34, normal
+
+	[attack_force_3]
+	type = normal
+	start_time = 2
+	end_time = 18
+	speed = 1.17
+	loop = false
+	data = "Blend time", "0.2"		; sec
+	data = "Dist", "2.3"	; m
+	data = "Ang", "20"	; grd
+	event = "Attack", 10, normal			;slash
+	event = "SndAlliace_W_attack_slash1", 2, normal
+	event = "Resact", 17, normal
+
+	[attack_force_4]
+	type = normal
+	start_time = 17
+	end_time = 35
+	speed = 1.03
+	loop = false
+	data = "Blend time", "0.2"		; sec
+	data = "Dist", "2.3"	; m
+	data = "Ang", "20"	; grd
+	event = "Attack", 24, normal			;slash
+	event = "SndAlliace_W_attack_slash2", 19, normal
+	event = "Resact", 34, normal
+
+;THRUSTS-FAST
+	[attack_fast_1] 	
+	type = normal
+	start_time = 36
+	end_time = 65
+	
+	speed = 2.3
+	loop = false
+	
+	data = "Blend time", "0.2"		; sec
+	data = "Dist", "2"	; m
+	data = "Ang", "40"	; grd
+	
+	event = "Attack", 49, normal			;slash
+	event = "SndAlliace_W_attack_slash1", 36, normal
+	event = "Resact", 64, normal
 
 	
 	[attack_fast_2] 
 	type = normal
-	start_time = 2
-	end_time = 18
-	
-	speed = 1.5
+	start_time = 36
+	end_time = 65
+	speed = 2.3
 	loop = false
-	
 	data = "Blend time", "0.2"		; sec
 	data = "Dist", "2"	; m
-	data = "Ang", "20"	; grd
-		
-	event = "Attack", 10, normal			;slash
-	event = "SndAlliace_W_attack_thrust1", 2, normal
-	event = "Resact", 10, normal
+	data = "Ang", "40"	; grd
+	event = "Attack", 49, normal			;slash
+	event = "SndAlliace_W_attack_thrust1", 36, normal
+	event = "Resact", 64, normal
 		
 	[attack_fast_3] 
 	type = normal
-	start_time = 19
-	end_time = 35
-	
-	speed = 1.5
+	start_time = 66
+	end_time = 96
+	speed = 2.3
 	loop = false
-	
 	data = "Blend time", "0.2"		; sec
 	data = "Dist", "2"	; m
-	data = "Ang", "20"	; grd
-		
-	event = "Attack", 24, normal			;slash
-	event = "SndAlliace_W_attack_thrust2", 19, normal
-	event = "Resact", 27, normal
+	data = "Ang", "40"	; grd
+	event = "Attack", 78, normal			;slash
+	event = "SndAlliace_W_attack_thrust2", 66, normal
+	event = "Resact", 95, normal
 
-	[attack_fast_4] 
-	type = normal
-	start_time = 19
-	end_time = 35
-	
-	speed = 1.5
-	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	data = "Dist", "2"	; m
-	data = "Ang", "20"	; grd
-		
-	event = "Attack", 24, normal			;slash
-	event = "SndAlliace_W_attack_thrust2", 19, normal
-	event = "Resact", 27, normal
-	
 ;ROUNDHOUSE 
 	[attack_round_1]
 	type = normal
@@ -163,16 +132,16 @@ data = "Turn speed", "6.3"
 	start_time = 170
 	end_time = 206
 	
-	speed = 1.25
+	speed = 1.26
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
 	data = "Dist", "2.4"	; m
 	data = "Ang", "25"	; grd
 		
-	event = "Attack", 186, normal			;slash
+	event = "Attack", 187, normal			;slash
 	event = "SndAlliace_W_attack_break", 180, normal
-	event = "Resact", 190, normal
+	event = "Resact", 204, normal
 
 ;PARRY
 	[parry_1]
@@ -180,14 +149,14 @@ data = "Turn speed", "6.3"
 	start_time = 207
 	end_time = 234
 	
-	speed = 2.3
+	speed = 2.25
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
 	
-	event = "Parry start", 212, normal
-	event = "Parry end", 223, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 	
 	[parry_2]
@@ -195,14 +164,14 @@ data = "Turn speed", "6.3"
 	start_time = 207
 	end_time = 234
 	
-	speed = 2.3
+	speed = 2.23
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
 	
-	event = "Parry start", 212, normal
-	event = "Parry end", 223, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 	
 	[parry_3]
@@ -210,14 +179,14 @@ data = "Turn speed", "6.3"
 	start_time = 207
 	end_time = 234
 	
-	speed = 2.3
+	speed = 2.23
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
 	
-	event = "Parry start", 212, normal
-	event = "Parry end", 223, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 	
 	[parry_4]
@@ -225,14 +194,14 @@ data = "Turn speed", "6.3"
 	start_time = 207
 	end_time = 234
 	
-	speed = 2.3
+	speed = 2.2
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
 	
-	event = "Parry start", 212, normal
-	event = "Parry end", 223, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 	
 ;FEINTS
@@ -247,9 +216,9 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 
-	event = "SndAlliace_W_attack_feint", 207, normal
+	event = "SndAlliace_W_attack_parry", 207, normal
 	event = "Resact", 232, normal
 	
 	[attack_feint_2]
@@ -263,9 +232,9 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 
-	event = "SndAlliace_W_attack_feint", 207, normal
+	event = "SndAlliace_W_attack_parry", 207, normal
 	event = "Resact", 232, normal
 		
 	[attack_feint_3]
@@ -279,9 +248,9 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 
-	event = "SndAlliace_W_attack_feint", 207, normal
+	event = "SndAlliace_W_attack_parry", 207, normal
 	event = "Resact", 232, normal
 		
 	[attack_feint_4]
@@ -295,9 +264,9 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 
-	event = "SndAlliace_W_attack_feint", 207, normal
+	event = "SndAlliace_W_attack_parry", 207, normal
 	event = "Resact", 232, normal
 		
 	
@@ -305,57 +274,53 @@ data = "Turn speed", "6.3"
 
 	[attack_feintc_1]
 	type = normal
-	start_time = 279
+	start_time = 272
 	end_time = 304
-	
-	speed = 1.5
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.2"		; sec
-	event = "Attack", 285, normal			;slash
+	data = "Blend time", "0.29"		; sec
+	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
 	
 	[attack_feintc_2]
 	type = normal
-	start_time = 279
+	start_time = 272
 	end_time = 304
-	
-	speed = 1.5
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.2"		; sec
-	event = "Attack", 285, normal			;slash
+	data = "Blend time", "0.29"		; sec
+	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
 	
 	[attack_feintc_3]
 	type = normal
-	start_time = 279
+	start_time = 272
 	end_time = 304
-	
-	speed = 1.5
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.2"		; sec
-	event = "Attack", 285, normal			;slash
+	data = "Blend time", "0.29"		; sec
+	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
 		
 	[attack_feintc_4]
 	type = normal
-	start_time = 279
+	start_time = 272
 	end_time = 304
-	
-	speed = 1.5
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.2"		; sec
-	event = "Attack", 285, normal			;slash
+	data = "Blend time", "0.29"		; sec
+	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
 	
@@ -363,49 +328,43 @@ data = "Turn speed", "6.3"
 	[block]
 	type = normal
 	start_time = 305
-	end_time = 306
-	
-	speed = 3.
+	end_time = 350
+	speed = 0.15
 	loop = true
-	
-	data = "Blend time", "0.2"		; sec
-	event = "Resact", 306, normal	
+	data = "Blend time", "0.1"		; sec
+	;event = "Resact", 306, normal	
+
 
 	[block_axe]
 	type = normal
 	start_time = 305
-	end_time = 306
-	
-	speed = 3.
+	end_time = 350
+	speed = 0.15
 	loop = true
-	
-	data = "Blend time", "0.2"		; sec
-	event = "Resact", 306, normal	
+	data = "Blend time", "0.1"		; sec
+	;event = "Resact", 306, normal	
+
 
 
 ;ĞÅÀÊÖÈ?ÍÀ ÏÎÏÀÄÀÍÈ??ÁËÎÊ
 	[block_hit]
 	type = normal
 	start_time = 351
-	end_time = 368
-	
-	speed = 3.0
+	end_time = 367
+	speed = 1.5
 	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	event = "SndAlliace_BlockHit", 351, normal	
+	data = "Blend time", "0.13"		; sec
+	event = "SndAlliace_BlockHit", 351, normal
 	
 ;ĞÅÀÊÖÈ?ÍÀ ÏĞÎÁÈÂÀÍÈÅ ÁËÎÊ?
 	[block_break]
 	type = normal
-	start_time = 661
-	end_time = 693
-	
-	speed = 3.0
+	start_time = 351
+	end_time = 367
+	speed = 1.5
 	loop = false
-	
-	data = "Blend time", "0.2"		; sec
-	event = "SndAlliace_W_blockbreak", 661, normal	
+	data = "Blend time", "0.13"		; sec
+	event = "SndAlliace_BlockHit", 351, normal
 
 
 ;ĞÅÀÊÖÈ?
@@ -415,7 +374,7 @@ data = "Turn speed", "6.3"
 	start_time = 476
 	end_time = 492
 	
-	speed = 3.0
+	speed = 3.05
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -426,7 +385,7 @@ data = "Turn speed", "6.3"
 	start_time = 476
 	end_time = 492
 	
-	speed = 3.0
+	speed = 3.05
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -437,7 +396,7 @@ data = "Turn speed", "6.3"
 	start_time = 493
 	end_time = 512
 	
-	speed = 3.0
+	speed = 3.62
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -448,7 +407,7 @@ data = "Turn speed", "6.3"
 	start_time = 493
 	end_time = 512
 	
-	speed = 3.0
+	speed = 3.62
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -459,7 +418,7 @@ data = "Turn speed", "6.3"
 	start_time = 645
 	end_time = 660
 	
-	speed = 1.6
+	speed = 1.56
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -481,10 +440,10 @@ data = "Turn speed", "6.3"
 	start_time = 608
 	end_time = 644
 	
-	speed = 1.5
+	speed = 2.59
 	loop = false
 	
-	data = "Blend time", "0.2"		; sec
+	data = "Blend time", "0.25"		; sec
 	event = "SndAlliace_W_parryhit", 608, normal			
 
 
@@ -493,7 +452,7 @@ data = "Turn speed", "6.3"
 	start_time = 571
 	end_time = 607
 	
-	speed = 1.5
+	speed = 3.1
 	loop = false
 	
 	data = "Blend time", "0.2"		; sec
@@ -503,8 +462,8 @@ data = "Turn speed", "6.3"
 ;ÂÛÑÒĞÅ?
 
 	[Shot]
-speed = 2.5
-type = normal
+	speed = 2.4
+	type = normal
 	start_time = 693
 	end_time = 755
 	loop = false
@@ -608,18 +567,20 @@ type = normal
 	
 
 ; ÄÅÉÑÒÂÈß ?ÁÎÅÂÎÉ ÑÒÎÉÊÅ (IDLES)
-
+;ğóêè íå òàì -> äåğãàåòñÿ
+;start_time = 424
+;end_time = 475
 [fight stand_1]
-loop = true
-type = normal
-	start_time = 424
-	end_time = 475
+	loop = true
+	type = normal
+	start_time = 1109
+	end_time = 1156
 	
 	speed = 1.
 	
 	data = "Blend time", "0.2"		; sec
 	
-	data = "Probability", "1.0"
+	data = "Probability", "0.1"
 
 [fight stand_2]
 loop = true
@@ -713,7 +674,7 @@ type = normal
 
 ;Õîäüáà âïåğ¸ä ?êëèíêî??ğóêå
 	[fight walk]
-speed = 2.2
+speed = 2.45
 loop = true
 type = normal
 	start_time = 368
@@ -747,7 +708,7 @@ loop = true
 
 ;Áå?âïåğ¸ä ?êëèíêî??ğóêå
 	[fight run]
-	speed = 2.0
+	speed = 1.9
 	loop = true
 	type = normal
 	start_time = 403
@@ -785,40 +746,41 @@ loop = true
 	end_time = 780
 	
 	loop = false
-	speed = 2.
-	event = "Recoil start", 762, normal
-	event = "Recoil end", 775, normal
-	data = "Blend time", "0.02"	; sec
-	event = "SndAlliace_W_recoil", 757, normal
+	speed = 2.1
+	event = "Recoil start", 761, normal
+	event = "Recoil end", 776, normal
+	data = "Blend time", "0.35"	; sec
+	data = "Walk speed", "2.322"		; m/sec
 
 ;Ñìåùåíèå âëåâ?(A) 	
 [straif_weapon_left]
-	start_time = 2550
-	end_time = 2570
+	start_time = 2533
+	end_time = 2549
 	data = "Blend time", "0.1"		; sec
-	event = "Recoil start", 2554, normal
-	event = "LStep", 2556, normal
-	event = "RStep", 2565, normal
-	event = "Recoil end", 2566, normal
-	speed = 1.3
+	event = "Recoil start", 2536, normal
+	event = "LStep", 2541, normal
+	event = "RStep", 2547, normal
+	event = "Recoil end", 2547, normal
+	speed = 1.66
 	loop = false
 	type = normal
-	event = "SndAlliace_recoil", 2559, normal
+	event = "SndAlliace_recoil", 2540, normal
+	data = "Walk speed", "2.5"		; m/sec
 	
 ;Ñìåùåíèå âïğàâî (D) 
 [straif_weapon_right]
-	start_time = 2570
-	end_time = 2588
+	start_time = 2551
+	end_time = 2568
 	data = "Blend time", "0.1"		; sec
-	event = "Recoil start", 2573, normal
-	event = "LStep", 2585, normal
-	event = "RStep", 2576, normal
-	event = "Recoil end", 2585, normal
-	speed = 1.3
+	event = "Recoil start", 2554, normal
+	event = "LStep", 2559, normal
+	event = "RStep", 2563, normal
+	event = "Recoil end", 2566, normal
+	speed = 1.66
 	loop = false
-	type =reverse
-	event = "SndAlliace_recoil", 2580, normal
-
+	type = normal
+	event = "SndAlliace_recoil", 2559, normal
+	data = "Walk speed", "2.5"		; m/sec
 
 ;===================================================================================
 ; ÌÈĞÍÛÅ ÀÍÈÌÀÖÈÈ

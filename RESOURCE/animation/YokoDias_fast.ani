@@ -43,7 +43,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "40"	; grd
 	event = "Attack", 49, normal			;slash
 	event = "SndAlliace_W_attack_thrust1", 36, normal
-	event = "Resact", 51, normal
+	event = "Resact", 64, normal
 
 	
 [attack_fast_2] 
@@ -57,7 +57,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "40"	; grd
 	event = "Attack", 78, normal			;slash
 	event = "SndAlliace_W_attack_thrust2", 66, normal
-	event = "Resact", 81, normal
+	event = "Resact", 95, normal
 		
 [attack_fast_3] 
 	type = normal
@@ -70,7 +70,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "40"	; grd
 	event = "Attack", 78, normal			;slash
 	event = "SndAlliace_W_attack_thrust2", 66, normal
-	event = "Resact", 81, normal
+	event = "Resact", 95, normal
 
 ; Выпад  (Right_Mouse) -----------------------------------------------------------------------------
 [attack_force_1]
@@ -84,7 +84,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "10"	; grd
 	event = "Attack", 10, normal	
 	event = "SndAlliace_W_attack_slash1", 2, normal
-	event = "Resact", 10, normal
+	event = "Resact", 17, normal
 
 [attack_force_2]
 	type = normal
@@ -97,7 +97,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "10"	; grd
 	event = "Attack", 10, normal			;slash
 	event = "SndAlliace_W_attack_slash1", 2, normal
-	event = "Resact", 10, normal
+	event = "Resact", 17, normal
 
 [attack_force_3]
 	type = normal
@@ -110,7 +110,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "10"	; grd
 	event = "Attack", 24, normal			;slash
 	event = "SndAlliace_W_attack_slash2", 19, normal
-	event = "Resact", 27, normal
+	event = "Resact", 34, normal
 
 [attack_force_4]
 	type = normal
@@ -123,7 +123,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "10"	; grd
 	event = "Attack", 24, normal			;slash
 	event = "SndAlliace_W_attack_slash2", 19, normal
-	event = "Resact", 27, normal
+	event = "Resact", 34, normal
 
 ;ROUNDHOUSE - Круговой удар (Shift+Left_Mouse) ------------------------------------------------------------- 
 [attack_round_1]
@@ -152,7 +152,7 @@ data = "Turn speed", "6.3"
 	data = "Ang", "25"	; grd
 	event = "Attack", 187, normal			;slash
 	event = "SndAlliace_W_attack_break", 180, normal
-	event = "Resact", 190, normal
+	event = "Resact", 204, normal
 
 
 ;PARRY - Парирование удара (Shift+Right_Mouse) ---------------------------------------------------------------- 
@@ -163,9 +163,9 @@ data = "Turn speed", "6.3"
 	speed = 2.25
 	loop = false
 	data = "Blend time", "0.2"		; sec
-	event = "Parry start", 212, normal
-	event = "Parry end", 227, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 
 [parry_2]
@@ -175,9 +175,9 @@ data = "Turn speed", "6.3"
 	speed = 2.23
 	loop = false
 	data = "Blend time", "0.2"		; sec
-	event = "Parry start", 212, normal
-	event = "Parry end", 227, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 
 [parry_3]
@@ -187,9 +187,9 @@ data = "Turn speed", "6.3"
 	speed = 2.23
 	loop = false
 	data = "Blend time", "0.2"		; sec
-	event = "Parry start", 212, normal
-	event = "Parry end", 227, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 
 [parry_4]
@@ -199,9 +199,9 @@ data = "Turn speed", "6.3"
 	speed = 2.2
 	loop = false
 	data = "Blend time", "0.2"		; sec
-	event = "Parry start", 212, normal
-	event = "Parry end", 227, normal
-	event = "Resact", 220, normal
+	event = "Parry start", 211, normal
+	event = "Parry end", 228, normal
+	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 
 ;FEINTS - Финты (Shift+Central_Mouse) ---------------------------------------------------------------------------------------
@@ -209,11 +209,11 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 207
 	end_time = 234
-	speed = 1.95
+	speed = 2.2
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
 	
@@ -221,49 +221,49 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 207
 	end_time = 234
-	speed = 1.95
+	speed = 2.2
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 	event = "Resact", 232, normal
-	event = "SndAlliace_W_attack_parry", 207, normal	
-
+	event = "SndAlliace_W_attack_parry", 207, normal
+	
 [attack_feint_3]
 	type = normal
 	start_time = 207
 	end_time = 234
-	speed = 1.95
+	speed = 2.2
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 	event = "Resact", 232, normal
-	event = "SndAlliace_W_attack_parry", 207, normal	
-		
+	event = "SndAlliace_W_attack_parry", 207, normal
+	
 [attack_feint_4]
 	type = normal
 	start_time = 207
 	end_time = 234
-	speed = 1.95
+	speed = 2.2
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "Feint start", 212, normal
-	event = "Feint end", 228, normal
+	event = "Feint end", 229, normal
 	event = "Resact", 232, normal
 	event = "SndAlliace_W_attack_parry", 207, normal
-		
+	
 	
 ;FEINT SUCCESSFUL - Атака при удачном финте ----------------------------------------------------------------
 [attack_feintc_1]
 	type = normal
 	start_time = 272
 	end_time = 304
-	speed = 1.8
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.25"		; sec
+	data = "Blend time", "0.29"		; sec
 	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
@@ -271,11 +271,11 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 272
 	end_time = 304
-	speed = 1.8
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.25"		; sec
+	data = "Blend time", "0.29"		; sec
 	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 	
@@ -283,11 +283,11 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 272
 	end_time = 304
-	speed = 1.8
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.25"		; sec
+	data = "Blend time", "0.29"		; sec
 	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_W_attack_feintc", 271, normal
 		
@@ -295,11 +295,11 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 272
 	end_time = 304
-	speed = 1.8
+	speed = 1.97
 	loop = false
 	data = "Ang", "10"	; grd
 	data = "Dist", "2,5"	; m
-	data = "Blend time", "0.25"		; sec
+	data = "Blend time", "0.29"		; sec
 	event = "Attack", 284, normal			;slash
 	event = "SndAlliace_attack_feintc", 271, normal
 	
@@ -333,7 +333,7 @@ data = "Turn speed", "6.3"
 	end_time = 367
 	speed = 1.5
 	loop = false
-	data = "Blend time", "0.15"		; sec
+	data = "Blend time", "0.13"		; sec
 	event = "SndAlliace_BlockHit", 351, normal	
 
 ;Реакция на попадание в блок с топором
@@ -343,7 +343,7 @@ data = "Turn speed", "6.3"
 	end_time = 367
 	speed = 1.5
 	loop = false
-	data = "Blend time", "0.15"		; sec
+	data = "Blend time", "0.13"		; sec
 	event = "SndAlliace_BlockHit", 351, normal
 	
 ;Реакция на пробитие блока 
@@ -351,7 +351,7 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 661
 	end_time = 693
-	speed = 1.5
+	speed = 2.0
 	loop = false
 	data = "Blend time", "0.15"		; sec
 	event = "SndAlliace_W_blockbreak", 661, normal	
@@ -374,7 +374,7 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 476
 	end_time = 492
-	speed = 6.0
+	speed = 4.0
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "SndAlliace_W_manhit", 476, normal		
@@ -383,7 +383,7 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 476
 	end_time = 492
-	speed = 6.0
+	speed = 4.0
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "SndAlliace_W_manhit", 476, normal		
@@ -392,7 +392,7 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 493
 	end_time = 512
-	speed = 6.0
+	speed = 4.75
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "SndAlliace_W_manhit", 493, normal		
@@ -401,7 +401,7 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 645
 	end_time = 660
-	speed = 2.5
+	speed = 2.05
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "SndAlliace_W_manhit", 645, normal			
@@ -420,16 +420,16 @@ data = "Turn speed", "6.3"
 	type = normal
 	start_time = 608
 	end_time = 644
-	speed = 3.0
+	speed = 3.4
 	loop = false
-	data = "Blend time", "0.2"		; sec
+	data = "Blend time", "0.25"		; sec
 	event = "SndAlliace_W_parryhit", 608, normal			
 
 [hit_fire]
 	type = normal
 	start_time = 571
 	end_time = 607
-	speed = 3.0
+	speed = 4.06
 	loop = false
 	data = "Blend time", "0.2"		; sec
 	event = "SndAlliace_bullethit", 571, normal	
@@ -438,20 +438,20 @@ data = "Turn speed", "6.3"
 ;Отскок назад (S)
 [Recoil]
 	type = normal
-	start_time = 757
+	start_time = 756
 	end_time = 780
 	loop = false
-	speed = 1.75
+	speed = 2.1
 	event = "Recoil start", 761, normal
 	event = "Recoil end", 776, normal
-	data = "Blend time", "0.02"	; sec
-	data = "Walk speed", "2.2"		; m/sec
-	;event = "SndAlliace_W_recoil", 757, normal
+	data = "Blend time", "0.35"	; sec
+	data = "Walk speed", "2.32"		; m/sec
+											
 
 ;Смещение влево (A) 
 [straif_weapon_left]
 	start_time = 2533
-	end_time = 2550
+	end_time = 2549
 	data = "Blend time", "0.1"		; sec
 	event = "LStep", 2541, normal
 	event = "RStep", 2547, normal
@@ -460,12 +460,13 @@ data = "Turn speed", "6.3"
 	speed = 1.8
 	loop = false
 	type = normal
-	;event = "SndAlliace_W_recoil", 2540, normal
+	event = "SndAlliace_recoil", 2540, normal
+	data = "Walk speed", "2.5"		; m/sec	
 
 ;Смещение вправо (D) 
 [straif_weapon_right]
 	start_time = 2551
-	end_time = 2569
+	end_time = 2568
 	data = "Blend time", "0.1"		; sec
 	event = "LStep", 2559, normal
 	event = "RStep", 2563, normal
@@ -474,21 +475,17 @@ data = "Turn speed", "6.3"
 	speed = 1.8
 	loop = false
 	type = normal
-	;event = "SndAlliace_W_recoil", 2560, normal
+	event = "SndAlliace_recoil", 2560, normal
+    data = "Walk speed", "2.52		; m/sec	
 	
 ;IDLES - Паузы в бою ---------------------------------------------------------------------------------------------------------------------
 ;Просто прямая стойка
-[fight stand_1]
-	loop = false
-	type = normal
-	start_time = 424
-	end_time = 475
-	speed = 1.
-	data = "Blend time", "0.2"		; sec
-	data = "Probability", "1.0"
-
+;руки не там -> дергаетсЯ
+;start_time = 424
+;end_time = 475
+		   
 ;Дразнилка
-[fight stand_2]
+[fight stand_1]
 	loop = true
 	type = normal
 	start_time = 1109
@@ -498,7 +495,7 @@ data = "Turn speed", "6.3"
 	data = "Probability", "0.1"
 
 ;Восьмерка
-[fight stand_3]
+[fight stand_2]
 	loop = true
 	type = normal
 	start_time = 1157
@@ -508,7 +505,7 @@ data = "Turn speed", "6.3"
 	data = "Probability", "0.1"
 
 ;Оглядывается
-[fight stand_4]
+[fight stand_3]
 	loop = true
 	type = normal
 	start_time = 1213
@@ -517,7 +514,16 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	data = "Probability", "0.1"
 
-;Дразнилка
+
+[fight stand_4]
+	loop = true
+	type = normal
+	start_time = 1286
+	end_time = 1358
+	speed = 1.
+	data = "Blend time", "0.2"		; sec
+	data = "Probability", "0.1"
+
 [fight stand_5]
 	loop = true
 	type = normal
@@ -527,7 +533,7 @@ data = "Turn speed", "6.3"
 	data = "Blend time", "0.2"		; sec
 	data = "Probability", "0.1"
 
-;Восьмерка
+
 [fight stand_6]
 	loop = true
 	type = normal
@@ -540,9 +546,9 @@ data = "Turn speed", "6.3"
 ;Восьмерка обратная
 [fight stand_7]
 	loop = true
-	type = reverse
-	start_time = 1157
-	end_time = 1212
+	type = normal
+	start_time = 1213
+	end_time = 1285
 	speed = 1.
 	data = "Blend time", "0.2"		; sec
 	data = "Probability", "0.1"
@@ -551,12 +557,11 @@ data = "Turn speed", "6.3"
 [fight stand_8]
 	loop = true
 	type = normal
-	start_time = 1109
-	end_time = 1156
+	start_time = 1286
+	end_time = 1358
 	speed = 1.
 	data = "Blend time", "0.2"		; sec
 	data = "Probability", "0.1"
-
 
 ;ПЕРЕМЕЩЕНИЯ с клинком в руке ---------------------------------------------------------------------------------------------
 ;Ходьба вперёд с клинком в руке
