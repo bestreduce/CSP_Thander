@@ -618,3 +618,29 @@ void procTimerTimeOut()
 {
 	QuestComplete(objTimerInterface.questtype, objTimerInterface.questname);
 }
+
+void BI_ShowInterface(bool bShow)
+{
+	if( bShow )
+	{
+		if( IsEntity(&BattleInterface) )
+		{
+			SendMessage(&BattleInterface,"ll",BI_SET_VISIBLE,true);
+		}
+		if( IsEntity(&objLandInterface) )
+		{
+			SendMessage(&objLandInterface,"ll",MSG_BATTLE_LAND_SET_SHOW,true);
+		}
+	}
+	else
+	{
+		if( IsEntity(&BattleInterface) )
+		{
+			SendMessage(&BattleInterface,"ll",BI_SET_VISIBLE,false);
+		}
+		if( IsEntity(&objLandInterface) )
+		{
+			SendMessage(&objLandInterface,"ll",MSG_BATTLE_LAND_SET_SHOW,false);
+		}
+	}
+}
