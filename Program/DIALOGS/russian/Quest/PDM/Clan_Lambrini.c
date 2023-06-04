@@ -272,7 +272,7 @@ void ProcessDialogEvent()
 			}
 			if (pchar.rank >= 26 && pchar.rank <= 32)
 			{
-				FantomMakeCoolSailor(sld, SHIP_LINESHIPHEAVY, "Эль Тибурон", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_AGAMEMNON, "Эль Тибурон", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 			}
 			if (pchar.rank >= 33)
 			{
