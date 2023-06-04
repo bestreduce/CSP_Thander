@@ -927,6 +927,7 @@ void LAi_AllCharactersUpdate(float dltTime)
 			if(LAi_IsDead(chr)) continue;
 			//Востоновление жизни
 			float dlthp = LAI_DEFAULT_DLTHP;
+			dlthp = GetCharacterRegenHP(chr, false);
 			if(CheckAttribute(chr_ai, "hp_dlt")) dlthp = stf(chr_ai.hp_dlt);
 			float maxhp = stf(chr_ai.hp_max);
 			float hp = stf(chr_ai.hp) + dlthp*dltTime;
