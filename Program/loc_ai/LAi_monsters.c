@@ -270,8 +270,8 @@ bool LAi_CreateEncounters(ref location)
 		//------------------ Спасаем девку в пампасах ----------------------
 		case 1:
 			if (isDay()) 
-			{if (rand(9) > 5) return false;}//60% днём, что появится
-			else {if (rand(9) > 2) return false;}//30% ночью
+			{if (rand(9) > 1) return false;}//20% днём, что появится	+выше шанс 16%. сумма 3,33%
+			else {if (rand(9) > 0) return false;}//10% ночью			+выше шанс 16%. сумма 1,66%
 
 			if(CheckAttribute(location, "onUninhabitedIsland") || location.type == "seashore" || location.type == "mayak") return false; // На необитаемых  островах, маяках и бухтах нельзя
 			num = GetAttributesNum(grp); //кол-во локаторов

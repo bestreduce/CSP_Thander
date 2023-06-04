@@ -424,27 +424,12 @@ void ProcessDialogEvent()
 					break;
 				}
 			}
-// -> ugeen fix   31.01.09 (при наличии у ГГ лицензии с валидным сроком > 40-а дней выдавалась взамен лицензия сроком ровно на 40 дней (нафик нужен такой подарок !)
-// теперь должно работать корректно   :  если у ГГ валиднось лицензии 50 дней, то взамен выдаётся лицезия сроком на 70 дней
-// ежели лицезии не водится ( типа нелегал, или просрочена) то выдаётся стандартно на 40 дней
-			if (iNation == 5) // если со всеми в мире, то генерим лицензию случайной нации сроком 40 дней
+			if (iNation == 5) //если со всеми в мире, то генерим лицензию случайной нации сроком 40 дней
 			{
 				iNation = rand(3);
-				GiveNationLicence(iNation, LicenceValidity);
 			}
-			else // если с кем -то в раздрыганных  отношениях, то проверим наличие и валидность лицензии
-			{
-				iTermsValidity = GetDaysContinueNationLicence(iNation); // GetValidityNationLicence(iNation); // fix
-				if(iTermsValidity == -1) // лицензия просрочена
-				{
-					GiveNationLicence(iNation, LicenceValidity); // даём лицезию на 40 дней по дефолту
-				}
-				else // лицензия есть и не просрочена
-				{
-					LicenceValidity = (makeint(iTermsValidity/10)) * 10 + 20;
-				}
-			}
-// -> ugeen fix
+			GiveNationLicence(iNation, LicenceValidity + GetDaysContinueNationLicence(iNation));//фикс - продляю лицензию на весь срок, а не по сложным округлениям
+
 			dialog.text = "Это " + GetRusNameNationLicence(iNation) + " сроком на " + LicenceValidity + " дней! С удовольствием вручаю её вам.";
 			link.l1 = "Ого, довольно дорогой документ! Ну что же, спасибо вам, " + GetAddress_FormToNPC(NPChar) + ", за оказанную услугу. Прощайте.";
 			link.l1.go = "exit_over";

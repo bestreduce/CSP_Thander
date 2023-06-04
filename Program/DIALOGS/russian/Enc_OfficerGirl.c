@@ -886,14 +886,14 @@ void ProcessDialogEvent()
 			AddQuestRecord("PomoshElen", "2");
 			CloseQuestHeader("PomoshElen");
 		break;
-		//Анджелика
+		//Анжелика
 		case "Angellica_meet":
 			if (startherotype == 4 || startherotype == 5)
 			{
 				if(npchar.id == "Angellica")
 				{
 					dialog.text = "Кто это тут у нас? Ещё один плод неуёмной любви моего папаши к слабому полу? Сегодня я не в настроении убивать родственников. Иди своей дорогой!";
-					link.l1 = "Эх, а мы могли бы осуществить мечту отца вместе. Ну, как знаешь Анджелика, прощай.";
+					link.l1 = "Эх, а мы могли бы осуществить мечту отца вместе. Ну, как знаешь Анжелика, прощай.";
 					link.l1.go = "exit";
 					break;
 				}

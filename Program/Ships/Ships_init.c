@@ -1306,7 +1306,7 @@ void InitShips()
 	refship.Soundtype					= "lugger";
 	refShip.Class						= 5;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 20;
+	refShip.MaxCaliber      			= 16;
 	refShip.Weight						= Tonnes2CWT(350);
 	refShip.Capacity       				= 2500;
 	refShip.MaxCannonDiff				= 2;

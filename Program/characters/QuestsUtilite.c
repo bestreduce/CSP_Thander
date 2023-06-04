@@ -2806,7 +2806,7 @@ void OfficerGirlInit()
     LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 
 	sld = GetCharacter(NPC_GenerateCharacter("Angellica", "PGG_Angellica", "woman", "Milenace", 15, PIRATE, -1, false));
-	sld.name 	= "Анджелика";
+	sld.name 	= "Анжелика";
 	sld.lastname = "Шарп";
 	sld.loyality = 20;
 	sld.rank 	= 15;

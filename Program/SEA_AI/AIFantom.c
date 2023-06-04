@@ -338,7 +338,7 @@ int Fantom_CalcSkill(ref rMainCharacter, string sSkill, int iShipClass, int iSki
 void FixOverMaxCannons(ref _chr)
 {
 	ref rShip = GetRealShip(GetCharacterShipType(_chr));
- 	int iCannonsType = sti(rShip.Cannon);
+ 	int iCannonsType = sti(_chr.Ship.Cannons.Type);
 	ref rCannon = GetCannonByType(iCannonsType);
 	int nCaliber = sti(rCannon.caliber);
 	if (nCaliber == 48) return;//не трогаем 48фт, это явно что-то квестовое, что и должно нарушить ограничения
