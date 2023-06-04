@@ -19,9 +19,9 @@ bool bBoxUsed = false; // Сундук-ли?
 aref refToChar, arChest, arDeadChar;
 String sCharactersArroy[INTERFACE_ITEMSBOX_CHAR_ARROYSIZE] = {"", "", "", "", "", "", "", "", "", ""};
 
-int iTableAddAllBtnX = 270;
+int iTableAddAllBtnX = 300;
 int iTableAddAllBtnY = 160;
-int iTableRemoveAllBtnX = 504;
+int iTableRemoveAllBtnX = 500;
 int iTableRemoveAllBtnY = 160;
 
 int iCurrentTabMode = 3; // Текущий режим сортировки

@@ -2161,7 +2161,7 @@ void EncGirl_GenQuest_GetCoins(string qName)
 
 void EncGirl_GenQuest_GetChestPlaceName()
 {
-	int iTemp = rand(3);
+	int iTemp = rand(4);
 	switch (iTemp)
 	{
 		case 0:
@@ -2183,6 +2183,11 @@ void EncGirl_GenQuest_GetChestPlaceName()
 			pchar.GenQuest.EncGirl.islandId = "Terks";
 			pchar.GenQuest.EncGirl.placeId = "Terks_Grot";
 			pchar.GenQuest.EncGirl.shoreId = "Shore56";
+		break;
+		case 4:
+			pchar.GenQuest.EncGirl.islandId = "StLucia";
+			pchar.GenQuest.EncGirl.placeId = "StLucia_Grot";
+			pchar.GenQuest.EncGirl.shoreId = "Shore66";
 		break;
 	}
 }

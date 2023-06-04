@@ -1774,6 +1774,7 @@ void SetMapCross(string _MapLocId)
 	case "Cuba_Grot": left = 198; top = 44; break;	//{в пещере справа от мыса Камагуэй}
 	case "Cumana_Cave": left = 530; top = 505; break;	//{в пещере справа от бухты Карупано}
 	case "Curacao_Cave": left = 465; top = 435; break;	//{в пещере справа от берега Приют контрабандиста}
+	case "StLucia_Grot": left = 545; top = 420; break;	//{в пещере справа от мыса Пеликана}
 	case "Dominica_Grot": left = 574; top = 326; break;	//{в пещере справа от пляжа Касл Брус}
 	case "Guadeloupe_Cave": left = 485; top = 269; break;	//{в пещере слева от маяка Гваделупы}
 	case "Hispaniola_Cave": left = 383; top = 119; break;	//{в пещере недалеко от города Порт-о-Принс}
