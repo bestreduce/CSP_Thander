@@ -140,16 +140,16 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					if(blockSave)
 					{
-						kAttackDmg = 1.25;
+						kAttackDmg = 0.8;
 					}
 					else
 					{
-						kAttackDmg = 2.25;
+						kAttackDmg = 1.25;
 					}
 				}
 				else
 				{
-					kAttackDmg = 3.0;
+					kAttackDmg = 2.0;
 				}
 				if (fencing_type != "FencingHeavy") kAttackDmg *= 0.7;
 				//if (!CheckCharacterPerk(attack, "HardHitter")) kAttackDmg /= 2.0;
@@ -1855,7 +1855,7 @@ float LAi_NPC_GetFireActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterGunLevel(chr);
-	npc_return_tmp = 0.001 + level*0.06;
+	npc_return_tmp = 0.001 + level*0.04;
 	// boal наши офицеры пулят из всех стволов -->
 	if (chr.chr_ai.group == LAI_GROUP_PLAYER)
 	{
@@ -1874,7 +1874,7 @@ float LAi_NPC_GetFireActive()
 		}
 	}
 	//if (npc_return_tmp > 0.5) npc_return_tmp = 0.5;
-
+	npc_return_tmp = 0.01;
 	return npc_return_tmp;
 }
 
