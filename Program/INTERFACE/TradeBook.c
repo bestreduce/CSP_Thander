@@ -219,7 +219,7 @@ void FillPriceList(string _tabName, string attr1)// картинка, назва
 	    n = 1;
 	    for (i = 0; i < GOODS_QUANTITY; i++)
 	    {
-			if(i > 34 && i < 51) continue;
+			if(i > 36 && i < 57) continue;
 	        row = "tr" + n;
 	        sGoods = "Gidx" + i;
 			iTradeType = sti(nulChr.PriceList.(attr1).(sGoods).TradeType);

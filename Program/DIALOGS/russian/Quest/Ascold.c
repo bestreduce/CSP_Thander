@@ -109,13 +109,13 @@ void ProcessDialogEvent()
             if (npchar.quest.meeting == "0")
             {
             	dialog.text = "Приветствую. Меня зовут Аскольд. А с кем имею честь...";
-				link.l1 = "Меня зовут " + GetFullName(pchar) + ". А прислал меня к тебе " + GetFullName(sld) + ", хозяин магазина, что находится на " + XI_ConvertString("Colony" + sld.City + "Dat") + ".";
+				link.l1 = "Меня зовут " + GetFullName(pchar) + ". А прислал меня к тебе " + GetFullName(sld) + ", хозяин магазина, что находится на " + XI_ConvertString("Colony" + sld.City + "Voc") + ".";
                 npchar.quest.meeting = "1";
             }
             else
             {
             	dialog.text = "Опять на горизонте "+ GetSexPhrase("появился наш грозный корсар","появилась наша грозная женщина-корсар") +". Что тебе нужно на этот раз?";
-        		link.l1 = "На этот раз меня прислал к тебе " + GetFullName(sld) + ", хозяин магазина, что находится на " + XI_ConvertString("Colony" + sld.City + "Dat") + ".";
+        		link.l1 = "На этот раз меня прислал к тебе " + GetFullName(sld) + ", хозяин магазина, что находится на " + XI_ConvertString("Colony" + sld.City + "Voc") + ".";
             }
             link.l1.go = "Step_5";
 		break;
