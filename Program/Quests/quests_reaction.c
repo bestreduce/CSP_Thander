@@ -3441,7 +3441,7 @@ void QuestComplete(string sQuestName, string qname)
             Island_SetReloadEnableGlobal("Antigua", false);
 
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_spa_2", "man", "man", 15, SPAIN, 0, true));
-            FantomMakeCoolSailor(sld, SHIP_NIGHTMARE, "", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
+            FantomMakeCoolSailor(sld, SHIP_NEPTUN, "", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
             FantomMakeCoolFighter(sld, 20, 90, 50, "blade25", "pistol3", 80);
             sld.DontRansackCaptain = true; //квестовые не сдаются
             sld.SinkTenPercent = true; //уходим с повреждениями
@@ -4388,7 +4388,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 7:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -5184,7 +5184,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "topor2";
                     break;
                     case 6:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_2";
                         Rank = 32;
                         Blade = "topor2";
@@ -5321,7 +5321,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 8:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -5945,7 +5945,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_NEPTUN;
                         Rank = 31;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6071,7 +6071,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_NEPTUN;
                         Rank = 34;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6107,7 +6107,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 8:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_NEPTUN;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade32";
@@ -6301,13 +6301,13 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
 					case 1:
-                        ShipType = SHIP_MANOWAR_GUB;
+                        ShipType = SHIP_CRISTIAN;
                         Rank = 45;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_NEPTUN;
                         Rank = 34;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6337,13 +6337,13 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS32;
                     break;
                     case 7:
-                        ShipType = SHIP_MANOWAR_GUB;
+                        ShipType = SHIP_CRISTIAN;
                         Rank = 42;
                         Blade = "topor2";
 						iTemp = CANNON_TYPE_CANNON_LBS42;
                     break;
                     case 8:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_NEPTUN;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade33";

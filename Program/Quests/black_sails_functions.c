@@ -202,7 +202,7 @@ void BSOnTheHorizon_start(string qName)
 void BSOnTheHorizon_Flint();
 {
 	sld = GetCharacter(NPC_GenerateCharacter("Flint", "BS_Flint_0", "man", "man", 999, PIRATE, -1, true));
-	FantomMakeCoolestSailor(sld, SHIP_NEPTUN, "Морж", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	FantomMakeCoolestSailor(sld, SHIP_ROTTERDAM, "Морж", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 	FantomMakeCoolFighter(sld, 100, 100, 100, "blade43", "pistol4", 1000);
 	SetSPECIAL(sld, 10, 10, 10, 10, 10, 10, 10);
 	sld.name = "Джеймс";
@@ -277,13 +277,13 @@ void BSOnTheHorizon_SeaBattle()
 		sld = GetCharacter(NPC_GenerateCharacter("BSOnTheHorizon_enemyfleet"+i, "off_eng_"+(rand(1)+1), "man", "man", 999, ENGLAND, -1, true));
 		if (i == 1)
 		{
-			sld.Ship.Type = GenerateShipExt(SHIP_NIGHTMARE, true, sld);
+			sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
 			sld.Ship.Name = "Денуво";
 			sld.Name = "Денуво";
 			sld.Lastname = "Антитампер";
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, sld);
-		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
+		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_ROTTERDAM, true, sld);
 		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_FWZP, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, sld);
@@ -1182,9 +1182,9 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 	for (int i = 0; i < 5; i++)
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("BSBons"+i, "off_eng_"+(rand(1)+1), "man", "man", 999, ENGLAND, 8, true));
-		FantomMakeCoolSailor(sld, SHIP_NEPTUN, "Морж", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+		FantomMakeCoolSailor(sld, SHIP_ROTTERDAM, "Морж", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 		sld.AlwaysEnemy = true;
-		sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
+		sld.Ship.Type = GenerateShipExt(SHIP_ROTTERDAM, true, sld);
 
 		Group_AddCharacter(sGroup, sld.id);
 		if (i == 0)
@@ -1195,7 +1195,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 				{
 					if (!CheckAttribute(pchar, "BSBonsSpawned"))
 					{
-						FantomMakeCoolestSailor(sld, SHIP_NIGHTMARE, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+						FantomMakeCoolestSailor(sld, SHIP_NEPTUN, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 						sld.Name = "Билли";
 						sld.Lastname = "Бонс";
 						sld.Model = "BS_Billy";
@@ -1315,7 +1315,7 @@ void BSUrka_Curacao_SeaBattle()
 		sld = GetCharacter(NPC_GenerateCharacter("BSUrka_Curacao_enemyfleet"+i, "off_spa_"+(rand(1)+1), "man", "man", 999, SPAIN, -1, true));
 		if (i == 1)
 		{
-			sld.Ship.Type = GenerateShipExt(SHIP_GALEON50, true, sld);
+			sld.Ship.Type = GenerateShipExt(SHIP_VASA, true, sld);
 			//sld.Ship.Name = "Денуво";
 			//sld.Name = "Денуво";
 			//sld.Lastname = "Антитампер";
@@ -1465,7 +1465,7 @@ void BSUrka_PlaceUrka()
 
 	sld = GetCharacter(NPC_GenerateCharacter("BSUrka", "off_spa_"+(rand(1)+1), "man", "man", 999, SPAIN, -1, true));
 
-	sld.Ship.Type = GenerateShipExt(SHIP_GALEON50, true, sld);
+	sld.Ship.Type = GenerateShipExt(SHIP_VASA, true, sld);
 	sld.Ship.Name = "Урка де Лима";
 	sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 

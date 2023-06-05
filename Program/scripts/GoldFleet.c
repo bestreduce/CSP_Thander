@@ -100,7 +100,7 @@ void GoldFleet()
         }
         else
         {
-            sld.ship.type = GenerateShipExt(SHIP_GALEON50, 1, sld);
+            sld.ship.type = GenerateShipExt(SHIP_VASA, 1, sld);
     	    //SetBaseShipData(sld);
             Fantom_SetCannons(sld, "war");
 			SetCrewQuantityFull(sld);

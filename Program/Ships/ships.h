@@ -6,12 +6,12 @@
 //7
 #define SHIP_TARTANE				0
 #define SHIP_PLOT					1
-#define SHIP_WAR_TARTANE			2
+#define SHIP_FELUCA		        	2
 //====================================================================================================================================================================================================================
 //6 пушки(8-12)
 #define SHIP_KETCH 	    			3
 #define SHIP_SCHOONER_B				4
-#define SHIP_PINK					5
+#define SHIP_YACHT					5
 #define SHIP_LUGGER					6
 #define SHIP_LUGGER_H				7
 #define SHIP_SPEEDY					8
@@ -85,8 +85,8 @@
 #define SHIP_UNICORN				70
 #define SHIP_REVENGE				71
 #define SHIP_HERMIONE   			72
-#define SHIP_CHERUB                 73
-#define SHIP_BOUSSOLE				74
+#define SHIP_NIGHTMARE              73
+#define SHIP_CHERUB			    	74
 #define SHIP_BELLE  				75
 #define SHIP_ESSEX  				76
 #define SHIP_CECILIA    			77
@@ -94,16 +94,16 @@
 #define SHIP_FASTFRIGATE			79
 #define SHIP_MORDAUNT				80
 #define SHIP_FRIGATE				81
-#define SHIP_FRIGATE_H				82
+#define SHIP_DIANA	    			82
 #define SHIP_CARRACA				83
 //====================================================================================================================================================================================================================
 //2 пушки(24-32)
-#define SHIP_GALEON50				84
-#define SHIP_NIGHTMARE  			85
+#define SHIP_VASA	    			84
+#define SHIP_NEPTUN      			85
 #define SHIP_INDEFATIGABLE			86
-#define SHIP_DIANA  			    87
+#define SHIP_ENDYMION  			    87
 #define SHIP_GALEON_SANTIAGO		88
-#define SHIP_NEPTUN         		89
+#define SHIP_ROTTERDAM         		89
 #define SHIP_HOLLGALEON_H			90
 #define SHIP_LEOPARD				91
 #define SHIP_LINESHIP				92
@@ -132,12 +132,12 @@
 #define SHIP_PAVEL  				113
 #define SHIP_BELLONA				114
 #define SHIP_ZEVENPROVINCIEN		115
-#define SHIP_CRISTIAN       		116
-#define SHIP_TRINITY				117
-#define SHIP_PRINCE     			118
-#define SHIP_MANOWAR    			119
-#define SHIP_MANOWAR_GUB			120
-#define SHIP_HMS_VICTORY            121
+#define SHIP_SANTAANA       		116
+#define SHIP_CRISTIAN				117
+#define SHIP_TRINITY     			118
+#define SHIP_PRINCE                 119
+#define SHIP_ZWAAN                  120
+#define SHIP_MANOWAR                121
 #define SHIP_SANFELIPE				122
 #define SHIP_VICTORY    			123
 #define SHIP_OCEAN      			124

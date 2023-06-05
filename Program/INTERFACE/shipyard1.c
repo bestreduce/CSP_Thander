@@ -443,7 +443,7 @@ void FillShipyardTable()
 		{iStart = SHIP_POSEIDON; iEnd = SHIP_OCEAN;}
 	break;
 	case 2:
-		{iStart = SHIP_GALEON50; iEnd = SHIP_WAPEN_VON_HAMBURG;}
+		{iStart = SHIP_VASA; iEnd = SHIP_WAPEN_VON_HAMBURG;}
 	break;
 	case 3:
 		{iStart = SHIP_PINNACE; iEnd = SHIP_CARRACA;}

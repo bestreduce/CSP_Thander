@@ -371,7 +371,7 @@ int RandShipFromShipClass(ref _ch)
 			break;
 
 		case 7:
-			iShipType = SHIP_WAR_TARTANE + rand(1);
+			iShipType = SHIP_FELUCA + rand(1);
 			break;
 	}
 	return iShipType;

@@ -2202,7 +2202,7 @@ void CaptureCapitol_SeaBattle()
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("CaptureCapitol_enemyfleet"+i, "off_spa_"+(rand(1)+1), "man", "man", sti(pchar.rank)+10, SPAIN, -1, true));
 
-		if (i == 1) FantomMakeQuickSailor(sld, SHIP_GALEON50, "Откровение", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
+		if (i == 1) FantomMakeQuickSailor(sld, SHIP_VASA, "Откровение", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
 		if (i == 2) FantomMakeQuickSailor(sld, SHIP_GALEON1, "Деяния святых апостолов", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
 		if (i == 3) FantomMakeQuickSailor(sld, SHIP_REVENGE, "Евангелие", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
 		if (i == 4) FantomMakeQuickSailor(sld, SHIP_GALEON_H, "Плач Иеремии", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
