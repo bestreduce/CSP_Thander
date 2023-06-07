@@ -5,7 +5,7 @@
 //====================================================================================================================================================================================================================
 //7
 #define SHIP_TARTANE				0
-#define SHIP_PLOT					1
+#define SHIP_WARTARTANE				1
 #define SHIP_FELUCA		        	2
 //====================================================================================================================================================================================================================
 //6 пушки(8-12)
@@ -25,9 +25,9 @@
 //5 пушки(8-12-16)
 #define SHIP_POLACCA				15
 #define SHIP_BARQUE					16
-#define SHIP_RATTLESNAKE    		17
-#define SHIP_SCHOONER				18
-#define SHIP_SCHOONER_L       		19
+#define SHIP_SCHOONER       		17
+#define SHIP_SCHOONER_L				18
+#define SHIP_RATTLESNAKE       		19
 #define SHIP_XEBEC					20
 #define SHIP_XEBECBATTLE			21
 #define SHIP_XEBECLIGHT				22
@@ -43,14 +43,14 @@
 #define SHIP_BRIGANTINE				30
 #define SHIP_CASTELF				31
 #define SHIP_DERFFLINGER			32
-#define SHIP_INTERCEPTOR			33
-#define SHIP_FLEUT					34
+#define SHIP_FLEUT         			33
+#define SHIP_HERCULEST				34
 #define SHIP_BRIG_NV				35
 #define SHIP_BRIG_M		     		36
 #define SHIP_BRIGSOPHIE     		37
 #define SHIP_GALEON_L				38
-#define SHIP_GREYHOUND				39
-#define SHIP_CORVETTELIGHT			40
+#define SHIP_CORVETTELIGHT			39
+#define SHIP_GREYHOUND			    40
 #define SHIP_PRINCE_H				41
 #define SHIP_ENTERPRISE				42
 #define SHIP_POLACRE_H				43
