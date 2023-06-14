@@ -137,7 +137,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.lastname = "";
 			LAi_SetStayType(sld);
 			sld.City = "SanJuan";
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Джордано_1";
 			ChangeCharacterAddressGroup(sld, "SanJuan_town", "patrol", "patrol16");
 		break;

@@ -62,7 +62,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE * 4);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
-				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
+				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_1";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;
@@ -82,7 +82,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE * 4);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
-				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
+				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_2";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;
@@ -102,7 +102,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FantomMakeCoolFighter(sld, sti(pchar.rank), 20 + MOD_SKILL_ENEMY_RATE * 5, 20 + MOD_SKILL_ENEMY_RATE * 5, "blade36", "", 80 + MOD_SKILL_ENEMY_RATE * 5);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
-				sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
+				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 				sld.dialog.currentnode   = "Rostovshik_Fra_Off_3";
 				LAi_ActorDialog(sld, pchar, "", -1, 0);
 				sld.SaveItemsForDead = true;

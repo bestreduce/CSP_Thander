@@ -123,7 +123,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DoQuestReloadToLocation("SantoDomingo_Brothel_room", "reload", "reload1_back", "");
 			sld = CharacterFromID("PDM_PK_Francheska")
 			ChangeCharacterAddressGroup(sld, "SantoDomingo_Brothel_room", "goto", "goto2");
-			sld.dialog.filename   = "Quest/PDM/Poteryanoe_Koltso.c";
+			sld.dialog.filename   = "Quest\PDM\Poteryanoe_Koltso.c";
 			sld.dialog.currentnode   = "NaVerhuSFrancheska";
 			chrDisableReloadToLocation = true;
 		break;

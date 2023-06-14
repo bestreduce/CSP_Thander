@@ -2522,7 +2522,7 @@ void PDMQuestsInit()
 	sld = GetCharacter(NPC_GenerateCharacter("Albreht_Zalpfer", "Mechanic", "man", "man", 6, ENGLAND, -1, false));
 	sld.name	= "Альбрехт";
 	sld.lastname	= "Цальпфер";
-	sld.Dialog.Filename = "Quest/PDM/Albreht_Zalpfer.c";
+	sld.Dialog.Filename = "Quest\PDM\Albreht_Zalpfer.c";
 	sld.greeting = "Albrecht_Zalpfer";
 	SetCharacterPerk(sld, "Carpenter");
 	SetCharacterPerk(sld, "BasicBattleState");
@@ -2547,7 +2547,7 @@ void PDMQuestsInit()
 	sld.name	= "Хьюго";
 	sld.lastname	= "Лесопилка";
 	sld.sex = "man";
-	sld.Dialog.Filename = "Quest/PDM/Novaya_Rodina.c";
+	sld.Dialog.Filename = "Quest\PDM\Novaya_Rodina.c";
 	LAi_SetSitType(sld);
 	LAi_SetImmortal(sld, true);
 	ChangeCharacterAddressGroup(sld,"PuertoPrincipe_tavern","sit","sit_front2");
@@ -2557,14 +2557,13 @@ void PDMQuestsInit()
 	sld = GetCharacter(NPC_GenerateCharacter("Josephine_Lodet", "BaynesWife", "woman", "woman", 10, FRANCE, -1, false));
 	sld.name	= "Старушка";
 	sld.lastname	= "";
-	sld.City = "BasTer";
-	sld.Dialog.Filename = "Quest/PDM/Poteryanoe_Koltso.c";
+	sld.Dialog.Filename = "Quest\PDM\Poteryanoe_Koltso.c";
 	LAi_SetCitizenType(sld);
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	sld.talker = 7;
 	LAi_SetImmortal(sld, true);
 	LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
-	sld.city = "BasTer";
+	sld.City = "BasTer";
 	ChangeCharacterAddressGroup(sld,"BasTer_town","goto","goto4");
 
 	//******Непутёвый казначей Sinistra******
@@ -2574,7 +2573,7 @@ void PDMQuestsInit()
 	sld.name	= "Андреас";
 	sld.lastname	= "Фиклер";
 	sld.City = "Villemstad";
-	sld.Dialog.Filename = "Quest/PDM/Neputyovy_kaznachey.c";
+	sld.Dialog.Filename = "Quest\PDM\Neputyovy_kaznachey.c";
 	LAi_SetCitizenType(sld);
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	sld.talker = 7;
@@ -2587,7 +2586,7 @@ void PDMQuestsInit()
 	sld = GetCharacter(NPC_GenerateCharacter("PDM_Octavio_Lambrini", "barmen_3", "man", "man", 10, PIRATE, -1, true));
 	sld.name	= "Октавио";
 	sld.lastname	= "Ламбрини";
-	sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+	sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 	LAi_SetSitType(sld);
 	LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 	ChangeCharacterAddressGroup(sld,"PortSpein_tavern","sit","sit_front2");
@@ -2596,7 +2595,7 @@ void PDMQuestsInit()
 	sld = GetCharacter(NPC_GenerateCharacter("PDM_PJ_Strajnik_1", "sold_fra_5KSM", "man", "manKSM", 10, FRANCE, -1, false));
 	sld.name	= "Джори";
 	sld.lastname	= "";
-	sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+	sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	sld.talker = 7;
 	LAi_SetStayType(sld);
@@ -2624,7 +2623,7 @@ void PDMQuestsInit()
 	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
 	LAi_SetBarmanType(sld);
 	sld.greeting = "GR_Doctor_Alumnus";
-	sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+	sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 	sld.dialog.currentnode   = "First time";
 	sld.City = "Marigo";
 	ChangeCharacterAddressGroup(sld,"Farmacia","barmen","stay");

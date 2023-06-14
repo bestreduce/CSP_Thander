@@ -56,7 +56,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.location	= "SantoDomingo_Brothel";
 			sld.location.group = "goto";
 			sld.location.locator = "goto3";
-			sld.dialog.filename   = "Quest/PDM/Poteryanoe_Koltso.c";
+			sld.dialog.filename   = "Quest\PDM\Poteryanoe_Koltso.c";
 			sld.dialog.currentnode   = "Francheska";
 			LAi_SetCitizenType(sld);
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");

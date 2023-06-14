@@ -78,7 +78,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.name = "Геред";
 			sld.lastname = "Драббе";
 			FreeSitLocator("Marigo_tavern", "sit3");
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Capitan_v_taverne_1";
 			LAi_SetSitType(sld);
 			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");

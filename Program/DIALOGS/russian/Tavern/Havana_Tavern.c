@@ -201,7 +201,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FreeSitLocator("PortoBello_tavern", "sit_base2");
 				ChangeCharacterAddressGroup(sld,"PortoBello_tavern","sit","sit_base2");
 				LAi_SetSitType(sld);
-				sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+				sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 				sld.dialog.currentnode   = "RazgovorSViktorom_1";
 				pchar.questTemp.PDM_ONV_PortoBello = "PortoBello";
 			break;
@@ -222,7 +222,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FreeSitLocator("Maracaibo_tavern", "sit_base2");
 				ChangeCharacterAddressGroup(sld,"Maracaibo_tavern","sit","sit_base2");
 				LAi_SetSitType(sld);
-				sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+				sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 				sld.dialog.currentnode   = "RazgovorSViktorom_1";
 				pchar.questTemp.PDM_ONV_Maracaibo = "Maracaibo";
 			break;
@@ -243,7 +243,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				FreeSitLocator("SanJuan_tavern", "sit_base2");
 				ChangeCharacterAddressGroup(sld,"SanJuan_tavern","sit","sit_base2");
 				LAi_SetSitType(sld);
-				sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+				sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 				sld.dialog.currentnode   = "RazgovorSViktorom_1";
 				pchar.questTemp.PDM_ONV_SanJuan = "SanJuan";
 			break;

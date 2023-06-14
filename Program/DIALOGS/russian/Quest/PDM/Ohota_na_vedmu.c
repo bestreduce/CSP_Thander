@@ -49,7 +49,7 @@ void ProcessDialogEvent()
 			sld.city = "Havana";
 			ChangeCharacterAddressGroup(sld, "Havana_tavern", "goto", "goto5");
 			LAi_SetWaitressType(sld);
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "First_Carla_1";
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -97,7 +97,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "Havana_town", "reload", "reload3_back");
 			LAi_SetStayType(sld);
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "OfficerGuard";
 
 			PChar.quest.PDM_ONV_Vzaimno.win_condition.l1 = "NPC_Death";
@@ -286,7 +286,7 @@ void ProcessDialogEvent()
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 			sld.name = "Карла ";
 			sld.lastname = "";
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "Carla_Final_1";
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -400,7 +400,7 @@ void ProcessDialogEvent()
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 			sld.name = "Антонио";
 			sld.lastname = "де Соуза";
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "Inqizitor_1";
 			ChangeCharacterAddressGroup(sld, "Santiago_Incquisitio", "sit", "armchair1");
 

@@ -57,15 +57,15 @@ void ProcessDialogEvent()
 			DialogExit();
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_1")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_7";
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_2")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_7";
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_3")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_7";
 			
 			pchar.questTemp.PKM_SvtvA_Gde_Deti = "Gde_Deti";
@@ -129,7 +129,7 @@ void ProcessDialogEvent()
 			sld.name = "Баллтезар";
 			sld.lastname = "Фигуейдал";
 			FreeSitLocator("Charles_tavern", "sit_base4");
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Shturman_v_taverne_1";
 			LAi_SetSitType(sld);
 			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
@@ -406,7 +406,7 @@ void ProcessDialogEvent()
 		
 		case "Победа_в Церкви_5":
 			DialogExit();
-			StartInstantDialog("Maltese", "Победа_в Церкви_6", "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c");
+			StartInstantDialog("Maltese", "Победа_в Церкви_6", "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c");
 		break;
 		
 		case "Победа_в Церкви_6":
@@ -458,11 +458,11 @@ void ProcessDialogEvent()
 		
 			sld = CharacterFromID("FortFrance_Priest");
 			LAi_SetPriestType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Победа_в Церкви_11";
 			
 			sld = CharacterFromID("SanJuan_Priest");
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Падре_Робано";			
 			
 			PChar.quest.PKM_SvtvA_PriestVernuDialog.win_condition.l1 = "ExitFromLocation";
@@ -618,7 +618,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PKM_Animists", "30");
 			
 			sld = CharacterFromID("Satanist_Uchitel");
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Учитель_Спасение";
 		break;
 		
@@ -664,7 +664,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
 			
 			sld = CharacterFromID("Satanist_Uchitel");
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Учитель_Спасение";
 		break;
 		

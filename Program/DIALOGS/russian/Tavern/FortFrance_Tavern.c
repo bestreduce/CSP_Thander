@@ -77,7 +77,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.PDM_PJ_KV");
 			DeleteAttribute(pchar, "questTemp.PDM_PJ_SS");
 			sld = CharacterFromID("PDM_PJ_Strajnik_1")
-			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+			sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Prines_Vino_1";
 		break;
 
@@ -117,7 +117,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			GiveItem2Character(PChar, "PDM_PJ_BsRL");
 			DeleteAttribute(pchar, "questTemp.PDM_PJ_KR");
 			sld = CharacterFromID("PDM_PJ_Strajnik_2")
-			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+			sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Prines_Rom_1";
 			AddQuestRecord("PDM_Proklyataya_Jara", "4");
 			

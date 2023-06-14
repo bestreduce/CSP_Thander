@@ -66,7 +66,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			
 			sld = CharacterFromID("James_Callow");
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Vstrecha_4_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
 		break;
@@ -170,7 +170,7 @@ void ProcessDialogEvent()
 			SetSelfSkill(sld, 90, 90, 90, 60, 70);
 			sld.standUp = true; //вставать и нападать на врага
 			ChangeCharacterAddressGroup(sld, "LeFransua_townhall", "sit", "sit1");
-			sld.Dialog.Filename = "Quest/PDM/Cursed_Idol.c";
+			sld.Dialog.Filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Rodjer_1";
 			pchar.questTemp.PDM_PI_Skelety_v_more = "PDM_PI_Skelety_v_more";
 			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 5);
@@ -312,7 +312,7 @@ void ProcessDialogEvent()
 			sld.talker = 7;
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 			LAi_SetStayType(sld);
-			sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode   = "Pablo_Loco_Idol";
 			ChangeCharacterAddressGroup(sld,"LeFransua_town","goto","goto10");
 
@@ -419,7 +419,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			
 			sld = CharacterFromID("James_Callow");
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_2_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
 		break;
@@ -541,7 +541,7 @@ void ProcessDialogEvent()
 
 		case "Rostovshik_Fra_Off_1a":
 			DialogExit();
-			StartInstantDialog("Tortuga_usurer", "Rostovshik_Fra_Off_1b", "Quest/PDM/Cursed_Idol.c");
+			StartInstantDialog("Tortuga_usurer", "Rostovshik_Fra_Off_1b", "Quest\PDM\Cursed_Idol.c");
 		break;
 
 		case "Rostovshik_Fra_Off_1b":
@@ -552,7 +552,7 @@ void ProcessDialogEvent()
 
 		case "Rostovshik_Fra_Off_1с":
 			DialogExit();
-			StartInstantDialog("PDM_PI_Bandit_1", "Rostovshik_Fra_Off_1_1", "Quest/PDM/Cursed_Idol.c");
+			StartInstantDialog("PDM_PI_Bandit_1", "Rostovshik_Fra_Off_1_1", "Quest\PDM\Cursed_Idol.c");
 		break;
 
 		case "Rostovshik_Fra_Off_1_1":
@@ -570,7 +570,7 @@ void ProcessDialogEvent()
 
 		case "Rostovshik_Fra_Off_2_2":
 			DialogExit();
-			StartInstantDialog("Tortuga_usurer", "Rostovshik_Fra_Off_2_3", "Quest/PDM/Cursed_Idol.c");
+			StartInstantDialog("Tortuga_usurer", "Rostovshik_Fra_Off_2_3", "Quest\PDM\Cursed_Idol.c");
 		break;
 
 		case "Rostovshik_Fra_Off_2_3":
@@ -587,7 +587,7 @@ void ProcessDialogEvent()
 
 		case "Rostovshik_Fra_Off_2_5":
 			DialogExit();
-			StartInstantDialog("PDM_PI_Bandit_1", "Rostovshik_Fra_Off_2_6", "Quest/PDM/Cursed_Idol.c");
+			StartInstantDialog("PDM_PI_Bandit_1", "Rostovshik_Fra_Off_2_6", "Quest\PDM\Cursed_Idol.c");
 		break;
 
 		case "Rostovshik_Fra_Off_2_6":
@@ -616,7 +616,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "Tortuga_Bank", "barmen", "stay");
 
 			DialogExit();
-			StartInstantDialog("PDM_PI_Skel_Rostov", "Rostovshik_Fra_Off_3_2", "Quest/PDM/Cursed_Idol.c");
+			StartInstantDialog("PDM_PI_Skel_Rostov", "Rostovshik_Fra_Off_3_2", "Quest\PDM\Cursed_Idol.c");
 		break;
 
 		case "Rostovshik_Fra_Off_3_2":
@@ -702,7 +702,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			
 			sld = CharacterFromID("James_Callow");
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Callow_POBEDA_2_1";
 			LAi_Fade("PDM_Callow_sadis_na_stul", "");
 		break;

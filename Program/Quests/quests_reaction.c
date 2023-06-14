@@ -9997,7 +9997,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.model	= "ozg_green";
 			GiveItem2Character(sld, "blade34");
 			EquipCharacterByItem(sld, "blade34");
-			sld.Dialog.Filename = "Quest/PDM/Cursed_Idol.c";
+			sld.Dialog.Filename = "Quest\PDM\Cursed_Idol.c";
 			LAi_SetSitType(sld);
 			LAi_SetImmortal(sld, true);
 			FreeSitLocator("LaVega_tavern", "sit_base3");
@@ -10029,7 +10029,7 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "PDM_Callow_RodjerFin":
 			sld = CharacterFromID("James_Callow")
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowRad_1";
 		break;
 
@@ -10042,13 +10042,13 @@ void QuestComplete(string sQuestName, string qname)
 			chrDisableReloadToLocation = false;
 			bDisableFastReload = false;
 			sld = CharacterFromID("James_Callow")
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_1";
 		break;
 
 		case "PDM_Callow_poradomoy":
 			sld = CharacterFromID("James_Callow")
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Callow_POBEDA_1";
 			AddQuestRecord("PDM_Cursed_Idol", "9");
 			chrDisableReloadToLocation = false;
@@ -10075,7 +10075,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lastname = "";
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);
-			sld.dialog.filename = "Quest/PDM/Cursed_Idol.c";
+			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Matros_preduprejdaet";
 			LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 			LAi_ActorDialogDelay(sld, pchar, "", 1.0);
@@ -10158,7 +10158,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "PDM_Lesopilka_SJ":
 			sld = CharacterFromID("Hugo_Lesopilka")
 			ChangeCharacterAddressGroup(sld,"Havana_Town","goto","goto2");
-			sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+			sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 			sld.dialog.currentnode   = "Final_1";
 			PChar.quest.PDM_Lesopilka_Vremy.over = "yes";
 		break;
@@ -10181,7 +10181,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("Hugo_Lesopilka")
 			ChangeCharacterAddressGroup(sld,"Havana_Town","goto","goto2");
 			sld.city = "Havana";
-			sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+			sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 			sld.dialog.currentnode   = "Final_1";
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 			TakeItemFromCharacter(pchar, "PDM_SJ_Angl_Gal");
@@ -10303,7 +10303,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.city = "Havana";
 			ChangeCharacterAddressGroup(sld, "Havana_townhall", "sit", "sit1");
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "RazgovorSGuberom";
 			LAi_SetHuberType(sld);
 			LAi_SetImmortal(sld, true);
@@ -10313,7 +10313,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, "Havana_townhall", "goto", "governor1");
 			FantomMakeCoolFighter(sld, 50, 100, 100, "blade27", "pistol6", 50);
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "Soldat15";
 			sld.greeting = "GR_Spainguard";
 			LAi_SetOwnerType(sld);
@@ -10324,7 +10324,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, "Havana_townhall", "goto", "goto6");
 			FantomMakeCoolFighter(sld, 50, 100, 100, "blade27", "pistol6", 50);
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "Soldat15";
 			sld.greeting = "GR_Spainguard";
 			LAi_SetOwnerType(sld);
@@ -10495,7 +10495,7 @@ void QuestComplete(string sQuestName, string qname)
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "4");
 
 			sld = CharacterFromID("Andreas_Fickler")
-			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.filename   = "Quest\PDM\Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Fickler_11";
 		break;
 
@@ -10634,7 +10634,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, "none", "", "");
 			Group_SetAddress("PDM_el_tib", "none", "", "");
 			sld = CharacterFromID("PDM_Octavio_Lambrini")
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_2_1";
 			DeleteAttribute(pchar, "questTemp.PDM_CL_Ishem");
 			AddQuestRecord("PDM_Clan_Lambrini", "3");
@@ -10643,7 +10643,7 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "PDM_CL_PVT":
 			sld = CharacterFromID(pchar.LambriniPGG)
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_1_1";
 			LAi_SetSitType(sld);
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
@@ -10664,7 +10664,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetActorType(sld);
 			DeleteAttribute(sld, "chr_ai.disableDlg");
 			LAi_ActorDialog(sld, pchar, "", 0, 0);
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_6_1";
 		break;
 
@@ -10725,7 +10725,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetActorType(sld);
 			LAi_ActorDialog(sld, pchar, "", -1, 0);
 			sld.lifeday = 0;
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Antonio_8_1";
 		break;
 
@@ -10785,7 +10785,7 @@ void QuestComplete(string sQuestName, string qname)
 			GiveItem2Character(PChar, "PDM_Derevo_Teshkali");
 
 			sld = CharacterFromID("Pablo_Loco")
-			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+			sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Nashel_Derevo";
 
 			AddQuestRecord("PDM_Aptekar", "6");
@@ -10835,7 +10835,7 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "PDM_Apt_Lodka_Postroena":
 			sld = CharacterFromID("Pablo_Loco")
-			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+			sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Pablo_Loco_Lodka_Postroena";
 		break;
 
@@ -10855,7 +10855,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_1", "girl_9", "woman", "woman", 1, HOLLAND, -1, false));
 			sld.name	= "Жаннеке";
 			sld.lastname	= "Блинкерхоф";
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "First time";
 			LAi_SetStayType(sld);
 			LAi_SetLoginTime(sld, 6.0, 21.99);
@@ -10867,7 +10867,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_2", "girl_6", "woman", "woman", 1, HOLLAND, -1, false));
 			sld.name	= "Райан";
 			sld.lastname	= "Леккерс";
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "First time";
 			LAi_SetStayType(sld);
 			LAi_SetLoginTime(sld, 6.0, 21.99);
@@ -10879,7 +10879,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = GetCharacter(NPC_GenerateCharacter("PKM_SvtvA_Devushka_3", "girl_1", "woman", "woman", 1, HOLLAND, -1, false));
 			sld.name	= "Лизбет";
 			sld.lastname	= "Шефольд";
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "First time";
 			LAi_SetStayType(sld);
 			LAi_SetLoginTime(sld, 6.0, 21.99);
@@ -10903,7 +10903,7 @@ void QuestComplete(string sQuestName, string qname)
 			FantomMakeCoolFighter(sld, 70, 100, 100, BLADE_LONG, "", 200);
 			LAi_SetStayType(sld);
 			sld.talker = 6;
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Satanist_v_gorode_1";
 			ChangeCharacterAddressGroup(sld, pchar.location, "quest",  "quest1");
 			DeleteAttribute(sld, "items");
@@ -11030,7 +11030,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lastname = "";
 			FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade5", "", 0);
 			LAi_SetActorType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Satanist_v_buhte_1";
 			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto1");
 			LAi_ActorDialog(sld, pchar, "", -1, 0);
@@ -11081,7 +11081,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.name = "Загадочный человек";
 			sld.lastname = "";
 			LAi_SetActorType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Satanist_zasada2";
 			ChangeCharacterAddressGroup(sld, pchar.location, "patrol",  "patrol17");
 			LAi_ActorDialog(sld, pchar, "", 1.4, 0);
@@ -11128,7 +11128,7 @@ void QuestComplete(string sQuestName, string qname)
 		
 		case "PKM_SvtvA_Нападение_в_церкви":
 			sld = CharacterFromID("Satanist_Krisa");
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Сатанист_крыса";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
 		break;
@@ -11195,7 +11195,7 @@ void QuestComplete(string sQuestName, string qname)
 		
 		case "PKM_SvtvA_TuremchikQuest2":
 			sld = CharacterFromID("PortPaxJailOff");
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Разговор с тюремщиком";
 		break;
 		
@@ -11242,7 +11242,7 @@ void QuestComplete(string sQuestName, string qname)
 			}
 			LAi_SetActorType(pchar);
 			sld = CharacterFromID("Satanist_Uchitel");
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Обманываем Учителя";
 			ChangeCharacterAddressGroup(sld, "Ship_deck", "goto", "goto3");
 			DoQuestCheckDelay("PKM_SvtvA_UchitelNaPalube3", 2.8);
@@ -11263,7 +11263,7 @@ void QuestComplete(string sQuestName, string qname)
 			GiveItem2Character(sld, "PKM_SvtvA_znachok");
 			AddItems(sld, "mineral3", rand(10)-2);
 			AddItems(sld, "jewelry1", 3);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Обманываем Учителя_4";
 			ChangeCharacterAddressGroup(sld, "SanJuan_tavern_upstairs", "goto", "goto3");
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
@@ -11397,7 +11397,7 @@ void QuestComplete(string sQuestName, string qname)
 			//Пленники
 			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_1", "barmen_6", "man", "man", sti(pchar.rank), PIRATE, -1, false));
 			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Спасите, помогите1";
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, true);
@@ -11405,7 +11405,7 @@ void QuestComplete(string sQuestName, string qname)
 			
 			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_2", "officer_20", "man", "man", sti(pchar.rank), PIRATE, -1, false));
 			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Спасите, помогите2";
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, true);
@@ -11415,7 +11415,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.name = "падре";
 			sld.lastname = "Домингес";
 			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Домингес в клетке";
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, true);
@@ -11423,7 +11423,7 @@ void QuestComplete(string sQuestName, string qname)
 			
 			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_4", "Slave3", "man", "man", sti(pchar.rank), PIRATE, -1, false));
 			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Спасите, помогите3";
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, true);
@@ -11746,7 +11746,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("Chernoe_Solntse");
 			LAi_SetActorType(sld);
 			LAi_group_MoveCharacter(sld, "Chernoe_Solntse_Konets");
-			sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Лорд_Хаоса_3";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
 			LAi_SetImmortal(sld, true);
@@ -11819,15 +11819,15 @@ void QuestComplete(string sQuestName, string qname)
 			pchar.questTemp.PKM_SvtvA_Gubernator_Final = true;
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_1")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_11";
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_2")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_11";
 			
 			sld = CharacterFromID("PKM_SvtvA_Devushka_3")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Verni_detey_11";
 			
 			AddQuestRecord("PKM_Animists", "36");
@@ -11844,7 +11844,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = GetCharacter(NPC_GenerateCharacter("KSM_Alloka", "trader_1", "man", "man", 10, ENGLAND, -1, false));
 			sld.name	= "Джеймс";
 			sld.lastname	= "Аллока";
-			sld.Dialog.Filename = "Quest/KSM/Spasenie_na_rifah.c";
+			sld.Dialog.Filename = "Quest\KSM\Spasenie_na_rifah.c";
 			LAi_SetCitizenType(sld);
 			LAi_SetLoginTime(sld, 6.0, 21.99);
 			sld.talker = 7;
@@ -12017,7 +12017,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_LoginInCaptureTown(sld, true);
 			LAi_SetStayType(sld);
 			LAi_CharacterEnableDialog(sld);
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "Stoim_na_pirse";
 			sld.talker = 5;
 			ChangeCharacterAddressGroup(sld, "LaVega_town", "officers", "reload1_2");
@@ -12182,7 +12182,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetCurHPMax(sld);
 			LAi_SetStayType(sld);
 			ChangeCharacterAddressGroup(sld, "SantoDomingo_ExitTown", "reload", "reload1_back");
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "ATpr_SD_Koten_1";
 		break;
 		
@@ -12194,7 +12194,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetPlayerType(pchar);
 			sld = CharacterFromID("Gasten_Kotes")
 			LAi_SetActorType(sld);
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "ATpr_SD_Koten_6_3";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
 		break;
@@ -12218,17 +12218,17 @@ void QuestComplete(string sQuestName, string qname)
 			locations[FindLocation("LaVega_town")].models.always.locatorsl2 = "LaVega_1";			
 			sld = CharacterFromID("Edward Mansfield")
 			ChangeCharacterAddressGroup(sld, "LaVega_townhall", "sit", "sit1");
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "Pirat_Guber";
 			
 			sld = CharacterFromID("spa_guber")
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "Ispa_Guber";
 			
 			sld = CharacterFromID("AT_pr_devushka_na_rynke")
 			sld.lifeday = 0;
 			sld = CharacterFromID("Old Friend")
-			sld.Dialog.Filename = "Quest/SilencePrice/Luke.c";
+			sld.Dialog.Filename = "Quest\SilencePrice\Luke.c";
 			sld.dialog.currentnode = "First Time";
 		break;
 		
@@ -12261,7 +12261,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, pchar.location, "quest", "quest3");
 			LAi_SetActorType(sld);
 			LAi_ActorDialogDelay(sld, pchar, "", 1.0);
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_Undead_dialog.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_Undead_dialog.c";
 			sld.dialog.currentnode = "PGG_Undead_1";
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, false);
@@ -12279,7 +12279,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, pchar.location, "quest", "quest3");
 			LAi_SetActorType(sld);
 			LAi_ActorDialogDelay(sld, pchar, "", 1.0);
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_Undead_dialog.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_Undead_dialog.c";
 			sld.dialog.currentnode = "PGG_Undead_5";
 			sld.lifeday = 0;
 		break;
@@ -12552,7 +12552,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetActorType(sld);
 			LAi_ActorRunToLocation(sld, "reload", "reload1_back", "none", "", "", "", 1);
 			sld = CharacterFromID("Bandit_Prytki_1");
-			sld.dialog.filename = "Quest/ForAll_dialog.c";
+			sld.dialog.filename = "Quest\ForAll_dialog.c";
 			sld.dialog.currentnode = "SCQ_Prytki_Ooops_Eto_Lovushka_3";
 			LAi_ActorDialogNow(sld, Pchar, "", -1);
 		break;
@@ -12573,7 +12573,7 @@ void QuestComplete(string sQuestName, string qname)
 			DeleteAttribute(pchar, "showTimer");
 			ClearAllLogStrings();
 			sld = CharacterFromID(pchar.StudentZachet);
-			sld.dialog.filename = "Quest/ForAll_dialog.c";
+			sld.dialog.filename = "Quest\ForAll_dialog.c";
 			sld.dialog.currentnode = "SCQ_Proverka_Znani_VremyVishlo";
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);

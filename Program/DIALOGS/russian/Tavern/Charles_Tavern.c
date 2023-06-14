@@ -33,7 +33,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.PKM_SvtvA_NevisTaverna_1");
 			
 			sld = CharacterFromID("PKM_SvpvA_Shturman_1")
-			sld.Dialog.Filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Shturman_v_taverne_2";			
 		break;
 //========================  Квест "Странные вещи творятся на архипелаге" <==		

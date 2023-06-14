@@ -471,7 +471,7 @@ void ProcessDialogEvent()
 
 		case "Antonio_1_11":
 			sld = CharacterFromID("PDM_Octavio_Lambrini");
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_3_1";
 			DeleteAttribute(pchar, "questTemp.PDM_CL_Ishem");
 			PChar.quest.PDM_CL_Antonio_Ubit.over = "yes";
@@ -574,7 +574,7 @@ void ProcessDialogEvent()
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_Octavio_Lambrini", "barmen_3", "man", "man", 10, PIRATE, -1, false));
 			sld.name	= "Октавио";
 			sld.lastname	= "Ламбрини";
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_4_1";
 			LAi_SetSitType(sld);
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
@@ -606,7 +606,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(sld, "PGG_trader");
 
 			SaveOldDialog(sld);
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_1_1";
 			LAi_SetSitType(sld);
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
@@ -642,7 +642,7 @@ void ProcessDialogEvent()
 
 		case "Pokupatel_2_1":
 			sld = characterFromID(pchar.LambriniPGG);
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_2_2";
 			DialogExit();
 			DoQuestFunctionDelay("PDM_CL_Pokupatel_Speech", 0);
@@ -656,7 +656,7 @@ void ProcessDialogEvent()
 
 		case "Pokupatel_2_3":
 			sld = characterFromID("PDM_Octavio_Lambrini");
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_2_4";
 			DialogExit();
 			DoQuestFunctionDelay("PDM_CL_Octavio_Speech", 0);
@@ -671,7 +671,7 @@ void ProcessDialogEvent()
 
 		case "Pokupatel_2_5":
 			sld = characterFromID(pchar.LambriniPGG);
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Pokupatel_2_6";
 			DialogExit();
 			DoQuestFunctionDelay("PDM_CL_Pokupatel_Speech", 0);
@@ -691,7 +691,7 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(sld);
 			DoQuestFunctionDelay("PDM_CL_Pokupatel_Uhodit", 1.5);
 			sld = CharacterFromID("PDM_CL_Antonio3");
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Antonio_5_1";
 			LAi_SetPlayerType(pchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -989,7 +989,7 @@ void ProcessDialogEvent()
 			GiveItem2Character(sld, sBlade);
 			EquipCharacterbyItem(sld, sBlade);
 			ChangeCharacterAddressGroup(sld, "Shore37", "goto", "goto7");
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			//sld = CharacterFromID("PDM_CL_Antonio3");
 			sld.dialog.currentnode   = "Antonio_8_1";
 			pchar.InstantDialog = sld.id;
@@ -1072,7 +1072,7 @@ void ProcessDialogEvent()
 			pchar.LambriniPGGInPrison = true;
 			//sld = CharacterFromID("MaracaiboJailOff");
 			//SaveOldDialog(sld);
-			//sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			//sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			//sld.dialog.currentnode   = "LambriniPGG_1_14";
 		break;
 

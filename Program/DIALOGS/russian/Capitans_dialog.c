@@ -268,7 +268,7 @@ void ProcessDialogEvent()
 
 		case "Antonio_1_11":
 			sld = CharacterFromID("PDM_Octavio_Lambrini")
-			sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+			sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 			sld.dialog.currentnode   = "Octavio_3_1";
 			DeleteAttribute(pchar, "questTemp.PDM_CL_Ishem");
 			PChar.quest.PDM_CL_Antonio_Ubit.over = "yes";

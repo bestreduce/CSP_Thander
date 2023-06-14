@@ -474,7 +474,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.name = "Бартоломью";
 			sld.lastname = "Ольстер";
 			LAi_SetCitizenType(sld);
-			sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+			sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 			sld.dialog.currentnode   = "First_time";
 			sld.sex = "man";
 			sld.City = "Havana";
@@ -1555,7 +1555,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("PDM_Novaya_Rodina", "5");
 			AddQuestUserData("PDM_Novaya_Rodina", "sSex", GetSexPhrase("","а"));
 			sld = CharacterFromID("Hugo_Lesopilka")
-			sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+			sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 			sld.dialog.currentnode   = "Novoe_Zadanie_1";
 			ChangeCharacterAddressGroup(sld,"Havana_Town","goto","goto2");
 			LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");

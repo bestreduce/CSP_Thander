@@ -706,7 +706,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			FantomMakeCoolFighter(sld, sti(pchar.rank), 15, 15, "blade7", "", 0);
 			sld.name	= "Кристофер";
 			sld.lastname	= "Клейстон";
-			sld.Dialog.Filename = "Quest/PDM/Black_Yosh.c";
+			sld.Dialog.Filename = "Quest\PDM\Black_Yosh.c";
 			LAi_SetSitType(sld);
 			LAi_SetImmortal(sld, true);
 			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");

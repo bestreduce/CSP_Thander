@@ -10422,7 +10422,7 @@ void PDM_Callow_RodjerProdolg(string qName)
 	AddItems(sld, "mineral5", 3);
 	ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto2");
 	LAi_SetActorType(sld);
-	sld.dialog.filename   = "Quest/PDM/Cursed_Idol.c";
+	sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 	sld.dialog.currentnode   = "FraOff_1";
 	LAi_ActorDialog(sld, pchar, "", -1, 0);
 	int j;
@@ -10499,7 +10499,7 @@ void PDM_Zoloto_ne_tonet_BITVA_na_sushe(string qName)
 		sld.greeting = "GR_Spainguard";
 		LAi_SetWarriorType(sld);
 		sld.lifeday = 0;
-		sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+		sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 		sld.dialog.currentnode   = "Novoe_Zadanie_ZaIspaniu";
 		LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
         ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto13");
@@ -10513,7 +10513,7 @@ void PDM_Zoloto_ne_tonet_BITVA_na_sushe(string qName)
 		sld.greeting = "GR_Spainguard";
 		LAi_SetWarriorType(sld);
 		sld.lifeday = 0;
-		sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+		sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 		sld.dialog.currentnode   = "Novoe_Zadanie_ZaIspaniu";
 		LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
         ChangeCharacterAddressGroup(sld, pchar.location, "item",  "item10");
@@ -10525,7 +10525,7 @@ void PDM_Zoloto_ne_tonet_BITVA_na_sushe(string qName)
 		sld.greeting = "GR_Spainguard";
 		LAi_SetWarriorType(sld);
 		sld.lifeday = 0;
-		sld.dialog.filename   = "Quest/PDM/Novaya_Rodina.c";
+		sld.dialog.filename   = "Quest\PDM\Novaya_Rodina.c";
 		sld.dialog.currentnode   = "Novoe_Zadanie_ZaIspaniu";
         LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
         ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto10");
@@ -10564,7 +10564,7 @@ void Sinistra_TEST(string qName)
 void PDM_ONV_NaRabotu(string qName)
 {
 	LAi_SetPlayerType(pchar);
-	StartInstantDialogNoType("PDM_ONV_Glavny_Guber_KLON", "RazgovorSGuberom_7", "Quest/PDM/Ohota_na_vedmu.c");
+	StartInstantDialogNoType("PDM_ONV_Glavny_Guber_KLON", "RazgovorSGuberom_7", "Quest\PDM\Ohota_na_vedmu.c");
 }
 void PDM_ONV_Kazn(string qName)
 {
@@ -10575,7 +10575,7 @@ void PDM_ONV_Kazn_2(string qName)
 {
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("PDM_ONV_Podjigatel")
-	sld.dialog.filename   = "Quest/PDM/Ohota_na_vedmu.c";
+	sld.dialog.filename   = "Quest\PDM\Ohota_na_vedmu.c";
 	sld.dialog.currentnode   = "Inqizitor_Kazn_3";
 	LAi_SetActorType(sld);
 	LAi_ActorDialog(sld, pchar, "", 0, 0);
@@ -10693,7 +10693,7 @@ void PDM_CL_Ubrat_Lodku(string qName)
 	FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "pistol2", DopHP);
 	sld.nonTable = true;
 	LAi_SetSitType(sld);
-	sld.Dialog.Filename = "Quest/PDM/Clan_Lambrini.c";
+	sld.Dialog.Filename = "Quest\PDM\Clan_Lambrini.c";
 	sld.dialog.currentnode   = "Antonio_2_1";
 	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 	sld.city = "Maracaibo";
@@ -10778,7 +10778,7 @@ void PKM_SvtvA_Malta_na_pomosh_2(string qName)
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("FortFrance_Priest");
 	LAi_SetActorType(sld);
-	sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+	sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 	sld.dialog.currentnode = "Победа_в Церкви";
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
 }
@@ -10857,7 +10857,7 @@ void PKM_SvtvA_RazgovorZKnyazem5(string qName)
 {	
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("Chernoe_Solntse");
-	sld.dialog.filename = "Quest/PKM/Strannie_veshi_tvorytsya_v_arhipelage.c";
+	sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 	sld.dialog.currentnode = "Лорд_Хаоса_1";
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
 }
@@ -11562,7 +11562,7 @@ void KSM_Snr_Nashli_Ship(string qName)
 	TakeNItems(sld, "potionwine", 2);
 	AddMoneyToCharacter(sld, 2000);
 	ChangeCharacterAddressGroup(sld, "WreckedShip", "rld", "aloc14");
-	sld.Dialog.Filename = "Quest/KSM/Spasenie_na_rifah.c";
+	sld.Dialog.Filename = "Quest\KSM\Spasenie_na_rifah.c";
 	sld.dialog.currentnode   = "REEFS";
 	
 	//Наши матросы

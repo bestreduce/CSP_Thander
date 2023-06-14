@@ -83,7 +83,7 @@ void ProcessDialogEvent()
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_Markus", "prison_3", "man", "man", 10, HOLLAND, -1, false));
 			sld.name	= "Будевин";
 			sld.lastname	= "";
-			sld.Dialog.Filename = "Quest/PDM/Aptekar.c";
+			sld.Dialog.Filename = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Markus_1";
 			LAi_SetGroundSitType(sld);
 			LAi_SetImmortal(sld, true);
@@ -132,7 +132,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("PDM_Aptekar", "sSex2", GetSexPhrase("","а"));
 			
 			sld = CharacterFromID("Doktor_Alumnus");
-			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+			sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Alumnus_VtoroeZadanie";
 		break;
 
@@ -172,7 +172,7 @@ void ProcessDialogEvent()
 			sld.greeting = "GR_Pablo_Loco";
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 			LAi_SetStayType(sld);
-			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+			sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Pablo_Loco_FT";
 			ChangeCharacterAddressGroup(sld,"Shore68","quest","quest18");
 
@@ -347,7 +347,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Aptekar", "8");
 
 			sld = CharacterFromID("Doktor_Alumnus");
-			sld.dialog.filename   = "Quest/PDM/Aptekar.c";
+			sld.dialog.filename   = "Quest\PDM\Aptekar.c";
 			sld.dialog.currentnode   = "Alumnus_Finish_Zadanie";
 		break;
 

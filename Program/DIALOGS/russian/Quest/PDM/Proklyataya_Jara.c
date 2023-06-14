@@ -70,7 +70,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.PDM_PJ_KV = "KupitVino";
 			pchar.questTemp.PDM_PJ_SS = "SdatSoldata";
 			sld = CharacterFromID("PDM_PJ_Strajnik_1");
-			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+			sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Mne_Jarko_5_EsheRaz";
 		break;
 
@@ -128,7 +128,7 @@ void ProcessDialogEvent()
 		case "A_Eto_eshe_ne_vse":
 			DialogExit();
 			sld = CharacterFromID("PDM_PJ_Strajnik_2");
-			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+			sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Ya_Toje_Hochu_1";
 			LAi_SetActorType(sld);
 			LAi_ActorDialog(sld, pchar, "", 0.0, 0);
@@ -176,7 +176,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Proklyataya_Jara", "3");
 			pchar.questTemp.PDM_PJ_KR = "KupitRom";
 			sld = CharacterFromID("PDM_PJ_Strajnik_2");
-			sld.Dialog.Filename = "Quest/PDM/Proklyataya_Jara.c";
+			sld.Dialog.Filename = "Quest\PDM\Proklyataya_Jara.c";
 			sld.dialog.currentnode = "Ya_Toje_Hochu_5_EsheRaz";
 			LAi_SetGuardianType(sld);
 			LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");

@@ -85,7 +85,7 @@ void ProcessDialogEvent()
 			sld.location.group = "sit";
 			sld.location.locator = "sit12";
 			LAi_SetSitType(sld);
-			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.filename   = "Quest\PDM\Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Viktor";
 
 			SetQuestHeader("PDM_Neputyovy_kaznachey");
@@ -178,7 +178,7 @@ void ProcessDialogEvent()
 			
 			sld = CharacterFromID("PDM_NK_Viktor");
 			sld.lifeday = 0;
-			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.filename   = "Quest\PDM\Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Viktor_Poka";
 			
 			sld = CharacterFromID("Andreas_Fickler");
@@ -204,11 +204,11 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Commerce", 220);
 			AddCharacterExpToSkill(pchar, "Sneak", 150);
 			sld = CharacterFromID("PDM_NK_Viktor");
-			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.filename   = "Quest\PDM\Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Viktor_Poka";
 			sld.lifeday = 0;
 			sld = CharacterFromID("Andreas_Fickler");
-			sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
+			sld.dialog.filename   = "Quest\PDM\Neputyovy_kaznachey.c";
 			sld.dialog.currentnode   = "Fickler_11";
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "3");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("","а"));

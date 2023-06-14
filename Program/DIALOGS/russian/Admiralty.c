@@ -50,7 +50,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.AnjelikaTichPrologue3_1 = "ATP3_1";
 			
 			sld = CharacterFromID("SantoDomingo_Mayor")
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "ATpr_SD_Gubernator_1";
 			LAi_SetStayType(sld);
 			ChangeCharacterAddressGroup(sld,"SantoDomingo_Admiralty","quest","quest4");

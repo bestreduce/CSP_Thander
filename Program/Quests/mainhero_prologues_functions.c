@@ -327,7 +327,7 @@ void AnjelikaTich_StartGame(string qName)
 	sld = GetCharacter(NPC_GenerateCharacter("AT_pr_Rebekka", "RebekkaRemedios", "woman", "YokoDias", 10, SPAIN, -1, false));
 	sld.name	= "Ребекка";
 	sld.lastname	= "Ремедиос";
-	sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	LAi_SetActorType(sld);
 	LAi_SetImmortal(sld, true);
 	ChangeCharacterAddressGroup(sld,"LaVega_MH12","goto","goto8");
@@ -398,7 +398,7 @@ void AT_pr_Torgovets_6_2(string qName)
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("Gasten_Kotes")
 	//LAi_SetActorType(sld);
-	sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	sld.dialog.currentnode = "Torgovets_6_3";
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
 }
@@ -460,7 +460,7 @@ void AT_pr_Grot_3(string qName)
 {
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("AT_pr_Rebekka")
-	sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	sld.dialog.currentnode = "Rebekka_v_grote_1";
 	//LAi_SetActorType(sld);
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
@@ -479,7 +479,7 @@ void AT_pr_Strelba_is_pushki_3(string qName)
 {
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("AT_pr_Rebekka")
-	sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	sld.dialog.currentnode = "Rebekka_v_grote_8";
 	//LAi_ActorDialog(sld, pchar, "", 0.0, 0);
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
@@ -503,7 +503,7 @@ void AT_pr_Strelba_is_pushki_6(string qName)
 {
 	LAi_SetPlayerType(pchar);
 	sld = CharacterFromID("AT_pr_Rebekka")
-	sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	sld.dialog.currentnode = "Rebekka_v_grote_11";
 	//LAi_ActorDialog(sld, pchar, "", 0.0, 0);
 	LAi_ActorDialogNow(sld, Pchar, "", -1);
@@ -524,7 +524,7 @@ void AT_pr_Piraty_v_grote_2(string qName)
 {
 	sld = CharacterFromID("AT_pr_Piraty_1")
 	LAi_ActorDialog(sld, pchar, "", 2.3, 0);
-	sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+	sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 	sld.dialog.currentnode = "Pirate_v_grote_1";
 	DoQuestFunctionDelay("AT_pr_Piraty_v_grote_3", 2.3);
 }
@@ -1071,7 +1071,7 @@ void ATpr_SvobodaIgry(string qName)
 	sld = CharacterFromID("AT_pr_devushka_na_rynke")
 	sld.lifeday = 0;
 	sld = CharacterFromID("Old Friend")
-	sld.Dialog.Filename = "Quest/SilencePrice/Luke.c";
+	sld.Dialog.Filename = "Quest\SilencePrice\Luke.c";
 	sld.dialog.currentnode = "First Time";
 }
 

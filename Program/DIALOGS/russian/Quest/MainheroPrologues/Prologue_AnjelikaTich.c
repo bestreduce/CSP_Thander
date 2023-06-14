@@ -96,7 +96,7 @@ void ProcessDialogEvent()
 			sld.name	= "Аурелио";
 			sld.lastname	= "Серрано";
 			sld.SaveItemsForDead = true;
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "LaVegaIspanski_Gubernator";
 			LAi_SetHuberType(sld);
 			LAi_SetImmortal(sld, true);
@@ -121,7 +121,7 @@ void ProcessDialogEvent()
 			SetShipSkill(sld, 27, 45, 21, 14, 18, 21, 13, 9, 28);
 			TakeNItems(sld,"potion1", -10);
 			TakeNItems(sld,"potion2", -10);
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "Torgovets_1";
 			LAi_SetStayType(sld);
 			LAi_SetImmortal(sld, true);
@@ -138,7 +138,7 @@ void ProcessDialogEvent()
 			
 			//Какой-то мужик со шляпой
 			sld = CharacterFromID("Old Friend")
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "man_shlyapa";
 			DeleteAttribute(sld, "talker");
 		break;
@@ -372,7 +372,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("AT_pr_devushka_na_rynke")
 			LAi_SetCitizenType(sld);
 			ChangeCharacterAddressGroup(sld, "LaVega_town", "goto", "goto2");
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "Sofia_1";
 			
 			DialogExit();
@@ -624,7 +624,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "SantoDomingo_town", "officers", "Reload3_1");
 			LAi_SetLoginTime(sld, 6.0, 21.99);
 			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "AT_pr_Officer_u_rezidenta";
 			sld.talker = 5;
 			
@@ -855,7 +855,7 @@ void ProcessDialogEvent()
 			chrDisableReloadToLocation = false;
 			
 			sld = CharacterFromID("SantoDomingo_Mayor")
-			sld.Dialog.Filename = "Quest/MainheroPrologues/Prologue_AnjelikaTich.c";
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Prologue_AnjelikaTich.c";
 			sld.dialog.currentnode = "ATpr_SD_Gubernator_20";
 			LAi_SetHuberType(sld);
 			ChangeCharacterAddressGroup(sld,"SantoDomingo_townhall","sit","sit1");
