@@ -26,6 +26,8 @@ string sMessageMode;
 bool bTransferMode;
 bool bSwap;
 bool bShipScrollEnabled = false;
+string textvalue = "Число передаваемых товаров (клик для ввода, ENTER для подтверждения)";
+int qtytogive = 0;
 
 void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _type)
 {
@@ -112,6 +114,7 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 	SetEventHandler("GoodsExitCancel", "GoodsExitCancel", 0);
 	SetEventHandler("TransactionOK", "TransactionOK", 0);
 	SetEventHandler("confirmChangeQTY_EDIT", "confirmChangeQTY_EDIT", 0);
+	SetEventHandler("confirmChangeQTY_TO_GIVE", "confirmChangeQTY_TO_GIVE", 0);
 	SetEventHandler("ExitShipChangeMenu", "ExitShipChangeMenu", 0);
 	SetEventHandler("ShowOtherClick", "ShowOtherClick", 0);
 	SetEventHandler("GoToShipChange", "GoToShipChange", 0);
@@ -272,6 +275,7 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 		SetNodeUsing("SHIPS_RIGHTSCROLLBUTTON",false);
 		SetNodeUsing("SHIPS_SCROLL_FRAME",false);
 	}
+	SetFormatedText("QTY_TO_GIVE_TEXT",textvalue);
 }
 
 void FillShipsScroll()
@@ -435,6 +439,7 @@ void IDoExit(int exitCode)
 	DelEventHandler("GoodsExitCancel", "GoodsExitCancel");
 	DelEventHandler("TransactionOK", "TransactionOK");
 	DelEventHandler("confirmChangeQTY_EDIT", "confirmChangeQTY_EDIT");
+	DelEventHandler("confirmChangeQTY_TO_GIVE", "confirmChangeQTY_TO_GIVE");
 	DelEventHandler("ExitShipChangeMenu", "ExitShipChangeMenu");
 	DelEventHandler("ShowOtherClick", "ShowOtherClick");
 	DelEventHandler("GoToShipChange", "GoToShipChange");
@@ -1405,6 +1410,11 @@ void TransactionOK()
 	//SetShipOTHERTable("TABLE_OTHER", xi_refCharacter);
 }
 
+void confirmChangeQTY_TO_GIVE()
+{
+	qtytogive = abs(sti(GameInterface.QTY_TO_GIVE_EDIT.str));
+}
+
 void confirmChangeQTY_EDIT()
 {
 	ChangeQTY_EDIT();
@@ -2085,6 +2095,7 @@ void TakeGoods(int inc)
 	{
 		idx = sti(GameInterface.(CurTable).(CurRow).index);
 		inc = sti(Goods[idx].Units) * inc;
+		if (qtytogive > 0) inc = qtytogive;
 		if (inc > GetCargoGoods(xi_refCharacter, idx)) inc = GetCargoGoods(xi_refCharacter, idx);
 		if (inc > 0)
 		{
@@ -2111,6 +2122,7 @@ void GiveGoods(int inc)
 	{
 		idx = sti(GameInterface.(CurTable).(CurRow).index);
 		inc = sti(Goods[idx].Units) * inc;
+		if (qtytogive > 0) inc = qtytogive;
 		if (inc > GetCargoGoods(refCharacter, idx)) inc = GetCargoGoods(refCharacter, idx);
 		if (inc > 0)
 		{
