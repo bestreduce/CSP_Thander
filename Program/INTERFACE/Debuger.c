@@ -1039,7 +1039,7 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_LEOPARD, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FWZP, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_CONSTITUTION_H_H_H, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_CONSTITUTION, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_DUTCHLINESHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_DUTCHSHIP, true, mc);
@@ -1055,19 +1055,19 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_POSEIDON, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CENTURION, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_RESOLUTION, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_BELLONA, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_REDOUTABLE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SUPERBE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_RUITER, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BELLONA_H, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_REDOUTABLE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_LINK2, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_IMPLACABLE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_PAVEL, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BELLONA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ZEVENPROVINCIEN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_BUCENTAURE, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_CRISTIAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SANTAANA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_TRINITY, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SANFELIPE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_PRINCE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_CRISTIAN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_TRINITY, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_PRINCE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ZWAAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_MANOWAR, true, mc);
@@ -2588,11 +2588,11 @@ void CalculateInfoDataF54()
 	// FantomMakeCoolSailor(sld, SHIP_RESOLUTION, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_SUPERBE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_RUITER, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
-	// FantomMakeCoolSailor(sld, SHIP_BELLONA_H, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_BELLONA, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_REDOUTABLE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_LINK2, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
+	// FantomMakeCoolSailor(sld, SHIP_IMPLACABLE, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_PAVEL, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
-	// FantomMakeCoolSailor(sld, SHIP_BELLONA, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_ZEVENPROVINCIEN, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_SANTAANA, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ
 	// FantomMakeCoolSailor(sld, SHIP_TRINITY, "Тестовый корабль", CANNON_TYPE_CANNON_LBS42, 50, 60, 70); //КОРАБЛЬ

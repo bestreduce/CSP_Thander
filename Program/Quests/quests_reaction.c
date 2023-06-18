@@ -4364,7 +4364,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 3:
-                        ShipType = SHIP_LINK2;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 33;
                         Blade = "blade24";
@@ -5023,7 +5023,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_PAVEL;
+                        ShipType = SHIP_IMPLACABLE;
                         Model = "SpaOfficer2";
                         Rank = 28;
                         Blade = "blade24";
@@ -5297,7 +5297,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 4:
-                        ShipType = SHIP_PAVEL;
+                        ShipType = SHIP_IMPLACABLE;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade24";
@@ -6886,7 +6886,7 @@ void QuestComplete(string sQuestName, string qname)
             // ==> Испанский кэп
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_spa_1", "man", "man", 35, SPAIN, -1, true));
 			sld.DontRansackCaptain = true;
-			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION_H, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
+			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
             FantomMakeCoolFighter(sld, 35, 100, 90, BLADE_LONG, "pistol3", 150);
     		Group_AddCharacter("Spa_Attack", "CaptainAttack_1");
             // ==> стравливание
@@ -6969,7 +6969,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_LINK2;
+                        ShipType = SHIP_SANTAANA;
                         Rank = 38;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CANNON_LBS32;
@@ -7929,7 +7929,7 @@ void QuestComplete(string sQuestName, string qname)
 					break;
 					case 2:
 						iCannonType = CANNON_TYPE_CANNON_LBS32;
-						iShipType = SHIP_PAVEL;
+						iShipType = SHIP_IMPLACABLE;
 						sShipName = "";
 						Blade = "topor2";
 					break;

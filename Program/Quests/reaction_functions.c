@@ -9973,7 +9973,7 @@ void Create_Ja(string qName)//cоздаем Фрегат "Ахерон" с Дж�
 	sld.HeroModel = "QuestCaptain,QuestCaptain_1,QuestCaptain_2,QuestCaptain_3,QuestCaptain_4,QuestCaptain_5,QuestCaptain,QuestCaptain,QuestCaptain";
 	// Прописка всех моделей для кирас. <--
 	FantomMakeCoolFighter(sld, 35, 75, 75, "blade14", "pistol6", 100);
-	FantomMakeCoolestSailor(sld, SHIP_CONSTITUTION_H, "Ахерон", CANNON_TYPE_CANNON_LBS32, 80, 80, 80); // LEO: убрал оверапы калибров
+	FantomMakeCoolestSailor(sld, SHIP_CONSTITUTION, "Ахерон", CANNON_TYPE_CANNON_LBS32, 80, 80, 80); // LEO: убрал оверапы калибров
 	DeleteAttribute(sld, "SinkTenPercent");
 	DeleteAttribute(sld, "AboardToFinalDeck");
 	sld.AlwaysSandbankManeuver = true;

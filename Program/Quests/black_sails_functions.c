@@ -1323,8 +1323,8 @@ void BSUrka_Curacao_SeaBattle()
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, sld);
 		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
-		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA_H, true, sld);
-		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_LINK2, true, sld);
+		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA, true, sld);
+		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_SANTAANA, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 
 		sld.ship.Crew.Morale = 100;
