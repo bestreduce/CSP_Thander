@@ -128,10 +128,10 @@ void InitShips()
 	refship.InertiaAccelerationZ	= 0.15;	refship.InertiaBrakingZ		= 0.05;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Tartane			Баркас
+	//// Leudo			Леудо
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_TARTANE]);
-	refShip.Name								= "Tartane";
+	makeref(refShip,ShipsTypes[SHIP_LEUDO]);
+	refShip.Name								= "Leudo";
 	refship.Soundtype							= "lugger";
 	refShip.Class								= 7;
 	refShip.Cannon								= CANNON_TYPE_NONECANNON;
@@ -194,10 +194,10 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Wartartane			Тартана
+	/// Tartane			Тартана
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_WARTARTANE]);
-	refShip.Name								= "Wartartane";
+	makeref(refShip,ShipsTypes[SHIP_TARTANE]);
+	refShip.Name								= "Tartane";
 	refship.Soundtype							= "lugger";
 	refShip.Class								= 7;
 	refShip.Cannon								= CANNON_TYPE_CANNON_LBS8;
@@ -774,10 +774,10 @@ void InitShips()
 	refShip.hullNums = 7; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// FR_Sloop			Пир. Шлюп
+	/// Sloop_b			Пир. Шлюп
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_FR_SLOOP]);
-	refShip.Name            			= "FR_Sloop";
+	makeref(refShip,ShipsTypes[SHIP_SLOOP_B]);
+	refShip.Name            			= "Sloop_b";
 	refship.Soundtype					= "lugger";
 	refShip.Class						= 6;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -849,10 +849,10 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Galeoth_h			Галеот
+	/// Galeoth			Галеот
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_Galeoth_h]);
-	refShip.Name            			= "Galeoth_h";
+	makeref(refShip,ShipsTypes[SHIP_GALEOTH]);
+	refShip.Name            			= "Galeoth";
 	refship.Soundtype					= "lugger";
 	refShip.Class						= 6;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -995,10 +995,10 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Sloop_b			Боевой Шлюп
+	/// Sloop_h			Боевой Шлюп
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_SLOOP_B]);
-	refShip.Name            			= "Sloop_b";
+	makeref(refShip,ShipsTypes[SHIP_SLOOP_H]);
+	refShip.Name            			= "Sloop_h";
 	refship.Soundtype					= "lugger";
 	refShip.Class						= 6;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -5073,10 +5073,10 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// TheBlackPearl			Пир. Галеон
+	/// Nao			Пир. Галеон
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_THEBLACKPEARL]);
-	refShip.Name            		= "TheBlackPearl";
+	makeref(refShip,ShipsTypes[SHIP_NAO]);
+	refShip.Name            		= "Nao";
 	refship.Soundtype				= "frigate";
 	refShip.Class					= 3;
 	refShip.Cannon          		= CANNON_TYPE_CANNON_LBS8;
@@ -5235,10 +5235,10 @@ void InitShips()
 	refShip.hullNums = 27; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Galeon1			Исп. Тяж. Галеон
+	/// Galeon			Исп. Тяж. Галеон
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_GALEON1]);
-	refShip.Name            			= "Galeon1";
+	makeref(refShip,ShipsTypes[SHIP_GALEON]);
+	refShip.Name            			= "Galeon";
 	refship.Soundtype					= "corvette";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -5398,10 +5398,10 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// PiratFastGal			Пир. Быстрый Галеон
+	/// Navio			Навио
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_PIRATFASTGAL]);
-	refShip.Name            			= "PiratFastGal";
+	makeref(refShip,ShipsTypes[SHIP_NAVIO]);
+	refShip.Name            			= "Navio";
 	refship.Soundtype					= "corvette";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -6337,10 +6337,10 @@ void InitShips()
 	refShip.Capacity        			= 3000;
 	refShip.MaxCannonDiff						= 3;
 	refShip.CannonsQuantity						= 46;
-	refShip.rcannon 							= 21;
-	refShip.lcannon 							= 21;
+	refShip.rcannon 							= 20;
+	refShip.lcannon 							= 20;
 	refShip.fcannon 							= 2;
-	refShip.bcannon 							= 2;
+	refShip.bcannon 							= 4;
 	refShip.MaxCrew         				= 300;
 	refShip.MinCrew         				= 60;
 	refShip.SpeedRate       		= 13;
@@ -6360,7 +6360,7 @@ void InitShips()
 	refship.Rocking.y = 0.4;
 	refship.Rocking.az = 0.035;
 
-	refship.WaterLine							= 0.0;
+	refship.WaterLine							= -0.3;
 
 	refship.SpeedDependWeight			= 0.2;
 	refship.SubSeaDependWeight			= 1.0;
@@ -6411,10 +6411,10 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Diana			Линкор 3-го класса
+	/// Frigate_h			Линкор 3-го класса
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_DIANA]);
-	refShip.Name            			= "Diana";
+	makeref(refShip,ShipsTypes[SHIP_FRIGATE_H]);
+	refShip.Name            			= "Frigate_h";
 	refship.Soundtype					= "corvette";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -6646,10 +6646,10 @@ void InitShips()
 	refShip.hullNums = 27; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Neptun			Боевой Фрегат
+	/// Diana			Боевой Фрегат
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_NEPTUN]);
-	refShip.Name            			= "Neptun";
+	makeref(refShip,ShipsTypes[SHIP_DIANA]);
+	refShip.Name            			= "Diana";
 	refship.Soundtype					= "frigate";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -6657,11 +6657,11 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(920);
 	refShip.Capacity        			= 3200;
 	refShip.MaxCannonDiff						= 4;
-	refShip.CannonsQuantity						= 46;
-	refShip.rcannon 							= 20;
-	refShip.lcannon 							= 20;
+	refShip.CannonsQuantity						= 48;
+	refShip.rcannon 							= 22;
+	refShip.lcannon 							= 22;
 	refShip.fcannon 							= 2;
-	refShip.bcannon 							= 4;
+	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 320;
 	refShip.MinCrew         				= 64;
 	refShip.SpeedRate       		= 13.6;
@@ -6678,7 +6678,7 @@ void InitShips()
 
 	refship.Rocking.y 					= 0.4;
 	refship.Rocking.az 					= 0.035;
-	refship.WaterLine					= -0.4;
+	refship.WaterLine					= 0.0;
 
 	refship.SpeedDependWeight			= 0.3;
 	refship.SubSeaDependWeight			= 1.0;
@@ -6799,7 +6799,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Endymion			Тяж. Фрегат
+	/// Endymion			Военный Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ENDYMION]);
 	refShip.Name            			= "Endymion";
@@ -6810,9 +6810,9 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(1200);
 	refShip.Capacity        			= 3500;
 	refShip.MaxCannonDiff						= 4;
-	refShip.CannonsQuantity						= 48;
-	refShip.rcannon 							= 22;
-	refShip.lcannon 							= 22;
+	refShip.CannonsQuantity						= 52;
+	refShip.rcannon 							= 24;
+	refShip.lcannon 							= 24;
 	refShip.fcannon 							= 2;
 	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 320;
@@ -8050,10 +8050,10 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Retvisan			Варшип
+	/// Rattvisan			Варшип
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_RETVISAN]);
-	refShip.Name            			= "Retvisan";
+	makeref(refShip,ShipsTypes[SHIP_RATTVISAN]);
+	refShip.Name            			= "Rattvisan";
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -10268,10 +10268,10 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Corvette_quest			Чёрная Жемчужина
+	/// BlackPearl			Чёрная Жемчужина
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_CORVETTE_QUEST]);
-	refShip.Name            			= "Corvette_quest";
+	makeref(refShip,ShipsTypes[SHIP_BLACKPEARL]);
+	refShip.Name            			= "BlackPearl";
 	refship.Soundtype					= "corvette";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;

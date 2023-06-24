@@ -546,7 +546,7 @@ void SeaPearl_login(string qName)
 	{
 		sTemp = "PearlCapitain_" + j;
 		sld = GetCharacter(NPC_GenerateCharacter(sTemp, "trader_"+(rand(15)+1), "man", "man", 10, PIRATE, 30, true));
-		sld.Ship.Type = GenerateShip(SHIP_TARTANE, false);
+		sld.Ship.Type = GenerateShip(SHIP_LEUDO, false);
 		SetRandomNameToShip(sld);
 		SetBaseShipData(sld);
 		SetCrewQuantityFull(sld);
@@ -921,7 +921,7 @@ void PQ4_SeaPearl_login(string qName)
 	{
 		sTemp = "PearlCapitain_" + j;
 		sld = GetCharacter(NPC_GenerateCharacter(sTemp, "trader_"+(rand(15)+1), "man", "man", 10, PIRATE, 30, true));
-		sld.Ship.Type = GenerateShip(SHIP_TARTANE, false);
+		sld.Ship.Type = GenerateShip(SHIP_LEUDO, false);
 		SetRandomNameToShip(sld);
 		SetBaseShipData(sld);
 		SetCrewQuantityFull(sld);

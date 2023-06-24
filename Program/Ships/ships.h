@@ -4,8 +4,8 @@
 
 //====================================================================================================================================================================================================================
 //7
-#define SHIP_TARTANE				0
-#define SHIP_WARTARTANE				1
+#define SHIP_LEUDO  				0
+#define SHIP_TARTANE				1
 #define SHIP_FELUCA		        	2
 //====================================================================================================================================================================================================================
 //6 пушки(8-12)
@@ -15,10 +15,10 @@
 #define SHIP_LUGGER					6
 #define SHIP_LUGGER_H				7
 #define SHIP_SPEEDY					8
-#define SHIP_FR_SLOOP				9
-#define SHIP_GALEOTH_H				10
+#define SHIP_SLOOP_B				9
+#define SHIP_GALEOTH				10
 #define SHIP_SLOOP					11
-#define SHIP_SLOOP_B				12
+#define SHIP_SLOOP_H				12
 #define SHIP_NEPTUNUS        	 	13
 #define SHIP_VEINARD				14
 //====================================================================================================================================================================================================================
@@ -77,11 +77,11 @@
 #define SHIP_RAAFRIGATE				62
 #define SHIP_FR_FRIGATE				63
 #define SHIP_EASTINDIAMAN			64
-#define SHIP_THEBLACKPEARL			65
+#define SHIP_NAO			        65
 #define SHIP_GALEON_H				66
-#define SHIP_GALEON1				67
+#define SHIP_GALEON 				67
 #define SHIP_LA_MARIANNA			68
-#define SHIP_PIRATFASTGAL			69
+#define SHIP_NAVIO      			69
 #define SHIP_UNICORN				70
 #define SHIP_REVENGE				71
 #define SHIP_HERMIONE   			72
@@ -94,12 +94,12 @@
 #define SHIP_FASTFRIGATE			79
 #define SHIP_MORDAUNT				80
 #define SHIP_FRIGATE				81
-#define SHIP_DIANA	    			82
+#define SHIP_FRIGATE_H	    		82
 #define SHIP_CARRACA				83
 //====================================================================================================================================================================================================================
 //2 пушки(24-32)
 #define SHIP_VASA	    			84
-#define SHIP_NEPTUN      			85
+#define SHIP_DIANA      			85
 #define SHIP_INDEFATIGABLE			86
 #define SHIP_ENDYMION  			    87
 #define SHIP_GALEON_SANTIAGO		88
@@ -117,7 +117,7 @@
 #define SHIP_CROWN					100
 #define SHIP_AGAMEMNON              101
 #define SHIP_INGERMANLAND			102
-#define SHIP_RETVISAN   			103
+#define SHIP_RATTVISAN   			103
 #define SHIP_WAPEN_VON_HAMBURG      104
 //====================================================================================================================================================================================================================
 //1 пушки(42)
@@ -149,7 +149,7 @@
 #define SHIP_BRIGVALCIRIA			128
 #define SHIP_XEBEKVML				129
 #define SHIP_CLIPPER				130
-#define SHIP_CORVETTE_QUEST			131
+#define SHIP_BLACKPEARL 			131
 #define SHIP_WH_CORVETTE_QUEST		132
 #define SHIP_MEFISTO        		133
 #define SHIP_ARABELLA				134

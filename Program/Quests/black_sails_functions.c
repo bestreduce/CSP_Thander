@@ -277,7 +277,7 @@ void BSOnTheHorizon_SeaBattle()
 		sld = GetCharacter(NPC_GenerateCharacter("BSOnTheHorizon_enemyfleet"+i, "off_eng_"+(rand(1)+1), "man", "man", 999, ENGLAND, -1, true));
 		if (i == 1)
 		{
-			sld.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, sld);
+			sld.Ship.Type = GenerateShipExt(SHIP_DIANA, true, sld);
 			sld.Ship.Name = "Денуво";
 			sld.Name = "Денуво";
 			sld.Lastname = "Антитампер";
@@ -791,7 +791,7 @@ void BSChaseBegun_shore_fight()
 		sld = GetCharacter(NPC_GenerateCharacter("BSChaseBegun_shore_fight"+i, "pirate_"+sti(rand(24)+1), "man", "man", 99, PIRATE, 3, true));
 		ChangeCharacterAddressGroup(sld, "Shore_ship1", "reload", "reload1_back"));
 		LAi_group_MoveCharacter(sld, "BSChaseBegun_shore_fight");
-		sld.Ship.Type = GenerateShip(SHIP_TARTANE, false);
+		sld.Ship.Type = GenerateShip(SHIP_LEUDO, false);
 		LAi_SetWarriorTypeNoGroup(sld);
 		//LAi_warrior_DialogEnable(sld, false);
 		cnd = "l" + i;
@@ -1195,7 +1195,7 @@ void BSBons_SeaBattle(bool bonsAdmiral)
 				{
 					if (!CheckAttribute(pchar, "BSBonsSpawned"))
 					{
-						FantomMakeCoolestSailor(sld, SHIP_NEPTUN, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
+						FantomMakeCoolestSailor(sld, SHIP_DIANA, "Фортуна", CANNON_TYPE_CANNON_LBS32, 100, 100, 100);
 						sld.Name = "Билли";
 						sld.Lastname = "Бонс";
 						sld.Model = "BS_Billy";

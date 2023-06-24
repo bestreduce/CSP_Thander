@@ -935,8 +935,8 @@ void CalculateInfoDataF6()
 	LAi_SetHP(mc, 600.0, 600.0);
 
 	// 7 класс
+	// mc.Ship.Type = GenerateShipExt(SHIP_LEUDO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_TARTANE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_WARTARTANE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FELUCA, true, mc);
 
 	// 6 класс
@@ -946,10 +946,10 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_LUGGER, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_LUGGER_H, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SPEEDY, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_FR_SLOOP, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_GALEOTH_H, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_SLOOP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SLOOP_B, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_GALEOTH, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_SLOOP, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_SLOOP_H, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_NEPTUNUS, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_VEINARD, true, mc);
 
@@ -1008,11 +1008,11 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_COASTALFRIGATE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FR_FRIGATE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_EASTINDIAMAN, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_THEBLACKPEARL, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_NAO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON_H, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON1, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_LA_MARIANNA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_PIRATFASTGAL, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_NAVIO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_UNICORN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_REVENGE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_HERMIONE, true, mc);
@@ -1025,12 +1025,12 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_FASTFRIGATE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_MORDAUNT, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_DIANA, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATE_H, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CARRACA, true, mc);
 
 	// 2 класс
 	// mc.Ship.Type = GenerateShipExt(SHIP_VASA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_NEPTUN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_DIANA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ENDYMION, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON_SANTIAGO, true, mc);
@@ -1048,7 +1048,7 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_CROWN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_AGAMEMNON, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_RETVISAN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_RATTVISAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_WAPEN_VON_HAMBURG, true, mc);
 
 	// 1 класс
@@ -1079,7 +1079,7 @@ void CalculateInfoDataF6()
 	mc.Ship.Type = GenerateShipExt(SHIP_BRIGVALCIRIA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGSW, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CLIPPER, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_CORVETTE_QUEST, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_BLACKPEARL, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_WH_CORVETTE_QUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ARABELLA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
@@ -1822,7 +1822,7 @@ void CalculateInfoDataF31()
 	SetRandShipSkill(mc, 100, 100);
 	LAi_SetHP(mc, 380.0, 380.0);
 	mc.rank = 25;
-//	mc.Ship.Type = GenerateShipExt(SHIP_CORVETTE_QUEST, true, mc);
+//	mc.Ship.Type = GenerateShipExt(SHIP_BLACKPEARL, true, mc);
 	mc.Ship.Type = GenerateShipExt(SHIP_ARABELLA, true, mc);
 //	mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
 	SetBaseShipData(mc);
@@ -2236,7 +2236,7 @@ void CalculateInfoDataF40()
 	totalInfo = descF40;
  	ref mc;
 	mc = GetMainCharacter();
-//	mc.Ship.Type = GenerateShipExt(SHIP_CORVETTE_QUEST, true, mc);
+//	mc.Ship.Type = GenerateShipExt(SHIP_BLACKPEARL, true, mc);
 	mc.Ship.Type = GenerateShipExt(SHIP_XebekVML, true, mc);
 //	mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
 	SetBaseShipData(mc);

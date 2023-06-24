@@ -226,7 +226,7 @@ void DefeatGoldFleet(string temp)
 
 			sld.mapEnc.Name = "штормовая эскадра разработчиков, в количестве 8 кораблей";
 			sld.mapEnc.type = "war";
-			FantomMakeCoolSailor(sld, rand(SHIP_WARTARTANE), "", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
+			FantomMakeCoolSailor(sld, rand(SHIP_TARTANE), "", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
 
 			sld.AlwaysEnemy = true;
 			sld.AlwaysSandbankManeuver = true;
