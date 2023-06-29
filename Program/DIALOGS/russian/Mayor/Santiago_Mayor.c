@@ -36,7 +36,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         //********************** Девятый квест англ.линейки: нападение на Сантьяго ************************
         case "EL9_SantiagoAttack":
 			dialog.text = "Ты победил"+ GetSexPhrase("","а") +", ладронка!";
-			link.l1 = "Сеньор, я не люблю, когда меня так называют. Я бы предпоч"+ GetSexPhrase("ел","ла") +", чтобы меня называли капером.";
+			link.l1 = "Сеньор, я не люблю, когда меня так называют. Я бы предпоч"+ GetSexPhrase("ёл","ла") +", чтобы меня называли капером.";
 			link.l1.go = "Step_E9_1";
 			AfterTownBattle();
         break;

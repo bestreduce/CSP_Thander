@@ -43,7 +43,7 @@ void ProcessDialogEvent()
 					LinkRandPhrase("Что тебе нужно, "+ GetSexPhrase("негодяй","мерзавка") +"?! Городская стража уже взяла твой след, далеко тебе не уйти"+ GetSexPhrase(", грязный пират!","") +"", "Грязн"+ GetSexPhrase("ый","ая") +" убийца, вон из моего дома! Стража!!", "Я не боюсь тебя, мерзав"+ GetSexPhrase("ец","ка") +"! Скоро тебя повесят в нашем форте, далеко тебе не уйти..."));
 				link.l1 = NPCharRepPhrase(pchar,
 					RandPhraseSimple("Хех, тревога для меня не проблема...", "Им меня ни за что не поймать."),
-					RandPhraseSimple("Заткни свою пасть, " + GetWorkTypeOfMan(npchar, "") + ", а не то вырву твой поганый язык!", "Хех, " + GetWorkTypeOfMan(npchar, "") + ", а все туда же - пиратов ловить! Вот что я тебе скажу, приятель: сиди тихо и будешь жить..."));
+					RandPhraseSimple("Заткни свою пасть, " + GetWorkTypeOfMan(npchar, "") + ", а не то вырву твой поганый язык!", "Хех, " + GetWorkTypeOfMan(npchar, "") + ", а всё туда же - пиратов ловить! Вот что я тебе скажу, приятель: сиди тихо и будешь жить..."));
 				link.l1.go = "exit";
 				break;
 			}
@@ -100,7 +100,7 @@ void ProcessDialogEvent()
 			//зачарованный город -->
 			if (pchar.questTemp.MC == "toCaracas" && npchar.city == "Caracas")
 			{
-				dialog.text = "Ради Бога, капитан, спасите! Они все, все погубят! Мою таверну!";
+				dialog.text = "Ради Бога, капитан, спасите! Они всё, всё погубят! Мою таверну!";
 				link.l1 = "Это ты оборотень, что ли?";
 				link.l1.go = "MCTavern";
 				break;
@@ -115,7 +115,7 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.MC == "toCaracasPadre" && npchar.city == "Caracas")
 			{
 				dialog.text = "Ну, что скажете, капитан? Вы нашли его?";
-				link.l1 = "Наш"+ GetSexPhrase("ел","ла") +". Но сейчас не время разговаривать, позже все расскажу...";
+				link.l1 = "Наш"+ GetSexPhrase("ел","ла") +". Но сейчас не время разговаривать, позже всё расскажу...";
 				link.l1.go = "exit";
 				break;
 			}

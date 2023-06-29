@@ -9,7 +9,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Нет вопросов...", "Сейчас мне не о чем говорить."), "Эх, опять...",
                       "Да, действительно лучше торговаться...", "Хм, извини, торговец...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
-			if (pchar.questTemp.PDM_PK_IshemKoltso == "IshemKoltso")	// Квест "Потерянное кольцо"
+			if (CheckAttribute(pchar, "questTemp.PDM_PK_IshemKoltso"))	// Квест "Потерянное кольцо"
             {
                 link.l1 = "Я разыскиваю кольцо, которое принадлежало... одному из моих знакомых. Довольно ценное кольцо. И это кольцо находится где-то в этом городе. Быть может, ты что-то слышал"+ NPCharSexPhrase(NPChar,"","а") +" о нём? Большой сапфир, в золотой оправе.";
                 link.l1.go = "IshemKoltso";

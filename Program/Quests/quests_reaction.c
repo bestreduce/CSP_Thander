@@ -5663,9 +5663,6 @@ void QuestComplete(string sQuestName, string qname)
         case "Sp5LaVegaAttack_FightWithMayor":
             chrDisableReloadToLocation = true; // закрыть выход из локации
             bDisableFastReload = true; // закрыть переходы.
-			//--> огонь и пламень
-			locations[FindLocation("LaVega_town")].hidden_effects = true;
-			//<-- огонь и пламень
             sld = GetCharacter(NPC_GenerateCharacter("LaVega_Comendant", "Mansfield", "man", "man", 35, PIRATE, -1, true));
             sld.Dialog.Filename = "Quest\SpaLineNpc_1.c";
         	sld.name 	= "Эдвард";
