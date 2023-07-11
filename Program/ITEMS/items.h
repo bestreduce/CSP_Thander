@@ -36,7 +36,7 @@
 #define IDOLS_RIGHT_ITEM_TYPE 				"idols_right"
 
 
-#define ITEMS_QUANTITY			  429  // не забываем менять номер
+#define ITEMS_QUANTITY			  430  // не забываем менять номер
 
 #define MAX_BUTTONS               64
 #define RANDITEMS_QUANTITY    	  61
@@ -46,7 +46,7 @@
 #define MAX_HANDLED_BOXES 		  25
 #define ITEM_PROBABILITY		  0.5
 #define OBJECTS_IN_BOX			  9
-#define MAPS_IN_ATLAS			  26 // ugeen 21.06.09  -не забываем увеличивать при появлении новых карт
+#define MAPS_IN_ATLAS			  27 // ugeen 21.06.09  -не забываем увеличивать при появлении новых карт
 
 object Items[ITEMS_QUANTITY];
 object RandItems[RANDITEMS_QUANTITY];
