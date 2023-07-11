@@ -118,7 +118,7 @@ int LocationInitBahames(int n)
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 
-	locations[n].reload.lgate.name = "gate_back";
+	locations[n].reload.lgate.name = "gate1";
 	locations[n].reload.lgate.go = "Nassau_ExitTown";
 	locations[n].reload.lgate.emerge = "reload2";
 	locations[n].reload.lgate.autoreload = "1";
