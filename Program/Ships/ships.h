@@ -18,7 +18,7 @@
 #define SHIP_SLOOP_B				9
 #define SHIP_GALEOTH				10
 #define SHIP_SLOOP					11
-#define SHIP_SLOOP_H				12
+#define SHIP_ALERT				    12
 #define SHIP_NEPTUNUS        	 	13
 #define SHIP_VEINARD				14
 //====================================================================================================================================================================================================================
@@ -52,8 +52,8 @@
 #define SHIP_CORVETTELIGHT			39
 #define SHIP_GREYHOUND			    40
 #define SHIP_PRINCE_H				41
-#define SHIP_ENTERPRISE				42
-#define SHIP_POLACRE_H				43
+#define SHIP_POLACRE_H				42
+#define SHIP_HERCULESU				43
 #define SHIP_CARAVEL				44
 #define SHIP_POSTILLIONEN			45
 #define SHIP_COASTALFRIGATE			46
@@ -125,11 +125,11 @@
 #define SHIP_CENTURION  			106
 #define SHIP_RESOLUTION             107
 #define SHIP_BELLONA            	108
-#define SHIP_REDOUTABLE				109
-#define SHIP_SUPERBE				110
-#define SHIP_RUITER				    111
-#define SHIP_IMPLACABLE			    112
-#define SHIP_PAVEL        			113
+#define SHIP_SUPERBE				109
+#define SHIP_RUITER				    110
+#define SHIP_IMPLACABLE				111
+#define SHIP_PAVEL			        112
+#define SHIP_REDOUTABLE        		113
 #define SHIP_ZEVENPROVINCIEN		114
 #define SHIP_BUCENTAURE		        115
 #define SHIP_CRISTIAN       		116

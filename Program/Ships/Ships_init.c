@@ -995,10 +995,10 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Sloop_h			Боевой Шлюп
+	/// Alert			Боевой Шлюп
 	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_SLOOP_H]);
-	refShip.Name            			= "Sloop_h";
+	makeref(refShip,ShipsTypes[SHIP_ALERT]);
+	refShip.Name            			= "Alert";
 	refship.Soundtype					= "lugger";
 	refShip.Class						= 6;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
@@ -1007,9 +1007,9 @@ void InitShips()
 	refShip.Capacity        			= 750;
 	refShip.MaxCannonDiff				= 2;
 	refShip.CannonsQuantity				= 16;
-	refShip.rcannon 							= 7;
-	refShip.lcannon 							= 7;
-	refShip.fcannon 							= 0;
+	refShip.rcannon 							= 6;
+	refShip.lcannon 							= 6;
+	refShip.fcannon 							= 2;
 	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 70;
 	refShip.MinCrew         				= 14;
@@ -1141,11 +1141,11 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
+    refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
-	refship.nation.spain	= false;
+	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Veinard			Тяж. Шлюп
@@ -2735,6 +2735,13 @@ void InitShips()
 	refship.Track2.Width	= "8.0, 9.0";
 	refship.Track2.Speed	= "0.15, 0.25";
 
+	//Nation
+    refship.nation.england	= true;
+	refship.nation.france	= true;
+	refship.nation.holland	= true;
+	refship.nation.pirate	= false;
+	refship.nation.spain	= true;
+
 	///////////////////////////////////////////////////////////////////////////
 	/// Brig_nv			Бриг
 	///////////////////////////////////////////////////////////////////////////
@@ -3282,85 +3289,6 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Enterprise			Воен. Ост-индец
-	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_ENTERPRISE]);
-	refShip.Name            			= "Enterprise";
-	refship.Soundtype					= "lugger";
-	refShip.Class						= 4;
-	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 20;
-	refShip.Weight						= Tonnes2CWT(400);
-	refShip.Capacity        			= 2000;
-	refShip.MaxCannonDiff						= 2;
-	refShip.CannonsQuantity						= 24;
-	refShip.rcannon 							= 12;
-	refShip.lcannon 							= 12;
-	refShip.fcannon 							= 0;
-	refShip.bcannon 							= 0;
-	refShip.MaxCrew         				= 180;
-	refShip.MinCrew         				= 36;
-	refShip.SpeedRate       		= 15.3;
-	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 71850;
-	refShip.HP              				= 2800;
-	refShip.SP              				= 100;
-	refShip.MastMultiplier					= 1.6;
-	refship.CanEncounter				= true;
-	refship.Type.Merchant				= false;
-	refship.Type.War					= true;
-	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 12;
-	refShip.buildtime = 60;
-
-	refship.Rocking.y = 0.5;
-	refship.Rocking.az = 0.04;
-
-	refship.WaterLine							= -0.2;
-	refship.SpeedDependWeight			= 0.2;
-	refship.SubSeaDependWeight			= 0.6;
-	refship.TurnDependWeight			= 0.2;
-	refship.WindAgainstSpeed   = 4.5;//boal
-	refship.CabinType          = "New_Cabin2"; // boal 28.03.05
-	refship.DeckType           			= "Medium";
-
-	refship.InertiaAccelerationX	= 5.0;	refship.InertiaBrakingX		= 5.0;
-	refship.InertiaAccelerationY	= 4;	refship.InertiaBrakingY		= 4;
-	refship.InertiaAccelerationZ	= 5.0;	refship.InertiaBrakingZ		= 5.0;
-
-    refShip.Height.Bombs.Y	= 2.5;		refShip.Height.Bombs.DY = 1.0;
-    refShip.Height.Grapes.Y	= 2.9;		refShip.Height.Grapes.DY = 1.0;
-    refShip.Height.Knippels.Y = 17.0;	refShip.Height.Knippels.DY = 9.0;
-    refShip.Height.Balls.Y 	= 2.5;		refShip.Height.Balls.DY = 1.0;
-
-	refShip.GeraldSails.rey_b1		= 1;
-	refShip.GeraldSails.rey_b2		= 1;
-	refShip.GeraldSails.rey_b3		= 1;
-	refShip.GeraldSails.rey_b1.vscale		= 0.9;
-	refShip.GeraldSails.rey_b2.vscale		= 0.7;
-	refShip.GeraldSails.rey_b3.vscale		= 0.7;
-
-	refship.Track.Enable	= true;
-	refship.Track1.ZStart	= 0.20;
-	refship.Track1.LifeTime = 14.5;
-	refship.Track1.Width	= "3.7, 3.9";
-	refship.Track1.Speed	= "7.0, 8.0";
-
-	refship.Track2.ZStart	= -0.15;
-	refship.Track2.LifeTime = 8.5;
-	refship.Track2.Width	= "8.0, 9.0";
-	refship.Track2.Speed	= "0.15, 0.25";
-
-	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= true;
-	refship.nation.holland	= true;
-	refship.nation.pirate	= true;
-	refship.nation.spain	= false;
-
-	refShip.hullNums = 5; // LEO
-
-	///////////////////////////////////////////////////////////////////////////
 	/// Polacre_H			Тяжёлый Полакр
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_POLACRE_H]);
@@ -3434,6 +3362,83 @@ void InitShips()
 	refship.nation.holland	= false;
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
+
+	///////////////////////////////////////////////////////////////////////////
+	/// HerculesU			Воен. Ост-индец
+	///////////////////////////////////////////////////////////////////////////
+	makeref(refShip,ShipsTypes[SHIP_HERCULESU]);
+	refShip.Name            			= "HerculesU";
+	refship.Soundtype					= "lugger";
+	refShip.Class						= 4;
+	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
+	refShip.MaxCaliber      			= 20;
+	refShip.Weight						= Tonnes2CWT(400);
+	refShip.Capacity        			= 2000;
+	refShip.MaxCannonDiff						= 2;
+	refShip.CannonsQuantity						= 28;
+	refShip.rcannon 							= 12;
+	refShip.lcannon 							= 12;
+	refShip.fcannon 							= 2;
+	refShip.bcannon 							= 2;
+	refShip.MaxCrew         				= 180;
+	refShip.MinCrew         				= 36;
+	refShip.SpeedRate       		= 15.3;
+	refShip.TurnRate        		= 50.0;
+	refShip.Price           			= 71850;
+	refShip.HP              				= 2800;
+	refShip.SP              				= 100;
+	refShip.MastMultiplier					= 1.6;
+	refship.CanEncounter				= true;
+	refship.Type.Merchant				= false;
+	refship.Type.War					= true;
+	refShip.sea_enchantment				= 3;
+	refShip.lowpolycrew = 12;
+	refShip.buildtime = 60;
+
+	refship.Rocking.y = 0.5;
+	refship.Rocking.az = 0.04;
+
+	refship.WaterLine							= -0.2;
+	refship.SpeedDependWeight			= 0.2;
+	refship.SubSeaDependWeight			= 0.6;
+	refship.TurnDependWeight			= 0.2;
+	refship.WindAgainstSpeed   = 4.5;//boal
+	refship.CabinType          = "New_Cabin2"; // boal 28.03.05
+	refship.DeckType           			= "Medium";
+
+	refship.InertiaAccelerationX	= 5.0;	refship.InertiaBrakingX		= 5.0;
+	refship.InertiaAccelerationY	= 4;	refship.InertiaBrakingY		= 4;
+	refship.InertiaAccelerationZ	= 5.0;	refship.InertiaBrakingZ		= 5.0;
+
+    refShip.Height.Bombs.Y	= 2.5;		refShip.Height.Bombs.DY = 1.0;
+    refShip.Height.Grapes.Y	= 2.9;		refShip.Height.Grapes.DY = 1.0;
+    refShip.Height.Knippels.Y = 17.0;	refShip.Height.Knippels.DY = 9.0;
+    refShip.Height.Balls.Y 	= 2.5;		refShip.Height.Balls.DY = 1.0;
+
+	refShip.GeraldSails.rey_b1		= 1;
+	refShip.GeraldSails.rey_b2		= 1;
+	refShip.GeraldSails.rey_b3		= 1;
+	refShip.GeraldSails.rey_b1.vscale		= 0.9;
+	refShip.GeraldSails.rey_b2.vscale		= 0.7;
+	refShip.GeraldSails.rey_b3.vscale		= 0.7;
+
+	refship.Track.Enable	= true;
+	refship.Track1.ZStart	= 0.20;
+	refship.Track1.LifeTime = 14.5;
+	refship.Track1.Width	= "3.7, 3.9";
+	refship.Track1.Speed	= "7.0, 8.0";
+
+	refship.Track2.ZStart	= -0.15;
+	refship.Track2.LifeTime = 8.5;
+	refship.Track2.Width	= "8.0, 9.0";
+	refship.Track2.Speed	= "0.15, 0.25";
+
+	//Nation
+    refship.nation.england	= false;
+	refship.nation.france	= true;
+	refship.nation.holland	= true;
+	refship.nation.pirate	= true;
+	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
 	//// Caravel			Каравелла
@@ -8370,7 +8375,7 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// resolution			Фрегат Резолюция
+	/// resolution			Резолюция
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_RESOLUTION]);
 	refShip.Name            			= "resolution";
@@ -8391,7 +8396,7 @@ void InitShips()
 	refShip.SpeedRate				= 10.9;
 	refShip.TurnRate        		= 25.0;
 	refShip.Price           			= 549453;
-	refShip.HP              				= 7000;
+	refShip.HP              				= 8000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.5;
 	refship.CanEncounter				= true;
@@ -8438,14 +8443,14 @@ void InitShips()
 	refship.Track2.Speed					= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= true;
-	refship.nation.holland	= true;
+    refship.nation.england	= true;
+	refship.nation.france	= false;
+	refship.nation.holland	= false;
 	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Bellona			Тяж. Линкор
+	/// Bellona			Беллона
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_BELLONA]);
 	refShip.Name            		= "Bellona";
@@ -8524,94 +8529,11 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= true;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= true;
-	refship.nation.spain	= true;
-
-	///////////////////////////////////////////////////////////////////////////
-	/// Redoutable			Тяж. Варшип
-	///////////////////////////////////////////////////////////////////////////
-	makeref(refShip,ShipsTypes[SHIP_REDOUTABLE]);
-	refShip.Name            		= "Redoutable";
-	refship.Soundtype				= "manowar";
-	refShip.Class					= 1;
-	refShip.Cannon          		= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      		= 42;
-	refShip.Weight					= Tonnes2CWT(3500);
-	refShip.Capacity        		= 5500;
-	refShip.MaxCannonDiff					= 5;
-	refShip.CannonsQuantity					= 78;
-	refShip.rcannon 						= 37;
-	refShip.lcannon 						= 37;
-	refShip.fcannon 						= 2;
-	refShip.bcannon 						= 2;
-	refShip.MaxCrew         			= 850;
-	refShip.MinCrew         			= 170;
-	refShip.SpeedRate			= 8.2;
-	refShip.TurnRate        	= 15.0;
-	refShip.Price           		= 623870;
-	refShip.HP              			= 15000;
-	refShip.SP              			= 100;
-	refShip.MastMultiplier				= 1.6;
-	refship.CanEncounter			= true;
-	refship.Type.Merchant			= false;
-	refship.Type.War				= true;
-	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
-	refShip.buildtime 				= 120;
-
-	refship.Rocking.y = 0.5;
-	refship.Rocking.az = 0.035;
-
-
-	refship.WaterLine							= -0.9;
-	refship.SpeedDependWeight			= 0.35;
-	refship.SubSeaDependWeight			= 0.75;
-	refship.TurnDependWeight			= 0.2;
-	refship.WindAgainstSpeed   			= 1.7;//boal
-	refship.CabinType         			= "Cabin_Huge"; // boal 28.03.05
-	refship.DeckType           			= "Lineship";
-
-	refShip.Height.Bombs.Y				= 5.0;		refShip.Height.Bombs.DY		= 4.0;
-	refShip.Height.Grapes.Y				= 6.0;		refShip.Height.Grapes.DY	= 3.1;
-	refShip.Height.Knippels.Y			= 33.6;		refShip.Height.Knippels.DY	= 32.8;
-	refShip.Height.Balls.Y				= 5.0;		refShip.Height.Balls.DY		= 4.0;
-
-	refShip.Flags.Mast1.Flag1 = FLAG_ENSIGN;
-	refShip.Flags.Mast2.Flag1 = FLAG_SPECIAL;
-	refShip.Flags.Mast3.Flag1 = FLAG_ENSIGN;
-	refShip.Flags.Mast4.Flag1 = FLAG_ENSIGN;
-
-	refship.InertiaAccelerationX	= 3.5;	refship.InertiaBrakingX		= 3.0;
-	refship.InertiaAccelerationY	= 2.5;	refship.InertiaBrakingY		= 2.5;
-	refship.InertiaAccelerationZ	= 3.5;	refship.InertiaBrakingZ		= 3.0;
-
-	refShip.GeraldSails.rey_b2		= 1;
-	refShip.GeraldSails.rey_b3		= 1;
-	refShip.GeraldSails.rey_c1		= 1;
-	refShip.GeraldSails.rey_c1.vscale		= 0.98;
-	refShip.GeraldSails.rey_b2.vscale		= 0.98;
-	refShip.GeraldSails.rey_b3.vscale		= 0.98;
-
-	refship.Track.Enable	= true;
-	refship.Track1.ZStart	= 0.30;
-	refship.Track1.LifeTime = 18.5;
-	refship.Track1.Width	= "6.5, 7.5";
-	refship.Track1.Speed	= "8.0, 9.0";
-
-	refship.Track2.ZStart	= -0.15;
-	refship.Track2.LifeTime = 10.5;
-	refship.Track2.Width	= "16.0, 18.0";
-	refship.Track2.Speed	= "0.15, 0.25";
-
-	//Nation
-    refship.nation.england	= true;
-	refship.nation.france	= false;
-	refship.nation.holland	= false;
 	refship.nation.pirate	= false;
-	refship.nation.spain	= true;
+	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Superbe			Линкор 1-го класса
+	/// Superbe			Супербе
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SUPERBE]);
 	refShip.Name            			= "Superbe";
@@ -8687,13 +8609,13 @@ void InitShips()
 
 	//Nation
     refship.nation.england	= false;
-	refship.nation.france	= true;
-	refship.nation.holland	= true;
+	refship.nation.france	= false;
+	refship.nation.holland	= false;
 	refship.nation.pirate	= false;
-	refship.nation.spain	= false;
+	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Admiral de Ruiter			Тяж. Линкор
+	/// Admiral de Ruiter			Рюйтер
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_RUITER]);
 	refShip.Name            			= "Ruiter";
@@ -8768,14 +8690,14 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= true;
+    refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= true;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Implacable			Боевой Корабль
+	//// Implacable			Импакабл
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_IMPLACABLE]);
 	refShip.Name            			= "Implacable";
@@ -8849,14 +8771,14 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= true;
+    refship.nation.england	= false;
 	refship.nation.france	= true;
-	refship.nation.holland	= true;
-	refship.nation.pirate	= true;
-	refship.nation.spain	= true;
+	refship.nation.holland	= false;
+	refship.nation.pirate	= false;
+	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Pavel			Тяж. Лин. Корабль
+	/// Pavel			Павел
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PAVEL]);
 	refShip.Name            			= "Pavel";
@@ -8877,7 +8799,7 @@ void InitShips()
 	refShip.SpeedRate				= 8.5;
 	refShip.TurnRate        		= 23.0;
 	refShip.Price           			= 501350;
-	refShip.HP              				= 8500;
+	refShip.HP              				= 11500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
@@ -8932,14 +8854,97 @@ void InitShips()
 	refship.Track2.Speed		= "1.0, 2.0";
 
 	//Nation
-    refship.nation.england	= true;
-	refship.nation.france	= true;
+    refship.nation.england	= false;
+	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= true;
+	refship.nation.pirate	= false;
+	refship.nation.spain	= true;
+
+	///////////////////////////////////////////////////////////////////////////
+	/// Redoutable			Редутабл
+	///////////////////////////////////////////////////////////////////////////
+	makeref(refShip,ShipsTypes[SHIP_REDOUTABLE]);
+	refShip.Name            		= "Redoutable";
+	refship.Soundtype				= "lineship";
+	refShip.Class					= 1;
+	refShip.Cannon          		= CANNON_TYPE_CANNON_LBS8;
+	refShip.MaxCaliber      		= 42;
+	refShip.Weight					= Tonnes2CWT(3500);
+	refShip.Capacity        		= 5500;
+	refShip.MaxCannonDiff					= 5;
+	refShip.CannonsQuantity					= 86;
+	refShip.rcannon 						= 41;
+	refShip.lcannon 						= 41;
+	refShip.fcannon 						= 2;
+	refShip.bcannon 						= 2;
+	refShip.MaxCrew         			= 850;
+	refShip.MinCrew         			= 170;
+	refShip.SpeedRate			= 8.2;
+	refShip.TurnRate        	= 15.0;
+	refShip.Price           		= 623870;
+	refShip.HP              			= 15000;
+	refShip.SP              			= 100;
+	refShip.MastMultiplier				= 1.6;
+	refship.CanEncounter			= true;
+	refship.Type.Merchant			= false;
+	refship.Type.War				= true;
+	refShip.sea_enchantment			= 1.1;
+	refShip.lowpolycrew 			= 24;
+	refShip.buildtime 				= 120;
+
+	refship.Rocking.y = 0.5;
+	refship.Rocking.az = 0.035;
+
+
+	refship.WaterLine							= 0.0;
+	refship.SpeedDependWeight			= 0.35;
+	refship.SubSeaDependWeight			= 0.75;
+	refship.TurnDependWeight			= 0.2;
+	refship.WindAgainstSpeed   			= 1.7;//boal
+	refship.CabinType         			= "Cabin_Huge"; // boal 28.03.05
+	refship.DeckType           			= "Lineship";
+
+	refShip.Height.Bombs.Y				= 5.0;		refShip.Height.Bombs.DY		= 4.0;
+	refShip.Height.Grapes.Y				= 6.0;		refShip.Height.Grapes.DY	= 3.1;
+	refShip.Height.Knippels.Y			= 33.6;		refShip.Height.Knippels.DY	= 32.8;
+	refShip.Height.Balls.Y				= 5.0;		refShip.Height.Balls.DY		= 4.0;
+
+	refShip.Flags.Mast1.Flag1 = FLAG_ENSIGN;
+	refShip.Flags.Mast2.Flag1 = FLAG_SPECIAL;
+	refShip.Flags.Mast3.Flag1 = FLAG_ENSIGN;
+	refShip.Flags.Mast4.Flag1 = FLAG_ENSIGN;
+
+	refship.InertiaAccelerationX	= 3.5;	refship.InertiaBrakingX		= 3.0;
+	refship.InertiaAccelerationY	= 2.5;	refship.InertiaBrakingY		= 2.5;
+	refship.InertiaAccelerationZ	= 3.5;	refship.InertiaBrakingZ		= 3.0;
+
+	refShip.GeraldSails.rey_b2		= 1;
+	refShip.GeraldSails.rey_b3		= 1;
+	refShip.GeraldSails.rey_c1		= 1;
+	refShip.GeraldSails.rey_c1.vscale		= 0.98;
+	refShip.GeraldSails.rey_b2.vscale		= 0.98;
+	refShip.GeraldSails.rey_b3.vscale		= 0.98;
+
+	refship.Track.Enable	= true;
+	refship.Track1.ZStart	= 0.30;
+	refship.Track1.LifeTime = 18.5;
+	refship.Track1.Width	= "6.5, 7.5";
+	refship.Track1.Speed	= "8.0, 9.0";
+
+	refship.Track2.ZStart	= -0.15;
+	refship.Track2.LifeTime = 10.5;
+	refship.Track2.Width	= "16.0, 18.0";
+	refship.Track2.Speed	= "0.15, 0.25";
+
+	//Nation
+    refship.nation.england	= true;
+	refship.nation.france	= false;
+	refship.nation.holland	= false;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Zevenprovincien			Боевой Корабль
+	/// Zevenprovincien			Семь Провинций
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ZEVENPROVINCIEN]);
 	refShip.Name            			= "Zevenprovincien";
@@ -8960,7 +8965,7 @@ void InitShips()
 	refShip.SpeedRate				= 10.3;
 	refShip.TurnRate        		= 22.0;
 	refShip.Price           			= 530850;
-	refShip.HP              				= 11500;
+	refShip.HP              				= 8500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
@@ -9016,10 +9021,10 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= true;
-	refship.nation.france	= true;
-	refship.nation.holland	= false;
-	refship.nation.pirate	= true;
+    refship.nation.england	= false;
+	refship.nation.france	= false;
+	refship.nation.holland	= true;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -9034,7 +9039,7 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(3500);
 	refShip.Capacity        			= 6200;
 	refShip.MaxCannonDiff						= 5;
-	refShip.CannonsQuantity						= 92;
+	refShip.CannonsQuantity						= 94;
 	refShip.rcannon 							= 46;
 	refShip.lcannon 							= 46;
 	refShip.fcannon 							= 0;
@@ -9057,7 +9062,7 @@ void InitShips()
 	refship.Rocking.y = 0.5;
 	refship.Rocking.az = 0.035;
 
-	refShip.WaterLine					= 1.5;
+	refShip.WaterLine					= 0.0;
 	refShip.SpeedDependWeight			= 0.3;
 	refShip.SubSeaDependWeight			= 1.15;
 	refship.TurnDependWeight			= 0.2;
