@@ -3293,7 +3293,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_POLACRE_H]);
 	refShip.Name						= "Polacre_H";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon  					= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber  				= 16;
@@ -3368,7 +3368,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_HERCULESU]);
 	refShip.Name            			= "HerculesU";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 20;
@@ -3445,7 +3445,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CARAVEL]);
 	refShip.Name            			= "Caravel";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 16;
@@ -8771,8 +8771,8 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= true;
+    refship.nation.england	= true;
+	refship.nation.france	= false;
 	refship.nation.holland	= false;
 	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
@@ -8937,8 +8937,8 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= true;
-	refship.nation.france	= false;
+    refship.nation.england	= false;
+	refship.nation.france	= true;
 	refship.nation.holland	= false;
 	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
@@ -9028,7 +9028,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Bucentaure			Францусзкий линкор
+	/// Bucentaure			Буцентавр
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_BUCENTAURE]);
 	refShip.Name            			= "Bucentaure";
@@ -9108,7 +9108,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Cristian			Голландский линкор
+	/// Cristian			Кристиан
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CRISTIAN]);
 	refShip.Name            			= "Cristian";
@@ -9192,7 +9192,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// SantaAna			Испанский линкор
+	/// SantaAna			Санта Анна
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SANTAANA]);
 	refShip.Name            			= "SantaAna";
@@ -9276,7 +9276,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Prince				Английский линкор
+	/// Prince				Принц
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PRINCE]);
 	refShip.Name            			= "Prince";

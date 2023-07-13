@@ -1524,8 +1524,8 @@ void SetShipPictureDataByShipTypeName(int N)
 	case "corvettelight":		BI_intNRetValue[0] = 14+2*32;	BI_intNRetValue[1] = 14+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Корвет
 	case "greyhound":			BI_intNRetValue[0] = 16+2*32;	BI_intNRetValue[1] = 16+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Корвет
 	case "prince_h":			BI_intNRetValue[0] = 18+2*32;	BI_intNRetValue[1] = 18+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лин. Шхуна
-	case "herculesu":			BI_intNRetValue[0] = 20+2*32;	BI_intNRetValue[1] = 20+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Ост-индец
-	case "polacre_h":			BI_intNRetValue[0] = 22+2*32;	BI_intNRetValue[1] = 22+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Полакр
+	case "polacre_h":			BI_intNRetValue[0] = 20+2*32;	BI_intNRetValue[1] = 20+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Ост-индец
+	case "herculesu":			BI_intNRetValue[0] = 22+2*32;	BI_intNRetValue[1] = 22+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Полакр
 	case "caravel":				BI_intNRetValue[0] = 24+2*32;	BI_intNRetValue[1] = 24+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Каравелла
 	case "postillionen":		BI_intNRetValue[0] = 26+2*32;	BI_intNRetValue[1] = 26+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
 	case "raafrigate":			BI_intNRetValue[0] = 28+2*32;	BI_intNRetValue[1] = 28+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
