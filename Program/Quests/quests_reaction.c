@@ -12574,7 +12574,8 @@ void QuestComplete(string sQuestName, string qname)
 			sld.dialog.currentnode = "SCQ_Proverka_Znani_VremyVishlo";
 			sld.lifeday = 0;
 			LAi_SetActorType(sld);
-			LAi_ActorDialogNow(sld, Pchar, "", -1);
+			//LAi_ActorDialogNow(sld, Pchar, "", -1);
+			LAi_ActorDialog(sld, pchar, "", 0, 0);
 		break;
 		
 
