@@ -220,7 +220,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Pirates_store";
 	locations[n].id.label = "Store";
-	locations[n].filespath.models = "locations\inside\Store05\";
+	locations[n].filespath.models = "locations\inside\Store02\";
 	locations[n].image = "loading\jonny_load\inside\store02.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
@@ -231,18 +231,18 @@ int LocationInitBermudes(int n)
  	locations[n].islandId = "Bermudes";
 	//Models
 	//Always
-	locations[n].models.always.locators = "Store05_locators";
-	locations[n].models.always.store = "Store05";
+	locations[n].models.always.locators = "Store02_locators";
+	locations[n].models.always.store = "Store02";
 	locations[n].models.always.store.level = 65538;
-	locations[n].models.always.window = "Store05_window";
+	locations[n].models.always.window = "Store02_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
-	locations[n].models.day.charactersPatch = "Store05_patch";
+	locations[n].models.day.charactersPatch = "Store02_patch";
 	//Night
-	locations[n].models.night.charactersPatch = "Store05_patch";
+	locations[n].models.night.charactersPatch = "Store02_patch";
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
