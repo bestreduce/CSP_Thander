@@ -809,8 +809,8 @@ void ChangeImport()
 				}
 				for (j = 0; j < GOODS_QUANTITY; j++)
 				{
-					if(j > 34 && j < 51) continue;
-					if (j == 32) continue;
+					if(j >= GOOD_CANNON_8 && j <= GOOD_CANNON_48) continue;//пушки динамическую торговлю игнорируют? 
+					if (j == GOOD_SLAVES) continue;//рабы динамическую торговлю игнорируют? 
 					goodName = Goods[j].Name;
 
 					gModifierExport = sti(sti(Goods[j].Norm)*0.6);
@@ -841,7 +841,7 @@ void ChangeImport()
 							pRef.Goods.(goodName).Quantity =  sti(sti(pRef.Goods.(goodName).Quantity)*1.2);
 						break;
 					}
-					if (j < 11)
+					if (j <= GOOD_RUM)
 					{//Расходники восстанавливаются чуток быстрее
 						if (sti(pRef.Goods.(goodName).Quantity) < 250 * sti(Goods[j].Units))
 						{
@@ -850,14 +850,14 @@ void ChangeImport()
 					}
 					int goodsQty = sti(pRef.Goods.(goodName).Quantity));
 
-					if(i == 3 || i == 4 || i == 10 || i == 19)
+					if(i == 3 || i == 4 || i == 10 || i == 19)//номера магазинов столиц		3=Villemstad_STORE	10=Havana_STORE	19=PortRoyal_STORE
 					{
 						iType = rand(2);
 						if (aggress == 0)
 						{
 							aggress = -2;
 						}
-						if (i == 4 && CheckAttribute(pchar,"Whisper.Contraband") &&  j == GOOD_EBONY)
+						if (i == 4 && CheckAttribute(pchar,"Whisper.Contraband") &&  j == GOOD_EBONY)// для особого задания Виспер?   //4=Tortuga_STORE
 						{
 							continue;
 						}
@@ -875,7 +875,7 @@ void ChangeImport()
 							if (import < 9 || goodsQty < gModifierImport/3)
 							{
 								import++;
-								if(j == 33 || j == 34)
+								if(j == GOOD_GOLD || j == GOOD_SILVER)//золото и серебро не меняется на экспорт?  не очень понял в этих кодах. 
 								{
 									pRef.Goods.(goodName).TradeType = 2;
 									//iImport--;

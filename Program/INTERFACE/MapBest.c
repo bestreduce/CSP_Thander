@@ -851,7 +851,7 @@ void ShowColonyInfo(int iColony)
 		{
 			break;
 		}
-		if(iType > 34 && iType < 51) continue;
+		if(iType >= GOOD_CANNON_8 && iType <= GOOD_CANNON_48) continue;
 
 		sGood = goods[iType].name;
 
