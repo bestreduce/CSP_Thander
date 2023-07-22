@@ -97,7 +97,7 @@ void ProcessDialogEvent()
 			}
 			if (NPChar.id == "Andreas_Fickler")
 			{
-				dialog.text = "Что в-в-вы хотите, к-к-капитан "+pchar.name+"!";
+				dialog.text = "Что в-вы хотите, к-к-капитан "+pchar.name+"!";
 			}
 			if (NPChar.sex == "skeleton" && PChar.sex == "skeleton")
 			{
@@ -154,7 +154,12 @@ void ProcessDialogEvent()
 			{
 			    Link.l8 = "Дай мне полный отчёт о корабле, " + GetStrSmallRegister(XI_ConvertString("treasurer")) + ".";
 			    Link.l8.go = "QMASTER_1";
-
+				if (NPChar.id == "Andreas_Fickler")
+				{
+					Link.l8 = "Дай мне полный отчёт о корабле, Андреас.";
+					Link.l8.go = "QMASTER_1";
+				}
+				
 			    Link.l11 = "Давай обсудим, какое количество товаров и предметов нужно закупать в магазинах.";
 			    Link.l11.go = "TransferGoodsEnable";
 			}
@@ -346,6 +351,11 @@ void ProcessDialogEvent()
 			}
             Link.l12 = "Ничего. Вольно.";
             Link.l12.go = "Exit";
+			if (NPChar.id == "Andreas_Fickler")
+			{
+				Link.l12 = "Успокойся, Андреас. Продолжай считать деньги.";
+				Link.l12.go = "Exit";
+			}
         break;
 
 		case "FUNY_SHIP_1":
@@ -1129,18 +1139,18 @@ void ProcessDialogEvent()
 				break;
 			}
             dialog.text = "Максимальная активность крыс в рейсе " +
-                     FloatToString(50.0 / (2.0+GetSummonSkillFromNameToOld(PChar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(PChar,SKILL_SNEAK)), 1) +
-                     "% от количества груза. На "+GetCrewQuantity(PChar) + " матросов нужно " + makeint((GetCrewQuantity(PChar)+6) / 10) + " провианта в день. Это без учёта перевозимых рабов.";
+            FloatToString(50.0 / (2.0+GetSummonSkillFromNameToOld(PChar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(PChar,SKILL_SNEAK)), 1) +
+            "% от количества груза. На "+GetCrewQuantity(PChar) + " матросов нужно " + makeint((GetCrewQuantity(PChar)+6) / 10) + " провианта в день. Это без учёта перевозимых рабов.";
             Link.l1 = "Спасибо.";
             Link.l1.go = "Exit";
-					if (NPChar.id == "Andreas_Fickler")
-						{
-							dialog.text = "Максимальная активность к-к-крыс в рейсе " +
-									FloatToString(50.0 / (2.0+GetSummonSkillFromNameToOld(PChar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(PChar,SKILL_SNEAK)), 1) +
-									"% от к-к-количест-тва груза. На "+GetCrewQuantity(PChar) + " мат-тросов н-нужно " + makeint((GetCrewQuantity(PChar)+6) / 10) + " п-п-провианта в день. Это без учёта п-перевозимых рабов.";
-							Link.l1 = "Спасибо, мой заикающийся друг.";
-							Link.l1.go = "Exit";
-						}
+			if (NPChar.id == "Andreas_Fickler")
+			{
+				dialog.text = "Максимальная активность к-к-крыс в рейсе " +
+				FloatToString(50.0 / (2.0+GetSummonSkillFromNameToOld(PChar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(PChar,SKILL_SNEAK)), 1) +
+				"% от количества груза. На "+GetCrewQuantity(PChar) + " матросов н-нужно " + makeint((GetCrewQuantity(PChar)+6) / 10) + " п-провианта в день. Это без учёта п-п-перевозимых рабов.";
+				Link.l1 = "Спасибо, мой заикающийся друг.";
+				Link.l1.go = "Exit";
+			}
             Diag.TempNode = "Hired";
         break;
 
@@ -1148,9 +1158,9 @@ void ProcessDialogEvent()
         case "stay_follow":
             dialog.text = "Какие будут приказания?";
 			if (NPChar.id == "Andreas_Fickler")
-				{
-					dialog.text = "К-к-какие будут п-приказания?";
-				}
+			{
+				dialog.text = "К-к-какие будут п-приказания?";
+			}
             Link.l1 = "Стой здесь!";
             Link.l1.go = "Boal_Stay";
             Link.l2 = "Следуй за мной и не отставай!";

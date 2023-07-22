@@ -2565,21 +2565,13 @@ void PDMQuestsInit()
 	LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
 	sld.City = "BasTer";
 	ChangeCharacterAddressGroup(sld,"BasTer_town","goto","goto4");
-
+	
 	//******Непутёвый казначей Sinistra******
 	//Андреас Фиклер
-	sld = GetCharacter(NPC_GenerateCharacter("Andreas_Fickler", "usurer_5", "man", "man", 10, HOLLAND, -1, false));
-	SetCharacterPerk(sld, "Trader");
-	sld.name	= "Андреас";
-	sld.lastname	= "Фиклер";
-	sld.City = "Villemstad";
-	sld.Dialog.Filename = "Quest\PDM\Neputyovy_kaznachey.c";
-	LAi_SetCitizenType(sld);
-	LAi_SetLoginTime(sld, 6.0, 21.99);
-	sld.talker = 7;
-	LAi_SetImmortal(sld, true);
-	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
-	ChangeCharacterAddressGroup(sld,"Villemstad_town","officers","houseSp5_2");
+	pchar.quest.PDM_NK_Nachalo.win_condition.l1 = "Rank";
+	pchar.quest.PDM_NK_Nachalo.win_condition.l1.value = 3;
+	pchar.quest.PDM_NK_Nachalo.win_condition.l1.operation = ">=";
+	PChar.quest.PDM_NK_Nachalo.win_condition = "PDM_NK_Nachalo";
 
 	//******Клан Ламбрини Sinistra******
 	//Октавио Ламбрини
