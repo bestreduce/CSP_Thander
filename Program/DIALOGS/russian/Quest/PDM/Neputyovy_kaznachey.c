@@ -336,11 +336,12 @@ void ProcessDialogEvent()
 
 		case "Fickler_Nanyat":
 			sld = CharacterFromID("Andreas_Fickler");
-			SetCharacterRemovable(sld, false);
+			SetCharacterRemovable(sld, true);
+			sld.Payment = true;
+			sld.quest.OfficerPrice = sti(pchar.rank)*50;
+			sld.OfficerWantToGo.DontGo = true;
 			LAi_SetActorType(sld);
-			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "PDM_NK_NaKorabl", 0.5);
-			bDisableFastReload = true;
-			chrDisableReloadToLocation = true;
+			LAi_ActorRunToLocation(sld, "reload", "reload1", "", "", "", "", -1);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "5");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sSex", GetSexPhrase("ся","ась"));

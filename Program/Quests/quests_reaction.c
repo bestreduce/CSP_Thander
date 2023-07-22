@@ -10481,6 +10481,20 @@ void QuestComplete(string sQuestName, string qname)
 
 //========================  Квест "Непутёвый казначей".  =======================
 
+		case "PDM_NK_Nachalo":
+			sld = GetCharacter(NPC_GenerateCharacter("Andreas_Fickler", "usurer_5", "man", "man", 10, HOLLAND, -1, false));
+			sld.name	= "Андреас";
+			sld.lastname	= "Фиклер";
+			sld.City = "Villemstad";
+			sld.Dialog.Filename = "Quest\PDM\Neputyovy_kaznachey.c";
+			LAi_SetCitizenType(sld);
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			sld.talker = 5;
+			LAi_SetImmortal(sld, true);
+			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
+			ChangeCharacterAddressGroup(sld,"Villemstad_town","officers","houseSp5_2");
+		break;
+
 		case "PDM_NK_Viktor":
 			AddCharacterExpToSkill(pchar, "FencingLight", 100);
 			AddCharacterExpToSkill(pchar, "Fencing", 100);
@@ -10497,22 +10511,9 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "PDM_NK_Litsenzia":
-			if (GetDaysContinueNationLicence(HOLLAND) < 30) GiveNationLicence(HOLLAND, 30);
-			if (GetDaysContinueNationLicence(SPAIN) < 30) GiveNationLicence(SPAIN, 30);
-			if (GetDaysContinueNationLicence(ENGLAND) < 30) GiveNationLicence(ENGLAND, 30);
-			if (GetDaysContinueNationLicence(FRANCE) < 30) GiveNationLicence(FRANCE, 30);
+			if (GetDaysContinueNationLicence(SPAIN) < 20) GiveNationLicence(SPAIN, 20);
+			if (GetDaysContinueNationLicence(ENGLAND) < 20) GiveNationLicence(ENGLAND, 20);
 			TakeItemFromCharacter(pchar, "Litsenzia");
-		break;
-
-		case "PDM_NK_NaKorabl":
-			sld = CharacterFromID("Andreas_Fickler")
-			SetCharacterRemovable(sld, true);
-			sld.Payment = true;
-			sld.quest.OfficerPrice = sti(pchar.rank)*50;
-			sld.OfficerWantToGo.DontGo = true;
-
-			bDisableFastReload = false;
-			chrDisableReloadToLocation = false;
 		break;
 		
 //========================  Квест "Проклятая жара".  =======================		
