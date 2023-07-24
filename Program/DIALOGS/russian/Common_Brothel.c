@@ -55,6 +55,15 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 				break;
             }
+			//-->> квест Кольцо Жозефины Лодет
+			if (CheckAttribute(pchar, "questTemp.PDM_PK_UvestiNaVerh") && npchar.city == "SantoDomingo") 
+			{
+				dialog.text = "Что я могу для вас сделать, " + GetAddress_Form(NPChar) + "?";
+				link.l1 = "Послушай, " + npchar.name + ", я хочу провести время с одной из твоих девушек, кажется, её зовут Франческа.";
+				link.l1.go = "PDM_PK_UvestiNaVerh";
+				break;
+			}
+			//<<-- квест Кольцо Жозефины Лодет
 			//-->> квест пожертвования в церковь
 			//результаты
 			if (npchar.questChurch == "baster")
@@ -598,6 +607,38 @@ void ProcessDialogEvent()
 
 			npchar.questChurch = ""; //нулим личный флаг квеста
 			AddMoneyToCharacter(pchar, -sti(pchar.questTemp.different.HostessChurch.money));
+		break;
+		//Квест Кольцо Жозефины Лодет
+		case "PDM_PK_UvestiNaVerh":
+			dialog.text = "О-о, "+ GetSexPhrase("красавчик","красавица") +", Франческа одна из лучших девушек нашего заведения. За неё тебе придётся заплатить 3000 золотых.";
+			link.l1 = "Да, конечно.";
+			link.l1.go = "PDM_PK_UvestiNaVerh_2";
+			link.l2 = "Я передумал"+ GetSexPhrase("","а") +".";
+			link.l2.go = "exit";
+		break;
+		case "PDM_PK_UvestiNaVerh_2":
+			if (sti(pchar.Money) >= 3000)
+			{
+				dialog.text = "Отлично, "+ GetSexPhrase("дорогой","дорогая") +". Франческа будет ждать тебя в комнате для уединения на втором этаже.";
+				link.l1 = "Хех, ну я "+ GetSexPhrase("пошёл","пошла") +"...";
+				link.l1.go = "PDM_PK_UvestiNaVerh_3";
+				AddMoneyToCharacter(pchar, -3000);
+			}
+			else
+			{
+				dialog.text = "";
+				link.l1 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже.";
+				link.l1.go = "exit";
+			}
+		break;
+		case "PDM_PK_UvestiNaVerh_3":
+			DoQuestReloadToLocation("SantoDomingo_Brothel_room", "reload", "reload1_back", "");
+			sld = CharacterFromID("PDM_PK_Francheska")
+			ChangeCharacterAddressGroup(sld, "SantoDomingo_Brothel_room", "goto", "goto2");
+			sld.dialog.filename   = "Quest\PDM\Poteryanoe_Koltso.c";
+			sld.dialog.currentnode   = "NaVerhuSFrancheska";
+			chrDisableReloadToLocation = true;
+			DeleteAttribute(pchar, "questTemp.PDM_PK_UvestiNaVerh");
 		break;
 		//поиски кольца губернатора
 		case "TakeMayorsRing_H1":
