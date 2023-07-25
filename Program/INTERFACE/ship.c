@@ -1225,7 +1225,7 @@ void GoToShipChange()
 		ExitShipChangeMenu();
 		OnShipScrollChange();
 	}
-	if (sMessageMode == "ShipChange") // обмен с кораблем
+	if (sMessageMode == "ShipChange") // обмен с кораблём
 	{
 		pchar.TransferChar = xi_refCharacter.index;
 		InterfaceStates.ReloadMenuExit = true;

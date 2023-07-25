@@ -68,7 +68,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 				if (pchar.questTemp.Headhunter == "hunt_rat_yes2")
 				{
-					link.l1 = "Я прибыл"+ GetSexPhrase("","а") +" с хорошими новостями, " + npchar.name + ". Мне удалось выманить Крысу. Я отправил"+ GetSexPhrase("","а") +" его к Дэви Джонсу вместе с его кораблем.";
+					link.l1 = "Я прибыл"+ GetSexPhrase("","а") +" с хорошими новостями, " + npchar.name + ". Мне удалось выманить Крысу. Я отправил"+ GetSexPhrase("","а") +" его к Дэви Джонсу вместе с его кораблём.";
 					link.l1.go = "Endtaskhunt_3";
 				}
 				if(pchar.questTemp.Headhunter == "next_task_4" && GetQuestPastDayParam("pchar.questTemp.Headhunter_next_task_4") > 17)

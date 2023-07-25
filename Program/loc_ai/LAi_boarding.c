@@ -1127,7 +1127,7 @@ void LAi_SetBoardingActors(string locID)
 			boarding_enemy.CaptanId = boarding_enemy.id;
 			chr.SuperShooter = true; // супер стрелок (вероятность пальбы выше, от сложности, если ещё и пистоль есть)
 			if (boarding_enemy.sex == "man") chr.greeting = "CapSinkShip";
-			SetCharacterPerk(chr, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+			SetCharacterPerk(chr, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 			if (CheckAttribute(chr,"Situation"))
 			{
 				if(bSeaCanGenerateShipSituation) SetQuestAboardCabinDialogSituation(chr);

@@ -961,7 +961,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
 
         case "Step_7_7":
-            dialog.text = RandPhraseSimple("И какого черта тогда вы трясёте им у меня перед глазами?", "Впредь прошу вас говорить только о МОЕМ золоте.");
+            dialog.text = RandPhraseSimple("И какого чёрта тогда вы трясёте им у меня перед глазами?", "Впредь прошу вас говорить только о МОЕМ золоте.");
             link.l1 = "Сэр, вы меня спросили - я вам "+ GetSexPhrase("ответил","ответила") +" как есть. Прошу меня извинить.";
             link.l1.go = "exit";
         break;

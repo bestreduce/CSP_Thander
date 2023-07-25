@@ -39,7 +39,7 @@ void SetRandomFaceToCharacter(ref rCharacter)
 
 void FaceMaker(aref rCharacter)
 {
-	// Warship 07.07.09 Пасхалка с кораблем "Мэри Селест" - за место лица кэпа - море с облаками
+	// Warship 07.07.09 Пасхалка с кораблём "Мэри Селест" - за место лица кэпа - море с облаками
 	string checkedmodel = rCharacter.model;
 	if(rCharacter.ID == "MaryCelesteCapitan")
 	{

@@ -154,7 +154,7 @@ void ProcessDialogEvent()
 		//ГГ застукали за первым
 		case "FackYou":
 			dialog.text = "Не зря я подозревал нехорошие вещи. Слишком много пропало наших...";
-			link.l1 = ""+ GetSexPhrase("Ой... А ты это о чем?","Какого черта... Ты это о чем?") +"";
+			link.l1 = ""+ GetSexPhrase("Ой... А ты это о чем?","Какого чёрта... Ты это о чем?") +"";
 			link.l1.go = "FackYou_1";
 		break;
 		case "FackYou_1":

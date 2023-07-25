@@ -962,7 +962,7 @@ void TWN_Back_Mayor_Type()
     }
 }
 
-void TWN_ExitForPay() // мэр дает откуп - табличка прибыли
+void TWN_ExitForPay() // мэр даёт откуп - табличка прибыли
 {
     ref sld, Builder;
 

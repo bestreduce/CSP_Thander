@@ -278,7 +278,7 @@ void CalculateXZDistance(int iX, int iZ)
     iZ = sti(worldMap.playerShipZ)/fN;
     iZ = iM - iZ - iN;
 }
-//расчет между кораблем ГГ и колонией (в днях пути)
+//расчет между кораблём ГГ и колонией (в днях пути)
 int CalculateDistance(string sColony)
 {
     int playership_x, playership_z;

@@ -880,7 +880,7 @@ void ReasonToFast_GenerateVictimShip(int iShipType, int iShipGoods) // гене�
     SetTimerCondition("ReasonToFast_ClearVictim", 0, 0, 1, false);
 }
 
-// кэп пинаса утоп вместе с кораблем или ГГ уплыл на глобалку
+// кэп пинаса утоп вместе с кораблём или ГГ уплыл на глобалку
 void ReasonToFast_KillVictim(string qName)
 {
 	ref sld = characterFromId("VictimCap_1");
@@ -973,7 +973,7 @@ void ReasonToFast_PreparePirateShip(string qName) // генерация пира
 
     sld.SuperShooter  = true;
 	SetCharacterPerk(sld, "MusketsShoot");
-	SetCharacterPerk(sld, "Energaiser"); 					// скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(sld, "Energaiser"); 					// скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 
 	LAi_SetHP(sld, 100 + makeint(pchar.rank) * 2, 100 + makeint(pchar.rank) * 2);
 
@@ -1669,7 +1669,7 @@ void PiratesOnUninhabited_OpenChest(String _quest)
 	Log_TestInfo("Пираты на необитайке: зарубили пиратов, можно лезть в сундук");
 }
 
-// После входа в локу прошел день - чистим сундуки и убираем пиратов
+// После входа в локу прошёл день - чистим сундуки и убираем пиратов
 void PiratesOnUninhabited_ShoreTreasureLose(String _quest)
 {
 	ref location = &Locations[FindLocation(PChar.GenQuest.PiratesOnUninhabited.TreasureShore)];

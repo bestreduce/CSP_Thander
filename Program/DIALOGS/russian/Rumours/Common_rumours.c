@@ -549,7 +549,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
                 "", "", "block", 1, npchar, Dialog.CurrentNode);
 
     			link.l1 = HeroStringReactionRepeat(RandPhraseSimple(RandSwear() + "Платить за пустую болтовню? Нет уж, поищи кого-нибудь другого.",
-                                         "За такие деньги я сам"+ GetSexPhrase("","а") +" все узнаю."), "Давай поговорим о чем-нибудь другом.", "Давай поговорим о чем-нибудь другом.", "Давай поговорим о чем-нибудь другом.", npchar, Dialog.CurrentNode);
+                                         "За такие деньги я сам"+ GetSexPhrase("","а") +" все узнаю."), "Давай поговорим о чём-нибудь другом.", "Давай поговорим о чём-нибудь другом.", "Давай поговорим о чём-нибудь другом.", npchar, Dialog.CurrentNode);
                 link.l1.go = HeroStringReactionRepeat("rumours_tavern_no", "first time", "first time", "first time", npchar, Dialog.CurrentNode);//"rumours_tavern_no";
                 NextDiag.CurrentNode = NextDiag.TempNode;
     			if (makeint(pchar.money) >= 1000 )
@@ -635,7 +635,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 
 		case "rumours_tavern_no":
 			Dialog.Text = "Поймите меня правильно, мне нужно кормить семью.";
-            link.l1 = "Давай поговорим о чем-нибудь другом.";
+            link.l1 = "Давай поговорим о чём-нибудь другом.";
 			link.l1.go = "first time";
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			link.l2 = LinkRandPhrase("Спасибо, долж"+ GetSexPhrase("ен","на") +" откланяться.",

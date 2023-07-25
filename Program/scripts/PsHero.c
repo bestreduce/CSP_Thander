@@ -61,7 +61,7 @@ void InitPsHeros()
 			//navy <--
 			SetFantomParamFromRank_PPG(ch, 1 + rand(5), true); //WW  генерим статы TO_DO на отдельно специал и эмулятор скилов
 			trace("PGG " + GetFullName(ch) + " starting rank " + sti(ch.rank));
-			SetCharacterPerk(ch, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии
+			SetCharacterPerk(ch, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии
 			ch.Money = 8000 + rand(1000)*10; // чтоб быстрее корабли купили
 			k = rand(13)+1;
 			sname = "Totem_"+k;
@@ -769,7 +769,7 @@ void PGG_SetUpForTask(ref chr)
 			int iSpace;
 
 			if (PGG_ChangeRelation2MainCharacter(chr, 0) < 51 && sti(chr.reputation) < 20 && rand(100) == 5 && sti(pchar.money) >= sti(chr.rank)*20000+250000 && GetCharacterShipClass(chr) <= GetCharacterShipClass(PChar))	//крайне сомнительный код. со временем все ПГГ с низкой репой станут врагами. Нет обратного стирания враждебности, если ГГ пересядет на крутой корабль или лишится денег
-			{//Любой пгг с определенным шансом будет охотиться за нами
+			{//Любой пгг с определённым шансом будет охотиться за нами
 				chr.AlwaysEnemy = true;
 				chr.PGG_Hunter = true;
 				chr.DontRansackCaptain = true;
@@ -1116,7 +1116,7 @@ void PGG_UpdatePerks(ref chr)
 		chr.perks.freepoints_self = 0;
 		chr.perks.freepoints_ship = 0;
 		LAi_NPC_EquipPerk(chr, "fantom");
-		SetCharacterPerk(chr, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии
+		SetCharacterPerk(chr, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии
 	}
 }
 

@@ -1398,7 +1398,7 @@ int GetPortManPriceExt(ref NPChar, ref chref)
 }
 //<-- альтернативный расчет стоянки корабля в ПУ
 
-// Warship 31.05.09 Установка на корабль персонажа определенного паруса
+// Warship 31.05.09 Установка на корабль персонажа определённого паруса
 // Путь относительно папки Textures
 bool SetShipSailsFromFile(ref _char, String _sailTexturePath)
 {

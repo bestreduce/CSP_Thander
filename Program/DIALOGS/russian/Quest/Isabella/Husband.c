@@ -49,7 +49,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = "Какого черта ты шастаешь у меня дома? Защищайся, мерзавец!";
+					dialog.text = "Какого чёрта ты шастаешь у меня дома? Защищайся, мерзавец!";
 					link.l1 = "Ну хорошо...";
 					link.l1.go = "Romantic_Battle_in_Bedroom_2";
 				}

@@ -261,7 +261,7 @@ void MakeMineBoom(int iCharacterIndex, int iGoodCharacterIndex, float damg)
     }
     Ship_ApplyHullHitpoints(rCharacter, damg, KILL_BY_BALL, iGoodCharacterIndex);
 
-    if (bBettaTestMode)  // дает вылет :(
+    if (bBettaTestMode)  // даёт вылет :(
     {
 		int iRandStartTime = rand(1000);
 		float fTotalFireTime = Ship_GetTotalFireTime(rCharacter);

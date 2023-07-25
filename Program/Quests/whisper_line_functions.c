@@ -1313,7 +1313,7 @@ void WhisperHuntersCaveEntrance(string qName)
 	SetCharacterPerk(sld, "IronWill");
 	SetCharacterPerk(sld, "Ciras");
 	SetCharacterPerk(sld, "MusketsShoot");
-	SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 
 
 	PChar.quest.WhisperAfterHuntersCaveBattle.function = "WhisperAfterHuntersCaveBattle";
@@ -1545,7 +1545,7 @@ void WhisperSpawn_Chard()
 	SetCharacterPerk(sld, "Tireless");
 	//SetCharacterPerk(sld, "Grus");
 	SetCharacterPerk(sld, "Ciras");
-	SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 }
 
 void WhisperSpawnPortman(ref npchar)
@@ -1574,7 +1574,7 @@ void WhisperSpawnPortman(ref npchar)
 	GiveItem2Character(sld, "cirass4");
 	EquipCharacterbyItem(sld, "cirass4");
 	GiveItem2Character(sld, "jewelry9");
-	SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 	TakeNItems(sld, "Food5", 5);
 	TakeNItems(sld, "potion2", 5);
 	sld.money = 100000;
@@ -1618,7 +1618,7 @@ void WhisperSpawnPortman(ref npchar)
 		GiveItem2Character(sld, "cirass3");
 		EquipCharacterbyItem(sld, "cirass3");
 		GiveItem2Character(sld, "jewelry9");
-		SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+		SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 		TakeNItems(sld, "Food5", 3);
 		TakeNItems(sld, "potion2", 3);
 		sld.money = 30000;
@@ -1700,7 +1700,7 @@ void WhisperEnglandRevengel()
 
 		GiveItem2Character(sld, "cirass3");
 		EquipCharacterbyItem(sld, "cirass3");
-		SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+		SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 		TakeNItems(sld, "Food5", 2);
 		TakeNItems(sld, "potion2", 2);
 		sld.money = 40000;

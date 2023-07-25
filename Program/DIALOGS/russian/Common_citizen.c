@@ -446,7 +446,7 @@ void ProcessDialogEvent()
 					link.l1.go = "fort";
 				break;
             }
-			link.l2 = "Поговорим о чем-нибудь другом.";
+			link.l2 = "Поговорим о чём-нибудь другом.";
 			link.l2.go = "new question";
 		break;
 	  // to_do

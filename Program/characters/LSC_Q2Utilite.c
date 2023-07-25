@@ -1932,7 +1932,7 @@ string GetSharpRumour_toCityTarget()
     {
         case 0: sRumour = "Капитан Бартоломью Шарп был у нас в городе и, как всегда, умудрился 'отметиться'... Но сейчас его здесь нет. По слухам он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
         case 1: sRumour = "Знаете, капитан Шарп был в городе недавно. Веселый пират, этот Барталомью... Хорошо, однако, что он покинул наш город. Кажется он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + "."; break;
-        case 2:	sRumour = "Вы знаете, недавно нас почтил своим присутствием капитан Шарп. Но, к нашему большому разочарованию, нового карибского анекдота 'от Шарпа' не случилось. Жаль... А сейчас его нет у нас в городе. Говорят, он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + ". Может им повезет..."; break;
+        case 2:	sRumour = "Вы знаете, недавно нас почтил своим присутствием капитан Шарп. Но, к нашему большому разочарованию, нового карибского анекдота 'от Шарпа' не случилось. Жаль... А сейчас его нет у нас в городе. Говорят, он ушёл в " + XI_ConvertString("Colony" + pchar.questTemp.Sharp.City + "Acc") + ". Может им повезёт..."; break;
     }
 	return sRumour;
 }
@@ -2019,7 +2019,7 @@ void PiratesLineInit()
 	LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 }
 
-//ищем город определенной нации, проверять наличие ростовщика и тавернщика
+//ищем город определённой нации, проверять наличие ростовщика и тавернщика
 string GetQuestNationsCity(int _nation)
 {
 	int n, iRes;
@@ -2042,7 +2042,7 @@ string GetQuestNationsCity(int _nation)
 	return colonies[iRes].id;
 }
 
-string GetQuestNationsPrison(int _nation)//ищем город определенной нации, проверять наличие тавернщика и тюремного босса
+string GetQuestNationsPrison(int _nation)//ищем город определённой нации, проверять наличие тавернщика и тюремного босса
 {
 	int n, iRes;
     int fortArray[MAX_COLONIES];
@@ -3127,7 +3127,7 @@ void MaryCelesteInit()
 	String seaGroup = "MaryCelesteGroup";
 	int good;
 
-	// Сцуко.. В функции низя делать как generableGoods[15] = { GOOD_FOOD, GOOD_WEAPON, ... }; - дает ошибку
+	// Сцуко.. В функции низя делать как generableGoods[15] = { GOOD_FOOD, GOOD_WEAPON, ... }; - даёт ошибку
 	// Если вынести из функции, то все норм
 	/*int generableGoods[15] = { GOOD_FOOD, GOOD_WEAPON, GOOD_MAHOGANY, GOOD_MEDICAMENT, GOOD_SILK,
 		GOOD_SANDAL, GOOD_COFFEE, GOOD_CLOTHES, GOOD_EBONY, GOOD_TOBACCO,

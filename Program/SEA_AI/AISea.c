@@ -331,6 +331,6 @@ void UpdateRelations()
 	if (bSeaActive)
 	{
 		SendMessage(&AISea, "l", AI_MESSAGE_UPDATE_RELATIONS);
-		// не было в ПКМ, помню дает  доп тормоза, если частить RefreshBattleInterface();
+		// не было в ПКМ, помню даёт  доп тормоза, если частить RefreshBattleInterface();
 	}
 }

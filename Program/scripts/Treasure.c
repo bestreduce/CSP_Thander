@@ -974,7 +974,7 @@ ref SetFantomSkeletForts(string group, string locator, string enemygroup, string
 	    LAi_LoginInCaptureTown(Cr, true); // для записи игры
 	    if (_type == "GhostShipCrew")
 	    {
-		    // возможно дает вылеты от многих трупов Cr.DontClearDead = true;
+		    // возможно даёт вылеты от многих трупов Cr.DontClearDead = true;
 		    Cr.GhostShipCrew = true;
 	    }
     }
@@ -1164,7 +1164,7 @@ void Survive_In_Sea_Go2Land()
     pchar.location = SelectSmugglingLocation();
 
     pchar.Health.Damg = stf(pchar.chr_ai.hp_max)*40;
-	// дает лог в + и - AddCharacterHealth(pchar, -30);
+	// даёт лог в + и - AddCharacterHealth(pchar, -30);
 	Log_Info("О чудо! Я жив!");
 	if (sti(PChar.GenQuest.GhostShip.KillMe) <= 1)
 	{
@@ -1219,7 +1219,7 @@ void GhostShipInit()
 	sld.AlwaysSandbankManeuver = true;  // тупым запрет тонуть об берег
 	sld.GenQuest.CrewSkelMode  = true; // на абордаже скелеты
 	LAi_SetHP(sld, 666, 666);
-	SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
     sld.SuperShooter  = true;
 	DeleteAttribute(sld, "items");
 	GiveItem2Character(sld, "topor2");

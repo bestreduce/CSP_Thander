@@ -339,7 +339,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "DH_mercenary_Amatike_return":
-			dialog.Text = "Да какого черта тут творится?! ";
+			dialog.Text = "Да какого чёрта тут творится?! ";
 			Link.l1 = "Корабль уплыл? Неужели мы опоздали?";
 			Link.l1.go = "DH_mercenary_Amatike_return_1";
 		break;

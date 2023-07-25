@@ -754,7 +754,7 @@ void  EndOfTheSiege(string tmp)
             SiegeRumourEx("Сегодня мы празднуем победу над "+NationNameSK(sti(aData.nation))+"ими захватчиками - нам удалось отстоять нашу колонию! Вражеская эскадра была потоплена, и городу больше ничего не угрожает.", aData.Colony, sti(aData.conation), -1, 15, 3, "citizen,habitue,trader,tavern");
             SiegeRumour("Говорят, что "+NationNameSK(sti(aData.nation))+"ая эскадра потерпела поражение при штурме "+NationNameSK(sti(aData.conation))+"ой колонии "+GetConvertStr(aData.Colony+" Town", "LocLables.txt")+". Защитники оказались сильней.", "", sti(aData.conation)+10, sti(aData.nation)+10, 30, 3);
             SiegeRumour("Поговаривают, что "+NationNamePeople(sti(aData.nation))+" внезапно атаковали нашу колонию "+GetConvertStr(aData.Colony+" Town", "LocLables.txt")+", но в город вовремя подоспело подкрепление! Все "+NationNameSK(sti(aData.nation))+"ие корабли были потоплены.", "!"+aData.Colony, sti(aData.conation), -1, 30, 3);
-            SiegeRumour("Ходят слухи, что недавно наша эскадра, после продолжительной осады "+NationNameSK(sti(aData.conation))+"ой колонии "+GetConvertStr(aData.Colony+" Town", "LocLables.txt")+", была потоплена фортом! Возможно, в следующий раз нам повезет больше.", "!"+aData.Colony, sti(aData.nation), -1, 30, 3);
+            SiegeRumour("Ходят слухи, что недавно наша эскадра, после продолжительной осады "+NationNameSK(sti(aData.conation))+"ой колонии "+GetConvertStr(aData.Colony+" Town", "LocLables.txt")+", была потоплена фортом! Возможно, в следующий раз нам повезёт больше.", "!"+aData.Colony, sti(aData.nation), -1, 30, 3);
             SiegeClear("");
             Log_TestInfo("Siege Finish - Squadron defeat!");
         }
