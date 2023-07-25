@@ -1312,7 +1312,7 @@ void ProcessDialogEvent()
 		case "TakeMayorsRing_S1":
 			if (CheckAttribute(pchar, "questTemp.different.TakeMayorsRing.item")) //если валяется в итемах
 			{
-				dialog.text = LinkRandPhrase("Нет, дорогой, не попадалось, к сожалению. Рада бы помочь, да не могу...",
+				dialog.text = LinkRandPhrase("Нет, "+ GetSexPhrase("дорогой","дорогая") +", не попадалось, к сожалению. Рада бы помочь, да не могу...",
 					"Нет, "+ GetSexPhrase("красавчик","девушка") +", кольца не видела...",
 					"К сожалению, нет. Никакого кольца не видела.");
 				link.l1 = "Жаль... Ну что же, спасибо тебе.";
@@ -1328,7 +1328,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = LinkRandPhrase("Нет, дорогой, не попадалось, к сожалению. Рада бы помочь, да не могу...",
+					dialog.text = LinkRandPhrase("Нет, "+ GetSexPhrase("дорогой","дорогая") +", не попадалось, к сожалению. Рада бы помочь, да не могу...",
 						"Нет, "+ GetSexPhrase("красавчик","девушка") +", кольца не видела...",
 						"К сожалению, нет. Никакого кольца не видела.");
 					link.l1 = "Жаль... Ну что же, спасибо тебе.";
