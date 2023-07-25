@@ -1365,7 +1365,7 @@ void QuestionsInit()
 	LAi_SetCitizenType(sld);
 	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
 	//============> спрашивательница в Порт-о-Принсе даёт квест: "Вызволение из плена мужа горожанки"
-	sld = GetCharacter(NPC_GenerateCharacter("QuetionsPortPax", "LabbeLiliana", "woman", "towngirl", 5, FRANCE, -1, false));
+	sld = GetCharacter(NPC_GenerateCharacter("QuetionsPortPax", "LabbeLiliana", "woman", "woman", 5, FRANCE, -1, false));
 	sld.name = "Лилиана";
 	sld.lastname = "Лаббе";
 	sld.rank = 5;
