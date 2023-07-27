@@ -10698,7 +10698,7 @@ void PDM_CL_Ubrat_Lodku(string qName)
 	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 	sld.city = "Maracaibo";
 	ChangeCharacterAddressGroup(sld, "Maracaibo_church", "sit", "sit16");
-	LAi_SetLoginTime(sld, 9.0, 13.00);
+	LAi_SetLoginTime(sld, 9.0, 14.00);
 }
 void PDM_CL_Sadis_Pokupatel(string qName)
 {
