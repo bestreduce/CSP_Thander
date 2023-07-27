@@ -297,24 +297,25 @@ void ProcessDialogEvent()
 
 		case "RodjerCod_2":
 			Pchar.quest.PDM_Callow_RodjerProdolg.win_condition.l1           = "Location";
-			Pchar.quest.PDM_Callow_RodjerProdolg.win_condition.l1.location  = "LeFransua_ExitTown";
+			Pchar.quest.PDM_Callow_RodjerProdolg.win_condition.l1.location  = "LeFransua_town";
 			pchar.quest.PDM_Callow_RodjerProdolg.function = "PDM_Callow_RodjerProdolg";
-			Pchar.quest.PDM_Callow_RodjerVozvrat.win_condition.l1           = "ExitFromLocation";
-			Pchar.quest.PDM_Callow_RodjerVozvrat.win_condition.l1.location  = PChar.location;
-			Pchar.quest.PDM_Callow_RodjerVozvrat.win_condition              = "PDM_Callow_RodjerVozvrat";
 			AddQuestRecord("PDM_Cursed_Idol", "4");
 			AddQuestUserData("PDM_Cursed_Idol", "sSex1", GetSexPhrase("ен","на"));
 			bDisableFastReload = true;
+			LAi_LocationFightDisable(&Locations[FindLocation("LeFransua_town")], true);
+			SetLocationCapturedState("LeFransua_town", true);
+			SetCurrentTime(23, 1);
 
 			sld = GetCharacter(NPC_GenerateCharacter("Pablo_Loco_Idol", "indsar1", "man", "man", 10, PIRATE, -1, false));
-			sld.name = "Туантух";
+			sld.name = "Керук";
 			sld.lastname = "";
 			sld.talker = 7;
 			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 			LAi_SetStayType(sld);
 			sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode   = "Pablo_Loco_Idol";
-			ChangeCharacterAddressGroup(sld,"LeFransua_town","goto","goto10");
+			LAi_LoginInCaptureTown(sld, true);
+			ChangeCharacterAddressGroup(sld,"LeFransua_town","goto","goto7");
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -328,21 +329,66 @@ void ProcessDialogEvent()
 
 		case "Pablo_Loco_Idol_2":
 			dialog.text = "Выбрось его! Выбрось! Никогда не трогай эту вещь, никогда! Эти золотопожиратели, эти, которые жили на Эмуно - они сделали эту вещь! Никогда не касайся её! Гнев Хурукацелитипочтли велик, это дух дымящейся горы. Он, бросающий камни на головы своих же людей, уничтожит и тебя тоже. Избавься от этой злой вещи, пока он не убил тебя!";
-			link.l1 = "Кошмар какой... Во что я влип"+ GetSexPhrase("","ла") +".";
+			link.l1 = "Кошмар какой... Во что я влип"+ GetSexPhrase("","ла") +"?";
 			link.l1.go = "Pablo_Loco_Idol_3";
 			npchar.lifeday = 0;
 		break;
 
 		case "Pablo_Loco_Idol_3":
+			DialogExit();
+			
 			sld = CharacterFromID("Pablo_Loco_Idol");
 			LAi_SetActorType(sld);
-			LAi_ActorGoToLocation(sld, "reload", "reload5", "none", "", "", "", -1);
-
-			DialogExit();
+			LAi_ActorGoToLocation(sld, "reload", "houseK4", "none", "", "", "", -1);
+			
+			sld = GetCharacter(NPC_GenerateCharacter("PDM_Pinki_Skelet", "skel3", "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
+			sld.name = "Пинкамина";
+			sld.lastname = "Пай";
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade36", "", 25 + MOD_SKILL_ENEMY_RATE * 4);
+			sld.SaveItemsForDead = true;
+			sld.DontChangeBlade = true;
+			sld.DeleteFood = true;
+			LAi_LoginInCaptureTown(sld, true);
+			TakeItemFromCharacter(sld, "spyglass3");
+			AddMoneyToCharacter(sld, 5000);
+			AddItems(sld, "jewelry2", 10);
+			AddItems(sld, "jewelry5", 10);
+			AddItems(sld, "jewelry17", 10);
+			AddItems(sld, "mineral5", 3);
+			sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
+			sld.dialog.currentnode   = "FraOff_1";
+			ChangeCharacterAddressGroup(sld, "LeFransua_town", "reload",  "houseH7");
+			LAi_SetActorType(sld);
+			LAi_ActorDialog(sld, pchar, "", 4, 0);
+			
+			for (i=4; i<=5; i++)
+			{
+				sTemp = "skel_"+(rand(3)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
+				LAi_SetActorType(sld);
+				LAi_LoginInCaptureTown(sld, true);
+				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
+			}		
+			for (i=10; i<=11; i++)
+			{
+				sTemp = "skel_"+(rand(3)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
+				LAi_SetActorType(sld);
+				LAi_LoginInCaptureTown(sld, true);
+				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
+			}
+			for (i=13; i<=18; i++)
+			{
+				sTemp = "skel_"+(rand(3)+1);
+				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
+				LAi_SetActorType(sld);
+				LAi_LoginInCaptureTown(sld, true);
+				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
+			}
 		break;
 
 		case "FraOff_1":
-			dialog.text = RandPhraseSimple("Мы любим забавляться с ходячим мясом. Особенно, когда это мясо брызгает багровым фонтаном.", "Я почти сшил себе прекрасный камзол из человеческой кожи, не хватает лишь пару лоскутов, твоя как раз подойдёт.");
+			dialog.text = RandPhraseSimple("Я люблю забавляться с ходячим мясом. Особенно, когда это мясо брызгает багровым фонтаном.", "Я почти сшил себе прекрасный камзол из человеческой кожи, не хватает лишь пару лоскутов, твоя как раз подойдёт.");
 			link.l1 = RandPhraseSimple("Ты совершил ошибку, дружок.", "Ах ты нечисть проклятая, сгинь!");
 			link.l1.go = "FraOff_Bitva_1";
 		break;
@@ -353,18 +399,33 @@ void ProcessDialogEvent()
 			LAi_SetFightMode(pchar, true);
 			sld = CharacterFromID("PDM_Pinki_Skelet");
 			LAi_SetWarriorType(sld);
-			LAi_group_MoveCharacter(sld, "EnemyFight");
-			int j;
-			j = (GetOfficersQuantity(Pchar) + 1) * 2 + 1;
-			for (i=1; i<=j; i++)
-				{
+			LAi_group_MoveCharacter(sld, "PDM_PI_Skelety");
+			
+			for (i=4; i<=5; i++)
+			{
 				sld = CharacterFromID("PDM_PI_skel_"+i);
 				LAi_SetWarriorType(sld);
-				LAi_group_MoveCharacter(sld, "EnemyFight");
-				}
-			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);		//стравливаем
-			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, false);
-			LAi_group_SetCheck("EnemyFight", "PDM_FraOff_Bitva_1_Posle");
+				LAi_group_MoveCharacter(sld, "PDM_PI_Skelety");
+			}		
+			for (i=10; i<=11; i++)
+			{
+				sld = CharacterFromID("PDM_PI_skel_"+i);
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, "PDM_PI_Skelety");
+			}			
+			for (i=14; i<=17; i++)
+			{
+				sld = CharacterFromID("PDM_PI_skel_"+i);
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, "PDM_PI_Skelety");
+			}
+			
+			LAi_group_SetRelation("PDM_PI_Skelety", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);		//стравливаем
+			LAi_group_FightGroups("PDM_PI_Skelety", LAI_GROUP_PLAYER, false);
+			LAi_group_SetCheck("PDM_PI_Skelety", "PDM_FraOff_Bitva_1_Posle");
+			LAi_group_SetLookRadius("PDM_PI_Skelety", 7.0);
+			LAi_group_SetHearRadius("PDM_PI_Skelety", 2.0);
+			LAi_group_SetSayRadius("PDM_PI_Skelety", 4.0);
 			DialogExit();
 		break;
 

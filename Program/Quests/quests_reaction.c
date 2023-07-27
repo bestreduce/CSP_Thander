@@ -10016,14 +10016,6 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetPlayerType(pchar);
 		break;
 
-		case "PDM_Callow_RodjerVozvrat":
-			sld = CharacterFromID("PDM_LeFransua_Mayor_Klon")
-			ChangeCharacterAddressGroup(sld, "LeFransua_town", "none", "");
-
-			sld = CharacterFromID("LeFransua_Mayor")
-			ChangeCharacterAddressGroup(sld, "LeFransua_townhall", "sit", "sit1");
-		break;
-
 		case "PDM_Callow_RodjerFin":
 			sld = CharacterFromID("James_Callow")
 			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
@@ -10041,6 +10033,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("James_Callow")
 			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_1";
+			AddQuestRecord("PDM_Cursed_Idol", "3");
 		break;
 
 		case "PDM_Callow_poradomoy":
