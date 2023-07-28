@@ -359,7 +359,7 @@ void ProcessDialogEvent()
 			sld.dialog.currentnode   = "FraOff_1";
 			ChangeCharacterAddressGroup(sld, "LeFransua_town", "reload",  "houseH7");
 			LAi_SetActorType(sld);
-			LAi_ActorDialog(sld, pchar, "", 4, 0);
+			LAi_ActorDialog(sld, pchar, "", -1, 0);
 			
 			for (i=4; i<=5; i++)
 			{
@@ -377,7 +377,7 @@ void ProcessDialogEvent()
 				LAi_LoginInCaptureTown(sld, true);
 				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
 			}
-			for (i=13; i<=18; i++)
+			for (i=14; i<=17; i++)
 			{
 				sTemp = "skel_"+(rand(3)+1);
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
