@@ -1413,7 +1413,7 @@ bool SetReloadIcons()
                     objLandInterface.UserIcons.port.tex = 1;
                     objLandInterface.UserIcons.port.name = "reloadtoport";
                     string townsack = Locations[idxloc].townsack;
-                    if(townsack != "LeFransua" && townsack != "PuertoPrincipe" && townsack != "FortOrange") objLandInterface.UserIcons.port.location = townsack+"_town";
+                    if(townsack != "PuertoPrincipe" && townsack != "FortOrange") objLandInterface.UserIcons.port.location = townsack+"_town";
 					else objLandInterface.UserIcons.port.location = townsack+"_port";
                     objLandInterface.UserIcons.port.locator = "reload1";
                     objLandInterface.UserIcons.port.note = GetNodeForIcon(1, 10);

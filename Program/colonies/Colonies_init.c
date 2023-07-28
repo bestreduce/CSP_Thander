@@ -346,7 +346,7 @@ void InitColonies()
 		colonies[n].map.x = 1330;
 		colonies[n].map.y = 1260;
 		colonies[n].StoreNum   = LeFransua_STORE;
-		colonies[n].from_sea   = "LeFransua_port";
+		colonies[n].from_sea   = "LeFransua_town";
 		colonies[n].HasNoFort = true;
 
 

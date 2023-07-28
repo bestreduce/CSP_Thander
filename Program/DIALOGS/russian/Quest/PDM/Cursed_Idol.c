@@ -120,10 +120,10 @@ void ProcessDialogEvent()
 
 		case "Vstrecha_11":
             dialog.text = "Мою благодарность. И я буду сопровождать тебя во всех твоих путешествиях... по крайней мере, некоторое время. Того, кому ты долж"+ GetSexPhrase("ен","на") +" отдать идола, зовут Бортоломью Роджерс, он главарь поселения Ле Франсуа, что на Мартинике. Ты поможешь мне, "+ GetSexPhrase("приятель","подруга") +"?";
-            link.l1 = "Нет, это будет пустой тратой времени.";
-			link.l1.go = "VstrechaNet_1";
-			link.l2 = "Да. Я помогу тебе.";
-			link.l2.go = "VstrechaDa_1";
+			link.l1 = "Да. Я помогу тебе.";
+			link.l1.go = "VstrechaDa_1";
+            link.l2 = "Нет, это будет пустой тратой времени.";
+			link.l2.go = "VstrechaNet_1";
 			LAi_SetSitType(npchar);
 		break;
 
@@ -172,8 +172,6 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "LeFransua_townhall", "sit", "sit1");
 			sld.Dialog.Filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "Rodjer_1";
-			pchar.questTemp.PDM_PI_Skelety_v_more = "PDM_PI_Skelety_v_more";
-			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 5);
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -304,7 +302,7 @@ void ProcessDialogEvent()
 			bDisableFastReload = true;
 			LAi_LocationFightDisable(&Locations[FindLocation("LeFransua_town")], true);
 			SetLocationCapturedState("LeFransua_town", true);
-			SetCurrentTime(23, 1);
+			SetCurrentTime(24, 0);
 
 			sld = GetCharacter(NPC_GenerateCharacter("Pablo_Loco_Idol", "indsar1", "man", "man", 10, PIRATE, -1, false));
 			sld.name = "Керук";
@@ -316,6 +314,8 @@ void ProcessDialogEvent()
 			sld.dialog.currentnode   = "Pablo_Loco_Idol";
 			LAi_LoginInCaptureTown(sld, true);
 			ChangeCharacterAddressGroup(sld,"LeFransua_town","goto","goto7");
+			
+			pchar.questTemp.PDM_PI_Skelety_v_more = true;
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -367,6 +367,8 @@ void ProcessDialogEvent()
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
 				LAi_SetActorType(sld);
 				LAi_LoginInCaptureTown(sld, true);
+				sld.lifeday = 1;
+				SaveCurrentNpcQuestDateParam(sld, "LifeTimeCreate")
 				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
 			}		
 			for (i=10; i<=11; i++)
@@ -375,6 +377,8 @@ void ProcessDialogEvent()
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
 				LAi_SetActorType(sld);
 				LAi_LoginInCaptureTown(sld, true);
+				sld.lifeday = 1;
+				SaveCurrentNpcQuestDateParam(sld, "LifeTimeCreate")
 				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
 			}
 			for (i=14; i<=17; i++)
@@ -383,6 +387,8 @@ void ProcessDialogEvent()
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", sti(pchar.rank), PIRATE, -1, true));
 				LAi_SetActorType(sld);
 				LAi_LoginInCaptureTown(sld, true);
+				sld.lifeday = 1;
+				SaveCurrentNpcQuestDateParam(sld, "LifeTimeCreate")
 				ChangeCharacterAddressGroup(sld, "LeFransua_town", "goto",  "goto"+i);
 			}
 		break;
@@ -420,9 +426,11 @@ void ProcessDialogEvent()
 				LAi_group_MoveCharacter(sld, "PDM_PI_Skelety");
 			}
 			
-			LAi_group_SetRelation("PDM_PI_Skelety", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);		//стравливаем
+			PChar.quest.PDM_PI_PinkiSkelet.win_condition.l1 = "NPC_Death";
+			PChar.quest.PDM_PI_PinkiSkelet.win_condition.l1.character = "PDM_Pinki_Skelet";
+			PChar.quest.PDM_PI_PinkiSkelet.win_condition = "PDM_FraOff_Bitva_1_Posle";
+			LAi_group_SetRelation("PDM_PI_Skelety", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("PDM_PI_Skelety", LAI_GROUP_PLAYER, false);
-			LAi_group_SetCheck("PDM_PI_Skelety", "PDM_FraOff_Bitva_1_Posle");
 			LAi_group_SetLookRadius("PDM_PI_Skelety", 7.0);
 			LAi_group_SetHearRadius("PDM_PI_Skelety", 2.0);
 			LAi_group_SetSayRadius("PDM_PI_Skelety", 4.0);

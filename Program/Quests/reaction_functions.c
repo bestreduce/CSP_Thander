@@ -10440,6 +10440,11 @@ void PDM_PI_Vykl_Music(string qName)
 	PlayVoice("Kopcapkz\Voices\Skeletons\Skeleton_hit_23.ogg");
 	PlayVoice("CSR\Music\Sea\Deck_Nekro.ogg");
 }
+void PDM_PI_Vernut_Gorod(string qName)
+{
+	SetLocationCapturedState("LeFransua_town", false);
+	AddSimpleRumourToAllNations("Представляешь, какой-то безумец в одиночку вырезал половину гарнизона в Ле Франсуа!", 7, 1);
+}
 //Sinistra Проклятый идол <--
 
 //Sinistra Золото не тонет -->

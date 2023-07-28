@@ -10034,6 +10034,8 @@ void QuestComplete(string sQuestName, string qname)
 			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_1";
 			AddQuestRecord("PDM_Cursed_Idol", "3");
+			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 1);		//У-у-у страшно!!!
+			SetTimerFunction("PDM_PI_Vernut_Gorod", 0, 0, 1);
 		break;
 
 		case "PDM_Callow_poradomoy":
@@ -10130,7 +10132,6 @@ void QuestComplete(string sQuestName, string qname)
             InterfaceStates.Buttons.Save.enable = 1;
             pchar.quest.Munity = "Deads";
             LAi_SetFightMode(Pchar, false);
-			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 20);
         break;
 //========================  Квест "Новая Родина".  =======================
 

@@ -501,7 +501,7 @@ string GetPortByCityName(string city) // имена портов по город
             return "FortFrance_town";
 		break;
 		case "LeFransua":
-            return "LeFransua_port";
+            return "LeFransua_town";
 		break;
 		case "Havana":
             return "Havana_town";

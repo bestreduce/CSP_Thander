@@ -35,9 +35,9 @@ void HKT_Button(string sHKB) // быстрый переход
 	// <--
 	if(bOk)
 	{
-		if (sHKB == "Fast_port")
+		if (sHKB == "Fast_port")		//Телепортация в ГОРОД (или в порт)
 		{
-			if (sCityID != "LeFransua" && sCityID != "PuertoPrincipe") PlayerFastTravel(curLocIdx, sCityID + "_town", "reload1");
+			if (sCityID != "PuertoPrincipe") PlayerFastTravel(curLocIdx, sCityID + "_town", "reload1");
 			else PlayerFastTravel(curLocIdx, sCityID + "_port", "reload1");
 		}
 		else PlayerFastTravel(curLocIdx, sCityID + locID, "");
