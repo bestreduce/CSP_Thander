@@ -2293,12 +2293,11 @@ void PL_Q8_ResEnterBox(string qName)
     {
 		TakeItemFromCharacter(pchar, "keyPanama");
 		chrDisableReloadToLocation = true;
-		sld = characterFromId("Henry Morgan");
-		sld.dialog.currentNode = "PL_Q8_Panama2";
-		ChangeCharacterAddressGroup(sld, pchar.location, "reload", "reload1");
-		LAi_SetActorType(sld);
-		LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
-		LAi_ActorDialog(sld, pchar, "", -1, 0);
+		
+		pchar.quest.PL_Q8_MorganBox.win_condition.l1 = "Money";
+		pchar.quest.PL_Q8_MorganBox.win_condition.l1.value = 50000000;
+		pchar.quest.PL_Q8_MorganBox.win_condition.l1.operation = ">=";
+		PChar.quest.PL_Q8_MorganBox.function = "PL_Q8_MorganBox";
 	}
 	else
 	{
@@ -2315,6 +2314,16 @@ void PL_Q8_ResEnterBox_2(string qName)
 	pchar.quest.PL_Q8_ResEnterBox.win_condition.l1.locator_group = "box";
 	pchar.quest.PL_Q8_ResEnterBox.win_condition.l1.locator = "private1";
 	pchar.quest.PL_Q8_ResEnterBox.function = "PL_Q8_ResEnterBox";
+}
+
+void PL_Q8_MorganBox(string qName)
+{
+	sld = characterFromId("Henry Morgan");
+	sld.dialog.currentNode = "PL_Q8_Panama2";
+	ChangeCharacterAddressGroup(sld, pchar.location, "goto", "goto6");
+	LAi_SetActorType(sld);
+	LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+	LAi_ActorDialog(sld, pchar, "", 0, 0);
 }
 
 void PL_Q8_inPanamaFort2(string qName)
