@@ -1439,6 +1439,8 @@ void ProcessDialogEvent()
 			dialog.text = "Верно. Поэтому испанцы и не ждут от нас этого, и форт им не поможет отбивать атаку с тыла. Но запомни мои слова - мы это сделаем.";
 			link.l1 = "А, чёрт! Заманчиво, хотя и опасно! Когда приступаем?";
 			link.l1.go = "PL_Q8_12";
+			link.l2 = "Знаешь, Морган, я что-то сомневаюсь в успехе данной авантюры. Я откажусь.";
+			link.l2.go = "PL_Q8_17";
 		break;
 		case "PL_Q8_12":
 			dialog.text = "Я даю тебе 20 дней, чтобы ты смог"+ GetSexPhrase("","ла") +" подготовиться как следует. Подбери корабль помощней, а особенно команду побольше собери. Ты сможешь участвовать в этом деле только с одним кораблём, имей это в виду.";
@@ -1471,6 +1473,16 @@ void ProcessDialogEvent()
 			SetTimerFunction("PQ8_timeOver", 0, 0, 35);
 			LocatorReloadEnterDisable("Shore48", "reload1_back", true); //закрывем подходы к Панаме
 			LocatorReloadEnterDisable("PortoBello_Jungle_01", "reload1_back", true);
+		break;
+		
+		case "PL_Q8_17":
+			dialog.text = "Очень зря. Твой отказ разочаровал меня, но уговаривать тебя я не стану. Бывай.";
+			link.l1 = "Всего хорошего, Морган.";
+			link.l1.go = "PL_Q8_18";
+		break;
+		case "PL_Q8_18":
+			DialogExit();
+			NextDiag.TempNode = "First time";
 		break;
 
 		case "PL_Q8_ready":
