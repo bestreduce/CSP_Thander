@@ -1439,6 +1439,8 @@ void ProcessDialogEvent()
 			dialog.text = "Верно. Поэтому испанцы и не ждут от нас этого, и форт им не поможет отбивать атаку с тыла. Но запомни мои слова - мы это сделаем.";
 			link.l1 = "А, чёрт! Заманчиво, хотя и опасно! Когда приступаем?";
 			link.l1.go = "PL_Q8_12";
+			link.l2 = "Знаешь, Морган, я что-то сомневаюсь в успехе данной авантюры. Я откажусь.";
+			link.l2.go = "PL_Q8_17";
 		break;
 		case "PL_Q8_12":
 			dialog.text = "Я даю тебе 20 дней, чтобы ты смог"+ GetSexPhrase("","ла") +" подготовиться как следует. Подбери корабль помощней, а особенно команду побольше собери. Ты сможешь участвовать в этом деле только с одним кораблём, имей это в виду.";
@@ -1471,6 +1473,16 @@ void ProcessDialogEvent()
 			SetTimerFunction("PQ8_timeOver", 0, 0, 35);
 			LocatorReloadEnterDisable("Shore48", "reload1_back", true); //закрывем подходы к Панаме
 			LocatorReloadEnterDisable("PortoBello_Jungle_01", "reload1_back", true);
+		break;
+		
+		case "PL_Q8_17":
+			dialog.text = "Очень зря. Твой отказ разочаровал меня, но уговаривать тебя я не стану. Бывай.";
+			link.l1 = "Всего хорошего, Морган.";
+			link.l1.go = "PL_Q8_18";
+		break;
+		case "PL_Q8_18":
+			DialogExit();
+			NextDiag.TempNode = "First time";
 		break;
 
 		case "PL_Q8_ready":
@@ -1671,7 +1683,7 @@ void ProcessDialogEvent()
 			link.l1.go = "PL_Q8_PBResidence_1";
 		break;
 		case "PL_Q8_PBResidence_1":
-			dialog.text = "В чем дело?";
+			dialog.text = "В чём дело?";
 			link.l1 = "Испанцам известно о наших намерениях идти на Панаму. Это рассказал мне пленный губернатор.";
 			link.l1.go = "PL_Q8_PBResidence_2";
 		break;
@@ -1715,7 +1727,7 @@ void ProcessDialogEvent()
 			}
 		break;
 		case "PL_Q8_PBResidence_8":
-			dialog.text = "Это ещё не все. Джекмен и Моррис пойдут со мной. Ты пойдёшь с Соукинсом. Испанцы знают о нашем походе, и наверняка попытаются организовать засаду в джунглях. А скорее всего, и не одну.";
+			dialog.text = "Это ещё не всё. Джекмен и Моррис пойдут со мной. Ты пойдёшь с Соукинсом. Испанцы знают о нашем походе, и наверняка попытаются организовать засаду в джунглях. А скорее всего, и не одну.";
 			link.l1 = "Думаю, что это так, адмирал. Мы будем готовы.";
 			link.l1.go = "PL_Q8_PBResidence_9";
 		break;
