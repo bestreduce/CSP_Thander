@@ -1996,27 +1996,7 @@ string GetBlueBirdRumour_Ship()
 //======================= пиратская линейка ===================================
 void PiratesLineInit()
 {
-	ref sld;
 	pchar.questTemp.piratesLine = "begin";
-	sld = GetCharacter(NPC_GenerateCharacter("QuestPirate1", "officer_9", "man", "man", 20, PIRATE, -1, true));
-	sld.name = "Капитан";
-	sld.lastname = "Гудли";
-	sld.rank = 20;
-	sld.city = "PuertoPrincipe";
-	sld.location	= "PuertoPrincipe_town";
-	sld.location.group = "goto";
-	sld.location.locator = "goto7";
-	sld.dialog.filename   = "Quest\PiratesLine_dialog.c";
-	sld.dialog.currentnode   = "PiratesMan1";
-	sld.greeting = "Gr_EvilPirate";
-	sld.talker = 8; //начать диалог
-	sld.TiedItems.itm1.model = "HandsItems\meet";
-	sld.TiedItems.itm1.locator = "Saber_hand";
-	sld.TiedItems.itm2.model = "HandsItems\cup";
-	sld.TiedItems.itm2.locator = "Saber_hand";
-	LAi_SetLoginTime(sld, 6.0, 21.99);
-	LAi_SetCitizenType(sld);
-	LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 }
 
 //ищем город определенной нации, проверять наличие ростовщика и тавернщика
