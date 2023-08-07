@@ -67,7 +67,7 @@ void Sharp_MeetSiblings(string qName)
 	sld.talker = 10;
 	weaponskill = 5* MOD_SKILL_ENEMY_RATE;
 	SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		SetCharacterPerk(sld, "Sliding");
 	}
@@ -125,7 +125,7 @@ void SharleMary_Indians(string qName)
 	chrDisableReloadToLocation = true;
 	string cnd;
 	int maxIndians = 2;
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		maxIndians++;
 	}
@@ -143,7 +143,7 @@ void SharleMary_Indians(string qName)
 		SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
 		GiveItem2Character(sld, _Blade);
 		EquipCharacterbyItem(sld, _Blade);
-		if (MOD_SKILL_ENEMY_RATE == 10)
+		if (MOD_SKILL_ENEMY_RATE == 3)
 		{//Сюрприз для невозможки
 			//FantomMakeCoolFighter(sld, 15, 10, 10, _Blade, "", 0);
 			SetCharacterPerk(sld, "Sliding");
@@ -228,7 +228,7 @@ void SharleMary_MeetCap(string qName)
 	LAi_LocationFightDisable(locLoad, true);
 	int maxPirates = 3;
 	string cnd;
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		maxPirates++;
 	}

@@ -695,7 +695,7 @@ void ProcessCommandExecute()
 		case "RIGHTCHANGE_COMPLEX":
 			if(comName=="click")
 			{
-			    if (MOD_SKILL_ENEMY_RATE < 10)
+			    if (MOD_SKILL_ENEMY_RATE < 3)
 			    {
 	               MOD_SKILL_ENEMY_RATE++;
 	            }
@@ -1606,7 +1606,7 @@ void StopBlind_Hint()
 
 void DisableEnable_CheckProcess() // ugeen 2016
 {
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{
 		SetClickable("CHECK_MOD_DAMAGE", false);
 		Button_SetEnable("CHECK_MOD_DAMAGE", false);

@@ -502,7 +502,7 @@ string GetRPGText(string _param)
     string totalInfo;
 
     idLngFile = LanguageOpenFile("RPGDescribe.txt");
-	if (MOD_SKILL_ENEMY_RATE == 10 && _param == "sailing") _param += "Hard10";
+	if (MOD_SKILL_ENEMY_RATE == 3 && _param == "sailing") _param += "Hard10";
     totalInfo = LanguageConvertString(idLngFile, _param);
     LanguageCloseFile(idLngFile);
 
@@ -1422,7 +1422,7 @@ int GetShipClassNavySkill(int shipClass)
             case 3 : needSkill = 70; break;
             case 4 : needSkill = 50; break;
             case 5 : needSkill = 30; break;
-            case 6 : if (MOD_SKILL_ENEMY_RATE == 10) needSkill = 10; else needSkill = 1; break; // LEO: Превозмогаторам страдать 07.12.2021
+            case 6 : if (MOD_SKILL_ENEMY_RATE == 3) needSkill = 10; else needSkill = 1; break; // LEO: Превозмогаторам страдать 07.12.2021
             case 7 : needSkill = 0; break;
     }
     return needSkill;

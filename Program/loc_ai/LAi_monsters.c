@@ -212,7 +212,7 @@ bool LAi_CreateEncounters(ref location)
 			if (num <= 0 ) num = 1; //если локаторов меньше четырех
 			str = "Gang"+ location.index + "_";
 			//--> генерим ранг
-			if (sti(pchar.rank) > 6 || MOD_SKILL_ENEMY_RATE == 10)
+			if (sti(pchar.rank) > 6 || MOD_SKILL_ENEMY_RATE == 3)
 			{
 				if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5);
 				else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*1.5);

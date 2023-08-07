@@ -420,7 +420,7 @@ float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 {
 	float fMultiplier = 1.35+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/20.0);// 1.5 ... 1.85 - влияние силы на скорость восстановления энергии
 
-	if((MOD_SKILL_ENEMY_RATE == 10) || (CheckCharacterPerk(chr, "Energaiser"))) // скрытый перк боссов и ГГ
+	if((MOD_SKILL_ENEMY_RATE == 3) || (CheckCharacterPerk(chr, "Energaiser"))) // скрытый перк боссов и ГГ
 	{
 		fMultiplier = fMultiplier * 1.5;
 	}

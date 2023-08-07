@@ -2393,7 +2393,7 @@ void QuestComplete(string sQuestName, string qname)
 					}
 					//<-- генерим ранг
 					// sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "spy", "spy", Rank, PIRATE, 0, true)); // LEO: Убрал от бугуртов недовольных - Gregg :)
-					if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
+					if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
 					else sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man", Rank, PIRATE, 0, true));
 					sld.dialog.filename = "MayorQuests_dialog.c";
 					sld.dialog.currentnode = "SeekSpy_house";
@@ -2980,7 +2980,7 @@ void QuestComplete(string sQuestName, string qname)
 		////////////////////////////////////////////////////////////////////////
 		case "Berglars_Ostin":
 			chrDisableReloadToLocation = true;
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man", 30, SPAIN, -1, false));
 			FantomMakeCoolFighter(sld, 30, 100, 70, "blade32", "pistol5", 50);
 			sld.name 	= "Альберто";
@@ -8064,7 +8064,7 @@ void QuestComplete(string sQuestName, string qname)
         case "Ascold_InGraveAfterFight":
 			pchar.questTemp.Ascold = "Ascold_MummyIsLive";
 		    LAi_LocationFightDisable(&Locations[FindLocation("Guadeloupe_Cave")], true);
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man", 100, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, 100, 100, 100, "blade28", "", 3000);
 			sld.name = "Лейф";
@@ -12921,7 +12921,7 @@ void QuestComplete(string sQuestName, string qname)
 			if (loadedLocation.id != "DeckWithReefs" || CheckAttribute(pchar,"GiantEvilSkeletonSpawned")) {chrDisableReloadToLocation = false; break;}
 			scareOfficers(50);
 			log_info("Хранитель грота был пробуждён.");
-			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_0", "skeleton", "Giant", iRank, PIRATE, 1, true));
 			sld.name = "Хранитель";
 			sld.lastname = "Грота";
@@ -13326,7 +13326,7 @@ void QuestCursedSceleton()
 {
 	ref sld;
 	//sld = GetCharacter(CharacterFromID("CursedSkeleton"));
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
 	FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 100, 100, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 	DeleteAttribute(sld, "SuperShooter");

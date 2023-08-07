@@ -854,7 +854,7 @@ void PGG_SetUpForTask(ref chr)
 			{
 				int pgg_hunters = sti(chr.rank)/15 + 1;
 				int pgg_hunters_bonus = 1;
-				if (MOD_SKILL_ENEMY_RATE == 10)
+				if (MOD_SKILL_ENEMY_RATE == 3)
 				{
 					pgg_hunters_bonus = 2;
 				}

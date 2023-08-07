@@ -284,7 +284,7 @@ void BlueBird_seaBattle(string qName)
 {
 	LAi_group_Delete("EnemyFight");
 	group_DeleteGroup("BlueBird_Group");
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("BlueBirdCapitain", "PGG_DeLuck_0", "man", "man_fast", 20, PIRATE, 30, true));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("BlueBirdCapitain", "PGG_DeLuck_0", "man", "man_fast", 20, PIRATE, 30, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("BlueBirdCapitain", "PGG_DeLuck_0", "man", "man", 20, PIRATE, 30, true));
 	sld.name 	= "Фольке";
     sld.lastname = "Дэллюк";
@@ -5493,7 +5493,7 @@ void LSC_climeUsurer_4(string qName)
 	//ставим бога мертвых
 	LAi_LockFightMode(Pchar, false);
 	LAi_LocationFightDisable(loadedLocation, true);
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man_fast", 100, PIRATE, 0, true));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man_fast", 100, PIRATE, 0, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "skeleton", 100, PIRATE, 0, true));
     FantomMakeCoolFighter(sld, 50, 100, 100, "toporAZ", "pistol4", 3000); //дадим четырехствольник
 	sld.name = "Миктлантекутли";
@@ -5615,7 +5615,7 @@ void Teno_startInShore_2()
 	LAi_SetActorType(sld);
 	LAi_ActorRunToLocation(sld, "reload", "sea", "none", "", "", "CanFightCurLocation", 10.0);
 	//Ставим вождя
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("Montesuma", "Aztec", "man", "man_fast", 50, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("Montesuma", "Aztec", "man", "man_fast", 50, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("Montesuma", "Aztec", "man", "man", 50, PIRATE, -1, true));
 	FantomMakeCoolFighter(sld, 50, 100, 100, "toporAZ", "", 500);
 	sld.name = "Монтесума";
@@ -6824,7 +6824,7 @@ void FindMsStid_ring(string qName)
 void LoginWinterwood()
 {
     ref sld, ch, itm;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Winterwood", "officer_20", "man", "man_fast", 10, PIRATE, 3, false));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Winterwood", "officer_20", "man", "man_fast", 10, PIRATE, 3, false));
 	else sld = GetCharacter(NPC_GenerateCharacter("Winterwood", "officer_20", "man", "man", 10, PIRATE, 3, false));
 	sld.name = "Стюарт";
 	sld.lastname = "Уинтервуд";
@@ -9029,7 +9029,7 @@ void zpq_sld1_fc(string qName)
 void zpq_seaBattle(string qName)
 {
 	LAi_group_Delete("EnemyFight");
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("zpqCaptain", "Lil_Jim_0", "man", "man_fast", 40, PIRATE, 1, true));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("zpqCaptain", "Lil_Jim_0", "man", "man_fast", 40, PIRATE, 1, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("zpqCaptain", "Lil_Jim_0", "man", "man", 40, PIRATE, 1, true));
 	FantomMakeCoolFighter(sld, 40, 105, 105, "blade23", "pistol3", 200);
 	FantomMakeCoolSailor(sld, SHIP_LUGGERQUEST, "Нормандия", CANNON_TYPE_CANNON_LBS16, 105, 105, 105);
@@ -9225,7 +9225,7 @@ void SelectCarlosCity() //выбираем город
 void CreateCarlos()//создаем Карлоса
 {
     ref sld, ch;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Carlos", "ozg_carlos", "man", "man_fast", 20, PIRATE, -1, false));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Carlos", "ozg_carlos", "man", "man_fast", 20, PIRATE, -1, false));
 	else sld = GetCharacter(NPC_GenerateCharacter("Carlos", "ozg_carlos", "man", "man", 20, PIRATE, -1, false));
 	sld.name = "Карлос";
 	sld.lastname = "Кассир";
@@ -9351,7 +9351,7 @@ void SelectHoumCity()//выберем колонию для Холма
 void CreateHoum()//создадим Холма
 {
     ref sld;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Houm", "ozg_horn", "man", "man_fast", 25, ENGLAND, -1, false));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Houm", "ozg_horn", "man", "man_fast", 25, ENGLAND, -1, false));
 	else sld = GetCharacter(NPC_GenerateCharacter("Houm", "ozg_horn", "man", "man", 25, ENGLAND, -1, false));
 	FantomMakeCoolFighter(sld, 25, 50, 50, "blade19", "pistol6", 70);
 	FantomMakeCoolSailor(sld, SHIP_GALEON_H, "Мертвая голова", CANNON_TYPE_CANNON_LBS32, 70, 70, 70);
@@ -9404,7 +9404,7 @@ void Headhunter_CreateHoumShips(string qName)//cоздание кораблей 
 		LAi_SetImmortal(sld, false);
 		Group_AddCharacter("Houm_Attack", "Houm");//добавим Хоума в группу
 
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Houm_helper", "pirate_1", "man", "man_fast", 35, ENGLAND, -1, true));//создание кэпа-помощника
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Houm_helper", "pirate_1", "man", "man_fast", 35, ENGLAND, -1, true));//создание кэпа-помощника
 		else sld = GetCharacter(NPC_GenerateCharacter("Houm_helper", "pirate_1", "man", "man", 35, ENGLAND, -1, true));//создание кэпа-помощника
 		sld.name = "Андре";
 		sld.lastname = "Деготь";
@@ -9470,7 +9470,7 @@ void Headhunter_CreateRatpinasse(string qName)//создание пинаса А
 	Group_FindOrCreateGroup("PinasseC");//создать группу
 	Group_SetType("PinasseC", "war");//тип группы
 
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("RatSeaOfficer", "officer_15", "man", "man_fast", 35, FRANCE, -1, true));//создание кэпа
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("RatSeaOfficer", "officer_15", "man", "man_fast", 35, FRANCE, -1, true));//создание кэпа
 	else sld = GetCharacter(NPC_GenerateCharacter("RatSeaOfficer", "officer_15", "man", "man", 35, FRANCE, -1, true));//создание кэпа
 	sld.name = "Первый помощник";
 	sld.lastname = "Барнс";
@@ -9519,7 +9519,7 @@ void PinasseC_AfterBattle(string qName)//реакция на досрочное 
 void CreateRatOfficer()//посадим в таверну самого Крысу - не будем модель прятать
 {
     ref sld;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("RatOfficer", "ozg_piRat", "man", "man_fast", 10, PIRATE, -1, false));
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("RatOfficer", "ozg_piRat", "man", "man_fast", 10, PIRATE, -1, false));
 	else sld = GetCharacter(NPC_GenerateCharacter("RatOfficer", "ozg_piRat", "man", "man", 10, PIRATE, -1, false));
 	sld.name = "Матиас";
 	sld.lastname = "Грин";
@@ -9611,7 +9611,7 @@ void Headhunter_CreateRatTruepinasse(string qName)//создание пинас�
 	Group_SetType("PinasseT", "war");//тип группы
 	Island_SetReloadEnableGlobal("Beliz", false);
 
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("RatCaptain", "ozg_piRat", "man", "man_fast", 25, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("RatCaptain", "ozg_piRat", "man", "man_fast", 25, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("RatCaptain", "ozg_piRat", "man", "man", 25, PIRATE, -1, true));//создание кэпа
 	sld.name = "Матиас";
 	sld.lastname = "Грин";
@@ -9710,7 +9710,7 @@ void RatHunters_Enter(string qName)//пришли киллеры
 	int iTemp = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
 	for (i=1; i<=2; i++)
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)ref sld = GetCharacter(NPC_GenerateCharacter("RatHunters"+i, "officer_7", "man", "man_fast", iTemp, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)ref sld = GetCharacter(NPC_GenerateCharacter("RatHunters"+i, "officer_7", "man", "man_fast", iTemp, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("RatHunters"+i, "officer_7", "man", "man", iTemp, PIRATE, -1, true));
 		FantomMakeCoolFighter(sld, iTemp, 50, 50, "topor2", "pistol5", 50);
 		LAi_SetActorType(sld);
@@ -9738,7 +9738,7 @@ void RatHunters_Enter(string qName)//пришли киллеры
 void CreateHalen()//создаем Халена и ближайшее окружение
 {
     ref sld;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen", "ozg_martin", "man", "man_fast", 30, HOLLAND, -1, false)); // LEO: Превозмогаторам страдать 08.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen", "ozg_martin", "man", "man_fast", 30, HOLLAND, -1, false)); // LEO: Превозмогаторам страдать 08.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("Halen", "ozg_martin", "man", "man", 30, HOLLAND, -1, false));
 	sld.name = "Мартин";
 	sld.lastname = "ван Хален";
@@ -9787,13 +9787,13 @@ void Headhunter_SeabattleInPort(string qName)//создание корвета �
 
 	if (GetCharacterIndex("Halen") == -1)
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen1", "officer_17", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen1", "officer_17", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("Halen1", "officer_17", "man", "man", 25, HOLLAND, -1, true));
 		if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
 	}
 	else
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen1", "ozg_martin", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen1", "ozg_martin", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("Halen1", "ozg_martin", "man", "man", 25, HOLLAND, -1, true));//создание кэпа
 		sld.name = "Мартин";
 		sld.lastname = "ван Хален";
@@ -9818,7 +9818,7 @@ void Headhunter_SeabattleInPort(string qName)//создание корвета �
 	ChangeCrewExp(sld, "Cannoners", 80);
 	ChangeCrewExp(sld, "Soldiers", 80);
 
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen_helper", "off_hol_2", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Halen_helper", "off_hol_2", "man", "man_fast", 25, HOLLAND, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("Halen_helper", "off_hol_2", "man", "man", 25, HOLLAND, -1, true));//создание кэпа
 	sld.DontRansackCaptain = true;
 	if (bHardBoss) sld.AlwaysReload = true;//перезарядка независимо от Дозарядки
@@ -9877,7 +9877,7 @@ void Headhunter_Halen_frigate_AfterBattle(string qName)//потопили кор
 void CreateMiko()//создадим Мико Пистольеро
 {
     ref sld;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Miko", "ozg_miko", "man", "man_fast", 40, SPAIN, -1, false)); // LEO: Превозмогаторам страдать 08.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Miko", "ozg_miko", "man", "man_fast", 40, SPAIN, -1, false)); // LEO: Превозмогаторам страдать 08.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("Miko", "ozg_miko", "man", "man", 40, SPAIN, -1, false));
 	FantomMakeCoolFighter(sld, 40, 50, 100, "blade22", "pistol4", 150);
 	sld.name = "Мико";
@@ -9899,7 +9899,7 @@ void CreateMiko()//создадим Мико Пистольеро
 	ChangeCharacterAddressGroup(sld, "Pearl_Town_2", "goto", "goto1");
 	for (i=2; i<=5; i++)//добавим охраны в поселение
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("AddPearlguard"+i, "Pirate_"+(rand(24)+1), "man", "man_fast", 25, SPAIN, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("AddPearlguard"+i, "Pirate_"+(rand(24)+1), "man", "man_fast", 25, SPAIN, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("AddPearlguard"+i, "Pirate_"+(rand(24)+1), "man", "man", 25, SPAIN, -1, true));
 		sld.Dialog.Filename = "Pearl_dialog.c";
 		sld.dialog.currentnode = "PearlMan";
@@ -9930,7 +9930,7 @@ void Headhunter_Jahunters(string qName)//наймиты Джа в бухте
 	chrDisableReloadToLocation = true;
 	for (i=1; i<=6; i++)
 	{
-		if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)ref sld = GetCharacter(NPC_GenerateCharacter("JaHunters"+i, "officer_17", "man", "man_fast", iTemp, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+		if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)ref sld = GetCharacter(NPC_GenerateCharacter("JaHunters"+i, "officer_17", "man", "man_fast", iTemp, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 		else sld = GetCharacter(NPC_GenerateCharacter("JaHunters"+i, "officer_17", "man", "man", iTemp, PIRATE, -1, true));
 		FantomMakeCoolFighter(sld, 25, 60, 60, "topor2", "pistol6", 70);
 		LAi_SetActorType(sld);
@@ -9962,7 +9962,7 @@ void Create_Ja(string qName)//cоздаем Фрегат "Ахерон" с Дж�
 	int hcrew;
 	Group_FindOrCreateGroup("BlueBird_Group2");
 	bQuestDisableMapEnter = true;
-	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("Jafar", "QuestCaptain", "man", "man_fast", 28, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("Jafar", "QuestCaptain", "man", "man_fast", 28, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("Jafar", "QuestCaptain", "man", "man", 28, PIRATE, -1, true));
 	sld.name 	= "Джа";
     sld.lastname = "Престон";
@@ -10679,7 +10679,7 @@ void PDM_CL_Ubrat_Lodku(string qName)
 {
 	int Rank = sti(pchar.rank) - 4 + MOD_SKILL_ENEMY_RATE;
 	if (Rank < 1) Rank = 1;
-	int Sila = 70 + MOD_SKILL_ENEMY_RATE * 3;
+	int Sila = 70 + MOD_SKILL_ENEMY_RATE*3;
 	int DopHP = 60 + MOD_SKILL_ENEMY_RATE * 12;
 
 	sld = CharacterFromID("PDM_CL_Anto2")
@@ -11118,7 +11118,7 @@ void UnexpectedInheritanceSeaBattle()
 	}
 	SetCharacterPerk(sld, "MusketsShoot");
 	SetCharacterPerk(sld, "CannonProfessional");
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{
 		sld.rank = 60;
 		SetSelfSkill(sld, 100, 100, 100, 100, 100);

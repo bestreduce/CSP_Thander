@@ -252,7 +252,7 @@ void ProcessDialogEvent()
 			link.l1 = "Меньше слов - к делу!";
 			link.l1.go = "fight_right_now";
 			sld = CharacterFromID("PDM_NK_Viktor");
-			if (MOD_SKILL_ENEMY_RATE <= 6)
+			if (MOD_SKILL_ENEMY_RATE <= 2)
 			{
 				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "Pistol1", DopHP);
 			}

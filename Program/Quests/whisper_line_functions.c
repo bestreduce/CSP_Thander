@@ -91,7 +91,7 @@ void Whisper_StartGame(string qName)
 			EquipCharacterByItem(sld, "blade14");
 		}
 		LAi_SetHP(sld, 10.0 * MOD_SKILL_ENEMY_RATE, 10.0 *MOD_SKILL_ENEMY_RATE);
-		if (MOD_SKILL_ENEMY_RATE == 10)
+		if (MOD_SKILL_ENEMY_RATE == 3)
 		{
 			SetCharacterPerk(sld, "Sliding");
 		}
@@ -491,7 +491,7 @@ void WhisperLine_IncqGuard(string qName)
 				int weaponskill = 6 * MOD_SKILL_ENEMY_RATE;
 				SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
 				//LAi_group_Attack(sld, Pchar);
-				//if (MOD_SKILL_ENEMY_RATE != 10)
+				//if (MOD_SKILL_ENEMY_RATE != 3)
 				//{
 					DeleteAttribute(sld, "perks.list.Sliding");
 				//}
@@ -960,7 +960,7 @@ void WhisperPirateTownGetHat_part_1(string qName)
 	sld = characterFromID("PirateTownDefender_7");
 	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item9");
 
-	if (MOD_SKILL_ENEMY_RATE != 10)
+	if (MOD_SKILL_ENEMY_RATE != 3)
 	{
 		sld = characterFromID("PirateTownDefender_8");
 		ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item9");
@@ -1033,7 +1033,7 @@ void WhisperMeetCrew(string qName)
 	GiveItem2Character(sld, "blade9");
 	EquipCharacterByItem(sld, "blade9");
 	LAi_SetHP(sld, 30.0 * MOD_SKILL_ENEMY_RATE, 30.0 *MOD_SKILL_ENEMY_RATE);
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{
 		SetCharacterPerk(sld, "Sliding");
 		LAi_SetHP(sld, 35.0 * MOD_SKILL_ENEMY_RATE, 35.0 *MOD_SKILL_ENEMY_RATE);
@@ -1245,7 +1245,7 @@ void WhisperHuntersCaveEntrance(string qName)
 		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", 5+MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
 		//SetFantomParamHunter(sld);
 		LAi_SetHP(sld, 50+sti(pchar.rank)*10.0, 50+sti(pchar.rank)*10.0);
-		if (MOD_SKILL_ENEMY_RATE == 10)
+		if (MOD_SKILL_ENEMY_RATE == 3)
 		{
 			LAi_SetHP(sld, 50+sti(pchar.rank) * 20.0, 50+sti(pchar.rank) * 20.0);
 		}
@@ -1364,7 +1364,7 @@ void WhisperDeSouzaSeaBattle()
 	SetCharacterPerk(sld, "MusketsShoot");
 	SetCharacterPerk(sld, "CannonProfessional");
 
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{
 		SetCharacterPerk(sld, "Sliding");
 		sld.rank = 40;
@@ -1455,7 +1455,7 @@ void WhisperWarDogSeaBattle()
 	}
 	SetCharacterPerk(sld, "MusketsShoot");
 	SetCharacterPerk(sld, "CannonProfessional");
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{
 		sld.rank = 60;
 		SetSelfSkill(sld, 100, 100, 100, 100, 100);
@@ -1861,7 +1861,7 @@ void DarkHuman_Temple(string qName)
 
 	string cnd;
 	pchar.maxIndians = 8;
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		pchar.maxIndians+=2;
 	}

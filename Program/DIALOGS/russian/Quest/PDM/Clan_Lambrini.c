@@ -12,7 +12,7 @@ void ProcessDialogEvent()
 
 	int Rank = sti(pchar.rank) - 4 + MOD_SKILL_ENEMY_RATE;
 	if (Rank < 1) Rank = 1;
-	int Sila = 70 + MOD_SKILL_ENEMY_RATE * 3;
+	int Sila = 70 + MOD_SKILL_ENEMY_RATE*3;
 	int DopHP = 60 + MOD_SKILL_ENEMY_RATE * 12;
 	int Bonus = sti(pchar.rank);
 	if (Bonus <= 6) Bonus = 1;

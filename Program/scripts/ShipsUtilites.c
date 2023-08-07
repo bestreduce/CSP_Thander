@@ -1625,7 +1625,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			cl1 = 52;
 		break;
 		case 3:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 52;
 				cl1 = 84;
@@ -1637,7 +1637,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			}
 		break;
 		case 2:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 84;
 				cl1 = 105;
@@ -1649,7 +1649,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			}
 		break;
 		case 1:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 105;
 				cl1 = 125;
