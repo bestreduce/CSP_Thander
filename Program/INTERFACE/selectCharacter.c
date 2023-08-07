@@ -80,7 +80,7 @@ void InitInterface(string iniName)
 	SetFormatedText("EXP_SLIDE_MIN", "Min");
 	SetFormatedText("EXP_SLIDE_MAX", "Max");
 	expval = 5+makeint(10*(1.0-stf(GameInterface.nodes.EXP_SLIDE.value)));
-	SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666));
+	SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE*3 * expval / 1.666666666));
 
 	//SetFormatedText("DESC_TITLE", "Внимание!");
 	SetFormatedText("DESC_TEXT", "Начало новой игры - это важный этап, в котором Вам предстоит настроить игру под себя. \n\nВсе стартовые параметры, которые Вы сейчас укажете в данном меню, будут действовать до конца партии! Поставив не ту 'галочку' или, наоборот, не включив - можно серьёзно усложнить себе игру. Для каждой опции есть описание, которое выводится при зажатии правой клавиши мыши на ней. \nТеперь внимание! Чтобы начать игру, Вам просто нужно нажать правой кнопкой мыши по кнопке 'Соглашаюсь!' или 'Давай, поехали уже!'. \n\nУдачи, корсар, попутного ветра!");
@@ -534,13 +534,13 @@ void IProcessFrame()
 	{
 		bWorldAlivePause = false;
 	}
-	minval = makeint(5 + MOD_SKILL_ENEMY_RATE * 5 / 1.666666666);
+	minval = makeint(5 + MOD_SKILL_ENEMY_RATE*3 * 5 / 1.666666666);
 	if (minval < 10) minval = 10;
-	SetFormatedText("EXP_SLIDE_MIN", "Min\n"+makeint(15 + MOD_SKILL_ENEMY_RATE * 15 / 1.666666666));
+	SetFormatedText("EXP_SLIDE_MIN", "Min\n"+makeint(15 + MOD_SKILL_ENEMY_RATE*3 * 15 / 1.666666666));
 	SetFormatedText("EXP_SLIDE_MAX", "Max\n"+minval);
 	expval = 5+makeint(10*(1.0-stf(GameInterface.nodes.EXP_SLIDE.value)));
-	if (makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666) < 10) SetFormatedText("EXP_SLIDE_VALUE", "10");
-	else SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE * expval / 1.666666666));
+	if (makeint(expval + MOD_SKILL_ENEMY_RATE*3 * expval / 1.666666666) < 10) SetFormatedText("EXP_SLIDE_VALUE", "10");
+	else SetFormatedText("EXP_SLIDE_VALUE", ""+makeint(expval + MOD_SKILL_ENEMY_RATE*3 * expval / 1.666666666));
 	/*if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_MOD_DAMAGE", 3, 1))
 	{
 		bModDamage = true;
@@ -1592,7 +1592,7 @@ void TmpI_ShowDeadAmount()
 }
 void TmpI_ShowDamageAmount()
 {
-    SetFormatedText("DAMAGE_COUNT", "x" + FloatToString((makefloat(4+MOD_SKILL_ENEMY_RATE)/10)*makefloat(FloatToString((3.0 - 2.67 * (1.0 - stf(GameInterface.nodes.DAMAGE_SLIDE.value))),2)),2));
+    SetFormatedText("DAMAGE_COUNT", "x" + FloatToString((makefloat(4+MOD_SKILL_ENEMY_RATE*3)/10)*makefloat(FloatToString((3.0 - 2.67 * (1.0 - stf(GameInterface.nodes.DAMAGE_SLIDE.value))),2)),2));
 }
 void TmpI_ShowDefendersAmount()
 {

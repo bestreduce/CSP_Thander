@@ -60,7 +60,7 @@ void LAi_GenerateFantomFromMe(aref chr)
 		sld.dialog.filename = "Common_Soldier.c";
 		sld.dialog.currentnode = "first time";
 		LAi_CharacterReincarnation(sld, true, true);
-		LAi_SetReincarnationRankStep(sld, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+		LAi_SetReincarnationRankStep(sld, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 		if (CheckAttribute(chr, "chr_ai.reincarnation.step"))
 		{
 			SetFantomParamFromRank(sld, sti(chr.rank) + sti(chr.chr_ai.reincarnation.step), true); // бравые орлы
@@ -124,7 +124,7 @@ void LAi_GenerateFantomFromMe(aref chr)
 int LAi_CalculateRaidersQuantity(int iBase)
 {
     int iOfficer = GetOfficersQuantity(pchar);
-    // float fMod = makefloat(MOD_SKILL_ENEMY_RATE  * 0.5); // 1.0 уровень сложности = (+ 1 бандит), т.е. на невозможке будет 5.0 = +5 бандитов *** (База - 4) + (назначенные абордажники) + (сложность * 0.5) ***
+    // float fMod = makefloat(MOD_SKILL_ENEMY_RATE*3  * 0.5); // 1.0 уровень сложности = (+ 1 бандит), т.е. на невозможке будет 5.0 = +5 бандитов *** (База - 4) + (назначенные абордажники) + (сложность * 0.5) ***
     int iQty = iBase + iOfficer/*   + makeint(fMod) */;
     return iQty;
 }
@@ -214,8 +214,8 @@ bool LAi_CreateEncounters(ref location)
 			//--> генерим ранг
 			if (sti(pchar.rank) > 6 || MOD_SKILL_ENEMY_RATE == 3)
 			{
-				if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5);
-				else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*1.5);
+				if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*2.5);
+				else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*1.5);
 			}
 			else iRank = sti(pchar.rank);
 			//<-- генерим ранг
@@ -336,8 +336,8 @@ bool LAi_CreateEncounters(ref location)
 			{//--------------- обычная девка в джунглях ---------------
 				if (sti(pchar.rank) > 1)
 				{
-					if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5);
-					else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*1.5);
+					if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*2.5);
+					else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*1.5);
 				}
 				else iRank = sti(pchar.rank);
 
@@ -565,8 +565,8 @@ bool LAi_CreateEncounters(ref location)
 			//--> генерим ранг. военному патрулю палец в рот не клади и на начальных уровнях.
 			num = makeint(5+rand(15)); //кол-во человек в патруле // LEO
 			if (num <= 0) num = 1;
-			if (sti(pchar.rank) > 14) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5);
-			else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*1.5);
+			if (sti(pchar.rank) > 14) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*2.5);
+			else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*1.5);
 			//<-- генерим ранг
 			//Начинаем перебирать локаторы и логинить фантомов
 			str = "Patrol"+ location.index + "_";
@@ -761,7 +761,7 @@ bool LAi_CreateEncounters(ref location)
 						_Blade = GiveRandomBladeByType("good");
 					}
 
-					int iHP = (150+MOD_SKILL_ENEMY_RATE*30+sti(pchar.rank)*5)*0.75;
+					int iHP = (150+MOD_SKILL_ENEMY_RATE*3*30+sti(pchar.rank)*5)*0.75;
 
 					LAi_SetHP(chr, iHP, iHP);
 
@@ -851,9 +851,9 @@ bool LAi_CreateEncounters(ref location)
 				}
 				RandomShuffle(&models);
 
-				iRank = sti(PChar.rank) + MOD_SKILL_ENEMY_RATE;
+				iRank = sti(PChar.rank) + MOD_SKILL_ENEMY_RATE*3;
 
-				num = rand(10) + makeint(MOD_SKILL_ENEMY_RATE / 3) + dRand(5); // Кол-во пиратов
+				num = rand(10) + makeint(MOD_SKILL_ENEMY_RATE*3 / 3) + dRand(5); // Кол-во пиратов
 				PChar.GenQuest.PiratesOnUninhabited.PiratesQty = num;
 
 				if (num <= 0) return false;
@@ -905,7 +905,7 @@ bool LAi_CreateEncounters(ref location)
 				}
 				RandomShuffle(&models);
 
-				iRank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
+				iRank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3;
 
 				num = 5 + dRand(10); // Кол-во кораблекрушенцев
 				pchar.GenQuest.ShipWreck.Qty = num;

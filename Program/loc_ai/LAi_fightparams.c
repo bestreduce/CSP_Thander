@@ -314,10 +314,10 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 		}*/
 		
 		//Boyer mod #20170318-33 difficulty level rebalancing
-		//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
+		//if (MOD_SKILL_ENEMY_RATE < 2 && sti(enemy.index) == GetMainCharacterIndex())
 		if (sti(enemy.index) == GetMainCharacterIndex())
 		{
-			dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0) * bModDamage;
+			dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE*3) / 10.0) * bModDamage;
 		}
 		return dmg;
 	}
@@ -395,7 +395,7 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 	 // честно все всем
 	/*if(character.id == pchar.id || character.chr_ai.group == LAI_GROUP_PLAYER)
 	{
-		energy = energy * (1.05 - (0.025 * MOD_SKILL_ENEMY_RATE));
+		energy = energy * (1.05 - (0.025 * MOD_SKILL_ENEMY_RATE*3));
 	} */
 	if (energy > 0.0)  // оптимизация
 	{
@@ -436,7 +436,7 @@ float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 	/*
 	if(chr.id == pchar.id || chr.chr_ai.group == LAI_GROUP_PLAYER)
 	{
-		fMultiplier = fMultiplier * (1.0 + (0.025 * MOD_SKILL_ENEMY_RATE));
+		fMultiplier = fMultiplier * (1.0 + (0.025 * MOD_SKILL_ENEMY_RATE*3));
 	}
 	*/
 	float fEnergy;
@@ -547,10 +547,10 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 		}
 	}*/
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
-	//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
+	//if (MOD_SKILL_ENEMY_RATE < 2 && sti(enemy.index) == GetMainCharacterIndex())
 	if (sti(enemy.index) == GetMainCharacterIndex())
 	{
-		dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0) * bModDamage;
+		dmg = (dmg * (4.0 + MOD_SKILL_ENEMY_RATE*3) / 10.0) * bModDamage;
 	}
 	if(CheckCharacterPerk(attack, "Buccaneer"))
 	{
@@ -1659,7 +1659,7 @@ float LAi_NPC_GetAttackActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
-	npc_return_tmp = 0.30 + MOD_SKILL_ENEMY_RATE*0.03 - level*0.15;//0.16...0.43;
+	npc_return_tmp = 0.30 + MOD_SKILL_ENEMY_RATE*3*0.03 - level*0.15;//0.16...0.43;
 	if(CheckAttribute(chr, "SaveItemsForDead"))
 	{
 		if(chr.SaveItemsForDead == true)
@@ -1683,15 +1683,15 @@ float LAi_NPC_GetAttackWeightFast()
 {
 	aref chr = GetEventData();
 	npc_return_tmp = 1.0;
-	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "Fencing")
 	{
-		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * 2 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 2 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	return npc_return_tmp;
 }
@@ -1702,15 +1702,15 @@ float LAi_NPC_GetAttackWeightForce()
 {
 	aref chr = GetEventData();
 	npc_return_tmp = 1.0;
-	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "FencingLight")
 	{
-		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 5 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	return npc_return_tmp;
 }
@@ -1721,15 +1721,15 @@ float LAi_NPC_GetAttackWeightRound()
 {
 	aref chr = GetEventData();
 	npc_return_tmp = 1.0;
-	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	//npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	if (LAi_GetBladeEnergyType(chr) == "FencingLight")
 	{
-		npc_return_tmp = npc_return_tmp * 2 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * 2 * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE + 0.05));
+		npc_return_tmp = npc_return_tmp * (0.8 + (0.05 * MOD_SKILL_ENEMY_RATE*3 + 0.05));
 	}
 	return npc_return_tmp;
 }
@@ -1742,11 +1742,11 @@ float LAi_NPC_GetAttackWeightBreak()
 	npc_return_tmp = 1.0;
 	if (LAi_GetBladeEnergyType(chr) == "FencingHeavy")
 	{
-		npc_return_tmp = npc_return_tmp * 2 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+		npc_return_tmp = npc_return_tmp * 2 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	}
 	else
 	{
-		npc_return_tmp = npc_return_tmp	* 0.5 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+		npc_return_tmp = npc_return_tmp	* 0.5 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	}
 	return npc_return_tmp;
 }
@@ -1757,7 +1757,7 @@ float LAi_NPC_GetAttackWeightFeint()
 {
 	aref chr = GetEventData();
 	npc_return_tmp = 1.0; //boal fix
-	npc_return_tmp = npc_return_tmp * 1.1 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
+	npc_return_tmp = npc_return_tmp * 1.1 * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
 	return npc_return_tmp;
 }
 
@@ -1769,7 +1769,7 @@ float LAi_NPC_GetAttackDefence()
 {
 	aref chr = GetEventData();
 
-	npc_return_tmp = 0.2 + MOD_SKILL_ENEMY_RATE*0.08;
+	npc_return_tmp = 0.2 + MOD_SKILL_ENEMY_RATE*3*0.08;
 
 	return npc_return_tmp;
 
@@ -1866,11 +1866,11 @@ float LAi_NPC_GetFireActive()
 	// boal наши офицеры пулят из всех стволов <--
 		if (CheckAttribute(chr, "SuperShooter"))
 		{
-			npc_return_tmp = npc_return_tmp + 0.4 * MOD_SKILL_ENEMY_RATE / 10.0;
+			npc_return_tmp = npc_return_tmp + 0.4 * MOD_SKILL_ENEMY_RATE*3 / 10.0;
 		}
 		else
 		{
-			npc_return_tmp = npc_return_tmp + 0.1 * MOD_SKILL_ENEMY_RATE / 10.0;
+			npc_return_tmp = npc_return_tmp + 0.1 * MOD_SKILL_ENEMY_RATE*3 / 10.0;
 		}
 	}
 	//if (npc_return_tmp > 0.5) npc_return_tmp = 0.5;

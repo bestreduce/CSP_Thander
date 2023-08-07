@@ -1801,7 +1801,7 @@ int GetMaxItemsWeight(ref _chref)
         //опасная рекурсия  если писать GetCharacterSPECIAL
 		if (CheckAttribute(_chref, "chr_ai.bonusweighttube")) iBonus += 60 + sti(_chref.rank);
         if (bDifficultyWeight) iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12);
-		else iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12 - MOD_SKILL_ENEMY_RATE);
+		else iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12 - MOD_SKILL_ENEMY_RATE*3);
         return  iBonus;
     }
     else
@@ -2797,8 +2797,8 @@ void initNewMainCharacter()
     ch.nation     = NullCharacter.HeroParam.nation;
     ch.BaseNation = NullCharacter.HeroParam.nation;
     //MOD_EXP_RATE =  10;  задаем в начале игры (выбор, от 5 до 15, 10 - середина по умолчанию)
-    //MOD_EXP_RATE =  MOD_EXP_RATE + (MOD_SKILL_ENEMY_RATE)*6; // разные уровни для всех
-    MOD_EXP_RATE =  makeint(MOD_EXP_RATE + MOD_SKILL_ENEMY_RATE * MOD_EXP_RATE / 1.666666666); // разные уровни для всех
+    //MOD_EXP_RATE =  MOD_EXP_RATE + (MOD_SKILL_ENEMY_RATE*3)*6; // разные уровни для всех
+    MOD_EXP_RATE =  makeint(MOD_EXP_RATE + MOD_SKILL_ENEMY_RATE*3 * MOD_EXP_RATE / 1.666666666); // разные уровни для всех
     if (MOD_EXP_RATE < 10) MOD_EXP_RATE = 10; // иначе будет развал целостности данных, порог релиховой версии бля всех сложностей.
     // куда плывем
 	if (sti(ch.nation) != PIRATE)
@@ -2968,7 +2968,7 @@ void initNewMainCharacter()
 		SetCharacterGoods(pchar, GOOD_RUM, 50 + rand(100));
 	}
 	// коцаем корабль
-	pchar.ship.HP = sti(pchar.ship.HP) - makeint(sti(pchar.ship.HP)*0.05) * (MOD_SKILL_ENEMY_RATE);
+	pchar.ship.HP = sti(pchar.ship.HP) - makeint(sti(pchar.ship.HP)*0.05) * (MOD_SKILL_ENEMY_RATE*3);
 	SetCrewQuantity(pchar, GetMinCrewQuantity(pchar));
 	//Tutorial - НАЧАЛО ИГРЫ
     if (startHeroType == 1) //21/07/07 homo для Блада даем другое начало
@@ -3051,13 +3051,13 @@ void initMainCharacterItem()
 					AddItems(Pchar, "GunPowder", 5);
 					GiveItem2Character(Pchar, "Spyglass1");
 					EquipCharacterbyItem(Pchar, "Spyglass1");
-					pchar.money = 1500/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 1500/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case FRANCE:
 					itemID = GetGeneratedItem("topor3");
 					GiveItem2Character(Pchar, itemID);
 					EquipCharacterbyItem(Pchar, itemID);
-					pchar.money = 500/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 500/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case HOLLAND:
 					itemID = GetGeneratedItem("topor1");
@@ -3069,7 +3069,7 @@ void initMainCharacterItem()
 					GiveGunAmmunitionPchar(Pchar,itemID,5);
 					GiveItem2Character(Pchar, "Spyglass1");
 					EquipCharacterbyItem(Pchar, "Spyglass1");
-					pchar.money = 1000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 1000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case PIRATE:
 					itemID = GetGeneratedItem("topor3");
@@ -3084,7 +3084,7 @@ void initMainCharacterItem()
 					itemID = GetGeneratedItem("topor3");
 					GiveItem2Character(Pchar, itemID);
 					EquipCharacterbyItem(Pchar, itemID);
-					pchar.money = 500/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 500/MOD_SKILL_ENEMY_RATE*3;
 				break;
 			}
 	    break;
@@ -3102,20 +3102,20 @@ void initMainCharacterItem()
 				case ENGLAND:
 					GiveItem2Character(Pchar, "Map_bad");
 					TakeNItems(Pchar, "indian3", 1);
-					pchar.money = 15000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 15000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case FRANCE:
 					TakenItems(Pchar, "potion1", 2);
 					TakeNItems(Pchar, "indian3", 1);
 					GiveItem2Character(Pchar, "Spyglass1");
 					EquipCharacterbyItem(Pchar, "Spyglass1");
-					pchar.money = 10000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 10000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case HOLLAND:
 					TakeNItems(Pchar, "indian3", 1);
 					GiveItem2Character(Pchar, "Spyglass3");
 					EquipCharacterbyItem(Pchar, "Spyglass3");
-					pchar.money = 11000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 11000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case PIRATE:
 					GiveItem2Character(Pchar, "Map_Normal");
@@ -3125,13 +3125,13 @@ void initMainCharacterItem()
 					AddItems(Pchar, "GunPowder", 10);
 					GiveItem2Character(Pchar, "Spyglass1");
 					EquipCharacterbyItem(Pchar, "Spyglass1");
-					pchar.money = 5000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 5000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case SPAIN:
 					TakeNItems(Pchar, "indian14", 1);
 					TakeNItems(Pchar, "jewelry8", 1);
 					TakeNItems(Pchar, "jewelry9", 1);
-					pchar.money = 8000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 8000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 			}
 	    break;
@@ -3153,20 +3153,20 @@ void initMainCharacterItem()
 			switch (sti(ch.nation))
 			{
 				case ENGLAND:
-					pchar.money = 500/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 500/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case FRANCE:
 					GiveGunAmmunitionPchar(Pchar,itemID,10);
-					pchar.money = 1000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 1000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case HOLLAND:
-					pchar.money = 500/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 500/MOD_SKILL_ENEMY_RATE*3;
 				break;
 				case PIRATE:
 					GiveItem2Character(Pchar, "Map_part1");
 				break;
 				case SPAIN:
-					pchar.money = 2000/MOD_SKILL_ENEMY_RATE;
+					pchar.money = 2000/MOD_SKILL_ENEMY_RATE*3;
 				break;
 			}
 	    break;
@@ -3183,7 +3183,7 @@ void initMainCharacterItem()
 	        itemID = GetGeneratedItem("Spyglass" + rand(3));
 			GiveItem2Character(Pchar, itemID);
 			EquipCharacterbyItem(Pchar, itemID);
-			pchar.money = 3000/MOD_SKILL_ENEMY_RATE;
+			pchar.money = 3000/MOD_SKILL_ENEMY_RATE*3;
             TakenItems(Pchar, "Food1", rand(1)+2);
 			itemID = GetGeneratedItem("pistol" + (rand(2)+1));
             GiveItem2Character(Pchar, itemID);
@@ -3235,7 +3235,7 @@ void initMainCharacterItem()
 			AddItems(Pchar, "GunPowder", 30);
 			GiveGunAmmunitionPchar(Pchar,itemID,30);
 			TakenItems(Pchar, "potion1", rand(10));
-			pchar.money = 1000/MOD_SKILL_ENEMY_RATE;
+			pchar.money = 1000/MOD_SKILL_ENEMY_RATE*3;
             TakenItems(Pchar, "Food1", rand(6)+4);
 	    break;
 
@@ -3286,7 +3286,7 @@ void initMainCharacterItem()
             EquipCharacterbyItem(Pchar, itemID);
 			GiveGunAmmunitionPchar(Pchar,itemID,10);
 			TakenItems(Pchar, "potion1", rand(8));
-			pchar.money = 2000/MOD_SKILL_ENEMY_RATE;
+			pchar.money = 2000/MOD_SKILL_ENEMY_RATE*3;
             TakenItems(Pchar, "Food1", rand(6)+4);
 	    break;
 	}

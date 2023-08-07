@@ -173,7 +173,7 @@ void GenerateIslandShips(string sIslandID)
 					}
 					for (j = 0; j < iShipsQuantity; j++)
 					{
-						iChar = NPC_GenerateCharacter("ColonyTrader" + i +j, "trade", "man", "man", MOD_SKILL_ENEMY_RATE, iNation, -1, true));
+						iChar = NPC_GenerateCharacter("ColonyTrader" + i +j, "trade", "man", "man", MOD_SKILL_ENEMY_RATE*3, iNation, -1, true));
 						chr = GetCharacter(iChar);
 						chr.AlwaysSandbankManeuver = true;
 						CreateFortMerchants(chr, iNation);

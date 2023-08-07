@@ -623,10 +623,10 @@ void CreatPlantation(aref loc)
 			SetNPCModelUniq(chr, sType, MAN);
 			chr.City = Colonies[iColony].id;
             chr.CityType = "soldier";
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 			LAi_SetLoginTime(chr, 0.0, 24.0);
 			LAi_SetPatrolType(chr);
 
@@ -725,7 +725,7 @@ void CreatUnderwater(aref loc)
 			{
 				if (GetCharacterIndex("Crab_"+i) == -1)
 				{
-					sld = GetCharacter(NPC_GenerateCharacter("Crab_"+i, "crabBig", "crab", "crabBig", 40+(MOD_SKILL_ENEMY_RATE), PIRATE, -1, false));
+					sld = GetCharacter(NPC_GenerateCharacter("Crab_"+i, "crabBig", "crab", "crabBig", 40+(MOD_SKILL_ENEMY_RATE*3), PIRATE, -1, false));
 					GiveItem2Character(sld, "unarmed");
 					EquipCharacterbyItem(sld, "unarmed");
 					LAi_SetWarriorType(sld);
@@ -800,7 +800,7 @@ void CreatTenochtitlanInside(aref loc)
 			//определим кол-во войнов в храме
 			//Boyer mod: 3 warriors is very difficult, they will always outrank, have poison and very deadly weapon...and is enough.  At 10 = Impossible, there will be 4
 			//#20170318-33
-			warriorQty = makeint(MOD_SKILL_ENEMY_RATE / 2.5);
+			warriorQty = makeint(MOD_SKILL_ENEMY_RATE*3 / 2.5);
 			if (warriorQty < 3) warriorQty = 3;
 			//определим ранг войнов. обработаем от сложности, но не менее 15 уровня
 			warriorRank = GetCoffDiff(sti(pchar.rank), 1000);
@@ -834,7 +834,7 @@ void CreatTenochtitlanInside(aref loc)
 				GiveItem2Character(chr, "toporAZ");
 				EquipCharacterbyItem(chr, "toporAZ");
 				SetCharacterPerk(chr, "Energaiser");
-				if (sti(loc.smallGodTemple) > 3 && MOD_SKILL_ENEMY_RATE > 1)
+				if (sti(loc.smallGodTemple) > 3 && MOD_SKILL_ENEMY_RATE*3 > 1)
 				{
 					SetCharacterPerk(chr, "SwordplayProfessional");
 					SetCharacterPerk(chr, "AdvancedDefense");
@@ -855,11 +855,11 @@ void CreatTenochtitlanInside(aref loc)
 		{
 			//определим кол-во войнов в храме
 			//warriorQty = 4;
-			//if (MOD_SKILL_ENEMY_RATE > 6) warriorQty = 5;
+			//if (MOD_SKILL_ENEMY_RATE > 2) warriorQty = 5;
 			//if (MOD_SKILL_ENEMY_RATE <= 1) warriorQty = 3;
 			//Boyer mod: 3 warriors is very difficult, they will always outrank, have poison and very deadly weapon...and is enough.  At 10 = Impossible, there will be 4
 			//#20170318-33
-			warriorQty = makeint(MOD_SKILL_ENEMY_RATE / 2.5);
+			warriorQty = makeint(MOD_SKILL_ENEMY_RATE*3 / 2.5);
 			if (warriorQty < 3) warriorQty = 3;
 			warriorRank = GetCoffDiff(sti(pchar.rank), 1000);
 			if (warriorRank < 20) warriorRank = 20;
@@ -892,7 +892,7 @@ void CreatTenochtitlanInside(aref loc)
 					GiveItem2Character(chr, "toporAZ");
 					EquipCharacterbyItem(chr, "toporAZ");
 					SetCharacterPerk(chr, "Energaiser");
-					if (MOD_SKILL_ENEMY_RATE > 5)
+					if (MOD_SKILL_ENEMY_RATE > 1)
 					{
 						SetCharacterPerk(chr, "SwordplayProfessional");
 						SetCharacterPerk(chr, "AdvancedDefense");
