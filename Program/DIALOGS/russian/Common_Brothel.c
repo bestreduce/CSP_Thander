@@ -192,7 +192,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "tubeheal":
-			pchar.questTemp.drugsprice = 1000*MOD_SKILL_ENEMY_RATE;
+			pchar.questTemp.drugsprice = 1000*MOD_SKILL_ENEMY_RATE*3;
 			dialog.text = "Похоже, ты и впрямь укурил"+GetSexPhrase("ся","ась")+" какой-то дряни, капитан. К счастью, я могу тебе помочь. Но это займёт некоторое время и будет стоить тебе "+pchar.questTemp.drugsprice+" пиастров. Согла"+ GetSexPhrase("сен","сна")+"?";
 			if (sti(pchar.money) >= sti(pchar.questTemp.drugsprice))
 			{
@@ -391,7 +391,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.different.GiveShipLetters.Id = GetFullName(npchar);
 					pchar.questTemp.different.GiveShipLetters.city = npchar.city;
 					pchar.questTemp.different.GiveShipLetters.variant = rand(2);
-					p1 = rand(20 - MOD_SKILL_ENEMY_RATE) + 1; // даём хотя бы один день
+					p1 = rand(20 - MOD_SKILL_ENEMY_RATE*3) + 1; // даём хотя бы один день
 					s1 = rand(80 - pchar.rank - p1) * 50 + rand(100);
 					s2 = s1 * 2;
 					s3 = s1 * rand(GetCharacterSPECIAL(pchar, "Luck")) + s1;

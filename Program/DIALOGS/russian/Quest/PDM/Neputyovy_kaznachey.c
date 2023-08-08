@@ -11,14 +11,14 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	int Plata1 = 14000 * MOD_SKILL_ENEMY_RATE * 0.21;
-	int Plata2 = 14000 * MOD_SKILL_ENEMY_RATE * 0.31;
+	int Plata1 = 14000 * MOD_SKILL_ENEMY_RATE*3 * 0.21;
+	int Plata2 = 14000 * MOD_SKILL_ENEMY_RATE*3 * 0.31;
 
-	pchar.PDM_NK_Plata2.Money = 14000 * MOD_SKILL_ENEMY_RATE * 0.31;
+	pchar.PDM_NK_Plata2.Money = 14000 * MOD_SKILL_ENEMY_RATE*3 * 0.31;
 
-	int Sila = 25 + MOD_SKILL_ENEMY_RATE * 2.8;
-	int DopHP = 40 + MOD_SKILL_ENEMY_RATE * 10;
-	int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE * 1.2;
+	int Sila = 25 + MOD_SKILL_ENEMY_RATE*3 * 2.8;
+	int DopHP = 40 + MOD_SKILL_ENEMY_RATE*3 * 10;
+	int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE*3 * 1.2;
 	if (Rank < 1) Rank = 1;
 
 	switch(Dialog.CurrentNode)

@@ -10,10 +10,10 @@ void ProcessDialogEvent()
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 
-	int Rank = sti(pchar.rank) - 4 + MOD_SKILL_ENEMY_RATE;
+	int Rank = sti(pchar.rank) - 4 + MOD_SKILL_ENEMY_RATE*3;
 	if (Rank < 1) Rank = 1;
-	int Sila = 70 + MOD_SKILL_ENEMY_RATE*3;
-	int DopHP = 60 + MOD_SKILL_ENEMY_RATE * 12;
+	int Sila = 70 + MOD_SKILL_ENEMY_RATE*3 * 3;
+	int DopHP = 60 + MOD_SKILL_ENEMY_RATE*3 * 12;
 	int Bonus = sti(pchar.rank);
 	if (Bonus <= 6) Bonus = 1;
 	if (Bonus >= 7 && Bonus <= 12) Bonus = 1.2;

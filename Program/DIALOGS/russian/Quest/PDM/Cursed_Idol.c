@@ -610,7 +610,7 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "Tortuga_Town", "none", "");
 
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Skel_Rostov", "skel_2", "skeleton", "skeleton", 10, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade10", "pistol6", 70);
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE*3 * 4, 15 + MOD_SKILL_ENEMY_RATE*3 * 4, "blade10", "pistol6", 70);
 			sld.name = "Ростовщик";
 			sld.lastname = "";
 			ChangeCharacterAddressGroup(sld, "Tortuga_Bank", "barmen", "stay");
@@ -636,7 +636,7 @@ void ProcessDialogEvent()
 			{
 				sTemp = "pirate_"+(rand(24)+1);
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandity_"+i, sTemp, "man", "man", 10, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 2, 15 + MOD_SKILL_ENEMY_RATE * 2, "blade7", "", 0 + MOD_SKILL_ENEMY_RATE * 2);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE*3 * 2, 15 + MOD_SKILL_ENEMY_RATE*3 * 2, "blade7", "", 0 + MOD_SKILL_ENEMY_RATE*3 * 2);
 				LAi_SetWarriorType(sld);
 				LAi_group_MoveCharacter(sld, "EnemyFight");
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
@@ -660,7 +660,7 @@ void ProcessDialogEvent()
 			{
 				sTemp = "sold_fra_"+(rand(7)+1);
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandity_"+i, sTemp, "man", "man", 10, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 2, 15 + MOD_SKILL_ENEMY_RATE * 2, "blade7", "", 0 + MOD_SKILL_ENEMY_RATE * 2);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE*3 * 2, 15 + MOD_SKILL_ENEMY_RATE*3 * 2, "blade7", "", 0 + MOD_SKILL_ENEMY_RATE*3 * 2);
 				LAi_SetWarriorType(sld);
 				LAi_group_MoveCharacter(sld, "EnemyFight");
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");

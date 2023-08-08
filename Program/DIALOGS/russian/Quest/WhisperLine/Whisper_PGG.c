@@ -35,7 +35,7 @@ void ProcessDialogEvent()
 
 			for (i = 1; i < 4; i++)
 			{
-				sld = GetCharacter(NPC_GenerateCharacter("PGG_Whisper_Incquisitor"+i, "PGG_Vincento_"+(2+i), "man", "man", sti(pchar.rank) + MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
+				sld = GetCharacter(NPC_GenerateCharacter("PGG_Whisper_Incquisitor"+i, "PGG_Vincento_"+(2+i), "man", "man", sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3, PIRATE, 0, true));
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload", "reload1_back");
 				cnd = "l"+i;
 				pchar.quest.QuestWhisper_RoomFight.win_condition.(cnd) = "NPC_Death";
