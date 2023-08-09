@@ -295,7 +295,7 @@ void ProcessDialogEvent()
 			chrDisableReloadToLocation = false;
 			dialog.Text = "Если я правильно понял, клад находится на Доминике. Более точное место скажу как доберёмся туда.";
 			Link.l1 = "Тогда не будем медлить. Готовь свой бриг.";
-			npchar.Ship.Type = GenerateShipExt(SHIP_PRINCE_H, true, npchar);
+			npchar.Ship.Type = GenerateShipExt(SHIP_NEUFCHATEL, true, npchar);
 			npchar.Ship.name = "Любимец удачи";
 			SetBaseShipData(npchar);
 			npchar.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS16;

@@ -783,7 +783,7 @@ int SearchForMaxShip(aref chr, int isLock, int _tmp)
 		else
 		{
 			if (rand(100) > 70) rndShip = rand(SHIP_REDOUTABLE);
-			else rndShip = rand(SHIP_GALEON_L);
+			else rndShip = rand(SHIP_ROTERLOW);
 		}
 
 		rShip = GetShipByType(rndShip);

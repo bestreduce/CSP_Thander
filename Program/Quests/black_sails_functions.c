@@ -284,9 +284,9 @@ void BSOnTheHorizon_SeaBattle()
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_ROTTERDAM, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_FWZP, true, sld);
-		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, sld);
+		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_LEOPARD, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 
 		sld.ship.Crew.Morale = 100;
@@ -608,8 +608,8 @@ void BSCourtlyPassions_SeaBattle()
 	Group_SetType("BSCourtlyPassions_SeaBattle", "pirate");
 	sld = CharacterFromID("BS_Vein");
 	//LAi_SetHP(sld, 20, 20);
-	sld.Ship.Type = GenerateShipExt(SHIP_PRINCE_H, true, sld);
-	FantomMakeCoolestSailor(sld, SHIP_PRINCE_H, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	sld.Ship.Type = GenerateShipExt(SHIP_NEUFCHATEL, true, sld);
+	FantomMakeCoolestSailor(sld, SHIP_NEUFCHATEL, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 
 	sld.ship.Crew.Morale = 100;
 	ChangeCrewExp(sld, "Sailors", 50);
@@ -713,7 +713,7 @@ void BSChaseBegun()
 	sld.lastname 	= "Вейн";
 	sld.dialog.filename = "Quest\BlackSails\Pogonya_Nachalas.c";
 	sld.DeckDialogNode = "BS_PN_shipV";
-	FantomMakeCoolestSailor(sld, SHIP_PRINCE_H, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+	FantomMakeCoolestSailor(sld, SHIP_NEUFCHATEL, "Рейнджер", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
 	Group_AddCharacter("Flint_Group", sld.id);
 	Fantom_SetBalls(sld, "war");
 	LAi_SetImmortal(sld, true);
@@ -1315,14 +1315,14 @@ void BSUrka_Curacao_SeaBattle()
 		sld = GetCharacter(NPC_GenerateCharacter("BSUrka_Curacao_enemyfleet"+i, "off_spa_"+(rand(1)+1), "man", "man", 999, SPAIN, -1, true));
 		if (i == 1)
 		{
-			sld.Ship.Type = GenerateShipExt(SHIP_VASA, true, sld);
+			sld.Ship.Type = GenerateShipExt(SHIP_WASA, true, sld);
 			//sld.Ship.Name = "Денуво";
 			//sld.Name = "Денуво";
 			//sld.Lastname = "Антитампер";
 		}
 		if (i == 2) sld.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, sld);
 		if (i == 3) sld.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, sld);
-		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_CROWN, true, sld);
+		if (i == 4) sld.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, sld);
 		if (i == 5) sld.Ship.Type = GenerateShipExt(SHIP_BELLONA, true, sld);
 		if (i == 6) sld.Ship.Type = GenerateShipExt(SHIP_SANTAANA, true, sld);
 		sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
@@ -1465,7 +1465,7 @@ void BSUrka_PlaceUrka()
 
 	sld = GetCharacter(NPC_GenerateCharacter("BSUrka", "off_spa_"+(rand(1)+1), "man", "man", 999, SPAIN, -1, true));
 
-	sld.Ship.Type = GenerateShipExt(SHIP_VASA, true, sld);
+	sld.Ship.Type = GenerateShipExt(SHIP_WASA, true, sld);
 	sld.Ship.Name = "Урка де Лима";
 	sld.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS32;
 

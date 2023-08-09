@@ -8010,7 +8010,7 @@ void Slavetrader_CreateSlaveShips(string qName)//создание корабле
 		}
 		if (i == 2)
 		{
-		FantomMakeCoolSailor(sld, SHIP_GALEON_L, sTemp, CANNON_TYPE_CANNON_LBS24, 70, 50, 50); //создание кораблей
+		FantomMakeCoolSailor(sld, SHIP_ROTERLOW, sTemp, CANNON_TYPE_CANNON_LBS24, 70, 50, 50); //создание кораблей
 		FantomMakeCoolFighter(sld, Rank, 40, 40, "blade16", "pistol2", 30);//создание фантома кэпа
 		}
 

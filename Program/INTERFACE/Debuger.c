@@ -977,12 +977,12 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_DERFFLINGER, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FLEUT, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_HERCULEST, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGSOPHIE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON_L, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_SOPHIE, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_ROTERLOW, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SHIP_CORVETTELIGHT, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_GREYHOUND, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BRIG_M, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_PRINCE_H, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_MERCURY, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_NEUFCHATEL, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_HERCULESU, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_POLACRE_H, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CARAVEL, true, mc);
@@ -1006,7 +1006,7 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_PANDORA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BLACKANGEL, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_COASTALFRIGATE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_FR_FRIGATE, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_PEARL, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_EASTINDIAMAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_NAO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON_H, true, mc);
@@ -1029,23 +1029,23 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_CARRACA, true, mc);
 
 	// 2 класс
-	// mc.Ship.Type = GenerateShipExt(SHIP_VASA, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_WASA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_DIANA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_INDEFATIGABLE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ENDYMION, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON_SANTIAGO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ROTTERDAM, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_SANTIAGO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_HOLLGALEON_H, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_LEOPARD, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FWZP, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_LEOPARD, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CONSTITUTION, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_OXFORD, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_DUTCHLINESHIP, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_DUTCHSHIP, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_DUTCHLINESHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CONVOISHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_COURONNE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_CROWN, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_LINESHIP, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_AGAMEMNON, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_INGERMANLAND, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_RATTVISAN, true, mc);
@@ -1076,7 +1076,7 @@ void CalculateInfoDataF6()
 	// Квестовые
 	// mc.Ship.Type = GenerateShipExt(SHIP_LUGGERQUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_XEBEKVML, true, mc);
-	mc.Ship.Type = GenerateShipExt(SHIP_BRIGVALCIRIA, true, mc);
+	mc.Ship.Type = GenerateShipExt(SHIP_VALCIRIA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGSW, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CLIPPER, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BLACKPEARL, true, mc);

@@ -285,7 +285,7 @@ void SetMushketCapitainInWorld()
 	sld.name = "Альберт";
 	sld.lastname = "Зиверт";
  	SetCaptanModelByEncType(sld, "pirate");
-	FantomMakeCoolSailor(sld, SHIP_BRIGVALCIRIA, "Стрела", CANNON_TYPE_CANNON_LBS20, 100, 100, 100);
+	FantomMakeCoolSailor(sld, SHIP_VALCIRIA, "Стрела", CANNON_TYPE_CANNON_LBS20, 100, 100, 100);
 	FantomMakeCoolFighter(sld, 20, 50, 50, "blade34", "pistol2", 50);
 	sld.Ship.Mode = "pirate";
 	DeleteAttribute(sld, "SinkTenPercent");

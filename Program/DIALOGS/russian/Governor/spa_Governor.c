@@ -1116,7 +1116,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 	sld = GetCharacter(ShipType);
                     ShipType = sti(sld.ship.type);
                     Rank = sti(RealShips[ShipType].basetype);
-                    if (Rank == SHIP_GALEON_L)
+                    if (Rank == SHIP_ROTERLOW)
 					{
 						iTemp++;
 						iMoney = iMoney + sti(sld.Ship.Cargo.Goods.Gold);
