@@ -10054,7 +10054,6 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "PDM_PI_Skelety_on_Ship":
             pchar.quest.Munity = "";
-            pchar.GenQuest.MunityStart = true;
 			
 			StartQuestMovie(true, true, true);
 			//ChangeShowIntarface();
