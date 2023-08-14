@@ -25,6 +25,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		case "PDM_PJ_SS_2":
 			DialogExit();
+			sld = CharacterFromID("PDM_PJ_Strajnik_1")
+			LAi_SetLoginTime(sld, 0.0, 24.0);
+			sld = CharacterFromID("PDM_PJ_Strajnik_2")
+			LAi_SetLoginTime(sld, 0.0, 24.0);
 			bDisableFastReload = true;
 			chrDisableReloadToLocation = true;
 			LAi_SetActorType(pchar);

@@ -10538,9 +10538,6 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("PDM_PJ_Strajnik_1")
 			LAi_SetActorType(sld);
 			sld.lifeday = 0;
-			LAi_SetLoginTime(sld, 0.0, 24.0);
-			sld = CharacterFromID("PDM_PJ_Strajnik_2")
-			LAi_SetLoginTime(sld, 0.0, 24.0);
 			
 			StartQuestMovie(true, true, true);
 			locCameraFromToPos(-35.50, 7.00, 25.00, true, -20.00, 0.00, 15.00);
