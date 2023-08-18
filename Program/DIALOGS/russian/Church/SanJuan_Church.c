@@ -152,7 +152,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			
 			//Корабль 'Маёнез'
 			sld = GetCharacter(NPC_GenerateCharacter("Maltese", "Maltese", "man", "man", 10, SPAIN, -1, true));
-			FantomMakeCoolFighter(sld, 10, 30, 30, "blade44", "pistol1", 50);
+			FantomMakeCoolFighter(sld, 10, 30, 30, "blade16", "pistol1", 50);
 			SetSPECIAL(sld, 10, 6, 8, 10, 6, 5, 6);
 			SetSelfSkill(sld, 18, 21, 70, 3, 40);
 			SetShipSkill(sld, 60, 12, 18, 17, 32, 41, 60, 31, 26);
@@ -163,6 +163,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.loyality = 20;
 			FantomMakeCoolSailor(sld, SHIP_BARQUE, "Маёнез", CANNON_TYPE_CULVERINE_LBS16, 30, 50, 30);	//Корабль
 			sld.AlwaysFriend = true;
+			sld.Ship.Mode = "trade";
 			Group_FindOrCreateGroup("PKM_SvtvA_Malta");
 			Group_SetType("PKM_SvtvA_Malta", "war");
 			Group_AddCharacter("PKM_SvtvA_Malta", "Maltese");

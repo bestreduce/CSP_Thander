@@ -11065,7 +11065,9 @@ void QuestComplete(string sQuestName, string qname)
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
 			AddQuestUserData("PKM_Animists", "sSex2", GetSexPhrase("ёл","ла"));
 			
-			pchar.questTemp.PKM_SvtvA_Znakomstvo_s_Malta = true;
+			sld = CharacterFromID("Maltese");
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.DeckDialogNode = "Знакомство с Жаком";
 		break;
 		
 		case "PKM_SvtvA_Zasada2":
@@ -11114,6 +11116,7 @@ void QuestComplete(string sQuestName, string qname)
 			FantomMakeCoolFighter(sld, sti(pchar.rank), 50, 50, "blade5", "", 120);
 			sld.name = "отец";
 			sld.lastname = "Гарет";
+			LAi_SetImmortal(sld, true);
 			LAi_SetActorType(sld);
 			sld.SaveItemsForDead = true;
 			sld.DontChangeBlade = true;
@@ -11750,10 +11753,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetImmortal(sld, true);
 		break;
 		
-		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":		
-			AddQuestRecord("PKM_Animists", "34");
-			chrDisableReloadToLocation = false;
-			
+		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":			
 			for (i=1; i<=4; i++)
 			{
 				sld = CharacterFromID("Plennik_u_satanistov_"+i);
@@ -11764,6 +11764,14 @@ void QuestComplete(string sQuestName, string qname)
 			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition.l1 = "location";
 			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition.l1.location = "Guadeloupe";
 			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition = "PKM_SvtvA_Bitva_s_Mefisto";
+			
+			sld = CharacterFromID("Plennik_u_satanistov_3");
+			ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto3");
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Спасение пленников";
+			LAi_SetActorType(sld);
+			LAi_ActorDialog(sld, pchar, "", -1, 0);
+			
 		break;
 		
 		case "PKM_SvtvA_Bitva_s_Mefisto":

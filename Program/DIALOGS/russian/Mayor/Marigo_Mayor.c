@@ -81,6 +81,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.Dialog.Filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Capitan_v_taverne_1";
 			LAi_SetSitType(sld);
+			if(InterfaceStates.EnabledQuestsMarks)
+			{
+				sld.quest.questflag.model = "questionmarkY";
+			}
 			LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
 			ChangeCharacterAddressGroup(sld, "Marigo_tavern", "sit", "sit3");			
         break;
