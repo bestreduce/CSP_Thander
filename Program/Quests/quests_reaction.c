@@ -11412,7 +11412,15 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetImmortal(sld, true);
 			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto21");
 			
-			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_3", "Priest_4", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_3", "Slave3", "man", "man", sti(pchar.rank), PIRATE, -1, false));
+			LAi_SetStayType(sld);
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
+			sld.dialog.currentnode = "Спасите, помогите3";
+			sld.lifeday = 0;
+			LAi_SetImmortal(sld, true);
+			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto23");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_Dominges", "Priest_4", "man", "man", sti(pchar.rank), PIRATE, -1, false));
 			sld.name = "падре";
 			sld.lastname = "Домингес";
 			LAi_SetStayType(sld);
@@ -11421,14 +11429,6 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lifeday = 0;
 			LAi_SetImmortal(sld, true);
 			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto22");
-			
-			sld = GetCharacter(NPC_GenerateCharacter("Plennik_u_satanistov_4", "Slave3", "man", "man", sti(pchar.rank), PIRATE, -1, false));
-			LAi_SetStayType(sld);
-			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
-			sld.dialog.currentnode = "Спасите, помогите3";
-			sld.lifeday = 0;
-			LAi_SetImmortal(sld, true);
-			ChangeCharacterAddressGroup(sld, "Cave_Satanists", "goto",  "goto23");
 			
 			//Охрана
 			sld = GetCharacter(NPC_GenerateCharacter("Satanist_Turma_1", "Animists1", "man", "man", sti(pchar.rank), PIRATE, -1, true));
@@ -11754,7 +11754,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 		
 		case "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2":			
-			for (i=1; i<=4; i++)
+			for (i=1; i<=3; i++)
 			{
 				sld = CharacterFromID("Plennik_u_satanistov_"+i);
 				ChangeCharacterAddressGroup(sld, "none", "", "");
@@ -11765,13 +11765,38 @@ void QuestComplete(string sQuestName, string qname)
 			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition.l1.location = "Guadeloupe";
 			PChar.quest.PKM_SvtvA_Bitva_s_Mefisto.win_condition = "PKM_SvtvA_Bitva_s_Mefisto";
 			
-			sld = CharacterFromID("Plennik_u_satanistov_3");
+			sld = CharacterFromID("Plennik_Dominges");
 			ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto3");
 			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
 			sld.dialog.currentnode = "Спасение пленников";
 			LAi_SetActorType(sld);
-			LAi_ActorDialog(sld, pchar, "", -1, 0);
+			LAi_ActorDialog(sld, pchar, "", -1, 0);			
+		break;
+		
+		case "PKM_SvtvA_Dominges_na_bort":
+			sld = GetCharacter(NPC_GenerateCharacter("Plennik_Dominges", "Priest_4", "man", "man", 3, PIRATE, -1, false));
+			sld.name = "падре";
+			sld.lastname = "Домингес";
+			LAi_SetCitizenType(sld);
+			AddPassenger(pchar, sld, false);
+			SetCharacterRemovable(sld, false);
+			chrDisableReloadToLocation = false;
 			
+			Pchar.quest.PKM_SvtvA_Dominges_Doma.win_condition.l1           = "location";
+        	Pchar.quest.PKM_SvtvA_Dominges_Doma.win_condition.l1.location  = "SanJuan_town";
+        	Pchar.quest.PKM_SvtvA_Dominges_Doma.win_condition              = "PKM_SvtvA_Dominges_Doma";
+		break;
+		
+		case "PKM_SvtvA_Dominges_Doma":
+			bDisableFastReload = true;
+			chrDisableReloadToLocation = true;
+            sld = CharacterFromID("Plennik_Dominges");
+			PlaceCharacter(sld, "goto", PChar.location);
+			RemovePassenger(pchar, sld);
+			sld.dialog.filename = "Quest\PKM\Strannie_veshi_tvorytsya_v_arhipelage.c";
+	        sld.dialog.currentnode = "Домингес_спасён_1";
+			LAi_SetActorType(sld);
+			LAi_ActorDialog(sld, pchar, "", -1, 0);
 		break;
 		
 		case "PKM_SvtvA_Bitva_s_Mefisto":
@@ -11785,6 +11810,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.lastname = "";
 			sld.FaceId = 297;
 			FantomMakeCoolSailor(sld, SHIP_MEFISTO, "Мефисто", CANNON_TYPE_CANNON_LBS24, 100, 100, 100);
+			RemoveItems(sld, "katar", 1);
 			sld.DontRansackCaptain = true;
 			sld.DontHitInStorm = true;
 			sld.SinkTenPercent = false;
@@ -11814,12 +11840,6 @@ void QuestComplete(string sQuestName, string qname)
 		case "PKM_SvtvA_Bitva_s_Mefisto_Pobeda":		
 			Island_SetReloadEnableGlobal("Guadeloupe", true);
 			bQuestDisableMapEnter = false;
-			
-			sld = CharacterFromID("SanJuan_Priest");
-			sld.name		= "падре Домингес";
-			sld.lastname = "";
-			sld.dialog.filename = "Common_church.c";
-			sld.dialog.currentnode = "First time";			
 			
 			pchar.questTemp.PKM_SvtvA_Clermon_Final = true;
 			pchar.questTemp.PKM_SvtvA_Gubernator_Final = true;

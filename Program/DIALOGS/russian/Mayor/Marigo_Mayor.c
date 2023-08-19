@@ -99,12 +99,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("PKM_Animists", "38");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
 			pchar.questTemp.PKM_Animists_GuberMarigo = true;
-			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon") && CheckAttribute(pchar, "questTemp.PKM_Animists_PadreDominges"))
 			{
 				CloseQuestHeader("PKM_Animists");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_PadreDominges");
 			}
         break;
 		
