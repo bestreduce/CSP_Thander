@@ -285,8 +285,8 @@ void CreateCitizens(aref loc)
 			chr.RebirthPhantom = true;
 			chr.CanChangeModel = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 			LAi_SetLoginTime(chr, 6.0, 23.0); //а ночью будет беготня от патруля :)
 
 			//locatorName = PlaceCharacter(chr, "soldiers", "random_free"); // бага наложения была из-за правки рандома
@@ -345,10 +345,10 @@ void CreateCitizens(aref loc)
 			chr.City = Colonies[iColony].id;
 			chr.CanChangeModel = true;
             chr.CityType = "soldier";
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 			LAi_SetLoginTime(chr, 0.0, 24.0);
 			chr.dialog.filename = "Common_Soldier.c";
 			chr.dialog.currentnode = "first time";
@@ -400,8 +400,8 @@ void CreateCitizens(aref loc)
 			chr.RebirthPhantom = true;
 			chr.CanChangeModel = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 			LAi_SetLoginTime(chr, 0.0, 24.0); //а ночью будет беготня от патруля :)
 
 			PlaceCharacter(chr, "patrol", "random_free");
@@ -814,7 +814,7 @@ void CreateIncquisitio(aref loc)
 				if (!CheckAttribute(pchar, "PirateOrder"))	sld = GetCharacter(NPC_GenerateCharacter("MaltGuard_"+j, "sold_spa_"+(rand(7)+1), "man", "man", 35, PIRATE, 3, true));
 				else	sld = GetCharacter(NPC_GenerateCharacter("MaltGuard_"+j, "officer_" + (rand(63)+1), "man", "man", 35, PIRATE, 1, true));
 				sld.City = "Santiago";
-				FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+15, 100, 90, BLADE_LONG, "pistol3", 100);//спецназ
+				FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3+15, 100, 90, BLADE_LONG, "pistol3", 100);//спецназ
 				LAi_SetLoginTime(sld, 0.0, 24.0);
 				LAi_SetCitizenType(sld);
 				LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
@@ -878,7 +878,7 @@ void CreateIncquisitio(aref loc)
 				sld.City = "Santiago";
 				sld.CityType = "soldier";
 				LAi_LoginInCaptureTown(sld, true);
-				FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+15, 100, 90, BLADE_LONG, "pistol3", 100);//спецназ
+				FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3+15, 100, 90, BLADE_LONG, "pistol3", 100);//спецназ
 				LAi_SetLoginTime(sld, 0.0, 24.0);
 				LAi_SetGuardianType(sld);
 				LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
@@ -978,7 +978,7 @@ void CreateMayak(aref loc)
 					chr.City = Colonies[iColony].id;
 					chr.CityType = "soldier";
 					chr.greeting = "soldier_common";
-					SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+6, true); // бравые орлы
+					SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3+6, true); // бравые орлы
 					LAi_SetLoginTime(chr, 0.0, 24.0);
 					solderLoc = GetAttributeN(st, i);
 					locatorName = GetAttributeName(solderLoc);
@@ -1015,7 +1015,7 @@ void CreateMayak(aref loc)
 					chr = &characters[iChar];
 					chr.City = Colonies[iColony].id;
 					chr.CityType = "soldier";
-					SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+					SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 					LAi_SetLoginTime(chr, 0.0, 24.0);
 					LAi_SetPatrolType(chr);
 					LAi_group_MoveCharacter(chr, slai_group);
@@ -1253,7 +1253,7 @@ void CreateIndianVillage(aref loc) // Sinistra: деревня индейцев
 		{
 			SetNPCQuestDate(loc, "indian_date");
 			int i, iMassive;
-			int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+5;
+			int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3+5;
 			int num = rand(2)+6; //кол-во 
 			ref chr;
 			string model[8];		
@@ -1278,7 +1278,7 @@ void CreateIndianVillage(aref loc) // Sinistra: деревня индейцев
 					chr.lastname = "";
 					LAi_SetLoginTime(chr, 6.0, 21.99);
 					LAi_CharacterReincarnation(chr, true, true);
-					LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); 
+					LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); 
 					chr.dialog.Filename = "indian_dialog.c";
 					chr.dialog.currentnode = "IndianMan";
 					chr.greeting = "indian_male";
@@ -1682,7 +1682,7 @@ void CreateResidenceNpc(aref loc)
 		sGreeting = "worker";
 		break;
 	case 2:
-		Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
+		Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3;
 		sModel = "sold_"+NationShortName(iNation)+"_"+(rand(7)+1);
 		sSex = "man";
 		sAni = "man"
@@ -1894,8 +1894,8 @@ void CreateFortsNPC(aref loc)
 				chr.CityType = "soldier";
 				chr.RebirthPhantom = true;
 				LAi_CharacterReincarnation(chr, true, true);
-				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
-				SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+				SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 				solderLoc = GetAttributeN(st, i);
 				locatorName = GetAttributeName(solderLoc);
 				ChangeCharacterAddressGroup(chr, pchar.location, "soldiers", locatorName);
@@ -1944,10 +1944,10 @@ void CreateFortsNPC(aref loc)
 				SetNPCModelUniq(chr, sType, MAN);
 				chr.City = Colonies[iColony].id;
 				chr.CityType = "fortPatrol";
-				SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+				SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
 				chr.RebirthPhantom = true;
 				LAi_CharacterReincarnation(chr, true, true);
-				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
+				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 				LAi_SetLoginTime(chr, 0.0, 24.0);
 				LAi_SetPatrolType(chr);
 

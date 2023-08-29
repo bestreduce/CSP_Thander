@@ -447,8 +447,8 @@ void ProcessDialogEvent()
 
 		case "OfficerConfused_2":
 			chref = GetCharacter(sti(NPChar.OfficerToHealConfuse));
-			if (CheckAttribute(chref,"chr_ai.max_hp")) npchar.HealPrice = (makeint(chref.chr_ai.max_hp)*100)+makeint((sti(chref.rank)*500)*(MOD_SKILL_ENEMY_RATE/2));
-			else npchar.HealPrice = (makeint(chref.health.maxhp)*100)+makeint((sti(chref.rank)*500)*(MOD_SKILL_ENEMY_RATE/2));
+			if (CheckAttribute(chref,"chr_ai.max_hp")) npchar.HealPrice = (makeint(chref.chr_ai.max_hp)*100)+makeint((sti(chref.rank)*500)*(MOD_SKILL_ENEMY_RATE*3/2));
+			else npchar.HealPrice = (makeint(chref.health.maxhp)*100)+makeint((sti(chref.rank)*500)*(MOD_SKILL_ENEMY_RATE*3/2));
 			dialog.Text = "По прогнозам, этому офицеру до полного излечения естественным путём ещё дней так..."+(sti(chref.HPminusDaysNeedtoRestore)-sti(chref.HPminusDays))+". Я мог бы попробовать ускорить процесс выздоровления, но это обойдётся вам в... "+FindRussianMoneyString(sti(npchar.HealPrice));
 			if (sti(pchar.money)>=sti(npchar.HealPrice))
 			{

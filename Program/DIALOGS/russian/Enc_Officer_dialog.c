@@ -750,7 +750,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "contract3":
-			NPChar.contractMoney = makeint(sti(NPChar.rank)*MOD_SKILL_ENEMY_RATE*1000);
+			NPChar.contractMoney = makeint(sti(NPChar.rank)*MOD_SKILL_ENEMY_RATE*3*1000);
 			dialog.text = "Заманчивое предложение, ничего не скажешь. На спокойную старость заработать немного. А как насчёт небольших подьёмных для постоянного состава?";
 			if (sti(Pchar.money) >= sti(NPChar.contractMoney))
 			{
@@ -802,7 +802,7 @@ void ProcessDialogEvent()
 		break;
 			
 		case "cancelcontract2":
-			NPChar.contractMoney = makeint(sti(NPChar.rank)*MOD_SKILL_ENEMY_RATE*1000);
+			NPChar.contractMoney = makeint(sti(NPChar.rank)*MOD_SKILL_ENEMY_RATE*3*1000);
 			dialog.text = "Вот как, ну что ж если вы оплатите неустойку по контракту, то у меня не будет претензий.";
 			if (sti(Pchar.money) >= sti(NPChar.contractMoney))
 			{

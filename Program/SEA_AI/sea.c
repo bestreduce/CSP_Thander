@@ -485,7 +485,7 @@ void Sea_MapLoad()
                 ok = false;
                 Log_SetStringToLog("Корабль '" +  chref.Ship.Name + "' перегружен.");
             }
-            if (MOD_SKILL_ENEMY_RATE > 2) // халява и юнга - послабление
+            if (MOD_SKILL_ENEMY_RATE > 1) // халява и юнга - послабление
     		{
 	            if (i > 0 && GetMinCrewQuantity(chref) > GetCrewQuantity(chref))
 	            {

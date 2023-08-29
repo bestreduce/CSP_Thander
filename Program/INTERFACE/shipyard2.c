@@ -926,36 +926,36 @@ void CalcTuningPrice()
 	int i = 1;//HP
 	Tun_Mater1[i] = makeint((35 * (7-shipClass) + shipHP * 7/100) * fQuestShip);
 	Tun_Mater2[i] = makeint(5 * ((7-shipClass)*3) * fQuestShip);
-	Tun_Mater3[i] = makeint((shipHP * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((shipHP * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i = i + 2;//MAST
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);
 	Tun_Mater2[i] = makeint(10 * (7-shipClass) * fQuestShip);
-	Tun_Mater3[i] = makeint((100 * MastMulti * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((100 * MastMulti * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//Speed
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);
 	Tun_Mater2[i] = makeint(5 * (7-shipClass) * fQuestShip);
-	Tun_Mater3[i] = makeint((100 * shipSpeedRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((100 * shipSpeedRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//Turn
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 375/shipClass+20) * fQuestShip);
 	Tun_Mater2[i] = makeint((5 * (7-shipClass)+2) * fQuestShip);
-	Tun_Mater3[i] = makeint((30 * shipTurnRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((30 * shipTurnRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//Wind
 	Tun_Mater1[i] = makeint((shipHP * 25/1000 + 750/shipClass+20) * fQuestShip);
 	Tun_Mater2[i] = makeint((6 * (7-shipClass)+1) * fQuestShip);
-	Tun_Mater3[i] = makeint((300 * shipSpeedRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((300 * shipSpeedRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//capacity
 	Tun_Mater1[i] = makeint((35 * (7-shipClass) + shipCapacity * 7/100) * fQuestShip);
 	Tun_Mater2[i] = makeint((10 * (7-shipClass)+10) * fQuestShip);
-	Tun_Mater3[i] = makeint((2 * shipCapacity * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((2 * shipCapacity * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//MaxCrew
 	Tun_Mater1[i] = makeint((shipMaxCrew * 6/10 + 50 * (7-shipClass)) * fQuestShip);
 	Tun_Mater2[i] = makeint((6 * (7-shipClass)+3) * fQuestShip);
-	Tun_Mater3[i] =  makeint((15 * shipMaxCrew * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] =  makeint((15 * shipMaxCrew * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 	i++;//cannon
 	Tun_Mater1[i] = makeint((cannonQ * 2 + 35 * (7-shipClass) - 20) * fQuestShip);
 	Tun_Mater2[i] = makeint((7-shipClass)/2 * fQuestShip);
 	if (Tun_Mater2[i] < 1) Tun_Mater2[i] = 1;
-	Tun_Mater3[i] = makeint((100 * cannonQ * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
+	Tun_Mater3[i] = makeint((100 * cannonQ * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
 }
 
 void OnTableClick()

@@ -507,7 +507,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 				fModifikator = 0.4 + 12.0/iGoods;
 				iMultiply = (rand(10)+iGoods*3) * (rand(iShipClass) + 4);
 				iRandMultiply = 2 + rand(iShipClass);
-				if (MOD_SKILL_ENEMY_RATE < rand(12))
+				if (MOD_SKILL_ENEMY_RATE < rand(6))
 				{
     					iFinish = GOOD_CANNON_8 - iStart - 1;
 				}
@@ -523,7 +523,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 					{
 						iRandMultiply = 2 + rand(iShipClass);
 						iMultiply = (rand(10)+ 10) * (rand(iShipClass) + 2);
-						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(1.2 * MOD_SKILL_ENEMY_RATE));
+						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(1.2 * MOD_SKILL_ENEMY_RATE*3));
 						if(iGoodQuantity < 1) iGoodQuantity = 1;
 						isLock = 1;
 						Fantom_SetCharacterGoods(rFantom, iGoodName, iGoodQuantity, isLock);
@@ -546,7 +546,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 				}
 				iMultiply = (rand(10)+iGoods*3) * (rand(iShipClass) + 4);
 				iRandMultiply = 2 + rand(iShipClass);
-				if (MOD_SKILL_ENEMY_RATE < rand(12))
+				if (MOD_SKILL_ENEMY_RATE < rand(6))
 				{
     					iFinish = GOOD_CANNON_8 - iStart - 1;
 				}
@@ -562,7 +562,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 					{
 						iRandMultiply = 2 + rand(iShipClass);
 						iMultiply = (rand(10)+ 5) * (rand(iShipClass) + 2);
-						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(1.1 * MOD_SKILL_ENEMY_RATE));
+						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(1.1 * MOD_SKILL_ENEMY_RATE*3));
 						if(iGoodQuantity < 1) iGoodQuantity = 1;
 						isLock = 1; isLock = isLock || bOk;
 						Fantom_SetCharacterGoods(rFantom, iGoodName, iGoodQuantity, isLock);
@@ -580,7 +580,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 			iMultiply = (rand(10)+3) * (rand(iShipClass) + 1);
 			iRandMultiply = 2 + rand(iShipClass);
 			iRandGoods = rand(5)+1;
-			if (MOD_SKILL_ENEMY_RATE < rand(12))
+			if (MOD_SKILL_ENEMY_RATE < rand(6))
 			{
     				iFinish = GOOD_CANNON_8 - iStart - 1;
 			}
@@ -596,7 +596,7 @@ void Fantom_SetGoods(ref rFantom, string sFantomType)
 				{
 						iRandMultiply = 2 + rand(iShipClass);
 						iMultiply = (rand(10)+ 30) * (rand(iShipClass) + 2);
-						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(0.9 * MOD_SKILL_ENEMY_RATE));
+						iGoodQuantity = makeint((fModifikator * 50 + iMultiply * (1 + rand(iRandMultiply * 3)))/(0.9 * MOD_SKILL_ENEMY_RATE*3));
 						if(iGoodQuantity < 1) iGoodQuantity = 1;
 						isLock = 1; isLock = isLock || bOk;
 						Fantom_SetCharacterGoods(rFantom, iGoodName, iGoodQuantity, isLock);
@@ -635,7 +635,7 @@ void Fantom_SetGoodsOld(ref rFantom, string sFantomType)
     int i, iGoods;
 
     // разрешим золото от сложности
-    if (MOD_SKILL_ENEMY_RATE < rand(12))
+    if (MOD_SKILL_ENEMY_RATE < rand(6))
     {
     	iFinish = GOOD_CANNON_8 - iStart - 1;
     }
@@ -734,19 +734,19 @@ void Fantom_SetRandomCrewExp(ref rFantom, string sFantomType)
 	switch (sFantomType)
 	{
 		case "trade":
-			rFantom.Ship.Crew.Exp.Sailors   = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(70);
-			rFantom.Ship.Crew.Exp.Cannoners = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(70);
-			rFantom.Ship.Crew.Exp.Soldiers  = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(70);
+			rFantom.Ship.Crew.Exp.Sailors   = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(70);
+			rFantom.Ship.Crew.Exp.Cannoners = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(70);
+			rFantom.Ship.Crew.Exp.Soldiers  = 20 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(70);
 		break;
 		case "war":
-			rFantom.Ship.Crew.Exp.Sailors   = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(60);
-			rFantom.Ship.Crew.Exp.Cannoners = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(60);
-			rFantom.Ship.Crew.Exp.Soldiers  = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(60);
+			rFantom.Ship.Crew.Exp.Sailors   = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(60);
+			rFantom.Ship.Crew.Exp.Cannoners = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(60);
+			rFantom.Ship.Crew.Exp.Soldiers  = 30 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(60);
 		break;
 		case "pirate":
-		    rFantom.Ship.Crew.Exp.Sailors   = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(55);
-			rFantom.Ship.Crew.Exp.Cannoners = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(55);
-			rFantom.Ship.Crew.Exp.Soldiers  = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE + rand(55);
+		    rFantom.Ship.Crew.Exp.Sailors   = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(55);
+			rFantom.Ship.Crew.Exp.Cannoners = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(55);
+			rFantom.Ship.Crew.Exp.Soldiers  = 35 - iSClass*2 + MOD_SKILL_ENEMY_RATE*3 + rand(55);
 		break;
 	}
 }

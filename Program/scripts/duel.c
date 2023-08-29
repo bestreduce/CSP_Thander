@@ -33,7 +33,7 @@ void Duel_Prepare_Fight()
 
 		if(CheckAttribute(PChar,"questTemp.duel.enemyQty")) // не один !!
 		{
-			iTemp = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE);
+			iTemp = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3);
 			for(i = 0; i < sti(PChar.questTemp.duel.enemyQty); i++)
 			{
 				sld = GetCharacter(NPC_GenerateCharacter("Berglar_Duel"+i, "officer_"+(rand(63)+1), "man", "man", iTemp, PIRATE, 1, true));
