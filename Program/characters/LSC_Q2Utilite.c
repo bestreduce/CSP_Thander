@@ -2888,6 +2888,7 @@ void LoginDeadmansGod()
 	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man_fast", 100, PIRATE, 0, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod", "mictlantecuhtli", "skeleton", "man", 100, PIRATE, 0, true));
     FantomMakeCoolFighter(sld, 100, 100, 100, "toporAZ", "pistol5", 3000);
+	LAi_SetDltHealth(sld, 3.0);
 	sld.name = "Миктлантекутли";
 	sld.lastname = "";
 	sld.dialog.filename   = "Quest\Mictlantecuhtli.c";
