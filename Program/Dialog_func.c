@@ -1138,7 +1138,7 @@ int GetNamesCount(String _nameType)
 	return GetAttributesNum(typeNames);
 }
 
-// Случайное имя из определенной группы в определенном падеже
+// Случайное имя из определённой группы в определённом падеже
 String GetRandName(String _nameType, String _case)
 {
 	String nameId;

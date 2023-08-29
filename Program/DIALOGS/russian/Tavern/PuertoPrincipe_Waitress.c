@@ -45,7 +45,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		case "PL_Q7_4":
 			dialog.text = "Нет.";
-			link.l1 = "Так какого черта ты морочишь мне голову?!!";
+			link.l1 = "Так какого чёрта ты морочишь мне голову?!!";
 			link.l1.go = "PL_Q7_5";
 		break;
 		case "PL_Q7_5":

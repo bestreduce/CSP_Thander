@@ -350,7 +350,7 @@ void ProcessDialogEvent()
 			link.l1.go = "Step_S7_2";
 		break;
  		case "Step_S7_2":
-			dialog.text = "Я, пожалуй, ещё задержусь в этих водах. Возможно, мне повезет...";
+			dialog.text = "Я, пожалуй, ещё задержусь в этих водах. Возможно, мне повезёт...";
 			link.l1 = "Желаю тебе удачи, Маноэль. Прощай.";
 			link.l1.go = "exit";
 			pchar.questTemp.State = "Sp7SavePardal_2GoodWork";

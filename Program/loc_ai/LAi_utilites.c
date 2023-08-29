@@ -1147,7 +1147,7 @@ void CreatePearlVillage(aref loc)
 		// ==> глава администрации
 		iRank = 20+rand(15);
 		chr = GetCharacter(NPC_GenerateCharacter("HeadMan_"+iPrefix, "SpaOfficer"+(rand(2)+1), "man", "man", iRank, iPearNation, 30, true));
-		SetCharacterPerk(chr, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+		SetCharacterPerk(chr, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 		SetCharacterPerk(chr, "SwordplayProfessional");
 		chr.dialog.Filename = "Pearl_dialog.c";
 	    chr.dialog.currentnode = "HeadMan";

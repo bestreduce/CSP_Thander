@@ -1527,7 +1527,7 @@ void CalculateInfoDataF18()
 		SetSelfSkill(sld, 100, 100, 100, 100, 100);
 		SetShipSkill(sld, 100, 100, 100, 100, 100, 100, 100, 100, 100);
 		SetSPECIAL(sld, 6, 10, 9, 10, 10, 8, 10);
-		SetCharacterPerk(sld, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+		SetCharacterPerk(sld, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 		SetCharacterPerk(sld, "BasicBattleState");
 		SetCharacterPerk(sld, "AdvancedBattleState");
 		SetCharacterPerk(sld, "ShipDefenseProfessional");

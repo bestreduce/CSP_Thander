@@ -350,8 +350,8 @@ void CalculateTypeSkillsForRank (ref npchar, int rank, string type, float coeff)
 	BasePriority = makeint(15 * Deviation); // для базового усиления профильного навыка
 	BaseSidePriority = makeint(5 * Deviation); // для базового усиления дополнительного навыка
 	TypeSidePriority = "unknown";
-	Priority3 = 1.5 * Deviation; // для упора на определенный основной навык
-	Priority4 = 1.4 * Deviation; // для упора на определенный дополнительный навык
+	Priority3 = 1.5 * Deviation; // для упора на определённый основной навык
+	Priority4 = 1.4 * Deviation; // для упора на определённый дополнительный навык
 	switch(type)
 	{
 		case "boatswain":		
@@ -827,7 +827,7 @@ void SetMonsterLoginHP(ref _pchar) // жизнь у монстров больш�
 	}
 }
 
-/// метод расчета от опыта солдат, дает бонус в НР (или пенальти)
+/// метод расчета от опыта солдат, даёт бонус в НР (или пенальти)
 bool GetBoardingHP(ref mchr, ref echr, ref float_boarding_player_hp, ref float_boarding_enemy_hp)
 {
 	float b_p_hp, b_e_hp;

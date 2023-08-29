@@ -403,7 +403,7 @@ void Sea_LandLoad()
 
 			pchar.money = sti(pchar.money) - sbormoney;
 
-			if (GetDaysContinueNationLicence(iCityNation) < 2) // доработка портового сбора. Если причалил успешно, то условный портовик дает пропуск на два дня.
+			if (GetDaysContinueNationLicence(iCityNation) < 2) // доработка портового сбора. Если причалил успешно, то условный портовик даёт пропуск на два дня.
 			{
 				TakeNationLicence(iCityNation);
 				GiveNationLicence(iCityNation, 2);
@@ -960,7 +960,7 @@ void SeaLogin(ref Login)
 
 		Trace("ay_res = " + ay_res);
 
-        //т.к. арктангенс дает только острые углы, то считаем тупые
+        //т.к. арктангенс даёт только острые углы, то считаем тупые
         if (ay_res < 0 && z > z_mc)
         {
             ay_res += PI;

@@ -916,7 +916,7 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
     _Character.skill.Fortune = GetCoffDiffSkill(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
 	_Character.chr_ai.hp = stf(_Character.chr_ai.hp) + GetCoffDiff(_AddHP, 5000);
 	_Character.chr_ai.hp_max = stf(_Character.chr_ai.hp_max) + GetCoffDiff(_AddHP, 5000);
-	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 	SetCharacterPerk(_Character, "SwordplayProfessional");
 	SetCharacterPerk(_Character, "AdvancedDefense");
 	SetCharacterPerk(_Character, "CriticalHit");
@@ -952,7 +952,7 @@ void FantomMakeCoolFighterWRankDepend(ref _Character, int _Rank, int _Fencing, i
     _Character.skill.Fortune = GetCoffDiffSkill(_Pistol, SKILL_MAX); //zagolski. если умеет хорошо стрелять из пистоля, то умеет и хорошо от него защищаться
 	_Character.chr_ai.hp = stf(_Character.chr_ai.hp) + GetCoffDiff(_AddHP, 5000);
 	_Character.chr_ai.hp_max = stf(_Character.chr_ai.hp_max) + GetCoffDiff(_AddHP, 5000);
-	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	SetCharacterPerk(_Character, "Energaiser"); // скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 	SetCharacterPerk(_Character, "SwordplayProfessional");
 	SetCharacterPerk(_Character, "AdvancedDefense");
 	SetCharacterPerk(_Character, "CriticalHit");

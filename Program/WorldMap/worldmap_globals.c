@@ -361,7 +361,7 @@ bool wdmCreateFollowShipByIndex(float kSpeed, int index, ref encID, int timeOutI
 		res = SendMessage(&worldMap, "lsssff", MSG_WORLDMAP_CREATEENC_MER, nationShipName, "", "", kSpeed, timeOutInSec); // boal new
 	}
 	else
-	{   // boal - код этот полный абзац, я Вам, господа акеловцы, аплодирую - метод Следовать дает убегание - и так весь код. плакаль
+	{   // boal - код этот полный абзац, я Вам, господа акеловцы, аплодирую - метод Следовать даёт убегание - и так весь код. плакаль
 		// погано, что метод имеет право быть, но название должно быть иным, нужно чтоб мирные не доставали патрулями.
 		res = SendMessage(&worldMap, "lsff", MSG_WORLDMAP_CREATEENC_FLW, nationShipName, kSpeed, timeOutInSec);
 	}
@@ -395,7 +395,7 @@ bool wdmCreateRealFollowShipByIndex(float kSpeed, int index, ref encID, int time
 		res = SendMessage(&worldMap, "lsssf", MSG_WORLDMAP_CREATEENC_MER, nationShipName, "", "", kSpeed);
 	}
 	else
-	{ */  // boal - код этот полный абзац, я Вам, господа акеловцы, аплодирую - метод Следовать дает убегание - и так весь код. плакаль
+	{ */  // boal - код этот полный абзац, я Вам, господа акеловцы, аплодирую - метод Следовать даёт убегание - и так весь код. плакаль
 		res = SendMessage(&worldMap, "lsff", MSG_WORLDMAP_CREATEENC_FLW, nationShipName, kSpeed, timeOutInSec);
 	//}
 	//Копируем данные

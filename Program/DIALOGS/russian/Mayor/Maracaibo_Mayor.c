@@ -58,7 +58,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
         break;
         case "Step_H12_2":
 			dialog.text = "Если бы вы не снабжали Францию деньгами, ничего бы этого не было!";
-			link.l1 = "Полагаю, теперь поздно о чем-то спорить. Этот город стал голландским, а дальше видно будет.";
+			link.l1 = "Полагаю, теперь поздно о чём-то спорить. Этот город стал голландским, а дальше видно будет.";
 			link.l1.go = "exit";
             AddQuestRecord("Hol_Line_12_OccupyMaracaibo", "2");
             pchar.questTemp.State = "OccupyMaracaibo_toWeWon";

@@ -367,12 +367,12 @@ void extrnInitPerks()
 	/// Скрытые перки
 	/////////////////////////////////////////////////////////////
 
-	// скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
+	// скрытый перк даёт 1.5 к приросту энергии, дается ГГ и боссам уровней
 	ChrPerksList.list.Energaiser.descr = "perkEnergaiser";
 	ChrPerksList.list.Energaiser.Hiden = true;
 
 
-	// скрытый перк дает бонус в 5 процентов к базовой скорости корабля при наличии всех карт
+	// скрытый перк даёт бонус в 5 процентов к базовой скорости корабля при наличии всех карт
 	ChrPerksList.list.MapMaker.descr = "perkMapMaker";
 	ChrPerksList.list.MapMaker.PlayerOnly = true;
 	ChrPerksList.list.MapMaker.Hiden = true;

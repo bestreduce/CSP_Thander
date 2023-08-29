@@ -518,7 +518,7 @@ void ProcessDialogEvent()
 		    }
 		break;
 		case "Woman_FackYou":
-			dialog.text = "Мил"+ GetSexPhrase("ый","ая") +", ты куда это полез"+ GetSexPhrase("","ла") +"?! Надо же, а казался порядочн"+ GetSexPhrase("ым капитаном","ой девушкой") +".\nНу а теперь так просто тебе не уйти, красав"+ GetSexPhrase("чик","ица") +". Подрежут тебе крылышки...";
+			dialog.text = "Мил"+ GetSexPhrase("ый","ая") +", ты куда это полез"+ GetSexPhrase("","ла") +"?! Надо же, а казал"+ GetSexPhrase("ся","ась") +" порядочн"+ GetSexPhrase("ым капитаном","ой девушкой") +".\nНу а теперь так просто тебе не уйти, красав"+ GetSexPhrase("чик","ица") +". Подрежут тебе крылышки...";
 			link.l1 = "Заткнись, дура...";
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
@@ -832,7 +832,7 @@ void ProcessDialogEvent()
 			dialog.text = "О! Что-то я не о том подумала. Продолжай, прошу тебя.";
 			link.l1 = "По правде говоря, я тоже думал не только о твоих глазах...";
 			link.l1.go = "SpeakHistoryTwo_10";
-			link.l2 = "Как ты могла подумать о чем-то другом? Конечно, я имел ввиду только глаза.";
+			link.l2 = "Как ты могла подумать о чём-то другом? Конечно, я имел ввиду только глаза.";
 			link.l2.go = "SpeakHistoryTwo_15";
 		break;
 		case "SpeakHistoryTwo_10":
@@ -1353,7 +1353,7 @@ void ProcessDialogEvent()
 		case "TakeMayorsRing_S1":
 			if (CheckAttribute(pchar, "questTemp.different.TakeMayorsRing.item")) //если валяется в итемах
 			{
-				dialog.text = LinkRandPhrase("Нет, дорогой, не попадалось, к сожалению. Рада бы помочь, да не могу...",
+				dialog.text = LinkRandPhrase("Нет, "+ GetSexPhrase("дорогой","дорогая") +", не попадалось, к сожалению. Рада бы помочь, да не могу...",
 					"Нет, "+ GetSexPhrase("красавчик","девушка") +", кольца не видела...",
 					"К сожалению, нет. Никакого кольца не видела.");
 				link.l1 = "Жаль... Ну что же, спасибо тебе.";
@@ -1369,7 +1369,7 @@ void ProcessDialogEvent()
 				}
 				else
 				{
-					dialog.text = LinkRandPhrase("Нет, дорогой, не попадалось, к сожалению. Рада бы помочь, да не могу...",
+					dialog.text = LinkRandPhrase("Нет, "+ GetSexPhrase("дорогой","дорогая") +", не попадалось, к сожалению. Рада бы помочь, да не могу...",
 						"Нет, "+ GetSexPhrase("красавчик","девушка") +", кольца не видела...",
 						"К сожалению, нет. Никакого кольца не видела.");
 					link.l1 = "Жаль... Ну что же, спасибо тебе.";

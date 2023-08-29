@@ -835,7 +835,7 @@ void QuestComplete(string sQuestName, string qname)
 				ChangeCharacterAddress(characterFromID(sTemp), "None", ""); // вся логика теперь в рассидки таверны
 			}
             SetCaptureTownByHero(sld.City);
-            LaunchColonyInfoScreen(); // табличка   to_do дает вылет :(
+            LaunchColonyInfoScreen(); // табличка   to_do даёт вылет :(
 			// отсчет для отбития
 			//if (!isCityHasFort(sld.City)) // сухопутный город
 			sTemp = "Attack_Fort_" + sld.City;

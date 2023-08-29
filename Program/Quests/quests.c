@@ -1720,7 +1720,7 @@ bool isLocationFreeForQuests(string loc_id)
 // boal <--
 
 // Warship -->
-// Запустить евент с параметром "s" через определенное игровое время
+// Запустить евент с параметром "s" через определённое игровое время
 void SetTimerEvent_String(string _event, int _year, int _month, int _day, string _string)
 {
 	int iMax = 30;
