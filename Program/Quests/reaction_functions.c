@@ -10733,11 +10733,10 @@ void LambriniPGG_Tavern(string qName)
 void PKM_SvtvA_Malta_na_pomosh(string qName)
 {	
 	sld = GetCharacter(NPC_GenerateCharacter("Maltese", "Maltese", "man", "man", sti(pchar.rank), SPAIN, -1, true));
-	FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade44", "pistol1", 400);
+	FantomMakeCoolFighter(sld, sti(pchar.rank), 30, 30, "blade16", "pistol1", 400);
 	SetSPECIAL(sld, 10, 6, 8, 10, 8, 5, 6);
 	SetSelfSkill(sld, 18, 21, 70, 3, 40);
 	SetShipSkill(sld, 60, 12, 18, 17, 32, 41, 60, 31, 26);
-	//LAi_SetHP(sld, 2000.0, 2000.0);
 	sld.name = "Жаквин";
 	sld.lastname = "де Массе";
 	sld.FaceId = 296;
@@ -10751,6 +10750,8 @@ void PKM_SvtvA_Malta_na_pomosh(string qName)
 	PChar.quest.PKM_SvtvA_MalteseMertv.win_condition.l1 = "NPC_Death";
 	PChar.quest.PKM_SvtvA_MalteseMertv.win_condition.l1.character = "Maltese";
 	PChar.quest.PKM_SvtvA_MalteseMertv.win_condition = "PKM_SvtvA_MalteseMertv";
+	sld = CharacterFromID("Satanist_Krisa");
+	LAi_SetImmortal(sld, false);
 }
 void PKM_SvtvA_Malta_na_pomosh_2(string qName)
 {	

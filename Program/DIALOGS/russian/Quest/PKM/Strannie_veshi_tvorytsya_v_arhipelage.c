@@ -86,6 +86,7 @@ void ProcessDialogEvent()
 			dialog.text = "Хочешь поставить мне выпивку?";
 			link.l1 = "Извини, приятель, выпивку не куплю, но вопросы тебе задам.";
 			link.l1.go = "Capitan_v_taverne_1_5";
+			UnmarkCharacter(npchar);
 		break;
 		
 		case "Capitan_v_taverne_1_5":
@@ -118,9 +119,9 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddQuestRecord("PKM_Animists", "4");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
-			pchar.questTemp.PKM_SvtvA_SprositKapitanov_v_more = "SprositKapitanov";
-			pchar.questTemp.PKM_SvtvA_NevisTaverna_1 = "Taverna";
-			pchar.questTemp.PKM_SvtvA_NevisPortMan_1 = "PortMan";
+			pchar.questTemp.PKM_SvtvA_SprositKapitanov_v_more = true;
+			pchar.questTemp.PKM_SvtvA_NevisTaverna_1 = true;
+			pchar.questTemp.PKM_SvtvA_NevisPortMan_1 = true;
 			
 			PChar.quest.PKM_SvtvA_SprositKapitanov_v_more.win_condition.l1 = "MapEnter";
 			PChar.quest.PKM_SvtvA_SprositKapitanov_v_more.win_condition = "PKM_SvtvA_SprositKapitanov_v_more";
@@ -310,6 +311,39 @@ void ProcessDialogEvent()
 			PChar.quest.PKM_SvtvA_SJ_B1.over = "yes";
 			PChar.quest.PKM_SvtvA_SJ_B2.over = "yes";
 			PChar.quest.PKM_SvtvA_SJ_B3.over = "yes";
+		break;
+		
+		case "Знакомство с Жаком":
+			dialog.text = "Капитан, даже не знаю, как вас благодарить! Если бы не вы, мой корабль и вся его команда уже лежали бы в морской пучине. Меня зовут Жаквин де Массе, рыцарь мальтийского ордена.";
+			link.l1 = "Очень приятно, Жаквин. А я "+GetFullName(pchar)+".";
+			link.l1.go = "Знакомство с Жаком_2";
+		break;
+		case "Знакомство с Жаком_2":
+			dialog.text = "Так это вы тот самый капитан, о котором меня предупредили посредством голубиной почты.";
+			link.l1 = "Вы правы в своих догадках. У меня указание сопроводить вас до Пуэрто Рико.";
+			link.l1.go = "Знакомство с Жаком_3";
+		break;
+		case "Знакомство с Жаком_3":
+			dialog.text = "Хорошо. В таком случае, мы можем отправиться в путь.";
+			link.l1 = "Отлично! Тогда не будем мешкать!";
+			link.l1.go = "Знакомство с Жаком_4";
+		break;
+		case "Знакомство с Жаком_4":
+			DialogExit();
+			pchar.questTemp.PKM_SvtvA_Znakomstvo_s_Malta2 = true;
+			pchar.questTemp.PKM_SvtvA_Dostavka_Malty = true;
+			SetCompanionIndex(pchar, -1, sti(NPChar.index));
+			SetShipRemovable(npchar, false);
+			SetCharacterRemovable(npchar, false);
+			AddQuestRecord("PKM_Animists", "18");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("ся","ась"));
+			npchar.dialog.currentnode = "Знакомство с Жаком_5";
+		break;
+		case "Знакомство с Жаком_5":
+			dialog.text = "Во имя всех святых! Нам нельзя терять время, нужно спешить на Пуэрто Рико.";
+			link.l1 = "Да, Жаквин, ты прав.";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "Знакомство с Жаком_5";
 		break;
 		
 		case "Satanist_zasada2":
@@ -520,6 +554,8 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("SanJuan_Priest");
 			sld.dialog.filename = "Common_church.c";
 			sld.dialog.currentnode = "First time";
+			AddCharacterExpToSkill(pchar, "Leadership", 200);
+			AddCharacterExpToSkill(pchar, "Fortune", 200);
 		break;
 		
 		case "Джордано_1":
@@ -582,16 +618,10 @@ void ProcessDialogEvent()
 		
 		case "Разговор с тюремщиком_2":
 			dialog.text = "Вообще-то, у нас запрещены разговоры с заключёнными...";
-			if (sti(pchar.reputation) < 40)
-			{
-				link.l1 = "(доставая пистолет) Вы сейчас же проводите меня к пленнику, или, клянусь Богом, я убью вас!";
-				link.l1.go = "Угроза тюремщику_1";
-			}
-			else
-			{
-				link.l1 = "Но, позвольте! Я занимаюсь делом государственной важности!";
-				link.l1.go = "Разговор с тюремщиком_3";
-			}
+			link.l1 = "Но, позвольте! Я занимаюсь делом государственной важности!";
+			link.l1.go = "Разговор с тюремщиком_3";
+			link.l2 = "(доставая пистолет) Вы сейчас же проводите меня к пленнику, или, клянусь Богом, я убью вас!";
+			link.l2.go = "Угроза тюремщику_1";
 		break;
 		
 		case "Разговор с тюремщиком_3":
@@ -684,6 +714,8 @@ void ProcessDialogEvent()
 			
 			AddQuestRecord("PKM_Animists", "28");
 			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			ChangeCharacterReputation(pchar, -30);
+			ChangeCharacterNationReputation(pchar, FRANCE, -30);
 		break;
 		
 		case "Угроза тюремщику_2":
@@ -1013,6 +1045,67 @@ void ProcessDialogEvent()
 			LAi_ActorRunToLocation(sld, "goto", "goto28", "none", "", "", "PKM_SvtvA_Lord_Haos_Pobeda_no_ne_sovsem2", 4);
 		break;
 		
+		case "Спасение пленников":
+			dialog.text = ""+ GetSexPhrase("Сын мой","Дочь моя") +", мы победили?";
+			link.l1 = "От их логова ничего не осталось, святой отец, но их главарю удалось сбежать...";
+			link.l1.go = "Спасение пленников_2";
+		break;
+		case "Спасение пленников_2":
+			dialog.text = "Ничего страшного, "+ GetSexPhrase("сын мой","дочь моя") +". Пока вы сражались с этими демонами, я успел освободить всех мирных жителей.";
+			link.l1 = "Отлично! Мой корабль '" + PChar.Ship.Name + "' стоит в бухте, отведите их на борт. Я пойду следом за вами и прослежу, чтобы ни одна тварь не вылезла из засады. Вперёд!";
+			link.l1.go = "Спасение пленников_3";
+		break;
+		
+		case "Спасение пленников_3":
+			DialogExit();
+			AddQuestRecord("PKM_Animists", "34");
+			sld = CharacterFromID("Plennik_Dominges");
+			LAi_ActorRunToLocation(sld, "reload", "reload1_back", "none", "", "", "PKM_SvtvA_Dominges_na_bort", -1);
+		break;
+		
+		case "Домингес_спасён_1":
+			dialog.text = ""+ GetSexPhrase("Сын мой","Дочь моя") +", наконец-то все эти ужасы остались позади. Вы даже представить себе не можете, какую беду вы предотвратили.";
+			link.l1 = "Вы так говорите, как будто они собирались создать портал в ад, из которого бы вылезла огромная армия нечисти.";
+			link.l1.go = "Домингес_спасён_2";
+		break;
+		
+		case "Домингес_спасён_2":
+			dialog.text = "Страшно вообразить, чтобы случилось, успей они провести свой демонический обряд. Но это уже неважно. Сейчас же я направлюсь на службу в церковь, и буду благодарить Господа Бога за ту помощь, которую он вам оказал в той священной битве.";
+			link.l1 = "До свидания, святой отец. Для меня было честью послужить Свету.";
+			link.l1.go = "Домингес_спасён_3";
+		break;
+		
+		case "Домингес_спасён_3":
+			DialogExit();
+			AddCharacterExpToSkill(pchar, "Leadership", 50);
+			AddCharacterExpToSkill(pchar, "Sailing", 150);
+			sld = CharacterFromID("Plennik_Dominges");
+			sld.lifeday = 0;
+			LAi_SetActorType(sld);
+			LAi_ActorGoToLocation(sld, "reload", "reload7", "none", "", "", "", -1);
+			
+			bDisableFastReload = false;
+			chrDisableReloadToLocation = false;
+			
+			sld = CharacterFromID("SanJuan_Priest");
+			sld.name		= "падре Домингес";
+			sld.lastname = "";
+			sld.dialog.filename = "Common_church.c";
+			sld.dialog.currentnode = "First time";
+			
+			AddQuestRecord("PKM_Animists", "40");
+			AddQuestUserData("PKM_Animists", "sSex", GetSexPhrase("","а"));
+			pchar.questTemp.PKM_Animists_PadreDominges = true;
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon") && CheckAttribute(pchar, "questTemp.PKM_Animists_PadreDominges"))
+			{
+				CloseQuestHeader("PKM_Animists");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_PadreDominges");
+			}
+		break;
+		
 		case "Verni_detey_11":
 			dialog.text = "Вы вернулись? Где наши маленькие детки?";
 			link.l1 = "Ваши дети в полной безопасности. Сейчас их как раз переправляют на берег с моего судна.";
@@ -1047,12 +1140,13 @@ void ProcessDialogEvent()
 			
 			AddQuestRecord("PKM_Animists", "37");
 			pchar.questTemp.PKM_Animists_MamaDeti = true;
-			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon"))
+			if (CheckAttribute(pchar, "questTemp.PKM_Animists_MamaDeti") && CheckAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo") && CheckAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon") && CheckAttribute(pchar, "questTemp.PKM_Animists_PadreDominges"))
 			{
 				CloseQuestHeader("PKM_Animists");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_MamaDeti");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_GuberMarigo");
 				DeleteAttribute(pchar, "questTemp.PKM_Animists_OtetsKlermon");
+				DeleteAttribute(pchar, "questTemp.PKM_Animists_PadreDominges");
 			}
 		break;
 		
