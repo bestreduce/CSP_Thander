@@ -113,7 +113,9 @@ int LocationInitStLucia(int n)
 	locations[n].locators_radius.reload.reload1_back = 2;
 	
 	locations[n].private1.key = "key_ruins";
+	locations[n].private1.key.delItem = true;
 	locations[n].private1.items.Map_Best = 1;
+	locations[n].private1.items.talisman11 = 1
 	locations[n].private1.items.icollection = 1
 	
 	n = n + 1;
@@ -463,6 +465,7 @@ int LocationInitStLucia(int n)
 	locations[n].locators_radius.item.item1 = 1.2;
 	
 	locations[n].private1.key = "key_ruins";
+	locations[n].private1.key.delItem = true;
 	locations[n].private1.items.topor_01 = 1;
 	locations[n].private1.items.talisman15 = 1;
 	

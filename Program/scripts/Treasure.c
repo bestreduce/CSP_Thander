@@ -595,7 +595,7 @@ void FillBoxForTreasureSuper(ref item)
 		itmName = "";
 		while (itmName == "" && i < 15)
 		{
-            switch (rand(28))
+            switch (rand(29))
 			{
                 case 0:
                 	itmName = GetGeneratedItem("blade13");
@@ -683,6 +683,9 @@ void FillBoxForTreasureSuper(ref item)
 				break;
 				case 28:
 					itmName = "talisman16";
+				break;
+				case 29:
+					itmName = "talisman17";
 				break;
 			}
 			if (GetCharacterItem(Pchar, itmName) > 0)

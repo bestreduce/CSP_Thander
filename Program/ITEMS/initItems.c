@@ -7865,6 +7865,7 @@ int InitItems()
 	itm.Weight = 0.5;
 	itm.minlevel = 1;
 	itm.rare = 0.001;
+	itm.points_shop = 650; // Атрибут для магазина ачивок
 	n++;
 
 	makeref(itm,Items[n]);
@@ -7935,6 +7936,7 @@ int InitItems()
 	itm.Weight = 0.5;
 	itm.minlevel = 1;
 	itm.rare = 0.001;
+	itm.points_shop = 650; // Атрибут для магазина ачивок
 	n++;
 
 	makeref(itm,Items[n]);
@@ -8020,6 +8022,7 @@ int InitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	itm.kind = "boatswain";
+	itm.points_shop = 650; // Атрибут для магазина ачивок
 	n++;
 
 	makeref(itm,Items[n]);
@@ -8033,6 +8036,7 @@ int InitItems()
 	itm.Weight = 0.5;
 	itm.minlevel = 1;
 	itm.rare = 0.001;
+	itm.points_shop = 650; // Атрибут для магазина ачивок
 	n++;
 	
 	makeref(itm,Items[n]);
