@@ -680,7 +680,7 @@ void ProcessDialogEvent()
 						{
 							if (i == 0)
 							{	//если нужный корабль - у ГГ
-								sld.Ship.Type = GenerateShip(SHIP_TARTANE, true);
+								sld.Ship.Type = GenerateShip(SHIP_LEUDO, true);
 								SetBaseShipData(sld);
 								SetCrewQuantityFull(sld);
 							}

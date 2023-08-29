@@ -6,6 +6,7 @@ ref refTown;
 int  BuyOrSell = 0; // 1-buy -1 sell
 int  iPriceSailor;
 int	 QtyMax = 0;
+int	 CrewQty = 0;
 void InitInterface(string iniName)
 {
  	StartAboveForm(true);
@@ -45,6 +46,26 @@ void InitInterface(string iniName)
 	SetCurrentNode("SHIPS_SCROLL");
 	GameInterface.qty_edit.str = 0;
 	QtyMax = GetCargoFreeSpace(refCharacter);
+
+	if(CheckAttribute(refTown, "AdditionalCrew"))
+	{
+		if(!IsEquipCharacterByArtefact(pchar, "talisman11"))
+		{
+			CrewQty = GetCrewQuantity(refTown) - sti(refTown.AdditionalCrew);
+			if(CrewQty < 0) CrewQty = 0;
+			SetCrewQuantity(refTown, CrewQty);
+		}
+	}
+	else
+	{
+		if(IsEquipCharacterByArtefact(pchar, "talisman11"))
+		{
+			CrewQty = GetCrewQuantity(refTown);						
+			refTown.AdditionalCrew = makeint(CrewQty * 0.5);			
+			CrewQty += sti(refTown.AdditionalCrew);
+			SetCrewQuantity(refTown, CrewQty);
+		}
+	}
 }
 
 void ProcessBreakExit()
@@ -211,6 +232,7 @@ void SetVariable()
 	SetNewGroupPicture("CREW_MORALE_PIC2", "MORALE_SMALL", GetMoraleGroupPicture(stf(refTown.ship.crew.morale)));
 	SetFormatedText("CREW_MORALE_TEXT2", XI_ConvertString("CrewMorale") + ": " + XI_ConvertString(GetMoraleName(sti(refTown.Ship.crew.morale))));
 	iPriceSailor = GetCrewPriceForTavern(refTown.id);
+	if(IsEquipCharacterByArtefact(pchar, "talisman11")) iPriceSailor = makeint(iPriceSailor/2);
 	SetFormatedText("TAVERN_PRICE", "Стоимость найма одного матроса " + FindRussianMoneyString(iPriceSailor));
 }
 

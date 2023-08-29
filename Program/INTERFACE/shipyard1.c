@@ -440,10 +440,10 @@ void FillShipyardTable()
 		{iStart = SHIP_KETCH; iEnd = SHIP_OCEAN;}
 	break;
 	case 1:
-		{iStart = SHIP_POSEIDON; iEnd = SHIP_OCEAN;}
+		{iStart = SHIP_RESOLUTION; iEnd = SHIP_OCEAN;}
 	break;
 	case 2:
-		{iStart = SHIP_GALEON50; iEnd = SHIP_WAPEN_VON_HAMBURG;}
+		{iStart = SHIP_WASA; iEnd = SHIP_WAPEN_VON_HAMBURG;}
 	break;
 	case 3:
 		{iStart = SHIP_PINNACE; iEnd = SHIP_CARRACA;}

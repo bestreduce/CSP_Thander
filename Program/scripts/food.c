@@ -186,7 +186,7 @@ void DailyEatCrewUpdate()   // сюда пихаю всё что в 1 день
 				if (cn != -1)
 				{
 		            chref = &Characters[cn];
-					if (CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo") && rand(morale) == 2)
+					if (CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo") && rand(morale) == 2 && !IsEquipCharacterByArtefact(chref, "talisman17"))
 					{
 		    			chref.loyality = makeint(chref.loyality) - 1;
 					}
@@ -333,7 +333,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		{
 			AddCrewMorale(rChar, -1);
 			cn = 5 + CheckOfficersPerk(PChar, "IronWill");  // перк у ГГ
-			if(i > 0 && rand(cn) == 2 && !CheckAttribute(rChar, "OfficerWantToGo.DontGo"))
+			if(i > 0 && rand(cn) == 2 && !CheckAttribute(rChar, "OfficerWantToGo.DontGo") && !IsEquipCharacterByArtefact(rChar, "talisman17"))
 			{
 				rChar.loyality = sti(rChar.loyality) - 1;
 			}
@@ -413,7 +413,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		if(sti(rChar.Ship.Crew.Morale) <= MORALE_MIN)
 		{
 			//int locidx = FindLocation(rChar.location); // не используется
-			if(IsEntity(worldMap) && GetCrewQuantity(rChar) > 0)
+			if(IsEntity(worldMap) && GetCrewQuantity(rChar) > 0 && !IsCharacterEquippedArtefact(rChar, "talisman16"))
 			{
 				Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
 				MunityOnShip("ShipMunity");
@@ -422,11 +422,11 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 	}
 	else
 	{
-		if(GetShipRemovable(rChar) && !CheckAttribute(rChar, "OfficerWantToGo.DontGo") && !IsCompanionTraveler) // ПГГ, квестовые оффы и компаньоны-путешественники не бунтуют
+		if(GetShipRemovable(rChar) && !CheckAttribute(rChar, "OfficerWantToGo.DontGo") && !IsCompanionTraveler && !IsEquipCharacterByArtefact(rChar, "talisman17")) // ПГГ, квестовые оффы и компаньоны-путешественники не бунтуют
 		{
 			if(sti(rChar.Ship.Crew.Morale) <= MORALE_MIN || sti(rChar.loyality) <= 0) // допуск, что лояльность есть у всех офов
 			{
-				if(GetCrewQuantity(rChar) > 0)
+				if(GetCrewQuantity(rChar) > 0 && !IsCharacterEquippedArtefact(rChar, "talisman16"))
 				{
 					Log_Info("На " + XI_ConvertString(RealShips[sti(rChar.Ship.Type)].BaseName+"Voc") + " ''" + rChar.Ship.Name + "'' произошёл бунт!");
 					Log_SetStringToLog("Корабль выходит из эскадры");

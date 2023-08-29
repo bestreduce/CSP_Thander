@@ -531,11 +531,21 @@ void ProcessDialogEvent()
 						if(bPartitionSet)
 						{
 							if((Partition_GetSetting("Part_Crew") == 0) || GetPartitionAmount("CrewPayment") > 0)
-							{
-								dialog.text = "Капитан, поговаривают, что вы скуповаты. У меня нет желающих пойти в вашу команду.";
-								link.l1 = "Понятно...";
-								link.l1.go = "exit";
-							}
+							{	
+								if(IsEquipCharacterByArtefact(pchar, "talisman11"))
+								{
+									DeleteAttribute(NPChar, "CrewHired"); //на всяк случай.
+									NextDiag.CurrentNode =  NextDiag.TempNode;
+									DialogExit();
+									LaunchHireCrew();							
+								}
+								else
+								{
+									dialog.text = "Капитан, поговаривают, что вы скуповаты. У меня нет желающих пойти в вашу команду.";
+									link.l1 = "Понятно...";
+									link.l1.go = "exit";
+								}
+							}	
 							else
 							{
 								DeleteAttribute(NPChar, "CrewHired"); //на всяк случай.

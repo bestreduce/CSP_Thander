@@ -911,7 +911,7 @@ void SetShipyardStore(ref NPChar)
         return;
     }
 
-	FillShipParamShipyard(NPChar, GenerateStoreShipExt(SHIP_TARTANE, NPChar), "ship1"); // обязательный на верфи
+	FillShipParamShipyard(NPChar, GenerateStoreShipExt(SHIP_LEUDO, NPChar), "ship1"); // обязательный на верфи
 
 	string shipyarder_nation=NPChar.nation;//учет нации Lipsar
 	// 0-england 1-france 2-spain 3-holland 4-pirate;

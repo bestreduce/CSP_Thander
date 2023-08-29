@@ -791,7 +791,7 @@ int ReasonToFast_GetVictimShipType()
 			sTemp = "Флейт";
 		break;
 	    case 2:
-			iShipType = SHIP_GALEON_L;
+			iShipType = SHIP_ROTERLOW;
 			sTemp = "Галеон";
 		break;
 	    case 3:
@@ -3583,7 +3583,7 @@ void CaptainComission_GenerateShips()
 		}
 		switch(rand(2))
 		{
-			case 0: iShipTypeVictim = SHIP_GALEON_L;	break;
+			case 0: iShipTypeVictim = SHIP_ROTERLOW;	break;
 			case 1: iShipTypeVictim = SHIP_GALEON_H;	break;
 			case 2:	iShipTypeVictim = SHIP_PINNACE;		break;
 		}

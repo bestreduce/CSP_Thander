@@ -788,7 +788,7 @@ int FindShipFromClass(int iClass, string sType)
 		case "Fast":
 			switch(iClass)
 			{
-				case 7: return SHIP_WAR_TARTANE; break;
+				case 7: return SHIP_FELUCA; break;
 				case 6: return 3 + rand(11); break;
 				case 5: return 15 + rand(12); break;
 				case 4: return 28 + rand(23); break;
@@ -801,7 +801,7 @@ int FindShipFromClass(int iClass, string sType)
 		case "Trader":
 			switch(iClass)
 			{
-				case 7: return SHIP_WAR_TARTANE; break;
+				case 7: return SHIP_FELUCA; break;
 				case 6: return 3 + rand(11); break;
 				case 5: return 15 + rand(12); break;
 				case 4: return 28 + rand(23); break;
@@ -814,7 +814,7 @@ int FindShipFromClass(int iClass, string sType)
 		case "All":
 			switch(iClass)
 			{
-				case 7: return SHIP_WAR_TARTANE; break;
+				case 7: return SHIP_FELUCA; break;
 				case 6: return 3 + rand(11); break;
 				case 5: return 15 + rand(12); break;
 				case 4: return 28 + rand(23); break;

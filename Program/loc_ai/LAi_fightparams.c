@@ -304,6 +304,10 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); //fix
 			}
 		}
+		if(CheckAttribute(enemy, "chr_ai.energy"))
+			{
+				enemy.chr_ai.energy = stf(enemy.chr_ai.energy) * isEquippedArtefactUse(attack, "talisman10", 1.0, 0.9); // крадем энергию
+			}
 		// упрощение игры новичкам
 		/*if (MOD_SKILL_ENEMY_RATE == 1 && CheckAttribute(enemy, "chr_ai.group"))
 		{
@@ -416,7 +420,7 @@ float GetMushketEnergyDrain(ref character)
 	return stf(Items[GetItemIndex(character.equip.gun)].weight)/10.0 + 0.2;
 }
 
-float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
+float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime, attack)
 {
 	float fMultiplier = 1.35+(GetCharacterSPECIALSimple(chr,SPECIAL_S)/20.0);// 1.5 ... 1.85 - влияние силы на скорость восстановления энергии
 
@@ -481,6 +485,7 @@ float LAi_GunCalcProbability(aref attack, float kDist)
 			p = p + 0.1;
 		}
 	}
+	if(!IsDay() && IsEquipCharacterByArtefact(attack, "talisman15")) p = p * 2;
 	// путь будет больше 1 - тогда 100 процентов попал
 	return p;
 }
@@ -926,7 +931,7 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	MakePoisonAttackCheckSex(enemy, attack);
 	//Есть ли оружие у цели
 	bool isSetBlade = (CheckAttribute(enemy, "equip.blade"));//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "isSetBlade") != 0);
-	if (CheckAttribute(attack,"vampire") || sti(attack.chr_ai.special.valueV) > 0)
+	if (CheckAttribute(attack,"vampire") || sti(attack.chr_ai.special.valueV) > 0) 
 	{
 		float hp = attack.chr_ai.hp;
 		float maxhp = attack.chr_ai.hp_max;
@@ -1120,7 +1125,7 @@ void CheckForSwift(ref attack, ref enemy, bool type)
 					Log_Info("Вам был нанесён резкий удар.");
 					PlaySound("interface\Stan_"+rand(5)+".wav");
 				}
-				MakeSwiftAttack(enemy, attack, coeff);
+				MakeSwiftAttack(enemy, attack, coeff/2);
 			}
 			else
 			{
@@ -1158,7 +1163,7 @@ void CheckForSwift(ref attack, ref enemy, bool type)
 						Log_Info("Вам нанесён резкий удар.");
 						PlaySound("interface\Stan_"+rand(5)+".wav");
 					}
-					MakeSwiftAttack(enemy, attack, 3.0);
+					MakeSwiftAttack(enemy, attack, 2.0);
 				}
 				else
 				{
@@ -1419,7 +1424,7 @@ void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBlade)
 				if (sti(pchar.LilarcorKills) == 1800)
 				{
 					LAi_CharacterPlaySound(PChar, "Lilarcor_Victory");
-					string sEquipItem = GetGeneratedItem("blade201");
+					string sEquipItem = GetGeneratedItem("blade48");
 					AddItems(pchar, sEquipItem, 1);
 					EquipCharacterbyItem(pchar, sEquipItem);
 					RemoveItems(pchar, "Lilarcor_Sword3", 1);
@@ -1872,9 +1877,9 @@ float LAi_NPC_GetFireActive()
 		{
 			npc_return_tmp = npc_return_tmp + 0.1 * MOD_SKILL_ENEMY_RATE / 10.0;
 		}
+		npc_return_tmp = 0.01;
 	}
 	//if (npc_return_tmp > 0.5) npc_return_tmp = 0.5;
-	npc_return_tmp = 0.01;
 	return npc_return_tmp;
 }
 

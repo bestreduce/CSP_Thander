@@ -567,7 +567,7 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 	{
         DeleteAttribute(_location, "box1");
         _location.box1.money = 500000;
-		_location.box1.items.blackbeard_sword_baron = 1;
+		_location.box1.items.blackbeard_sword = 1;
 		_location.box1.items.howdah = 1;
 		_location.box1.items.spyglass5 = 1;
 		_location.box1.items.cirass5 = 1;

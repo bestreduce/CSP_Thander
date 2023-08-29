@@ -122,7 +122,7 @@ int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string
 	string sAttr;
 	bool bOk;
 
-	for (i=SHIP_TARTANE; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
+	for (i=SHIP_LEUDO; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
 	{
 		object rShip = GetShipByType(i);
 		if (!checkAttribute(rship, "class"))
@@ -221,7 +221,7 @@ int Fantom_GetShipType(int iClassMin, int iClassMax, string sShipType)
 	int i, iShipsNum;
 	iShipsNum = 0;
 
-	for (i=SHIP_TARTANE; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
+	for (i=SHIP_LEUDO; i<=SHIP_OCEAN; i++)  //энкаунтеры только до мановара, квестовые корабли отдельно
 	{
 		object rShip = GetShipByType(i);
 		if (!checkAttribute(rship, "class"))

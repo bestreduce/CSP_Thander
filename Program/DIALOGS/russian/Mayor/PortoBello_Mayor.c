@@ -80,7 +80,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             for (int i=1; i<=4; i++)
             {
                 sld = GetCharacter(NPC_GenerateCharacter("Captain_"+i, "trader_"+(rand(15)+1), "man", "man", 15, SPAIN, -1, true));
-                FantomMakeCoolSailor(sld, SHIP_GALEON_L, "", CANNON_TYPE_CANNON_LBS16, 30, 15, 15);
+                FantomMakeCoolSailor(sld, SHIP_ROTERLOW, "", CANNON_TYPE_CANNON_LBS16, 30, 15, 15);
                 FantomMakeCoolFighter(sld, 15, 10, 10, BLADE_SHORT, "pistol1", 0);
                 sld.Ship.Cargo.Goods.Balls = 48;
                 sld.Ship.Cargo.Goods.Grapes = 10;

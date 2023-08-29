@@ -1147,7 +1147,7 @@ void BI_SetPossibleCommands()
 		//BattleInterface.Commands.CCommand.enable		= GetCompanionQuantity(pchar)>1;
 		//BattleInterface.Commands.Ability.enable			= true;
 		//  проверка на 7 класс
-		if (sti(RealShips[sti(pchar.Ship.Type)].BaseType) >= SHIP_TARTANE)
+		if (sti(RealShips[sti(pchar.Ship.Type)].BaseType) >= SHIP_LEUDO)
         {
             BattleInterface.Commands.Cabin.enable		= true;
         }
@@ -1479,32 +1479,32 @@ void SetShipPictureDataByShipTypeName(int N)
 /*	switch(sType)
 	{
 	// 7-й КЛАСС	(3 корабля)						
-	case "tartane":				BI_intNRetValue[0] = 0+0*32;	BI_intNRetValue[1] = 0+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Баркас
-	case "plot":				BI_intNRetValue[0] = 2+0*32;	BI_intNRetValue[1] = 2+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тартана
-    case "wartartane":			BI_intNRetValue[0] = 4+0*32;	BI_intNRetValue[1] = 4+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// фелука
+	case "leudo":				BI_intNRetValue[0] = 0+0*32;	BI_intNRetValue[1] = 0+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Баркас
+	case "tartane":				BI_intNRetValue[0] = 2+0*32;	BI_intNRetValue[1] = 2+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тартана
+    case "feluca":				BI_intNRetValue[0] = 4+0*32;	BI_intNRetValue[1] = 4+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// фелука
 	// 6-й КЛАСС	(12 кораблей)
 	case "ketch":				BI_intNRetValue[0] = 6+0*32;	BI_intNRetValue[1] = 6+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Кеч
 	case "Schoone_b":			BI_intNRetValue[0] = 8+0*32;	BI_intNRetValue[1] = 8+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Торг. Шхуна
-	case "pink":				BI_intNRetValue[0] = 10+0*32;	BI_intNRetValue[1] = 10+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лёг. Шлюп
+	case "yacht":				BI_intNRetValue[0] = 10+0*32;	BI_intNRetValue[1] = 10+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лёг. Шлюп
     case "lugger":				BI_intNRetValue[0] = 12+0*32;	BI_intNRetValue[1] = 12+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Люггер
 	case "lugger_h":			BI_intNRetValue[0] = 14+0*32;	BI_intNRetValue[1] = 14+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Люггер
 	case "speedy":				BI_intNRetValue[0] = 16+0*32;	BI_intNRetValue[1] = 16+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Шлюп
-	case "fr_sloop":			BI_intNRetValue[0] = 18+0*32;	BI_intNRetValue[1] = 18+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Шлюп
-	case "galeoth_h":			BI_intNRetValue[0] = 20+0*32;	BI_intNRetValue[1] = 20+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Галеот
+	case "sloop_b":				BI_intNRetValue[0] = 18+0*32;	BI_intNRetValue[1] = 18+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Шлюп
+	case "galeoth":				BI_intNRetValue[0] = 20+0*32;	BI_intNRetValue[1] = 20+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Галеот
 	case "sloop":				BI_intNRetValue[0] = 22+0*32;	BI_intNRetValue[1] = 22+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Шлюп
-	case "sloop_b":				BI_intNRetValue[0] = 24+0*32;	BI_intNRetValue[1] = 24+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Шлюп
+	case "alert":				BI_intNRetValue[0] = 24+0*32;	BI_intNRetValue[1] = 24+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Шлюп
 	case "neptunus":			BI_intNRetValue[0] = 26+0*32;	BI_intNRetValue[1] = 26+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Усил. Шлюп
 	case "veinard":				BI_intNRetValue[0] = 28+0*32;	BI_intNRetValue[1] = 28+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Шлюп
 	// 5-й КЛАСС	(13 кораблей)
 	case "polacca":				BI_intNRetValue[0] = 30+0*32;	BI_intNRetValue[1] = 30+0*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;    break;	// Полакка
 	case "barque":				BI_intNRetValue[0] = 0+1*32;	BI_intNRetValue[1] = 0+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Барк
-	case "rattlesnake":			BI_intNRetValue[0] = 2+1*32;	BI_intNRetValue[1] = 2+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Шлюп
-	case "schooner":			BI_intNRetValue[0] = 4+1*32;	BI_intNRetValue[1] = 4+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Шхуна
-	case "schooner_l":			BI_intNRetValue[0] = 6+1*32;	BI_intNRetValue[1] = 6+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Шхуна
+	case "schooner":			BI_intNRetValue[0] = 2+1*32;	BI_intNRetValue[1] = 2+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Шлюп
+	case "schooner_l":			BI_intNRetValue[0] = 4+1*32;	BI_intNRetValue[1] = 4+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Шхуна
+	case "schoonerwar":			BI_intNRetValue[0] = 6+1*32;	BI_intNRetValue[1] = 6+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Шхуна
 	case "xebec":				BI_intNRetValue[0] = 8+1*32;	BI_intNRetValue[1] = 8+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Щебека
 	case "xebecbattle":			BI_intNRetValue[0] = 10+1*32;	BI_intNRetValue[1] = 10+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Щебека
 	case "xebeclight":			BI_intNRetValue[0] = 12+1*32;	BI_intNRetValue[1] = 12+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Щебека
-	case "schoonerwar":			BI_intNRetValue[0] = 14+1*32;	BI_intNRetValue[1] = 14+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Шхуна
+	case "rattlesnake":			BI_intNRetValue[0] = 14+1*32;	BI_intNRetValue[1] = 14+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Шхуна
 	case "Mirage":				BI_intNRetValue[0] = 16+1*32;	BI_intNRetValue[1] = 16+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Кеч
 	case "polacre":				BI_intNRetValue[0] = 18+1*32;	BI_intNRetValue[1] = 18+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Полакр
 	case "enslaver":			BI_intNRetValue[0] = 20+1*32;	BI_intNRetValue[1] = 20+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Бригантина
@@ -1515,117 +1515,117 @@ void SetShipPictureDataByShipTypeName(int N)
 	case "brigantine":			BI_intNRetValue[0] = 28+1*32;	BI_intNRetValue[1] = 28+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бригантина
 	case "castelf":				BI_intNRetValue[0] = 30+1*32;	BI_intNRetValue[1] = 30+1*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Бригантина
 	case "derfflinger":			BI_intNRetValue[0] = 0+2*32;	BI_intNRetValue[1] = 0+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Флейт
-	case "interceptor":			BI_intNRetValue[0] = 2+2*32;	BI_intNRetValue[1] = 2+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ост-индец
-	case "fleut":				BI_intNRetValue[0] = 4+2*32;	BI_intNRetValue[1] = 4+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Флейт
-	case "brig_nv":				BI_intNRetValue[0] = 6+2*32;	BI_intNRetValue[1] = 6+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг
-	case "brigsophie":			BI_intNRetValue[0] = 8+2*32;	BI_intNRetValue[1] = 8+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Бриг
-	case "brig_m":				BI_intNRetValue[0] = 10+2*32;	BI_intNRetValue[1] = 10+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Бриг
-	case "galeon_l":			BI_intNRetValue[0] = 12+2*32;	BI_intNRetValue[1] = 12+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Галеон
-	case "greyhound":			BI_intNRetValue[0] = 14+2*32;	BI_intNRetValue[1] = 14+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Корвет
+	case "fleut":				BI_intNRetValue[0] = 2+2*32;	BI_intNRetValue[1] = 2+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ост-индец
+	case "ontario":				BI_intNRetValue[0] = 4+2*32;	BI_intNRetValue[1] = 4+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Флейт
+	case "navy":				BI_intNRetValue[0] = 6+2*32;	BI_intNRetValue[1] = 6+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг
+	case "mercury":				BI_intNRetValue[0] = 8+2*32;	BI_intNRetValue[1] = 8+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Бриг
+	case "sophie":				BI_intNRetValue[0] = 10+2*32;	BI_intNRetValue[1] = 10+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Бриг
+	case "roterlow":			BI_intNRetValue[0] = 12+2*32;	BI_intNRetValue[1] = 12+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Галеон
+	case "herculest":			BI_intNRetValue[0] = 14+2*32;	BI_intNRetValue[1] = 14+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Корвет
 	case "corvettelight":		BI_intNRetValue[0] = 16+2*32;	BI_intNRetValue[1] = 16+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Корвет
-	case "prince_h":			BI_intNRetValue[0] = 18+2*32;	BI_intNRetValue[1] = 18+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лин. Шхуна
-	case "enterprise":			BI_intNRetValue[0] = 20+2*32;	BI_intNRetValue[1] = 20+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Ост-индец
+	case "greyhound":			BI_intNRetValue[0] = 18+2*32;	BI_intNRetValue[1] = 18+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лин. Шхуна
+	case "neufchatel":			BI_intNRetValue[0] = 20+2*32;	BI_intNRetValue[1] = 20+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Ост-индец
 	case "polacre_h":			BI_intNRetValue[0] = 22+2*32;	BI_intNRetValue[1] = 22+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Полакр
-	case "caravel":				BI_intNRetValue[0] = 24+2*32;	BI_intNRetValue[1] = 24+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Каравелла
-	case "postillionen":		BI_intNRetValue[0] = 26+2*32;	BI_intNRetValue[1] = 26+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
-	case "raafrigate":			BI_intNRetValue[0] = 28+2*32;	BI_intNRetValue[1] = 28+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
-	case "caravel2":			BI_intNRetValue[0] = 30+2*32;	BI_intNRetValue[1] = 30+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Каравелла
-	case "fleutwar":			BI_intNRetValue[0] = 0+3*32;	BI_intNRetValue[1] = 0+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Боев. Флейт
-	case "fleutwarsat":			BI_intNRetValue[0] = 2+3*32;	BI_intNRetValue[1] = 2+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Тяж. Флейт
+	case "herculesu":			BI_intNRetValue[0] = 24+2*32;	BI_intNRetValue[1] = 24+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Каравелла
+	case "caravel":				BI_intNRetValue[0] = 26+2*32;	BI_intNRetValue[1] = 26+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
+	case "postillionen":		BI_intNRetValue[0] = 28+2*32;	BI_intNRetValue[1] = 28+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Фрегат
+	case "coastalfrigate":		BI_intNRetValue[0] = 30+2*32;	BI_intNRetValue[1] = 30+2*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Каравелла
+	case "caravel2":			BI_intNRetValue[0] = 0+3*32;	BI_intNRetValue[1] = 0+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Боев. Флейт
+	case "fleutwar":			BI_intNRetValue[0] = 2+3*32;	BI_intNRetValue[1] = 2+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Тяж. Флейт
 	case "galeontrader":		BI_intNRetValue[0] = 4+3*32;	BI_intNRetValue[1] = 4+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Торг. Корабль
-	case "Hercules1":			BI_intNRetValue[0] = 6+3*32;	BI_intNRetValue[1] = 6+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Торг. Корабль
+	case "Hercules":			BI_intNRetValue[0] = 6+3*32;	BI_intNRetValue[1] = 6+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Торг. Корабль
 	// 3-й КЛАСС	(32 корабля)
 	case "pinnace":				BI_intNRetValue[0] = 8+3*32;	BI_intNRetValue[1] = 8+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пинас
 	case "debrackw":			BI_intNRetValue[0] = 10+3*32;	BI_intNRetValue[1] = 10+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Пинас
 	case "Indiaman":			BI_intNRetValue[0] = 12+3*32;	BI_intNRetValue[1] = 12+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Двухпалуб. Пинас
 	case "Requin":				BI_intNRetValue[0] = 14+3*32;	BI_intNRetValue[1] = 14+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Щебека
-	case "felipe":				BI_intNRetValue[0] = 16+3*32;	BI_intNRetValue[1] = 16+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Галеон
-	case "crimsonblood":		BI_intNRetValue[0] = 18+3*32;	BI_intNRetValue[1] = 18+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Корвет
-	case "corvette":			BI_intNRetValue[0] = 20+3*32;	BI_intNRetValue[1] = 20+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корвет
-	case "Renommee":			BI_intNRetValue[0] = 22+3*32;	BI_intNRetValue[1] = 22+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Корвет
-	case "blackangel":			BI_intNRetValue[0] = 24+3*32;	BI_intNRetValue[1] = 24+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Корвет
-	case "Pandora1":			BI_intNRetValue[0] = 26+3*32;	BI_intNRetValue[1] = 26+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Корвет
-	case "CoastalFrigate":		BI_intNRetValue[0] = 28+3*32;	BI_intNRetValue[1] = 28+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Береговой Фрегат
-	case "fr_frigate":			BI_intNRetValue[0] = 30+3*32;	BI_intNRetValue[1] = 30+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корсарский Фрегат
-	case "EastIndiaMan":		BI_intNRetValue[0] = 0+4*32;	BI_intNRetValue[1] = 0+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Пинас
-	case "theblackpearl":		BI_intNRetValue[0] = 2+4*32;	BI_intNRetValue[1] = 2+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Галеон
-	case "galeon_h":			BI_intNRetValue[0] = 4+4*32;	BI_intNRetValue[1] = 4+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Галеон
-	case "galeon1":				BI_intNRetValue[0] = 6+4*32;	BI_intNRetValue[1] = 6+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Тяж. Галеон
-	case "la_marianna":			BI_intNRetValue[0] = 8+4*32;	BI_intNRetValue[1] = 8+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Призрачный Галеон
-	case "piratfastgal":		BI_intNRetValue[0] = 10+4*32;	BI_intNRetValue[1] = 10+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Быстрый Галеон
-	case "unicorn":				BI_intNRetValue[0] = 12+4*32;	BI_intNRetValue[1] = 12+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Приватирский Фрегат
-	case "revenge":				BI_intNRetValue[0] = 14+4*32;	BI_intNRetValue[1] = 14+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Галеон
+	case "crimsonblood":		BI_intNRetValue[0] = 16+3*32;	BI_intNRetValue[1] = 16+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Галеон
+	case "corvette":			BI_intNRetValue[0] = 18+3*32;	BI_intNRetValue[1] = 18+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Корвет
+	case "Renommee":			BI_intNRetValue[0] = 20+3*32;	BI_intNRetValue[1] = 20+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корвет
+	case "blackangel":			BI_intNRetValue[0] = 22+3*32;	BI_intNRetValue[1] = 22+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Корвет
+	case "raafrigate":			BI_intNRetValue[0] = 24+3*32;	BI_intNRetValue[1] = 24+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Корвет
+	case "pandora":				BI_intNRetValue[0] = 26+3*32;	BI_intNRetValue[1] = 26+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Корвет
+	case "rossiya":				BI_intNRetValue[0] = 28+3*32;	BI_intNRetValue[1] = 28+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Береговой Фрегат
+	case "EastIndiaMan":		BI_intNRetValue[0] = 30+3*32;	BI_intNRetValue[1] = 30+3*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корсарский Фрегат
+	case "pearl":				BI_intNRetValue[0] = 0+4*32;	BI_intNRetValue[1] = 0+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Пинас
+	case "galeon_h":			BI_intNRetValue[0] = 2+4*32;	BI_intNRetValue[1] = 2+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Галеон
+	case "felipe":				BI_intNRetValue[0] = 4+4*32;	BI_intNRetValue[1] = 4+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Галеон
+	case "galeon":				BI_intNRetValue[0] = 6+4*32;	BI_intNRetValue[1] = 6+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Тяж. Галеон
+	case "revenge":				BI_intNRetValue[0] = 8+4*32;	BI_intNRetValue[1] = 8+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Призрачный Галеон
+	case "la_marianna":			BI_intNRetValue[0] = 10+4*32;	BI_intNRetValue[1] = 10+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Быстрый Галеон
+	case "navio":				BI_intNRetValue[0] = 12+4*32;	BI_intNRetValue[1] = 12+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Приватирский Фрегат
+	case "unicorn":				BI_intNRetValue[0] = 14+4*32;	BI_intNRetValue[1] = 14+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Галеон
 	case "hermione":			BI_intNRetValue[0] = 16+4*32;	BI_intNRetValue[1] = 16+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лин. Фрегат
-	case "cherub":				BI_intNRetValue[0] = 18+4*32;	BI_intNRetValue[1] = 18+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Патр. Корабль
-	case "boussole":			BI_intNRetValue[0] = 20+4*32;	BI_intNRetValue[1] = 20+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Корвет
-	case "belle":				BI_intNRetValue[0] = 22+4*32;	BI_intNRetValue[1] = 22+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. фрегат
-	case "essex":				BI_intNRetValue[0] = 24+4*32;	BI_intNRetValue[1] = 24+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. фрегат
-	case "cecilia":				BI_intNRetValue[0] = 26+4*32;	BI_intNRetValue[1] = 26+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. фрегат
-	case "battlefrigate":		BI_intNRetValue[0] = 28+4*32;	BI_intNRetValue[1] = 28+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. фрегат
-	case "fastfrigate":			BI_intNRetValue[0] = 30+4*32;	BI_intNRetValue[1] = 30+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. фрегат
+	case "nightmare":			BI_intNRetValue[0] = 18+4*32;	BI_intNRetValue[1] = 18+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Патр. Корабль
+	case "cherub":  			BI_intNRetValue[0] = 20+4*32;	BI_intNRetValue[1] = 20+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Корвет
+	case "essex":				BI_intNRetValue[0] = 22+4*32;	BI_intNRetValue[1] = 22+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. фрегат
+	case "cecilia":				BI_intNRetValue[0] = 24+4*32;	BI_intNRetValue[1] = 24+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. фрегат
+	case "belle":				BI_intNRetValue[0] = 26+4*32;	BI_intNRetValue[1] = 26+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. фрегат
+	case "surprise":			BI_intNRetValue[0] = 28+4*32;	BI_intNRetValue[1] = 28+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. фрегат
+	case "fortuna":				BI_intNRetValue[0] = 30+4*32;	BI_intNRetValue[1] = 30+4*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. фрегат
 	case "mordaunt":			BI_intNRetValue[0] = 0+5*32;	BI_intNRetValue[1] = 0+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Мордаунт
 	case "frigate":				BI_intNRetValue[0] = 2+5*32;	BI_intNRetValue[1] = 2+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат
 	case "frigate_h":			BI_intNRetValue[0] = 4+5*32;	BI_intNRetValue[1] = 4+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор 3-го класса
 	case "carraca":				BI_intNRetValue[0] = 6+5*32;	BI_intNRetValue[1] = 6+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Каракка
 	// 2-й КЛАСС (21 корабль)
-	case "galeon50":			BI_intNRetValue[0] = 8+5*32;	BI_intNRetValue[1] = 8+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Императорский Галеон
-	case "nightmare":			BI_intNRetValue[0] = 10+5*32;	BI_intNRetValue[1] = 10+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Фрегат
+	case "wasa":				BI_intNRetValue[0] = 8+5*32;	BI_intNRetValue[1] = 8+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Императорский Галеон
+	case "diana":				BI_intNRetValue[0] = 10+5*32;	BI_intNRetValue[1] = 10+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Фрегат
 	case "indefatigable":		BI_intNRetValue[0] = 12+5*32;	BI_intNRetValue[1] = 12+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Фрегат
-	case "diana":				BI_intNRetValue[0] = 14+5*32;	BI_intNRetValue[1] = 14+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Фрегат
-	case "galleon_santiago":	BI_intNRetValue[0] = 16+5*32;	BI_intNRetValue[1] = 16+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Галеон
-	case "neptun":				BI_intNRetValue[0] = 18+5*32;	BI_intNRetValue[1] = 18+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Пинас
+	case "endymion":			BI_intNRetValue[0] = 14+5*32;	BI_intNRetValue[1] = 14+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Фрегат
+	case "rotterdam":			BI_intNRetValue[0] = 16+5*32;	BI_intNRetValue[1] = 16+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Галеон
+	case "santiago":			BI_intNRetValue[0] = 18+5*32;	BI_intNRetValue[1] = 18+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Пинас
 	case "hollgaleon_h":		BI_intNRetValue[0] = 20+5*32;	BI_intNRetValue[1] = 20+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Воен. Галеон
-	case "leopard":				BI_intNRetValue[0] = 22+5*32;	BI_intNRetValue[1] = 22+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Усил. Патр. Корабль
-	case "lineship":			BI_intNRetValue[0] = 24+5*32;	BI_intNRetValue[1] = 24+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Корабль
-	case "fwzp":				BI_intNRetValue[0] = 26+5*32;	BI_intNRetValue[1] = 26+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Воен. Галеон
-	case "constitution_h":		BI_intNRetValue[0] = 28+5*32;	BI_intNRetValue[1] = 28+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Лин. фрегат
-	case "oxford":				BI_intNRetValue[0] = 30+5*32;	BI_intNRetValue[1] = 30+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Оксфорд
-	case "dutchlineship":		BI_intNRetValue[0] = 0+6*32;	BI_intNRetValue[1] = 0+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Воен. Корабль
-	case "dutchship":			BI_intNRetValue[0] = 2+6*32;	BI_intNRetValue[1] = 2+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Усил. Фрегат
-	case "convoiship":			BI_intNRetValue[0] = 4+6*32;	BI_intNRetValue[1] = 4+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Сторожевой Корабль
-	case "couronne":			BI_intNRetValue[0] = 6+6*32;	BI_intNRetValue[1] = 6+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Воен. Галеон
-	case "crown":				BI_intNRetValue[0] = 8+6*32;	BI_intNRetValue[1] = 8+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор 2-го класса
+	case "fwzp":				BI_intNRetValue[0] = 22+5*32;	BI_intNRetValue[1] = 22+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Усил. Патр. Корабль
+	case "leopard":				BI_intNRetValue[0] = 24+5*32;	BI_intNRetValue[1] = 24+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Корабль
+	case "oxford":				BI_intNRetValue[0] = 26+5*32;	BI_intNRetValue[1] = 26+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Воен. Галеон
+	case "constitution":		BI_intNRetValue[0] = 28+5*32;	BI_intNRetValue[1] = 28+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Лин. фрегат
+	case "dutchlineship":		BI_intNRetValue[0] = 30+5*32;	BI_intNRetValue[1] = 30+5*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Оксфорд
+	case "convoiship":			BI_intNRetValue[0] = 0+6*32;	BI_intNRetValue[1] = 0+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Ср. Воен. Корабль
+	case "couronne":			BI_intNRetValue[0] = 2+6*32;	BI_intNRetValue[1] = 2+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Усил. Фрегат
+	case "lineship":			BI_intNRetValue[0] = 4+6*32;	BI_intNRetValue[1] = 4+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Сторожевой Корабль
+	case "poseidon":			BI_intNRetValue[0] = 6+6*32;	BI_intNRetValue[1] = 6+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Воен. Галеон
+	case "centurion":			BI_intNRetValue[0] = 8+6*32;	BI_intNRetValue[1] = 8+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор 2-го класса
 	case "agamemnon":			BI_intNRetValue[0] = 10+6*32;	BI_intNRetValue[1] = 10+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Воен. Корабль
 	case "ingermanland":		BI_intNRetValue[0] = 12+6*32;	BI_intNRetValue[1] = 12+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линейный Корабль
-	case "retvisan":			BI_intNRetValue[0] = 14+6*32;	BI_intNRetValue[1] = 14+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип
+	case "rattvisan":			BI_intNRetValue[0] = 14+6*32;	BI_intNRetValue[1] = 14+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип
 	case "wapen_von_hamburg":	BI_intNRetValue[0] = 16+6*32;	BI_intNRetValue[1] = 16+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Лин. Пинас
 	// 1-й КЛАСС (20 кораблей)
-	case "poseidon":			BI_intNRetValue[0] = 18+6*32;	BI_intNRetValue[1] = 18+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор
-	case "centurion":			BI_intNRetValue[0] = 20+6*32;	BI_intNRetValue[1] = 20+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор
-	case "resolution":			BI_intNRetValue[0] = 22+6*32;	BI_intNRetValue[1] = 22+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Резолюция
-	case "superbe":				BI_intNRetValue[0] = 24+6*32;	BI_intNRetValue[1] = 24+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Корабль
-	case "ruiter":				BI_intNRetValue[0] = 26+6*32;	BI_intNRetValue[1] = 26+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Линкор
-	case "bellona_h":			BI_intNRetValue[0] = 28+6*32;	BI_intNRetValue[1] = 28+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Линкор
-	case "redoutable":			BI_intNRetValue[0] = 30+6*32;	BI_intNRetValue[1] = 30+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Боевой Корабль
-	case "link2":				BI_intNRetValue[0] = 0+7*32;	BI_intNRetValue[1] = 0+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Варшип
-	case "pavel":				BI_intNRetValue[0] = 2+7*32;	BI_intNRetValue[1] = 2+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Линкор 1-го класса
-	case "bellona":				BI_intNRetValue[0] = 4+7*32;	BI_intNRetValue[1] = 4+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Лин. Корабль
-	case "zevenprovincien":		BI_intNRetValue[0] = 6+7*32;	BI_intNRetValue[1] = 6+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Тяж. Лин. Корабль
-	case "cristian":			BI_intNRetValue[0] = 8+7*32;	BI_intNRetValue[1] = 8+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Лег. Мановар
-	case "trinity":				BI_intNRetValue[0] = 10+7*32;	BI_intNRetValue[1] = 10+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Воен. Мановар
-	case "prince":				BI_intNRetValue[0] = 12+7*32;	BI_intNRetValue[1] = 12+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Королевский линкор
-	case "manowar":				BI_intNRetValue[0] = 14+7ы*32;	BI_intNRetValue[1] = 14+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Мановар
-	case "manowar_gub":			BI_intNRetValue[0] = 16+7*32;	BI_intNRetValue[1] = 16+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Пир. Мановар
-	case "hms_victory":			BI_intNRetValue[0] = 18+7*32;	BI_intNRetValue[1] = 18+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// 
-	case "sanfelipe":			BI_intNRetValue[0] = 20+7*32;	BI_intNRetValue[1] = 20+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Мановар
-	case "victory":				BI_intNRetValue[0] = 22+7*32;	BI_intNRetValue[1] = 22+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Мановар
+	case "resolution":			BI_intNRetValue[0] = 18+6*32;	BI_intNRetValue[1] = 18+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Линкор
+	case "bellona":				BI_intNRetValue[0] = 20+6*32;	BI_intNRetValue[1] = 20+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Линкор
+	case "superbe":				BI_intNRetValue[0] = 22+6*32;	BI_intNRetValue[1] = 22+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Линкор
+	case "ruiter":				BI_intNRetValue[0] = 24+6*32;	BI_intNRetValue[1] = 24+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Линкор
+	case "implacable":			BI_intNRetValue[0] = 26+6*32;	BI_intNRetValue[1] = 26+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Варшип
+	case "pavel":				BI_intNRetValue[0] = 28+6*32;	BI_intNRetValue[1] = 28+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Варшип
+	case "redoutable":			BI_intNRetValue[0] = 30+6*32;	BI_intNRetValue[1] = 30+6*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Варшип
+	case "zevenprovincien":		BI_intNRetValue[0] = 0+7*32;	BI_intNRetValue[1] = 0+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Варшип
+	case "bucentaure":			BI_intNRetValue[0] = 2+7*32;	BI_intNRetValue[1] = 2+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Батлшип
+	case "cristian":			BI_intNRetValue[0] = 4+7*32;	BI_intNRetValue[1] = 4+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Батлшип
+	case "santaana":			BI_intNRetValue[0] = 6+7*32;	BI_intNRetValue[1] = 6+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Батлшип
+	case "prince":				BI_intNRetValue[0] = 8+7*32;	BI_intNRetValue[1] = 8+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Батлшип
+	case "trinity":				BI_intNRetValue[0] = 10+7*32;	BI_intNRetValue[1] = 10+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Мановар
+	case "zwaan":				BI_intNRetValue[0] = 12+7*32;	BI_intNRetValue[1] = 12+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Гол. Мановар
+	case "sanfelipe":			BI_intNRetValue[0] = 14+7*32;	BI_intNRetValue[1] = 14+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Мановар
+	case "manowar":	 			BI_intNRetValue[0] = 16+7*32;	BI_intNRetValue[1] = 16+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Мановар
+	case "victory":				BI_intNRetValue[0] = 18+7*32;	BI_intNRetValue[1] = 18+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Анг. Мановар
+	case "soley":				BI_intNRetValue[0] = 20+7*32;	BI_intNRetValue[1] = 20+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Мановар
+	case "santaanna":			BI_intNRetValue[0] = 22+7*32;	BI_intNRetValue[1] = 22+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Исп. Мановар
 	case "ocean":				BI_intNRetValue[0] = 24+7*32;	BI_intNRetValue[1] = 24+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фра. Мановар
 		// КВЕСТОВЫЕ (11 кораблей)
 	case "luggerquest":			BI_intNRetValue[0] = 26+7*32;	BI_intNRetValue[1] = 26+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Курьерский Люггер
 	case "brigqueen":			BI_intNRetValue[0] = 28+7*32;	BI_intNRetValue[1] = 28+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг Шарпоносец
 	case "brigsw":				BI_intNRetValue[0] = 30+7*32;	BI_intNRetValue[1] = 30+7*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг МВ
-	case "brigvalciria":		BI_intNRetValue[0] = 0+8*32;	BI_intNRetValue[1] = 0+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг Стрела
+	case "valciria":			BI_intNRetValue[0] = 0+8*32;	BI_intNRetValue[1] = 0+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Бриг Стрела
 	case "xebekvml":			BI_intNRetValue[0] = 2+8*32;	BI_intNRetValue[1] = 2+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Шебека СП
-	case "Clipper":				BI_intNRetValue[0] = 4+8*32;	BI_intNRetValue[1] = 4+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Клиппер
-	case "corvette_quest":		BI_intNRetValue[0] = 6+8*32;	BI_intNRetValue[1] = 6+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат ЧЖ
-	case "Wh_corvette_quest":	BI_intNRetValue[0] = 8+8*32;	BI_intNRetValue[1] = 8+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корвет Пёс войны
-	case "Mefisto":	            BI_intNRetValue[0] = 10+8*32;	BI_intNRetValue[1] = 10+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат культистов
-	case "ArabellaShip":		BI_intNRetValue[0] = 12+8*32;	BI_intNRetValue[1] = 12+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Арабелла
+	case "clipper":				BI_intNRetValue[0] = 4+8*32;	BI_intNRetValue[1] = 4+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Клиппер
+	case "blackpearl":			BI_intNRetValue[0] = 6+8*32;	BI_intNRetValue[1] = 6+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат ЧЖ
+	case "wh_corvette_quest":	BI_intNRetValue[0] = 8+8*32;	BI_intNRetValue[1] = 8+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Корвет Пёс войны
+	case "mefisto":	            BI_intNRetValue[0] = 10+8*32;	BI_intNRetValue[1] = 10+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат культистов
+	case "arabellaShip":		BI_intNRetValue[0] = 12+8*32;	BI_intNRetValue[1] = 12+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат Арабелла
 	case "frigatequeen":		BI_intNRetValue[0] = 14+8*32;	BI_intNRetValue[1] = 14+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат МКА
-	case "Catherine":			BI_intNRetValue[0] = 16+8*32;	BI_intNRetValue[1] = 16+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Королева-Катрин
+	case "catherine":			BI_intNRetValue[0] = 16+8*32;	BI_intNRetValue[1] = 16+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Королева-Катрин
 	case "flyingdutchman":		BI_intNRetValue[0] = 18+8*32;	BI_intNRetValue[1] = 18+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип ЛГ
 	case "flyingdutchman_n":	BI_intNRetValue[0] = 20+8*32;	BI_intNRetValue[1] = 20+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип ЛГ
-	case "santisima":			BI_intNRetValue[0] = 22+8*32;	BI_intNRetValue[1] = 22+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Быстрый мановар
+	case "santisima":			BI_intNRetValue[0] = 22+8*32;	BI_intNRetValue[1] = 22+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Королевский мановар
 	case "soleyru":				BI_intNRetValue[0] = 24+8*32;	BI_intNRetValue[1] = 24+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Сулей Руаяль
 	}
 */

@@ -256,7 +256,7 @@ void ProcessDialogEvent()
 			sld.greeting = "GR_Spainguard";
 			if (pchar.rank <= 9)
 			{
-				FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
+				FantomMakeCoolSailor(sld, SHIP_NAVY, "Эль Тибурон", CANNON_TYPE_CULVERINE_LBS16, 100, 100, 100);
 			}
 			if (pchar.rank >= 10 && pchar.rank <= 14)
 			{

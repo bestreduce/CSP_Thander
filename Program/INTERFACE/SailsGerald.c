@@ -7,6 +7,7 @@ int cursails = 0;
 int defsails = 0;
 string curgerald = "";
 string defgerald = "";
+string embsail = "";
 ref yard;
 bool allowgerald = false;
 bool setcolor = false;
@@ -73,6 +74,11 @@ void InitInterface_RR(string iniName, ref _shipyarder, ref chreff)
 	{
 		curgerald = shref.ShipSails.Gerald_Name;
 		defgerald = curgerald;
+	}
+	if (CheckAttribute(shref,"EmblemedSails.normalTex"))
+	{
+		embsail = shref.EmblemedSails.normalTex;
+		DeleteAttribute(shref,"EmblemedSails");
 	}
 	if (CheckAttribute(chref,"Features.GeraldSails") && chref.Features.GeraldSails == true)
 	{
@@ -182,6 +188,12 @@ void IDoExit(int exitCode)
 		shref.ship.upgrades.sails = defsails;
 		if(CheckSailsGerald(chref) && CanSetSailsGerald(chref)) shref.ShipSails.Gerald_Name = defgerald;
 		if (!geraldsails) DeleteAttribute(chref,"Features.GeraldSails");
+		if (embsail != "") shref.EmblemedSails.normalTex = embsail;
+	}
+	else 
+	{
+		if (embsail != "") shref.EmblemedSails.normalTex = embsail;
+		if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETSAIL_CHECKBOX", 3, 1)) DeleteAttribute(shref,"EmblemedSails");
 	}
 	Ship_Walk_Delete();
 
@@ -692,9 +704,9 @@ void SetNewSailsGerald()
 			case "parus_common_torn1.tga.tx":shref.ship.upgrades.sails = 90;break;
 			case "parus_common_torn2.tga.tx":shref.ship.upgrades.sails = 91;break;
 		}
+		Log_testInfo(shref.ship.upgrades.sails);
+		if (CheckAttribute(shref,"EmblemedSails")) DeleteAttribute(shref,"EmblemedSails");
 	}
-	Log_testInfo(shref.ship.upgrades.sails);
-	if (CheckAttribute(shref,"EmblemedSails")) DeleteAttribute(shref,"EmblemedSails");
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "SETHULL_CHECKBOX", 3, 1) && hullid != basehull) shref.ship.upgrades.hull = hullid;
 	AddMoneyToCharacter(Pchar, -price);
 	WaitDate("",0,0,0, 1, 30);

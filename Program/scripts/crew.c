@@ -211,6 +211,19 @@ float ChangeCrewExp(ref chr, string sType, float fNewExp)
 {
 	if (!CheckAttribute(chr, "Ship.Crew.Exp." + sType)) chr.Ship.Crew.Exp.(sType) = (1 + rand(50));
 
+	switch(sType)
+	{
+		case "Cannoners" 	:
+			fNewExp = fNewExp * isEquippedArtefactUse(chr, "talisman13", 1.0, 2.0);
+		break;
+		case "Sailors" 		:
+			fNewExp = fNewExp * isEquippedArtefactUse(chr, "talisman12", 1.0, 2.0);
+		break;
+		case "Soldiers" 	:
+			fNewExp = fNewExp * isEquippedArtefactUse(chr, "talisman14", 1.0, 2.0);
+		break;
+	}
+
 	chr.Ship.Crew.Exp.(sType) = (stf(chr.Ship.Crew.Exp.(sType)) + fNewExp);
 	if (stf(chr.Ship.Crew.Exp.(sType)) > 100) chr.Ship.Crew.Exp.(sType) = 100;
 	if (stf(chr.Ship.Crew.Exp.(sType)) < 1) chr.Ship.Crew.Exp.(sType)   = 1;
@@ -253,6 +266,8 @@ void UpdateCrewInColonies()
 		rTown = &colonies[i];
 	    if (rTown.nation == "none") continue;
 
+		if(CheckAttribute(rTown, "AdditionalCrew")) DeleteAttribute(rTown, "AdditionalCrew");
+
 	    if (GetNpcQuestPastDayParam(rTown, "CrewDate") >= (2+rand(2)) || !CheckAttribute(rTown, "CrewDate.control_year"))
 	    {
 	    	//trace("UpdateCrewInColonies " + rTown.id);
@@ -271,6 +286,12 @@ void UpdateCrewInColonies()
 		        nNeedCrew = ableCrew - nNeedCrew - rand(makeint((ableCrew - nNeedCrew)/2.0));
 				if (nNeedCrew < 1) nNeedCrew = 1+rand(20);
 		    }
+
+/*			nNeedCrew = makeint(abs(REPUTATION_NEUTRAL - sti(pchar.reputation))/MOD_SKILL_ENEMY_RATE + sti(pchar.rank)/MOD_SKILL_ENEMY_RATE + rand(sti(pchar.rank)/2) + drand(20 + MOD_SKILL_ENEMY_RATE));
+			
+			if(MOD_SKILL_ENEMY_RATE == 2) nNeedCrew *= 3;
+			if(MOD_SKILL_ENEMY_RATE == 4) nNeedCrew *= 2;
+*/
 
 			if (nPastQ > nNeedCrew)
 			{	nPastM = MORALE_NORMAL/3 + rand(MORALE_MAX-MORALE_NORMAL/3);

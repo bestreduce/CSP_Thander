@@ -371,7 +371,7 @@ int RandShipFromShipClass(ref _ch)
 			break;
 
 		case 7:
-			iShipType = SHIP_WAR_TARTANE + rand(1);
+			iShipType = SHIP_FELUCA + rand(1);
 			break;
 	}
 	return iShipType;
@@ -2953,7 +2953,7 @@ void LoginDeadmansGod2()
 {
 	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "man_fast", 60, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 	else sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "man", 60, PIRATE, 0, true));
-    FantomMakeCoolFighter(sld, 60, 100, 100, "blade201", "", 2500);
+    FantomMakeCoolFighter(sld, 60, 100, 100, "blade48", "", 2500);
 	sld.name = "Юм";
 	sld.lastname = "Самиль";
 	sld.vampire = true;

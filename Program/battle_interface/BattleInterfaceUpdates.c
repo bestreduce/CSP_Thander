@@ -61,6 +61,7 @@ void BI_UpdateRSRollSpeed(ref chref) // скорость подъема/спус
 	if (iArcadeSails != 1) fRollSpeed = fRollSpeed / 2.5;
 	if (CheckOfficersPerk(chref, "SailsMan")) fRollSpeed = fRollSpeed * 1.1; // 10 процентов
 	if (CheckAttribute(&RealShips[iShip], "Tuning.SailsSpecial")) fRollSpeed = fRollSpeed * 1.25;
+	if (IsEquipCharactersByItem(chref, "blackbeard_sword")) fRollSpeed = fRollSpeed * 1.15;
 
 	chref.Ship.RollSpeed = fRollSpeed;
 }

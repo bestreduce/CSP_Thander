@@ -684,7 +684,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
         case "Munity_on_Ship_Map":
-            if (IsEntity(worldMap) && GetCrewQuantity(pchar) > 0)
+            if (IsEntity(worldMap) && GetCrewQuantity(pchar) > 0 && !IsEquipCharacterByArtefact(pchar, "talisman16"))
         	{
                 MunityOnShip("ShipMunity");
             }
@@ -3441,7 +3441,7 @@ void QuestComplete(string sQuestName, string qname)
             Island_SetReloadEnableGlobal("Antigua", false);
 
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_spa_2", "man", "man", 15, SPAIN, 0, true));
-            FantomMakeCoolSailor(sld, SHIP_NIGHTMARE, "", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
+            FantomMakeCoolSailor(sld, SHIP_DIANA, "", CANNON_TYPE_CULVERINE_LBS24, 90, 90, 90);
             FantomMakeCoolFighter(sld, 20, 90, 50, "blade25", "pistol3", 80);
             sld.DontRansackCaptain = true; //квестовые не сдаются
             sld.SinkTenPercent = true; //уходим с повреждениями
@@ -3549,7 +3549,7 @@ void QuestComplete(string sQuestName, string qname)
 				pchar.questTemp.abordage = 0; // запрещаем абордаж повторно - это сброс запрета
 
                 sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_hol_2", "man", "man", 23, HOLLAND, 0, true));
-                FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "", CANNON_TYPE_CANNON_LBS32, 95, 95, 95);
+                FantomMakeCoolSailor(sld, SHIP_NAVY, "", CANNON_TYPE_CANNON_LBS32, 95, 95, 95);
                 FantomMakeCoolFighter(sld, 25, 90, 50, BLADE_LONG, "pistol3", 100);
                 sld.DontRansackCaptain = true; //квестовые не сдаются
                 sld.SinkTenPercent = true; // уходим с повреждениями
@@ -4179,7 +4179,7 @@ void QuestComplete(string sQuestName, string qname)
             sld.SinkTenPercent = true; // уходим с повреждениями
             sld.DontRansackCaptain = true; //квестовые не сдаются
 
-            FantomMakeCoolSailor(sld, SHIP_GALEON1, "", CANNON_TYPE_CANNON_LBS32, 95, 90, 90);
+            FantomMakeCoolSailor(sld, SHIP_GALEON, "", CANNON_TYPE_CANNON_LBS32, 95, 90, 90);
             FantomMakeCoolFighter(sld, 38, 90, 70, BLADE_LONG, "pistol3", 120);
 			Group_FindOrCreateGroup("Spa_Attack");
 			Group_SetType("Spa_Attack", "war");
@@ -4364,7 +4364,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 3:
-                        ShipType = SHIP_LINK2;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 33;
                         Blade = "blade24";
@@ -4388,7 +4388,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 7:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -4560,7 +4560,7 @@ void QuestComplete(string sQuestName, string qname)
                             Blade = "blade33";
                         break;
                         case 2:
-                            ShipType = SHIP_BRIG_NV;
+                            ShipType = SHIP_NAVY;
                             Model = "off_eng_2";
                             Rank = 19;
                             Blade = "blade28";
@@ -4933,7 +4933,7 @@ void QuestComplete(string sQuestName, string qname)
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "officer_15", "man", "man", 30, PIRATE, 0, true));
             sld.Dialog.Filename    = "Quest\HolLineNpc_2.c";
 			sld.DontRansackCaptain = true;
-            FantomMakeCoolSailor(sld, SHIP_BRIG_NV, "Ла Рошель", CANNON_TYPE_CULVERINE_LBS24, 90, 80, 80);
+            FantomMakeCoolSailor(sld, SHIP_NAVY, "Ла Рошель", CANNON_TYPE_CULVERINE_LBS24, 90, 80, 80);
             FantomMakeCoolFighter(sld, 30, 100, 40, "blade24", "pistol3", 80);
 			Group_AddCharacter("Pirate_Attack", "CaptainAttack_1");
             // ==> стравливание
@@ -5023,7 +5023,7 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
                     case 1:
-                        ShipType = SHIP_PAVEL;
+                        ShipType = SHIP_IMPLACABLE;
                         Model = "SpaOfficer2";
                         Rank = 28;
                         Blade = "blade24";
@@ -5071,7 +5071,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.ShipEnemyDisable = true; //при попадании не враждебен
         	sld.Abordage.Enable = false; // НЕЛЬЗЯ!
             LAi_SetStayTypeNoGroup(sld);
-            FantomMakeCoolSailor(sld, SHIP_BATTLEFRIGATE, "Коминте", CANNON_TYPE_CANNON_LBS32, 90, 80, 80);
+            FantomMakeCoolSailor(sld, SHIP_ROSSIYA, "Коминте", CANNON_TYPE_CANNON_LBS32, 90, 80, 80);
             FantomMakeCoolFighter(sld, 45, 90, 70, "topor2", "pistol3", 100);
             Group_AddCharacter("Quest_Group", "LoranDeGraf");
             Group_SetType("Quest_Group", "war");
@@ -5184,7 +5184,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "topor2";
                     break;
                     case 6:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_2";
                         Rank = 32;
                         Blade = "topor2";
@@ -5297,7 +5297,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 4:
-                        ShipType = SHIP_PAVEL;
+                        ShipType = SHIP_IMPLACABLE;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade24";
@@ -5321,7 +5321,7 @@ void QuestComplete(string sQuestName, string qname)
                         Blade = "blade28";
                     break;
                     case 8:
-                        ShipType = SHIP_CRISTIAN;
+                        ShipType = SHIP_SANTAANA;
                         Model = "off_spa_1";
                         Rank = 39;
                         Blade = "blade32";
@@ -5813,7 +5813,7 @@ void QuestComplete(string sQuestName, string qname)
 							Blade = "blade34";
 						break;
 						case 6:
-							ShipType = SHIP_BRIG_NV;
+							ShipType = SHIP_NAVY;
 							Model = "off_hol_2";
 							Rank = 29;
 							Blade = "blade26";
@@ -5901,7 +5901,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_GALEON_L;
+                        ShipType = SHIP_ROTERLOW;
                         Model = "off_spa_2";
                         Rank = 24;
                         Blade = "blade26";
@@ -5942,7 +5942,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_DIANA;
                         Rank = 31;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6068,7 +6068,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_DIANA;
                         Rank = 34;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6104,7 +6104,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 8:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_DIANA;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade32";
@@ -6234,7 +6234,7 @@ void QuestComplete(string sQuestName, string qname)
                 	sld = GetCharacter(ShipType);
                     ShipType = sti(sld.ship.type);
                     Rank = sti(RealShips[ShipType].basetype);
-                    if (Rank == SHIP_GALEON_L) iTemp++;
+                    if (Rank == SHIP_ROTERLOW) iTemp++;
                 }
             }
 			//--> результат в СЖ
@@ -6298,13 +6298,13 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
 					case 1:
-                        ShipType = SHIP_MANOWAR_GUB;
+                        ShipType = SHIP_CRISTIAN;
                         Rank = 45;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 2:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_DIANA;
                         Rank = 34;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6334,13 +6334,13 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS32;
                     break;
                     case 7:
-                        ShipType = SHIP_MANOWAR_GUB;
+                        ShipType = SHIP_CRISTIAN;
                         Rank = 42;
                         Blade = "topor2";
 						iTemp = CANNON_TYPE_CANNON_LBS42;
                     break;
                     case 8:
-                        ShipType = SHIP_NIGHTMARE;
+                        ShipType = SHIP_DIANA;
                         Model = "off_spa_1";
                         Rank = 35;
                         Blade = "blade33";
@@ -6741,19 +6741,19 @@ void QuestComplete(string sQuestName, string qname)
                 switch (i)
                 {
 					case 1:
-                        ShipType = SHIP_GALEON1;
+                        ShipType = SHIP_GALEON;
                         Rank = 23;
                         Blade = "topor2";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 2:
-                        ShipType = SHIP_GALEON1;
+                        ShipType = SHIP_GALEON;
                         Rank = 21;
                         Blade = "blade33";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_GALEON1;
+                        ShipType = SHIP_GALEON;
                         Rank = 23;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CANNON_LBS24;
@@ -6883,7 +6883,7 @@ void QuestComplete(string sQuestName, string qname)
             // ==> Испанский кэп
             sld = GetCharacter(NPC_GenerateCharacter("CaptainAttack_1", "off_spa_1", "man", "man", 35, SPAIN, -1, true));
 			sld.DontRansackCaptain = true;
-			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION_H, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
+			FantomMakeCoolSailor(sld, SHIP_CONSTITUTION, "", CANNON_TYPE_CULVERINE_LBS32, 100, 95, 95);
             FantomMakeCoolFighter(sld, 35, 100, 90, BLADE_LONG, "pistol3", 150);
     		Group_AddCharacter("Spa_Attack", "CaptainAttack_1");
             // ==> стравливание
@@ -6960,13 +6960,13 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CANNON_LBS42;
                     break;
                     case 2:
-                        ShipType = SHIP_GALEON1;
+                        ShipType = SHIP_GALEON;
                         Rank = 30;
                         Blade = "blade31";
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
                     break;
                     case 3:
-                        ShipType = SHIP_LINK2;
+                        ShipType = SHIP_SANTAANA;
                         Rank = 38;
                         Blade = "blade34";
 						iTemp = CANNON_TYPE_CANNON_LBS32;
@@ -6978,7 +6978,7 @@ void QuestComplete(string sQuestName, string qname)
 						iTemp = CANNON_TYPE_CULVERINE_LBS32;
                     break;
                     case 5:
-                        ShipType = SHIP_GALEON1;
+                        ShipType = SHIP_GALEON;
                         Rank = 31;
                         Blade = "blade28";
 						iTemp = CANNON_TYPE_CULVERINE_LBS24;
@@ -7926,7 +7926,7 @@ void QuestComplete(string sQuestName, string qname)
 					break;
 					case 2:
 						iCannonType = CANNON_TYPE_CANNON_LBS32;
-						iShipType = SHIP_PAVEL;
+						iShipType = SHIP_IMPLACABLE;
 						sShipName = "";
 						Blade = "topor2";
 					break;
@@ -12060,7 +12060,7 @@ void QuestComplete(string sQuestName, string qname)
 			Group_FindOrCreateGroup("AT_Pir_Attack_1");
 			Group_SetType("AT_Pir_Attack_1", "war");
             sld = GetCharacter(NPC_GenerateCharacter("AT_pr_1_CaptainAttack_1", "officer_"+(rand(57)+1), "man", "man", 1, PIRATE, -1, true));
-            FantomMakeCoolSailor(sld, SHIP_GALEON1, "", CANNON_TYPE_CANNON_LBS12, 15, 25, 15);
+            FantomMakeCoolSailor(sld, SHIP_GALEON, "", CANNON_TYPE_CANNON_LBS12, 15, 25, 15);
             FantomMakeCoolFighter(sld, 1, 10, 10, "blade2", "", 10);
     		Group_AddCharacter("AT_Pir_Attack_1", "AT_pr_1_CaptainAttack_1");
 			Group_SetGroupCommander("AT_Pir_Attack_1", "AT_pr_1_CaptainAttack_1");

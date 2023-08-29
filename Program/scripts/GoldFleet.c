@@ -77,7 +77,7 @@ void GoldFleet()
         if (k<3 || k==7 || k==8 || k>=(5+ngal))//3 СанФелипе(флагман + 2) впереди 	+ 4-5 усиленных фрегатов замыкают		//Qwerry,St. - ставлю галеоны в середину построения
         {
 			if(k < 3)  sld.ship.type = GenerateShipExt(SHIP_SANFELIPE, 1, sld);
-				else sld.ship.type = GenerateShipExt(SHIP_DUTCHSHIP, 1, sld);//Qwerry,St. - меняю Алексис, потому что он не испанский в ините
+				else sld.ship.type = GenerateShipExt(SHIP_RATTVISAN, 1, sld);//Qwerry,St. - меняю Алексис, потому что он не испанский в ините
     	    //SetBaseShipData(sld);
 
 			//Qwerry,St. - отвязываю скилы фрегата от навыков ГГ, ставлю тюнинг фрегатам, чтоб компенсировать замену Алексисов
@@ -100,7 +100,7 @@ void GoldFleet()
         }
         else
         {
-            sld.ship.type = GenerateShipExt(SHIP_GALEON50, 1, sld);
+            sld.ship.type = GenerateShipExt(SHIP_WASA, 1, sld);
     	    //SetBaseShipData(sld);
             Fantom_SetCannons(sld, "war");
 			SetCrewQuantityFull(sld);
@@ -226,7 +226,7 @@ void DefeatGoldFleet(string temp)
 
 			sld.mapEnc.Name = "штормовая эскадра разработчиков, в количестве 8 кораблей";
 			sld.mapEnc.type = "war";
-			FantomMakeCoolSailor(sld, rand(SHIP_PLOT), "", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
+			FantomMakeCoolSailor(sld, rand(SHIP_TARTANE), "", CANNON_TYPE_CANNON_LBS48, 100, 100, 100);
 
 			sld.AlwaysEnemy = true;
 			sld.AlwaysSandbankManeuver = true;

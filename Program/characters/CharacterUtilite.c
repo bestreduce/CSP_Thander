@@ -3011,9 +3011,70 @@ bool IsEquipCharacterByArtefact(ref chref, string itemID)
 	return false;
 }
 
+bool IsCharacterEquippedArtefact(ref rChar, string itemID)
+{
+	int 	iOfficer = -1;
+	ref 	rItem, sld;
+	string  sKind = "";
+	
+	if (IsMainCharacter(rChar)) // ГГ и его офицеры 
+	{
+		if(IsEquipCharacterByArtefact(pchar, itemID)) return true;
+		rItem = ItemsFromID(itemID);
+		if(CheckAttribute(rItem, "kind")) 
+		{
+			sKind = rItem.kind;
+			if(sKind == "fighter")
+			{
+				for(int i = 1; i < MAX_NUM_FIGHTERS; i++)
+				{		
+					iOfficer = GetOfficersIndex(pchar, i); 
+					if(iOfficer != -1)
+					{
+						if(IsEquipCharacterByArtefact(&characters[iOfficer], itemID)) return true;						
+					}
+				}	
+			}
+			else
+			{
+				iOfficer = sti(pchar.Fellows.Passengers.(sKind));
+				if(iOfficer != -1)
+				{
+					return IsEquipCharacterByArtefact(&characters[iOfficer], itemID);
+				}
+			}	
+			return false;
+		}	
+		else
+		{
+			for (int io = 0; io < GetNotQuestPassengersQuantity(rChar); io++)
+			{
+				iOfficer = GetNotQuestPassenger(rChar, io);
+				if(iOfficer != -1)
+				{
+					sld = GetCharacter(iOfficer);
+					if(isOfficerInShip(sld, true))
+					{
+						if(IsEquipCharacterByArtefact(sld, itemID)) return true;
+					}					
+				}
+			}
+			return false;
+		}	
+	}
+	// все прочие (компаньоны, враги и т.п.)
+	return IsEquipCharacterByArtefact(rChar, itemID);
+}
+
 float isEquippedArtefactUse(ref rChar, string sItem, float fOff, float fOn)
 {
 	if (IsEquipCharactersByItem(rChar, sItem)) return fOn;
+	return fOff;
+}
+
+float isEquippedAmuletUse(ref rChar, string sItem, float fOff, float fOn)
+{
+	if(IsEquipCharacterByArtefact(rChar, sItem)) return fOn;	
 	return fOff;
 }
 

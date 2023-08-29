@@ -1686,7 +1686,7 @@ void WhisperEnglandRevengel()
     {
 		sld = GetCharacter(NPC_GenerateCharacter("W_Captain0"+i, "off_eng_" + (rand(1) + 1), "man", "man", difficulty, ENGLAND, 3, true));
 		FantomMakeCoolFighter(sld, 50, 30 + difficulty, 30 + difficulty, "blade36", "pistol3", 50);
-		FantomMakeCoolSailor(sld, SHIP_OXFORD, "", CANNON_TYPE_CANNON_LBS24, 40 + difficulty, 40 + difficulty, 40 + difficulty);
+		FantomMakeCoolSailor(sld, SHIP_LEOPARD, "", CANNON_TYPE_CANNON_LBS24, 40 + difficulty, 40 + difficulty, 40 + difficulty);
 		SetRandomNameToShip(sld);
 		sld.AlwaysSandbankManeuver = true;
 		sld.DontRansackCaptain = true;
@@ -2133,8 +2133,8 @@ void DHRaceAgainstTime_findHouse(string qName)
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
 		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto3");
-		GiveItem2Character(sld, "blade202");
-		EquipCharacterByItem(sld, "blade202");
+		GiveItem2Character(sld, "blade29");
+		EquipCharacterByItem(sld, "blade29");
 		sld.SaveItemsForDead = true;
 		//LAi_SetImmortal(sld, true);
 		Group_FindOrCreateGroup("DHAmbush");
@@ -2202,13 +2202,13 @@ void CaptureCapitol_SeaBattle()
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("CaptureCapitol_enemyfleet"+i, "off_spa_"+(rand(1)+1), "man", "man", sti(pchar.rank)+10, SPAIN, -1, true));
 
-		if (i == 1) FantomMakeQuickSailor(sld, SHIP_GALEON50, "Откровение", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
-		if (i == 2) FantomMakeQuickSailor(sld, SHIP_GALEON1, "Деяния святых апостолов", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
+		if (i == 1) FantomMakeQuickSailor(sld, SHIP_WASA, "Откровение", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
+		if (i == 2) FantomMakeQuickSailor(sld, SHIP_GALEON, "Деяния святых апостолов", CANNON_TYPE_CANNON_LBS24, 50, 50, 50);
 		if (i == 3) FantomMakeQuickSailor(sld, SHIP_REVENGE, "Евангелие", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
 		if (i == 4) FantomMakeQuickSailor(sld, SHIP_GALEON_H, "Плач Иеремии", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
 		if (i == 5) FantomMakeQuickSailor(sld, SHIP_FELIPE, "Притчи", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
-		if (i == 6) FantomMakeQuickSailor(sld, SHIP_GALEON_SANTIAGO, "Псалмы", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
-		if (i == 7) FantomMakeQuickSailor(sld, SHIP_GALEON_L, "Бытие", CANNON_TYPE_CANNON_LBS16, 50, 50, 50);
+		if (i == 6) FantomMakeQuickSailor(sld, SHIP_SANTIAGO, "Псалмы", CANNON_TYPE_CANNON_LBS32, 50, 50, 50);
+		if (i == 7) FantomMakeQuickSailor(sld, SHIP_ROTERLOW, "Бытие", CANNON_TYPE_CANNON_LBS16, 50, 50, 50);
 
 		TakeNItems(sld, "Food5", 5);
 		TakeNItems(sld, "potion2", 5);

@@ -1540,7 +1540,7 @@ void ProcessDialogEvent()
 
 		case "Convict_15":
 			dialog.text = LinkRandPhrase("Ну что, капитан? пригнали кораблик?","Приветствуем вас, капитан. Ну что, дело сделано?","Здравствуйте капитан, а мы уж испереживались. Всё прошло гладко?");
-			if(Convict_CheckShipType(SHIP_TARTANE) || Convict_CheckShipType(SHIP_WAR_TARTANE))
+			if(Convict_CheckShipType(SHIP_LEUDO) || Convict_CheckShipType(SHIP_FELUCA))
 			{
 				link.l1 = "Да, получите свою скорлупку. И про деньги не забудьте. Я выложил"+ GetSexPhrase("","а") +" за неё " + pchar.GenQuest.Convict.ShipPrice + " монет, так что с вас " + sti(pchar.GenQuest.Convict.ShipPrice) * 2 + ", как и договорились.";
 				link.l1.go = "Convict_15_1";

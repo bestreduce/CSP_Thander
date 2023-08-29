@@ -286,7 +286,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 			pchar.BlackBeardSpawn = true;
 
 			sld = GetCharacter(NPC_GenerateCharacter("BlackBeardNPC", "PGG_Tich_0", "man", "man", 60, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, 60, 100, 100, "blackbeard_sword_baron", "howdah", 100);
+			FantomMakeCoolFighter(sld, 60, 100, 100, "blackbeard_sword", "howdah", 100);
 			sld.items.spyglass3 = 0;
 			sld.items.spyglass5 = 1;
 			EquipCharacterbyItem(sld,"spyglass5");
