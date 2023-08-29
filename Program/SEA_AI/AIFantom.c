@@ -654,7 +654,7 @@ void Fantom_SetGoodsOld(ref rFantom, string sFantomType)
 			if (CheckAttribute(rFantom, "RealEncounterType") && sti(rFantom.RealEncounterType) == ENCOUNTER_TYPE_ESCORT_LARGE)
 			{
                 iGoods = 12;
-                // золото, если повезет
+                // золото, если повезёт
                 if (MOD_SKILL_ENEMY_RATE < rand(6))
                 {
 					iMultiply = (rand(10)+ 10) * (rand(iShipClass) + 1);
