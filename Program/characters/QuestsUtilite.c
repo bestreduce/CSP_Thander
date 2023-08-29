@@ -1905,6 +1905,11 @@ void SetQuestAboardCabinDialog(ref refChar)
 			refChar.Dialog.CurrentNode = "SeekCap"; //даем абордажную ноду
 		    return;
 		}
+		//квест Вызволение из плена мужа горожанки
+		if (refChar.CaptanId == "QuetionsPortPax_KoriBoll")
+		{
+		    LAi_SetCheckMinHP(refChar, 5, true, "QuestAboardCabinDialog");  // сколько НР мин
+		}
 		//квест горожанина по возвращения украденной жены
 		if (findsubstr(refChar.CaptanId, "SeekCitizCap_" , 0) != -1)
 		{

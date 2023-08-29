@@ -69,23 +69,27 @@ void ProcessDialogEvent()
 			link.l2 = "Да, я многое могу порассказать о моих приключениях. Думаю, моя история тебе понравится, Франческа. В одной колонии живёт женщина. Довольно давно она потеряла своего сына...";
 			link.l2.go = "Istoria";
 			PlayVoice("Kopcapkz\Voices\PDM\Francesca.wav");
-			pchar.questTemp.PDM_PK_UvestiNaVerh = "UvestiNaVerh";
+			pchar.questTemp.PDM_PK_UvestiNaVerh = true;
 		break;
 
 		case "SrazuProKoltso":
 			dialog.text = "Какое кольцо? Нет у меня никаких колец! Уходи, уходи!";
-			link.l1 = "Хорошо, я ухожу.";
-			link.l1.go = "exit";
+			link.l1 = "Пойми, это кольцо мне нужно для бедной женщины.";
+			link.l1.go = "Otstan";
 			link.l2 = "Дай мне кольцо, а не то я разукрашу твоё хорошенькое личико моим ножиком!";
 			link.l2.go = "Krik";
-			link.l3 = "Пойми, это кольцо мне нужно для бедной женщины, которая...";
-			link.l3.go = "Krik";
 			NextDiag.TempNode = "Uhodi";
+		break;
+		
+		case "Otstan":
+			dialog.text = "Кольцо моё хочешь? Уходи прочь, прочь!";
+			link.l1 = "Ладно, пойду к твоей хозяйке.";
+			link.l1.go = "exit";
 		break;
 
 		case "Krik":
 			dialog.text = "Aaaaaaaaaaaa!!!! (ужасный крик)";
-			link.l1 = "Хватит! Хватит! Сейчас стража прибежит... Хорошо, я ухожу.";
+			link.l1 = "Хватит! Хватит! Сейчас стража прибежит... Ладно, пойду к твоей хозяйке.";
 			link.l1.go = "exit";
 			ChangeCharacterReputation(pchar, -2);
 		break;
@@ -134,19 +138,19 @@ void ProcessDialogEvent()
 
 		case "Volshebnoe":
 			dialog.text = "Это кольцо? Но это ВОЛШЕБНОЕ кольцо! Как я могу его тебе отдать?";
-			link.l1 = "Я только хочу вернуть его настоящей владелице. Сама подумай, разве такое ВОЛШЕБНОЕ кольцо принесёт тебе счастье?";
+			link.l1 = "Я только хочу вернуть его настоящей владелице. Сама подумай, разве кольцо, снятое с мёртвого человека, принесёт тебе счастье?";
 			link.l1.go = "Kupit";
 		break;
 
 		case "Kupit":
-			dialog.text = "Двадцать тысяч миллионов! И не меньше, за ВОЛШЕБНОЕ-то кольцо! Кольцо ВОЛШЕБНОЕ! Ты сам так сказал, а значит оно должно стоить очень-очень много! Очень!";
+			dialog.text = "Двадцать тысяч миллионов! И не меньше, за ВОЛШЕБНОЕ-то кольцо! Кольцо ВОЛШЕБНОЕ! Ты сам"+GetSexPhrase("","а")+" так сказал"+GetSexPhrase("","а")+", а значит оно должно стоить очень-очень много! Очень!";
 			link.l1 = "Вот. (дать ей двадцать)";
 			link.l1.go = "Kupit_20";
 			link.l2 = "Вот. (дать ей двадцать тысяч)";
 			link.l2.go = "Kupit_20000";
 			link.l3 = "Вот. (дать ей двадцать миллионов)";
 			link.l3.go = "Kupit_20000000";
-			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
+			link.l4 = "А знаешь, я передумал"+GetSexPhrase("","а")+"...";
 			link.l4.go = "exit";
 			NextDiag.TempNode = "Popitka_Vtoraya";
 		break;
@@ -204,13 +208,13 @@ void ProcessDialogEvent()
 
 		case "Popitka_Vtoraya_2":
 			dialog.text = "Ты прин"+ GetSexPhrase("ёс","есла") +" мне двадцать тысяч миллионов за ВОЛШЕБНОЕ кольцо?";
-			link.l1 = "Вот - (дать ей двадцать).";
+			link.l1 = "Вот. (дать ей двадцать)";
 			link.l1.go = "Kupit_20";
-			link.l2 = "Вот - (дать ей двадцать тысяч).";
+			link.l2 = "Вот. (дать ей двадцать тысяч)";
 			link.l2.go = "Kupit_20000";
-			link.l3 = "Вот - (дать ей двадцать миллионов).";
+			link.l3 = "Вот. (дать ей двадцать миллионов)";
 			link.l3.go = "Kupit_20000000";
-			link.l4 = "Послушай, у меня сейчас нет при себе таких денег - но я принесу их тебе попозже...";
+			link.l4 = "А знаешь, я передумал"+GetSexPhrase("","а")+"...";
 			link.l4.go = "exit";
 		break;
 
@@ -312,17 +316,25 @@ void ProcessDialogEvent()
 		break;
 
 		case "Konets_2":
-			CloseQuestHeader("PDM_Poteryanoe_Koltso");
 			TakeItemFromCharacter(pchar, "PDM_PK_Koltso");
 			dialog.text = "Моё кольцо... я помню это кольцо... Я отдала его кому-то, кто должен был его вернуть. Он должен был вернуться... Мой Жак... О...";
 			link.l1 = "Жизнь не кончается, мадам. Я думаю, вам надо найти ваших родственников, я уверен"+ GetSexPhrase("","а") +", что они очень по вам скучают. До свидания.";
-			link.l1.go = "Nagrada";
+			link.l1.go = "Konets_3";
 		break;
-
-		case "Nagrada":
+		
+		case "Konets_3":
+			dialog.text = "Погодите, погодите, "+ GetSexPhrase("месье","мадемуазель") +". Вам кое-что в награду причитается. Держите 5000 монет и 10 алмазов. Они теперь ваши.";
+			link.l1 = "Спасибо большое, мадам.";
+			link.l1.go = "Nagrada";
+			AddMoneyToCharacter(pchar, 5000);
+			TakeNItems(PChar,"jewelry2", 10);
 			AddCharacterExpToSkill(pchar, "Sailing", 100);
 			AddCharacterExpToSkill(pchar, "Leadership", 100);
 			ChangeCharacterReputation(pchar, 2);
+		break;
+
+		case "Nagrada":
+			CloseQuestHeader("PDM_Poteryanoe_Koltso");
 			sld = CharacterFromID("Josephine_Lodet");
 			sld.dialog.filename   = "Common_citizen.c";
 			sld.dialog.currentnode = "First Time";

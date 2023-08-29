@@ -10538,9 +10538,6 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("PDM_PJ_Strajnik_1")
 			LAi_SetActorType(sld);
 			sld.lifeday = 0;
-			LAi_SetLoginTime(sld, 0.0, 24.0);
-			sld = CharacterFromID("PDM_PJ_Strajnik_2")
-			LAi_SetLoginTime(sld, 0.0, 24.0);
 			
 			StartQuestMovie(true, true, true);
 			locCameraFromToPos(-35.50, 7.00, 25.00, true, -20.00, 0.00, 15.00);
@@ -12475,7 +12472,7 @@ void QuestComplete(string sQuestName, string qname)
 			SetCharacterPerk(sld, "CannonProfessional");
 		break;
 		
-//========================  "Игра в прятки"  =======================		
+//========================  "Игра в прятки"  ========================
 		
 		case "SCQ_Prytki_VremyPoshlo":
 			Log_info("Вам нужно найти девушку за 120 секунд");
@@ -12564,7 +12561,7 @@ void QuestComplete(string sQuestName, string qname)
 			AddCharacterExpToSkill(pchar, "FencingHeavy", 5);
 		break;
 		
-//========================  "Проверка знаний"  =======================
+//========================  "Проверка знаний"  ======================
 
 		case "SCQ_Zachet_VremyVishlo":
 			DialogExit();
@@ -12578,6 +12575,52 @@ void QuestComplete(string sQuestName, string qname)
 			//LAi_ActorDialogNow(sld, Pchar, "", -1);
 			LAi_ActorDialog(sld, pchar, "", 0, 0);
 		break;
+		
+//==================  "Найти пропавшего торговца"  ==================
+
+		case "SCQ_Hasband_Truba":
+			pchar.questTemp.womanHasband_Truba = true;
+			if (CheckAttribute(pchar, "questTemp.womanHasband_Nagrada") && CheckAttribute(pchar, "questTemp.womanHasband_Truba"))
+			{
+				CloseQuestHeader("SCQ_womanHasband");
+				DeleteAttribute(pchar, "questTemp.womanHasband_Nagrada");
+				DeleteAttribute(pchar, "questTemp.womanHasband_Truba");
+			}
+		break;
+
+//============  "Вызволение из плена мужа горожанки"  ===============
+
+		case "SCQ_womanPirates_afterCabinFight":
+			sld = GetCharacter(NPC_GenerateCharacter("QuetionsPortPax_MuzhPassajir", "trader_4", "man", "man", 3, FRANCE, -1, false));
+			sld.name = "Венсан";
+			sld.lastname = "Лаббе";
+			sld.dialog.filename   = "Quest\Questions.c";
+			sld.dialog.currentnode = "womanPirates_Board";
+			LAi_SetStayType(sld);
+			GetCharacterPos(pchar, &locx, &locy, &locz);
+			ChangeCharacterAddressGroup(sld, pchar.location, "rld", LAi_FindFarLocator("rld", locx, locy, locz));
+			LAi_SetActorType(pchar);
+			LAi_SetActorType(sld);
+			SetActorDialogAny2Pchar(sld.id, "", 0.0, 0.0);
+			LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", -1);
+		break;
+		
+		case "SCQ_Pirates_Kostum":
+			CloseQuestHeader("SCQ_womanPirates");
+		break;
+		
+		case "SCQ_womanPirates_Potunul":
+			AddQuestRecord("SCQ_womanPirates", "2");
+			CloseQuestHeader("SCQ_womanPirates");
+			sld = characterFromId("QuetionsPortPax");
+			sld.lifeday = 0;
+		break;
+		
+		case "SCQ_womanPirates_Nashli":
+			AddQuestRecord("SCQ_womanPirates", "3");
+		break;
+		
+//===================================================================
 		
 
 		// Тичингиту

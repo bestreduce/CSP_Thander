@@ -1347,8 +1347,10 @@ void QuestionsInit()
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	LAi_SetCitizenType(sld);
 	LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
-	//============> спрашивательница в Виллемстде
-	sld = GetCharacter(NPC_GenerateCharacter("QuetionsVillemstad", "girl_"+(rand(7)+1), "woman", "towngirl", 5, HOLLAND, -1, false));
+	//============> спрашивательница в Виллемстде даёт квест: "Найти пропавшего торговца"
+	sld = GetCharacter(NPC_GenerateCharacter("QuetionsVillemstad", "GrunIrma", "woman", "towngirl", 5, HOLLAND, -1, false));
+	sld.name = "Ирма";
+	sld.lastname = "Грун";
 	sld.rank = 5;
 	sld.city = "Villemstad";
 	sld.location	= "Villemstad_town";
@@ -1362,8 +1364,10 @@ void QuestionsInit()
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	LAi_SetCitizenType(sld);
 	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
-	//============> спрашивательница в Порт-о-Принсе
-	sld = GetCharacter(NPC_GenerateCharacter("QuetionsPortPax", "girl_"+(rand(7)+1), "woman", "towngirl", 5, FRANCE, -1, false));
+	//============> спрашивательница в Порт-о-Принсе даёт квест: "Вызволение из плена мужа горожанки"
+	sld = GetCharacter(NPC_GenerateCharacter("QuetionsPortPax", "LabbeLiliana", "woman", "woman", 5, FRANCE, -1, false));
+	sld.name = "Лилиана";
+	sld.lastname = "Лаббе";
 	sld.rank = 5;
 	sld.city = "PortPax";
 	sld.location	= "PortPax_town";
@@ -1372,7 +1376,7 @@ void QuestionsInit()
 	sld.dialog.filename   = "Quest\Questions.c";
 	sld.dialog.currentnode   = "PortPax";
 	sld.greeting = "Gr_Woman_Citizen";
-	sld.talker = 6; //начать диалог
+	sld.talker = 3; //начать диалог
 	sld.quest.numQuestion = SelectQuestions(); //номер вопроса
 	LAi_SetLoginTime(sld, 6.0, 21.99);
 	LAi_SetCitizenType(sld);
