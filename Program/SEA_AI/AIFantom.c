@@ -655,7 +655,7 @@ void Fantom_SetGoodsOld(ref rFantom, string sFantomType)
 			{
                 iGoods = 12;
                 // золото, если повезёт
-                if (MOD_SKILL_ENEMY_RATE < rand(6))
+                if (MOD_SKILL_ENEMY_RATE < rand(12))
                 {
 					iMultiply = (rand(10)+ 10) * (rand(iShipClass) + 1);
 	            	iRandMultiply = 1 + rand(iShipClass);
