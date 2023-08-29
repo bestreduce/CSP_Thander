@@ -135,7 +135,7 @@ bool bSanJuanIsDamned = false;
 int MOD_EXP_RATE           = 10; // это база... + (сложность)
 //int Level_Complexity       = 5; // by default только настройка
 //  complexity of fantom skill
-int MOD_SKILL_ENEMY_RATE   = 2; // 1-easy; 2-medium; 3-hard (please, do not set more 3 or less 1 it mays crash game
+int MOD_SKILL_ENEMY_RATE   = 5; // 1- easy; 2; 3; 4;  5-medium; 6; 7; 8; 9;  10 - hard (please, do not set more 10 or less 1 it mays crash game
 #define MOD_Complexity_1_DMG  3.0
 //officers count
 int MOD_OFFICERS_RATE   = 3;

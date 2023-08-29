@@ -96,7 +96,7 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "OnceAgain";
 			break;
 			}
-			if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 21 + MOD_SKILL_ENEMY_RATE*3)//при низком авторитете - в сад
+			if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 21 + MOD_SKILL_ENEMY_RATE)//при низком авторитете - в сад
 			{
                 dialog.text = "Хм. Ничего личного, капитан, но хоть вас и считают героем, но ваши дела пока не слишком говорят за вас. Хочу быть уверен, что иду на службу к солидному человеку. Так что я, пожалуй, повременю наниматься к вам.";
     			link.l1 = "Что же, я не бегаю от трудностей, и ем по негодяю на завтрак, каждый день. Вы скоро обо мне услышите, не сомневайтесь. Пока же желаю здравствовать...";

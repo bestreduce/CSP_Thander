@@ -161,7 +161,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Node_2":
-			iMoney = 100*MOD_SKILL_ENEMY_RATE*3*sti(NPChar.EncQty)+makeint(100 * sti(PChar.rank))+makeint(100 * sti(NPChar.rank)*sti(NPChar.EncQty));
+			iMoney = 100*MOD_SKILL_ENEMY_RATE*sti(NPChar.EncQty)+makeint(100 * sti(PChar.rank))+makeint(100 * sti(NPChar.rank)*sti(NPChar.EncQty));
 			NPChar.moneyfee = iMoney;
 			dialog.text = LinkRandPhrase(LinkRandPhrase("Не прикидывайся простофилей! Выкладывай своё золото, тогда, может, и отпущу!",
 				"Ты что, о дорожных издержках не слышал"+ GetSexPhrase("","а") +"? Не расстанешься со своим золотом - расстанешься с головой!",
@@ -192,7 +192,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Node_2_woman":
-			iMoney = 100*MOD_SKILL_ENEMY_RATE*3*sti(NPChar.EncQty)+makeint(100 * sti(PChar.rank))+makeint(100 * sti(NPChar.rank)*sti(NPChar.EncQty));
+			iMoney = 100*MOD_SKILL_ENEMY_RATE*sti(NPChar.EncQty)+makeint(100 * sti(PChar.rank))+makeint(100 * sti(NPChar.rank)*sti(NPChar.EncQty));
 			NPChar.moneyfee = iMoney;
 			dialog.text = "Думаю ты не обеднеешь, отдав "+iMoney+" пиастров. Примерно по "+makeint(iMoney/sti(NPChar.EncQty))+" на брата.";
 			//Link.l1 = "Проклятье! Мерзавец! У меня с собой только " + makeint(makeint(Pchar.money)/20)*10 + " пиастров.";

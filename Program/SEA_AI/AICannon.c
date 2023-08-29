@@ -135,7 +135,7 @@ float Cannon_GetRechargeTime()
 		//Boyer remove reload speed boost for enemies
 		if (sti(aCharacter.index) != GetMainCharacterIndex())
 		{
-		   fReloadTime -= MOD_SKILL_ENEMY_RATE*3/2; // -10c на невозможном
+		   fReloadTime -= MOD_SKILL_ENEMY_RATE/2; // -10c на невозможном
 		   // if(aCharacter.id == "GhostCapt") fReloadTime = fReloadTime/2;
 		}
 		// boal <--

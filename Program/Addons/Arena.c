@@ -107,7 +107,7 @@ void GenerateArenaDuel()
 	Characters[iCharacter].skill.FencingHeavy = iFencingHeavy;
 	Characters[iCharacter].skill.LeaderShip = iLeaderShip;
 	Characters[iCharacter].model = "officer_" + (rand(63)+1);
-	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) Characters[iCharacter].model.animation = "man_fast"; // LEO: Превозмогаторам страдать 15.12.2021
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) Characters[iCharacter].model.animation = "man_fast"; // LEO: Превозмогаторам страдать 15.12.2021
 	else Characters[iCharacter].model.animation = "man";
 	Characters[iCharacter].greeting = "Gr_ArenaMember";
 
@@ -138,7 +138,7 @@ void GenerateArenaDuel()
 
     SetSpeciality(&Characters[iCharacter], PerksChars()); // LEO: Характеры 01.12.2021
 	SetCharacterPerk(&Characters[iCharacter], "Energaiser");
-	if (MOD_SKILL_ENEMY_RATE == 3)
+	if (MOD_SKILL_ENEMY_RATE == 10)
 	{
 		TakeNItems(&Characters[iCharacter], "BackPack5", 1);
 		EquipCharacterbyItem(&Characters[iCharacter], "BackPack5");
@@ -974,7 +974,7 @@ void ArenaEtapsSetMonsterAttributes(ref monster, int iEtap)
 	if(iFencingHeavy < 20) { iFencingHeavy = 20; }
 	if(iFencingHeavy > 100) { iFencingHeavy = 100; }
 
-	monster.rank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3;
+	monster.rank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE;
 	monster.skill.FencingLight = iFencingLight;
 	monster.skill.Fencing = iFencing;
 	monster.skill.FencingHeavy = iFencingHeavy;
@@ -1030,7 +1030,7 @@ void GenerateArenaTournament()
 
 	for(int i=1; i <= 7; i++)
 	{
-		int iRank2 = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3;
+		int iRank2 = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE;
 		if (iMoney >= 1000000 && bHardAnimations) iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "man_fast", iRank2, PIRATE, -1, true); // LEO: Превозмогаторам страдать 15.12.2021
 		else iChar = NPC_GenerateCharacterIndep("Arena_Tournament_Character_" + i, "officer_"+(rand(63)+1), "man", "man", iRank2, PIRATE, -1, true);
 
@@ -1038,7 +1038,7 @@ void GenerateArenaTournament()
 		DeleteAttribute(chr, "items");
 		chr.items = "";
 		// SetFoodToCharacter(chr, 5, 50);
-		if (iMoney >= 1000000 || MOD_SKILL_ENEMY_RATE == 3)
+		if (iMoney >= 1000000 || MOD_SKILL_ENEMY_RATE == 10)
 		{
 			TakeNItems(&Characters[iChar], "BackPack5", 1);
 			EquipCharacterbyItem(&Characters[iChar], "BackPack5");

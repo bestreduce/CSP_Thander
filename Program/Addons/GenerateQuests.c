@@ -149,7 +149,7 @@ void QuestDuelGenerateCharacters()
 				}
 
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sAnimation = "man_fast";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -167,7 +167,7 @@ void QuestDuelGenerateCharacters()
 				}
 
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sAnimation = "man_fast";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -177,7 +177,7 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Mercenary_" + rand(100000);
 				sModel = GetModelForQuestDuel(19, "officer");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sAnimation = "man_fast";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -196,7 +196,7 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Relative_" + rand(100000);
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sAnimation = "man_fast";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
@@ -207,14 +207,14 @@ void QuestDuelGenerateCharacters()
 				sCharacter = "QuestDuel_Relative_" + rand(100000);
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sAnimation = "man_fast";
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "man_fast";
 				else sAnimation = "man";
 				bEquip = true;
 			break;
 
 		}
 
-		int iRank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3;
+		int iRank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE;
 		iChar = NPC_GenerateCharacter(sCharacter, sModel, sSex, sAnimation, iRank, iNation, -1, false);
 		chr = GetCharacter(iChar);
 		chr.id = sCharacter;
@@ -968,7 +968,7 @@ void GenerateShipWreck(aref loc)
 		case 3: sModel = "pirate_" + (rand(24)+1); break;
 	}
 
-	int iCharacter = NPC_GenerateCharacter("ShipWreck_" + rand(10000), sModel, "man", "man", GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3, iNation, -1, true);
+	int iCharacter = NPC_GenerateCharacter("ShipWreck_" + rand(10000), sModel, "man", "man", GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE, iNation, -1, true);
 	ref chr = GetCharacter(iCharacter);
 	chr.Ship.Type = GenerateShip(iShipType, 0);
 	chr.greeting = "Gr_AllowToDump";
@@ -987,7 +987,7 @@ void GenerateShipWreck(aref loc)
 	SetRandomNameToShip(chr);
 	SetBaseShipData(chr);
 	SetCrewQuantity(chr, (GetMaxCrewQuantity(chr) / 4 + rand(10)));
-	SetFantomParamFromRank(chr, GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3, true);
+	SetFantomParamFromRank(chr, GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE, true);
 	chr.ship.HP = sti(chr.ship.HP) / 4;
 
 	PChar.GenerateShipWreck.ShipWreckIdx = sti(chr.Ship.Type);
@@ -1175,7 +1175,7 @@ void ShipWreckInSeaWait()
 	chrDisableReloadToLocation = true;
 
 	string sModel = PChar.GenerateShipWreck.ModelHelper;
-	int iRank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE*3;
+	int iRank = GetRank(PChar, 5) + MOD_SKILL_ENEMY_RATE;
 	ref chr = GetCharacter(NPC_GenerateCharacter("ShipWreckSailor_" + rand(30000), sModel, "man", "man", iRank, PIRATE, -1, true));
 	chr.greeting = "Gr_AllowToDump";
 	chr.Dialog.Filename = "DamnedDestiny\ShipWreck_dialog.c";

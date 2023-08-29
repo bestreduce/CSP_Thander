@@ -35,55 +35,55 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		if(CheckAttribute(&RealShips[sti(Pchar.Ship.Type)], "QuestShip")) fQuestShip = 1.2;
 
-		//int  zWorkPrice  = makeint(8000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3) * fQuestShip);
+		//int  zWorkPrice  = makeint(8000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE) * fQuestShip);
 		int sundukSum = makeint(((7-shipClass)*1.0) * fQuestShip);
 
 	    int  cannonMatherial1 = makeint((cannonQ * 2 + 35 * (7-shipClass) - 20) * fQuestShip);
 	    int	 cannonMatherial2 = makeint((7-shipClass)/2 * fQuestShip);
 		if (cannonMatherial2 < 1) cannonMatherial2 = 1;
 	    int	 cannonMatherial3 = sundukSum;
-		int  cannonWorkPrice  = makeint((100 * cannonQ * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  cannonWorkPrice  = makeint((100 * cannonQ * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  capacityMatherial1 = makeint((35 * (7-shipClass) + shipCapacity * 7/100) * fQuestShip);
 	    int	 capacityMatherial2 = makeint((10 * (7-shipClass)+10) * fQuestShip);
 	    int  capacityMatherial3 = sundukSum;
-		int  capacityWorkPrice  = makeint((2 * shipCapacity * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  capacityWorkPrice  = makeint((2 * shipCapacity * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  SpeedRateMatherial1 = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);
 	    int	 SpeedRateMatherial2 = makeint(5 * (7-shipClass) * fQuestShip);
 	    int	 SpeedRateMatherial3 = sundukSum;
-		int  SpeedRateWorkPrice  = makeint((100 * shipSpeedRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  SpeedRateWorkPrice  = makeint((100 * shipSpeedRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 		int  MastMultiplierMatherial1 = makeint((shipHP * 25/1000 + 70 * (7-shipClass)) * fQuestShip);
 	    int	 MastMultiplierMatherial2 = makeint(10 * (7-shipClass) * fQuestShip);
 	    int	 MastMultiplierMatherial3 = sundukSum;
-		int  MastMultiplierMatherialWorkPrice  = makeint((100 * MastMulti * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  MastMultiplierMatherialWorkPrice  = makeint((100 * MastMulti * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  MaxCrewMatherial1 = makeint((shipMaxCrew * 6/10 + 50 * (7-shipClass)) * fQuestShip);
 	    int	 MaxCrewMatherial2 = makeint((6 * (7-shipClass)+3) * fQuestShip);
 	    int	 MaxCrewMatherial3 = sundukSum;
-		int  MaxCrewWorkPrice  =  makeint((15 * shipMaxCrew * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  MaxCrewWorkPrice  =  makeint((15 * shipMaxCrew * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  TurnRateMatherial1 = makeint((shipHP * 25/1000 + 375/shipClass+20) * fQuestShip);
 	    int	 TurnRateMatherial2 = makeint((5 * (7-shipClass)+2) * fQuestShip);
 	    int	 TurnRateMatherial3 = sundukSum;
-		int  TurnRateWorkPrice  = makeint((30 * shipTurnRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  TurnRateWorkPrice  = makeint((30 * shipTurnRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  HPMatherial1 = makeint((35 * (7-shipClass) + shipHP * 7/100) * fQuestShip);
 	    int	 HPMatherial2 = makeint(5 * ((7-shipClass)*3) * fQuestShip);
 	    int	 HPMatherial3 = sundukSum;
-		int  HPWorkPrice  = makeint((shipHP * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  HPWorkPrice  = makeint((shipHP * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 	    int  WindAgainstMatherial1 = makeint((shipHP * 25/1000 + 750/shipClass+20) * fQuestShip);
 	    int	 WindAgainstMatherial2 = makeint((6 * (7-shipClass)+1) * fQuestShip);
 	    int	 WindAgainstMatherial3 = sundukSum;
-		int  WindAgainstWorkPrice  = makeint((300 * shipSpeedRate * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int  WindAgainstWorkPrice  = makeint((300 * shipSpeedRate * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 		int quantityMatherial1 = makeint((cannonQ * 2 + 35 * (7-shipClass) - 20) * fQuestShip);
 		int quantityMatherial2 = makeint((7-shipClass)/2 * fQuestShip);
 			if (quantityMatherial2 < 1) quantityMatherial2 = 1;
 		int quantityMatherial3 = sundukSum;
-		int cannonQWorkPrice = makeint((100 * cannonMaxQ * MOD_SKILL_ENEMY_RATE*3 + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE*3)) * fQuestShip);
+		int cannonQWorkPrice = makeint((100 * cannonMaxQ * MOD_SKILL_ENEMY_RATE + 4000 * ((7-shipClass) * MOD_SKILL_ENEMY_RATE)) * fQuestShip);
 
 		int AllMatherial1 = cannonMatherial1 + quantityMatherial1;
 		int AllMatherial2 = cannonMatherial2 + quantityMatherial2;

@@ -88,7 +88,7 @@ void ProcessDialogEvent()
 		case "First time":
 		UpdateSmugglers();
 		//ОЗГ
-			if (CheckAttribute(pchar,"contrabandmoneyback") && sti(pchar.contrabandmoneyback) >= 3000000+(MOD_SKILL_ENEMY_RATE*3*100000) && !CheckCharacterPerk(pchar,"UnlimitedContra"))
+			if (CheckAttribute(pchar,"contrabandmoneyback") && sti(pchar.contrabandmoneyback) >= 3000000+(MOD_SKILL_ENEMY_RATE*100000) && !CheckCharacterPerk(pchar,"UnlimitedContra"))
 			{
 				dialog.text = "Капитан, вы показали себя по настоящему полезным клиентом для всего контрабандного бизнеса. Отныне и впредь вам будут предоставляться наилучшие условия сделок.";
 				link.l1 = "Благодарю вас за доверие.";

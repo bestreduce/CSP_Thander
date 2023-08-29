@@ -781,7 +781,7 @@ void ProcessDialogEvent()
 			link.l1.go = "NewLife_firstTime_5";
 		break;
 		case "NewLife_firstTime_5":
-			dialog.text = "Хорошо, но начнём с малого... Что же, подведём итог: ежемесячно тебе нужно будет приносить в дом " + FindRussianMoneyString(MOD_SKILL_ENEMY_RATE*3*10000) + ".";
+			dialog.text = "Хорошо, но начнём с малого... Что же, подведём итог: ежемесячно тебе нужно будет приносить в дом " + FindRussianMoneyString(MOD_SKILL_ENEMY_RATE*10000) + ".";
 			link.l1 = "Как скажешь, Изабелла. Все - для тебя! Так, а что у нас третьим принципом?";
 			link.l1.go = "NewLife_firstTime_6";
 		break;
@@ -921,7 +921,7 @@ void ProcessDialogEvent()
 		//=========================== Бюджет =================================
 		case "NewLife_Budget":
 			iMoney = IsabellaCheckBudgetMoney();
-			if (iMoney > -(MOD_SKILL_ENEMY_RATE*3*10000)) //деньги на исходе
+			if (iMoney > -(MOD_SKILL_ENEMY_RATE*10000)) //деньги на исходе
 			{
 				if (iMoney == 0)
 				{

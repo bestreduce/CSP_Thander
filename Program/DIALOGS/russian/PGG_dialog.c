@@ -315,7 +315,7 @@ void ProcessDialogEvent()
 			break;
 		}
 
-		if (!CheckAttribute(NPChar, "Quest.Officer.Price")) NPChar.Quest.Officer.Price = 10000 + sti(NPChar.rank)*500*MOD_SKILL_ENEMY_RATE*3 - MakeInt(GetSummonSkillFromNameToOld(PChar, SKILL_COMMERCE)*1000);
+		if (!CheckAttribute(NPChar, "Quest.Officer.Price")) NPChar.Quest.Officer.Price = 10000 + sti(NPChar.rank)*500*MOD_SKILL_ENEMY_RATE - MakeInt(GetSummonSkillFromNameToOld(PChar, SKILL_COMMERCE)*1000);
 		
 		Dialog.Text = NPCharRepPhrase(NPChar, RandSwear() +
 			RandPhraseSimple(

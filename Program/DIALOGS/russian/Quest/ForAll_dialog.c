@@ -228,7 +228,7 @@ void ProcessDialogEvent()
 			link.l1.go = "GiveKeyMan_7";
 		break;
 		case "GiveKeyMan_7":
-			npchar.quest.price = makeint((6666 * ((sti(pchar.rank))/2.0)*MOD_SKILL_ENEMY_RATE*3*(100-(GetCharacterSkill(pchar, SKILL_LEADERSHIP)/2)))/100);
+			npchar.quest.price = makeint((6666 * ((sti(pchar.rank))/2.0)*MOD_SKILL_ENEMY_RATE*(100-(GetCharacterSkill(pchar, SKILL_LEADERSHIP)/2)))/100);
 			if (sti(pchar.money) >= sti(npchar.quest.price))
 			{
 				dialog.text = "М-м... хорошо! Я хочу за этот ключ " + FindRussianMoneyString(sti(npchar.quest.price)) + ".";
@@ -250,7 +250,7 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "GiveKeyMan_NoMoney";
 		break;
 		case "GiveKeyMan_NoMoney":
-			npchar.quest.price = makeint((6666 * ((sti(pchar.rank))/2.0)*MOD_SKILL_ENEMY_RATE*3*(100-(GetCharacterSkill(pchar, SKILL_LEADERSHIP)/2)))/100);
+			npchar.quest.price = makeint((6666 * ((sti(pchar.rank))/2.0)*MOD_SKILL_ENEMY_RATE*(100-(GetCharacterSkill(pchar, SKILL_LEADERSHIP)/2)))/100);
 			if (sti(pchar.money) >= sti(npchar.quest.price))
 			{
 				dialog.text = "Ну вот, уже лучше, как говорится... Давай вернёмся к нашему разговору о ключе. В общем, я готов его тебе сделать, предположим, за " + FindRussianMoneyString(sti(npchar.quest.price)) + ".";
@@ -385,8 +385,8 @@ void ProcessDialogEvent()
 			for (int i = 1; i <= 2; i++)
 			{
 				ref sld = SetFantomOfficer("reload", "reload1", HOLLAND, "");
-				// FantomMakeCoolFighter(sld, 40, 100, 100, "blade28", "pistol4", 200 + 10 * MOD_SKILL_ENEMY_RATE*3); // annoer, я всё понимаю, но это ебля без вазелина уже (LEO)
-				FantomMakeCoolFighter(sld, sti(Pchar.rank), 25+drand(50), 25+drand(50), "blade39", "pistol2", 20/*  + 10 * MOD_SKILL_ENEMY_RATE*3 */);
+				// FantomMakeCoolFighter(sld, 40, 100, 100, "blade28", "pistol4", 200 + 10 * MOD_SKILL_ENEMY_RATE); // annoer, я всё понимаю, но это ебля без вазелина уже (LEO)
+				FantomMakeCoolFighter(sld, sti(Pchar.rank), 25+drand(50), 25+drand(50), "blade39", "pistol2", 20/*  + 10 * MOD_SKILL_ENEMY_RATE */);
 				LAi_SetWarriorType(sld);
 				LAi_group_MoveCharacter(sld, "OliverTrust");
 			}

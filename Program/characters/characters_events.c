@@ -125,9 +125,9 @@ void chrCharacterEntryToLocator()
 			CreateParticleSystem("shipfire",stf(locator_group.x)+1.4,stf(locator_group.y),stf(locator_group.z)+1.4,0,0,0,0);
 			loc.gotoFire = SendMessage(Sound, "lsllllllfff", MSG_SOUND_PLAY, "fortfire", SOUND_WAV_3D, VOLUME_FX, 0, 1, 0, 0, stf(locator_group.x), stf(locator_group.y), stf(locator_group.z));
 			float hp    = stf(chr.chr_ai.hp);
-			chr.chr_ai.hp = sti(chr.chr_ai.hp) - (15+MOD_SKILL_ENEMY_RATE*3);
+			chr.chr_ai.hp = sti(chr.chr_ai.hp) - (15+MOD_SKILL_ENEMY_RATE);
 			LAi_CheckKillCharacter(chr);
-			SendMessage(chr, "lfff", MSG_CHARACTER_VIEWDAMAGE, (15+MOD_SKILL_ENEMY_RATE*3), MakeFloat(MakeInt(hp)), MakeFloat(MakeInt(chr.chr_ai.hp_max)));
+			SendMessage(chr, "lfff", MSG_CHARACTER_VIEWDAMAGE, (15+MOD_SKILL_ENEMY_RATE), MakeFloat(MakeInt(hp)), MakeFloat(MakeInt(chr.chr_ai.hp_max)));
 		}
 		break;
 	}
@@ -200,9 +200,9 @@ void chrCharacterInLocator()
 		aref chr = GetEventData();
 		if (LAi_IsDead(chr) && LAi_IsImmortal(chr)) return;
 		float hp    = stf(chr.chr_ai.hp);
-		chr.chr_ai.hp = sti(chr.chr_ai.hp) - (15+MOD_SKILL_ENEMY_RATE*3);
+		chr.chr_ai.hp = sti(chr.chr_ai.hp) - (15+MOD_SKILL_ENEMY_RATE);
 		LAi_CheckKillCharacter(chr);
-		SendMessage(chr, "lfff", MSG_CHARACTER_VIEWDAMAGE, (15+MOD_SKILL_ENEMY_RATE*3), MakeFloat(MakeInt(hp)), MakeFloat(MakeInt(chr.chr_ai.hp_max)));
+		SendMessage(chr, "lfff", MSG_CHARACTER_VIEWDAMAGE, (15+MOD_SKILL_ENEMY_RATE), MakeFloat(MakeInt(hp)), MakeFloat(MakeInt(chr.chr_ai.hp_max)));
 	}
 	return;
 	string group = GetEventData();

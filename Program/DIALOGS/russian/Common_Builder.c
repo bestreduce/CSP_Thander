@@ -76,13 +76,13 @@ void ProcessDialogEvent()
 		case "ColonyBuilding":
 	    	if(CheckAttribute(pchar, "VedekerDiscount"))//Скидка от Ведекера.
 	    	{
-				NPChar.NeedMoney = (1500000 * MOD_SKILL_ENEMY_RATE*3)/2;
-	    		dialog.text = "Хм... Что же. Думаю, для начала нам необходимо осмотреть необитаемые острова для пригодности на постройку колонии. Кроме того, работа моя, конечно, не бесплатная, и оплата будет составлять "+(1500000*MOD_SKILL_ENEMY_RATE*3)+" пиастров. К тому же, с вами находится грамотный техник. Вместе с ним мы сможем существенно сократить затраты по деньгам примерно до "+NPChar.NeedMoney+" пиастров, если, конечно, он мне поможет. Что скажете?";
+				NPChar.NeedMoney = (1500000 * MOD_SKILL_ENEMY_RATE)/2;
+	    		dialog.text = "Хм... Что же. Думаю, для начала нам необходимо осмотреть необитаемые острова для пригодности на постройку колонии. Кроме того, работа моя, конечно, не бесплатная, и оплата будет составлять "+(1500000*MOD_SKILL_ENEMY_RATE)+" пиастров. К тому же, с вами находится грамотный техник. Вместе с ним мы сможем существенно сократить затраты по деньгам примерно до "+NPChar.NeedMoney+" пиастров, если, конечно, он мне поможет. Что скажете?";
 	    	}
 	    	else
 	    	{
-				NPChar.NeedMoney = 1500000 * MOD_SKILL_ENEMY_RATE*3;
-		    	dialog.text = "Хм... Что же. Думаю, для начала нам необходимо осмотреть необитаемые острова для пригодности на постройку колонии. Кроме того, работа моя, конечно, не бесплатная, и оплата будет составлять "+(1500000*MOD_SKILL_ENEMY_RATE*3)+" пиастров. Что скажете?";
+				NPChar.NeedMoney = 1500000 * MOD_SKILL_ENEMY_RATE;
+		    	dialog.text = "Хм... Что же. Думаю, для начала нам необходимо осмотреть необитаемые острова для пригодности на постройку колонии. Кроме того, работа моя, конечно, не бесплатная, и оплата будет составлять "+(1500000*MOD_SKILL_ENEMY_RATE)+" пиастров. Что скажете?";
 		    }
 
 			if(sti(PChar.money) >= sti(NPChar.NeedMoney))
@@ -305,12 +305,12 @@ void ProcessDialogEvent()
 		case "ColonyFortBuilding":
 			if(CheckAttribute(pchar, "VedekerDiscount"))
 			{
-				NPChar.NeedMoney = (200000 * MOD_SKILL_ENEMY_RATE*3)/2;
+				NPChar.NeedMoney = (200000 * MOD_SKILL_ENEMY_RATE)/2;
 				dialog.text = "Я с радостью помогу вам, йа! Но это вам будет стоить немалых затрат. За свою работу я хочу получить "+Sti(NPChar.NeedMoney)+" золотых.";
 			}
 			else
 			{
-				NPChar.NeedMoney = 200000 * MOD_SKILL_ENEMY_RATE*3;
+				NPChar.NeedMoney = 200000 * MOD_SKILL_ENEMY_RATE;
 			    dialog.text = "Я с радостью помогу вам, йа! Но это вам будет стоить немалых затрат. За свою работу я хочу получить "+Sti(NPChar.NeedMoney)+" золотых.";
 			}
 			if(sti(PChar.money) >= Sti(NPChar.NeedMoney))

@@ -116,7 +116,7 @@ int CalculateRelationSum(int iNation)
 	Pchar.GenQuest.(sNation) = abs(ChangeCharacterNationReputation(pchar, iNation, 0))
 	int iSumm = sti(Pchar.GenQuest.(sNation)) * 1500 +  makeint(stf(Pchar.rank)/stf(Pchar.reputation)*100000);
 
-	//iSumm = iSumm * (1.0 + (0.1 * MOD_SKILL_ENEMY_RATE*3));
+	//iSumm = iSumm * (1.0 + (0.1 * MOD_SKILL_ENEMY_RATE));
 
 	return iSumm;
 }

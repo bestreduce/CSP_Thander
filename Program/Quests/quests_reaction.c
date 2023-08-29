@@ -432,7 +432,7 @@ void QuestComplete(string sQuestName, string qname)
             chrDisableReloadToLocation = true;
             Pchar.GenQuestFort.FarLocator = true;
 			sTemp = "officers"; // не везде есть! :(
-            for (i = 0; i < MAX_TOWN_CREW + MOD_SKILL_ENEMY_RATE*3/2; i++)
+            for (i = 0; i < MAX_TOWN_CREW + MOD_SKILL_ENEMY_RATE/2; i++)
             {
 				sld = SetFantomSkeletForts(sTemp, "", "TOWN_BATTLE_SOLDIERS", "GhostShipCrew");
 				if (sld.location.locator == "")
@@ -452,7 +452,7 @@ void QuestComplete(string sQuestName, string qname)
             	SetFantomDefenceForts("goto", "", iTemp, LAI_GROUP_PLAYER);
             }
 
-            for (i = MOD_SKILL_ENEMY_RATE*3/2; i < 6; i++)
+            for (i = MOD_SKILL_ENEMY_RATE/2; i < 6; i++)
             {
             	SetFantomDefenceForts("goto", "", iTemp, LAI_GROUP_PLAYER);
             }
@@ -1254,7 +1254,7 @@ void QuestComplete(string sQuestName, string qname)
 				"Грохоту было - весь город переполошился, а в местной лавке крышу ядром проломило! Да только без толку всё. Местные-то - скупщики значит, в джунглях спрятались, а капитан морем ушёл. Как есть, с носом нашу эскадру оставил! Так из бухты вырулил - любой лоцман позавидует!", Pchar.quest.contraband.City, 3, 5, "");
 		break;
 		case "CoastalGuardsAllDead":
-			for (i=1; i<3+makeint(MOD_SKILL_ENEMY_RATE*3/2); i++)
+			for (i=1; i<3+makeint(MOD_SKILL_ENEMY_RATE/2); i++)
 			{
 				sTemp = "Rand_Smug0" + i;
 				LAi_SetGuardianTypeNoGroup(CharacterFromID(sTemp));
@@ -1513,14 +1513,14 @@ void QuestComplete(string sQuestName, string qname)
 		////////////////////////////////////////////////////////////////////////
 		case "LoanFindCitizenTimer": // должник
             Log_SetStringToLog("Вы не вернули деньги должника работодателю.");
-            LoansMoneyAvengerAmount(&Characters[GetCharacterIndex(pchar.GenQuest.Loan.FindCitizenNpcharId)], MOD_SKILL_ENEMY_RATE*3+30);
+            LoansMoneyAvengerAmount(&Characters[GetCharacterIndex(pchar.GenQuest.Loan.FindCitizenNpcharId)], MOD_SKILL_ENEMY_RATE+30);
             //DeleteAttribute(pchar, "GenQuest.Loan");
 		break;
 
 		case "LoanChestTimer": // сундук
             Log_SetStringToLog("Вы не доставили кредит по назначению.");
-            LoansMoneyAvengerAmount(&Characters[GetCharacterIndex(pchar.GenQuest.LoanChest.ChestNpcharId)], MOD_SKILL_ENEMY_RATE*3+15); // кто дал
-            LoansMoneyAvengerAmount(&Characters[sti(pchar.GenQuest.LoanChest.TargetIdx)], MOD_SKILL_ENEMY_RATE*3+15);// кому везли
+            LoansMoneyAvengerAmount(&Characters[GetCharacterIndex(pchar.GenQuest.LoanChest.ChestNpcharId)], MOD_SKILL_ENEMY_RATE+15); // кто дал
+            LoansMoneyAvengerAmount(&Characters[sti(pchar.GenQuest.LoanChest.TargetIdx)], MOD_SKILL_ENEMY_RATE+15);// кому везли
             pchar.GenQuest.LoanChest.Money.Discount = (rand(3)+1)*10; //процент удержания гонорара за просрочку
 			//DeleteAttribute(pchar, "GenQuest.LoanChest");
             AddQuestRecord("Gen_LoanTakeChest", "2");
@@ -2202,8 +2202,8 @@ void QuestComplete(string sQuestName, string qname)
 				//--> генерим ранг
 				if (sti(pchar.rank) > 6)
 				{
-					if (sti(pchar.rank) > 20) Rank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*4/iTemp);
-					else Rank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*2.5/iTemp);
+					if (sti(pchar.rank) > 20) Rank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*4/iTemp);
+					else Rank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5/iTemp);
 				}
 				else
 				{	//казуалам зеленый свет на начало игры
@@ -2380,8 +2380,8 @@ void QuestComplete(string sQuestName, string qname)
 					//--> генерим ранг
 					if (sti(pchar.rank) > 6)
 					{
-						if (sti(pchar.rank) > 20) Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3 + 10);
-						else Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3 + 5);
+						if (sti(pchar.rank) > 20) Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE + 10);
+						else Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE + 5);
 					}
 					else
 					{	//казуалам зеленый свет на начало игры
@@ -2393,7 +2393,7 @@ void QuestComplete(string sQuestName, string qname)
 					}
 					//<-- генерим ранг
 					// sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "spy", "spy", Rank, PIRATE, 0, true)); // LEO: Убрал от бугуртов недовольных - Gregg :)
-					if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
+					if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
 					else sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man", Rank, PIRATE, 0, true));
 					sld.dialog.filename = "MayorQuests_dialog.c";
 					sld.dialog.currentnode = "SeekSpy_house";
@@ -2402,7 +2402,7 @@ void QuestComplete(string sQuestName, string qname)
 					sld.money =  1000 + (sti(pchar.rank)*500) + rand(5000);
 			        sld.SaveItemsForDead  = true;
 					AddBonusEnergyToCharacter(sld, 30);
-					FantomMakeCoolFighterWRankDepend(sld,Rank,20+rand(70),20+rand(70),70+(MOD_SKILL_ENEMY_RATE*3*3));//реф,уровень,скилы фехта(дополнительно скейлятся в методе от сложности),навык стрельбы и везения(аналогично),доп хп(аналогично)
+					FantomMakeCoolFighterWRankDepend(sld,Rank,20+rand(70),20+rand(70),70+(MOD_SKILL_ENEMY_RATE*3));//реф,уровень,скилы фехта(дополнительно скейлятся в методе от сложности),навык стрельбы и везения(аналогично),доп хп(аналогично)
 					DeleteAllPerksExceptChar(sld);
 					DeleteAttribute(sld, "items.spyglass3")
 					SetCharacterPerk(sld, "BasicDefense");
@@ -2712,7 +2712,7 @@ void QuestComplete(string sQuestName, string qname)
 			GetCharacterPos(pchar, &locx, &locy, &locz);
 			LAi_LocationFightDisable(loadedLocation, false);
 			LAi_SetFightMode(pchar, true);
-			Rank = 5 + sti(MOD_SKILL_ENEMY_RATE*3);
+			Rank = 5 + sti(MOD_SKILL_ENEMY_RATE);
 			LAi_group_Delete("EnemyFight");
 			for (i=1; i<Rank; i++)
 			{
@@ -2825,7 +2825,7 @@ void QuestComplete(string sQuestName, string qname)
 			GetCharacterPos(pchar, &locx, &locy, &locz);
 			LAi_LocationFightDisable(loadedLocation, false);
 			LAi_SetFightMode(pchar, true);
-			Rank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE*3);
+			Rank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE);
 			LAi_group_Delete("EnemyFight");
 			for (i=1; i < 5; i++)
 			{
@@ -2980,7 +2980,7 @@ void QuestComplete(string sQuestName, string qname)
 		////////////////////////////////////////////////////////////////////////
 		case "Berglars_Ostin":
 			chrDisableReloadToLocation = true;
-			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man", 30, SPAIN, -1, false));
 			FantomMakeCoolFighter(sld, 30, 100, 70, "blade32", "pistol5", 50);
 			sld.name 	= "Альберто";
@@ -3256,7 +3256,7 @@ void QuestComplete(string sQuestName, string qname)
 				//--> генерим ранг
 				if (sti(pchar.rank) > 6)
 				{
-					Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3;
+					Rank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
 				}
 				else
 				{	//казуалам зеленый свет на начало игры
@@ -6645,7 +6645,7 @@ void QuestComplete(string sQuestName, string qname)
 			GetCharacterPos(pchar, &locx, &locy, &locz);
 			LAi_group_Delete("EnemyFight");
 			//#20171007-02 Rescale fight stats
-			int nRank = sti(pchar.rank)+ round((MOD_SKILL_ENEMY_RATE*3 + 1.1) / 4) + 1;
+			int nRank = sti(pchar.rank)+ round((MOD_SKILL_ENEMY_RATE + 1.1) / 4) + 1;
 			string sGoto = "goto2";
 			Model = "SpaOfficer1";
 			iTemp = nRank + 3;
@@ -6666,7 +6666,7 @@ void QuestComplete(string sQuestName, string qname)
 				sld = GetCharacter(NPC_GenerateCharacter(attrName, Model, "man", "man", iTemp, SPAIN, 0, true));
 				//#20171007-02 Rescale fight stats French Quest line
 				//FantomMakeCoolFighter(sld, sTemp, 70, 50, BLADE_LONG, "pistol2", 40);
-				FantomMakeCoolFighter(sld, iTemp, (50 + round(4 * MOD_SKILL_ENEMY_RATE*3 / 2)), (30 + round(4 * MOD_SKILL_ENEMY_RATE*3 / 2)), BLADE_LONG, "pistol2", (20 + round(10 * MOD_SKILL_ENEMY_RATE*3 / 2)));
+				FantomMakeCoolFighter(sld, iTemp, (50 + round(4 * MOD_SKILL_ENEMY_RATE / 2)), (30 + round(4 * MOD_SKILL_ENEMY_RATE / 2)), BLADE_LONG, "pistol2", (20 + round(10 * MOD_SKILL_ENEMY_RATE / 2)));
 				LAi_SetWarriorType(sld);
 				if (i==1)
 				{
@@ -7374,7 +7374,7 @@ void QuestComplete(string sQuestName, string qname)
 					{
 						Model = "off_" + sTemp + "_1";
 					}
-					Rank = sti(pchar.rank)+ MOD_SKILL_ENEMY_RATE*3 + 6;
+					Rank = sti(pchar.rank)+ MOD_SKILL_ENEMY_RATE + 6;
 					Blade = "blade20";
 				}
 				else
@@ -7387,11 +7387,11 @@ void QuestComplete(string sQuestName, string qname)
 					{
 						Model = "sold_" + sTemp + "_" +(rand(7)+1);
 					}
-					Rank = sti(pchar.rank)+ MOD_SKILL_ENEMY_RATE*3 + 2;
+					Rank = sti(pchar.rank)+ MOD_SKILL_ENEMY_RATE + 2;
 					Blade = "blade24";
 				}
 				sld = GetCharacter(NPC_GenerateCharacter("Soldier_"+i, Model, "man", "man", Rank, sti(colonies[iTemp].nation), 0, true));
-				FantomMakeCoolFighter(sld, Rank, (80 + round(4 * MOD_SKILL_ENEMY_RATE*3 / 2)), (70 + round(4 * MOD_SKILL_ENEMY_RATE*3 / 2)), Blade, "pistol5", (140 + round(10 * MOD_SKILL_ENEMY_RATE*3 / 2)));
+				FantomMakeCoolFighter(sld, Rank, (80 + round(4 * MOD_SKILL_ENEMY_RATE / 2)), (70 + round(4 * MOD_SKILL_ENEMY_RATE / 2)), Blade, "pistol5", (140 + round(10 * MOD_SKILL_ENEMY_RATE / 2)));
 				sld.City = colonies[iTemp].id;
 				sld.CityType = "soldier";
 				sld.Dialog.Filename = "Quest\Isabella\BrigCaptain.c";
@@ -7668,8 +7668,8 @@ void QuestComplete(string sQuestName, string qname)
             Log_QuestInfo("Последняя подляна Сальватора.");
             chrDisableReloadToLocation = true; // закрыть выход из локации.
 			LAi_group_Delete("EnemyFight");
-			iTemp = sti(2+(MOD_SKILL_ENEMY_RATE*3/1.5));
-			Rank = 10+MOD_SKILL_ENEMY_RATE*3*2;
+			iTemp = sti(2+(MOD_SKILL_ENEMY_RATE/1.5));
+			Rank = 10+MOD_SKILL_ENEMY_RATE*2;
             for (i=1; i<=iTemp; i++)
             {
                 sld = GetCharacter(NPC_GenerateCharacter("Bandit"+i, "officer_"+(i+3), "man", "man", Rank, PIRATE, 0, true));
@@ -7753,7 +7753,7 @@ void QuestComplete(string sQuestName, string qname)
 			QuestSetCurrentNode("Rosita", "IsabellaIsWife"); //Росите ноду, по которой она помогать будет с проблемами
 			pchar.RomanticQuest = "NewLifeForHero";
 			AddQuestRecord("Romantic_Line", "28");
-			AddQuestUserData("Romantic_Line", "IsabellaBuget", FindRussianMoneyString(MOD_SKILL_ENEMY_RATE*3*10000));
+			AddQuestUserData("Romantic_Line", "IsabellaBuget", FindRussianMoneyString(MOD_SKILL_ENEMY_RATE*10000));
 			//прерывание на вход в дом Изабеллы
 			Pchar.quest.Romantic_OutHome.win_condition.l1 = "location";
 			Pchar.quest.Romantic_OutHome.win_condition.l1.location = "PuertoRico";
@@ -8064,7 +8064,7 @@ void QuestComplete(string sQuestName, string qname)
         case "Ascold_InGraveAfterFight":
 			pchar.questTemp.Ascold = "Ascold_MummyIsLive";
 		    LAi_LocationFightDisable(&Locations[FindLocation("Guadeloupe_Cave")], true);
-			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man", 100, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, 100, 100, 100, "blade28", "", 3000);
 			sld.name = "Лейф";
@@ -9623,8 +9623,8 @@ void QuestComplete(string sQuestName, string qname)
 			chrDisableReloadToLocation = true;//закрыть локацию
 			LocatorReloadEnterDisable("ExternalRingInside", "reload1", true);
 			// ставим крабикусов
-			iRank = 25+MOD_SKILL_ENEMY_RATE*3*2;
-			iTemp = 150+MOD_SKILL_ENEMY_RATE*3*30+sti(pchar.rank)*5;
+			iRank = 25+MOD_SKILL_ENEMY_RATE*2;
+			iTemp = 150+MOD_SKILL_ENEMY_RATE*30+sti(pchar.rank)*5;
 			LAi_group_Register("EnemyCrab");
 			for (i=1; i<=10; i++)
 			{
@@ -9671,8 +9671,8 @@ void QuestComplete(string sQuestName, string qname)
 		case "LSC_RingEnterDeck": // входим на палубу разбитого корабля
 			chrDisableReloadToLocation = true;//закрыть локацию
 			// ставим крабикусов
-			iRank = 25+MOD_SKILL_ENEMY_RATE*3*2;
-			iTemp = 150+MOD_SKILL_ENEMY_RATE*3*30+sti(pchar.rank)*5;
+			iRank = 25+MOD_SKILL_ENEMY_RATE*2;
+			iTemp = 150+MOD_SKILL_ENEMY_RATE*30+sti(pchar.rank)*5;
 			for (i=1; i<=6; i++)
 			{
 				sld = GetCharacter(NPC_GenerateCharacter("CrabDeck_"+i, "crabBig", "crab", "crabBig", iRank, PIRATE, -1, false));
@@ -11517,8 +11517,8 @@ void QuestComplete(string sQuestName, string qname)
 			//ТРОННЫЙ ЗАЛ
 			
 			//Чёрное Солнце
-			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE*3, 100, 100, "katar", "pistol6", 1000);
+			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 1000);
 			LAi_SetHP(sld,800,800);
 			LAi_SetDltHealth(sld, 110.0);
 			sld.name = "Лорд Чёрное Солнце";
@@ -11793,8 +11793,8 @@ void QuestComplete(string sQuestName, string qname)
 			Island_SetReloadEnableGlobal("Guadeloupe", false);
 			bQuestDisableMapEnter = true;
 		
-			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse2", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE*3, 100, 100, "katar", "pistol6", 300);
+			sld = GetCharacter(NPC_GenerateCharacter("Chernoe_Solntse2", "Animists2", "man", "man", sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
+			FantomMakeCoolFighter(sld, sti(pchar.rank) + 10 + MOD_SKILL_ENEMY_RATE, 100, 100, "katar", "pistol6", 300);
 			AddCharacterHealth(sld, 30);
 			sld.name = "Лорд Чёрное Солнце";
 			sld.lastname = "";
@@ -12662,8 +12662,8 @@ void QuestComplete(string sQuestName, string qname)
 				int pRank;
 				if (sti(pchar.rank) > 5)
 				{
-					if (sti(pchar.rank) > 20) pRank = sti(pchar.rank)+5 + MOD_SKILL_ENEMY_RATE*3;
-					else pRank = sti(pchar.rank)+5 + sti(MOD_SKILL_ENEMY_RATE*3/2);
+					if (sti(pchar.rank) > 20) pRank = sti(pchar.rank)+5 + MOD_SKILL_ENEMY_RATE;
+					else pRank = sti(pchar.rank)+5 + sti(MOD_SKILL_ENEMY_RATE/2);
 				}
 				else
 				{	//казуалам набьют ебало, ибо ранг+5 и толпа
@@ -12676,7 +12676,7 @@ void QuestComplete(string sQuestName, string qname)
 				for(i = 0; i < num; i++)
 				{
 					sld = GetCharacter(NPC_GenerateCharacter("Skelet"+loadedLocation.index+"_"+i, "Skel_5", "skeleton", "man", pRank, PIRATE, 1, true));
-					FantomMakeCoolFighter(sld, pRank, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), "", MOD_SKILL_ENEMY_RATE*3*2);
+					FantomMakeCoolFighter(sld, pRank, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), "", MOD_SKILL_ENEMY_RATE*2);
 					sld.name = "Страж";
 					sld.lastname = "Храма";
 					LAi_SetWarriorType(sld);
@@ -12985,7 +12985,7 @@ void QuestComplete(string sQuestName, string qname)
 			if (loadedLocation.id != "DeckWithReefs" || CheckAttribute(pchar,"GiantEvilSkeletonSpawned")) {chrDisableReloadToLocation = false; break;}
 			scareOfficers(50);
 			log_info("Хранитель грота был пробуждён.");
-			if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_5", "skeleton", "Giant_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 			else sld = GetCharacter(NPC_GenerateCharacter("GiantEvilSkeleton", "PGG_Giant_0", "skeleton", "Giant", iRank, PIRATE, 1, true));
 			sld.name = "Хранитель";
 			sld.lastname = "Грота";
@@ -13390,9 +13390,9 @@ void QuestCursedSceleton()
 {
 	ref sld;
 	//sld = GetCharacter(CharacterFromID("CursedSkeleton"));
-	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton_fast", sti(pchar.rank)+20, PIRATE, 1, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("CursedSkeleton", "PGG_Skeletcap_0", "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
-	FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 100, 100, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*4);
+	FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 100, 100, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 	DeleteAttribute(sld, "SuperShooter");
 	int hitpoints = rand(sti(pchar.rank)*15)+1000;
 	LAi_SetHP(sld, hitpoints, hitpoints);

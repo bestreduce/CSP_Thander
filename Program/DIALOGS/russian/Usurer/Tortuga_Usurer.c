@@ -52,14 +52,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 		case "Rostovshik_5":
 			DialogExit();
-			int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE*3;
+			int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE;
 			if (Rank < 1) Rank = 1;
 			int Phrase;
 			Phrase = rand(2);
             if (Phrase == 0)
             {
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandit_1", "pirate_22", "man", "man", Rank, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE*3 * 4, 15 + MOD_SKILL_ENEMY_RATE*3 * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE*3 * 4);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE * 4);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
 				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
@@ -79,7 +79,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             if (Phrase == 1)
             {
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandit_1", "off_fra_1", "man", "man", Rank, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE*3 * 4, 15 + MOD_SKILL_ENEMY_RATE*3 * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE*3 * 4);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade19", "", 20 + MOD_SKILL_ENEMY_RATE * 4);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
 				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
@@ -99,7 +99,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			if (Phrase == 2)
             {
 				sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_Bandit_1", "skel1", "skeleton", "skeleton", Rank, PIRATE, -1, true));
-				FantomMakeCoolFighter(sld, sti(pchar.rank), 20 + MOD_SKILL_ENEMY_RATE*3 * 5, 20 + MOD_SKILL_ENEMY_RATE*3 * 5, "blade36", "", 80 + MOD_SKILL_ENEMY_RATE*3 * 5);
+				FantomMakeCoolFighter(sld, sti(pchar.rank), 20 + MOD_SKILL_ENEMY_RATE * 5, 20 + MOD_SKILL_ENEMY_RATE * 5, "blade36", "", 80 + MOD_SKILL_ENEMY_RATE * 5);
 				ChangeCharacterAddressGroup(sld, pchar.location, "reload",  "reload1");
 				LAi_SetActorType(sld);
 				sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";

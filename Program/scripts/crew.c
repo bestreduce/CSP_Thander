@@ -80,11 +80,11 @@ int GetMoneyForOfficer(ref Npchar)
 	    }
 		if (!CheckAttribute(Npchar, "OfficerWantToGo.DontGo"))// aw013 за постоянство надо платить
 		{
-			return MOD_SKILL_ENEMY_RATE*3*4*sum;
+			return MOD_SKILL_ENEMY_RATE*4*sum;
 		}
 		else
 		{
-			return MOD_SKILL_ENEMY_RATE*3*8*sum;
+			return MOD_SKILL_ENEMY_RATE*8*sum;
 		}
     }
     return 0;
@@ -130,7 +130,7 @@ int GetSalaryForShip(ref chref)
 
 	// экипаж
 	fExp = (GetCrewExp(chref, "Sailors") + GetCrewExp(chref, "Cannoners") + GetCrewExp(chref, "Soldiers")) / 100.00; // средний коэф опыта 0..3
-	nPaymentQ += makeint( SalaryCoeff * fExp * stf((0.5 + MOD_SKILL_ENEMY_RATE*3/5.0)*200*GetCrewQuantity(chref))/stf(shClass) * (1.05 - (nLeaderShip + nCommerce)/ 40.0) );
+	nPaymentQ += makeint( SalaryCoeff * fExp * stf((0.5 + MOD_SKILL_ENEMY_RATE/5.0)*200*GetCrewQuantity(chref))/stf(shClass) * (1.05 - (nLeaderShip + nCommerce)/ 40.0) );
 
     // теперь самого капитана и его офицеров (тут  главный герой не считается) так что пассажиров и оффицеров ниже
     if(sti(chref.index) != GetMainCharacterIndex())
@@ -193,7 +193,7 @@ int GetCharacterRaiseCrewMoraleMoney(ref chr)
 {
 	float nLeaderShip = GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_LEADERSHIP);
 	float nCommerce   = GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_COMMERCE); // boal
-	int nPaymentQ = 15 + GetCrewQuantity(chr)*(16 + MOD_SKILL_ENEMY_RATE*3*5 - nLeaderShip - nCommerce); // boal
+	int nPaymentQ = 15 + GetCrewQuantity(chr)*(16 + MOD_SKILL_ENEMY_RATE*5 - nLeaderShip - nCommerce); // boal
 	float fExp = (GetCrewExp(chr, "Sailors") + GetCrewExp(chr, "Cannoners") + GetCrewExp(chr, "Soldiers")) / 100.00; // средний коэф опыта 0..3
 	nPaymentQ = makeint(nPaymentQ * fExp + 0.5);
 	if (nPaymentQ < 5) nPaymentQ = 5;
@@ -239,7 +239,7 @@ float GetCrewExp(ref chr, string sType)
 
 float GetCrewExpRate()
 {
-	return makefloat(50 + MOD_SKILL_ENEMY_RATE*3);
+	return makefloat(50 + MOD_SKILL_ENEMY_RATE);
 }
 
 int GetCharacterCrewMorale(ref chr)
@@ -347,7 +347,7 @@ int GetCrewPriceForTavern(string sColony)
 
     float fExp = (GetCrewExp(rTown, "Sailors") + GetCrewExp(rTown, "Cannoners") + GetCrewExp(rTown, "Soldiers")) / 100.00; // средний коэф опыта 0..3
 	float fSkill = GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_LEADERSHIP) + GetSummonSkillFromNameToOld(GetMainCharacter(),SKILL_COMMERCE); // 0-20
-    int   nCrewCost = makeint((0.5 + MOD_SKILL_ENEMY_RATE*3/5.0)*30 * (1.0 - fSkill / 40.0));
+    int   nCrewCost = makeint((0.5 + MOD_SKILL_ENEMY_RATE/5.0)*30 * (1.0 - fSkill / 40.0));
 
 	nCrewCost = makeint(fExp*nCrewCost + 0.5);
 	if (nCrewCost < 5) nCrewCost = 5; // не ниже!
@@ -359,7 +359,7 @@ int GetMaxCrewAble()
 {
 	float nLeaderShip = 0.5 + GetSummonSkillFromNameToOld(pchar, SKILL_LEADERSHIP);
     //MOD_SKILL_ENEMY_RATE
-    return makeint(nLeaderShip*(55.0 + 10*(5-MOD_SKILL_ENEMY_RATE*3) + nLeaderShip * 15.0) + 2*nLeaderShip*abs(REPUTATION_NEUTRAL - sti(pchar.reputation)));
+    return makeint(nLeaderShip*(55.0 + 10*(5-MOD_SKILL_ENEMY_RATE) + nLeaderShip * 15.0) + 2*nLeaderShip*abs(REPUTATION_NEUTRAL - sti(pchar.reputation)));
 }
 
 int GetCurCrewEscadr()
@@ -414,7 +414,7 @@ void Partition_SetValue(string state) // state = "before" || "after" - для с
 	// деньги в офах - это деньги ГГ на хранении их считаем, тк потеря их - убыток ГГ
 	HowComp = 0;
 	HowCrew = 0;
-	part = Partition_GetSetting("Part_HeroPart") + (10 - MOD_SKILL_ENEMY_RATE*3)*Partition_GetSetting("Part_HeroPart"); // доля ГГ
+	part = Partition_GetSetting("Part_HeroPart") + (10 - MOD_SKILL_ENEMY_RATE)*Partition_GetSetting("Part_HeroPart"); // доля ГГ
 	for (i=0; i<COMPANION_MAX; i++)
 	{
 		cn = GetCompanionIndex(Pchar, i);

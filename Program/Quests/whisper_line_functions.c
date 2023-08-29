@@ -36,7 +36,7 @@ void Whisper_StartGame(string qName)
 	GiveItem2Character(pchar, "cirass5");
 	EquipCharacterbyItem(pchar, "cirass5");
     TakeNItems(Pchar, "12_gauge", 99);
-    TakeNItems(Pchar, "grapeshot", 18 - MOD_SKILL_ENEMY_RATE*3);
+    TakeNItems(Pchar, "grapeshot", 18 - MOD_SKILL_ENEMY_RATE);
 	TakeNItems(Pchar, "potion3", 1);
     TakeNItems(Pchar, "potion2", 3);
     TakeNItems(Pchar, "potion1", 4);
@@ -76,7 +76,7 @@ void Whisper_StartGame(string qName)
 	//Спавним роботов
 	for (int i = 0; i < 10; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("Robot"+sti(i), "Terminator", "Terminator_Sex", "Terminator", MOD_SKILL_ENEMY_RATE*3, PIRATE, 0, false));
+		sld = GetCharacter(NPC_GenerateCharacter("Robot"+sti(i), "Terminator", "Terminator_Sex", "Terminator", MOD_SKILL_ENEMY_RATE, PIRATE, 0, false));
 		sld.name = "Т-"+(800+rand(150));
 		sld.lastname = "";
 		sld.CantLoot = true;
@@ -90,8 +90,8 @@ void Whisper_StartGame(string qName)
 			GiveItem2Character(sld, "blade14");
 			EquipCharacterByItem(sld, "blade14");
 		}
-		LAi_SetHP(sld, 10.0 * MOD_SKILL_ENEMY_RATE*3, 10.0 *MOD_SKILL_ENEMY_RATE*3);
-		if (MOD_SKILL_ENEMY_RATE == 3)
+		LAi_SetHP(sld, 10.0 * MOD_SKILL_ENEMY_RATE, 10.0 *MOD_SKILL_ENEMY_RATE);
+		if (MOD_SKILL_ENEMY_RATE == 10)
 		{
 			SetCharacterPerk(sld, "Sliding");
 		}
@@ -205,7 +205,7 @@ void WhisperTeleport(string qName)
 
 	for (i = 1; i < 13; i++)
 	{
-			sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", 3+MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
+			sld = GetCharacter(NPC_GenerateCharacter("wl_Pirate_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", 3+MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 			ChangeCharacterAddressGroup(sld, PChar.location, "goto", "goto"+sti(i));
 			Group_AddCharacter("wl_Pirate", sld.id);
 			LAi_SetWarriorType(sld);
@@ -245,7 +245,7 @@ void WhisperBonusChallengeReCheck(string qName)
 
 void WhisperBonusChallenge(string qName)
 {
-	AddBonusEnergyToCharacter(pchar, MOD_SKILL_ENEMY_RATE*3);
+	AddBonusEnergyToCharacter(pchar, MOD_SKILL_ENEMY_RATE);
 	pchar.Whisper.BonusEnergy = true;
 
 	for (int i = 0; i < 3; i++)
@@ -450,7 +450,7 @@ void WhisperLine_IncqGuard(string qName)
 	{
 		sld = characterFromId("IncqGuard_"+i);
 		TakeNItems(sld, "spyglass3", -1);
-		LAi_SetHP(sld, 10+2.0 * MOD_SKILL_ENEMY_RATE*3, 10+2.0 *MOD_SKILL_ENEMY_RATE*3);
+		LAi_SetHP(sld, 10+2.0 * MOD_SKILL_ENEMY_RATE, 10+2.0 *MOD_SKILL_ENEMY_RATE);
 		RemoveCharacterEquip(sld, BLADE_ITEM_TYPE);
 		TakeNItems(sld, "blade16", -10);
 		TakeNItems(sld, "blade4", 1);
@@ -488,10 +488,10 @@ void WhisperLine_IncqGuard(string qName)
 		{
 			if(CheckAttribute(pchar, "Whisper.IncqGuard_bad"))
 			{
-				int weaponskill = 6 * MOD_SKILL_ENEMY_RATE*3;
+				int weaponskill = 6 * MOD_SKILL_ENEMY_RATE;
 				SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
 				//LAi_group_Attack(sld, Pchar);
-				//if (MOD_SKILL_ENEMY_RATE != 3)
+				//if (MOD_SKILL_ENEMY_RATE != 10)
 				//{
 					DeleteAttribute(sld, "perks.list.Sliding");
 				//}
@@ -568,13 +568,13 @@ void GiveMCItemToSomeoneElse(ref sld)
 					AddItems(sld, "GunPowder", 5);
 					GiveItem2Character(sld, "Spyglass1");
 					EquipCharacterbyItem(sld, "Spyglass1");
-					sld.money = 1500/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 1500/MOD_SKILL_ENEMY_RATE;
 				break;
 				case FRANCE:
 					itemID = GetGeneratedItem("topor3");
 					GiveItem2Character(sld, itemID);
 					EquipCharacterbyItem(sld, itemID);
-					sld.money = 500/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 500/MOD_SKILL_ENEMY_RATE;
 				break;
 				case HOLLAND:
 					itemID = GetGeneratedItem("topor1");
@@ -586,7 +586,7 @@ void GiveMCItemToSomeoneElse(ref sld)
 					GiveGunAmmunitionPchar(sld,itemID,5);
 					GiveItem2Character(sld, "Spyglass1");
 					EquipCharacterbyItem(sld, "Spyglass1");
-					sld.money = 1000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 1000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case PIRATE:
 					itemID = GetGeneratedItem("topor3");
@@ -601,7 +601,7 @@ void GiveMCItemToSomeoneElse(ref sld)
 					itemID = GetGeneratedItem("topor3");
 					GiveItem2Character(sld, itemID);
 					EquipCharacterbyItem(sld, itemID);
-					sld.money = 500/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 500/MOD_SKILL_ENEMY_RATE;
 				break;
 			}
 	    break;
@@ -619,20 +619,20 @@ void GiveMCItemToSomeoneElse(ref sld)
 				case ENGLAND:
 					GiveItem2Character(sld, "Map_bad");
 					TakeNItems(sld, "indian3", 1);
-					sld.money = 15000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 15000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case FRANCE:
 					TakenItems(sld, "potion1", 2);
 					TakeNItems(sld, "indian3", 1);
 					GiveItem2Character(sld, "Spyglass1");
 					EquipCharacterbyItem(sld, "Spyglass1");
-					sld.money = 10000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 10000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case HOLLAND:
 					TakeNItems(sld, "indian3", 1);
 					GiveItem2Character(sld, "Spyglass3");
 					EquipCharacterbyItem(sld, "Spyglass3");
-					sld.money = 11000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 11000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case PIRATE:
 					GiveItem2Character(sld, "Map_Normal");
@@ -642,13 +642,13 @@ void GiveMCItemToSomeoneElse(ref sld)
 					AddItems(sld, "GunPowder", 10);
 					GiveItem2Character(sld, "Spyglass1");
 					EquipCharacterbyItem(sld, "Spyglass1");
-					sld.money = 5000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 5000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case SPAIN:
 					TakeNItems(sld, "indian14", 1);
 					TakeNItems(sld, "jewelry8", 1);
 					TakeNItems(sld, "jewelry9", 1);
-					sld.money = 8000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 8000/MOD_SKILL_ENEMY_RATE;
 				break;
 			}
 	    break;
@@ -670,20 +670,20 @@ void GiveMCItemToSomeoneElse(ref sld)
 			switch (sti(ch.nation))
 			{
 				case ENGLAND:
-					sld.money = 500/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 500/MOD_SKILL_ENEMY_RATE;
 				break;
 				case FRANCE:
 					GiveGunAmmunitionPchar(sld,itemID,10);
-					sld.money = 1000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 1000/MOD_SKILL_ENEMY_RATE;
 				break;
 				case HOLLAND:
-					sld.money = 500/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 500/MOD_SKILL_ENEMY_RATE;
 				break;
 				case PIRATE:
 					GiveItem2Character(sld, "Map_part1");
 				break;
 				case SPAIN:
-					sld.money = 2000/MOD_SKILL_ENEMY_RATE*3;
+					sld.money = 2000/MOD_SKILL_ENEMY_RATE;
 				break;
 			}
 	    break;
@@ -700,7 +700,7 @@ void GiveMCItemToSomeoneElse(ref sld)
 	        itemID = GetGeneratedItem("Spyglass" + rand(3));
 			GiveItem2Character(sld, itemID);
 			EquipCharacterbyItem(sld, itemID);
-			sld.money = 3000/MOD_SKILL_ENEMY_RATE*3;
+			sld.money = 3000/MOD_SKILL_ENEMY_RATE;
             TakenItems(sld, "Food1", rand(1)+2);
 			itemID = GetGeneratedItem("pistol" + (rand(2)+1));
             GiveItem2Character(sld, itemID);
@@ -752,7 +752,7 @@ void GiveMCItemToSomeoneElse(ref sld)
 			AddItems(sld, "GunPowder", 30);
 			GiveGunAmmunitionPchar(sld,itemID,30);
 			TakenItems(sld, "potion1", rand(10));
-			sld.money = 1000/MOD_SKILL_ENEMY_RATE*3;
+			sld.money = 1000/MOD_SKILL_ENEMY_RATE;
             TakenItems(sld, "Food1", rand(6)+4);
 	    break;
 
@@ -800,7 +800,7 @@ void GiveMCItemToSomeoneElse(ref sld)
             EquipCharacterbyItem(sld, itemID);
 			GiveGunAmmunitionPchar(sld,itemID,10);
 			TakenItems(sld, "potion1", rand(8));
-			sld.money = 2000/MOD_SKILL_ENEMY_RATE*3;
+			sld.money = 2000/MOD_SKILL_ENEMY_RATE;
             TakenItems(sld, "Food1", rand(6)+4);
 	    break;
 	}
@@ -882,12 +882,12 @@ void WhisperPirateTownGetHat_part_1(string qName)
 	LocatorReloadEnterDisable("PuertoPrincipe_ExitTown", "reload2_back", true);
 
 	string cnd;
-	int weaponskill = 2 * MOD_SKILL_ENEMY_RATE*3;
+	int weaponskill = 2 * MOD_SKILL_ENEMY_RATE;
 	for (int i = 0; i < 12; i++)
 	{
 		if (i < 10)
 		{
-			sld = GetCharacter(NPC_GenerateCharacter("IncqSoldier_"+sti(i), "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3, SPAIN, 0, true));
+			sld = GetCharacter(NPC_GenerateCharacter("IncqSoldier_"+sti(i), "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE, SPAIN, 0, true));
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
 			cnd = "l" + i;
@@ -897,10 +897,10 @@ void WhisperPirateTownGetHat_part_1(string qName)
 			GiveItem2Character(sld, "blade4");
 			EquipCharacterByItem(sld, "blade4");
 			SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
-			LAi_SetHP(sld, 12.0 * MOD_SKILL_ENEMY_RATE*3, 12.0 *MOD_SKILL_ENEMY_RATE*3);
+			LAi_SetHP(sld, 12.0 * MOD_SKILL_ENEMY_RATE, 12.0 *MOD_SKILL_ENEMY_RATE);
 			ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item8");
 		}
-			sld = GetCharacter(NPC_GenerateCharacter("PirateTownDefender_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3, PIRATE, 0, true));
+			sld = GetCharacter(NPC_GenerateCharacter("PirateTownDefender_"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
 			LAi_SetWarriorType(sld);
 			LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 			sld.Dialog.Filename = "Quest\WhisperLine\Whisper.c";
@@ -909,12 +909,12 @@ void WhisperPirateTownGetHat_part_1(string qName)
 			GiveItem2Character(sld, "blade1");
 			EquipCharacterByItem(sld, "blade1");
 			SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
-			LAi_SetHP(sld, 12.0 * MOD_SKILL_ENEMY_RATE*3, 12.0 *MOD_SKILL_ENEMY_RATE*3);
+			LAi_SetHP(sld, 12.0 * MOD_SKILL_ENEMY_RATE, 12.0 *MOD_SKILL_ENEMY_RATE);
 		if (i < 10)
 		{
 			ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item12");
 		}
-		if (i >= 10 && MOD_SKILL_ENEMY_RATE*3 < 10)
+		if (i >= 10 && MOD_SKILL_ENEMY_RATE < 10)
 		{
 			ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item1");
 			LAi_SetImmortal(sld, false);
@@ -960,7 +960,7 @@ void WhisperPirateTownGetHat_part_1(string qName)
 	sld = characterFromID("PirateTownDefender_7");
 	ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item9");
 
-	if (MOD_SKILL_ENEMY_RATE != 3)
+	if (MOD_SKILL_ENEMY_RATE != 10)
 	{
 		sld = characterFromID("PirateTownDefender_8");
 		ChangeCharacterAddressGroup(sld, "PuertoPrincipe_ExitTown", "item", "item9");
@@ -1032,11 +1032,11 @@ void WhisperMeetCrew(string qName)
     sld.Dialog.Filename = "Quest\WhisperLine\Whisper.c";
 	GiveItem2Character(sld, "blade9");
 	EquipCharacterByItem(sld, "blade9");
-	LAi_SetHP(sld, 30.0 * MOD_SKILL_ENEMY_RATE*3, 30.0 *MOD_SKILL_ENEMY_RATE*3);
-	if (MOD_SKILL_ENEMY_RATE == 3)
+	LAi_SetHP(sld, 30.0 * MOD_SKILL_ENEMY_RATE, 30.0 *MOD_SKILL_ENEMY_RATE);
+	if (MOD_SKILL_ENEMY_RATE == 10)
 	{
 		SetCharacterPerk(sld, "Sliding");
-		LAi_SetHP(sld, 35.0 * MOD_SKILL_ENEMY_RATE*3, 35.0 *MOD_SKILL_ENEMY_RATE*3);
+		LAi_SetHP(sld, 35.0 * MOD_SKILL_ENEMY_RATE, 35.0 *MOD_SKILL_ENEMY_RATE);
 	}
 	sld.greeting = "GR_ToughPirate";
     ChangeCharacterAddressGroup(sld, "PuertoPrincipe_Port", "officers", "reload1_1");
@@ -1211,7 +1211,7 @@ void WhisperSmugglingPatrol()
 	for (i = 1; i <= 3; i++)
     {
         Model = "off_" + NationShortName(iNation) + "_" + (rand(1) + 1);
-		CoastGuard = GetCharacter(NPC_GenerateCharacter("Coastal_Captain0" + i, Model, "man", "man", sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3), iNation, 3, true)); // 3 дня, потом сами пропадут
+		CoastGuard = GetCharacter(NPC_GenerateCharacter("Coastal_Captain0" + i, Model, "man", "man", sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE), iNation, 3, true)); // 3 дня, потом сами пропадут
 		SetFantomParam(CoastGuard);
 		SelectCoastalGuardShip(CoastGuard);
 		CoastGuard.AlwaysEnemy = true;
@@ -1242,10 +1242,10 @@ void WhisperHuntersCaveEntrance(string qName)
 	string cnd;
 	for (int i = 1; i <= 7; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", 5+MOD_SKILL_ENEMY_RATE*3, PIRATE, 0, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", 5+MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
 		//SetFantomParamHunter(sld);
 		LAi_SetHP(sld, 50+sti(pchar.rank)*10.0, 50+sti(pchar.rank)*10.0);
-		if (MOD_SKILL_ENEMY_RATE == 3)
+		if (MOD_SKILL_ENEMY_RATE == 10)
 		{
 			LAi_SetHP(sld, 50+sti(pchar.rank) * 20.0, 50+sti(pchar.rank) * 20.0);
 		}
@@ -1347,9 +1347,9 @@ void WhisperDeSouzaSeaBattle()
 	SetCrewQuantity(sld,GetMaxCrewQuantity(sld));
 
 	sld.ship.Crew.Morale = 100;
-	ChangeCrewExp(sld, "Sailors", 20 + 5 * MOD_SKILL_ENEMY_RATE*3);
-	ChangeCrewExp(sld, "Cannoners", 20 + 5 * MOD_SKILL_ENEMY_RATE*3);
-	ChangeCrewExp(sld, "Soldiers", 20 + 5 * MOD_SKILL_ENEMY_RATE*3);
+	ChangeCrewExp(sld, "Sailors", 20 + 5 * MOD_SKILL_ENEMY_RATE);
+	ChangeCrewExp(sld, "Cannoners", 20 + 5 * MOD_SKILL_ENEMY_RATE);
+	ChangeCrewExp(sld, "Soldiers", 20 + 5 * MOD_SKILL_ENEMY_RATE);
 	sld.SaveItemsForDead = true;
 	TakeNItems(sld, "DeSouzaCross", 1);
 
@@ -1357,14 +1357,14 @@ void WhisperDeSouzaSeaBattle()
 	SetShipSkill(sld, 50, 50, 50, 50, 50, 50, 50, 50, 50);
 	//SetSPECIAL(sld, 10, 3, 10, 4, 8, 9, 5);
 	sld.rank = 25;
-	LAi_SetHP(sld, 50.0 * MOD_SKILL_ENEMY_RATE*3, 50.0 * MOD_SKILL_ENEMY_RATE*3);
+	LAi_SetHP(sld, 50.0 * MOD_SKILL_ENEMY_RATE, 50.0 * MOD_SKILL_ENEMY_RATE);
 	GiveItem2Character(sld, "cirass3");
 	EquipCharacterbyItem(sld, "cirass3");
 
 	SetCharacterPerk(sld, "MusketsShoot");
 	SetCharacterPerk(sld, "CannonProfessional");
 
-	if (MOD_SKILL_ENEMY_RATE == 3)
+	if (MOD_SKILL_ENEMY_RATE == 10)
 	{
 		SetCharacterPerk(sld, "Sliding");
 		sld.rank = 40;
@@ -1436,16 +1436,16 @@ void WhisperWarDogSeaBattle()
 	SetCrewQuantity(sld, hcrew);
 
 	sld.ship.Crew.Morale = 100;
-	ChangeCrewExp(sld, "Sailors", 50 + 5 * MOD_SKILL_ENEMY_RATE*3);
-	ChangeCrewExp(sld, "Cannoners", 50 + 5 * MOD_SKILL_ENEMY_RATE*3);
-	ChangeCrewExp(sld, "Soldiers", 50 + 5 * MOD_SKILL_ENEMY_RATE*3);
+	ChangeCrewExp(sld, "Sailors", 50 + 5 * MOD_SKILL_ENEMY_RATE);
+	ChangeCrewExp(sld, "Cannoners", 50 + 5 * MOD_SKILL_ENEMY_RATE);
+	ChangeCrewExp(sld, "Soldiers", 50 + 5 * MOD_SKILL_ENEMY_RATE);
 
 	TakeNItems(sld, "Food5", 5);
 	TakeNItems(sld, "potion2", 5);
 	sld.SaveItemsForDead = true;
 	GiveItem2Character(sld, "cirass5");
 	EquipCharacterbyItem(sld, "cirass5")
-	LAi_SetHP(sld, 200.0 + 20 * MOD_SKILL_ENEMY_RATE*3, 200.0 + 20 * MOD_SKILL_ENEMY_RATE*3);
+	LAi_SetHP(sld, 200.0 + 20 * MOD_SKILL_ENEMY_RATE, 200.0 + 20 * MOD_SKILL_ENEMY_RATE);
 	SetSelfSkill(sld, 80, 80, 80, 80, 80);
 	SetShipSkill(sld, 75, 75, 75, 75, 75, 75, 75, 75, 75);
 	sld.rank = 30;
@@ -1455,7 +1455,7 @@ void WhisperWarDogSeaBattle()
 	}
 	SetCharacterPerk(sld, "MusketsShoot");
 	SetCharacterPerk(sld, "CannonProfessional");
-	if (MOD_SKILL_ENEMY_RATE == 3)
+	if (MOD_SKILL_ENEMY_RATE == 10)
 	{
 		sld.rank = 60;
 		SetSelfSkill(sld, 100, 100, 100, 100, 100);
@@ -1550,7 +1550,7 @@ void WhisperSpawn_Chard()
 
 void WhisperSpawnPortman(ref npchar)
 {
-	int difficulty = 5 * MOD_SKILL_ENEMY_RATE*3;
+	int difficulty = 5 * MOD_SKILL_ENEMY_RATE;
 	sld = GetCharacter(NPC_GenerateCharacter("Whisper_Portman_Captain", "off_eng_2", "man", "man", 55, ENGLAND, -1, true));
 	sld.mapEnc.worldMapShip = "quest_ship";
 	sld.mapEnc.Name = "эскадра Ральфа Портмана";
@@ -1681,7 +1681,7 @@ void WhisperEnglandRevengel()
 {
 	ref sld;
 	int i;
-	int difficulty = 5 * MOD_SKILL_ENEMY_RATE*3;
+	int difficulty = 5 * MOD_SKILL_ENEMY_RATE;
 	for (i = 1; i <= 4; i++)
     {
 		sld = GetCharacter(NPC_GenerateCharacter("W_Captain0"+i, "off_eng_" + (rand(1) + 1), "man", "man", difficulty, ENGLAND, 3, true));
@@ -1810,7 +1810,7 @@ void DarkHuman_Amatike(string qName)
 	DeleteAttribute(pchar, "selectedHero");
 	DoReloadCharacterToLocation("Shore9","smugglers", "smuggler02");
 
-	sld = GetCharacter(NPC_GenerateCharacter("DH_mercenary", "officer_" + (rand(62)+2), "man", "man", MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
+	sld = GetCharacter(NPC_GenerateCharacter("DH_mercenary", "officer_" + (rand(62)+2), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 	LAi_SetImmortal(sld, true);
 	ChangeCharacterAddressGroup(sld, "Shore9", "smugglers", "smuggler01");
 	sld.dialog.filename = "Quest\WhisperLine\DarkHuman.c";
@@ -1822,7 +1822,7 @@ void DarkHuman_Amatike(string qName)
 
 	for (int i = 0; i < 4; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_mush" + i, GetPirateMushketerModel(), "man", "mushketer", MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_mush" + i, GetPirateMushketerModel(), "man", "mushketer", MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 		ChangeCharacterAddressGroup(sld, "Shore9", "smugglers", "smugglerload");
 		LAi_SetWarriorType(sld);
 		LAi_SetActorType(sld);
@@ -1830,7 +1830,7 @@ void DarkHuman_Amatike(string qName)
 		TakeNItems(sld,"potion1", rand(2)+1);
 		LAi_warrior_DialogEnable(sld, false);
 
-		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_blade"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DH_merc_blade"+sti(i), "pirate_"+sti(rand(24)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, -1, true));
 
 		ChangeCharacterAddressGroup(sld, "Shore9", "smugglers", "smugglerload");
 		LAi_SetWarriorType(sld);
@@ -1861,21 +1861,21 @@ void DarkHuman_Temple(string qName)
 
 	string cnd;
 	pchar.maxIndians = 8;
-	if (MOD_SKILL_ENEMY_RATE == 3)
+	if (MOD_SKILL_ENEMY_RATE == 10)
 	{//Сюрприз для невозможки
 		pchar.maxIndians+=2;
 	}
 	for (i = 0; i <= sti(pchar.maxIndians) * 2; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("DHindian"+i, "Canib_"+(rand(5)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3, PIRATE, 1, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DHindian"+i, "Canib_"+(rand(5)+1), "man", "man", MOD_SKILL_ENEMY_RATE, PIRATE, 1, true));
 		//SetFantomParamFromRank(sld, 1, true);
 		sld.name = "Калинаго";
 		sld.lastname = "";
 		DeleteAttribute(sld, "equip");
 		DeleteAttribute(sld, "items");
 		string _Blade = GiveRandomBladeByType("indian");
-		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE*3, 10*MOD_SKILL_ENEMY_RATE*3);
-		weaponskill = 2* MOD_SKILL_ENEMY_RATE*3;
+		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE, 10*MOD_SKILL_ENEMY_RATE);
+		weaponskill = 2* MOD_SKILL_ENEMY_RATE;
 		SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
 		GiveItem2Character(sld, _Blade);
 		EquipCharacterbyItem(sld, _Blade);
@@ -1912,7 +1912,7 @@ void DarkHuman_Temple_Afterfight(string qName)
 	PChar.quest.DarkHuman_Temple_Inside.win_condition.l1.location = "Temple_Inside";
 	PChar.quest.DarkHuman_Temple_Inside.function = "DarkHuman_Temple_Inside";
 
-	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor", "Dark_Incquisitor", "man", "man", MOD_SKILL_ENEMY_RATE*3/2, PIRATE, 1, false));
+	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor", "Dark_Incquisitor", "man", "man", MOD_SKILL_ENEMY_RATE/2, PIRATE, 1, false));
 	ChangeCharacterAddressGroup(sld, "Temple_Inside", "goto", "goto9");
 	TakeNItems(sld, "suit_1", 1);
 	GiveItem2Character(sld, "blade22");
@@ -1923,19 +1923,19 @@ void DarkHuman_Temple_Afterfight(string qName)
 	sld.dialog.filename = "Quest\WhisperLine\DarkHuman.c";
 	sld.dialog.currentnode = "Dark_Incquisitor";
 	LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
-	LAi_SetHP(sld, 5*MOD_SKILL_ENEMY_RATE*3, 5*MOD_SKILL_ENEMY_RATE*3);
+	LAi_SetHP(sld, 5*MOD_SKILL_ENEMY_RATE, 5*MOD_SKILL_ENEMY_RATE);
 	TakeNItems(sld, "GunPowder", -99);
-	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor1", "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3/2, PIRATE, 1, true));
+	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor1", "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE/2, PIRATE, 1, true));
 	ChangeCharacterAddressGroup(sld, "Temple_Inside", "goto", "goto11");
 	LAi_SetActorType(sld);
 	LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
-	LAi_SetHP(sld, 3*MOD_SKILL_ENEMY_RATE*3, 3*MOD_SKILL_ENEMY_RATE*3);
+	LAi_SetHP(sld, 3*MOD_SKILL_ENEMY_RATE, 3*MOD_SKILL_ENEMY_RATE);
 	TakeNItems(sld, "GunPowder", -99);
-	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor2", "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE*3/2, PIRATE, 1, true));
+	sld = GetCharacter(NPC_GenerateCharacter("Dark_Incquisitor2", "sold_spa_"+(rand(7)+1), "man", "man", MOD_SKILL_ENEMY_RATE/2, PIRATE, 1, true));
 	ChangeCharacterAddressGroup(sld, "Temple_Inside", "goto", "goto13");
 	LAi_SetActorType(sld);
 	LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
-	LAi_SetHP(sld, 3*MOD_SKILL_ENEMY_RATE*3, 3*MOD_SKILL_ENEMY_RATE*3);
+	LAi_SetHP(sld, 3*MOD_SKILL_ENEMY_RATE, 3*MOD_SKILL_ENEMY_RATE);
 	TakeNItems(sld, "GunPowder", -99);
 }
 
@@ -1976,7 +1976,7 @@ void DarkHuman_Temple_Merc_After_Stash(string qName)
 }
 void DarkHuman_Amatike_return(string qName)
 {
-	sld = GetCharacter(NPC_GenerateCharacter("DH_sailor", "officer_1", "man", "man", MOD_SKILL_ENEMY_RATE*3/2, PIRATE, 1, true));
+	sld = GetCharacter(NPC_GenerateCharacter("DH_sailor", "officer_1", "man", "man", MOD_SKILL_ENEMY_RATE/2, PIRATE, 1, true));
 	ChangeCharacterAddressGroup(sld, "Shore9", "smugglers", "smuggler02");
 	Lai_SetActorType(sld);
 	//LAi_ActorFollow(sld, pchar, "", -1);
@@ -2129,7 +2129,7 @@ void DHRaceAgainstTime_findHouse(string qName)
 	{
 		chrDisableReloadToLocation = true;
 
-		sld = GetCharacter(NPC_GenerateCharacter("DHMerc", "OZG_" + (rand(6) + 1), "man", "man", 10+MOD_SKILL_ENEMY_RATE*3, PIRATE, -1, false));
+		sld = GetCharacter(NPC_GenerateCharacter("DHMerc", "OZG_" + (rand(6) + 1), "man", "man", 10+MOD_SKILL_ENEMY_RATE, PIRATE, -1, false));
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
 		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto3");
@@ -2142,7 +2142,7 @@ void DHRaceAgainstTime_findHouse(string qName)
 		pchar.quest.DHRaceAgainstTime_End.win_condition.c1 = "NPC_Death";
 		pchar.quest.DHRaceAgainstTime_End.win_condition.c1.character ="DHMerc";
 
-		sld = GetCharacter(NPC_GenerateCharacter("DHIncq", "PGG_Vincento_0", "man", "man", 5+MOD_SKILL_ENEMY_RATE*3, SPAIN, -1, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DHIncq", "PGG_Vincento_0", "man", "man", 5+MOD_SKILL_ENEMY_RATE, SPAIN, -1, true));
 		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto1");
 		ChangeItemName("DeSouzaCross", "itmname_DeSouzaCross_DH");
 		GiveItem2Character(sld, "DeSouzaCross");
@@ -2306,7 +2306,7 @@ void CaptureCapitol_ShoreBattle(string q)
 	pchar.CaptureCapitolSailors = iRnd;
 	pchar.CaptureCapitolPerSailor = perSailor;
 
-	float fCoeff = iRnd / stf(iRnd + sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3) // чтобы оверфлоу по персонажам в локации не было (макс 64)
+	float fCoeff = iRnd / stf(iRnd + sti(pchar.rank) + MOD_SKILL_ENEMY_RATE) // чтобы оверфлоу по персонажам в локации не было (макс 64)
 	int iMaxFriends = sti(fCoeff * MAX_CHARS_IN_LOC);
 	int iMaxEnemies = sti(MAX_CHARS_IN_LOC - iMaxFriends);
 
@@ -2325,7 +2325,7 @@ void CaptureCapitol_ShoreBattle(string q)
 	Pchar.GenQuestFort.FarLocator = true;
 
 	//enemy
-	iRnd = iRnd + sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3;
+	iRnd = iRnd + sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
 	Pchar.GenQuestFort.FarLocator = true;
 	sLoc = LAi_FindNPCLocator("quest");
 	sLoc_2 = LAi_FindNPCLocator("reload");
@@ -2370,7 +2370,7 @@ void CaptureCapitol_ShoreBattleRespite(string q)
 		TakeNItems(sld, "12_gauge", 99);
 	}
 	else	FantomMakeCoolFighter(sld, 100, 100, 100, "blade24", "pistol4", 80);
-	LAi_SetHP (sld, MOD_SKILL_ENEMY_RATE*3 * 150 + 500, MOD_SKILL_ENEMY_RATE*3 * 150);
+	LAi_SetHP (sld, MOD_SKILL_ENEMY_RATE * 150 + 500, MOD_SKILL_ENEMY_RATE * 150);
 	SetSPECIAL(sld, 10, 10, 10, 10, 10, 10, 10);
 	sld.cirassID = Items_FindItemIdx("cirass5");
 	sld.SaveItemsForDead = true;
@@ -2572,7 +2572,7 @@ void QuestWhisper_Incq(string q)
 {
 	chrDisableReloadToLocation = true;
 	DoQuestFunctionDelay("QuestWhisper_Incq_1", 0.1);
-	DoQuestFunctionDelay("QuestWhisper_Incq_2", 11.0 - MOD_SKILL_ENEMY_RATE*3);
+	DoQuestFunctionDelay("QuestWhisper_Incq_2", 11.0 - MOD_SKILL_ENEMY_RATE);
 	sld = CharacterFromID(pchar.WhisperId);
 	ChangeCharacterAddressGroup(sld, "Santiago_Incquisitio", "goto", "goto14");
 	LAi_SetWarriorTypeNoGroup(sld);

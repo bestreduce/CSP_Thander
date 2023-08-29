@@ -113,7 +113,7 @@ void Train_PPG(ref NPchar, bool setEquip bool increaseRank)   //WW
 	{
 		if (!CheckAttribute(NPchar, "PGGAi.Boosted"))
 		{
-			rank = sti(NPchar.rank) + (sti(NPchar.rank) * 0.2) + MOD_SKILL_ENEMY_RATE*3;
+			rank = sti(NPchar.rank) + (sti(NPchar.rank) * 0.2) + MOD_SKILL_ENEMY_RATE;
 			NPchar.cirassId = Items_FindItemIdx("cirass"+(rand(3)+2));
 			CalculateSkillsFromRank(Npchar, rank);
 			Npchar.rank = rank;
@@ -572,17 +572,17 @@ void CalculateAppropriateSkills(ref NPchar)
 
 		MiddleK = base_rank;
 
-        ok =  (MOD_SKILL_ENEMY_RATE > 2) && (bNewCodeOn);
+        ok =  (MOD_SKILL_ENEMY_RATE > 5) && (bNewCodeOn);
         if (!ok)
         {
-        	ok =  (MOD_SKILL_ENEMY_RATE <= 2) && (!bNewCodeOn); // наоборот - есть - сложнее станет
+        	ok =  (MOD_SKILL_ENEMY_RATE <= 5) && (!bNewCodeOn); // наоборот - есть - сложнее станет
         }
         ok =  (!CheckAttribute(NPchar, "OurMan")) || (ok);
 
   		if (!CheckAttribute(NPchar, "BaseRank") && ok) // токо Компы и не двойной учет для моря
   		{
-            MiddleK = MiddleK + (MOD_SKILL_ENEMY_RATE*3-5) * 1.5;
-            sTemp += " ComplexBonus = " + FloatToString((MOD_SKILL_ENEMY_RATE*3-5) * 1.5, 1);
+            MiddleK = MiddleK + (MOD_SKILL_ENEMY_RATE-5) * 1.5;
+            sTemp += " ComplexBonus = " + FloatToString((MOD_SKILL_ENEMY_RATE-5) * 1.5, 1);
   		}
   		rank = MakeInt(MiddleK + frandSmall(4) + frandSmall(4) + frandSmall(4) + frandSmall(4) - 8 + rank_bonus);
 
@@ -813,7 +813,7 @@ void SetMonsterLoginHP(ref _pchar) // жизнь у монстров больш�
 	int hp;
 	if (true)
 	{
-		int rank = makeint(sti(_pchar.rank) * (1 + MOD_SKILL_ENEMY_RATE*3 / 40.0));
+		int rank = makeint(sti(_pchar.rank) * (1 + MOD_SKILL_ENEMY_RATE / 40.0));
 		hp = LAI_DEFAULT_HP_MAX + rank * 5;
 		_pchar.rank = rank;
 		LAi_SetHP(_pchar, hp, hp);
@@ -821,7 +821,7 @@ void SetMonsterLoginHP(ref _pchar) // жизнь у монстров больш�
 	}
 	else
 	{
-		hp = LAI_DEFAULT_HP_MAX + makeint(sti(_pchar.rank)*(MOD_SKILL_ENEMY_RATE*3 / 2.0 + 5.0)) + 10;
+		hp = LAI_DEFAULT_HP_MAX + makeint(sti(_pchar.rank)*(MOD_SKILL_ENEMY_RATE / 2.0 + 5.0)) + 10;
 		LAi_SetHP(_pchar, hp, hp);
 		LAi_SetCurHPMax(_pchar);
 	}
@@ -888,14 +888,14 @@ int GetBoarding_player_hp_Bonus(int mcrew, int ecrew) // бонус от пер�
 	{    // только этот код
 		if (mcrew > ecrew)
 		{
-			m_rank_bonus = makeint(0.5 * MOD_SKILL_ENEMY_RATE*3 * makefloat((mcrew - ecrew) / makefloat(ecrew)));
+			m_rank_bonus = makeint(0.5 * MOD_SKILL_ENEMY_RATE * makefloat((mcrew - ecrew) / makefloat(ecrew)));
 			Log_TestInfo("Бонус к уровню игрока за перевес в численности: " + m_rank_bonus);
 		}
 		return 0;
 	}
 	else
 	{
-		return makeint(5 * MOD_SKILL_ENEMY_RATE*3 * makefloat((mcrew - ecrew) / makefloat(ecrew)));
+		return makeint(5 * MOD_SKILL_ENEMY_RATE * makefloat((mcrew - ecrew) / makefloat(ecrew)));
 	}
 }
 
@@ -908,25 +908,25 @@ int GetBoarding_enemy_hp_Bonus(int mcrew, int ecrew) // бонус от пере
 	{    // только этот код
 		if (ecrew > mcrew)
 		{
-			e_rank_bonus = makeint(2 * MOD_SKILL_ENEMY_RATE*3 * makefloat((ecrew - mcrew) / makefloat(mcrew)));
+			e_rank_bonus = makeint(2 * MOD_SKILL_ENEMY_RATE * makefloat((ecrew - mcrew) / makefloat(mcrew)));
 			Log_TestInfo("Бонус к уровню врагов за перевес в численности: " + e_rank_bonus);
 		}
 		return 0;
 	}
 	else
 	{
-		return makeint(6 * MOD_SKILL_ENEMY_RATE*3 * makefloat((ecrew - mcrew) / makefloat(mcrew)));
+		return makeint(6 * MOD_SKILL_ENEMY_RATE * makefloat((ecrew - mcrew) / makefloat(mcrew)));
 	}
 }
 
 float GetBoarding_player_hp(float b_p_hp) // итоговое здоровье нашего матроса
 {
-	return b_p_hp; // нафиг случайность иначе мрут сильно + 6*rand(11 - MOD_SKILL_ENEMY_RATE*3) - 20;
+	return b_p_hp; // нафиг случайность иначе мрут сильно + 6*rand(11 - MOD_SKILL_ENEMY_RATE) - 20;
 }
 
 float GetBoarding_enemy_hp(float b_e_hp) // итоговое здоровье матроса врага
 {
-	return b_e_hp + 4*(MOD_SKILL_ENEMY_RATE*3 - 5); // нафиг случайность + 6*rand(MOD_SKILL_ENEMY_RATE*3+1) - 20;
+	return b_e_hp + 4*(MOD_SKILL_ENEMY_RATE - 5); // нафиг случайность + 6*rand(MOD_SKILL_ENEMY_RATE+1) - 20;
 }
 // наши на абордаде (далее применяется НР капитана)
 void SetFantomParamAbordOur(ref _pchar)

@@ -306,7 +306,7 @@ void PlaceSmugglersOnShore(string LocationId)
 	player.GenQuest.Smugglers_Group = "Smugglers_1";
     LAi_group_Register(player.GenQuest.Smugglers_Group);
 
-	for (i = 1; i <= 3+makeint(MOD_SKILL_ENEMY_RATE*3/2); i++)
+	for (i = 1; i <= 3+makeint(MOD_SKILL_ENEMY_RATE/2); i++)
     {
         Model = "pirate_" + (rand(9)+1);
 		Smuggler = GetCharacter(NPC_GenerateCharacter("Rand_Smug0" + i, Model, "man", "man", 5, PIRATE, 4, true)); // 4 дня, потом сами пропадут
@@ -390,7 +390,7 @@ void RemoveSmugglersFromShore()
 	pchar.quest.KillSmugglers_outShore.win_condition.l1 = "ExitFromLocation";
 	pchar.quest.KillSmugglers_outShore.win_condition.l1.location = pchar.location;
 	pchar.quest.KillSmugglers_outShore.win_condition = "KillSmugglers_outShore";
-	for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE*3/2); i++) //eddy
+	for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE/2); i++) //eddy
 	{
 		cn = GetCharacterIndex("Rand_Smug0"+i);
 		if (cn != -1)
@@ -517,7 +517,7 @@ int GetContrabandGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref
 	if(_PriceType == PRICE_TYPE_BUY) // цена покупки товара игроком
 	{
 		skillModify = 1.325 - _TradeSkill * 0.005;
-		if(tradeType == TRADE_TYPE_CANNONS) cModify = 2.0 - MOD_SKILL_ENEMY_RATE*3/20.0;
+		if(tradeType == TRADE_TYPE_CANNONS) cModify = 2.0 - MOD_SKILL_ENEMY_RATE/20.0;
 		if(CheckCharacterPerk(chref,"HT2"))
 		{
 			if(CheckOfficersPerk(chref,"AdvancedCommerce"))	{ skillModify -= 0.20; }
@@ -542,7 +542,7 @@ int GetContrabandGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref
 	else	// цена продажи товара игроком
 	{
 		skillModify = 0.675 + _TradeSkill * 0.005;
-		if(tradeType == TRADE_TYPE_CANNONS) cModify = 2.0 - MOD_SKILL_ENEMY_RATE*3/20.0;
+		if(tradeType == TRADE_TYPE_CANNONS) cModify = 2.0 - MOD_SKILL_ENEMY_RATE/20.0;
 		if(CheckCharacterPerk(chref,"HT2"))
 		{
 			if(CheckOfficersPerk(chref,"AdvancedCommerce"))	skillModify += 0.20;
@@ -591,7 +591,7 @@ int GetContrabandGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref
 }
 
 void ContrabandInterruptionSetStatus(bool status) {
-	for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE*3/2); i++) {
+	for (i=1; i<=3+makeint(MOD_SKILL_ENEMY_RATE/2); i++) {
 		ref randSmug = &characters[GetCharacterIndex("Rand_Smug0"+i)];
 		if (status) {
 			randSmug.ContrabandInterruption = true;

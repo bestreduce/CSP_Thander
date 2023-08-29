@@ -313,7 +313,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
         DialogExit();
         break;
 	case "Cost_Head":
-			PChar.HunterCost = MOD_SKILL_ENEMY_RATE*3/4 * sti(npchar.rank) * 1000 + rand(1000);
+			PChar.HunterCost = MOD_SKILL_ENEMY_RATE/4 * sti(npchar.rank) * 1000 + rand(1000);
 			dialog.text = "Даже так? Я уже был"+ NPCharSexPhrase(NPChar,"","а") +" готов"+ NPCharSexPhrase(NPChar,"","а") +" за оружие браться\nНу что же, я не против. Думаю, что " + sti(PChar.HunterCost) + " пиастров меня устроит.";
 			if(makeint(Pchar.money) < sti(PChar.HunterCost))
             {
@@ -623,7 +623,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		link.l1.go = "Quest_Whisper_2_exit";
 		for (int i = 1; i < 4; i++)
 		{
-			sld = GetCharacter(NPC_GenerateCharacter("PGG_Whisper_Incquisitor"+i, "PGG_Vincento_"+(2+i), "man", "man", MOD_SKILL_ENEMY_RATE*3/2, PIRATE, 1, false));
+			sld = GetCharacter(NPC_GenerateCharacter("PGG_Whisper_Incquisitor"+i, "PGG_Vincento_"+(2+i), "man", "man", MOD_SKILL_ENEMY_RATE/2, PIRATE, 1, false));
 			ChangeCharacterAddressGroup(sld, pchar.location, "reload", "reload1_back");
 		}
 	break;

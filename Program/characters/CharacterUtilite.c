@@ -3117,11 +3117,11 @@ void UpdateFame()	//метод вызывается ежедневно, умен
 {
 	if (sti(pchar.reputation) < (REPUTATION_NEUTRAL - 10))
 	{
-		ChangeCharacterReputation(pchar, (MOD_SKILL_ENEMY_RATE*3 / 40.0));//плохое забывается медленнее
+		ChangeCharacterReputation(pchar, (MOD_SKILL_ENEMY_RATE / 40.0));//плохое забывается медленнее
 	}
 	if (sti(pchar.reputation) > (REPUTATION_NEUTRAL + 10))
 	{
-		ChangeCharacterReputation(pchar, (-MOD_SKILL_ENEMY_RATE*3 / 20.0));
+		ChangeCharacterReputation(pchar, (-MOD_SKILL_ENEMY_RATE / 20.0));
 	}
 }
 

@@ -1086,7 +1086,7 @@ void Dead_AddLoginedCharacter(aref chr)
     		    // вернем саблю и пистоль -->
     		    if(CheckAttribute(chr, "equip.blade"))
 				{
-					if(rand(MOD_SKILL_ENEMY_RATE*3 + 5 - makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/3)) == 1 && chr.equip.blade != "unarmed") // 20 процентов for 3+2=5
+					if(rand(MOD_SKILL_ENEMY_RATE + 5 - makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/3)) == 1 && chr.equip.blade != "unarmed") // 20 процентов for 3+2=5
 					{
 						rItem = ItemsFromID(chr.equip.blade);
 						if(CheckAttribute(rItem,"quality") && rItem.quality != "excellent" && !CheckAttribute(rItem, "DontDrop")) // ugeen --> на обычных трупах топовое оружие не даем !!!
@@ -1112,7 +1112,7 @@ void Dead_AddLoginedCharacter(aref chr)
 				}
 				if(CheckAttribute(chr, "equip.gun"))
 				{
-					if(rand(MOD_SKILL_ENEMY_RATE*3 + 10 - makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/2)) == 2)
+					if(rand(MOD_SKILL_ENEMY_RATE + 10 - makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/2)) == 2)
 					{
 						rItem = ItemsFromID(chr.equip.gun);
 						if(CheckAttribute(rItem,"quality") && rItem.quality != "excellent") // ugeen --> на обычных трупах топовое оружие не даем !!!
@@ -1158,7 +1158,7 @@ void Dead_AddLoginedCharacter(aref chr)
 
                 for (j= ItemDeadStartCount; j<ITEMS_QUANTITY; j++) // нужно оптимизировать!!! 137 - это много  начало с опред места
     			{
-					if (howI >= (11 - MOD_SKILL_ENEMY_RATE*3 + makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/3)))
+					if (howI >= (11 - MOD_SKILL_ENEMY_RATE + makeint(GetCharacterSPECIALSimple(mchr, SPECIAL_L)/3)))
 					{
 					   break;
 					}
@@ -1169,7 +1169,7 @@ void Dead_AddLoginedCharacter(aref chr)
                         //attrName = name+".rare";
                         if (!CheckAttribute(typeRef, "rare") && MOD_BETTATESTMODE == "On") Log_Info("Error: Не найдет RARE для предмета = "+itm.id + " тип = " + name);
 
-                        if ( rand(1000-(GetCharacterSPECIALSimple(mchr, SPECIAL_L)*20)) < (((stf(typeRef.rare) + stf(typeRef.rare)*nLuck / 20.0) / makefloat(MOD_SKILL_ENEMY_RATE*3))*930.0))
+                        if ( rand(1000-(GetCharacterSPECIALSimple(mchr, SPECIAL_L)*20)) < (((stf(typeRef.rare) + stf(typeRef.rare)*nLuck / 20.0) / makefloat(MOD_SKILL_ENEMY_RATE))*930.0))
                         {
                             value = sti(typeRef.min);
                             value = value+rand(sti(typeRef.max) - value);

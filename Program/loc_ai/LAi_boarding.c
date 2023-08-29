@@ -1142,7 +1142,7 @@ void LAi_SetBoardingActors(string locID)
 			// 1.2.3 эффект кирасы
 			//if (CheckCharacterPerk(chr, "Ciras"))
 			//{
-		    xhp = makeint((MOD_SKILL_ENEMY_RATE*3*2+sti(chr.rank))/10.0);
+		    xhp = makeint((MOD_SKILL_ENEMY_RATE*2+sti(chr.rank))/10.0);
 
 		    if (xhp > 0)
 		    {
@@ -1402,16 +1402,16 @@ bool CheckForSurrender(ref mchr, ref echr, int _deck)
 
     if (GetPrisonerQty() > PRISONER_MAX) return false; // очень много пленых
 
-	float fEnemyRate = 0.5 - 0.02 * MOD_SKILL_ENEMY_RATE*3;
+	float fEnemyRate = 0.5 - 0.02 * MOD_SKILL_ENEMY_RATE;
 	if (sti(echr.Nation) == PIRATE)
 	{
-		fEnemyRate = 0.2 - 0.01 * MOD_SKILL_ENEMY_RATE*3;
+		fEnemyRate = 0.2 - 0.01 * MOD_SKILL_ENEMY_RATE;
 	}
 	else
 	{
 		if (CheckAttribute(echr, "Ship.Mode") && echr.Ship.Mode == "Trade") // торговцы склонны сдаться
 		{
-			fEnemyRate = 0.9 - 0.03 * MOD_SKILL_ENEMY_RATE*3;
+			fEnemyRate = 0.9 - 0.03 * MOD_SKILL_ENEMY_RATE;
 		}
 	}
 

@@ -1251,7 +1251,7 @@ void StartIncquisitioAttack()
     for (int i=1; i<=5; i++)
     {
 		sld = GetCharacter(NPC_GenerateCharacter("IncqAddGuard_"+i, "sold_spa_"+(rand(7)+1), "man", "man", 35, SPAIN, 1, true));
-		FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3+8, 80, 70, BLADE_LONG, "pistol4", 50);
+		FantomMakeCoolFighter(sld, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+8, 80, 70, BLADE_LONG, "pistol4", 50);
         LAi_SetWarriorType(sld);
         LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
         ChangeCharacterAddressGroup(sld, "Santiago_Incquisitio", "goto", LAi_FindRandomLocator("goto"));

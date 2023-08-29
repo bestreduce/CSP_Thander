@@ -320,7 +320,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("PDM_Novaya_Rodina", "6");
 			AddQuestUserData("PDM_Novaya_Rodina", "sSex", GetSexPhrase("","а"));
 
-			int Rank = sti(pchar.rank) - 3 + MOD_SKILL_ENEMY_RATE*3;
+			int Rank = sti(pchar.rank) - 3 + MOD_SKILL_ENEMY_RATE;
 			if (Rank < 1) Rank = 1;
 			sld = GetCharacter(NPC_GenerateCharacter("PDM_Lesopilka_Galeon", "off_eng_1", "man", "man", Rank, ENGLAND, -1, true));
 			FantomMakeCoolSailor(sld, SHIP_GALEON_H, "Вкуснятина", CANNON_TYPE_CANNON_LBS32, 20, 20, 50);

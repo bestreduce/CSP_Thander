@@ -3571,11 +3571,11 @@ void Ship_UpdateParameters()
 	{
 		if (iArcadeSails == 1)
     	{
-           fTRFromSpeed = 1.0 - (0.2 - MOD_SKILL_ENEMY_RATE*3*0.002) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));
+           fTRFromSpeed = 1.0 - (0.2 - MOD_SKILL_ENEMY_RATE*0.002) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));
 		}
 		else
 		{
-		    fTRFromSpeed = 1.0 - (0.75 - MOD_SKILL_ENEMY_RATE*3*0.005) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));//чем медленнее текущая скорость корабля, тем медленнее он поворачивает
+		    fTRFromSpeed = 1.0 - (0.75 - MOD_SKILL_ENEMY_RATE*0.005) * (1.0 - Clampf(fCurrentSpeedZ / fShipSpeed));//чем медленнее текущая скорость корабля, тем медленнее он поворачивает
 		}
 	}
 	// boal зависимость от скорости на маневр <--

@@ -123,7 +123,7 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 	float fCaliberPenalty = (GetCannonCaliber(iCannonType) - 6 - fCannons*2)/160;//-0.05...0.15
     float fAccuracy = (1.5 - stf(aCharacter.TmpSkill.Accuracy))/2 + fCaliberPenalty + fCannonsNumPenalty;
 	
-	fCannons = 15.0 + MOD_SKILL_ENEMY_RATE*3 - fCannons;//сложность влияет на частоту нанесения урона! И на неписей тоже распространяется???
+	fCannons = 15.0 + MOD_SKILL_ENEMY_RATE - fCannons;//сложность влияет на частоту нанесения урона! И на неписей тоже распространяется???
 
 	if (fCannons > 0.0 && RealShips[sti(aCharacter.ship.type)].BaseName != "fort") // fix
 	{

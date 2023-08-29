@@ -786,7 +786,7 @@ void BSChaseBegun_shore_fight()
 	Group_DeleteGroup("BSChaseBegun_shore_fight");
 	Group_FindOrCreateGroup("BSChaseBegun_shore_fight");//создать группу
 	Group_SetType("BSChaseBegun_shore_fight", "war");//тип группы
-	for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE*3 * 2; i++)
+	for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE * 2; i++)
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("BSChaseBegun_shore_fight"+i, "pirate_"+sti(rand(24)+1), "man", "man", 99, PIRATE, 3, true));
 		ChangeCharacterAddressGroup(sld, "Shore_ship1", "reload", "reload1_back"));
@@ -816,7 +816,7 @@ void BSChaseBegun_shore_fightReCheck(string qName)
 	if (!CheckAttribute(pchar, "BSChaseBegun_shore_fightEnd"))
 	{
 		int n = 1;
-		for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE*3 * 2; i++)
+		for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE * 2; i++)
 		{
 			sld = CharacterFromID("BSChaseBegun_shore_fight"+sti(i));
 			if(LAi_IsDead(sld))
@@ -824,9 +824,9 @@ void BSChaseBegun_shore_fightReCheck(string qName)
 				n++;
 			}
 		}
-		if(n >= 8 + MOD_SKILL_ENEMY_RATE*3 * 2)
+		if(n >= 8 + MOD_SKILL_ENEMY_RATE * 2)
 		{
-			for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE*3 * 2; i++)
+			for (i = 1; i < 10 + MOD_SKILL_ENEMY_RATE * 2; i++)
 			{
 				sld = CharacterFromID("BSChaseBegun_shore_fight"+sti(i));
 				if(!LAi_IsDead(sld))
@@ -1965,7 +1965,7 @@ void BSHangover_Cave(string q)
 	string cnd;
 	for (int i = 1; i <= 12; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3 * 2, PIRATE, 0, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", sti(pchar.rank)+MOD_SKILL_ENEMY_RATE * 2, PIRATE, 0, true));
 
 		LAi_SetWarriorType(sld);
 		LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
@@ -2038,7 +2038,7 @@ void BSHangover_CaveEntrance(string qName)
 		if(i == 2)	sld = CharacterFromID("BS_Silver");
 		if(i == 3)	sld = CharacterFromID("BS_Rakham");
 		if(i == 4)	sld = CharacterFromID("BS_Bony");
-		LAi_SetHP(sld, 1000 - MOD_SKILL_ENEMY_RATE*3 * 50, 1000);
+		LAi_SetHP(sld, 1000 - MOD_SKILL_ENEMY_RATE * 50, 1000);
 		ChangeCharacterAddressGroup(sld, pchar.location, "enc01", "enc01_02");
 		LAi_SetWarriorType(sld);
 		LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
@@ -2050,7 +2050,7 @@ void BSHangover_CaveEntrance(string qName)
 	string cnd;
 	for (i = 1; i <= 20; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3 * 2, PIRATE, 0, true));
+		sld = GetCharacter(NPC_GenerateCharacter("DeSouzaHunter"+sti(i), "OZG_" + (rand(6) + 1), "man", "man", sti(pchar.rank)+MOD_SKILL_ENEMY_RATE * 2, PIRATE, 0, true));
 
 		LAi_SetWarriorType(sld);
 		LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
@@ -2161,7 +2161,7 @@ void BSHangover_FlintFight()
 {
 	for (int i = 1; i <= 6; i++)
 	{
-		sld = GetCharacter(NPC_GenerateCharacter("FlintOff"+i, "officer_" + (rand(62)+2), "man", "man", sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3, PIRATE, 0, true));
+		sld = GetCharacter(NPC_GenerateCharacter("FlintOff"+i, "officer_" + (rand(62)+2), "man", "man", sti(pchar.rank) + MOD_SKILL_ENEMY_RATE, PIRATE, 0, true));
 		LAi_SetWarriorType(sld);
 		LAi_group_MoveCharacter(sld, LAI_GROUP_BRDENEMY);
 	}

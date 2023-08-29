@@ -391,7 +391,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 							//pchar.questTemp.pirateVikingQuest = "5";
 							pchar.LastHearedViking = npchar.city;
 
-							if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("pirateVikingQuest_Captain", "OZG_3", "man", "man_fast", 80, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+							if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("pirateVikingQuest_Captain", "OZG_3", "man", "man_fast", 80, PIRATE, -1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 							else sld = GetCharacter(NPC_GenerateCharacter("pirateVikingQuest_Captain", "OZG_3", "man", "man", 80, PIRATE, -1, true));
 							sld.mapEnc.worldMapShip = "quest_ship";
 							sld.mapEnc.Name = "щебека 'Драккар'";

@@ -145,7 +145,7 @@ void LandHunterReactionResult(ref loc)  // отработает после вх�
 				k = 8;
 	            for (i = 1; i <= k; i++)
 	            {
-	                if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter(sCapId + i, "OZG_" + (rand(9) + 1), "man", "man_fast", 30+rand(10), j, 0, true));
+	                if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter(sCapId + i, "OZG_" + (rand(9) + 1), "man", "man_fast", 30+rand(10), j, 0, true));
 	                else sld = GetCharacter(NPC_GenerateCharacter(sCapId + i, "OZG_" + (rand(9) + 1), "man", "man", 30+rand(10), j, 0, true));
 	                SetFantomParamHunter(sld); //крутые парни
 	                sld.name 	= "Охотник за головами";

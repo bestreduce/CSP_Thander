@@ -814,7 +814,7 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 // ugeen --> вычисление ранга квестовых проитвников в зависимости от ранга ГГ и уровня сложности
 int SetQuestCharacterRank()
 {
-	int rank = 25 + makeint(sti(pchar.rank)*(0.1 + MOD_SKILL_ENEMY_RATE*3));
+	int rank = 25 + makeint(sti(pchar.rank)*(0.1 + MOD_SKILL_ENEMY_RATE));
 
 	return rank;
 }
@@ -928,8 +928,8 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
 	_Blade = GetGeneratedItem(_Blade);
     GiveItem2Character(_Character, _Blade);
     EquipCharacterbyItem(_Character, _Blade);
-    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE*3+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
-    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE*3/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
+    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
+    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
     TakeNItems(_Character,"Food1", rand(2)+2);
     if (_Gun != "")
 	{
@@ -965,8 +965,8 @@ void FantomMakeCoolFighterWRankDepend(ref _Character, int _Rank, int _Fencing, i
 	sword = GetGeneratedItem(sword);
     GiveItem2Character(_Character, sword);
     EquipCharacterbyItem(_Character, sword);
-    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE*3+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
-    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE*3/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
+    TakeNItems(_Character,"potion1", func_min(MakeInt(((MOD_SKILL_ENEMY_RATE+5)/10) * (Random()+1) * stf(_Character.chr_ai.hp_max)*0.7 / 40), 25));
+    TakeNItems(_Character,"potion2", func_max(func_min(MakeInt((MOD_SKILL_ENEMY_RATE/5) * stf(_Character.chr_ai.hp_max)*0.7 / 150), 7), 1));
     TakeNItems(_Character,"Food1", rand(2)+2);
 	string Gun = GiveRankGun(_Character);
     if (Gun != "")
@@ -1057,8 +1057,15 @@ int GetCoffDiff(float _num, int _maxRange)
 	switch (MOD_SKILL_ENEMY_RATE)
 	{
 		case  1: _num *= 0.6;  break;
-		case  2: _num *= 1; break;
-		case  3: _num *= 1.4; break;
+		case  2: _num *= 0.75; break;
+		case  3: _num *= 0.85; break;
+		case  4: _num *= 0.9;  break;
+		case  5: _num *= 0.95; break;
+		case  6: _num *= 1;    break;
+		case  7: _num *= 1.1;  break;
+		case  8: _num *= 1.2;  break;
+		case  9: _num *= 1.3;  break;
+		case 10: _num *= 1.5;  break;
 	}
 	_num += 0.5;
 	if (_num > _maxRange) return _maxRange;
@@ -1069,8 +1076,15 @@ int GetCoffDiffSkill(float _num, int _maxRange)
 	switch (MOD_SKILL_ENEMY_RATE)
 	{
 		case  1: _num *= 0.8;  break;
-		case  2: _num *= 1; break;
-		case  3: _num *= 1.2; break;
+		case  2: _num *= 0.85; break;
+		case  3: _num *= 0.9; break;
+		case  4: _num *= 0.95;  break;
+		case  5: _num *= 1; break;
+		case  6: _num *= 1.05;    break;
+		case  7: _num *= 1.1;  break;
+		case  8: _num *= 1.15;  break;
+		case  9: _num *= 1.2;  break;
+		case 10: _num *= 1.25;  break;
 	}
 	_num += 0.5;
 	if (_num > _maxRange) return _maxRange;
@@ -2365,7 +2379,7 @@ void IsabellaNullBudget()
 //возвращает текущую задолженность в деньгах. положительное значение - задолж., отрицательное - профицит.
 int IsabellaCheckBudgetMoney()
 {
-	int Debt = GetQuestPastMonthParam("RomanticQuest.Budget")*MOD_SKILL_ENEMY_RATE*3*10000;
+	int Debt = GetQuestPastMonthParam("RomanticQuest.Budget")*MOD_SKILL_ENEMY_RATE*10000;
 	int CurMoney = sti(pchar.RomanticQuest.Budget);
 	return Debt - CurMoney;
 }
@@ -3161,7 +3175,7 @@ void SetSkeletonsToLocation(aref _location)
 	if (!CheckAttribute(_location, "Monsters_step"))
 	{
 		iStep = 0;
-		_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+		_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 		SaveCurrentNpcQuestDateParam(_location, "Monsters_step"); //запись даты
 	}
 	else
@@ -3169,13 +3183,13 @@ void SetSkeletonsToLocation(aref _location)
 		if (GetNpcQuestPastDayParam(_location, "Monsters_step") > 3)
 		{
 			iStep = 0;
-			_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+			_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 			SaveCurrentNpcQuestDateParam(_location, "Monsters_step"); //запись даты
 		}
 		else
 		{
 			iStep = _location.Monsters_step;
-			_location.Monsters_step = iStep + sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+			_location.Monsters_step = iStep + sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 		}
 	}
 	LAi_group_Delete("EnemyFight");
@@ -3183,8 +3197,8 @@ void SetSkeletonsToLocation(aref _location)
 	//--> генерим ранг
 	if (sti(pchar.rank) > 6)
 	{
-		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3;
-		else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3/2);
+		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
+		else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE/2);
 	}
 	else
 	{	//казуалам зеленый свет на начало игры
@@ -3201,7 +3215,7 @@ void SetSkeletonsToLocation(aref _location)
 		if (_location.id == "dungeon_02")
 		{
 			sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*5);
+			FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*5);
 		}
 		else
 		{
@@ -3209,14 +3223,14 @@ void SetSkeletonsToLocation(aref _location)
 			//если квест по зачистке от нечисти - скелетов делаем круче
 			if (CheckAttribute(_location, "DestroyGhost"))
 			{
-				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*4);
+				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*4);
 				DeleteAttribute(sld, "SuperShooter");
 			}
 			else
 			{
 				if (i == rNum && sti(pchar.rank) > 5)
 				{
-					FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3*3);
+					FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3);
 					DeleteAttribute(sld, "SuperShooter");
 				}
 				else SetFantomParamFromRank(sld, iRank, true);
@@ -3266,7 +3280,7 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 	if (!CheckAttribute(_location, "Monsters_step"))
 	{
 		iStep = 0;
-		_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+		_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 		SaveCurrentNpcQuestDateParam(_location, "Monsters_step"); //запись даты
 	}
 	else
@@ -3274,13 +3288,13 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 		if (GetNpcQuestPastDayParam(_location, "Monsters_step") > 3)
 		{
 			iStep = 0;
-			_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+			_location.Monsters_step = sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 			SaveCurrentNpcQuestDateParam(_location, "Monsters_step"); //запись даты
 		}
 		else
 		{
 			iStep = _location.Monsters_step;
-			_location.Monsters_step = iStep + sti(MOD_SKILL_ENEMY_RATE*3 / 1.5 + 0.5);
+			_location.Monsters_step = iStep + sti(MOD_SKILL_ENEMY_RATE / 1.5 + 0.5);
 		}
 	}
 	LAi_group_Delete("EnemyFight");
@@ -3288,8 +3302,8 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 	//--> генерим ранг
 	if (sti(pchar.rank) > 5)
 	{
-		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank)+5 + MOD_SKILL_ENEMY_RATE*3;
-		else iRank = sti(pchar.rank)+5 + sti(MOD_SKILL_ENEMY_RATE*3/2);
+		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank)+5 + MOD_SKILL_ENEMY_RATE;
+		else iRank = sti(pchar.rank)+5 + sti(MOD_SKILL_ENEMY_RATE/2);
 	}
 	else
 	{	//казуалам набьют ебало, ибо ранг+5 и толпа
@@ -3319,7 +3333,7 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 
 		if (i == rNum && sti(pchar.rank) > 5)
 		{
-			FantomMakeCoolFighter(sld, iRank, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3*3);
+			FantomMakeCoolFighter(sld, iRank, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3);
 			DeleteAttribute(sld, "SuperShooter");
 		}
 		else SetFantomParamFromRank(sld, iRank, true);
@@ -3328,7 +3342,7 @@ void SetReefSkeletonsToLocation(aref _location, string loc)
 			if (GetDataDay() == 3 && GetDataMonth() == 3 && GetTime() >= 3.0 && GetTime() < 4.0 && loc == "MountainPath" && !CheckAttribute(pchar,"salasarmet") && CheckAttribute(pchar,"SalasarEventKnow"))
 			{
 				pchar.salasarmet = true;
-				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "man_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
+				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "man_fast", iRank, PIRATE, 1, true)); // LEO: Превозмогаторам - страдать 01.12.2021
 				else sld = GetCharacter(NPC_GenerateCharacter("salasar", "salasar", "skeleton", "skeleton", iRank, PIRATE, 1, true));
 				sld.name = "Армандо";
 				sld.lastname = "Салазар";

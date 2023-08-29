@@ -734,7 +734,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				int cost = 4000 + makeint(500 * sti(PChar.rank) * MOD_SKILL_ENEMY_RATE*3/2);
+				int cost = 4000 + makeint(500 * sti(PChar.rank) * MOD_SKILL_ENEMY_RATE/2);
 				if (IsCharacterPerkOn(pchar, "Agent"))
 				{
 					cost = makeint(cost/2);
@@ -751,7 +751,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "PGGInfo_2":
-			int cost1 = 4000 + makeint(500 * sti(PChar.rank) * MOD_SKILL_ENEMY_RATE*3/2);
+			int cost1 = 4000 + makeint(500 * sti(PChar.rank) * MOD_SKILL_ENEMY_RATE/2);
 			if (IsCharacterPerkOn(pchar, "Agent"))
 			{
 				cost1 = makeint(cost1/2);

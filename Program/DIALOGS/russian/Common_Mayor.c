@@ -37,7 +37,7 @@ void ProcessDialogEvent()
     if (CheckNPCQuestDate(npchar, "Card_date"))
 	{
 		SetNPCQuestDate(npchar, "Card_date");
-		npchar.money = 5000 + (rand(10)+1) * makeint(100 * sti(PChar.rank) * (10.0 / MOD_SKILL_ENEMY_RATE*3));
+		npchar.money = 5000 + (rand(10)+1) * makeint(100 * sti(PChar.rank) * (10.0 / MOD_SKILL_ENEMY_RATE));
 	}
 	// генератор ИДХ по кейсу -->
 	attrLoc   = Dialog.CurrentNode;
@@ -1798,7 +1798,7 @@ void ProcessDialogEvent()
 							}
 							else
 							{
-								pchar.GenQuest.Intelligence.Terms = dRand(10) + (42 - MOD_SKILL_ENEMY_RATE*3); //сроки выполнения задания
+								pchar.GenQuest.Intelligence.Terms = dRand(10) + (42 - MOD_SKILL_ENEMY_RATE); //сроки выполнения задания
 								pchar.GenQuest.Intelligence.Money = ((dRand(4) + 6) * 1000) + (sti(pchar.rank) * 1000 + 10000); //вознаграждение
 								pchar.GenQuest.Intelligence.City = sTemp;
 								sTemp = ", что на " + XI_ConvertString(colonies[FindColony(pchar.GenQuest.Intelligence.City)].islandLable+"Voc");
@@ -1818,8 +1818,8 @@ void ProcessDialogEvent()
 							//--> генерим ранг
 							if (sti(pchar.rank) > 6)
 							{
-								if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3);
-								else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3/2);
+								if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE);
+								else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE/2);
 							}
 							else
 							{	//казуалам зелёный свет на начало игры
@@ -2493,7 +2493,7 @@ void ProcessDialogEvent()
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		case "DestroyPirate":
 			pchar.GenQuest.questName = "DestroyPirate"; //тип квеста
-			pchar.GenQuest.DestroyPirate.Terms = dRand(3) + (15 - MOD_SKILL_ENEMY_RATE*3); //сроки выполнения задания
+			pchar.GenQuest.DestroyPirate.Terms = dRand(3) + (15 - MOD_SKILL_ENEMY_RATE); //сроки выполнения задания
 			pchar.GenQuest.DestroyPirate.Money = ((dRand(5) + 5) * 500) + (sti(pchar.rank) * 200); //вознаграждение
 			sld = characterFromId("MQPirate");
 			dialog.text = "Мне нужно, чтобы вы выследили и уничтожили этого пирата. Потопите его, возьмите на абордаж - мне всё равно. Мне лишь нужно, чтобы этот проклятый корсар, охотящийся в здешних водах, не мешал торговле " + XI_ConvertString("Colony"+npchar.city+"Gen") +

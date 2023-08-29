@@ -1265,7 +1265,7 @@ void SetMushketCapitainInWorld()
 	//создаём кэпов
 	int Rank = sti(pchar.rank) + 15;
 	if (Rank > 30) Rank = 30;
-	if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man_fast", Rank, PIRATE, -1, true));
+	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man_fast", Rank, PIRATE, -1, true));
 	else sld = GetCharacter(NPC_GenerateCharacter("MushketCap", "officer_17", "man", "man", Rank, PIRATE, -1, true));
 	sld.name = "Альберт";
 	sld.lastname = "Зиверт";

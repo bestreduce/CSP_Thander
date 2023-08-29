@@ -80,22 +80,22 @@ void GenerateColonyVariable()
 	PChar.ColonyBuilding.SilverMine.Resize.BuildingTime = false;
 	PChar.ColonyBuilding.IronMine.Resize.BuildingTime = false;
 
-	PChar.ColonyBuilding.Expidition.Cost 		= (5000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Plantation.Cost		= (70000 * MOD_SKILL_ENEMY_RATE*3) + (rand(5000) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.StoreHouse.Cost 		= (10000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.StoreHouse.ResizeCost 	= (5000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.GoldMine.Cost 			= (30000 * MOD_SKILL_ENEMY_RATE*3) + (rand(10000) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.SilverMine.Cost 		= (25000 * MOD_SKILL_ENEMY_RATE*3) + (rand(5000) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.IronMine.Cost 			= (20000 * MOD_SKILL_ENEMY_RATE*3) + (rand(1500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.GoldMine.ResizeCost 	= (15000 * MOD_SKILL_ENEMY_RATE*3) + (rand(5000) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.SilverMine.ResizeCost 	= (10000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.IronMine.ResizeCost 	= (8500 * MOD_SKILL_ENEMY_RATE*3) + (rand(2000) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Store.Cost 			= (15000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Shipyard.Cost 			= (17500 * MOD_SKILL_ENEMY_RATE*3) + (rand(2850) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Tavern.Cost 			= (15000 * MOD_SKILL_ENEMY_RATE*3) + (rand(500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Church.Cost 			= (20000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.Bank.Cost 				= (20000 * MOD_SKILL_ENEMY_RATE*3) + (rand(2500) * MOD_SKILL_ENEMY_RATE*3);
-	PChar.ColonyBuilding.HeadPort.Cost 			= (12500 * MOD_SKILL_ENEMY_RATE*3) + (rand(2550) * MOD_SKILL_ENEMY_RATE*3);
+	PChar.ColonyBuilding.Expidition.Cost 		= (5000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Plantation.Cost		= (70000 * MOD_SKILL_ENEMY_RATE) + (rand(5000) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.StoreHouse.Cost 		= (10000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.StoreHouse.ResizeCost 	= (5000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.GoldMine.Cost 			= (30000 * MOD_SKILL_ENEMY_RATE) + (rand(10000) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.SilverMine.Cost 		= (25000 * MOD_SKILL_ENEMY_RATE) + (rand(5000) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.IronMine.Cost 			= (20000 * MOD_SKILL_ENEMY_RATE) + (rand(1500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.GoldMine.ResizeCost 	= (15000 * MOD_SKILL_ENEMY_RATE) + (rand(5000) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.SilverMine.ResizeCost 	= (10000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.IronMine.ResizeCost 	= (8500 * MOD_SKILL_ENEMY_RATE) + (rand(2000) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Store.Cost 			= (15000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Shipyard.Cost 			= (17500 * MOD_SKILL_ENEMY_RATE) + (rand(2850) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Tavern.Cost 			= (15000 * MOD_SKILL_ENEMY_RATE) + (rand(500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Church.Cost 			= (20000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.Bank.Cost 				= (20000 * MOD_SKILL_ENEMY_RATE) + (rand(2500) * MOD_SKILL_ENEMY_RATE);
+	PChar.ColonyBuilding.HeadPort.Cost 			= (12500 * MOD_SKILL_ENEMY_RATE) + (rand(2550) * MOD_SKILL_ENEMY_RATE);
 
 	PChar.BuildingColony.Blocks = 1000;
 	PChar.BuildingColony.Planks = 1000;
@@ -143,31 +143,31 @@ void GenerateColonyVariable()
 	PChar.ColonyBuilding.Architecture.Bank = 1;
 	PChar.ColonyBuilding.Architecture.Townhall = 1;
 
-	PChar.ColonyBuilding.Architecture.Town.Cost.Type_1 		= 100000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Town.Cost.Type_2 		= 200000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Town.Cost.Type_3 		= 150000 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Town.Cost.Type_1 		= 100000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Town.Cost.Type_2 		= 200000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Town.Cost.Type_3 		= 150000 * MOD_SKILL_ENEMY_RATE;
 
-	PChar.ColonyBuilding.Architecture.Store.Cost.Type_1 	= 10000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Store.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Store.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Store.Cost.Type_4 	= 17500 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Store.Cost.Type_1 	= 10000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Store.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Store.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Store.Cost.Type_4 	= 17500 * MOD_SKILL_ENEMY_RATE;
 
-	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_1 	= 10000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_1 	= 10000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Shipyard.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE;
 
-	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_1 	= 12500 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_4 	= 10000 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_1 	= 12500 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_2 	= 15000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_3 	= 20000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Tavern.Cost.Type_4 	= 10000 * MOD_SKILL_ENEMY_RATE;
 
-	PChar.ColonyBuilding.Architecture.Bank.Cost.Type_1 		= 20000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Bank.Cost.Type_2 		= 25000 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Bank.Cost.Type_1 		= 20000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Bank.Cost.Type_2 		= 25000 * MOD_SKILL_ENEMY_RATE;
 
-	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_1 	= 30000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_2 	= 20000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_3 	= 35000 * MOD_SKILL_ENEMY_RATE*3;
-	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_4 	= 25000 * MOD_SKILL_ENEMY_RATE*3;
+	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_1 	= 30000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_2 	= 20000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_3 	= 35000 * MOD_SKILL_ENEMY_RATE;
+	PChar.ColonyBuilding.Architecture.Townhall.Cost.Type_4 	= 25000 * MOD_SKILL_ENEMY_RATE;
 
 	SetColonyMessageInfo("", "", "", PIRATE, 0, true, false);
 	InitMines();
@@ -2720,8 +2720,8 @@ void CreateCaimanCitizens(aref loc)
 			chr.RebirthPhantom = true;
 			chr.nation = PIRATE;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
-            		SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
+            		SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 			LAi_SetLoginTime(chr, 6.0, 23.0);
 
 			solderLoc = GetAttributeN(st, i);
@@ -2773,10 +2773,10 @@ void CreateCaimanCitizens(aref loc)
 			chr.nation = PIRATE;
 			chr.City = "Caiman";
             chr.CityType = "soldier";
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
 			LAi_SetLoginTime(chr, 0.0, 24.0);
 			LAi_SetPatrolType(chr);
 
@@ -2813,8 +2813,8 @@ void CreateCaimanCitizens(aref loc)
 			chr.nation = PIRATE;
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
-            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
+            SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 			LAi_SetLoginTime(chr, 6.0, 23.0);
 
 			PlaceCharacter(chr, "patrol", "random_free");
@@ -3042,8 +3042,8 @@ void CreateCaimanGuardingBase(aref loc)
 		chr.nation = PIRATE;
 		chr.RebirthPhantom = true;
 		LAi_CharacterReincarnation(chr, true, true);
-		LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
-		SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+		LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
+		SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 		LAi_SetLoginTime(chr, 0.0, 24.0);
 		LAi_SetGuardianType(chr);
 		LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -3172,10 +3172,10 @@ void CreateCaimanMinesCitizens(aref loc)
 			chr.City = "Caiman";
 			chr.CityType = "soldier";
 			chr.nation = PIRATE;
-			SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+			SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
 			LAi_SetLoginTime(chr, 0.0, 24.0);
 			PlaceCharacter(chr, "goto", "random_free");
 			LAi_SetPatrolType(chr);
@@ -3346,10 +3346,10 @@ void CreateCaimanPlantationCitizens(aref loc)
 			chr.City = "Caiman";
 			chr.CityType = "soldier";
 			chr.nation = PIRATE;
-			SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE*3, true);
+			SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true);
 			chr.RebirthPhantom = true;
 			LAi_CharacterReincarnation(chr, true, true);
-			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE*3+2);
+			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2);
 			LAi_SetLoginTime(chr, 0.0, 24.0);
 			PlaceCharacter(chr, "goto", "random_free");
 			LAi_SetPatrolType(chr);
