@@ -310,7 +310,7 @@ string LAi_NPC_EquipBladeSelection(int rank, bool notuseinput)
 			blade = GetGeneratedItem("blade46"); // Офицерский клеванг
 		break;
 		case 31:
-			blade = GetGeneratedItem("blade202"); // Цвайхандер
+			blade = GetGeneratedItem("blade29"); // Цвайхандер
 		break;
 
 		// "Уникальное" оружие
@@ -347,6 +347,9 @@ string LAi_NPC_EquipBladeSelection(int rank, bool notuseinput)
 		break;
 		case 42:
 			blade = GetGeneratedItem("blade32"); // Фламберж
+		break;
+		case 43:
+			blade = GetGeneratedItem("blade47"); // Персидский меч
 		break;
 	}
 	return blade;
@@ -480,7 +483,7 @@ string LAi_Soldier_EquipBlade(int rank)
 			blade = GetGeneratedItem("blade46"); // Офицерский клеванг
 		break;
 		case 31:
-			blade = GetGeneratedItem("blade202"); // Цвайхандер
+			blade = GetGeneratedItem("blade29"); // Цвайхандер
 		break;
 
 		// "Уникальное" оружие
@@ -517,6 +520,9 @@ string LAi_Soldier_EquipBlade(int rank)
 		break;
 		case 42:
 			blade = GetGeneratedItem("blade32"); // Фламберж
+		break;
+		case 43:
+			blade = GetGeneratedItem("blade47"); // Персидский меч
 		break;
 	}
 	return blade;

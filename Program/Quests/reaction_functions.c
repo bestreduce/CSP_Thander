@@ -8919,7 +8919,7 @@ void mOfficer_fc(string qName)
 			{
 		Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с корабля " + pchar.ship.name + "");
 
-		if (GetCrewQuantity(pchar) > 0)
+		if (GetCrewQuantity(pchar) > 0 && !IsEquipCharacterByArtefact(pchar, "talisman16"))
 		{
 			AddCharacterExpToSkill(PChar, "Leadership", 200);
 			MunityOnShip("ShipMunity");
@@ -8953,7 +8953,7 @@ void mOfficer_fc2(string qName)
 			{
 	Log_SetStringToLog("Офицер " + GetFullName(sld) + " сбежал с корабля " + pchar.ship.name + "");
 
-        if (GetCrewQuantity(pchar) > 0)
+        if (GetCrewQuantity(pchar) > 0 && !IsEquipCharacterByArtefact(pchar, "talisman16"))
 	{
 		AddCharacterExpToSkill(PChar, "Leadership", 200);
 		MunityOnShip("ShipMunity");

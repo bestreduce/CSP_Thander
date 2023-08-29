@@ -112,7 +112,7 @@ void SkipSailorPayment()
 		{
             chref = &Characters[cn];
 			AddCrewMorale(chref, -nMoraleDecreaseQ);
-			if (i > 0 && CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo"))
+			if (i > 0 && CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo") && !IsEquipCharacterByArtefact(chref, "talisman17"))
 			{
 			    chref.loyality = makeint(chref.loyality) - 1;
 			}
@@ -125,7 +125,7 @@ void SkipSailorPayment()
 		if (iPassenger != -1)
 		{
             chref = &Characters[iPassenger];
-			if (CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo"))
+			if (CheckAttribute(chref, "loyality") && !CheckAttribute(chref, "OfficerWantToGo.DontGo") && !IsEquipCharacterByArtefact(chref, "talisman17"))
 			{
     			chref.loyality = makeint(chref.loyality) - 1;
 			}
@@ -134,7 +134,7 @@ void SkipSailorPayment()
 
 	if(AddCrewMorale(mchref, 0)<=I_MIN_MORALE)
     {
-		if (IsEntity(worldMap) && GetCrewQuantity(mchref) > 0)
+		if (IsEntity(worldMap) && GetCrewQuantity(mchref) > 0 && !IsCharacterEquippedArtefact(mchref, "talisman16"))
     	{
             MunityOnShip("ShipMunity");
         }

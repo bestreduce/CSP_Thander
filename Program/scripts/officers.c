@@ -13,7 +13,7 @@ void OfficersReaction(string alignment)
 		if (iPassenger != -1)
 		{
 			sld = GetCharacter(iPassenger);
-			if (CheckAttribute(sld, "loyality") && !CheckAttribute(sld, "OfficerWantToGo.DontGo"))
+			if (CheckAttribute(sld, "loyality") && !CheckAttribute(sld, "OfficerWantToGo.DontGo") && !IsEquipCharacterByArtefact(sld, "talisman17"))
 			{
 				if (sld.alignment == alignment)
 				{
@@ -32,7 +32,7 @@ void OfficersReaction(string alignment)
 		if(cn!=-1)
 		{
 			sld = GetCharacter(cn);
-			if (CheckAttribute(sld, "loyality") && !CheckAttribute(sld, "OfficerWantToGo.DontGo"))
+			if (CheckAttribute(sld, "loyality") && !CheckAttribute(sld, "OfficerWantToGo.DontGo") && !IsEquipCharacterByArtefact(sld, "talisman17"))
 			{
 				if (sld.alignment == alignment)
 				{

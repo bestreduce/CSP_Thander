@@ -1290,6 +1290,9 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		///////////// Оружие -->
 		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "topor_emperor", 20);			// {Императорский топор}
 		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "topor_emperor", -30);				// {Императорский топор}
+		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SAILING, "blackbeard_sword", 10);			// {Меч Тритона}
+		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_GRAPPLING, "blackbeard_sword", 20);		// {Меч Тритона}
+		
 		///////////// Оружие <--
 
 		///////////// Иконки слева (Камни/бижутерия)  -->
@@ -1396,6 +1399,14 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		if (CheckAttribute(_refCharacter, "chr_ai.drunk.skill." + skillName))
 		{
 			skillN += sti(_refCharacter.chr_ai.drunk.skill.(skillName));
+		}
+		//Талисман Ягуар
+		if(!IsDay())
+		{
+			if(IsCharacterEquippedArtefact(_refCharacter, "talisman15") && skillName == SKILL_ACCURACY) 
+			{
+				skillN = skillN * 2; // x2 по ночам
+			}
 		}
     	// boal учет перегруза 19.01.2004 -->
     	if ( GetItemsWeight(_refCharacter) > GetMaxItemsWeight(_refCharacter))
@@ -1798,10 +1809,12 @@ int GetMaxItemsWeight(ref _chref)
 	        	}
 	        }
 		// Lugger <--
+		if(IsEquipCharacterByArtefact(_chref, "talisman5")) iBonus = 30;
         //опасная рекурсия  если писать GetCharacterSPECIAL
 		if (CheckAttribute(_chref, "chr_ai.bonusweighttube")) iBonus += 60 + sti(_chref.rank);
         if (bDifficultyWeight) iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12);
 		else iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12 - MOD_SKILL_ENEMY_RATE);
+		//if(IsEquipCharacterByArtefact(_chref, "talisman5")) iBonus = makeint(iBonus * 1.15);
         return  iBonus;
     }
     else

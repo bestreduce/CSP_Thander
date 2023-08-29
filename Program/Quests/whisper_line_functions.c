@@ -2133,8 +2133,8 @@ void DHRaceAgainstTime_findHouse(string qName)
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
 		ChangeCharacterAddressGroup(sld, "CommonStoneHouse", "goto", "goto3");
-		GiveItem2Character(sld, "blade202");
-		EquipCharacterByItem(sld, "blade202");
+		GiveItem2Character(sld, "blade29");
+		EquipCharacterByItem(sld, "blade29");
 		sld.SaveItemsForDead = true;
 		//LAi_SetImmortal(sld, true);
 		Group_FindOrCreateGroup("DHAmbush");

@@ -26,23 +26,25 @@ string GiveRandomBladeByType(string sType)
 	{
     string blade = "blade2";
 	case "Poor":
-	   switch(rand(9))
+	   switch(rand(11))
 	   {
 		    case 0: blade = "blade5"; break;
 		    case 1: blade = "blade2"; break;
 		    case 2: blade = "blade1"; break;
-	    	case 3: blade = "blade4"; break;
+	    	case 3: blade = "blade3"; break;
 		    case 4: blade = "topor3"; break;
 		    case 5: blade = "blade3"; break;
 		    case 6: blade = "blade10"; break;
 		    case 7: blade = "blade35"; break;
 		    case 8: blade = "topor1"; break;
 		    case 9: blade = "blade17"; break;
+			case 10: blade = "slave_01"; break;
+			case 11: blade = "slave_02"; break;
 	    }
 	break;
 
 	case "ordinary":
-		switch(rand(7))
+		switch(rand(10))
 	    {
 			case 0: blade = "blade6"; break;
 			case 1: blade = "blade9"; break;
@@ -52,11 +54,14 @@ string GiveRandomBladeByType(string sType)
 			case 5: blade = "blade8"; break;
 			case 6: blade = "blade11"; break;
 			case 7: blade = "blade16"; break;
+			case 8: blade = "blade17"; break;
+			case 9: blade = "blade1"; break;
+			case 10: blade = "blade4"; break;
 		}
 	break;
 
 	case "good":
-		switch(rand(6))
+		switch(rand(13))
 	    {
 			case 0: blade = "blade19"; break;
 			case 1: blade = "blade22"; break;
@@ -65,11 +70,18 @@ string GiveRandomBladeByType(string sType)
 			case 4: blade = "blade15"; break;
 			case 5: blade = "blade21"; break;
 			case 6: blade = "topor2"; break;
+			case 7: blade = "blade36"; break;
+			case 8: blade = "blade37"; break;
+			case 9: blade = "blade29"; break;
+			case 10: blade = "blade40"; break;
+			case 11: blade = "blad39"; break;
+			case 12: blade = "blade42"; break;
+			case 13: blade = "blade46"; break;
 		}
 	break;
 
 	case "excellent":
-		switch(rand(10))
+		switch(rand(13))
 	    {
 			case 0: blade = "blade28"; break;
 			case 1: blade = "blade23"; break;
@@ -82,6 +94,9 @@ string GiveRandomBladeByType(string sType)
 			case 8: blade = "blade13"; break;
 			case 9: blade = "blade20"; break;
 			case 10: blade = "blade33"; break;
+			case 11: blade = "blade47"; break;
+			case 12: blade = "blade38"; break;
+			case 13: blade = "blade41"; break;
 	    }
 	break;
 

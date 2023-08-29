@@ -404,11 +404,11 @@ void FillBoxForTreasure(ref item, int i)
 	        }
 	        else
 	        {
-                item.BoxTreasure.blade1 = 5 + rand(100);//fix
+                item.BoxTreasure.blade3 = 5 + rand(100);//fix
 	        }
 	        if (rand(2) == 1)
 	        {
-            	item.BoxTreasure.blade1 = 5 + rand(100);
+            	item.BoxTreasure.blade3 = 5 + rand(100);
 	        }
 	        if (rand(2) == 1)
 	        {
@@ -595,7 +595,7 @@ void FillBoxForTreasureSuper(ref item)
 		itmName = "";
 		while (itmName == "" && i < 15)
 		{
-            switch (rand(21))
+            switch (rand(28))
 			{
                 case 0:
                 	itmName = GetGeneratedItem("blade13");
@@ -646,22 +646,43 @@ void FillBoxForTreasureSuper(ref item)
         			itmName = GetGeneratedItem("blade33");
 				break;
 				case 16:
-        			itmName = "mushket";
+        			itmName = GetGeneratedItem("blade47");
 				break;
 				case 17:
-        			itmName = "Map_Best";
+        			itmName = "mushket";
 				break;
 				case 18:
-					itmName = "BackPack5";
+        			itmName = "Map_Best";
 				break;
 				case 19:
-					itmName = "talisman8";
+					itmName = "BackPack5";
 				break;
 				case 20:
 					itmName = "talisman1";
 				break;
 				case 21:
+					itmName = "talisman5";
+				break;
+				case 22:
+					itmName = "talisman8";
+				break;
+				case 23:
+					itmName = "talisman10";
+				break;
+				case 24:
 					itmName = "topor_emperor";
+				break;
+				case 25:
+					itmName = "talisman13";
+				break;
+				case 26:
+					itmName = "talisman12";
+				break;
+				case 27:
+					itmName = "talisman14";
+				break;
+				case 28:
+					itmName = "talisman16";
 				break;
 			}
 			if (GetCharacterItem(Pchar, itmName) > 0)

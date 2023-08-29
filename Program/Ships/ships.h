@@ -25,12 +25,12 @@
 //5 пушки(8-12-16)
 #define SHIP_POLACCA				15
 #define SHIP_BARQUE					16
-#define SHIP_SCHOONER       		17
-#define SHIP_SCHOONER_L				18
+#define SHIP_SCHOONER_L       		17
+#define SHIP_SCHOONER				18
 #define SHIP_SCHOONERWAR       		19
-#define SHIP_XEBEC					20
-#define SHIP_XEBECBATTLE			21
-#define SHIP_XEBECLIGHT				22
+#define SHIP_XEBECLIGHT				20
+#define SHIP_XEBEC			        21
+#define SHIP_XEBECBATTLE			22
 #define SHIP_RATTLESNAKE			23
 #define SHIP_MIRAGE					24
 #define SHIP_POLACRE			    25
@@ -44,7 +44,7 @@
 #define SHIP_CASTELF				31
 #define SHIP_DERFFLINGER			32
 #define SHIP_FLEUT         			33
-#define SHIP_BRIG_NV				34
+#define SHIP_ONTARIO   				34
 #define SHIP_NAVY				    35
 #define SHIP_MERCURY		     	36
 #define SHIP_SOPHIE     		    37
@@ -74,7 +74,7 @@
 #define SHIP_BLACKANGEL				59
 #define SHIP_RAAFRIGATE				60
 #define SHIP_PANDORA    			61
-#define SHIP_BATTLEFRIGATE			62
+#define SHIP_ROSSIYA			    62
 #define SHIP_EASTINDIAMAN			63
 #define SHIP_PEARL			        64
 #define SHIP_GALEON_H			    65
@@ -91,7 +91,7 @@
 #define SHIP_CECILIA  				76
 #define SHIP_BELLE    			    77
 #define SHIP_SURPRISE			    78
-#define SHIP_FASTFRIGATE			79
+#define SHIP_FORTUNA			    79
 #define SHIP_MORDAUNT				80
 #define SHIP_FRIGATE				81
 #define SHIP_FRIGATE_H	    		82

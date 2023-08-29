@@ -690,6 +690,12 @@ void ProcessDialogEvent()
 			break;
 		}
 
+		// квест Виспер постоянно ломал ПП
+		if (CheckAttribute(PChar, "PGGWhisperComplete") || CheckAttribute(pchar, "PGGWhisperQuest")) {
+			if (CheckAttribute(PChar, "GenQuest.PGG_Quest") && NPChar.name != "Виспер")
+			DeleteAttribute(PChar, "GenQuest.PGG_Quest");
+		}
+
  		// TODO: тут неведомая хуйня, вот это иногда багает и так и остается флажок, будто мы на ПП еще, хотя квест закрыт
 		// пытался дебажить, но причину найти не смог, вроде во всех исходах мы подчищаем это
 		// есть подозрение, что были ошибки до подчистки флага -> мы вылетели к хуям, либо скипнули дальнейшую обработку -> флаг так и остался в подвешенном состоянии

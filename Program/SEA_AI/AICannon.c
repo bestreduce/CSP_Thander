@@ -126,6 +126,8 @@ float Cannon_GetRechargeTime()
 	fMultiply = AIShip_isPerksUse(aCharacter.TmpPerks.ImmediateReload, fMultiply, 0.5);
 	if (CheckAttribute(&RealShips[sti(aCharacter.Ship.Type)], "Tuning.CannonsSpecial")) fMultiply *= 0.9;
 	fMultiply *= (1+CheckOfficersPerk(aCharacter,"InstantRepair"));//х2 времени при активной быстрой починке
+	//fMultiply = isEquippedArtefactUse(aCharacter, "talisman13", fMultiply, 0.9);
+
 	ref refBaseShip = GetRealShip(sti(aCharacter.ship.Type));
 	if (sti(refBaseShip.BaseType) != SHIP_FORT)
 	{

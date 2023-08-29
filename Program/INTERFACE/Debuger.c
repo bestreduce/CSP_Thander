@@ -970,7 +970,7 @@ void CalculateInfoDataF6()
 
 	// 4 класс
 	// mc.Ship.Type = GenerateShipExt(SHIP_BRIG, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BRIG_NV, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_ONTARIO, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BARKENTINE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_BRIGANTINE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CASTELF, true, mc);
@@ -1021,8 +1021,8 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_BELLE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ESSEX, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CECILIA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_BATTLEFRIGATE, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_FASTFRIGATE, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_ROSSIYA, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_FORTUNA, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_MORDAUNT, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATE_H, true, mc);
@@ -1145,7 +1145,7 @@ void CalculateInfoDataF6()
 	// sEquipItem = GetGeneratedItem("toporAZ"); 				// Макуауитль		(ТО)
 	// sEquipItem = GetGeneratedItem("topor_viking"); 			// Топор викинга	(ТО)
 	// sEquipItem = GetGeneratedItem("blade28");				// Танат			(ТО)
-	sEquipItem = GetGeneratedItem("blackbeard_sword_baron");	// Меч Тритона		(СО)
+	sEquipItem = GetGeneratedItem("blackbeard_sword");	// Меч Тритона		(СО)
 	AddItems(mc, sEquipItem, 1);
 
 	AddItems(mc, "cirass5", 1);
@@ -1811,7 +1811,7 @@ void CalculateInfoDataF30()
 	Statistic_AddValue(PChar, "Cheats.F30", 1);
 }
 
-string descF31 = "Арабелла, 32 калибр, полная прокачка ГГ, все перки, предметы + уникальный рюкзак";
+string descF31 = "Арабелла, 32 калибр, полная прокачка ГГ, все перки, предметы + уникальный подсумок";
 void CalculateInfoDataF31()
 {
 	ref mc;

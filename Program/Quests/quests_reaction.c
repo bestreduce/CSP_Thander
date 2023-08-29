@@ -684,7 +684,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
         case "Munity_on_Ship_Map":
-            if (IsEntity(worldMap) && GetCrewQuantity(pchar) > 0)
+            if (IsEntity(worldMap) && GetCrewQuantity(pchar) > 0 && !IsEquipCharacterByArtefact(pchar, "talisman16"))
         	{
                 MunityOnShip("ShipMunity");
             }
@@ -5071,7 +5071,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.ShipEnemyDisable = true; //при попадании не враждебен
         	sld.Abordage.Enable = false; // НЕЛЬЗЯ!
             LAi_SetStayTypeNoGroup(sld);
-            FantomMakeCoolSailor(sld, SHIP_BATTLEFRIGATE, "Коминте", CANNON_TYPE_CANNON_LBS32, 90, 80, 80);
+            FantomMakeCoolSailor(sld, SHIP_ROSSIYA, "Коминте", CANNON_TYPE_CANNON_LBS32, 90, 80, 80);
             FantomMakeCoolFighter(sld, 45, 90, 70, "topor2", "pistol3", 100);
             Group_AddCharacter("Quest_Group", "LoranDeGraf");
             Group_SetType("Quest_Group", "war");

@@ -829,9 +829,9 @@ void OpenChest()
 		}
 		itmq[30] += makeint(value/3);
 
-        if (value >= 1 && value < 80) {nameitm[15] = "BackPack2"; itmq[15] = 1;}     		// Обычный рюкзак
-        if (value_alt >= 80 && value_alt < 160) {nameitm[15] = "BackPack3"; itmq[15] = 1;}  // Хороший рюкзак
-        if (value2 >= 160 && value2 < 240) {nameitm[15] = "BackPack4"; itmq[15] = 1;} 		// Отличный рюкзак
+        if (value >= 1 && value < 80) {nameitm[15] = "BackPack2"; itmq[15] = 1;}     		// Обычный подсумок
+        if (value_alt >= 80 && value_alt < 160) {nameitm[15] = "BackPack3"; itmq[15] = 1;}  // Хороший подсумок
+        if (value2 >= 160 && value2 < 240) {nameitm[15] = "BackPack4"; itmq[15] = 1;} 		// Отличный подсумок
 
         if (value3 >= 240 && value3 < 320) {nameitm[15] = "cirass2"; itmq[15] = 1;}     	// Рейтарский панцирь
         if (value >= 320 && value < 400) {nameitm[15] = "cirass3"; itmq[15] = 1;}     		// Гвардейская кираса
@@ -857,7 +857,7 @@ void OpenChest()
 
         if (value_alt >= 360 && value_alt < 400) {nameitm[16] = "blade15"; itmq[16] = 1;}   // Сторта ТО
         if (value2 >= 400 && value2 < 440) {nameitm[16] = "blade21"; itmq[16] = 1;}    		// Бастард ТО
-        if (value3 >= 440 && value3 < 480) {nameitm[16] = "blade202"; itmq[16] = 1;}     	// Цвайхандер ТО
+        if (value3 >= 440 && value3 < 480) {nameitm[16] = "blade29"; itmq[16] = 1;}     	// Цвайхандер ТО
         if (value >= 480 && value < 520) {nameitm[16] = "blade42"; itmq[16] = 1;}     		// Кханда ТО
         if (value_alt >= 520 && value_alt < 560) {nameitm[16] = "topor2"; itmq[16] = 1;}    // Рейтарский чекан ТО
 
@@ -866,13 +866,14 @@ void OpenChest()
         if (value >= 640 && value < 680) {nameitm[16] = "blade26"; itmq[16] = 1;}     		// Паппенхаймер ЛО
 
         if (value_alt >= 680 && value_alt < 720) {nameitm[16] = "blade30"; itmq[16] = 1;}   // Нобиль СО
-        if (value2 >= 720 && value2 < 760) {nameitm[16] = "blade24"; itmq[16] = 1;}     	// Чиавона СО
+        if (value2 >= 720 && value2 < 760) {nameitm[16] = "blade24"; itmq[16] = 1;}     	// Чиавона ТО
         if (value3 >= 760 && value3 < 800) {nameitm[16] = "blade25"; itmq[16] = 1;}     	// Карабела СО
 
         if (value >= 800 && value < 840) {nameitm[16] = "blade13"; itmq[16] = 1;}     		// Кракемарт ТО
         if (value_alt >= 840 && value_alt < 880) {nameitm[16] = "blade20"; itmq[16] = 1;}   // Клейбэг ТО
         if (value2 >= 880 && value2 < 920) {nameitm[16] = "blade33"; itmq[16] = 1;}     	// Валлонская шпага ТО
-        if (value3 >= 920 && value3 < 999) {nameitm[16] = "blade28"; itmq[16] = 1;}     	// Танат ТО
+        if (value3 >= 920 && value3 < 960) {nameitm[16] = "blade28"; itmq[16] = 1;}     	// Танат ТО
+		if (value3 >= 960 && value3 < 999) {nameitm[16] = "blade47"; itmq[16] = 1;}     	// Персидский меч СО
 
 		if (value >= 1 && value < 150) {nameitm[17] = "pistol_grapebok"; 		itmq[17] = 1;} // Трёхствольный дробовик
 		if (value_alt >= 200 && value_alt < 350) {nameitm[17] = "pistol6"; 		itmq[17] = 1;} // Бок-пистолет

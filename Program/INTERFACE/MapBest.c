@@ -851,7 +851,7 @@ void ShowColonyInfo(int iColony)
 		{
 			break;
 		}
-		if(iType > 34 && iType < 51) continue;
+		if(iType >= GOOD_CANNON_8 && iType <= GOOD_CANNON_48) continue;
 
 		sGood = goods[iType].name;
 
@@ -1077,7 +1077,7 @@ int GetMaxFortCannons(string _FortCommander)
 	int _iCannons = 0;
 	switch(_FortCommander)
 	{
-		case "Bridgetown Fort Commander": _iCannons = 39; break;
+		case "Bridgetown Fort Commander": _iCannons = 84; break;
 
 		case "SentJons Fort Commander": _iCannons = 103; break;
 
@@ -1117,9 +1117,9 @@ int GetMaxFortCannons(string _FortCommander)
 
 		case "Santiago Fort Commander": _iCannons = 128; break;
 
-		case "Tortuga Fort Commander": _iCannons = 28; break;
+		case "Tortuga Fort Commander": _iCannons = 110; break;
 
-		case "Havana Fort Commander": _iCannons = 80; break;
+		case "Havana Fort Commander": _iCannons = 162; break;
 		
 		case "Nassau Fort Commander": _iCannons = 80; break;
 	}
