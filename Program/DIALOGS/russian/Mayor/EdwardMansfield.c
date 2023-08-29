@@ -140,9 +140,9 @@ void ProcessDialogEvent()
 		break;
 		case "pirateVikingQuest_final":
 			CloseQuestHeader("pirateVikingQuest");
-			TakeNItems(pchar, "chest", 5);
+			TakeNItems(pchar, "chest", 3);
 			Log_Info("Вы получили кредитные сундуки");
-			dialog.text = "Ага, читал как то. Берсерк видать. Прямо осколок прошлого. Вот, держи награду, заслужил"+ GetSexPhrase("","а") +".";
+			dialog.text = "Ага, читал как-то. Берсерк видать. Прямо осколок прошлого. Вот, держи награду, заслужил"+ GetSexPhrase("","а") +".";
 			pchar.questTemp.pirateVikingQuest = "end";
 			link.l1 = "Спасибо.";
 			link.l1.go = "exit";

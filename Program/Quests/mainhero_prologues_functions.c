@@ -313,7 +313,7 @@ void AnjelikaTich_StartGame(string qName)
 	SetCaptureTownByNation("LaVega", SPAIN);
 	pchar.questTemp.AnjelikaTichPrologue = "ATP";
 	pchar.questTemp.AnjelikaTichPrologue5 = "ATP5";
-	pchar.questTemp.AnjelikaTichPrologue7_Jackman = "ATP7";
+	pchar.questTemp.AnjelikaTichPrologue7_Jackman = true;
 	pchar.questTemp.AnjelikaTichPrologue8_Gudli = "ATP8";
 	pchar.questTemp.AnjelikaTichPrologue9_BlackBeard = "ATP9";
 	pchar.questTemp.AnjelikaTichPrologue10 = "ATP10";		//На всякий случай (нигде не задействовано)

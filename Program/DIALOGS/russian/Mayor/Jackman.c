@@ -39,17 +39,135 @@ void ProcessDialogEvent()
 
 	switch(Dialog.CurrentNode)
 	{
-		// ----------------------------------- Диалог первый - первая встреча
 		case "First time":
-            dialog.text = NPCStringReactionRepeat(""+ GetSexPhrase("У тебя дело ко мне? Нет? Тогда вали отсюда!","Ха, " + pchar.name + "! У тебя дело ко мне? Нет? Тогда не отвлекай меня.") +"",
-                         "Я кажется ясно выразился.", "Хотя я выразился и ясно, но ты продолжаешь отвлекать меня!",
-                         "Та-а-ак, это уже похоже на грубость, меня это утомило.", "repeat", 3, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("Уже ухожу.",
-                                               "Конечно, Джекмен...",
-                                               "Извини, Джекмен...",
-                                               "Ой...", npchar, Dialog.CurrentNode);
+			if(NPChar.quest.meeting == "0")		//Самый первый диалог
+			{
+				dialog.text = "Ага! К нам пожаловал"+GetSexPhrase("","а")+" "+GetSexPhrase("сам","сама")+" "+GetSexPhrase("неустрашимый","")+""+GetFullName(pchar)+"! Так и знал, что ты явишься - рано или поздно! Что могло привести тебя ко мне?";
+				NPChar.quest.meeting = "1";
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue7_Jackman"))	//Sinistra Пролог Анжелика тич
+				{
+					dialog.text = "Так, так... Ходит молва, на архипелаге появилась некая самозванка, которая прикрываясь чужим именем, взялась проворачивать свои делишки.";
+					link.l1 = "Анжелика Тич – моё настоящее имя.";
+					link.l1.go = "ATpr_F1";
+					break;
+				}
+				if (!CheckAttribute(pchar, "questTemp.Vstuplenie_v_Bratstvo"))
+				{
+					link.l14 = "Я сюда явил"+GetSexPhrase("ся","ась")+" не просто так. Мне говорили, что я тебе нуж"+GetSexPhrase("ен","на")+".";
+					link.l14.go = "Vstuplenie_v_Bratstvo_1";
+				}
+				if (CheckAttribute(pchar, "questTemp.Jackman_Zadanie"))
+				{
+					link.l14 = "Джекмен, я тут работу ищу какую-нибудь...";
+					link.l14.go = "Jackman_Zadanie";
+				}
+				if (!CheckAttribute(pchar, "questTemp.Jackman_pro_ZolotoyFlot"))
+				{
+					link.l15 = "Прости мою наглость и позволь насладиться плодами мудрости твоей!";
+					link.l15.go = "Jackman_pro_ZolotoyFlot";
+				}
+				link.l89 = "У меня есть вопрос к тебе, Джекмен.";
+				link.l89.go = "Vopros";
+				link.l99 = HeroStringReactionRepeat("Э-э, что-то я позабыл"+GetSexPhrase("","а")+", зачем к тебе явил"+GetSexPhrase("ся","ась")+". Но если вспомню, то я вернусь. До встречи, Джекмен.",
+												   "Конечно, Джекмен. Уже ухожу.",
+												   "Извини, Джекмен. Уже ухожу.",
+												   "Ой...", npchar, Dialog.CurrentNode);
+				link.l99.go = "exit";
+			}
+			else							//Уже знакомы
+			{
+				dialog.text = NPCStringReactionRepeat(""+ GetSexPhrase("У тебя дело ко мне? Нет? Тогда вали отсюда!","Ха, " + pchar.name + "! У тебя дело ко мне? Нет? Тогда не отвлекай меня.") +"",
+							 "Я кажется ясно выразился.", "Хотя я выразился и ясно, но ты продолжаешь отвлекать меня!",
+							 "Та-а-ак, это уже похоже на грубость, меня это утомило.", "repeat", 3, npchar, Dialog.CurrentNode);
+				NextDiag.TempNode = "First time";
+				if (!CheckAttribute(pchar, "questTemp.Vstuplenie_v_Bratstvo"))
+				{
+					link.l14 = "Я сюда явил"+GetSexPhrase("ся","ась")+" не просто так. Мне говорили, что я тебе нуж"+GetSexPhrase("ен","на")+".";
+					link.l14.go = "Vstuplenie_v_Bratstvo_1";
+				}
+				if (CheckAttribute(pchar, "questTemp.Jackman_Zadanie"))
+				{
+					link.l14 = "Джекмен, я тут работу ищу какую-нибудь...";
+					link.l14.go = "Jackman_Zadanie";
+				}
+				if (!CheckAttribute(pchar, "questTemp.Jackman_pro_ZolotoyFlot"))
+				{
+					link.l15 = "Прости мою наглость и позволь насладиться плодами мудрости твоей!";
+					link.l15.go = "Jackman_pro_ZolotoyFlot";
+				}
+				link.l89 = "У меня есть вопрос к тебе, Джекмен.";
+				link.l89.go = "Vopros";
+				link.l99 = HeroStringReactionRepeat("Э-э, что-то я позабыл"+GetSexPhrase("","а")+", зачем к тебе явил"+GetSexPhrase("ся","ась")+". Но если вспомню, то я вернусь. До встречи, Джекмен.",
+												   "Конечно, Джекмен. Уже ухожу.",
+												   "Извини, Джекмен. Уже ухожу.",
+												   "Ой...", npchar, Dialog.CurrentNode);
+				link.l99.go = "exit";
+			}
+		break;
+		
+		case "I_know_you_good":			//Очень хорошо друг друга знаем
+            dialog.text = NPCStringReactionRepeat(GetFullName(pchar) + ", рад тебя видеть! Зачем пожаловал"+ GetSexPhrase("","а") +" на этот раз?",
+                         "Ну что тебе ещё?", "Долго это будет продолжаться? Если тебе делать нечего, не отвлекай других!",
+                         "Ты "+ GetSexPhrase("хороший капер","хорошая девушка") +", поэтому живи пока. Но общаться и разговаривать с тобой я больше не желаю.", "repeat", 1, npchar, Dialog.CurrentNode);
+			if (CheckAttribute(pchar, "questTemp.Jackman_Zadanie"))
+			{
+				link.l14 = "Джекмен, я тут работу ищу какую-нибудь...";
+				link.l14.go = "Jackman_Zadanie";
+			}
+			link.l89 = "У меня есть вопрос к тебе, Джекмен.";
+			link.l89.go = "Vopros";
+			link.l99 = HeroStringReactionRepeat("Да, собственно, просто так заглянул"+ GetSexPhrase("","а") +", проведать. Ничего по делу нет.",
+                                               "Ничего, просто так...",
+                                               "Хорошо, Джекмен, извини...",
+                                               "Вот чёрт возьми, доиграл"+ GetSexPhrase("ся","ась") +"!!!", npchar, Dialog.CurrentNode);
+			link.l99.go = "exit";
+			NextDiag.TempNode = "I_know_you_good";
+		break;
+
+ 		case "Exit":
+			DialogExit();
+			NextDiag.CurrentNode = NextDiag.TempNode;
+		break;
+		case "Jackman_Zadanie":		//Здесь берём пиратские задания
+			dialog.text = "Сейчас у меня нет для тебя поручений.";
+			link.l1 = "Ладно, Джекмен, зайду позже.";
 			link.l1.go = "exit";
-			NextDiag.TempNode = "First time";
+			if (pchar.questTemp.piratesLine == "begin" && !CheckAttribute(pchar, "QuestTemp.AndreAbelQuest"))	//Начало Пиратской Линейки: Найти Гудли
+			{
+				if(CheckAttribute(NPChar, "notQuestLine"))
+				{
+					dialog.text = "Поговаривают, что ты у английских властей в большом фаворе. Неужели каперский патент перестал приносить доход?! Не стану я с тобой сотрудничать, слишком велик риск оказаться на виселице в результате твоей работы. Не взыщи...";
+					link.l1 = "Ясно... Да я, собственно, просто так спросил"+ GetSexPhrase("","а") +". На всякий случай...";
+					link.l1.go = "exit";
+				}
+				else
+				{
+					dialog.text = "У меня работы нет. Но если ты ничем не занят"+ GetSexPhrase("","а") +", то отправляйся в Пуэрто-Принсипе - поищи там капитана Гудли. У него обычно всегда что-то есть.";
+					link.l1 = "А что за работа у него бывает?";
+					link.l1.go = "PL_Q1_2";
+					//LockQuestLine(characterFromId("eng_guber")); // лочим английскую линейку
+				}
+			}
+			if(sti(pchar.rank) >= 10 && !CheckAttribute(PChar, "questTemp.pirateVikingQuest"))	//Квест Осколок Прошлого
+			{
+				dialog.text = "Для тебя найдётся работёнка. Ты не только саблей "+ GetSexPhrase("остёр","остра") +", но и умом. Слушай сюда. Появился пару лет назад в наших водах скандинав какой-то, то ли датчанин, то ли швед, неважно. Рагнаром назвался. Корабль у него просто загляденье и команда сплошняком из норманов состоит. И вроде как, всё ничего, пиратствует помаленьку, гроши на хлеб зарабатывает, вот только долю в общий котёл не вносит, губернаторам грубит, призы вообще неизвестно где сбывает. Смекаешь к чему разговор?";
+				link.l1 = "Смекаю, наказать его нужно, так чтоб примером для всех стал. Где искать этого викинга?";
+				link.l1.go = "pirateVikingQuest_2";
+				link.l2 = "Что-то не нравится мне этот разговор. Прощай...";
+				link.l2.go = "exit";
+				pchar.questTemp.pirateVikingQuest = "0";
+			}
+			if(CheckAttribute(PChar, "questTemp.pirateVikingQuest") && pchar.questTemp.pirateVikingQuest == "7" && npchar.city == pchar.questTemp.pirateVikingQuest.City)
+			{
+				dialog.text = "Вижу ты с новостями?"
+				link.l1 = "Да, завалил"+ GetSexPhrase("","а") +" таки северянина, ох и лютый же был. Обычно все разговоры заводят как смерть почуят, а этот рычал только аж пена изо рта шла.";
+				link.l1.go = "pirateVikingQuest_final";
+			}
+		break;
+		case "Vopros":			//Вопросы по поводу заданий
+			dialog.text = RandPhraseSimple("Ну так задай его.", "Что ты хочешь?");
+			link.l1 = "Вопросов нет...";
+			link.l1.go = "exit";
 			//поиски шебеки Синяя Птица
 			if (pchar.questTemp.BlueBird == "toBermudes")
 			{
@@ -61,12 +179,7 @@ void ProcessDialogEvent()
 				link.l1 = "Представляешь, я таки отловил"+ GetSexPhrase("","а") +" эту шебеку 'Синяя Птица'!";
 				link.l1.go = "BlueBird_6";
 			}
-			//пиратская линейка начало
-			if (pchar.questTemp.piratesLine == "begin" && !CheckAttribute(pchar, "QuestTemp.AndreAbelQuest"))
-			{
-				link.l1 = "Джекмен, я тут работу ищу какую-нибудь...";
-				link.l1.go = "PL_Q1_1";
-			}
+			//пиратская линейка
 			if (pchar.questTemp.piratesLine == "KillLoy_toJackman")
 			{
 				link.l1 = "Я ищу своего друга Эдварда Лоу, Алексус сказал, что он у тебя.";
@@ -96,13 +209,6 @@ void ProcessDialogEvent()
 				link.l1 = "Послушай, ходят слухи о промысле ловцов жемчуга в Карибском море. Ты ничего не слышал об этом?";
 				link.l1.go = "SharpPearl_1";
 			}
-			//Sinistra Пролог Анжелика тич
-			if (pchar.questTemp.AnjelikaTichPrologue7_Jackman == "ATP7")
-			{
-				dialog.text = "Так, так... Ходит молва, на архипелаге появилась некая самозванка, которая прикрываясь чужим именем, взялась проворачивать свои делишки.";
-				link.l1 = "Анжелика Тич – моё настоящее имя.";
-				link.l1.go = "ATpr_F1";
-			}
 			//поиски супер-мушкета
 			if (CheckAttribute(pchar, "questTemp.mushket2x2") && !CheckCharacterItem(pchar, "mushket2x2"))
 			{
@@ -129,27 +235,48 @@ void ProcessDialogEvent()
 					link.l1.go = "CapComission6";
 				}
 			}
-			if(sti(pchar.rank) >= 10 && !CheckAttribute(PChar, "questTemp.pirateVikingQuest"))
-			{
-				link.l3 = "Есть какое-нибудь интересное дело для меня?";
-				link.l3.go = "pirateVikingQuest";
-			}
-			else
-			{
-				if(CheckAttribute(PChar, "questTemp.pirateVikingQuest") && pchar.questTemp.pirateVikingQuest == "7" && npchar.city == pchar.questTemp.pirateVikingQuest.City)
-				{
-					dialog.text = "Вижу ты с новостями?"
-					link.l1 = "Да, завалил"+ GetSexPhrase("","а") +" таки северянина, ох и лютый же был. Обычно все разговоры заводят как смерть почуят, а этот рычал только аж пена изо рта шла.";
-					link.l1.go = "pirateVikingQuest_final";
-				}
-			}
 		break;
-
- 		case "Exit":
-			DialogExit();
-			NextDiag.CurrentNode = NextDiag.TempNode;
+		//Начало Пиратской Линейки
+		case "Vstuplenie_v_Bratstvo_1":
+			dialog.text = "Правда? ТЫ нуж"+GetSexPhrase("ен","на")+" МНЕ? Я думаю, что скорее наоборот, не правда ли? Послушай меня, "+GetSexPhrase("сынок","девчонка")+", я слышал о твоих подвигах тут. Ты подаёшь надежды, как мне говорили. Пожалуй, ты скоро можешь стать легендой! Но это произойдёт лишь только после того, как кто-нибудь отрежет тебе голову. Пойми, "+pchar.name+", волки-одиночки не живут долго, особенно пираты. Пока у тебя нет друзей, у тебя есть все шансы обнаружить свою глотку перерезанной раньше, чем ты успеешь пискнуть. Теперь ты меня понял"+GetSexPhrase("","а")+"?";
+			link.l1 = "Нет. Ни единого слова. Повтори ещё раз - на этот раз, по-"+LinkRandPhrase("английски", "французски", "голландски")+", ладно?";
+			link.l1.go = "Vstuplenie_v_Bratstvo_2";
 		break;
-
+		case "Vstuplenie_v_Bratstvo_2":
+			dialog.text = "Слушай, "+GetSexPhrase("сынок","девчонка")+", ты, конечно, надоедлив"+GetSexPhrase("ый","ая")+" мерзав"+GetSexPhrase("ец","ка")+", но ты мне нравишься. И это единственная причина, по которой я не приказал ребятам сбросить тебя в море с ядром, привязанным к ноге\nТеперь послушай меня внимательно. Мы, вступившие в Братство, можем спокойно жить на этом острове, и никто не сунется сюда - ни англичане, ни французы, ни кровожадные испанцы. А знаешь, почему? Потому, что если они сюда сунутся, мы отправим их прямиком в ад! Взгляни как-нибудь в ясную погоду за борт - и ты увидишь, сколько кораблей покоится на дне этой бухты. Это всё наша работа. Хочешь знать, как? Просто - мы не грызёмся между собой, пока не избавимся от настоящей угрозы, и мы всегда знаем, что где творится. У меня повсюду друзья и приятели, и с их помощью я знаю обо всём, что здесь творится, я слежу за каждым мужчиной, женщиной или ребёнком на этих островах. Я встречаюсь со своими капитанами и говорю, кто заплатил за свою жизнь, а кто нет. Я говорю им, где плавают купцы пожирнее, а где играет в свои игры королевский флот. Мы помогаем друг другу, и не нарушаем законов Братства.";
+			link.l1 = "Ясно. И ты хочешь, чтобы я присоединил"+GetSexPhrase("ся","ась")+" к твоей организации?";
+			link.l1.go = "Vstuplenie_v_Bratstvo_3";
+		break;
+		case "Vstuplenie_v_Bratstvo_3":
+			dialog.text = "Мы называем себя 'Береговое Братство'. И мы - морские братья. Сказать честно, "+GetSexPhrase("парень","девочка")+", меня не очень волнует, с нами ты, или нет. Но если ты с нами, то, клянусь тебе, ты проживёшь гораздо дольше. И когда неприятности настигнут тебя, ты будешь знать, куда плыть.";
+			link.l1 = "А что я долж"+GetSexPhrase("ен","на")+" дать вам взамен?";
+			link.l1.go = "Vstuplenie_v_Bratstvo_4";
+		break;
+		case "Vstuplenie_v_Bratstvo_4":
+			dialog.text = "Не так уж много, поверь мне. В первую очередь, ты долж"+GetSexPhrase("ен","на")+" сообщать мне, если эти увальни замыслят что-нибудь против нас. И иногда я буду давать тебе некоторые поручения. Видишь, ничего особенного. Разве что иногда тебе придётся взять парочку фортов, или захватить линейный корабль. Обычные пиратские дела, знаешь ли. Чёрт возьми, "+GetSexPhrase("парень","девочка")+", тебе это понравится!";
+			link.l1 = "Так... Ну и что я в этом случае получаю? Я вступаю в ваше Братство для того, чтобы получить некоторую пресловутую защиту от непонятных врагов, и взамен я долж"+GetSexPhrase("ен","на")+" буду грабить, предавать губернаторов, топить корабли, разорять города и пьянствовать со всякими немытыми пиратами? Ну, как я могу отказаться. Я с тобой, Джекмен. Где надо подписать?";
+			link.l1.go = "Vstuplenie_v_Bratstvo_6";
+			link.l2 = "Хм, предложение заманчиво. Позволь мне подумать над ним какое-то время.";
+			link.l2.go = "Vstuplenie_v_Bratstvo_5";
+		break;
+		case "Vstuplenie_v_Bratstvo_5":
+			dialog.text = "Думай, сколько влезет. Но займись этим в другом месте. Не видишь, что я занят? Давай, дуй отсюда.";
+			link.l1 = "Э-э... До встречи, Джекмен.";
+			link.l1.go = "exit";
+		break;
+		case "Vstuplenie_v_Bratstvo_6":
+			dialog.text = "Отлично! Да, и научись разговаривать, как настоящий пират, а то, что это за сопли: 'Не будете ли вы так любезны...'! Тьфу! Добро пожаловать в Береговое Братство, капитан. Я скажу ребятам, что ты на борту. Теперь они тебя не тронут. Но помни, Морган плывёт не с нами, так что не зевай. Если он захочет избавиться от тебя, он не побоится встать на дороге Братства. Теперь плыви, "+pchar.name+". Сейчас у меня нет для тебя поручений. Давай! Отчаливай!";
+			link.l1 = "До свидания, Джекмен. Я загляну в другой раз, когда у тебя будет меньше дел.";
+			link.l1.go = "exit";
+			pchar.questTemp.Vstuplenie_v_Bratstvo = true;
+			pchar.questTemp.Jackman_Zadanie = true;
+		break;
+		case "Jackman_pro_ZolotoyFlot":
+			dialog.text = "Мудрости, говоришь? Ладно, есть у меня одна мыслишка... Слушай внимательно. Если у тебя в голове есть хотя бы одна извилина, то ты долж"+GetSexPhrase("ен","на")+" знать, что испанцы пуще всего охраняют свой Золотой Флот. Даже прислали для этого эскадру кораблей из самой Испании. Так вот, если бы я был молодым, отважным и дерзким капитаном, готовым рискнуть ради того, чтобы пощипать испанцам пёрышки, то именно к Золотому Флоту я бы направил своё корыто. Если пустишь на дно корабли охраны, то твои трюмы будут набиты добычей - купчишки не умеют драться. Золотой Флот отплывает из Порто Белло в Старый Свет два раза в год. Так-то. Ну, хватит с тебя мудрости, "+pchar.name+", или желаешь послушать ещё?";
+			link.l1 = "Нет уж, думаю, на сегодня с меня хватит мудрости, спасибо. Послушаю ещё в следующий раз.";
+			link.l1.go = "First Time";
+			pchar.questTemp.Jackman_pro_ZolotoyFlot = true;
+		break;
 		//Sinistra. Пролог Анжелика Тич
 		case "ATpr_F1":
 			dialog.text = "Теперь у меня в этом нет сомнений, ты прямо копия своей матери.";
@@ -169,28 +296,13 @@ void ProcessDialogEvent()
 		break;
 		case "ATpr_F4":
 			dialog.text = "Откровенно говоря, те давние события меня мало заботят, говори, зачем пришла сейчас?";
-			link.l1 = "Послушай, ходят слухи о промысле ловцов жемчуга в Карибском море. Ты ничего не слышал об этом?";
-			link.l1.go = "SharpPearl_1";
-			link.l2 = "Из любопытства. Уже ухожу.";
-			link.l2.go = "exit";
+			link.l1 = "Из любопытства. Уже ухожу.";
+			link.l1.go = "exit";
 		break;
 
 		//Blackthorn. Квест викинга
-		case "pirateVikingQuest":
-			dialog.text = "Для тебя найдётся работёнка. Ты не только саблей "+ GetSexPhrase("остёр","остра") +", но и умом, как мне рассказывали. Слушай сюда. Появился пару лет назад в наших водах скандинав какой то, то ли датчанин, то ли швед, неважно, Рагнаром назвался. Корабль у него просто загляденье и команда сплошняком из норманов состоит. И вроде как, всё ничего, пиратствует помаленьку, гроши на хлеб зарабатывает, вот только долю в общий котёл не вносит, губернаторам грубит, призы вообще неизвестно где сбывает. Смекаешь к чему разговор?";
-			link.l1 = "Смекаю, наказать его нужно, так чтоб примером стал. Вот только это не по законам берегового братства как то. Ну, зарвался пират, так пусть шепнёт кто властям где он обитает. И к нам, честным корсарам никаких претензий, никто не предъявит.";
-			link.l1.go = "pirateVikingQuest_1";
-			link.l2 = "Что-то не нравится мне этот разговор. Прощай...";
-			link.l2.go = "exit";
-			pchar.questTemp.pirateVikingQuest = "0";
-		break;
-		case "pirateVikingQuest_1":
-			dialog.text = "Законы братства, Кодекс, пиратская честь... Пфф... Детские шалости это. Ты ещё Либерталию вспомни, которую Шарп построить пытался. Ха-ха! Тут у нас баланс сил существует, власти закрывают глаза на наши делишки, если мы их делишкам не мешаем. А вдруг в Европе мир подпишут? Так и патенты отзовут, а все бравые каперы в один миг преступниками станут. И приплывут карательные эскадры. Нас с тобой ловить. А такие капитаны, как этот викинг, репутацию нам всем портят. Смекаешь?";
-			link.l1 = "Понял"+ GetSexPhrase("","а") +", дал ты мне пищу для размышлений. Где искать этого викинга?";
-			link.l1.go = "pirateVikingQuest_2";
-		break;
 		case "pirateVikingQuest_2":
-			dialog.text = "Где то. Знал бы где обитает, сам бы в море вышел, не посмотрел бы на старые раны и возраст. Ты у нас смекалист"+ GetSexPhrase("ый","ая") +", разберёшься. Одно условие – Рагнар этот и вся его команда на корм рыбам пойти должна, а золотишком я не обижу.";
+			dialog.text = "Где-то. Знал бы где обитает, сам бы в море вышел, не посмотрел бы на старые раны и возраст. Ты у нас смекалист"+ GetSexPhrase("ый","ая") +", разберёшься. Одно условие – Рагнар этот и вся его команда на корм рыбам пойти должна, а золотишком я не обижу.";
 			link.l1 = "Жди новостей. Да и про отзыв патентов, если новости будут, дай знать. Бывай, "+GetFullName(npchar)+".";
 			link.l1.go = "exit";
 
@@ -205,126 +317,41 @@ void ProcessDialogEvent()
 		break;
 		case "pirateVikingQuest_final":
 			CloseQuestHeader("pirateVikingQuest");
-			TakeNItems(pchar, "chest", 5);
+			TakeNItems(pchar, "chest", 3);
 			Log_Info("Вы получили кредитные сундуки");
-			dialog.text = "Ага, читал как то. Берсерк видать. Прямо осколок прошлого. Вот, держи награду, заслужил"+ GetSexPhrase("","а") +".";
+			dialog.text = "Ага, читал как-то. Берсерк видать. Прямо осколок прошлого. Вот, держи награду, заслужил"+ GetSexPhrase("","а") +".";
 			pchar.questTemp.pirateVikingQuest = "end";
 			link.l1 = "Спасибо.";
 			link.l1.go = "exit";
 		break;
 
-        case "I_know_you_good":
-            dialog.text = NPCStringReactionRepeat(GetFullName(pchar) + ", рад тебя видеть! Зачем пожаловал"+ GetSexPhrase("","а") +" на этот раз?",
-                         "Ну что тебе ещё?", "Долго это будет продолжаться? Если тебе делать нечего, не отвлекай других!",
-                         "Ты "+ GetSexPhrase("хороший капер","хорошая девушка") +", поэтому живи пока. Но общаться и разговаривать с тобой я больше не желаю.", "repeat", 1, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("Да, собственно, просто так заглянул"+ GetSexPhrase("","а") +", проведать. Ничего по делу нет.",
-                                               "Ничего, просто так...",
-                                               "Хорошо, Джекмен, извини...",
-                                               "Вот чёрт возьми, доиграл"+ GetSexPhrase("ся","ась") +"!!!", npchar, Dialog.CurrentNode);
-			link.l1.go = "exit";
-			NextDiag.TempNode = "I_know_you_good";
-			//поиски шебеки Синяя Птица
-			if (pchar.questTemp.BlueBird == "toBermudes")
-			{
-				link.l1 = "Слушай, Джекмен, тут такое дело... В общем, не чалилась ли у тебя в порту шебека 'Синяя Птица'?";
-				link.l1.go = "BlueBird_1";
-			}
-			if (pchar.questTemp.BlueBird == "weWon")
-			{
-				link.l1 = "Представляешь, я таки отловил"+ GetSexPhrase("","а") +" эту шебеку 'Синяя Птица'!";
-				link.l1.go = "BlueBird_6";
-			}
-			if (pchar.questTemp.Sharp == "begin" && rand(1))
-			{
-				link.l1 = "Послушай, ходят слухи о промысле ловцов жемчуга в Карибском море. Ты ничего не слышал об этом?";
-				link.l1.go = "SharpPearl_1";
-			}
-			//пиратскся линейка начало
-			if (pchar.questTemp.piratesLine == "KillLoy_toJackman")
-			{
-				link.l1 = "Я ищу своего друга Эдварда Лоу, Алексус сказал, что он у тебя.";
-				link.l1.go = "PL_Q3_1";
-			}
-			if (pchar.questTemp.piratesLine == "KillLoy_toTavernAgain")
-			{
-				dialog.text = ""+ GetSexPhrase("Что надо?! Я не в настроении отвечать на твои вопросы!","Что надо, " + pchar.name + "? Я очень занят...") +"";
-				link.l1 = "Кажется, у нас есть с тобой общее дело. Эдвард Лоу.";
-				link.l1.go = "PL_Q3_2";
-			}
-			if (CheckAttribute(pchar,"questTemp.piratesLine.T1") && pchar.questTemp.piratesLine.T1 == "KillLoy_GoodWork" && !CheckAttribute(npchar, "quest.PQ3"))
-			{
-				dialog.text = "Вернул"+ GetSexPhrase("ся","ась") +"! Да не с пустыми руками!";
-				link.l1 = "Готов"+ GetSexPhrase("","а") +" сообщить, что Эдвард Лоу умер с ужасом в глазах и твоим именем в ушах.";
-				link.l1.go = "PL_SEAWOLF";
-			}
-			if(CheckAttribute(pchar, "questTemp.piratesLine") && pchar.questTemp.piratesLine == "waiting_Q6") 
-			{
-				dialog.text = "О-о-о, кого я вижу?! Глазам не верю!";
-				link.l1 = "Морган послал к тебе сказать, что капитан Гудли мертв.";
-				link.l1.go = "PL_Q6_1";
-			}
-			if(CheckAttribute(pchar, "questTemp.piratesLine") && pchar.questTemp.piratesLine == "PL_Q6_AfterBattle") 
-			{
-				dialog.text = "Джон уже рассказал мне о твоей операции с "+ GetSexPhrase("двойником","'сеcтричкой'") +". Тебе удалось узнать что-нибудь конкретное?";
-				link.l1 = "Поговорить удалось, да и только. Он"+ GetSexPhrase("","а") +" слишком торопил"+ GetSexPhrase("ся","ась") +", видать, боял"+ GetSexPhrase("ся","ась") +" сболтнуть что-то лишнее.";
-				link.l1.go = "PL_Q6_after_1";
-			}
-			if (pchar.questTemp.piratesLine == "Panama_backToShip")
-			{
-				dialog.text = "А, рад тебя видеть, " + pchar.name + ". Ну, что скажешь?";
-				link.l1 = "Ты знаешь о том, что сделал Морган в Панаме?";
-				link.l1.go = "PL_Q8";
-			}
-			//поиски супер-мушкета
-			if (CheckAttribute(pchar, "questTemp.mushket2x2") && !CheckCharacterItem(pchar, "mushket2x2"))
-			{
-				link.l1 = "Слушай, Джекмен, тебе ни о чем не говорит слово 'стрела'? Может быть, одного из твоих парней так кличут, или судно пиратское так называется?";
-				link.l1.go = "Mushket";
-			}
-			//поручение капитана - выкуп
-			if (CheckAttribute(pchar, "GenQuest.CaptainComission") && CheckAttribute(pchar,"GenQuest.CaptainComission.toMayor"))
-			{
-				link.l1 = "Я по поводу твоего пленника.";
-				link.l1.go = "CapComission1";
-				DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
-			}
-			if(sti(pchar.rank) >= 10 && !CheckAttribute(PChar, "questTemp.pirateVikingQuest"))
-			{
-				link.l3 = "Есть какое-нибудь интересное дело для меня?";
-				link.l3.go = "pirateVikingQuest";
-			}
-			else
-			{
-				if(CheckAttribute(PChar, "questTemp.pirateVikingQuest") && pchar.questTemp.pirateVikingQuest == "7" && npchar.city == pchar.questTemp.pirateVikingQuest.City)
-				{
-					dialog.text = "Вижу ты с новостями?"
-					link.l1 = "Да, завалил"+ GetSexPhrase("","а") +" таки северянина, ох и лютый же был. Обычно все разговоры заводят как смерть почуят, а этот рычал только аж пена изо рта шла.";
-					link.l1.go = "pirateVikingQuest_final";
-				}
-			}
-		break;
 		//********************* пиратка, направление на квест №1 *********************
-		case "PL_Q1_1":
-			if(CheckAttribute(NPChar, "notQuestLine"))
-			{
-				dialog.text = "Поговаривают, что ты у английских властей в большом фаворе. Неужели каперский патент перестал приносить доход?! Не стану я с тобой сотрудничать, слишком велик риск оказаться на виселице в результате твоей работы. Не взыщи...";
-				link.l1 = "Ясно... Да я, собственно, просто так спросил"+ GetSexPhrase("","а") +". На всякий случай...";
-				link.l1.go = "exit";
-			}
-			else
-			{
-				dialog.text = "У меня работы нет. Но если ты ничем не занят"+ GetSexPhrase("","а") +", то отправляйся в Пуэрто-Принсипе -  поищи там капитана Гудли. У него обычно всегда что-то есть.";
-				link.l1 = "А что за работа у него бывает?";
-				link.l1.go = "PL_Q1_2";
-				//LockQuestLine(characterFromId("eng_guber")); // лочим английскую линейку
-			}
-		break;
 		case "PL_Q1_2":
 			dialog.text = "Да когда как. Сам"+ GetSexPhrase("","а") +" у него спросишь.";
 			link.l1 = "Понятно...";
 			link.l1.go = "exit";
 			pchar.questTemp.piratesLine = "toFirstQuest";
 			AddQuestRecord("Pir_Line_0_Waiting", "2");
+			
+			sld = GetCharacter(NPC_GenerateCharacter("QuestPirate1", "officer_9", "man", "man", 20, PIRATE, -1, true));
+			sld.name = "Капитан";
+			sld.lastname = "Гудли";
+			sld.rank = 20;
+			sld.city = "PuertoPrincipe";
+			sld.location	= "PuertoPrincipe_town";
+			sld.location.group = "goto";
+			sld.location.locator = "goto7";
+			sld.dialog.filename   = "Quest\PiratesLine_dialog.c";
+			sld.dialog.currentnode   = "PiratesMan1";
+			sld.greeting = "Gr_EvilPirate";
+			sld.talker = 8; //начать диалог
+			sld.TiedItems.itm1.model = "HandsItems\meet";
+			sld.TiedItems.itm1.locator = "Saber_hand";
+			sld.TiedItems.itm2.model = "HandsItems\cup";
+			sld.TiedItems.itm2.locator = "Saber_hand";
+			LAi_SetLoginTime(sld, 6.0, 21.99);
+			LAi_SetCitizenType(sld);
+			LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
 		break;
 		//********************* пиратка, квест №3, поиски Лоу *********************
 		case "PL_Q3_1":
