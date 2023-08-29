@@ -10016,14 +10016,6 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_SetPlayerType(pchar);
 		break;
 
-		case "PDM_Callow_RodjerVozvrat":
-			sld = CharacterFromID("PDM_LeFransua_Mayor_Klon")
-			ChangeCharacterAddressGroup(sld, "LeFransua_town", "none", "");
-
-			sld = CharacterFromID("LeFransua_Mayor")
-			ChangeCharacterAddressGroup(sld, "LeFransua_townhall", "sit", "sit1");
-		break;
-
 		case "PDM_Callow_RodjerFin":
 			sld = CharacterFromID("James_Callow")
 			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
@@ -10041,6 +10033,9 @@ void QuestComplete(string sQuestName, string qname)
 			sld = CharacterFromID("James_Callow")
 			sld.dialog.filename = "Quest\PDM\Cursed_Idol.c";
 			sld.dialog.currentnode = "CollowNeRad_1";
+			AddQuestRecord("PDM_Cursed_Idol", "3");
+			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 1);		//У-у-у страшно!!!
+			SetTimerFunction("PDM_PI_Vernut_Gorod", 0, 0, 1);
 		break;
 
 		case "PDM_Callow_poradomoy":
@@ -10059,7 +10054,6 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "PDM_PI_Skelety_on_Ship":
             pchar.quest.Munity = "";
-            pchar.GenQuest.MunityStart = true;
 			
 			StartQuestMovie(true, true, true);
 			//ChangeShowIntarface();
@@ -10137,7 +10131,6 @@ void QuestComplete(string sQuestName, string qname)
             InterfaceStates.Buttons.Save.enable = 1;
             pchar.quest.Munity = "Deads";
             LAi_SetFightMode(Pchar, false);
-			SetTimerFunction("PDM_PI_Skelety_v_more", 0, 0, 20);
         break;
 //========================  Квест "Новая Родина".  =======================
 

@@ -377,7 +377,7 @@ void BSCourtlyPassions_begin_again(string _quest)
 
 void BSCourtlyPassions_sailor_begin(string qName)
 {
-	if(pchar.location == "LeFransua_port" || pchar.location == "FortFrance_town" ||  pchar.location == "Shore38" ||   pchar.location == "Shore39")
+	if(pchar.location == "LeFransua_town" || pchar.location == "FortFrance_town" ||  pchar.location == "Shore38" ||   pchar.location == "Shore39")
 	{
 		BSCourtlyPassions_sailor();
 	}

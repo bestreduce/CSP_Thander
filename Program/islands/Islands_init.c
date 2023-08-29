@@ -1139,7 +1139,7 @@ void InitIslands()
 
 		Islands[n].reload.l4.label = "LeFransua Port";
 		Islands[n].reload.l4.name = "reload_3";
-		Islands[n].reload.l4.go = "LeFransua_port";
+		Islands[n].reload.l4.go = "LeFransua_town";
 		Islands[n].reload.l4.emerge = "sea";
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 1;

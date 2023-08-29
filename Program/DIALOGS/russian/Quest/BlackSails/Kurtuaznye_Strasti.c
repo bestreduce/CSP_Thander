@@ -116,7 +116,7 @@ void ProcessDialogEvent()
 			LAi_SetActorTypeNoGroup(npchar);
 			LAi_ActorGoToLocation(npchar, "reload", LAi_FindNearestFreeLocator2Pchar("reload"), "Pirates_store", "", "", "", -1);
 			//Запускаем Матроса.
-			if(pchar.location == "LeFransua_port" || pchar.location == "FortFrance_town" ||  pchar.location == "Shore38" ||   pchar.location == "Shore39")
+			if(pchar.location == "LeFransua_town" || pchar.location == "FortFrance_town" ||  pchar.location == "Shore38" ||   pchar.location == "Shore39")
 			{
 				BSCourtlyPassions_sailor();
 			}

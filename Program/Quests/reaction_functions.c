@@ -10399,50 +10399,15 @@ void SetPortAlarm(string qName) //Тревога в городе, если пр�
 //Sinistra Проклятый идол -->
 void PDM_Callow_RodjerProdolg(string qName)
 {
-	chrDisableReloadToLocation = true;   //Нельзя убежать
-	LAi_LockFightMode(Pchar, false);
-	LAi_LocationFightDisable(loadedLocation, true); //Запрещаем оружие
-	Pchar.GenQuest.Hunter2Pause = true;
-    //--------------------------- скелеты ------------------------------
+	chrDisableReloadToLocation = true;
+	ClearAllLogStrings();
+	Log_info("Что-то здесь не так...");
+	
+	sld = CharacterFromID("PDM_LeFransua_Mayor_Klon")
+	ChangeCharacterAddressGroup(sld, "LeFransua_town", "none", "");
 
-    int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE;
-	if (Rank < 1) Rank = 1;
-	sld = GetCharacter(NPC_GenerateCharacter("PDM_Pinki_Skelet", "skel3", "skeleton", "skeleton", Rank, PIRATE, -1, true));
-	sld.name = "Пинкамина";
-	sld.lastname = "Пай";
-    FantomMakeCoolFighter(sld, sti(pchar.rank), 15 + MOD_SKILL_ENEMY_RATE * 4, 15 + MOD_SKILL_ENEMY_RATE * 4, "blade36", "", 25 + MOD_SKILL_ENEMY_RATE * 4);
-	sld.SaveItemsForDead = true;
-	sld.DontChangeBlade = true;
-	sld.DeleteFood = true;
-	TakeItemFromCharacter(sld, "spyglass3");
-	AddMoneyToCharacter(sld, 5000);
-	AddItems(sld, "jewelry2", 10);
-	AddItems(sld, "jewelry5", 10);
-	AddItems(sld, "jewelry17", 10);
-	AddItems(sld, "mineral5", 3);
-	ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto2");
-	LAi_SetActorType(sld);
-	sld.dialog.filename   = "Quest\PDM\Cursed_Idol.c";
-	sld.dialog.currentnode   = "FraOff_1";
-	LAi_ActorDialog(sld, pchar, "", -1, 0);
-	int j;
-	if (pchar.rank <= 10)
-	{
-		j = (GetOfficersQuantity(Pchar) + 3);
-	}
-	else
-	{
-		j = (GetOfficersQuantity(Pchar) + 5);
-	}
-	for (i=1; i<=j; i++)
-    {
-        sTemp = "skel_"+(rand(3)+1);
- 		sld = GetCharacter(NPC_GenerateCharacter("PDM_PI_skel_"+i, sTemp, "skeleton", "skeleton", Rank, PIRATE, -1, true));
-        //FantomMakeCoolFighter(sld, sti(pchar.rank), 10 + MOD_SKILL_ENEMY_RATE * 2, 10 + MOD_SKILL_ENEMY_RATE * 2, BLADE_LONG, "", 10 + MOD_SKILL_ENEMY_RATE * 2);
-        ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto2");
-		LAi_SetActorType(sld);
-		LAi_ActorFollow(sld, pchar, "", -1);
-    }
+	sld = CharacterFromID("LeFransua_Mayor")
+	ChangeCharacterAddressGroup(sld, "LeFransua_townhall", "sit", "sit1");
 }
 void PDM_PI_Skelety_v_more(string qName)
 {
@@ -10474,6 +10439,11 @@ void PDM_PI_Vykl_Music(string qName)
 	PlayVoice("Kopcapkz\Voices\Skeletons\Skeleton_hit_16.ogg");
 	PlayVoice("Kopcapkz\Voices\Skeletons\Skeleton_hit_23.ogg");
 	PlayVoice("CSR\Music\Sea\Deck_Nekro.ogg");
+}
+void PDM_PI_Vernut_Gorod(string qName)
+{
+	SetLocationCapturedState("LeFransua_town", false);
+	AddSimpleRumourToAllNations("Представляешь, какой-то безумец в одиночку вырезал половину гарнизона в Ле Франсуа!", 7, 1);
 }
 //Sinistra Проклятый идол <--
 

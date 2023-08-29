@@ -410,8 +410,8 @@ void InitMapTeleport()
 	oMapTeleport.map_martiniqua.FortFrance_ExitTown.Pos0.Y = 325;
 	oMapTeleport.map_martiniqua.LeFransua_ExitTown.Pos0.X = 485;
 	oMapTeleport.map_martiniqua.LeFransua_ExitTown.Pos0.Y = 320;
-	oMapTeleport.map_martiniqua.LeFransua_port.Pos0.X = 490;
-	oMapTeleport.map_martiniqua.LeFransua_port.Pos0.Y = 260;
+	oMapTeleport.map_martiniqua.LeFransua_town.Pos0.X = 490;
+	oMapTeleport.map_martiniqua.LeFransua_town.Pos0.Y = 260;
 	
 	oMapTeleport.map_barbados.island = "Barbados";
 	oMapTeleport.map_barbados.Mayak2.Pos0.X = 290;
