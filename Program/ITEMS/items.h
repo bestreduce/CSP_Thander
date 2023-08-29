@@ -46,7 +46,7 @@
 #define MAX_HANDLED_BOXES 		  25
 #define ITEM_PROBABILITY		  0.5
 #define OBJECTS_IN_BOX			  9
-#define MAPS_IN_ATLAS			  26 // ugeen 21.06.09  -не забываем увеличивать при появлении новых карт
+#define MAPS_IN_ATLAS			  27 // ugeen 21.06.09  -не забываем увеличивать при появлении новых карт
 
 object Items[ITEMS_QUANTITY];
 object RandItems[RANDITEMS_QUANTITY];

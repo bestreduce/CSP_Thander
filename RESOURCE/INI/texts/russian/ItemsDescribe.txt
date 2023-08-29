@@ -400,6 +400,12 @@ itmdescr_map_Bahames
 Карта Багамских островов с городом Нассау
 }
 
+itmname_map_SentLuchia{Карта Санта-Люсии}
+itmdescr_map_SentLuchia
+{
+Карта острова Санта-Люсии. Нарисована неизвестным пиратом.
+}
+
 itmname_map_cumana{Карта Куманы}
 itmdescr_map_cumana
 {

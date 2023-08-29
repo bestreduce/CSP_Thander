@@ -875,6 +875,9 @@ string GetCityNameByIsland(string CurIslandId)
     	case "Antigua":
 			TargetLocation = "SentJons";
 		break;
+		case "Bahames":
+            TargetLocation = "Nassau";
+        break;
 		case "Bermudes":
 			TargetLocation = "Pirates";
 		break;
