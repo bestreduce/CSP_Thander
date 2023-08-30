@@ -2839,7 +2839,7 @@ void initNewMainCharacter()
 		ch.HeroParam.Location = ch.HeroParam.ToCityId + "_port";
 		ch.HeroParam.Group    = "reload";
 		ch.HeroParam.Locator  = "sea";
-		if (ch.HeroParam.ToCityId == "LaVega")	//Ла Вега town
+		if (ch.HeroParam.ToCityId == "LaVega" || ch.HeroParam.ToCityId == "LeFransua")	//Ла Вега и Ле Франсуа - города
 		{
 			ch.HeroParam.Location = ch.HeroParam.ToCityId + "_town";
 			ch.HeroParam.Group    = "reload";
