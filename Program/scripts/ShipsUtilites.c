@@ -798,7 +798,7 @@ float Cannon_GetRechargeTimeValue(ref aCharacter)
 	//Boyer remove reload speed boost for enemies
 	if (sti(aCharacter.index) != GetMainCharacterIndex())
 	{
-	   fReloadTime -= MOD_SKILL_ENEMY_RATE/2; // -10c на невозможном
+	   fReloadTime -= MOD_SKILL_ENEMY_RATE*3/2; // -10c на невозможном
 	}
 	// boal <--
 	float crewQty  = GetCrewQuantity(aCharacter);
@@ -1239,7 +1239,7 @@ int GetSailRepairCost(int shipType, int repairPercent, ref _shipyard)
 {
 	float fConstanta = 2.0;
 	float fSkillDepend = fConstanta + (SKILL_TO_OLD*2.0) - (GetSummonSkillFromNameToOld(pchar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(pchar, SKILL_COMMERCE));
-	fSkillDepend *= 0.1 + (MOD_SKILL_ENEMY_RATE * 0.01);
+	fSkillDepend *= 0.1 + (MOD_SKILL_ENEMY_RATE*3 * 0.01);
 	float SailRepairCoeff = 1.0 * fSkillDepend;
 	int shipPrice = GetShipPriceByType(shipType, _shipyard);
 	if(shipPrice<=0) return 0;
@@ -1253,7 +1253,7 @@ int GetHullRepairCost(int shipType,int repairPercent, ref _shipyard)
 {
 	float fConstanta = 4.0;
 	float fSkillDepend = fConstanta + (SKILL_TO_OLD*1.75) - (GetSummonSkillFromNameToOld(pchar, SKILL_REPAIR) + GetSummonSkillFromNameToOld(pchar, SKILL_COMMERCE));
-	fSkillDepend *= 0.1 + (MOD_SKILL_ENEMY_RATE * 0.01);
+	fSkillDepend *= 0.1 + (MOD_SKILL_ENEMY_RATE*3 * 0.01);
 	float HullRepairCoeff = 1.0 * fSkillDepend;
 	int shipPrice = GetShipPriceByType(shipType, _shipyard);
 	if(shipPrice<=0) return 0;
@@ -1391,7 +1391,7 @@ int GetPortManPriceExt(ref NPChar, ref chref)
 	float fRelation 	= 1.0; 															// учитываем  - родная нация или нет
 
 	if(sti(NPChar.nation) == GetBaseHeroNation()) fRelation = 0.5; 						// если нация родная- снижаем цену в два раза
-	int price = makeint(100 * MOD_SKILL_ENEMY_RATE * 1.56 * sqr(6.7 - sti(RealShips[sti(chref.Ship.Type)].Class)) * (2 + 0.5 * GetNationRelation2MainCharacter(sti(NPChar.nation))) * fRelation * fLeadership * fCommerce);
+	int price = makeint(100 * MOD_SKILL_ENEMY_RATE*3 * 1.56 * sqr(6.7 - sti(RealShips[sti(chref.Ship.Type)].Class)) * (2 + 0.5 * GetNationRelation2MainCharacter(sti(NPChar.nation))) * fRelation * fLeadership * fCommerce);
 	price = price + sti(chref.Ship.Crew.Quantity) * 10; // LEO: за каждого матроса платим по 10 золота
 
 	return price;
@@ -1625,7 +1625,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			cl1 = 52;
 		break;
 		case 3:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 52;
 				cl1 = 84;
@@ -1637,7 +1637,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			}
 		break;
 		case 2:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 84;
 				cl1 = 105;
@@ -1649,7 +1649,7 @@ void CreatePGG_War(ref ch, int iNation, ref shipOwner)
 			}
 		break;
 		case 1:
-			if (MOD_SKILL_ENEMY_RATE == 10)
+			if (MOD_SKILL_ENEMY_RATE == 3)
 			{
 				cl = 105;
 				cl1 = 125;

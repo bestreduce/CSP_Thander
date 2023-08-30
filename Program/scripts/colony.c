@@ -197,11 +197,11 @@ bool PrepareTownBattle()
     mcrew = GetCrewQuantity(Pchar) + GetTroopersCrewQuantity(Pchar);
     if (CheckAttribute(fortChr, "Fort.Mode") && sti(fortChr.Fort.Mode) != FORT_DEAD)
     { // это фортовый город и форт целый
-        ecrew = sti(fortChr.Default.Crew.Quantity) + makeint(sti(fortChr.Default.Crew.Quantity) * (MOD_SKILL_ENEMY_RATE / 10.0));
+        ecrew = sti(fortChr.Default.Crew.Quantity) + makeint(sti(fortChr.Default.Crew.Quantity) * (MOD_SKILL_ENEMY_RATE*3 / 10.0));
     }
     else
     { // форт убит
-        ecrew = sti(fortChr.Default.Crew.MinQuantity) + makeint(sti(fortChr.Default.Crew.MinQuantity) * (MOD_SKILL_ENEMY_RATE / 10.0));
+        ecrew = sti(fortChr.Default.Crew.MinQuantity) + makeint(sti(fortChr.Default.Crew.MinQuantity) * (MOD_SKILL_ENEMY_RATE*3 / 10.0));
     }
 
     Pchar.GenQuestFort.PlayerCrew_Start = mcrew; // скока было

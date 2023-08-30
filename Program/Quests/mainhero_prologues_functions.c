@@ -65,9 +65,9 @@ void Sharp_MeetSiblings(string qName)
 	LAi_SetStayTypeNoGroup(sld);
    	LAi_SetImmortal(sld, true);
 	sld.talker = 10;
-	weaponskill = 5* MOD_SKILL_ENEMY_RATE;
+	weaponskill = 5* MOD_SKILL_ENEMY_RATE*3;
 	SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		SetCharacterPerk(sld, "Sliding");
 	}
@@ -125,7 +125,7 @@ void SharleMary_Indians(string qName)
 	chrDisableReloadToLocation = true;
 	string cnd;
 	int maxIndians = 2;
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		maxIndians++;
 	}
@@ -138,12 +138,12 @@ void SharleMary_Indians(string qName)
 		DeleteAttribute(sld, "equip");
 		DeleteAttribute(sld, "items");
 		string _Blade = GiveRandomBladeByType("indian");
-		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE, 10*MOD_SKILL_ENEMY_RATE);
-		weaponskill = 2* MOD_SKILL_ENEMY_RATE;
+		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE*3, 10*MOD_SKILL_ENEMY_RATE*3);
+		weaponskill = 2* MOD_SKILL_ENEMY_RATE*3;
 		SetSelfSkill(sld, weaponskill, weaponskill, weaponskill, weaponskill, weaponskill);
 		GiveItem2Character(sld, _Blade);
 		EquipCharacterbyItem(sld, _Blade);
-		if (MOD_SKILL_ENEMY_RATE == 10)
+		if (MOD_SKILL_ENEMY_RATE == 3)
 		{//Сюрприз для невозможки
 			//FantomMakeCoolFighter(sld, 15, 10, 10, _Blade, "", 0);
 			SetCharacterPerk(sld, "Sliding");
@@ -228,7 +228,7 @@ void SharleMary_MeetCap(string qName)
 	LAi_LocationFightDisable(locLoad, true);
 	int maxPirates = 3;
 	string cnd;
-	if (MOD_SKILL_ENEMY_RATE == 10)
+	if (MOD_SKILL_ENEMY_RATE == 3)
 	{//Сюрприз для невозможки
 		maxPirates++;
 	}
@@ -236,13 +236,13 @@ void SharleMary_MeetCap(string qName)
 	for (int i = 1; i<=maxPirates; i++)
 	{
 		sld = GetCharacter(NPC_GenerateCharacter("SMPirate"+i, "pirate_"+(rand(15)+1), "man", "man", 1, PIRATE, 1, true));
-		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE, 10*MOD_SKILL_ENEMY_RATE);
+		LAi_SetHP(sld, 10*MOD_SKILL_ENEMY_RATE*3, 10*MOD_SKILL_ENEMY_RATE*3);
 		LAi_SetStayType(sld);
 		if (i == 1)
 		{
 			sld.model = "PGG_Yohang_0";
 			sld.dialog.filename = "Quest\MainheroPrologues\Prologue_SharleMary_dialog.c";
-			FantomMakeCoolFighter(sld, 10, 2*MOD_SKILL_ENEMY_RATE, 2*MOD_SKILL_ENEMY_RATE, "blade31", "", 6*MOD_SKILL_ENEMY_RATE);
+			FantomMakeCoolFighter(sld, 10, 2*MOD_SKILL_ENEMY_RATE*3, 2*MOD_SKILL_ENEMY_RATE*3, "blade31", "", 6*MOD_SKILL_ENEMY_RATE*3);
 			sld.SaveItemsForDead = true;
 			sld.talker = 10;
 			LAi_SetStayType(sld);

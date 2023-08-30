@@ -495,7 +495,7 @@ void Church_GenQuest2_GenerateBandits(string sQuest)
 	// if (iBanditsCount >= 4) iBanditsCount = 3 + rand(1);	// Чаще всего так и бывает
 
 	iGenRank = GetCoffDiff(sti(PChar.rank), 1000);
-	if (iGenRank < MOD_SKILL_ENEMY_RATE) iGenRank = MOD_SKILL_ENEMY_RATE;
+	if (iGenRank < MOD_SKILL_ENEMY_RATE*3) iGenRank = MOD_SKILL_ENEMY_RATE*3;
 
 	PChar.GenQuest.ChurchQuest_2.BanditsCount = iBanditsCount;
 	if(LAi_GetLocatorNum("encdetector") > 0) 	sLocGroup = "encdetector";
@@ -756,7 +756,7 @@ void ReasonToFast_GenerateHunter() // генерация ОЗГ
 {
 	ref chr;
 
-	int iRank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE);
+	int iRank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3);
 	chr = GetCharacter(NPC_GenerateCharacter("ReasonToFast_Hunter", "officer_"+(rand(63)+1), "man", "man", iRank, PIRATE, -1, true));
 	FantomMakeCoolFighter(chr, iRank, 80, 80, "topor2", "pistol3", 50);
 	int jewelType = sti(pchar.questTemp.ReasonToFast.p4);
@@ -925,7 +925,7 @@ void ReasonToFast_RemoveVictim()
 void ReasonToFast_PreparePirateShip(string qName) // генерация пиратского корабля
 {
 	ref sld;
-	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE);
+	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE*3);
 	int iShipRank, iShipType;
 	string sTemp, sTemp1;
 
@@ -1378,7 +1378,7 @@ void ReasonToFast_InitVariables()
 	pchar.questTemp.ReasonToFast.p2 = drand(100);
 	pchar.questTemp.ReasonToFast.p3 = "l" + drand(GetNamesCount(NAMETYPE_MAIN) - 1); 	// id пиратского атамана
 	pchar.questTemp.ReasonToFast.p4 = drand(3) + 1; 	// id камня (1-4)
-	pchar.questTemp.ReasonToFast.p5 = (110 - GetSummonSkillFromName(pchar, SKILL_FORTUNE)) * MOD_SKILL_ENEMY_RATE * 1000;
+	pchar.questTemp.ReasonToFast.p5 = (110 - GetSummonSkillFromName(pchar, SKILL_FORTUNE)) * MOD_SKILL_ENEMY_RATE*3 * 1000;
 	pchar.questTemp.ReasonToFast.p6 = GenQuest_GenerateGoodBlade(); // генерация клинка
 	s1 = GetCharacterSPECIAL(pchar,"Charisma");
 	s1 = s1 - drand(makeint(s1/2));
@@ -1554,7 +1554,7 @@ void PiratesOnUninhabited_InTreasureLoc(String _quest)
 
 	if(!CheckAttribute(PChar, "GenQuest.PiratesOnUninhabited.TreasureLose"))
 	{
-		count = rand(10) + makeint(MOD_SKILL_ENEMY_RATE / 3) + dRand(5);
+		count = rand(10) + makeint(MOD_SKILL_ENEMY_RATE*3 / 3) + dRand(5);
 
 		PChar.GenQuest.PiratesOnUninhabited.ShorePiratesQty = count;
 
@@ -2397,8 +2397,8 @@ void EncGirl_MeetRapers(string qName)
 
 	if (sti(pchar.rank) > 1)
 	{
-		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*2.5/3);
-		else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*1.6/3);
+		if (sti(pchar.rank) > 20) iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*2.5/3);
+		else iRank = sti(pchar.rank) + sti(MOD_SKILL_ENEMY_RATE*3*1.6/3);
 	}
 	else iRank = sti(pchar.rank);
 
@@ -3173,7 +3173,7 @@ void CaptainComission_GenerateSlave(string qName)
 		for (int i = 0; i < 3; i++)
 		{
 			sld = GetCharacter(NPC_GenerateCharacter("SlaveGuard_"+i, "sold_eng_"+(rand(7)+1), "man", "man", 10, GetCityNation("Bridgetown"), 1, false));
-			SetFantomParamFromRank(sld, sti(pchar.rank) + MOD_SKILL_ENEMY_RATE, true); // бравые орлы
+			SetFantomParamFromRank(sld, sti(pchar.rank) + MOD_SKILL_ENEMY_RATE*3, true); // бравые орлы
             LAi_SetActorType(sld);
             LAi_SetStayType(sld);
             LAi_group_MoveCharacter(sld, sTemp);
@@ -3317,7 +3317,7 @@ void CaptainComission_GeneratePatrol()
 	str = "Patrol"+ pLoc.index + "_";
 	string sGroup = "PatrolGroup_" + pLoc.index; //имя группы
 	iRank = sti(pchar.rank);
-	if(MOD_SKILL_ENEMY_RATE > 5) num = 5;
+	if(MOD_SKILL_ENEMY_RATE*3 > 5) num = 5;
 	else						 num = 3;
 
 	for(i = 0; i < num; i++)
@@ -3427,7 +3427,7 @@ void CaptainComission_GeneratePirateShips(string qName)
 	// ==> Пиратские кэпы
 	for (i=1; i<=2; i++)
 	{
-		Rank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE);
+		Rank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3);
 		if(makeint(pchar.rank) > 13) { iShipRank = rand(2) + 3; }
 		if(makeint(pchar.rank) > 6 && makeint(pchar.rank) < 13) { iShipRank = rand(2); }
 		if(makeint(pchar.rank) < 7) { iShipRank = rand(1); }
@@ -3696,7 +3696,7 @@ void CaptainComission_GenerateQuestVariant()
 
 void CaptainComission_GenerateShip()
 {
-	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE);
+	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE*3);
 	int iNation = sti(pchar.GenQuest.CaptainComission.Nation);
 	ref chref = GetCharacter(NPC_GenerateCharacter("CapComission_1", "off_"+NationShortName(iNation)+"_"+(rand(1)+1), "man", "man", iRank, iNation, -1, true));
 
@@ -3962,7 +3962,7 @@ void CaptainComission_GenerateCoastalPatrol()
 	for (i = 1; i <= 3; i++)
     {
         Model = "off_" + NationShortName(iNation) + "_" + (rand(1) + 1);
-		CoastGuard = GetCharacter(NPC_GenerateCharacter("Coastal_Captain0" + i, Model, "man", "man", sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE), iNation, 3, true)); // 3 дня, потом сами пропадут
+		CoastGuard = GetCharacter(NPC_GenerateCharacter("Coastal_Captain0" + i, Model, "man", "man", sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3), iNation, 3, true)); // 3 дня, потом сами пропадут
 		SetFantomParam(CoastGuard);
 		SelectCoastalGuardShip(CoastGuard);
 		CoastGuard.AlwaysEnemy = true;
@@ -4201,7 +4201,7 @@ void CaptainComission_ExitFromShoreAfterGang(string qName)
 
 void CaptainComission_ChangeCaptain()
 {
-	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE);
+	int iRank = sti(pchar.rank) + 5 + rand(MOD_SKILL_ENEMY_RATE*3);
 	int iNation = sti(pchar.GenQuest.CaptainComission.Nation);
 	aref	arShip1, arShip2;
 	ref chref, sld;
@@ -5173,6 +5173,7 @@ void ShipWreck_DeliveToCity(string qName)
 			for(int i = 0; i < sti(pchar.GenQuest.ShipWreck.Qty); i++)
 			{
 				sld = CharacterFromID("ShipWreck_" + i);
+				if (i != 0) continue;
 				PlaceCharacter(sld, "goto", "random_must_be_near");
 				if (i == 0 && CheckAttribute(sld,"curtown"))
 				{

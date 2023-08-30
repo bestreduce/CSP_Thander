@@ -803,6 +803,11 @@ void ProcessDialogEvent()
 
 		case "ShipWreck_16":
 			ChangeCharacterReputation(pchar, -3);
+			for(i = 1; i < sti(pchar.GenQuest.ShipWreck.Qty); i++)
+			{
+				sld = CharacterFromID("ShipWreck_" + i);
+				PlaceCharacter(sld, "goto", "random_must_be_near");
+			}
 			for(i = 0; i < sti(pchar.GenQuest.ShipWreck.Qty); i++)
 			{
 				rChar = CharacterFromID("ShipWreck_" + i);

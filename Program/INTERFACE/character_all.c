@@ -2304,7 +2304,7 @@ void ChoosePerk()
 	{
 		int contrap = 0;
 		if (CheckAttribute(pchar,"contrabandmoneyback")) contrap = sti(pchar.contrabandmoneyback);
-		SetFormatedText("CONTRAP",contrap+"/"+(3000000+(MOD_SKILL_ENEMY_RATE*100000)));
+		SetFormatedText("CONTRAP",contrap+"/"+(3000000+(MOD_SKILL_ENEMY_RATE*3*100000)));
 	}
 	else SetFormatedText("CONTRAP","");
 

@@ -237,9 +237,9 @@ void SetMerchantShip(ref Cap, int igoods)
     ref MerPrm;
     makeref(MerPrm, MerchantParam);
     int killM = Statistic_AddValue(GetMainCharacter(), "Rob"+NationShortName(sti(MerPrm.nation))+"MerchantOnMap", 0)
-    if (MOD_SKILL_ENEMY_RATE > 5) // 20/01/07 homo
+    if (MOD_SKILL_ENEMY_RATE*3 > 5) // 20/01/07 homo
     {
-        killMax = makeint(3+(10 - MOD_SKILL_ENEMY_RATE)/2);
+        killMax = makeint(3+(10 - MOD_SKILL_ENEMY_RATE*3)/2);
     }
     else
     {

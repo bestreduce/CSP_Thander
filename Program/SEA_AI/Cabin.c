@@ -709,14 +709,14 @@ void SetSailorDeck_Ships(ref Chref)
 		iQty = sti(PChar.GenerateShipWreck.ShipCrewQty) + 1;
 	}
 
-	int iRank = GetRank(PChar, 2) + MOD_SKILL_ENEMY_RATE;
+	int iRank = GetRank(PChar, 2) + MOD_SKILL_ENEMY_RATE*3;
 
 	if(!CheckAttribute(Chref, "ShipWreck"))
 	{
 		iRank = 10;
 	}
 
-	if(CheckAttribute(pchar,"GenQuest.CaptainComission")) Rank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE); // чтобы жизнь медом не казалась
+	if(CheckAttribute(pchar,"GenQuest.CaptainComission")) Rank = sti(pchar.rank) + rand(MOD_SKILL_ENEMY_RATE*3); // чтобы жизнь медом не казалась
 
     for (int i=1; i<5; i++)
     {
