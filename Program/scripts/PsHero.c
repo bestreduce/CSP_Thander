@@ -81,7 +81,7 @@ void InitPsHeros()
 				SetCharacterGoods(ch, GOOD_SAILCLOTH, 20 + rand(50));
 				SetCharacterGoods(ch, GOOD_PLANKS, 20 + rand(50));
 				SetCharacterGoods(ch, GOOD_RUM, 50 + rand(100));
-				ch.ship.HP = sti(ch.ship.HP) - makeint(sti(ch.ship.HP)*0.05) * makeint(MOD_SKILL_ENEMY_RATE/2);
+				ch.ship.HP = sti(ch.ship.HP) - makeint(sti(ch.ship.HP)*0.05) * makeint(MOD_SKILL_ENEMY_RATE*3/2);
 
 			}
 			else
@@ -479,7 +479,7 @@ void PGG_CheckDead(ref chr)
 
 	if (!CheckAttribute(chr, "KilledTimes"))	chr.KilledTimes = 1;
 	else	chr.KilledTimes = sti(chr.KilledTimes)+1;
-	int respawnChance = 25 + sti(chr.KilledTimes) * MOD_SKILL_ENEMY_RATE;
+	int respawnChance = 25 + sti(chr.KilledTimes) * MOD_SKILL_ENEMY_RATE*3;
 
 	//выжил или нет
 			if (sti(chr.PGGAi.IsPGG) && rand(100) > respawnChance && chr.id != "PsHero_2")
@@ -854,11 +854,11 @@ void PGG_SetUpForTask(ref chr)
 			{
 				int pgg_hunters = sti(chr.rank)/15 + 1;
 				int pgg_hunters_bonus = 1;
-				if (MOD_SKILL_ENEMY_RATE == 10)
+				if (MOD_SKILL_ENEMY_RATE == 3)
 				{
 					pgg_hunters_bonus = 2;
 				}
-				if (MOD_SKILL_ENEMY_RATE < 4)
+				if (MOD_SKILL_ENEMY_RATE < 3)
 				{
 					pgg_hunters_bonus = 0;
 				}
@@ -964,7 +964,7 @@ void PGG_UpdateStats(ref chr, string sExpType)
 		{
 			//время кача в часах
 
-			fMod = MOD_SKILL_ENEMY_RATE + rand(MOD_SKILL_ENEMY_RATE + 12);
+			fMod = MOD_SKILL_ENEMY_RATE*3 + rand(MOD_SKILL_ENEMY_RATE*3 + 12);
 			fMod = fMod*EXP_MODIFIER;
 
 			AddCharacterExpToSkill(chr, GetEquipedBladeType(chr), fMod*261);
@@ -973,7 +973,7 @@ void PGG_UpdateStats(ref chr, string sExpType)
 			AddCharacterExpToSkill(chr, SKILL_LEADERSHIP, fMod*11.759);
 			AddCharacterExpToSkill(chr, SKILL_DEFENCE, fMod*11.5);
 			//время кача в часах
-			fMod = MOD_SKILL_ENEMY_RATE + rand(12);
+			fMod = MOD_SKILL_ENEMY_RATE*3 + rand(12);
 			fMod = fMod*EXP_MODIFIER;
 			AddCharacterExpToSkill(chr, SKILL_COMMERCE, fMod*25.2);
 			if(GetCharacterShipClass(chr) > GetCharacterShipClass(PChar) || rand(9) == 0)
@@ -994,7 +994,7 @@ void PGG_UpdateStats(ref chr, string sExpType)
 			if (GetCharacterShipClass(chr) > GetCharacterShipClass(PChar) || rand(100) < iRnd)
 			{
 				//даю меньше от 1 до 6 кораблей...
-				PGG_AddMoneyToCharacter(chr, PGG_AddShipsBattleExp(chr, 1 + rand(makeint(MOD_SKILL_ENEMY_RATE*1.5))));
+				PGG_AddMoneyToCharacter(chr, PGG_AddShipsBattleExp(chr, 1 + rand(makeint(MOD_SKILL_ENEMY_RATE*3*1.5))));
 			}
 		}
 	}
@@ -1003,8 +1003,8 @@ void PGG_UpdateStats(ref chr, string sExpType)
 		switch (chr.PGGAi.Task)
 		{
 		case PGG_TASK_WORKONMAYOR:
-            AddCharacterExpToSkill(chr, SKILL_LEADERSHIP, 20 + MOD_SKILL_ENEMY_RATE + rand(MOD_SKILL_ENEMY_RATE + 40));
-		    AddCharacterExpToSkill(chr, SKILL_COMMERCE, 3 + MOD_SKILL_ENEMY_RATE);
+            AddCharacterExpToSkill(chr, SKILL_LEADERSHIP, 20 + MOD_SKILL_ENEMY_RATE*3 + rand(MOD_SKILL_ENEMY_RATE*3 + 40));
+		    AddCharacterExpToSkill(chr, SKILL_COMMERCE, 3 + MOD_SKILL_ENEMY_RATE*3);
 			iMoney = Makeint(sti(chr.rank)*200 + (GetSummonSkillFromNameToOld(chr, SKILL_LEADERSHIP)*30 + 700 + rand(20)*100));
 			// + Кач за боевки
 			iRnd = rand(100);
@@ -1044,7 +1044,7 @@ int PGG_AddShipsBattleExp(ref chr, int _shipsNum)
 	ref rShip;
 	int i, iMoney;
 	float fTmp = 0.0;
-	float fMod = MOD_SKILL_ENEMY_RATE * EXP_MODIFIER * _shipsNum;
+	float fMod = MOD_SKILL_ENEMY_RATE*3 * EXP_MODIFIER * _shipsNum;
 
 	AddCharacterExpToSkill(chr, SKILL_ACCURACY, fMod*29.4 + FRAND(100.0));
 	AddCharacterExpToSkill(chr, SKILL_SAILING, fMod*14.0);
@@ -1168,7 +1168,7 @@ void PGG_UpdateEquip(ref chr)
 			//если корабль уже есть, то не всегда есть возможность его сменить, поэтому 5-50 процентов
 			if (!bShipNotUsed)
 			{
-				if (MOD_SKILL_ENEMY_RATE * sti(chr.rank) > rand(10*MOD_SKILL_ENEMY_RATE)) bOk = true;
+				if (MOD_SKILL_ENEMY_RATE*3 * sti(chr.rank) > rand(10*MOD_SKILL_ENEMY_RATE*3)) bOk = true;
 			}
 			//а нет, так всегда купит, нужда.
 			else
@@ -1213,7 +1213,7 @@ void PGG_UpdateEquip(ref chr)
 		GiveItem2Character(chr, blade);
 		EquipCharacterByItem(chr, blade);
 
-		if(rand(1000) < MOD_SKILL_ENEMY_RATE*100)
+		if(rand(1000) < MOD_SKILL_ENEMY_RATE*3*100)
 		{
 			TakeNItems(chr, "potion1", rand(makeint(sti(chr.rank)/4 + 0.5))); // даю меньше
 			if(GetCharacterItem(chr, "potion1") > 30)	chr.Items.potion1 = 30;
@@ -1221,7 +1221,7 @@ void PGG_UpdateEquip(ref chr)
 			if(GetCharacterItem(chr, "potion2") > 10)	chr.Items.potion2 = 10;
 		}
 
-		if(rand(1000) < MOD_SKILL_ENEMY_RATE * sti(chr.rank) * 8)
+		if(rand(1000) < MOD_SKILL_ENEMY_RATE*3 * sti(chr.rank) * 8)
 		{
 			//трем пистолеты.
 			blade = FindCharacterItemByGroup(chr, GUN_ITEM_TYPE);
@@ -1810,7 +1810,7 @@ string PGG_Event_WorkWithContra(ref rRum)
 		LAi_group_MoveCharacter(chr, "PGGTmp");
 //		LAi_warrior_SetStay(chr, true); //можно убрать, будет шататься по бухте.
 
-		iTmp = 3 + rand(MakeInt(MOD_SKILL_ENEMY_RATE*0.4));
+		iTmp = 3 + rand(MakeInt(MOD_SKILL_ENEMY_RATE*3*0.4));
 		for (i = 0; i < iTmp; i++)
 		{
 			sTemp = "pirate_" + (rand(9)+1);
@@ -2631,7 +2631,7 @@ void PGG_Q1FightOnShore()
 
 	chrDisableReloadToLocation = true;
 	//our
-	iRnd = 10 + drand(15) + MOD_SKILL_ENEMY_RATE;
+	iRnd = 10 + drand(15) + MOD_SKILL_ENEMY_RATE*3;
 	if (!CheckAttribute(PChar, "GenQuest.PGG_Quest.PGGid.Dead"))
 	{
 		chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
@@ -2659,7 +2659,7 @@ void PGG_Q1FightOnShore()
 		Pchar.GenQuestFort.FarLocator = true;
 
 	//enemy
-	iRnd = 15 + drand(15) + MOD_SKILL_ENEMY_RATE + GetOfficersQuantity(pchar);
+	iRnd = 15 + drand(15) + MOD_SKILL_ENEMY_RATE*3 + GetOfficersQuantity(pchar);
 	Pchar.GenQuestFort.FarLocator = true;
 	sLoc = LAi_FindNPCLocator("goto");
 	sLoc_2 = LAi_FindNPCLocator("smugglers");

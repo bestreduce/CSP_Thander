@@ -816,7 +816,7 @@ void ProcessDialogEvent()
 		case "FlyingDutchmanSails":
 			if(iShipClass < 4)
 			{
-				iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE * 10; // Цена за установку парусов
+				iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE*3 * 10; // Цена за установку парусов
 				dialog.text = "Да, я как раз придумал интересную геометрию паруса: он напоминает рваный, чтобы книппели и ядра наносили меньший ущерб. Его, кстати, можно пошить из ненового сукна. Думаю, для вашего корабля такой комплект будет стоить " + FindRussianMoneyString(iSumm) + ".";
 
 				if(sti(PChar.money) >= iSumm)
@@ -837,7 +837,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "FlyingDutchmanSails_SetDuchman":
-			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE * 10; // Цена за установку парусов
+			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE*3 * 10; // Цена за установку парусов
 
 			AddMoneyToCharacter(PChar, -iSumm);
 
@@ -852,7 +852,7 @@ void ProcessDialogEvent()
 
 		// Убрать паруса ЛГ
 		case "FlyingDutchmanSails_Clear":
-			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE * 10; // Цена за установку парусов
+			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE*3 * 10; // Цена за установку парусов
 
 			dialog.text = "Ну, убрать так убрать. Это обойдётся тебе в " + FindRussianMoneyString(iSumm) + ".";
 
@@ -869,7 +869,7 @@ void ProcessDialogEvent()
 		case "FlyingDutchmanSails_SetNormal":
 			rRealShip = GetRealShip(sti(PChar.Ship.Type));
 
-			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE * 10; // Цена за установку парусов
+			iSumm = (10 / iShipClass) * iRank * MOD_SKILL_ENEMY_RATE*3 * 10; // Цена за установку парусов
 
 			AddMoneyToCharacter(PChar, -iSumm);
 

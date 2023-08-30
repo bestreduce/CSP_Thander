@@ -217,7 +217,7 @@ void LAi_CharacterAttack()
 		    //#20200510-03
 		    if(blckTime > SLIDING_BLK_THRESH)
 		    {
-		        int tHold = 20 + ((MOD_SKILL_ENEMY_RATE - 1) * 6);
+		        int tHold = 20 + ((MOD_SKILL_ENEMY_RATE*3 - 1) * 6);
 		        int iRand = rand(100);
                 if(iRand < tHold || attackType == "break" )
                 {

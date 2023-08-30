@@ -33,7 +33,7 @@ void ProcessDialogEvent()
 		npchar.quest.last_theme = makeint(rand(1));
 		npchar.quest.last_theme_game = makeint(rand(1));
 		npchar.quest.Meeting = LastSpeakDate();
-		npchar.money = 100 + rand(10) * makeint(50 * sti(PChar.rank) * (10.0 / MOD_SKILL_ENEMY_RATE));
+		npchar.money = 100 + rand(10) * makeint(50 * sti(PChar.rank) * (10.0 / MOD_SKILL_ENEMY_RATE*3));
         if (bBettaTestMode)
         {
             Dialog.CurrentNode = "Beta_test";

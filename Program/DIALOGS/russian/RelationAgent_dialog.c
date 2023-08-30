@@ -59,7 +59,7 @@ void ProcessDialogEvent()
 		else
 		{
  	    	Dialog.CurrentNode = "RelationAny_Done";
- 	    	npchar.quest.relation.summ = CalculateRelationSum(sti(npchar.quest.relation)) * MOD_SKILL_ENEMY_RATE;
+ 	    	npchar.quest.relation.summ = CalculateRelationSum(sti(npchar.quest.relation)) * MOD_SKILL_ENEMY_RATE*3;
  	    }
  	}
 
@@ -352,8 +352,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "NationLicenceType2":
-			if (IsCharacterPerkOn(pchar, "Agent")) iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE * 500 + 200000 + (sti(PChar.rank)*1000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
-			else iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE * 1000 + 300000 + (sti(PChar.rank)*2000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
+			if (IsCharacterPerkOn(pchar, "Agent")) iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE*3 * 500 + 200000 + (sti(PChar.rank)*1000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
+			else iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE*3 * 1000 + 300000 + (sti(PChar.rank)*2000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
         	dialog.text = "Итак, торговая лицензия " + XI_ConvertString(Nations[sti(npchar.LicenceNation)].Name + "Gen") + " сроком на " + sti(npchar.LicenceType) + " дней, цена " + FindRussianMoneyString(iSumm) + ".";
 		    link.l1 = "Меня устраивает.";
 		    if(makeint(Pchar.money) < iSumm)
@@ -369,9 +369,9 @@ void ProcessDialogEvent()
 		break;
 
 		case "NationLicenceType3":
-            //iSumm = sti(npchar.LicenceType) * (2000 * MOD_SKILL_ENEMY_RATE) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 2000 + sti(PChar.rank)*10000;
-			if (IsCharacterPerkOn(pchar, "Agent"))  iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE * 500 + 200000 + (sti(PChar.rank)*1000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
-			else iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE * 1000 + 300000 + (sti(PChar.rank)*2000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
+            //iSumm = sti(npchar.LicenceType) * (2000 * MOD_SKILL_ENEMY_RATE*3) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 2000 + sti(PChar.rank)*10000;
+			if (IsCharacterPerkOn(pchar, "Agent"))  iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE*3 * 500 + 200000 + (sti(PChar.rank)*1000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
+			else iSumm = sti(npchar.LicenceType) * MOD_SKILL_ENEMY_RATE*3 * 1000 + 300000 + (sti(PChar.rank)*2000) - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 1000;
 			dialog.text = "Вот ваш документ. Входить в порт нужно под дружественным флагом. Помните, патруль может проверить, не просрочена ли лицензия.";
 			link.l9 = "Спасибо.";
 			link.l9.go = "exit";
@@ -454,9 +454,9 @@ void ProcessDialogEvent()
 
 		case "patent_2":
             //pchar.PatentPrice = 8000 + (sti(NPChar.PatentPrice) * sti(pchar.rank));
-			// pchar.PatentPrice = 350000 - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 2000 + 6000 * sti(pchar.rank) * MOD_SKILL_ENEMY_RATE;
-			if (IsCharacterPerkOn(pchar, "Agent")) pchar.PatentPrice = 100000 * MOD_SKILL_ENEMY_RATE - (GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 5000 + 35000 + (sti(PChar.rank)*5000);
-			else pchar.PatentPrice = 150000 * MOD_SKILL_ENEMY_RATE - (GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 5000 + 500000 + (sti(PChar.rank)*5000);
+			// pchar.PatentPrice = 350000 - (GetSummonSkillFromName(PChar, SKILL_COMMERCE) + GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 2000 + 6000 * sti(pchar.rank) * MOD_SKILL_ENEMY_RATE*3;
+			if (IsCharacterPerkOn(pchar, "Agent")) pchar.PatentPrice = 100000 * MOD_SKILL_ENEMY_RATE*3 - (GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 5000 + 35000 + (sti(PChar.rank)*5000);
+			else pchar.PatentPrice = 150000 * MOD_SKILL_ENEMY_RATE*3 - (GetSummonSkillFromName(PChar, SKILL_LEADERSHIP)) * 5000 + 500000 + (sti(PChar.rank)*5000);
             switch (sti(NPChar.nation))
             {
 			    case PIRATE :
@@ -621,7 +621,7 @@ void ProcessDialogEvent()
 				pchar.questTemp.LSC = "toOliverTrast";
 				AddQuestRecord("ISS_PoorsMurder", "10");
 				LocatorReloadEnterDisable("Marigo_town", "houseH2", false);
-				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man_fast", 30, PIRATE, -1, true)); // LEO: Страдать превозмогаторам 07.12.2021
+				if (MOD_SKILL_ENEMY_RATE == 3 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man_fast", 30, PIRATE, -1, true)); // LEO: Страдать превозмогаторам 07.12.2021
 				else sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man", 30, PIRATE, -1, true));
 				sld.name = "Оливер";
 				sld.lastname = "Траст";

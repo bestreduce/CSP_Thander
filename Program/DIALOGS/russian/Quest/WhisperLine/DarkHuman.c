@@ -135,7 +135,7 @@ void ProcessDialogEvent()
 			SetCharacterGoods(pchar, GOOD_PLANKS, 20 + rand(50));
 			SetCharacterGoods(pchar, GOOD_RUM, 50 + rand(100));
 			// коцаем корабль
-			pchar.ship.HP = sti(pchar.ship.HP) - makeint(sti(pchar.ship.HP)*0.05) * (MOD_SKILL_ENEMY_RATE);
+			pchar.ship.HP = sti(pchar.ship.HP) - makeint(sti(pchar.ship.HP)*0.05) * (MOD_SKILL_ENEMY_RATE*3);
 			SetCrewQuantity(pchar, GetMinCrewQuantity(pchar));
 
 			InterfaceStates.DisFastTravel = false;
