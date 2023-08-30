@@ -5173,6 +5173,7 @@ void ShipWreck_DeliveToCity(string qName)
 			for(int i = 0; i < sti(pchar.GenQuest.ShipWreck.Qty); i++)
 			{
 				sld = CharacterFromID("ShipWreck_" + i);
+				if (i != 0) continue;
 				PlaceCharacter(sld, "goto", "random_must_be_near");
 				if (i == 0 && CheckAttribute(sld,"curtown"))
 				{
