@@ -2705,6 +2705,17 @@ void VSEnpcInit()
 	pchar.quest.Kuali_Spawn.win_condition.l1.value = 4;
 	pchar.quest.Kuali_Spawn.win_condition.l1.operation = ">=";
 	PChar.quest.Kuali_Spawn.win_condition = "Kuali_Spawn";
+	
+	//Скелеты на Санта Люсии в Подземелье	
+	for (i=1; i<=44; i++)
+	{
+		sld = GetCharacter(NPC_GenerateCharacter("Skelet_SantaLusia_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", 20+MOD_SKILL_ENEMY_RATE*5, PIRATE, 1, true));
+		FantomMakeCoolFighter(sld, 20+MOD_SKILL_ENEMY_RATE*5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*10);
+		LAi_SetWarriorType(sld);
+		LAi_warrior_SetStay(sld, true);
+		LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+		ChangeCharacterAddressGroup(sld, "dungeon_02", "monsters",  "monster"+i);
+	}
 }
 void OfficerGirlInit()
 {
@@ -3198,29 +3209,21 @@ void SetSkeletonsToLocation(aref _location)
 	int rNum = drand(num);
 	for(int i = 0; i < num; i++)
 	{
-		if (_location.id == "dungeon_02")
+		sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", iRank, PIRATE, 1, true));
+		//если квест по зачистке от нечисти - скелетов делаем круче
+		if (CheckAttribute(_location, "DestroyGhost"))
 		{
-			sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", sti(pchar.rank)+20, PIRATE, 1, true));
-			FantomMakeCoolFighter(sld, sti(pchar.rank)+20, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*5);
+			FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*4);
+			DeleteAttribute(sld, "SuperShooter");
 		}
 		else
 		{
-			sld = GetCharacter(NPC_GenerateCharacter("Skelet"+_location.index+"_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", iRank, PIRATE, 1, true));
-			//если квест по зачистке от нечисти - скелетов делаем круче
-			if (CheckAttribute(_location, "DestroyGhost"))
+			if (i == rNum && sti(pchar.rank) > 5)
 			{
-				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*3*4);
+				FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3*3);
 				DeleteAttribute(sld, "SuperShooter");
 			}
-			else
-			{
-				if (i == rNum && sti(pchar.rank) > 5)
-				{
-					FantomMakeCoolFighter(sld, sti(pchar.rank)+5, 80, 80, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol4"), MOD_SKILL_ENEMY_RATE*3*3);
-					DeleteAttribute(sld, "SuperShooter");
-				}
-				else SetFantomParamFromRank(sld, iRank, true);
-			}
+			else SetFantomParamFromRank(sld, iRank, true);
 		}
 		LAi_SetWarriorType(sld);
 		LAi_warrior_SetStay(sld, true);
