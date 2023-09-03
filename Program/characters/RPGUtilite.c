@@ -28,6 +28,7 @@ int GetCharacterAddHPValue(ref _refCharacter)
 int GetCharacterBaseHPValue(ref _refCharacter)
 {
 	int ret = makeint(30.0 + GetCharacterSPECIALSimple(_refCharacter, SPECIAL_S)*GetCharacterSPECIALSimple(_refCharacter, SPECIAL_E)*0.5);
+	if(_refCharacter == GetMainCharacter()) {ret = ret + 38;}
 	/*if (CheckCharacterPerk(_refCharacter, "HPPlus"))
 	{
 		ret = ret + 20;
