@@ -377,8 +377,8 @@ int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
 			sumSkill = sumSkill - sailSkill;
 	        if (sumSkill < 1) sumSkill = 1;
         }
-		if (CheckAttribute(_refCharacter,"chr_ai.Trauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - 20; //штраф от травмы - Gregg
-		if (CheckAttribute(_refCharacter,"chr_ai.HeavyTrauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - 30; //штраф от тяжелой травмы - Gregg
+		if (CheckAttribute(_refCharacter,"chr_ai.Trauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - makeint(sumSkill*0.2); //штраф от травмы - Gregg
+		if (CheckAttribute(_refCharacter,"chr_ai.HeavyTrauma") && HasSubStr(checkskillfortrauma,skillname)) sumSkill = sumSkill - makeint(sumSkill*0.3); //штраф от тяжелой травмы - Gregg
     }
 	else
 	{

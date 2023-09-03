@@ -457,7 +457,7 @@ void Fantom_SetBalls(ref rFantom, string sFantomType)
 	iKClass = iKClass * fK;
     // boal 20.01.2004 -->
 	Fantom_SetCharacterGoods(rFantom, GOOD_BALLS,    MakeInt(19 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
-	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(11 * iCannons * fK + rand(MakeInt(20 * iKClass))), 0);
+	Fantom_SetCharacterGoods(rFantom, GOOD_BOMBS,    MakeInt(5 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_KNIPPELS, MakeInt(9 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_GRAPES,   MakeInt(7 * iCannons * fK + rand(MakeInt(10 * iKClass))), 0);
 	Fantom_SetCharacterGoods(rFantom, GOOD_POWDER,   MakeInt(35 * iCannons * fK + rand(MakeInt(30 * iKClass))), 0);
@@ -468,7 +468,7 @@ void Fantom_SetBalls(ref rFantom, string sFantomType)
     Fantom_SetCharacterGoods(rFantom, GOOD_FOOD, 		MakeInt(60 + 20 * iKClass + rand(MakeInt(8 * iKClass))), 0);  //WW
     Fantom_SetCharacterGoods(rFantom, GOOD_WEAPON, 		MakeInt(iCrew + rand(MakeInt(8 * iKClass))), 0);   //WW
     Fantom_SetCharacterGoods(rFantom, GOOD_RUM, 		MakeInt(60 + 12 * iKClass + rand(MakeInt(8 * iKClass))), 0);  //WW
-    Fantom_SetCharacterGoods(rFantom, GOOD_MEDICAMENT, 	MakeInt(iCrew + rand(MakeInt(10 * iKClass))), 0);   //WW
+    Fantom_SetCharacterGoods(rFantom, GOOD_MEDICAMENT, 	MakeInt(iCrew + rand(MakeInt(5 * iKClass))), 0);   //WW
     // boal 20.01.2004 <--
 }
 
