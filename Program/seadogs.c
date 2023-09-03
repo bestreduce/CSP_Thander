@@ -1449,7 +1449,7 @@ void ProcessControls()
 		}
         if (bDisableMapEnter)
         {
-            if (TimeScaleCounter > 48) TimeScaleCounter = 48;
+            if (TimeScaleCounter > 32) TimeScaleCounter = 32;
         }
         else
         {   // без боя
