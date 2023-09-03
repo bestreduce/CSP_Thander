@@ -2707,15 +2707,9 @@ void VSEnpcInit()
 	PChar.quest.Kuali_Spawn.win_condition = "Kuali_Spawn";
 	
 	//Скелеты на Санта Люсии в Подземелье	
-	for (i=1; i<=44; i++)
-	{
-		sld = GetCharacter(NPC_GenerateCharacter("Skelet_SantaLusia_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", 20+MOD_SKILL_ENEMY_RATE*5, PIRATE, 1, true));
-		FantomMakeCoolFighter(sld, 20+MOD_SKILL_ENEMY_RATE*5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*10);
-		LAi_SetWarriorType(sld);
-		LAi_warrior_SetStay(sld, true);
-		LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
-		ChangeCharacterAddressGroup(sld, "dungeon_02", "monsters",  "monster"+i);
-	}
+	PChar.quest.Skelet_SantaLusia.win_condition.l1 = "location";
+	PChar.quest.Skelet_SantaLusia.win_condition.l1.location = "dungeon_02";
+	PChar.quest.Skelet_SantaLusia.win_condition = "Skelet_SantaLusia";
 }
 void OfficerGirlInit()
 {
