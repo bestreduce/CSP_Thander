@@ -3,7 +3,7 @@ void InitGoods()
 	int i;
 
 	Goods[GOOD_BALLS].Name			= "Balls"; // Ядра
-	Goods[GOOD_BALLS].Cost			= 4;
+	Goods[GOOD_BALLS].Cost			= 80;
 	Goods[GOOD_BALLS].Weight		= 1;
 	Goods[GOOD_BALLS].Units			= 20;
 	Goods[GOOD_BALLS].SpeedV0		= 1.0;
@@ -16,7 +16,7 @@ void InitGoods()
 
 
 	Goods[GOOD_GRAPES].Name			= "Grapes"; // Картечь
-	Goods[GOOD_GRAPES].Cost			= 12;
+	Goods[GOOD_GRAPES].Cost			= 140;
 	Goods[GOOD_GRAPES].Weight		= 1;
 	Goods[GOOD_GRAPES].Units		= 20;
 	Goods[GOOD_GRAPES].SpeedV0		= 0.55;//30%
@@ -28,7 +28,7 @@ void InitGoods()
 	Goods[GOOD_GRAPES].canbecontraband	= 0;
 
 	Goods[GOOD_KNIPPELS].Name		= "Knippels"; // Книпели
-	Goods[GOOD_KNIPPELS].Cost		= 26;
+	Goods[GOOD_KNIPPELS].Cost		= 160;
 	Goods[GOOD_KNIPPELS].Weight		= 2;
 	Goods[GOOD_KNIPPELS].Units		= 20;
 	Goods[GOOD_KNIPPELS].SpeedV0	= 0.9;//81%
@@ -40,13 +40,13 @@ void InitGoods()
 	Goods[GOOD_KNIPPELS].canbecontraband	= 0;
 
 	Goods[GOOD_BOMBS].Name			= "Bombs"; // Бомбы
-	Goods[GOOD_BOMBS].Cost			= 60;
+	Goods[GOOD_BOMBS].Cost			= 300;
 	Goods[GOOD_BOMBS].Weight		= 2;
 	Goods[GOOD_BOMBS].Units			= 20;
 	Goods[GOOD_BOMBS].SpeedV0		= 0.7;//49%
 	Goods[GOOD_BOMBS].DamageHull	= 2.5;
 	Goods[GOOD_BOMBS].DamageRig		= 0.0;
-	Goods[GOOD_BOMBS].DamageCrew	= 0.06;
+	Goods[GOOD_BOMBS].DamageCrew	= 0.1;
 	Goods[GOOD_BOMBS].AfraidWater = 0;
 	Goods[GOOD_BOMBS].type				= TRADE_TYPE_AMMUNITION;
 	Goods[GOOD_BOMBS].canbecontraband	= 0;
@@ -131,12 +131,13 @@ void InitGoods()
 
 	Goods[GOOD_RUM].Name		    = "Rum";
 	Goods[GOOD_RUM].Weight		    = 1;
-	Goods[GOOD_RUM].Cost		    = 13;
+	Goods[GOOD_RUM].Cost		    = 200;
 	Goods[GOOD_RUM].Units		    = 10;
 	Goods[GOOD_RUM].Swim.Model	    = "barrel";
 	Goods[GOOD_RUM].Swim.Time	    = 30;
 	Goods[GOOD_RUM].AfraidWater = 1;
 	Goods[GOOD_RUM].canbecontraband	= 0;
+	Goods[GOOD_RUM].Norm			= 1200;
 
 	Goods[GOOD_TOBACCO].Name	    = "Tobacco";
 	Goods[GOOD_TOBACCO].Weight	    = 2;
@@ -343,7 +344,7 @@ void InitGoods()
 
 	Goods[GOOD_POWDER].Name		    = "Powder";
 	Goods[GOOD_POWDER].Weight	    = 1;
-	Goods[GOOD_POWDER].Cost	        = 40;
+	Goods[GOOD_POWDER].Cost	        = 80;
 	Goods[GOOD_POWDER].Units	    = 20;
 	Goods[GOOD_POWDER].AfraidWater = 1;
 	Goods[GOOD_POWDER].type				= TRADE_TYPE_AMMUNITION;
