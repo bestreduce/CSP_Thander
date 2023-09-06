@@ -161,7 +161,7 @@ int GetStoreGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref, int
 			if(CheckOfficersPerk(pchar,"BasicCommerce"))	{ skillModify -= 0.1; }
 		}
 		if(CheckOfficersPerk(chref,"Trader"))	{ skillModify -= 0.05; }
-		if(tradeType == TRADE_TYPE_CANNONS) skillModify *= 3.3;//цены пушек меняем после применения перков, иначе непропорционально их влияние на итог
+		if(tradeType == TRADE_TYPE_CANNONS) skillModify *= 4.3;//цены пушек меняем после применения перков, иначе непропорционально их влияние на итог
 		//if(tradeType == TRADE_TYPE_AMMUNITION) skillModify *= 3.3;
 	}
 	else
@@ -169,7 +169,7 @@ int GetStoreGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref, int
 		skillModify = 0.69 + _TradeSkill*0.019; // boal
 		if(CheckOfficersPerk(pchar,"AdvancedCommerce"))	skillModify += 0.05;
 		if(CheckOfficersPerk(chref,"Trader"))	{ skillModify += 0.05; }
-		if(tradeType == TRADE_TYPE_CANNONS) skillModify /= 4.3;
+		if(tradeType == TRADE_TYPE_CANNONS) skillModify /= 1.3;
 		//if(tradeType == TRADE_TYPE_AMMUNITION) skillModify /= 3.3;
 	}
 

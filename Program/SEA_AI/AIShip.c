@@ -501,8 +501,6 @@ float Ship_MastDamage()
 			tempDamage = baseDamage * fCbrMDamage + fClsMDamage;
 			tempDamage = tempDamage * nDirect;
 			string sShip = rBaseShip.BaseName;
-			if (sShip == "PRINCE" || sShip == "OXFORD" || sShip == "RESOLUTION" || sShip == "MORDAUNT") 
-				tempDamage = tempDamage * MastMulti * 0.8; //для хрупких кораблей сделать жирнее мачты
 			tempDamage = tempDamage * MastMulti;
 			switch (iMastNum)
 			{
