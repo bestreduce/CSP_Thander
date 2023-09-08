@@ -1440,7 +1440,7 @@ int GetShipPriceByTTH(int iType, ref rChar)
 {
 	ref rRealShip = GetRealShip(iType);
 	ref rBaseShip = GetShipByType(sti(rRealShip.BaseType));
-	int iSumm = 100;//базовая стоимость sti(rBaseShip.price);
+	int iSumm = 10000;//базовая стоимость sti(rBaseShip.price);
 	int shipClass = sti(rRealShip.class);
 
 	//корпус
@@ -1489,17 +1489,17 @@ int GetShipPriceByTTH(int iType, ref rChar)
 	int caliber_price = 5000;
 	switch(sti(rRealShip.MaxCaliber))
 	{
-		case 8: caliber_price = 1250; break;
-		case 10: caliber_price = 2000; break;
-		case 12: caliber_price = 3150; break;
-		case 16: caliber_price = 5000; break;
-		case 20: caliber_price = 7800; break;
-		case 24: caliber_price = 12250; break;
-		case 28: caliber_price = 19250; break;
-		case 32: caliber_price = 30000; break;
-		case 36: caliber_price = 47500; break;
-		case 42: caliber_price = 75000; break;
-		case 48: caliber_price = 150000; break;
+		case 8: caliber_price = 15000; break;
+		case 10: caliber_price = 20000; break;
+		case 12: caliber_price = 25000; break;
+		case 16: caliber_price = 50000; break;
+		case 20: caliber_price = 60000; break;
+		case 24: caliber_price = 125000; break;
+		case 28: caliber_price = 150000; break;
+		case 32: caliber_price = 300000; break;
+		case 36: caliber_price = 400000; break;
+		case 42: caliber_price = 500000; break;
+		case 48: caliber_price = 600000; break;
 	}
 	int SummMaxCaliber = caliber_price;
 

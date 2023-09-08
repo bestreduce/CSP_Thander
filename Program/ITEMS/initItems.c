@@ -1154,8 +1154,8 @@ int InitItems()
 	itm.dmg_max = 66.0;// 60.0;
 	itm.piercing = 20;
 	itm.special.valueCrB = 10; //Буст крита
-	itm.special.valueSS = 7; //Резкий удар
-	itm.special.valueBB = 8; //Пролом блока
+	itm.special.valueSS = 10; //Резкий удар
+	itm.special.valueB = 8; //Кровоток
 	itm.minlevel = 1;
 	itm.rare = 0.1;
 	itm.block = 60;

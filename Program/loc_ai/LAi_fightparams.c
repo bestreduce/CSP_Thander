@@ -1860,7 +1860,7 @@ float LAi_NPC_GetFireActive()
 {
 	aref chr = GetEventData();
 	float level = LAi_GetCharacterGunLevel(chr);
-	npc_return_tmp = 0.001 + level*0.04;
+	npc_return_tmp = 0.001 + level*0.06;
 	// boal наши офицеры пулят из всех стволов -->
 	if (chr.chr_ai.group == LAI_GROUP_PLAYER)
 	{

@@ -3606,7 +3606,7 @@ void FirstLoginLostShipsCity(string qName) //первоначальная ген
 	SaveCurrentNpcQuestDateParam(sld, "location");
 
 	// внешний горожанин Тристан Борчер
-	sld = GetCharacter(NPC_GenerateCharacter("TristanBorcher", "soldier_free_1", "man", "man", 10, PIRATE, -1, false));
+	sld = GetCharacter(NPC_GenerateCharacter("TristanBorcher", "citiz_19", "man", "man", 10, PIRATE, -1, false));
 	sld.name = "Тристан";
 	sld.lastname = "Борчер";
 	sld.rank = 10;
