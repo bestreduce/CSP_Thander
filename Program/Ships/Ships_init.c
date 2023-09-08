@@ -214,7 +214,7 @@ void InitShips()
 	refShip.MinCrew									= 2;
 	refShip.SpeedRate						= 12.0;
 	refShip.TurnRate						= 65.0;
-	refShip.Price								= 12000;
+	refShip.Price								= 10000;
 	refShip.HP										= 100;
 	refShip.SP										= 100;
 	refShip.MastMultiplier							= 1.6;
@@ -281,7 +281,7 @@ void InitShips()
 	refShip.MinCrew									= 4;
 	refShip.SpeedRate						= 14.0;
 	refShip.TurnRate						= 55.0;
-	refShip.Price								= 22000;
+	refShip.Price								= 10000;
 	refShip.HP										= 210;
 	refShip.SP										= 100;
 	refShip.MastMultiplier							= 1.6;
@@ -289,7 +289,7 @@ void InitShips()
 	refship.Type.Merchant						= true;
 	refship.Type.War							= true;
 	refShip.sea_enchantment						= 4.0;
-	refShip.lowpolycrew							= 5;
+	refShip.lowpolycrew							= 3;
 	refShip.buildtime = 10;
 
 	refShip.Flags.Mast1.Flag1 = FLAG_SPECIAL;
@@ -352,7 +352,7 @@ void InitShips()
 	refShip.MinCrew         				= 7;
 	refShip.SpeedRate       		= 16.0;
 	refShip.TurnRate        		= 70.0;
-	refShip.Price           			= 9791;
+	refShip.Price           			= 20000;
 	refShip.HP              				= 700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -360,7 +360,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -422,7 +422,7 @@ void InitShips()
 	refShip.MinCrew         				= 12;
 	refShip.SpeedRate				= 15.5;
 	refShip.TurnRate        		= 70.0;
-	refShip.Price           			= 13676;
+	refShip.Price           			= 25000;
 	refShip.HP              				= 1200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -430,7 +430,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= false;
 	refShip.sea_enchantment				= 1.8;
-	refShip.lowpolycrew 				= 10;
+	refShip.lowpolycrew 				= 5;
 	refShip.buildtime 					= 40;
 
 	refship.Rocking.y = 0.45;
@@ -496,7 +496,7 @@ void InitShips()
 	refShip.MinCrew         				= 11;
 	refShip.SpeedRate       		= 17.0;
 	refShip.TurnRate        		= 75.0;
-	refShip.Price           			= 10358;
+	refShip.Price           			= 20000;
 	refShip.HP              				= 900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -504,7 +504,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -566,7 +566,7 @@ void InitShips()
 	refShip.MinCrew         				= 11;
 	refShip.SpeedRate       		= 17.5;
 	refShip.TurnRate        		= 85.0;
-	refShip.Price           			= 9651;
+	refShip.Price           			= 20000;
 	refShip.HP              				= 700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -574,7 +574,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -642,7 +642,7 @@ void InitShips()
 	refShip.MinCrew         				= 12;
 	refShip.SpeedRate       		= 16.8;
 	refShip.TurnRate        		= 78.0;
-	refShip.Price           			= 11261;
+	refShip.Price           			= 20000;
 	refShip.HP              				= 850;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -650,7 +650,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -714,7 +714,7 @@ void InitShips()
 	refShip.MinCrew         				= 12;
 	refShip.SpeedRate       			= 16.5;
 	refShip.TurnRate        			= 55.0;
-	refShip.Price           			= 11788;
+	refShip.Price           			= 25000;
 	refShip.HP              				= 1200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -722,7 +722,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment		= 1.8;
-	refShip.lowpolycrew 		= 16;
+	refShip.lowpolycrew 		= 5;
 	refShip.buildtime 		= 60;
 
 	refship.Rocking.y = 0.45;
@@ -794,7 +794,7 @@ void InitShips()
 	refShip.MinCrew         				= 14;
 	refShip.SpeedRate				= 16.5;
 	refShip.TurnRate        		= 70.0;
-	refShip.Price           			= 12981;
+	refShip.Price           			= 25000;
 	refShip.HP              				= 900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -802,7 +802,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -869,7 +869,7 @@ void InitShips()
 	refShip.MinCrew         				= 12;
 	refShip.SpeedRate       		= 15.0;
 	refShip.TurnRate        		= 65.0;
-	refShip.Price           			= 17300;
+	refShip.Price           			= 30000;
 	refShip.HP              				= 1000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -877,7 +877,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= false;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -941,7 +941,7 @@ void InitShips()
 	refShip.MinCrew         				= 13;
 	refShip.SpeedRate				= 16.0;
 	refShip.TurnRate        		= 68.0;
-	refShip.Price           			= 10954;
+	refShip.Price           			= 20000;
 	refShip.HP              				= 1000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -949,7 +949,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.45;
@@ -1015,7 +1015,7 @@ void InitShips()
 	refShip.MinCrew         				= 14;
 	refShip.SpeedRate				= 16.2;
 	refShip.TurnRate        		= 70.0;
-	refShip.Price           			= 13637;
+	refShip.Price           			= 30000;
 	refShip.HP              				= 1300;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1023,7 +1023,7 @@ void InitShips()
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
-	refShip.lowpolycrew 				= 9;
+	refShip.lowpolycrew 				= 5;
 
 	refship.Rocking.y 					= 0.45;
 	refship.Rocking.az 					= 0.02;
@@ -1090,7 +1090,7 @@ void InitShips()
 	refShip.MinCrew         				= 14;
 	refShip.SpeedRate				= 15.5;
 	refShip.TurnRate        		= 55.0;
-	refShip.Price           			= 13651;
+	refShip.Price           			= 30000;
 	refShip.HP              				= 1400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1098,7 +1098,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.45;
@@ -1168,7 +1168,7 @@ void InitShips()
 	refShip.MinCrew 				= 14;
 	refShip.SpeedRate 		= 15.5;
 	refShip.TurnRate 		= 65.0;
-	refShip.Price 				= 15083;
+	refShip.Price 				= 30000;
 	refShip.HP 						= 1200;
 	refShip.SP 						= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -1176,7 +1176,7 @@ void InitShips()
 	refship.Type.Merchant 					= true;
 	refship.Type.War 						= true;
 	refShip.sea_enchantment = 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.45;
@@ -1246,7 +1246,7 @@ void InitShips()
 	refShip.MinCrew         				= 18;
 	refShip.SpeedRate       		= 14.8;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 32406;
+	refShip.Price           			= 50000;
 	refShip.HP              				= 2500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1254,7 +1254,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 2;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.4;
@@ -1319,7 +1319,7 @@ void InitShips()
 	refShip.MinCrew         				= 20;
 	refShip.SpeedRate				= 14.4;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 32228;
+	refShip.Price           			= 50000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1327,7 +1327,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.8;
-	refShip.lowpolycrew = 10;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.4;
@@ -1393,7 +1393,7 @@ void InitShips()
 	refShip.MinCrew         				= 23;
 	refShip.SpeedRate       		= 17;
 	refShip.TurnRate        		= 65.0;
-	refShip.Price           			= 22161;
+	refShip.Price           			= 50000;
 	refShip.HP              			= 1500;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -1401,7 +1401,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.4;
@@ -1465,7 +1465,7 @@ void InitShips()
 	refShip.MinCrew         				= 26;
 	refShip.SpeedRate				= 15.9;
 	refShip.TurnRate        		= 60.0;
-	refShip.Price           			= 25500;
+	refShip.Price           			= 50000;
 	refShip.HP              				= 1800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1473,7 +1473,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 2.0;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.4;
@@ -1539,7 +1539,7 @@ void InitShips()
 	refShip.MinCrew         				= 26;
 	refShip.SpeedRate				= 15.4;
 	refShip.TurnRate        		= 60.0;
-	refShip.Price           			= 24675;
+	refShip.Price           			= 50000;
 	refShip.HP              				= 2000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1547,7 +1547,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.4;
@@ -1610,7 +1610,7 @@ void InitShips()
 	refShip.MinCrew        			= 24;
 	refShip.SpeedRate      	= 16.5;
 	refShip.TurnRate       	= 60.0;
-	refShip.Price          		= 27940;
+	refShip.Price          		= 50000;
 	refShip.HP             			= 1700;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -1620,7 +1620,7 @@ void InitShips()
 	refship.Type.Merchant		= true;
 	refship.Type.War			= true;
 	refShip.sea_enchantment		= 1.8;
-	refShip.lowpolycrew			= 12;
+	refShip.lowpolycrew			= 6;
 	refShip.buildtime			= 60;
 	refship.WindAgainstSpeed   = 10.0;//boal
 
@@ -1685,7 +1685,7 @@ void InitShips()
 	refShip.MinCrew         				= 24;
 	refShip.SpeedRate				= 15.7;
 	refShip.TurnRate        		= 60.0;
-	refShip.Price           			= 30060;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 1900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1693,7 +1693,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= false;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew				= 8;
+	refShip.lowpolycrew				= 6;
 	refShip.buildtime 				= 20;
 
 	refship.Rocking.y = 0.4;
@@ -1757,7 +1757,7 @@ void InitShips()
 	refShip.MinCrew         			= 28;
 	refShip.SpeedRate				= 15;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 30135;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 2200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1765,7 +1765,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew				= 8;
+	refShip.lowpolycrew				= 6;
 	refShip.buildtime 				= 20;
 
 	refship.Rocking.y = 0.4;
@@ -1827,7 +1827,7 @@ void InitShips()
 	refShip.MinCrew         				= 28;
 	refShip.SpeedRate				= 15.4;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 29135;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 2150;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1835,7 +1835,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 2.0;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.4;
@@ -1908,7 +1908,7 @@ void InitShips()
 	refShip.MinCrew         				= 30;
 	refShip.SpeedRate				= 14.4;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 28344;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 2400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1916,7 +1916,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew				= 8;
+	refShip.lowpolycrew				= 6;
 	refShip.buildtime 				= 20;
 
     refship.Rocking.y = 0.4;
@@ -1984,7 +1984,7 @@ void InitShips()
 	refShip.MinCrew         				= 27;
 	refShip.SpeedRate       		= 14.7;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 30596;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 2000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -1992,7 +1992,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -2062,7 +2062,7 @@ void InitShips()
 	refShip.MinCrew         				= 30;
 	refShip.SpeedRate       		= 14.8;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 28749;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 1400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2070,7 +2070,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.4;
@@ -2137,7 +2137,7 @@ void InitShips()
 	refShip.MinCrew         				= 24;
 	refShip.SpeedRate       		= 14.4;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 30519;
+	refShip.Price           			= 60000;
 	refShip.HP              				= 2300;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2145,7 +2145,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 3;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 6;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.4;
@@ -2217,7 +2217,7 @@ void InitShips()
 	refShip.MinCrew         				= 38;
 	refShip.SpeedRate       		= 16.8;
 	refShip.TurnRate        		= 60.0;
-	refShip.Price           			= 71225;
+	refShip.Price           			= 125000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2225,7 +2225,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2294,7 +2294,7 @@ void InitShips()
 	refShip.MinCrew         				= 32;
 	refShip.SpeedRate       		= 15.5;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 80875;
+	refShip.Price           			= 125000;
 	refShip.HP              				= 3600;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2302,7 +2302,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2374,7 +2374,7 @@ void InitShips()
 	refShip.MinCrew         				= 30;
 	refShip.SpeedRate       		= 16.4;
 	refShip.TurnRate        		= 70.0;
-	refShip.Price           			= 76700;
+	refShip.Price           			= 125000;
 	refShip.HP              				= 2700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2382,7 +2382,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2452,7 +2452,7 @@ void InitShips()
 	refShip.MinCrew         				= 35;
 	refShip.SpeedRate       		= 16.1;
 	refShip.TurnRate        		= 67.0;
-	refShip.Price           			= 72935;
+	refShip.Price           			= 125000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2460,7 +2460,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.8;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2530,7 +2530,7 @@ void InitShips()
 	refShip.MinCrew         		= 48;
 	refShip.SpeedRate		= 12.0;
 	refShip.TurnRate        = 50.0;
-	refShip.Price           	= 76125;
+	refShip.Price           	= 125000;
 	refShip.HP              		= 3000;
 	refShip.SP              		= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -2538,7 +2538,7 @@ void InitShips()
 	refship.Type.Merchant		= true;
 	refship.Type.War			= true;
 	refShip.sea_enchantment		= 1.5;
-	refShip.lowpolycrew 		= 16;
+	refShip.lowpolycrew 		= 7;
 	refShip.buildtime 		= 60;
 
 	refship.Rocking.y = 0.5;
@@ -2584,7 +2584,7 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	refShip.hullNums = 6; // LEO
@@ -2610,7 +2610,7 @@ void InitShips()
 	refShip.MinCrew         				= 22;
 	refShip.SpeedRate				= 13.5;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 81160;
+	refShip.Price           			= 125000;
 	refShip.HP              				= 4000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2618,7 +2618,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2662,11 +2662,11 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= true;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Ontario			Бриг
+	/// Ontario			Английский Бриг
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ONTARIO]);
 	refShip.Name            			= "Ontario";
@@ -2678,15 +2678,15 @@ void InitShips()
 	refShip.Capacity        			= 2800;
 	refShip.MaxCannonDiff						= 2;
 	refShip.CannonsQuantity						= 20;
-	refShip.rcannon 							= 9;
-	refShip.lcannon 							= 9;
+	refShip.rcannon 							= 10;
+	refShip.lcannon 							= 10;
 	refShip.fcannon 							= 0;
-	refShip.bcannon 							= 2;
+	refShip.bcannon 							= 0;
 	refShip.MaxCrew         				= 160;
 	refShip.MinCrew         				= 32;
 	refShip.SpeedRate				= 16.7;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 86500;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2694,7 +2694,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.1;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2741,7 +2741,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Navy			Бриг
+	/// Navy			Испанский Бриг
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_NAVY]);
 	refShip.Name            			= "Navy";
@@ -2761,7 +2761,7 @@ void InitShips()
 	refShip.MinCrew         				= 32;
 	refShip.SpeedRate				= 16.7;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 86500;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2769,7 +2769,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.1;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2816,11 +2816,11 @@ void InitShips()
 	refship.nation.spain	= true;
 	
 	///////////////////////////////////////////////////////////////////////////
-	/// Mercury			Военный Бриг
+	/// Mercury			Голландский Бриг
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_MERCURY]);
 	refShip.Name            			= "Mercury";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 16;
@@ -2836,7 +2836,7 @@ void InitShips()
 	refShip.MinCrew         				= 34;
 	refShip.SpeedRate       		= 16.0;
 	refShip.TurnRate        		= 55.0;
-	refShip.Price           			= 70310;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 2900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2844,7 +2844,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2891,11 +2891,11 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Sophie			Тяж. Бриг
+	/// Sophie			Французский Бриг
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SOPHIE]);
 	refShip.Name            			= "Sophie";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 16;
@@ -2911,7 +2911,7 @@ void InitShips()
 	refShip.MinCrew         				= 34;
 	refShip.SpeedRate       		= 16.0;
 	refShip.TurnRate        		= 55.0;
-	refShip.Price           			= 70310;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 2900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -2919,7 +2919,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -2988,7 +2988,7 @@ void InitShips()
 	refShip.MinCrew						= 32;
 	refShip.SpeedRate					= 13.5;
 	refShip.TurnRate					= 52.0;
-	refShip.Price						= 71825;
+	refShip.Price						= 150000;
 	refShip.HP							= 3600;
 	refShip.SP							= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -2996,7 +2996,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= false;
 	refShip.sea_enchantment				= 1.8;
-	refShip.lowpolycrew					= 12;
+	refShip.lowpolycrew					= 7;
 	refShip.buildtime					= 60;
 
 	refship.Rocking.y = 0.5;
@@ -3065,7 +3065,7 @@ void InitShips()
 	refShip.MinCrew         				= 64;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 90825;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 3800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3073,7 +3073,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -3146,7 +3146,7 @@ void InitShips()
 	refShip.MinCrew         				= 34;
 	refShip.SpeedRate				= 16.0;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 73985;
+	refShip.Price           			= 160000;
 	refShip.HP              				= 2400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3154,7 +3154,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.5;
@@ -3207,7 +3207,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_GREYHOUND]);
 	refShip.Name            			= "Greyhound";
-	refship.Soundtype					= "lugger";
+	refship.Soundtype					= "corvette";
 	refShip.Class						= 4;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 20;
@@ -3223,7 +3223,7 @@ void InitShips()
 	refShip.MinCrew         				= 30;
 	refShip.SpeedRate       		= 16.5;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 64610;
+	refShip.Price           			= 160000;
 	refShip.HP              				= 2800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3231,7 +3231,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -3302,7 +3302,7 @@ void InitShips()
 	refShip.MinCrew         				= 38;
 	refShip.SpeedRate				= 15.5;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 77585;
+	refShip.Price           			= 180000;
 	refShip.HP              				= 3250;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3310,7 +3310,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.5;
@@ -3384,7 +3384,7 @@ void InitShips()
 	refShip.MinCrew        					= 34;
 	refShip.SpeedRate      			= 14.0;
 	refShip.TurnRate       			= 55.0;
-	refShip.Price          				= 82735;
+	refShip.Price          				= 180000;
 	refShip.HP             					= 2800;
 	refShip.SP             					= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3394,7 +3394,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 
-	refShip.lowpolycrew					= 12;
+	refShip.lowpolycrew					= 7;
 
 	refship.WindAgainstSpeed   			= 7.0;
 
@@ -3459,7 +3459,7 @@ void InitShips()
 	refShip.MinCrew         				= 36;
 	refShip.SpeedRate       		= 14.3;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 71850;
+	refShip.Price           			= 180000;
 	refShip.HP              				= 2800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3467,7 +3467,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -3536,7 +3536,7 @@ void InitShips()
 	refShip.MinCrew         				= 39;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 74130;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3544,7 +3544,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.5;
@@ -3612,7 +3612,7 @@ void InitShips()
     refShip.MinCrew         					= 44;
     refShip.SpeedRate				= 13.5;
     refShip.TurnRate        		= 40.0;
-    refShip.Price           			= 86250;
+    refShip.Price           			= 200000;
     refShip.HP              				= 2700;
     refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3620,7 +3620,7 @@ void InitShips()
     refShip.Type.Merchant					= false;
     refShip.Type.War						= true;
     refShip.sea_enchantment					= 1.2;
-    refShip.lowpolycrew = 20;
+    refShip.lowpolycrew = 7;
     refShip.buildtime = 100;
 
     refShip.Rocking.y = 0.4;
@@ -3693,7 +3693,7 @@ void InitShips()
 	refShip.MinCrew         				= 46;
 	refShip.SpeedRate				= 13.5;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 80735;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 2500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3701,7 +3701,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.5;
@@ -3772,7 +3772,7 @@ void InitShips()
 	refShip.MinCrew         				= 56;
 	refShip.SpeedRate				= 11.5;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 85875;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 2700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3780,7 +3780,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 40;
 
 	refship.Rocking.y = 0.5;
@@ -3818,11 +3818,11 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// FLEUTWAR			Тяж. Боев. Флейт
+	/// FLEUTWAR			Тяжёлый Флейт
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_FLEUTWAR]);
 	refShip.Name            			= "FleutWar";
@@ -3842,7 +3842,7 @@ void InitShips()
 	refShip.MinCrew         				= 40;
 	refShip.SpeedRate				= 11.5;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 92850;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 3200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3850,7 +3850,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 2.1;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -3897,7 +3897,7 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -3921,7 +3921,7 @@ void InitShips()
 	refShip.MinCrew         				= 30;
 	refShip.SpeedRate				= 11.0;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 92110;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 3000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -3929,7 +3929,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 7;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.5;
@@ -3977,7 +3977,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Hercules			Торговый Ост-Индец
+	/// Hercules			Тяжёлый Ост-Индец
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_HERCULES]);
 	refShip.Name            			= "Hercules";
@@ -3997,14 +3997,14 @@ void InitShips()
 	refShip.MinCrew         				= 34;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 82585;
+	refShip.Price           			= 200000;
 	refShip.HP              				= 4000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 7;
 
 	refship.Rocking.y = 0.5;
 	refship.Rocking.az = 0.04;
@@ -4052,7 +4052,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Pinnace		Пинас
+	//// Pinnace		Испанский Пинас
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PINNACE]);
 	refShip.Name            			= "Pinnace";
@@ -4068,11 +4068,11 @@ void InitShips()
 	refShip.lcannon 							= 6;
 	refShip.fcannon 							= 2;
 	refShip.bcannon 							= 4;
-	refShip.MaxCrew							= 170;
-	refShip.MinCrew         				= 34;
+	refShip.MaxCrew							= 270;
+	refShip.MinCrew         				= 54;
 	refShip.SpeedRate				= 12.5;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 191302;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 7000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4080,7 +4080,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.1;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.4;
@@ -4137,7 +4137,7 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Debrackw				Воен. Пинас
+	/// Debrackw				Французский Пинас
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_DEBRACKW]);
 	refShip.Name            	= "Debrackw";
@@ -4153,11 +4153,11 @@ void InitShips()
 	refShip.lcannon 					= 11;
 	refShip.fcannon 					= 2;
 	refShip.bcannon 					= 2;
-	refShip.MaxCrew					= 210;
-	refShip.MinCrew         		= 42;
+	refShip.MaxCrew					= 310;
+	refShip.MinCrew         		= 62;
 	refShip.SpeedRate		= 13;
 	refShip.TurnRate        = 40.0;
-	refShip.Price           	= 196177;
+	refShip.Price           	= 300000;
 	refShip.HP              		= 5000;
 	refShip.SP              		= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -4165,7 +4165,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment		= 1.1;
-	refShip.lowpolycrew 		= 20;
+	refShip.lowpolycrew 		= 8;
 	refShip.buildtime 		= 80;
 
 	refship.Rocking.y = 0.5;
@@ -4218,7 +4218,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Indiaman			Торговый Пинас
+	/// Indiaman			Английский Пинас
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_INDIAMAN]);
 	refShip.Name            			= "Indiaman";
@@ -4234,11 +4234,11 @@ void InitShips()
 	refShip.lcannon 						= 14;
 	refShip.fcannon 						= 0;
 	refShip.bcannon 						= 2;
-	refShip.MaxCrew								= 190;
-	refShip.MinCrew         					= 38;
+	refShip.MaxCrew								= 290;
+	refShip.MinCrew         					= 58;
 	refShip.SpeedRate				= 11.7;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 183802;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4246,7 +4246,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= false;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.4;
@@ -4315,7 +4315,7 @@ void InitShips()
 	refShip.MinCrew        					= 48;
 	refShip.SpeedRate      			= 13.8;
 	refShip.TurnRate       			= 45.0;
-	refShip.Price          				= 210787;
+	refShip.Price          				= 300000;
 	refShip.HP             				= 4600;
 	refShip.SP             				= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -4323,7 +4323,7 @@ void InitShips()
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
-	refShip.lowpolycrew					= 21;
+	refShip.lowpolycrew					= 8;
 	refship.WindAgainstSpeed   			= 9.5;
 	refship.CabinType          			= "Cabin_Medium2";
 	refship.DeckType           			= "Medium";
@@ -4364,7 +4364,7 @@ void InitShips()
 	refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -4388,7 +4388,7 @@ void InitShips()
 	refShip.MinCrew         				= 50;
 	refShip.SpeedRate       		= 16.2;
 	refShip.TurnRate        		= 55.0;
-	refShip.Price           			= 179052;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 3700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4396,7 +4396,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 3;
-	refShip.lowpolycrew = 12;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 60;
 
 	refship.Rocking.y = 0.5;
@@ -4466,7 +4466,7 @@ void InitShips()
 	refShip.MinCrew         				= 40;
 	refShip.SpeedRate				= 15.9;
 	refShip.TurnRate        		= 55.0;
-	refShip.Price           			= 188912;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 4400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4474,7 +4474,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.8;
@@ -4545,7 +4545,7 @@ void InitShips()
 	refShip.MinCrew         				= 46;
 	refShip.SpeedRate				= 15.7;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 182052;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 4800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4553,7 +4553,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.5;
-	refShip.lowpolycrew 				= 16;
+	refShip.lowpolycrew 				= 8;
 	refShip.buildtime 					= 80;
 
 	refship.Rocking.y = 0.8;
@@ -4620,7 +4620,7 @@ void InitShips()
 	refShip.MinCrew         				= 40;
 	refShip.SpeedRate				= 15.1;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 192287;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 4500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4628,7 +4628,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.5;
-	refShip.lowpolycrew 				= 16;
+	refShip.lowpolycrew 				= 8;
 	refShip.buildtime 					= 80;
 
 	refship.Rocking.y = 0.8;
@@ -4695,7 +4695,7 @@ void InitShips()
     refShip.MinCrew         			= 58;
     refShip.SpeedRate				= 15.5;
     refShip.TurnRate        		= 45.0;
-    refShip.Price           			= 194427;
+    refShip.Price           			= 300000;
     refShip.HP              				= 4800;
     refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4703,7 +4703,7 @@ void InitShips()
     refShip.Type.Merchant					= false;
     refShip.Type.War						= true;
     refShip.sea_enchantment					= 1.2;
-    refShip.lowpolycrew = 20;
+    refShip.lowpolycrew = 8;
     refShip.buildtime = 100;
 
     refShip.Rocking.y = 0.4;
@@ -4774,7 +4774,7 @@ void InitShips()
 	refShip.MinCrew         				= 52;
 	refShip.SpeedRate				= 15.3;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 181162;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 4700;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4782,7 +4782,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.5;
@@ -4835,7 +4835,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Rossiya			Патрульный Фрегат
+	/// Rossiya			Тяжёлый Корвет
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ROSSIYA]);
 	refShip.Name            			= "Rossiya";
@@ -4855,7 +4855,7 @@ void InitShips()
 	refShip.MinCrew         				= 66;
 	refShip.SpeedRate       		= 13.6;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 190427;
+	refShip.Price           			= 300000;
 	refShip.HP              				= 5800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4863,7 +4863,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -4904,11 +4904,11 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= false;
+    refship.nation.england	= true;
+	refship.nation.france	= true;
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
-	refship.nation.spain	= false;
+	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
 	/// EastIndiaMan			Голландский Пинас
@@ -4927,11 +4927,11 @@ void InitShips()
 	refShip.lcannon 							= 15;
 	refShip.fcannon 							= 0;
 	refShip.bcannon 							= 6;
-	refShip.MaxCrew         				= 200;
-	refShip.MinCrew         				= 30;
+	refShip.MaxCrew         				= 300;
+	refShip.MinCrew         				= 60;
 	refShip.SpeedRate       		= 12.3;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 175411;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -4939,7 +4939,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= false;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -4991,7 +4991,7 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Pearl			Жемчужина
+	/// Pearl			Распутная девка
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PEARL]);
 	refShip.Name            		= "Pearl";
@@ -5011,7 +5011,7 @@ void InitShips()
 	refShip.MinCrew         			= 78;
 	refShip.SpeedRate       	= 13.2;
 	refShip.TurnRate        	= 35.0;
-	refShip.Price           		= 188801;
+	refShip.Price           		= 350000;
 	refShip.HP              			= 6500;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -5019,7 +5019,7 @@ void InitShips()
 	refship.Type.Merchant			= true;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.2;
-	refShip.lowpolycrew 			= 20;
+	refShip.lowpolycrew 			= 8;
 	refShip.buildtime 				= 100;
 
 	refship.Rocking.y 				= 0.4;
@@ -5087,7 +5087,7 @@ void InitShips()
 	refShip.MinCrew         				= 80;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 206411;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 6200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5095,7 +5095,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.4;
@@ -5169,7 +5169,7 @@ void InitShips()
 	refShip.MinCrew         		= 88;
 	refShip.SpeedRate		= 11.2;
 	refShip.TurnRate        = 35.0;
-	refShip.Price           	= 218536;
+	refShip.Price           	= 350000;
 	refShip.HP              		= 7000;
 	refShip.SP              		= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -5177,7 +5177,7 @@ void InitShips()
 	refship.Type.Merchant		= true;
 	refship.Type.War			= true;
 	refShip.sea_enchantment		= 1.2;
-	refShip.lowpolycrew 		= 20;
+	refShip.lowpolycrew 		= 8;
 	refShip.buildtime 		= 80;
 
 
@@ -5236,7 +5236,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_GALEON]);
 	refShip.Name            			= "Galeon";
-	refship.Soundtype					= "corvette";
+	refship.Soundtype					= "frigate";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
@@ -5252,7 +5252,7 @@ void InitShips()
 	refShip.MinCrew         				= 104;
 	refShip.SpeedRate				= 10.5;
 	refShip.TurnRate        		= 20.0;
-	refShip.Price           			= 220536;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 7800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5260,7 +5260,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 
@@ -5337,7 +5337,7 @@ void InitShips()
 	refShip.MinCrew         				= 80;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 207911;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 7000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5346,7 +5346,7 @@ void InitShips()
 	refship.Type.War					= true;
 
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew                             = 20;
+	refShip.lowpolycrew                             = 8;
 	refShip.buildtime                               = 80;
 
 
@@ -5399,7 +5399,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_LA_MARIANNA]);
 	refShip.Name            			= "La_Marianna";
-	refship.Soundtype					= "corvette";
+	refship.Soundtype					= "frigate";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
@@ -5415,7 +5415,7 @@ void InitShips()
 	refShip.MinCrew         				= 76;
 	refShip.SpeedRate				= 12.0;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 199912;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5600;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5423,7 +5423,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 
@@ -5493,7 +5493,7 @@ void InitShips()
 	refShip.MinCrew         				= 70;
 	refShip.SpeedRate				= 12.5;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 189677;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 6300;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5501,7 +5501,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 
@@ -5553,7 +5553,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	///  Unicorn			Анг. Тяж. Корвет
+	///  Unicorn			Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_UNICORN]);
 	refShip.Name            			= "Unicorn";
@@ -5573,7 +5573,7 @@ void InitShips()
 	refShip.MinCrew         				= 72;
 	refShip.SpeedRate       		= 12.4;
 	refShip.TurnRate        		= 42.0;
-	refShip.Price           			= 224912;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 6300;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5581,7 +5581,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 8;
 	refShip.buildtime 					= 220;
 
 
@@ -5626,15 +5626,15 @@ void InitShips()
 
 	//Nation
     refship.nation.england	= true;
-	refship.nation.france	= false;
-	refship.nation.holland	= false;
+	refship.nation.france	= true;
+	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
-	refship.nation.spain	= false;
+	refship.nation.spain	= true;
 
 	
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Nightmare			Исп. Тяж. Корвет
+	/// Nightmare			Пиратский Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_NIGHTMARE]);
 	refShip.Name            			= "Nightmare";
@@ -5654,7 +5654,7 @@ void InitShips()
 	refShip.MinCrew         				= 84;
 	refShip.SpeedRate				= 11.8;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 199536;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 6500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5662,7 +5662,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -5709,7 +5709,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Hermione			Фран. Тяж. Корвет
+	/// Hermione			Французский Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_HERMIONE]);
 	refShip.Name            			= "Hermione";
@@ -5729,7 +5729,7 @@ void InitShips()
 	refShip.MinCrew         				= 76;
 	refShip.SpeedRate       		= 14.8;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 202787;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5737,7 +5737,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.5;
@@ -5793,7 +5793,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Cherub			Гол. Тяж. Корвет
+	/// Cherub			Голландский Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CHERUB]);
 	refShip.Name 				= "Cherub";
@@ -5813,7 +5813,7 @@ void InitShips()
 	refShip.MinCrew 				= 56;
 	refShip.SpeedRate 		= 14.4;
 	refShip.TurnRate 		= 40.0;
-	refShip.Price 				= 177537;
+	refShip.Price 				= 350000;
 	refShip.HP 						= 5000;
 	refShip.SP  					= 100;
 	refShip.MastMultiplier			= 1.6;
@@ -5821,7 +5821,7 @@ void InitShips()
 	refship.Type.Merchant 		= false;
 	refship.Type.War 			= true;
 	refShip.sea_enchantment 	= 1.2;
-	refShip.lowpolycrew 		= 20;
+	refShip.lowpolycrew 		= 8;
 	refShip.buildtime 		= 100;
 
 	refship.Rocking.y = 0.5;
@@ -5870,7 +5870,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Essex			Анг. фрегат
+	/// Essex			Английский Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ESSEX]);
 	refShip.Name            			= "Essex";
@@ -5890,7 +5890,7 @@ void InitShips()
 	refShip.MinCrew         				= 60;
 	refShip.SpeedRate       		= 14.5;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 190162;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5898,7 +5898,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -5945,7 +5945,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Cecilia			Исп. фрегат
+	/// Cecilia			Испанский фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CECILIA]);
 	refShip.Name            			= "Cecilia";
@@ -5965,7 +5965,7 @@ void InitShips()
 	refShip.MinCrew         				= 60;
 	refShip.SpeedRate       		= 14.3;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 192037;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -5973,7 +5973,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6020,7 +6020,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Belle			Фра. фрегат
+	/// Belle			Фра. Воен. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_BELLE]);
 	refShip.Name 						= "Belle";
@@ -6040,7 +6040,7 @@ void InitShips()
 	refShip.MinCrew 						= 64;
 	refShip.SpeedRate 				= 13.3;
 	refShip.TurnRate 				= 40.0;
-	refShip.Price 						= 195787;
+	refShip.Price 						= 350000;
 	refShip.HP 								= 5600;
 	refShip.SP 								= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6048,7 +6048,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment = 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6097,7 +6097,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Surprise			Гол. фрегат
+	/// Surprise			Гол. Воен. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SURPRISE]);
 	refShip.Name            			= "Surprise";
@@ -6106,7 +6106,7 @@ void InitShips()
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
 	refShip.Weight						= Tonnes2CWT(1100);
-	refShip.Capacity        			= 2500;
+	refShip.Capacity        			= 2800;
 	refShip.MaxCannonDiff						= 3;
 	refShip.CannonsQuantity						= 44;
 	refShip.rcannon 							= 19;
@@ -6117,7 +6117,7 @@ void InitShips()
 	refShip.MinCrew         				= 70;
 	refShip.SpeedRate       		= 13.1;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 192802;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6125,7 +6125,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6172,7 +6172,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Fortuna		Пир. фрегат
+	/// Fortuna		Исп. Воен. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_FORTUNA]);
 	refShip.Name            			= "Fortuna";
@@ -6181,7 +6181,7 @@ void InitShips()
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
 	refShip.Weight						= Tonnes2CWT(1000);
-	refShip.Capacity        			= 2800;
+	refShip.Capacity        			= 2500;
 	refShip.MaxCannonDiff						= 3;
 	refShip.CannonsQuantity						= 44;
 	refShip.rcannon 							= 19;
@@ -6190,9 +6190,9 @@ void InitShips()
 	refShip.bcannon 							= 4;
 	refShip.MaxCrew         				= 330;
 	refShip.MinCrew         				= 66;
-	refShip.SpeedRate       		= 13.3;
+	refShip.SpeedRate       		= 13.5;
 	refShip.TurnRate        		= 38.0;
-	refShip.Price           			= 180802;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6200,7 +6200,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6243,11 +6243,11 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= true;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Mordaunt			Военный фрегат
+	/// Mordaunt			Анг. Воен. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_MORDAUNT]);
 	refShip.Name            			= "Mordaunt";
@@ -6256,7 +6256,7 @@ void InitShips()
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
 	refShip.Weight						= Tonnes2CWT(860);
-	refShip.Capacity        			= 2000;
+	refShip.Capacity        			= 3000;
 	refShip.MaxCannonDiff						= 3;
 	refShip.CannonsQuantity 					= 46;
 	refShip.rcannon 							= 20;
@@ -6267,7 +6267,7 @@ void InitShips()
 	refShip.MinCrew         				= 62;
 	refShip.SpeedRate       		= 13.1;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 192823;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.5;
@@ -6275,13 +6275,13 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y 						= 0.5;
 	refship.Rocking.az 						= 0.035;
 
-	refship.WaterLine = -0.5;
+	refship.WaterLine = -1.0;
 	refship.SpeedDependWeight	= 0.2;
 	refship.SubSeaDependWeight	= 0.9;
 	refship.TurnDependWeight	= 0.2;
@@ -6321,8 +6321,10 @@ void InitShips()
 	refship.nation.pirate	= false;
 	refship.nation.spain	= false;
 
+	refShip.hullNums = 5;
+
 	///////////////////////////////////////////////////////////////////////////
-	//// Frigate			Фрегат
+	//// Frigate			Военный Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_FRIGATE]);
 	refShip.Name            			= "Frigate";
@@ -6342,7 +6344,7 @@ void InitShips()
 	refShip.MinCrew         				= 60;
 	refShip.SpeedRate       		= 13;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 187037;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 5400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6350,7 +6352,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 
@@ -6399,10 +6401,10 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= false;
-	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+    refship.nation.england	= true;
+	refship.nation.france	= true;
+	refship.nation.holland	= true;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	refShip.hullNums = 4; // LEO
@@ -6412,7 +6414,7 @@ void InitShips()
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_FRIGATE_H]);
 	refShip.Name            			= "Frigate_h";
-	refship.Soundtype					= "corvette";
+	refship.Soundtype					= "frigate";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 28;
@@ -6428,7 +6430,7 @@ void InitShips()
 	refShip.MinCrew         				= 70;
 	refShip.SpeedRate       		= 12.1;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 192427;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 4900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6436,7 +6438,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6478,18 +6480,18 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
+    refship.nation.england	= true;
 	refship.nation.france	= true;
-	refship.nation.holland	= false;
+	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
-	refship.nation.spain	= false;
+	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Carraca			Каракка
+	/// Carraca			Тяжёлый Галеон
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CARRACA]);
 	refShip.Name            			= "Carraca";
-	refship.Soundtype					= "corvette";
+	refship.Soundtype					= "frigate";
 	refShip.Class						= 3;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
 	refShip.MaxCaliber      			= 24;
@@ -6505,7 +6507,7 @@ void InitShips()
 	refShip.MinCrew         				= 110;
 	refShip.SpeedRate				= 10.2;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 216801;
+	refShip.Price           			= 350000;
 	refShip.HP              				= 7200;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6513,7 +6515,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 
@@ -6555,8 +6557,8 @@ void InitShips()
 	refship.Track2.Speed	= "0.15, 0.25";
 
 	//Nation
-    refship.nation.england	= false;
-	refship.nation.france	= false;
+    refship.nation.england	= true;
+	refship.nation.france	= true;
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
@@ -6582,7 +6584,7 @@ void InitShips()
 	refShip.MinCrew         			= 108;
 	refShip.SpeedRate			= 9.8;
 	refShip.TurnRate        	= 23.0;
-	refShip.Price           		= 340350;
+	refShip.Price           		= 450000;
 	refShip.HP              			= 7000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -6591,7 +6593,7 @@ void InitShips()
 	refship.Type.War				= true;
 
 	refShip.sea_enchantment			= 1.2;
-	refShip.lowpolycrew				= 20;
+	refShip.lowpolycrew				= 9;
 	refShip.buildtime				= 80;
 
 	refship.Rocking.y = 0.5;
@@ -6637,7 +6639,7 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= true;
+	refship.nation.pirate	= false;
 	refship.nation.spain	= true;
 
 	refShip.hullNums = 27; // LEO
@@ -6663,7 +6665,7 @@ void InitShips()
 	refShip.MinCrew         				= 64;
 	refShip.SpeedRate       		= 13.6;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 323875;
+	refShip.Price           			= 450000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6671,7 +6673,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 9;
 
 	refship.Rocking.y 					= 0.4;
 	refship.Rocking.az 					= 0.035;
@@ -6713,7 +6715,7 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -6737,7 +6739,7 @@ void InitShips()
 	refShip.MinCrew         				= 70;
 	refShip.SpeedRate       		= 13.6;
 	refShip.TurnRate        		= 45.0;
-	refShip.Price           			= 316955;
+	refShip.Price           			= 450000;
 	refShip.HP              				= 7000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6745,7 +6747,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 9;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -6792,7 +6794,7 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -6816,14 +6818,14 @@ void InitShips()
 	refShip.MinCrew         				= 64;
 	refShip.SpeedRate       		= 13.2;
 	refShip.TurnRate        		= 42.0;
-	refShip.Price           			= 322275;
+	refShip.Price           			= 450000;
 	refShip.HP              				= 6400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 9;
 	refship.Rocking.y 					= 0.4;
 	refship.Rocking.az 					= 0.035;
 	refship.WaterLine					= -0.5;
@@ -6866,7 +6868,7 @@ void InitShips()
 	refship.nation.france	= true;
 	refship.nation.spain	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Rotterdam			Тяж. Воен. Пинас
@@ -6876,7 +6878,7 @@ void InitShips()
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 36;
+	refShip.MaxCaliber      			= 32;
 	refShip.Weight						= Tonnes2CWT(1100);
 	refShip.Capacity        			= 5000;
 	refShip.MaxCannonDiff						= 4;
@@ -6889,7 +6891,7 @@ void InitShips()
 	refShip.MinCrew         				= 80;
 	refShip.SpeedRate				= 11.8;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 288224;
+	refShip.Price           			= 500000;
 	refShip.HP              				= 6500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6897,7 +6899,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 9;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.4;
@@ -6964,7 +6966,7 @@ void InitShips()
 	refShip.MinCrew         				= 102;
 	refShip.SpeedRate				= 9.5;
 	refShip.TurnRate        		= 33.0;
-	refShip.Price           			= 322804;
+	refShip.Price           			= 500000;
 	refShip.HP              				= 7500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -6972,7 +6974,7 @@ void InitShips()
 	refship.Type.Merchant					= true;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 9;
 	refShip.buildtime = 80;
 
 
@@ -7017,7 +7019,7 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -7041,14 +7043,14 @@ void InitShips()
 	refShip.MinCrew         				= 94;
 	refShip.SpeedRate				= 10.2;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 309505;
+	refShip.Price           			= 500000;
 	refShip.HP              				= 6800;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 9;
 
 	refship.Rocking.y 					= 0.4;
 	refship.Rocking.az 					= 0.02;
@@ -7090,7 +7092,7 @@ void InitShips()
 	refship.nation.france	= false;
 	refship.nation.spain	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 
 	///////////////////////////////////////////////////////////////////////////
 	/// FWzP			Гол. Воен. Галеон
@@ -7100,7 +7102,7 @@ void InitShips()
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 36;
+	refShip.MaxCaliber      			= 32;
 	refShip.Weight						= Tonnes2CWT(2300);
 	refShip.Capacity        			= 5500;
 	refShip.MaxCannonDiff						= 4;
@@ -7113,7 +7115,7 @@ void InitShips()
 	refShip.MinCrew         				= 110;
 	refShip.SpeedRate				= 10;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 316555;
+	refShip.Price           			= 500000;
 	refShip.HP              				= 8500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -7121,7 +7123,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -7168,7 +7170,7 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -7256,7 +7258,7 @@ void InitShips()
 	refship.nation.spain	= true;*/
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Leopard			Леопард
+	/// Leopard			Анг. Тяж. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_LEOPARD]);
 	refShip.Name            			= "Leopard";
@@ -7276,7 +7278,7 @@ void InitShips()
 	refShip.MinCrew         				= 80;
 	refShip.SpeedRate       		= 11.8;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 311475;
+	refShip.Price           			= 450000;
 	refShip.HP              				= 7000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -7284,7 +7286,7 @@ void InitShips()
 	refship.Type.Merchant					= false;
 	refship.Type.War						= true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 9;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.5;
@@ -7335,7 +7337,7 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -7414,7 +7416,7 @@ void InitShips()
 	refship.nation.spain	= false;*/
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Dutchship			Усил. Фрегат
+	/// Dutchship			Фра. Лин. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_DUTCHSHIP]);
 	refShip.Name            			= "Dutchship";
@@ -7434,7 +7436,7 @@ void InitShips()
 	refShip.MinCrew         			= 76;
 	refShip.SpeedRate			= 12.4;
 	refShip.TurnRate        	= 40.0;
-	refShip.Price           		= 299450;
+	refShip.Price           		= 550000;
 	refShip.HP              			= 7000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -7442,7 +7444,7 @@ void InitShips()
 	refship.Type.Merchant			= false;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 9;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -7491,14 +7493,14 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Constitution			Тяж. Лин. фрегат
+	/// Constitution			Пир. Лин. фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CONSTITUTION]);
 	refShip.Name            			= "Constitution";
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 32;
+	refShip.MaxCaliber      			= 36;
 	refShip.Weight						= Tonnes2CWT(1000);
 	refShip.Capacity        			= 3300;
 	refShip.MaxCannonDiff						= 4;
@@ -7511,7 +7513,7 @@ void InitShips()
 	refShip.MinCrew         				= 76;
 	refShip.SpeedRate       		= 12.8;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 305741;
+	refShip.Price           			= 550000;
 	refShip.HP              				= 7000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.5;
@@ -7519,7 +7521,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 100;
 
 	refship.Rocking.y = 0.4;
@@ -7588,14 +7590,14 @@ void InitShips()
 	refShip.MinCrew         				= 90;
 	refShip.SpeedRate				= 11.3;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 344480;
+	refShip.Price           			= 550000;
 	refShip.HP              				= 9900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
 	refship.CanEncounter				= true;
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 
 	refship.Rocking.y 				= 0.3;
 	refship.Rocking.az 				= 0.035;
@@ -7643,7 +7645,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// ConvoiShip			Сторожевой Корабль
+	/// ConvoiShip			Гол. Лин. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CONVOISHIP]);
 	refShip.Name            		= "ConvoiShip";
@@ -7663,7 +7665,7 @@ void InitShips()
 	refShip.MinCrew         			= 84;
 	refShip.SpeedRate			= 11.8;
 	refShip.TurnRate        	= 30.0;
-	refShip.Price           		= 321750;
+	refShip.Price           		= 550000;
 	refShip.HP              			= 8200;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -7671,7 +7673,7 @@ void InitShips()
 	refship.Type.Merchant			= false;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 9;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y 				= 0.3;
@@ -7747,7 +7749,7 @@ void InitShips()
 	refShip.MinCrew         			= 116;
 	refShip.SpeedRate			= 9.7;
 	refShip.TurnRate        	= 25.0;
-	refShip.Price           		= 342900;
+	refShip.Price           		= 500000;
 	refShip.HP              			= 9900;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -7755,7 +7757,7 @@ void InitShips()
 	refship.Type.Merchant			= true;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 9;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y = 0.5;
@@ -7800,13 +7802,13 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= true;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	refShip.hullNums = 5; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Crown			Корона
+	/// Crown			Анг. Воен. Корабль
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_LINESHIP]);
 	refShip.Name            			= "Lineship";
@@ -7826,7 +7828,7 @@ void InitShips()
 	refShip.MinCrew         				= 94;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 344605;
+	refShip.Price           			= 600000;
 	refShip.HP              				= 11500;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -7834,7 +7836,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -7884,7 +7886,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Poseidon			
+	/// Poseidon		Исп. Лин. Фрегат	
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_POSEIDON]);
 	refShip.Name            			= "Poseidon";
@@ -7904,7 +7906,7 @@ void InitShips()
 	refShip.MinCrew         			= 76;
 	refShip.SpeedRate			= 12.4;
 	refShip.TurnRate        	= 40.0;
-	refShip.Price           		= 299450;
+	refShip.Price           		= 550000;
 	refShip.HP              			= 7000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -7912,7 +7914,7 @@ void InitShips()
 	refship.Type.Merchant			= false;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 9;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -7966,7 +7968,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Centurion			Линкор
+	/// Centurion			Анг. Лин. Фрегат
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CENTURION]);
 	refShip.Name            			= "Centurion";
@@ -7986,7 +7988,7 @@ void InitShips()
 	refShip.MinCrew         				= 80;
 	refShip.SpeedRate				= 12.2;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 542350;
+	refShip.Price           			= 550000;
 	refShip.HP              				= 9000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -7994,7 +7996,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8045,7 +8047,7 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Agamemnon1			Агамемнон
+	/// Agamemnon			Фра. Воен. Корабль
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_AGAMEMNON]);
 	refShip.Name            			= "Agamemnon";
@@ -8065,7 +8067,7 @@ void InitShips()
 	refShip.MinCrew         				= 84;
 	refShip.SpeedRate       		= 11;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 343950;
+	refShip.Price           			= 600000;
 	refShip.HP              				= 10000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8073,7 +8075,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -8122,14 +8124,14 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Ingermanland			Ингерманлэнд
+	//// Ingermanland			Гол. Воен. Корабль
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_INGERMANLAND]);
 	refShip.Name            			= "Ingermanland";
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 32;
+	refShip.MaxCaliber      			= 36;
 	refShip.Weight						= Tonnes2CWT(2500);
 	refShip.Capacity        			= 5000;
 	refShip.MaxCannonDiff						= 4;
@@ -8142,7 +8144,7 @@ void InitShips()
 	refShip.MinCrew         				= 100;
 	refShip.SpeedRate				= 10.5;
 	refShip.TurnRate        		= 35.0;
-	refShip.Price           			= 336900;
+	refShip.Price           			= 600000;
 	refShip.HP              				= 8900;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8150,7 +8152,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew					= 24;
+	refShip.lowpolycrew					= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8208,14 +8210,14 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Rattvisan			Ратвисан
+	/// Rattvisan			Исп. Воен. Корабль
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_RATTVISAN]);
 	refShip.Name            			= "Rattvisan";
 	refship.Soundtype					= "lineship";
 	refShip.Class						= 2;
 	refShip.Cannon          			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber      			= 32;
+	refShip.MaxCaliber      			= 36;
 	refShip.Weight						= Tonnes2CWT(3000);
 	refShip.Capacity        			= 4800;
 	refShip.MaxCannonDiff						= 4;
@@ -8228,7 +8230,7 @@ void InitShips()
 	refShip.MinCrew         				= 92;
 	refShip.SpeedRate				= 11.1;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 317700;
+	refShip.Price           			= 600000;
 	refShip.HP              				= 9000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8236,7 +8238,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -8306,7 +8308,7 @@ void InitShips()
 	refShip.MinCrew         				= 96;
 	refShip.SpeedRate				= 11.5;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 267275;
+	refShip.Price           			= 600000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8314,7 +8316,7 @@ void InitShips()
 	refship.Type.Merchant				= true;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 9;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8367,7 +8369,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// resolution			Резолюция
+	/// resolution			Английский Линкор
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_RESOLUTION]);
 	refShip.Name            			= "resolution";
@@ -8387,7 +8389,7 @@ void InitShips()
 	refShip.MinCrew         				= 100;
 	refShip.SpeedRate				= 11.5;
 	refShip.TurnRate        		= 30.0;
-	refShip.Price           			= 549453;
+	refShip.Price           			= 650000;
 	refShip.HP              				= 10000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.5;
@@ -8395,7 +8397,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 100;
 
 	refship.Rocking.y 						= 0.5;
@@ -8438,11 +8440,11 @@ void InitShips()
     refship.nation.england	= true;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Bellona			Беллона
+	/// Bellona			Французский Линкор
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_BELLONA]);
 	refShip.Name            		= "Bellona";
@@ -8462,7 +8464,7 @@ void InitShips()
 	refShip.MinCrew         			= 120;
 	refShip.SpeedRate			= 11.0;
 	refShip.TurnRate        	= 20.0;
-	refShip.Price           		= 556350;
+	refShip.Price           		= 650000;
 	refShip.HP              			= 11000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -8470,7 +8472,7 @@ void InitShips()
 	refship.Type.Merchant			= false;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 10;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8521,11 +8523,11 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= true;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Superbe			Супербе
+	/// Superbe			Испанский Линкор
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SUPERBE]);
 	refShip.Name            			= "Superbe";
@@ -8545,7 +8547,7 @@ void InitShips()
 	refShip.MinCrew         				= 100;
 	refShip.SpeedRate				= 11.5;
 	refShip.TurnRate        		= 25.0;
-	refShip.Price           			= 501350;
+	refShip.Price           			= 650000;
 	refShip.HP              				= 10000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8553,7 +8555,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8603,11 +8605,11 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= false;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Admiral de Ruiter			Адмирал Рюйтер
+	/// Admiral de Ruiter			Голландский Линкор
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_RUITER]);
 	refShip.Name            			= "Ruiter";
@@ -8627,7 +8629,7 @@ void InitShips()
 	refShip.MinCrew         				= 130;
 	refShip.SpeedRate				= 11.0;
 	refShip.TurnRate        		= 20.0;
-	refShip.Price           			= 543870;
+	refShip.Price           			= 650000;
 	refShip.HP              				= 11000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8635,7 +8637,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew = 28;
+	refShip.lowpolycrew = 10;
 	refShip.buildtime = 140;
 
 	refship.Rocking.y 					= 0.5;
@@ -8685,11 +8687,11 @@ void InitShips()
     refship.nation.england	= false;
 	refship.nation.france	= false;
 	refship.nation.holland	= true;
-	refship.nation.pirate	= false;
+	refship.nation.pirate	= true;
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Implacable			Имплакабл
+	//// Implacable			Английскиё Варшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_IMPLACABLE]);
 	refShip.Name            			= "Implacable";
@@ -8709,7 +8711,7 @@ void InitShips()
 	refShip.MinCrew         				= 120;
 	refShip.SpeedRate				= 10.5;
 	refShip.TurnRate        		= 20.0;
-	refShip.Price           			= 568350;
+	refShip.Price           			= 700000;
 	refShip.HP              				= 12000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8717,7 +8719,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8770,7 +8772,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Pavel			Павел
+	/// Pavel			Испанский Варшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PAVEL]);
 	refShip.Name            			= "Pavel";
@@ -8790,7 +8792,7 @@ void InitShips()
 	refShip.MinCrew         				= 100;
 	refShip.SpeedRate				= 11.0;
 	refShip.TurnRate        		= 23.0;
-	refShip.Price           			= 501350;
+	refShip.Price           			= 700000;
 	refShip.HP              				= 11000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8798,7 +8800,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y 					= 0.5;
@@ -8853,7 +8855,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Redoutable			Редутабл
+	/// Redoutable			Французский Варшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_REDOUTABLE]);
 	refShip.Name            		= "Redoutable";
@@ -8873,7 +8875,7 @@ void InitShips()
 	refShip.MinCrew         			= 170;
 	refShip.SpeedRate			= 10.5;
 	refShip.TurnRate        	= 15.0;
-	refShip.Price           		= 623870;
+	refShip.Price           		= 700000;
 	refShip.HP              			= 12000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -8881,7 +8883,7 @@ void InitShips()
 	refship.Type.Merchant			= false;
 	refship.Type.War				= true;
 	refShip.sea_enchantment			= 1.1;
-	refShip.lowpolycrew 			= 24;
+	refShip.lowpolycrew 			= 10;
 	refShip.buildtime 				= 120;
 
 	refship.Rocking.y = 0.5;
@@ -8936,7 +8938,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Zevenprovincien			Семь Провинций
+	/// Zevenprovincien			Голландский Варшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ZEVENPROVINCIEN]);
 	refShip.Name            			= "Zevenprovincien";
@@ -8956,7 +8958,7 @@ void InitShips()
 	refShip.MinCrew         				= 108;
 	refShip.SpeedRate				= 11.0;
 	refShip.TurnRate        		= 22.0;
-	refShip.Price           			= 530850;
+	refShip.Price           			= 700000;
 	refShip.HP              				= 11000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -8964,7 +8966,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -9020,7 +9022,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Bucentaure			Буцентавр
+	/// Bucentaure			Французский Батлшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_BUCENTAURE]);
 	refShip.Name            			= "Bucentaure";
@@ -9040,7 +9042,7 @@ void InitShips()
 	refShip.MinCrew         				= 140;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 15.0;
-	refShip.Price           			= 612850;
+	refShip.Price           			= 750000;
 	refShip.HP              				= 13000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9048,7 +9050,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -9100,7 +9102,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Cristian			Кристиан
+	/// Cristian			Голландский Батлшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_CRISTIAN]);
 	refShip.Name            			= "Cristian";
@@ -9120,7 +9122,7 @@ void InitShips()
 	refShip.MinCrew         				= 130;
 	refShip.SpeedRate				= 10.5;
 	refShip.TurnRate        		= 17.5;
-	refShip.Price           			= 593370;
+	refShip.Price           			= 750000;
 	refShip.HP              				= 12000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9128,7 +9130,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -9184,7 +9186,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// SantaAna			Санта Анна
+	/// SantaAna			Испанский Батлшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SANTAANA]);
 	refShip.Name            			= "SantaAna";
@@ -9204,7 +9206,7 @@ void InitShips()
 	refShip.MinCrew         				= 130;
 	refShip.SpeedRate				= 10.5;
 	refShip.TurnRate        		= 17.5;
-	refShip.Price           			= 593370;
+	refShip.Price           			= 750000;
 	refShip.HP              				= 12000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9212,7 +9214,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -9268,7 +9270,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Prince				Принц
+	/// Prince				Английский Батлшип
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_PRINCE]);
 	refShip.Name            			= "Prince";
@@ -9288,7 +9290,7 @@ void InitShips()
 	refShip.MinCrew         				= 150;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 14.0;
-	refShip.Price           			= 555953;
+	refShip.Price           			= 750000;
 	refShip.HP              				= 13000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.5;
@@ -9296,7 +9298,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y 						= 0.5;
@@ -9346,7 +9348,7 @@ void InitShips()
 	refShip.hullNums = 6; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Trinity			Тринити
+	/// Trinity			Голландский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_TRINITY]);
 	refShip.Name            			= "Trinity";
@@ -9366,7 +9368,7 @@ void InitShips()
 	refShip.MinCrew         				= 170;
 	refShip.SpeedRate				= 9.5;
 	refShip.TurnRate        		= 13.0;
-	refShip.Price           			= 612850;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 17000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9374,7 +9376,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew 				= 24;
+	refShip.lowpolycrew 				= 12;
 	refShip.buildtime 					= 120;
 
 	refship.Rocking.y = 0.5;
@@ -9426,7 +9428,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Zwaan			Чёрный Лебедь
+	//// Zwaan			Голландский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_ZWAAN]);
 	refShip.Name            			= "Zwaan";
@@ -9446,7 +9448,7 @@ void InitShips()
 	refShip.MinCrew         				= 160;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 15.0;
-	refShip.Price           			= 645850;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 14000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9454,7 +9456,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y = 0.3;
@@ -9508,7 +9510,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// SanFelipe			Сан Фелипе
+	/// SanFelipe			Испанский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SANFELIPE]);
 	refShip.Name            			= "SanFelipe";
@@ -9528,7 +9530,7 @@ void InitShips()
 	refShip.MinCrew         				= 150;
 	refShip.SpeedRate				= 9.5;
 	refShip.TurnRate        		= 11.0;
-	refShip.Price           			= 598870;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 15000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9536,7 +9538,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 12;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y = 0.3;
@@ -9593,7 +9595,7 @@ void InitShips()
 	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Manowar			Виктория1805
+	/// Manowar			Английский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_MANOWAR]);
 	refShip.Name            			= "Manowar";
@@ -9613,7 +9615,7 @@ void InitShips()
 	refShip.MinCrew         				= 190;
 	refShip.SpeedRate				= 9.5;
 	refShip.TurnRate        		= 12.0;
-	refShip.Price           			= 591350;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 14000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9621,7 +9623,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 12;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y = 0.3;
@@ -9675,7 +9677,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// Victory			Виктори1765
+	/// Victory			Английский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_VICTORY]);
 	refShip.Name            			= "Victory";
@@ -9695,7 +9697,7 @@ void InitShips()
 	refShip.MinCrew         				= 180;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 13.0;
-	refShip.Price           			= 621370;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 16000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.6;
@@ -9703,7 +9705,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 12;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y = 0.3;
@@ -9752,7 +9754,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Soley			Солей Роаяль
+	//// Soley			Французский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SOLEY]);
 	refShip.Name            			= "Soley";
@@ -9772,7 +9774,7 @@ void InitShips()
 	refShip.MinCrew         				= 180;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 12.0;
-	refShip.Price           			= 643000;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 15000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -9782,7 +9784,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew = 28;
+	refShip.lowpolycrew = 12;
 	refShip.buildtime = 140;
 
 	refship.Rocking.y = 0.3;
@@ -9836,7 +9838,7 @@ void InitShips()
 	refship.nation.spain	= false;
 
 	///////////////////////////////////////////////////////////////////////////
-	//// Santa Anna			Санта Анна
+	//// Santa Anna			Испанский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_SANTAANNA]);
 	refShip.Name            			= "Santaanna";
@@ -9856,7 +9858,7 @@ void InitShips()
 	refShip.MinCrew         				= 160;
 	refShip.SpeedRate				= 10.0;
 	refShip.TurnRate        		= 13.0;
-	refShip.Price           			= 650000;
+	refShip.Price           			= 800000;
 	refShip.HP              				= 16000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -9864,7 +9866,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew = 28;
+	refShip.lowpolycrew = 12;
 	refShip.buildtime = 140;
 
 	refship.Rocking.y = 0.3;
@@ -9918,7 +9920,7 @@ void InitShips()
 	refship.nation.spain	= true;
 
 	///////////////////////////////////////////////////////////////////////////
-	/// L'Ocean			Океан
+	/// Ocean			Французский Мановар
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_OCEAN]);
 	refShip.Name            			= "Ocean";
@@ -9938,7 +9940,7 @@ void InitShips()
 	refShip.MinCrew         				= 170;
 	refShip.SpeedRate				= 9.5;
 	refShip.TurnRate        		= 12.0;
-	refShip.Price           			= 626370;
+	refShip.Price           			= 800000;
 	refShip.HP              			= 17000;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier				= 1.6;
@@ -9946,7 +9948,7 @@ void InitShips()
 	refship.Type.Merchant				= false;
 	refship.Type.War					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew 				= 28;
+	refShip.lowpolycrew 				= 12;
 	refShip.buildtime 					= 140;
 
 	refship.Rocking.y = 0.3;
@@ -10020,7 +10022,7 @@ void InitShips()
 	refShip.MinCrew         				= 16;
 	refShip.SpeedRate       		= 19.3;
 	refShip.TurnRate        		= 85.0;
-	refShip.Price           			= 50000;
+	refShip.Price           			= 150000;
 	refShip.HP              				= 1400;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -10028,7 +10030,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 2.0;
-	refShip.lowpolycrew = 8;
+	refShip.lowpolycrew = 5;
 	refShip.buildtime = 20;
 
 	refship.Rocking.y = 0.5;
@@ -10087,7 +10089,7 @@ void InitShips()
 	refShip.MinCrew        			= 36;
 	refShip.SpeedRate      	= 18.5;
 	refShip.TurnRate       	= 60.0;
-	refShip.Price          		= 170500;
+	refShip.Price          		= 470500;
 	refShip.HP             			= 3600;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
@@ -10097,7 +10099,7 @@ void InitShips()
 	refship.Type.War			= true;
 	refship.QuestShip			= true;
 	refShip.sea_enchantment		= 1.8;
-	refShip.lowpolycrew			= 12;
+	refShip.lowpolycrew			= 7;
 	refShip.buildtime			= 60;
 
 	refship.WindAgainstSpeed   = 6.0;//boal
@@ -10160,7 +10162,7 @@ void InitShips()
 	refShip.MinCrew        			= 44;
 	refShip.SpeedRate      	= 18.0;
 	refShip.TurnRate       	= 60.0;
-	refShip.Price          		= 170500;
+	refShip.Price          		= 470500;
 	refShip.HP             			= 4000;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
@@ -10170,7 +10172,7 @@ void InitShips()
 	refship.Type.War			= true;
 	refship.QuestShip			= true;
 	refShip.sea_enchantment		= 1.8;
-	refShip.lowpolycrew			= 12;
+	refShip.lowpolycrew			= 7;
 	refShip.buildtime			= 60;
 
 	refship.WindAgainstSpeed   = 5.0;//boal
@@ -10233,7 +10235,7 @@ void InitShips()
 	refShip.MinCrew        			= 40;
 	refShip.SpeedRate      	= 18.0;
 	refShip.TurnRate       	= 55.0;
-	refShip.Price          		= 167500;
+	refShip.Price          		= 467500;
 	refShip.HP             			= 3800;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
@@ -10243,7 +10245,7 @@ void InitShips()
 	refship.Type.War			= true;
 	refship.QuestShip			= true;
 	refShip.sea_enchantment		= 1.8;
-	refShip.lowpolycrew			= 12;
+	refShip.lowpolycrew			= 7;
 	refShip.buildtime			= 60;
 
 	refship.WindAgainstSpeed   = 5.5;//boal
@@ -10306,7 +10308,7 @@ void InitShips()
 	refShip.MinCrew        			= 36;
 	refShip.SpeedRate      	= 17.0;
 	refShip.TurnRate       	= 65.0;
-	refShip.Price          		= 150500;
+	refShip.Price          		= 550500;
 	refShip.HP             			= 3500;
 	refShip.SP             			= 100;
 	refShip.MastMultiplier			= 1.3;
@@ -10387,7 +10389,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.8;
@@ -10460,7 +10462,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.8;
@@ -10524,7 +10526,7 @@ void InitShips()
 	refShip.MinCrew         		= 46;
 	refShip.SpeedRate					= 16.4;
 	refShip.TurnRate        			= 55.0;
-	refShip.Price           			= 150000;
+	refShip.Price           			= 1150000;
 	refShip.HP              			= 4800;
 	refShip.SP              			= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -10532,7 +10534,7 @@ void InitShips()
 	refship.Type.War						= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment					= 1.5;
-	refShip.lowpolycrew = 16;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 80;
 
 	refship.Rocking.y = 0.8;
@@ -10598,7 +10600,7 @@ void InitShips()
 	refShip.MinCrew         				= 66;
 	refShip.SpeedRate       		= 15.8;
 	refShip.TurnRate        		= 50.0;
-	refShip.Price           			= 1800000;
+	refShip.Price           			= 1150000;
 	refShip.HP              				= 6000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -10607,7 +10609,7 @@ void InitShips()
 	refship.Type.War						= true;
 	refship.QuestShip					    = true;
 	refShip.sea_enchantment					= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 8;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -10680,7 +10682,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 10;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -10758,7 +10760,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew = 20;
+	refShip.lowpolycrew = 10;
 	refShip.buildtime = 100;
 
 	refship.Rocking.y = 0.4;
@@ -10833,7 +10835,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.2;
-	refShip.lowpolycrew 				= 20;
+	refShip.lowpolycrew 				= 10;
 	refShip.buildtime 					= 100;
 
 	refship.Rocking.y 					= 0.4;
@@ -10891,16 +10893,16 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(1800);
 	refShip.Capacity        			= 4500;
 	refShip.MaxCannonDiff						= 0;
-	refShip.CannonsQuantity						= 68;
+	refShip.CannonsQuantity						= 64;
 	refShip.rcannon 							= 27;
 	refShip.lcannon 							= 27;
 	refShip.fcannon 							= 6;
-	refShip.bcannon 							= 8;
+	refShip.bcannon 							= 4;
 	refShip.MaxCrew         				= 444;
 	refShip.MinCrew         				= 88;
 	refShip.SpeedRate				= 13.1;
 	refShip.TurnRate        		= 40.0;
-	refShip.Price           			= 2890000;
+	refShip.Price           			= 2500000;
 	refShip.HP              				= 10000;
 	refShip.SP              				= 100;
 	refShip.MastMultiplier					= 1.3;
@@ -10909,7 +10911,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew = 24;
+	refShip.lowpolycrew = 10;
 	refShip.buildtime = 120;
 
 	refship.Rocking.y = 0.5;
@@ -10985,7 +10987,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.1;
-	refShip.lowpolycrew = 24;
+	refShip.lowpolycrew = 12;
 	refShip.buildtime = 120;
 
 	refship.Rocking.y = 0.5;
@@ -11062,7 +11064,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew = 28;
+	refShip.lowpolycrew = 12;
 	refShip.buildtime = 140;
 
 	refship.Rocking.y = 0.3;
@@ -11143,7 +11145,7 @@ void InitShips()
 	refship.Type.War					= true;
 	refship.QuestShip					= true;
 	refShip.sea_enchantment				= 1.0;
-	refShip.lowpolycrew = 28;
+	refShip.lowpolycrew = 12;
 	refShip.buildtime = 140;
 
 	refship.Rocking.y = 0.3;

@@ -13148,6 +13148,18 @@ void QuestComplete(string sQuestName, string qname)
 				ChangeCharacterAddressGroup(sld, "dungeon_02", "monsters",  "monster"+i);
 			}
 		break;
+
+		case "Skelet_SantaLusiaShip":
+			for (i=1; i<=6; i++)
+			{
+				sld = GetCharacter(NPC_GenerateCharacter("Skelet_SantaLusiaShip_"+i, "Skel"+(rand(3)+1), "skeleton", "skeleton", 20+MOD_SKILL_ENEMY_RATE*5, PIRATE, 1, true));
+				FantomMakeCoolFighter(sld, 20+MOD_SKILL_ENEMY_RATE*5, 90, 90, LinkRandPhrase(RandPhraseSimple("blade23","blade25"), RandPhraseSimple("blade30","blade26"), RandPhraseSimple("blade24","blade13")), RandPhraseSimple("pistol6", "pistol3"), MOD_SKILL_ENEMY_RATE*10);
+				LAi_SetWarriorType(sld);
+				LAi_warrior_SetStay(sld, true);
+				LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+				ChangeCharacterAddressGroup(sld, "SantaQuiteriaInside", "goto",  "goto"+i);
+			}
+		break;
 		
 		// <--- Загадочный остров
 	}

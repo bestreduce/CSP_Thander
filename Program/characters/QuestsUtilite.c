@@ -2710,6 +2710,10 @@ void VSEnpcInit()
 	PChar.quest.Skelet_SantaLusia.win_condition.l1 = "location";
 	PChar.quest.Skelet_SantaLusia.win_condition.l1.location = "dungeon_02";
 	PChar.quest.Skelet_SantaLusia.win_condition = "Skelet_SantaLusia";
+
+	PChar.quest.Skelet_SantaLusiaShip.win_condition.l1 = "location";
+	PChar.quest.Skelet_SantaLusiaShip.win_condition.l1.location = "SantaQuiteriaInside";
+	PChar.quest.Skelet_SantaLusiaShip.win_condition = "Skelet_SantaLusiaShip";
 }
 void OfficerGirlInit()
 {

@@ -2,7 +2,7 @@
 // здесь и далее ник boal - это разработческий ник ALexusB
 
 #define VERSION_NUMBER1       "ГПК v.1.3.2 ATR  "
-#define VERSION_NUMBER2       "CSP v2.3.0b (16.07.2023)"
+#define VERSION_NUMBER2       "CSP v2.3.1 beta (09.09.2023)"
 #define VERSION_NUMBER3       ""
 #define PROVIDER_TXT            "LEOPARD's team"
 #define VERSION_NUM      99910  // текущий номер
@@ -11,7 +11,7 @@
 #define VERSION_WWW     ""
 #define BI_COMPARE_HEIGHT 900
 // Show special message for test game statment
-#define MOD_BETTATESTMODE			"On"  // On -DEV version; Test - TST ver; Off
+#define MOD_BETTATESTMODE			"Off"  // On -DEV version; Test - TST ver; Off
 
 // глобальная строковая переменная
 string sGlobalTemp;

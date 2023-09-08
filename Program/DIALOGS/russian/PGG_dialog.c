@@ -976,6 +976,7 @@ void ProcessDialogEvent()
 		break;
 
 	case "Quest_1_Ship_Detail":
+		while (PChar.GenQuest.PGG_Quest.Island == "") GeneratePGGQuestLocation(NPChar);
 		sTmp = "Караван, принадлежащий " + NationNameGenitive(sti(PChar.GenQuest.PGG_Quest.Nation)) + ", перевозящий ";
 		PChar.GenQuest.PGG_Quest.Goods.Text = GetStrSmallRegister(XI_ConvertString(Goods[sti(PChar.GenQuest.PGG_Quest.Goods)].Name + "Acc"));
 		sTmp += PChar.GenQuest.PGG_Quest.Goods.Text;
