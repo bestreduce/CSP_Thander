@@ -42,7 +42,7 @@ void ProcessDialogEvent()
 		case "First time":
 			if(NPChar.quest.meeting == "0")		//Самый первый диалог
 			{
-				dialog.text = "Ага! К нам пожаловал"+GetSexPhrase("","а")+" "+GetSexPhrase("сам","сама")+" "+GetSexPhrase("неустрашимый","")+""+GetFullName(pchar)+"! Так и знал, что ты явишься - рано или поздно! Что могло привести тебя ко мне?";
+				dialog.text = "Ага! К нам пожаловал"+GetSexPhrase("","а")+" "+GetSexPhrase("сам","сама")+" "+GetSexPhrase("неустрашимый","")+" "+GetFullName(pchar)+"! Так и знал, что ты явишься - рано или поздно! Что могло привести тебя ко мне?";
 				NPChar.quest.meeting = "1";
 				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue7_Jackman"))	//Sinistra Пролог Анжелика тич
 				{
