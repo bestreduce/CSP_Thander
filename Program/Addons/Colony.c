@@ -3914,7 +3914,7 @@ void CreateTownCaiman()
 
 	rTown.id.label = "Street";
 	rTown.worldmap = "Caiman";
-	rTown.image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
+	rTown.image = "loading\jonny_load\city\Caiman_Town.tga";
 	rTown.citizens = true;
 	rTown.soldiers = true;
 	rTown.carrier = true;

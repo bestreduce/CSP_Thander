@@ -1686,7 +1686,7 @@ int LocationInitMartinique(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LeFransua_town";
 	locations[n].id.label = "Street";
-	locations[n].image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
+	locations[n].image = "loading\jonny_load\city\LeFransua_town.tga";
 	locations[n].worldmap = "Martinique";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
@@ -2293,7 +2293,7 @@ int LocationInitMartinique(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LeFransua_Hut2";
 	locations[n].id.label = "House";
-	locations[n].image = "loading\jonny_load\inside\Hut2_KNS.tga";
+	locations[n].image = "loading\jonny_load\inside\Hut4_KNS.tga";
 	locations[n].MustSetReloadBack = true;
 	//Town sack
 	locations[n].townsack = "LeFransua";

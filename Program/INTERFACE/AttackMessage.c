@@ -102,7 +102,7 @@ void MessageInfo()
 
 	if(PChar.ColonyBuilding.Stage == "1" && sTarget == "Colony")
 	{
-		SetNewPicture("TARGET", "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga");
+		SetNewPicture("TARGET", "loading\jonny_load\city\Caiman_Town.tga");
 	}
 	else
 	{

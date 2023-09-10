@@ -340,7 +340,7 @@ int LocationInitCaiman(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Caiman_town";
 	locations[n].id.label = "Street";
-	locations[n].image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
+	locations[n].image = "loading\jonny_load\city\Caiman_Town.tga";
 	locations[n].worldmap = "Caiman_town";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
