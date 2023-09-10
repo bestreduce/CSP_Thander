@@ -163,6 +163,7 @@ void GenerateMaps(aref ch, int iProbability1, int iProbability2)
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_Bahames")) AddItems(ch, "map_Bahames", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_maracaibo")) AddItems(ch, "map_maracaibo", 1);
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_cumana")) AddItems(ch, "map_cumana", 1);
+	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_SentLuchia")) AddItems(ch, "map_SentLuchia", 1);
 }
 
 
