@@ -12218,6 +12218,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "ATpr_VosstanovimGorod":	
 			LocatorReloadEnterDisable("SantoDomingo_town", "Reload1_back", false);
 			bDisableFastReload = false;
+			bDisableLandEncounters = false;
 			ChangeCharacterNationReputation(pchar, SPAIN, 18);
 			
 			sld = CharacterFromID("SantoDomingo_Mayor")

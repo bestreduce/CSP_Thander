@@ -1054,6 +1054,7 @@ void ATpr_SvobodaIgry(string qName)
 	LocatorReloadEnterDisable("SantoDomingo_ExitTown", "reload1_back", false);	//Важная реакция
 	LocatorReloadEnterDisable("PortPax_ExitTown", "reload3", false);	//Важная реакция
 	bDisableFastReload = false;
+	bDisableLandEncounters = false;
 	AddQuestRecord("AT_Mechty_Sbivautsya", "7");
 	CloseQuestHeader("AT_Mechty_Sbivautsya");
 	
