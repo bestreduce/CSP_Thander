@@ -246,6 +246,11 @@ void ProcessDialogEvent()
 			//homo Линейка Блада
             if (Pchar.questTemp.CapBloodLine != true)
             {
+				if (CheckAttribute(pchar, "questTemp.AnjelikaTichPrologue10"))		//ВРЕМЕННО!!! УДАЛИТЬ ПОТОМ!!!
+				{
+					link.l55 = "Я люблю Шип Пак... и котиков.";
+					link.l55.go = "LoveKotiki";
+				}
     			link.l1 = RandPhraseSimple("Я хочу внести пожертвования.", "Хочу пожертвовать на благое дело.");
     			link.l1.go = "donation";
 				if (startherotype !=2)
@@ -1712,6 +1717,15 @@ void ProcessDialogEvent()
 			}
 			//дым от костра
 			locations[FindLocation("Caracas_town")].hidden_effects = true;
+		break;
+		
+		case "LoveKotiki":				//ВРЕМЕННО!!! УДАЛИТЬ ПОТОМ!!!
+			dialog.text = "Воистину, "+ GetSexPhrase("сын мой","дочь моя") +"!";
+			link.l1 = "Ура!";
+			link.l1.go = "exit";
+			DeleteAttribute(pchar, "questTemp.AnjelikaTichPrologue10");
+			pchar.questTemp.AnjelikaTich11 = true;
+			bDisableLandEncounters = false;
 		break;
 
 	}
