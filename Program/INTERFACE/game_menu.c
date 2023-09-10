@@ -70,7 +70,7 @@ void InitInterface_gm(string iniName)
 	if (IsCharacterPerkOn(pchar, "SeaWolf")) text5 = "Морской Волк";
 	string text2 = "Характер: "+text5+"\nСложность: "+GetLevelComplexity(MOD_SKILL_ENEMY_RATE)+"\nНация: "+text3+"\nСкорость набора опыта: "+MOD_EXP_RATE+" / 105\nКоличество абордажников: "+MOD_OFFICERS_RATE+"\nВремя исчезновения трупов: "+MOD_DEAD_CLEAR_TIME+"\nКоличество кораблей охраны: "+MOD_DEFENDERS_RATE+"\nЧастота событий: "+iEncountersRate;
 	string text6 = "Количество энкаунтеров: "+iEncountersCountRate+"\nРежим плавания: "+iArcadeSails+"\nПлатные заходы в порт: "+bPortPermission+"\nВзятки стражникам: "+bBribeSoldiers+"\nСнижение порога личных перков: "+bHigherSelfRate+"\nСнижение порога корабельных перков: "+bHigherShipRate+"\nОграничение бонуса навыка офицеров: "+bNoBonusSkillOff+"\nКонтракт на полубессмертие: "+bHalfImmortalPGG;
-	string text7 = "Стрельба только в противников: "+bShootOnlyEnemy+"\nИсследование кораблей: "+bFillEncyShips+"\nТребование ранга к навигации: "+bRankRequirement+"\nОтключение влияния сложности на вес: "+bDifficultyWeight+"\nПолучаемый ГГ урон: x"+FloatToString(makefloat((4.0+MOD_SKILL_ENEMY_RATE)*3/10.0)*bModDamage,2)+"\nКвесты наций: "+bWorldAlivePause;
+	string text7 = "Стрельба только в противников: "+bShootOnlyEnemy+"\nИсследование кораблей: "+bFillEncyShips+"\nТребование ранга к навигации: "+bRankRequirement+"\nОтключение влияния сложности на вес: "+bDifficultyWeight+"\nПолучаемый ГГ урон: x"+FloatToString(makefloat((4.0+MOD_SKILL_ENEMY_RATE*3)/10.0)*bModDamage,2)+"\nКвесты наций: "+bWorldAlivePause;
 
 	SetFormatedText("STARTINFO_TEXT1", text+"\n"+text2+"\n"+text6+"\n"+text7);
 	SetFormatedText("COPYRIGHTS_TEXT", PROVIDER_TXT);
