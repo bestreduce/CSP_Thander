@@ -1197,14 +1197,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "house";
 
 	locations[n].reload.l3.name = "reload3";
-	locations[n].reload.l3.go = "FortFrance_CommonRoom_MH3";
+	locations[n].reload.l3.go = "FortFrance_MH9_2";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Room";
 	locations[n].reload.l3.disable = 1; //закроем
 
 	locations[n].reload.l4.name = "reload4";
-	locations[n].reload.l4.go = "FortFrance_CommonRoom_MH3";
+	locations[n].reload.l4.go = "FortFrance_MH9_2";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Room";
