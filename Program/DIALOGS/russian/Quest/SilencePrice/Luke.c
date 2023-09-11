@@ -36,6 +36,7 @@ void ProcessDialogEvent()
             dialog.text = "Проходи, чего встал" + GetSexPhrase(".", "а.");
             link.l1 = "Ладно, ладно, не кипятись.";
             link.l1.go = "exit";
+			NextDiag.TempNode = "First Time";
         }
         else
         {
