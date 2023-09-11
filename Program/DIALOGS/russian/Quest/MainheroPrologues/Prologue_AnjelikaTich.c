@@ -975,6 +975,57 @@ void ProcessDialogEvent()
 			sld.Dialog.Filename = "Common_Governor.c";
 			sld.dialog.currentnode = "First Time";
 		break;
+		
+		//Квест продолжение сюжета: "Портниха знатной дамы"
+		case "AT_PZD_Pilar_1_1":
+			dialog.text = "";
+			link.l1 = "Ребекка?";
+			link.l1.go = "AT_PZD_Pilar_1_2";
+		break;
+		
+		case "AT_PZD_Pilar_1_2":
+			dialog.text = "Прошу прощения?";
+			link.l1 = "Как... Кажется, я ошиблась. Перепутала вас с одной своей знакомой.";
+			link.l1.go = "AT_PZD_Pilar_1_3";
+		break;
+		
+		case "AT_PZD_Pilar_1_3":
+			dialog.text = "И я это уже прекрасно поняла. Теперь, прошу, отойдите от меня.";
+			link.l1 = "Конечно, конечно. Но мне бы только хотелось узнать, кто вам сшил платье? Из-за него мне и показалось, что вы та самая девушка.";
+			link.l1.go = "AT_PZD_Pilar_1_4";
+		break;
+		
+		case "AT_PZD_Pilar_1_4":
+			dialog.text = "Чепуха.";
+			link.l1 = "";
+			link.l1.go = "AT_PZD_Pilar_1_5";
+		break;
+		
+		case "AT_PZD_Pilar_1_5":
+			dialog.text = "Гарберд, для чего вы здесь стоите?";
+			link.l1 = "";
+			link.l1.go = "AT_PZD_Pilar_1_6";
+			LAi_SetActorType(npchar);
+			LAi_ActorTurnToCharacter(npchar, CharacterFromID("AT_PZD_Herineldo"));
+		break;
+		
+		case "AT_PZD_Pilar_1_6":
+			DialogExit();
+			StartInstantDialog("AT_PZD_Herineldo", "AT_PZD_Pilar_1_7", "Quest\MainheroPrologues\Prologue_AnjelikaTich.c");
+			sld = CharacterFromID("AT_PZD_Pilar");
+			LAi_SetActorType(sld);
+			LAi_ActorTurnToCharacter(sld, pchar);			
+		break;
+		
+		case "AT_PZD_Pilar_1_7":
+			dialog.text = "Сеньорита, я вынужден настоять.";
+			link.l1 = "Не утруждайте себя!";
+			link.l1.go = "AT_PZD_Pilar_1_8";
+		break;
+		
+		case "AT_PZD_Pilar_1_8":
+			DialogExit();
+		break;
 
 	}
 }
