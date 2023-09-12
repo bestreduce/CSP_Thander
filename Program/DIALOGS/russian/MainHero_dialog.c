@@ -283,13 +283,12 @@ void ProcessDialogEvent()
 			{
 				string sTemp = ""
 				DeleteAttribute(pchar, "questTemp.Whisper.HoldMonologue");
-				if (CheckAttribute(pchar, "Whisper.BonusEnergy"))
+				if (CheckAttribute(pchar, "Whisper.Podralas"))
 				{
-					//DeleteAttribute(pchar, "Whisper.BonusEnergy");
-					sTemp = "\n(Вы в одиночку вырезали половину экипажа на корабле, это навсегда укрепило ваши боевые навыки. Максимальная энергия увеличена на "+MOD_SKILL_ENEMY_RATE*3+".)"
+					pchar.Whisper.PodralasCheck = true;
 				}
 				dialog.Text = "Проклятье! Не хватало того, что меня закинуло в прошлое, а машина времени повреждена и находится вместе во всеми моими вещами в лапах этих немытых головорезов. В довесок я попала в плен, а в ближайшие дни меня наверняка ожидает казнь."+sTemp;
-				pchar.Whisper.BonusEnergy = true;
+				//pchar.Whisper.Podralas = true;
 				Link.l1 = "Нужно собраться. Я выберусь на свободу, рано или поздно.";
 				Link.l1.go = "exit_incq";
 			}
