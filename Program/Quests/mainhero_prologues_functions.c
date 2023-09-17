@@ -669,6 +669,7 @@ void AT_pr_tragedia_2(string qName)
 	PlaySound("CSR\Music\Quest\Tragic.ogg");
 	
 	sld = CharacterFromID("AT_pr_J1")
+	sld.CantLoot = true;
 	LaunchBlood(sld, 1.0, true);
 	LaunchBlood(sld, 2.0, true);
 	LaunchBlood(sld, 3.0, true);

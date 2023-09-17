@@ -226,7 +226,7 @@ void WhisperTeleport(string qName)
 
 void WhisperBonusChallengeReCheck(string qName)
 {
-	if (!CheckAttribute(pchar, "Whisper.BonusEnergy"))
+	if (!CheckAttribute(pchar, "Whisper.Podralas"))
 	{
 		int n = 1;
 		for (int i = 1; i < 13; i++)
@@ -245,8 +245,7 @@ void WhisperBonusChallengeReCheck(string qName)
 
 void WhisperBonusChallenge(string qName)
 {
-	AddBonusEnergyToCharacter(pchar, MOD_SKILL_ENEMY_RATE*3);
-	pchar.Whisper.BonusEnergy = true;
+	pchar.Whisper.Podralas = true;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -464,7 +463,7 @@ void WhisperLine_IncqGuard(string qName)
 				float locx, locy, locz;
 				GetCharacterPos(pchar, &locx, &locy, &locz);
 				sld.Dialog.Filename = "Quest\WhisperLine\Whisper.c";
-				if(!CheckAttribute(pchar, "Whisper.IncqGuard_bad"))
+				if(CheckAttribute(pchar, "Whisper.PodralasCheck"))
 				{
 					sld.dialog.currentnode = "IncqGuard";
 				}
