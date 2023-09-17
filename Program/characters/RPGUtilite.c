@@ -1810,7 +1810,7 @@ int GetMaxItemsWeight(ref _chref)
 	        	}
 	        }
 		// Lugger <--
-		if(IsEquipCharacterByArtefact(_chref, "talisman5")) iBonus = 30;
+		if(IsEquipCharacterByArtefact(_chref, "talisman5")) iBonus += 30;
         //опасная рекурсия  если писать GetCharacterSPECIAL
 		if (CheckAttribute(_chref, "chr_ai.bonusweighttube")) iBonus += 60 + sti(_chref.rank);
         if (bDifficultyWeight) iBonus = iBonus + CHAR_ITEMS_WEIGHT + GetCharacterSPECIALSimple(_chref, SPECIAL_S)*(GetCharacterSPECIALSimple(_chref, SPECIAL_E) + 12);
