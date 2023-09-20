@@ -522,6 +522,7 @@ void WhisperEscape(string qName)
 {
 	Pchar.BaseNation = PIRATE;
 	ChangeCharacterNationReputation(pchar, 2, -15);
+	AddMoneyToCharacter(pchar, 1500);
 	if (!CheckAttribute(pchar, "Whisper.Escaped"))
 	{
 		DoReloadCharacterToLocation("Santiago_ExitTown","reload","reload3");
