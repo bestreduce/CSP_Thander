@@ -3222,7 +3222,7 @@ void LSC_enterSoldiers()
 	iTemp = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE - 2;
 	//int iNum = sti((2+MOD_SKILL_ENEMY_RATE)/2);
 	//Boyer mod #20170318-33
-	int iNum = makeint(MOD_SKILL_ENEMY_RATE/4) + 2;
+	int iNum = makeint(MOD_SKILL_ENEMY_RATE) + 1;
 	for (i=1; i<=iNum; i++)
     {
         sld = GetCharacter(NPC_GenerateCharacter("MKSold"+i, "sold_hol_"+(rand(7)+1), "man", "man", iTemp, HOLLAND, 0, true));
