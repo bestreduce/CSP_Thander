@@ -701,8 +701,10 @@ void ProcessDialogEvent()
 		// есть подозрение, что были ошибки до подчистки флага -> мы вылетели к хуям, либо скипнули дальнейшую обработку -> флаг так и остался в подвешенном состоянии
 		if (CheckAttribute(PChar, "GenQuest.PGG_Quest"))
 		{
-			PGGQuestAlreadyActive(link, NPChar);
-			break;
+			bool toSkip = PGGQuestAlreadyActive(link, NPChar);
+			if (toSkip) {
+				break;
+			}
 		}
 
 		if (drand1(100) > 60 || isSetSail) // шанс 40% на дельце, либо поймали в море
@@ -1702,18 +1704,18 @@ void PGGQuestNotEnoughtTimePassedDialog(aref link, ref NPChar) {
 	link.l1.go = "exit";
 }
 
-void PGGQuestAlreadyActive(aref link, ref NPChar) {
+bool PGGQuestAlreadyActive(aref link, ref NPChar) {
 	int currQuestPGGid = GetCharacterIndex(PChar.GenQuest.PGG_Quest.PGGid);
 	if (currQuestPGGid < 0 || currQuestPGGid > TOTAL_CHARACTERS) {
-		Dialog.Text = "Если видите это, то отпишите в баги, стоит метка, что ПП уже взято, однако айди ПГГ '"+ PChar.GenQuest.PGG_Quest.PGGid +"' не нашли.";
-		link.l1 = "Мда, навасянили...";
-		link.l1.go = "exit";
+		DeleteAttribute(PChar, "GenQuest.PGG_Quest");
+		return false;
 	}
 
 	ref currQuestPGG = &characters[currQuestPGGid];
 	Dialog.Text = "А я вам на что, интересно? Приходи, как закончишь все дела с кэпом по имени " + GetFullName(currQuestPGG) + "!";
 	link.l1 = "Действительно, что-то я подзабыл" + GetSexPhrase("", "а") + ".";
 	link.l1.go = "exit";
+	return true;
 }
 
 void GeneratePGGQuestLocation(ref NPChar) {
